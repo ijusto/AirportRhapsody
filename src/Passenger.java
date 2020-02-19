@@ -12,19 +12,19 @@ public class Passenger {
     private static final int TRT = 0;  // in transit
     private static final int FDT = 1;  // has this airport as her final destination
 
-    private enum StatePassenger { AT_THE_DISEMBARKING_ZONE,
-                                  AT_THE_LUGGAGE_COLLECTION_POINT,
-                                  EXITING_THE_ARRIVAL_TERMINAL,
-                                  AT_THE_BAGGAGE_RECLAIM_OFFICE,
-                                  AT_THE_ARRIVAL_TRANSFER_TERMINAL,
-                                  TERMINAL_TRANSFER,
-                                  AT_THE_DEPARTURE_TRANSFER_TERMINAL,
-                                  ENTERING_THE_DEPARTURE_TERMINAL
-                                };
+    private enum State { AT_THE_DISEMBARKING_ZONE,
+                         AT_THE_LUGGAGE_COLLECTION_POINT,
+                         EXITING_THE_ARRIVAL_TERMINAL,
+                         AT_THE_BAGGAGE_RECLAIM_OFFICE,
+                         AT_THE_ARRIVAL_TRANSFER_TERMINAL,
+                         TERMINAL_TRANSFER,
+                         AT_THE_DEPARTURE_TRANSFER_TERMINAL,
+                         ENTERING_THE_DEPARTURE_TERMINAL
+                        };
 
     private enum SituationPassenger {TRT, FDT};
 
-    private StatePassenger St;  // state of passenger (0 .. 5)
+    private State St;  // state of passenger (0 .. 5)
     private SituationPassenger Si;  //situation of passenger (0 .. 5)
     private int NR;  // number of pieces of luggage the passenger - (0 .. 5) carried at the start of her journey
     private int NA;  // number of pieces of luggage the passenger - (0 .. 5) she has presently collected
