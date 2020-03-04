@@ -1,4 +1,5 @@
 public class Passenger {
+
     private static final int AT_THE_DISEMBARKING_ZONE = 0;
     private static final int AT_THE_LUGGAGE_COLLECTION_POINT = 1;
     private static final int EXITING_THE_ARRIVAL_TERMINAL = 2;
@@ -12,7 +13,8 @@ public class Passenger {
     private static final int TRT = 0;  // in transit
     private static final int FDT = 1;  // has this airport as her final destination
 
-    private enum State { AT_THE_DISEMBARKING_ZONE,
+    private enum State {
+                         AT_THE_DISEMBARKING_ZONE,
                          AT_THE_LUGGAGE_COLLECTION_POINT,
                          EXITING_THE_ARRIVAL_TERMINAL,
                          AT_THE_BAGGAGE_RECLAIM_OFFICE,
@@ -23,9 +25,57 @@ public class Passenger {
                         };
 
     private enum SituationPassenger {TRT, FDT};
-
     private State St;  // state of passenger (0 .. 5)
     private SituationPassenger Si;  //situation of passenger (0 .. 5)
     private int NR;  // number of pieces of luggage the passenger - (0 .. 5) carried at the start of her journey
     private int NA;  // number of pieces of luggage the passenger - (0 .. 5) she has presently collected
+
+    // Passageiro tem que dizer quantas malas vai dar ao Porter
+    public void setUpPassenger(){
+
+    }
+
+    public int getSi() {
+        return Si.ordinal();
+    }
+
+    public int getSt() {
+        return St.ordinal();
+    }
+
+    public int getNA() {
+        return NA;
+    }
+
+    public int getNR() {
+        return NR;
+    }
+
+    public void life(ArrivalLounge arrivalLounge) {
+        this.setUpPassenger();
+        boolean isFinal = arrivalLounge.whatShouldIDo(this.getSi());
+        boolean success = false;
+        if (isFinal) {
+            if (this.getNR() == 0) {
+                arrivalLounge.goHome();
+            } else {
+                for (int i = 0; i < this.getNR(); i++) {
+                    success = arrivalLounge.goCollectABag(); // porter diz se ja nao existem malas e então seria false
+                    if (!success) {
+                        break;
+                    }
+                }
+                if (!success) {
+                    //reportMissingBags()
+                }
+                //goHome()
+            }
+        } else {
+            //takeABus();
+            //enterTheBus();
+            //leaveTheBus();
+            //prepareNextLeg();
+        }
+    }
+
 }

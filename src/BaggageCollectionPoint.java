@@ -22,4 +22,6 @@ public class BaggageCollectionPoint {
          * functionality: change state of Passenger to EXITING_THE_ARRIVAL_TERMINAL
          */
     }
+
+    public void carryItToAppropriateStore(Bag bag){}
 }

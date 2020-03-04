@@ -13,4 +13,25 @@ public class Porter {
     private State Stat;  //Stat – state of the porter
     private int CB;  // CB - number of pieces of luggage presently on the conveyor belt
     private int SR;  // SR - number of pieces of luggage belonging to passengers in transit presently stored at the storeroom
+
+    public void life(ArrivalLounge arrivalLounge, TemporaryStorageArea tempStore, BaggageCollectionPoint bColPnt){
+        Bag bag;
+        boolean planeHoldEmpty;
+
+        while ( arrivalLounge.takeARest() != 'E' ){	// 'E' character return means end of state
+            planeHoldEmpty = false;
+            while (!planeHoldEmpty) {
+                bag = arrivalLounge.tryToCollectABag();
+                if (bag == null) {
+                    planeHoldEmpty = true;
+                    arrivalLounge.noMoreBagsToCollect();
+                } else if (bag.getDestStat() == 'T'){    // 'T' means transit, 'F' means final
+                    tempStore.carryItToAppropriateStore(bag);
+                } else {
+                    bColPnt.carryItToAppropriateStore(bag);
+                }
+            }
+            arrivalLounge.noMoreBagsToCollect();
+        }
+    }
 }
