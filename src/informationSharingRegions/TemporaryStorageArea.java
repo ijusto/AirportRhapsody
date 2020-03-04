@@ -1,3 +1,6 @@
+package informationSharingRegions;
+import entities.Bag;
+
 public class TemporaryStorageArea {
 
     TemporaryStorageArea(){

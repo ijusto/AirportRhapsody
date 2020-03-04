@@ -1,3 +1,8 @@
+package entities;
+import informationSharingRegions.ArrivalLounge;
+import informationSharingRegions.TemporaryStorageArea;
+import informationSharingRegions.BaggageCollectionPoint;
+
 public class Porter {
     private static final int WAITING_FOR_A_PLANE_TO_LAND = 0;
     private static final int AT_THE_PLANES_HOLD = 1;

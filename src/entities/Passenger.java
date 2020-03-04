@@ -1,3 +1,8 @@
+package entities;
+import informationSharingRegions.ArrivalLounge;
+
+import java.util.Random;
+
 public class Passenger {
 
     private static final int AT_THE_DISEMBARKING_ZONE = 0;
@@ -30,9 +35,24 @@ public class Passenger {
     private int NR;  // number of pieces of luggage the passenger - (0 .. 5) carried at the start of her journey
     private int NA;  // number of pieces of luggage the passenger - (0 .. 5) she has presently collected
 
-    // Passageiro tem que dizer quantas malas vai dar ao Porter
-    public void setUpPassenger(){
+    public Passenger(){
 
+    }
+
+    /*
+     * functionality: sets up the max number of bags of the passenger
+     * @param   maxBags4Passenger  max number of bags of the passenger
+     */
+    // Passageiro tem que dizer quantas malas vai dar ao entities.Porter
+    public void setUpPassenger(int maxBags4Passenger){
+        Random r = new Random();
+        if(r.nextDouble()*maxBags4Passenger < 0.5){
+            this.NR = 0;
+        } else if(r.nextDouble()*maxBags4Passenger > 0.5 && r.nextDouble()*maxBags4Passenger < 1.5){
+            this.NR = 1;
+        } else if(r.nextDouble()*maxBags4Passenger > 1.5){
+            this.NR = 2;
+        }
     }
 
     public int getSi() {
@@ -51,8 +71,8 @@ public class Passenger {
         return NR;
     }
 
-    public void life(ArrivalLounge arrivalLounge) {
-        this.setUpPassenger();
+    public void life(ArrivalLounge arrivalLounge, int maxBags4Passenger) {
+        this.setUpPassenger(maxBags4Passenger);
         boolean isFinal = arrivalLounge.whatShouldIDo(this.getSi());
         boolean success = false;
         if (isFinal) {

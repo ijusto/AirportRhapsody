@@ -1,3 +1,5 @@
+package entities;
+
 public class BusDriver {
     private static final int PARKING_AT_THE_ARRIVAL_TERMINAL = 0;
     private static final int DRIVING_FORWARD = 1;
