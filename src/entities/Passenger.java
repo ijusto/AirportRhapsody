@@ -45,6 +45,9 @@ public class Passenger {
      */
     // Passageiro tem que dizer quantas malas vai dar ao entities.Porter
     public void setUpPassenger(int maxBags4Passenger){
+
+        //originar ou nao a perda de malas
+
         Random r = new Random();
         if(r.nextDouble()*maxBags4Passenger < 0.5){
             this.NR = 0;
