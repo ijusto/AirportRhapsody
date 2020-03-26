@@ -4,6 +4,7 @@ import sharedRegions.ArrivalTerminalTransferQuay;
 import sharedRegions.DepartureTerminalTransferQuay;
 import sharedRegions.DepartureTerminalEntrance;
 import java.util.Random;
+import commonInfrastructures.EntitiesStates;
 
 /**
  * ...
@@ -13,6 +14,10 @@ import java.util.Random;
  */
 
 public class Passenger extends Thread {
+
+    /*
+    private static final int TRT = 0;  // in transit
+    private static final int FDT = 1;  // has this airport as her final destination
 
     private static final int AT_THE_DISEMBARKING_ZONE = 0;
     private static final int AT_THE_LUGGAGE_COLLECTION_POINT = 1;
@@ -24,9 +29,6 @@ public class Passenger extends Thread {
     private static final int AT_THE_DEPARTURE_TRANSFER_TERMINAL = 6;
     private static final int ENTERING_THE_DEPARTURE_TERMINAL = 7;
 
-    private static final int TRT = 0;  // in transit
-    private static final int FDT = 1;  // has this airport as her final destination
-
     private enum State {
                          AT_THE_DISEMBARKING_ZONE,
                          AT_THE_LUGGAGE_COLLECTION_POINT,
@@ -37,8 +39,9 @@ public class Passenger extends Thread {
                          AT_THE_DEPARTURE_TRANSFER_TERMINAL,
                          ENTERING_THE_DEPARTURE_TERMINAL
                         };
+    */
 
-    private enum SituationPassenger {TRT, FDT};
+    public enum SituationPassenger {TRT, FDT};
 
     /**
      *  State of the passenger
@@ -46,7 +49,7 @@ public class Passenger extends Thread {
      *    @serialField St
      */
 
-    private State St;
+    private EntitiesStates St;
 
     /**
      *  Situation of passenger
@@ -81,7 +84,7 @@ public class Passenger extends Thread {
      *    @param NA number of pieces of luggage the passenger she has presently collected
      */
 
-    public Passenger(State St, SituationPassenger Si, int NR, int NA){
+    public Passenger(EntitiesStates St, SituationPassenger Si, int NR, int NA){
         this.St = St;
         this.Si = Si;
         this.NR = NR;
@@ -124,12 +127,12 @@ public class Passenger extends Thread {
         }
     }
 
-    public int getSi() {
-        return Si.ordinal();
+    public SituationPassenger getSi() {
+        return Si;
     }
 
-    public int getSt() {
-        return St.ordinal();
+    public EntitiesStates getSt() {
+        return St;
     }
 
     public int getNA() {

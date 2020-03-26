@@ -1,7 +1,10 @@
 package sharedRegions;
 import commonInfrastructures.Bag;
+import commonInfrastructures.EntitiesStates;
 import entities.*;
+import main.AirportRhapsody;
 
+import java.util.Random;
 import java.util.Queue;
 
 /**
@@ -16,7 +19,7 @@ public class ArrivalLounge {
     public Queue<Passenger> passengerQueue;
 
     /**
-     *  Operation of deciding what to do next (raised by the Passenger). <p> functionality: choose between takeABus or one of these two: goCollectABag or goHome
+     *  Operation of deciding what to do next (raised by the Passenger). <p> Head start delay, that represents the time before the passenger chooses between what to do when arriving to the airport.
      *
      *    @param currentPassenger situation of passenger
      *
@@ -25,11 +28,16 @@ public class ArrivalLounge {
      */
 
     public synchronized boolean whatShouldIDo(Passenger currentPassenger){
-        if(currentPassenger.getSt() == 'F'){
-            return true;
+
+        if(currentPassenger.getSt() == EntitiesStates.AT_THE_DISEMBARKING_ZONE) {
+            try {
+                currentPassenger.sleep((long) (new Random().nextInt(AirportRhapsody.maxSleep - AirportRhapsody.minSleep + 1) + AirportRhapsody.minSleep));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        else
-            return false;
+        
+        return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
     }
 
     /**

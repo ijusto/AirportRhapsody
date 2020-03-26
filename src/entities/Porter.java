@@ -1,5 +1,6 @@
 package entities;
 import commonInfrastructures.Bag;
+import commonInfrastructures.EntitiesStates;
 import sharedRegions.ArrivalLounge;
 import sharedRegions.TemporaryStorageArea;
 import sharedRegions.BaggageCollectionPoint;
@@ -17,11 +18,13 @@ public class Porter extends Thread {
     private static final int AT_THE_LUGGAGE_BELT_CONVEYOR = 2;
     private static final int AT_THE_STOREROOM = 3;
 
+    /*
     private enum State { WAITING_FOR_A_PLANE_TO_LAND,
                          AT_THE_PLANES_HOLD,
                          AT_THE_LUGGAGE_BELT_CONVEYOR,
                          AT_THE_STOREROOM
                         }
+     */
 
     /**
      *  State of the porter
@@ -29,7 +32,7 @@ public class Porter extends Thread {
      *    @serialField Stat
      */
 
-    private State Stat;
+    private EntitiesStates Stat;
 
     /**
      *  Number of pieces of luggage presently on the conveyor belt
@@ -59,7 +62,7 @@ public class Porter extends Thread {
      *    @param SR number of pieces of luggage belonging to passengers in transit presently stored at the storeroom
      */
 
-    public Porter(State Stat, int CB, int SR){
+    public Porter(EntitiesStates Stat, int CB, int SR){
         this.Stat = Stat;
         this.CB = CB;
         this.SR = SR;

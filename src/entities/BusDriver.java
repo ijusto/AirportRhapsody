@@ -1,6 +1,7 @@
 package entities;
 import sharedRegions.ArrivalTerminalTransferQuay;
 import sharedRegions.DepartureTerminalTransferQuay;
+import commonInfrastructures.EntitiesStates;
 
 /**
  * ...
@@ -11,6 +12,7 @@ import sharedRegions.DepartureTerminalTransferQuay;
 
 public class BusDriver extends Thread {
 
+    /*
     private static final int PARKING_AT_THE_ARRIVAL_TERMINAL = 0;
     private static final int DRIVING_FORWARD = 1;
     private static final int PARKING_AT_THE_DEPARTURE_TERMINAL = 2;
@@ -21,6 +23,7 @@ public class BusDriver extends Thread {
                          PARKING_AT_THE_DEPARTURE_TERMINAL,
                          DRIVING_BACKWARD
                         }
+     */
 
     /**
      *  State of the driver
@@ -28,7 +31,7 @@ public class BusDriver extends Thread {
      *    @serialField Stat
      */
 
-    private State Stat;
+    private EntitiesStates Stat;
 
     /**
      *  Occupation state for the waiting queue (passenger id / - (empty))
@@ -70,7 +73,7 @@ public class BusDriver extends Thread {
      *    @return Stat
      */
 
-    public State getStat() {
+    public EntitiesStates getStat() {
         return Stat;
     }
 
