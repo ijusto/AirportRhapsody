@@ -8,14 +8,15 @@ public class ArrivalLounge {
 
     public Queue<Passenger> passengerQueue;
 
-    /*
-     * calling entity: entities.Passenger
-     * <p>
-     * functionality: choose between takeABus or one of these two: goCollectABag or goHome
-     * @param   Si  situation of passenger
-     * @return      true if final destination
-     * @see         boolean
+    /**
+     *  Operation of deciding what to do next (raised by the Passenger). <p> functionality: choose between takeABus or one of these two: goCollectABag or goHome
+     *
+     *    @param currentPassenger situation of passenger
+     *
+     *    @return <li> true, if final destination
+     *            <li> false, otherwise
      */
+
     public synchronized boolean whatShouldIDo(Passenger currentPassenger){
         if(currentPassenger.getSt() == 'F'){
             return true;
@@ -24,14 +25,14 @@ public class ArrivalLounge {
             return false;
     }
 
-    /*
-     * calling entity: entities.Passenger
-     * functionality: change state of entities.Passenger to AT_THE_ARRIVAL_TRANSFER_TERMINAL
-     * @param
-     * @return
+    /**
+     *  Operation of taking a Bus (raised by the Passenger). <p> functionality: change state of entities.Passenger to AT_THE_ARRIVAL_TRANSFER_TERMINAL
+     *
+     *    @return idk
      */
+
     public synchronized char takeABus(){
-        // 'E' character return means end of state
+
         return 0;
     }
 
@@ -53,11 +54,13 @@ public class ArrivalLounge {
 
     }
 
-    /*
-     * @param
-     * calling entity: entities.Porter
-     * functionality: change state of entities.Porter to WAITING_FOR_A_PLANE_TO_LAND
+    /**
+     *  Operation of taking a rest (raised by the Porter). <p> functionality: change state of entities.Porter to WAITING_FOR_A_PLANE_TO_LAND
+     *
+     *    @return <li> 'E', if end of state
+     *            <li> false, otherwise
      */
+
     public synchronized char takeARest(){
         // bloqueia porter
 
