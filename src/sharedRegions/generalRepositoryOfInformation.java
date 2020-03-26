@@ -1,4 +1,4 @@
-package informationSharingRegions;
+package sharedRegions;
 
 // logger
 public class generalRepositoryOfInformation {

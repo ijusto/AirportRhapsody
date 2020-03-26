@@ -1,5 +1,8 @@
-package informationSharingRegions;
+package sharedRegions;
+import commonInfrastructures.Bag;
 import entities.*;
+
+import java.util.Queue;
 
 public class ArrivalLounge {
 

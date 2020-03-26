@@ -1,9 +1,11 @@
 package entities;
-import informationSharingRegions.ArrivalLounge;
-
+import sharedRegions.ArrivalLounge;
+import sharedRegions.ArrivalTerminalTransferQuay;
+import sharedRegions.DepartureTerminalTransferQuay;
+import sharedRegions.DepartureTerminalEntrance;
 import java.util.Random;
 
-public class Passenger {
+public class Passenger extends Thread {
 
     private static final int AT_THE_DISEMBARKING_ZONE = 0;
     private static final int AT_THE_LUGGAGE_COLLECTION_POINT = 1;
@@ -30,19 +32,61 @@ public class Passenger {
                         };
 
     private enum SituationPassenger {TRT, FDT};
-    private State St;  // state of passenger (0 .. 5)
-    private SituationPassenger Si;  //situation of passenger (0 .. 5)
-    private int NR;  // number of pieces of luggage the passenger - (0 .. 5) carried at the start of her journey
-    private int NA;  // number of pieces of luggage the passenger - (0 .. 5) she has presently collected
 
-    public Passenger(){
+    /**
+     *  State of the passenger
+     *
+     *    @serialField St
+     */
+
+    private State St;
+
+    /**
+     *  Situation of passenger
+     *
+     *    @serialField Si
+     */
+
+    private SituationPassenger Si;
+
+    /**
+     *  Number of pieces of luggage the passenger carried at the start of her journey
+     *
+     *    @serialField NR
+     */
+
+    private int NR;
+
+    /**
+     *  Number of pieces of luggage the passenger she has presently collected
+     *
+     *    @serialField NA
+     */
+
+    private int NA;
+
+    /**
+     *  Instantiation of the thread Passenger.
+     *
+     *    @param St state of passenger
+     *    @param Si situation of passenger
+     *    @param NR number of pieces of luggage the passenger carried at the start of her journey
+     *    @param NA number of pieces of luggage the passenger she has presently collected
+     */
+
+    public Passenger(State St, SituationPassenger Si, int NR, int NA){
+        this.St = St;
+        this.Si = Si;
+        this.NR = NR;
+        this.NA = NA;
 
     }
 
     /*
-     * functionality: sets up the max number of bags of the passenger
-     * @param   maxBags4Passenger  max number of bags of the passenger
+     *  functionality: sets up the max number of bags of the passenger
+     *    @param   maxBags4Passenger  max number of bags of the passenger
      */
+
     // Passageiro tem que dizer quantas malas vai dar ao entities.Porter
     public void setUpPassenger(int maxBags4Passenger){
         //originar ou nao a perda de malas
@@ -89,9 +133,21 @@ public class Passenger {
         return NR;
     }
 
-    public void life(ArrivalLounge arrivalLounge, ArrivalTerminalTransferQuay transferQuay, DepartureTerminalTransferQuay departureTransferQuay, DepartureTerminalEntrance departureEntrance, int maxBags4Passenger) {
+    ArrivalLounge arrivalLounge;
+    ArrivalTerminalTransferQuay transferQuay;
+    DepartureTerminalTransferQuay departureTransferQuay;
+    DepartureTerminalEntrance departureEntrance;
+    int maxBags4Passenger = 2;
+
+    /**
+     *  Life cycle of the thread Passenger.
+     */
+
+    @Override
+    public void run() {
+
         this.setUpPassenger(maxBags4Passenger);
-        boolean isFinal = arrivalLounge.whatShouldIDo(this.getSi());
+        boolean isFinal = arrivalLounge.whatShouldIDo(this);
         boolean success = false;
         if (isFinal) {
             if (this.getNR() == 0) {

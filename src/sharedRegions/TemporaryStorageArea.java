@@ -1,5 +1,5 @@
-package informationSharingRegions;
-import entities.Bag;
+package sharedRegions;
+import commonInfrastructures.Bag;
 
 public class TemporaryStorageArea {
 

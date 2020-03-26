@@ -1,4 +1,4 @@
-package informationSharingRegions;
+package sharedRegions;
 
 public class DepartureTerminalEntrance {
     /*

@@ -1,4 +1,4 @@
-package informationSharingRegions;
+package sharedRegions;
 
 public class ArrivalTerminalTransferQuay {
 
@@ -10,12 +10,13 @@ public class ArrivalTerminalTransferQuay {
          */
     }
 
-    public void hasDaysWorkEnded(){
+    public char hasDaysWorkEnded(){
         /*
          * params:
          * calling entity: entities.BusDriver
          * functionality: change state of entities.BusDriver to PARKING_AT_THE_ARRIVAL_TERMINAL
          */
+        return 'F';
     }
 
     public void announcingBusBoarding(){

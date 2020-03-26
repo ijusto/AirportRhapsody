@@ -1,4 +1,4 @@
-package entities;
+package commonInfrastructures;
 
 public class Plane {
     private int FN;  // FN – flight number

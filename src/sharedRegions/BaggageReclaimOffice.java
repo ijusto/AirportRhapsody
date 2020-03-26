@@ -1,6 +1,10 @@
-package informationSharingRegions;
+package sharedRegions;
 
-public class ArrivalTerminalExit {
+public class BaggageReclaimOffice {
+    /*
+     * calling entity:
+     * functionality:
+     */
 
     public void goHome(){
         /*

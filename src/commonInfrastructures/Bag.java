@@ -1,4 +1,6 @@
-package entities;
+package commonInfrastructures;
+
+import entities.Passenger;
 
 public class Bag {
 

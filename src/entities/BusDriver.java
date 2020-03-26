@@ -1,6 +1,9 @@
 package entities;
+import sharedRegions.ArrivalTerminalTransferQuay;
+import sharedRegions.DepartureTerminalTransferQuay;
 
-public class BusDriver {
+public class BusDriver extends Thread {
+
     private static final int PARKING_AT_THE_ARRIVAL_TERMINAL = 0;
     private static final int DRIVING_FORWARD = 1;
     private static final int PARKING_AT_THE_DEPARTURE_TERMINAL = 2;
@@ -12,13 +15,39 @@ public class BusDriver {
                          DRIVING_BACKWARD
                         }
 
-    private State Stat;  // state of the driver
-    private int Q;  // occupation state for the waiting queue (passenger id / - (empty))
-    private int S;  // occupation state for seat in the bus (passenger id / - (empty))
+    /**
+     *  State of the driver
+     *
+     *    @serialField Stat
+     */
+
+    private State Stat;
+
+    /**
+     *  Occupation state for the waiting queue (passenger id / - (empty))
+     *
+     *    @serialField Q
+     */
+
+    private int Q;
+
+    /**
+     *  Occupation state for seat in the bus (passenger id / - (empty))
+     *
+     *    @serialField S
+     */
+
+    private int S;
 
     ArrivalTerminalTransferQuay arrivalTerminalQuay;
-    DepartureTransferQuay departureTransferQuay;
-    public void run(){
+    DepartureTerminalTransferQuay departureTransferQuay;
+
+    /**
+     *  Life cycle of the thread BusDriver.
+     */
+
+    @Override
+    public void run() {
         while(arrivalTerminalQuay.hasDaysWorkEnded() != 'F'){
             arrivalTerminalQuay.announcingBusBoarding();
             arrivalTerminalQuay.goToDepartureTerminal();

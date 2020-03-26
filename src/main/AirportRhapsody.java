@@ -1,3 +1,5 @@
+package main;
+
 public class AirportRhapsody {
     private static final int maxBags4Passenger = 2;
 

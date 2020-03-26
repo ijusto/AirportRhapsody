@@ -1,9 +1,10 @@
 package entities;
-import informationSharingRegions.ArrivalLounge;
-import informationSharingRegions.TemporaryStorageArea;
-import informationSharingRegions.BaggageCollectionPoint;
+import commonInfrastructures.Bag;
+import sharedRegions.ArrivalLounge;
+import sharedRegions.TemporaryStorageArea;
+import sharedRegions.BaggageCollectionPoint;
 
-public class Porter {
+public class Porter extends Thread {
     private static final int WAITING_FOR_A_PLANE_TO_LAND = 0;
     private static final int AT_THE_PLANES_HOLD = 1;
     private static final int AT_THE_LUGGAGE_BELT_CONVEYOR = 2;
@@ -15,15 +16,53 @@ public class Porter {
                          AT_THE_STOREROOM
                         }
 
-    private State Stat;  //Stat – state of the porter
-    private int CB;  // CB - number of pieces of luggage presently on the conveyor belt
-    private int SR;  // SR - number of pieces of luggage belonging to passengers in transit presently stored at the storeroom
+    /**
+     *  State of the porter
+     *
+     *    @serialField Stat
+     */
+
+    private State Stat;
+
+    /**
+     *  Number of pieces of luggage presently on the conveyor belt
+     *
+     *    @serialField CB
+     */
+
+    private int CB;
+
+    /**
+     *  Number of pieces of luggage belonging to passengers in transit presently stored at the storeroom
+     *
+     *    @serialField SR
+     */
+
+    private int SR;
+
     ArrivalLounge arrivalLounge;
-
     TemporaryStorageArea tempStore;
-
     BaggageCollectionPoint bColPnt;
 
+    /**
+     *  Instantiation of the thread Passenger.
+     *
+     *    @param St state of the porter
+     *    @param Si number of pieces of luggage presently on the conveyor belt
+     *    @param NR number of pieces of luggage belonging to passengers in transit presently stored at the storeroom
+     */
+
+    public Porter(State Stat, int CB, int SR){
+        this.Stat = Stat;
+        this.CB = CB;
+        this.SR = SR;
+    }
+
+    /**
+     *  Life cycle of the thread Porter.
+     */
+
+    @Override
     public void run(){
         Bag bag;
         boolean planeHoldEmpty;
