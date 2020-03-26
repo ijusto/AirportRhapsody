@@ -5,6 +5,13 @@ import sharedRegions.DepartureTerminalTransferQuay;
 import sharedRegions.DepartureTerminalEntrance;
 import java.util.Random;
 
+/**
+ * ...
+ *
+ * @author Inês Justo
+ * @author Miguel Lopes
+ */
+
 public class Passenger extends Thread {
 
     private static final int AT_THE_DISEMBARKING_ZONE = 0;

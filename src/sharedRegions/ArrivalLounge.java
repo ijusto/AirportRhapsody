@@ -4,6 +4,13 @@ import entities.*;
 
 import java.util.Queue;
 
+/**
+ * ...
+ *
+ * @author Inês Justo
+ * @author Miguel Lopes
+ */
+
 public class ArrivalLounge {
 
     public Queue<Passenger> passengerQueue;

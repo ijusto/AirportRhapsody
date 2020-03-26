@@ -1,6 +1,13 @@
 package sharedRegions;
 import commonInfrastructures.Bag;
 
+/**
+ * ...
+ *
+ * @author Inês Justo
+ * @author Miguel Lopes
+ */
+
 public class BaggageCollectionPoint {
     public void goCollectABag(){
         /*

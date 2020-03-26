@@ -4,6 +4,13 @@ import sharedRegions.ArrivalLounge;
 import sharedRegions.TemporaryStorageArea;
 import sharedRegions.BaggageCollectionPoint;
 
+/**
+ * ...
+ *
+ * @author Inês Justo
+ * @author Miguel Lopes
+ */
+
 public class Porter extends Thread {
     private static final int WAITING_FOR_A_PLANE_TO_LAND = 0;
     private static final int AT_THE_PLANES_HOLD = 1;
@@ -47,9 +54,9 @@ public class Porter extends Thread {
     /**
      *  Instantiation of the thread Passenger.
      *
-     *    @param St state of the porter
-     *    @param Si number of pieces of luggage presently on the conveyor belt
-     *    @param NR number of pieces of luggage belonging to passengers in transit presently stored at the storeroom
+     *    @param Stat state of the porter
+     *    @param CB number of pieces of luggage presently on the conveyor belt
+     *    @param SR number of pieces of luggage belonging to passengers in transit presently stored at the storeroom
      */
 
     public Porter(State Stat, int CB, int SR){

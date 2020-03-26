@@ -1,5 +1,12 @@
 package sharedRegions;
 
+/**
+ * ...
+ *
+ * @author Inês Justo
+ * @author Miguel Lopes
+ */
+
 public class BaggageReclaimOffice {
     /*
      * calling entity:

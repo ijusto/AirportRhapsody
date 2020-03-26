@@ -2,6 +2,13 @@ package commonInfrastructures;
 
 import entities.Passenger;
 
+/**
+ * ...
+ *
+ * @author Inês Justo
+ * @author Miguel Lopes
+ */
+
 public class Bag {
 
     private static final char TRANSIT = 'T';  // in transit

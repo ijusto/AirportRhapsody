@@ -2,6 +2,13 @@ package entities;
 import sharedRegions.ArrivalTerminalTransferQuay;
 import sharedRegions.DepartureTerminalTransferQuay;
 
+/**
+ * ...
+ *
+ * @author Inês Justo
+ * @author Miguel Lopes
+ */
+
 public class BusDriver extends Thread {
 
     private static final int PARKING_AT_THE_ARRIVAL_TERMINAL = 0;
@@ -57,5 +64,33 @@ public class BusDriver extends Thread {
         }
     }
 
+    /**
+     *  State of the BusDriver
+     *
+     *    @return Stat
+     */
 
+    public State getStat() {
+        return Stat;
+    }
+
+    /**
+     *  Occupation state for the waiting queue (passenger id / - (empty))
+     *
+     *    @return Q
+     */
+
+    public int getQ() {
+        return Q;
+    }
+
+    /**
+     *  Occupation state for seat in the bus (passenger id / - (empty))
+     *
+     *    @return S
+     */
+
+    public int getS() {
+        return S;
+    }
 }
