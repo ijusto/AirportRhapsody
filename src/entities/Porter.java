@@ -18,8 +18,13 @@ public class Porter {
     private State Stat;  //Stat – state of the porter
     private int CB;  // CB - number of pieces of luggage presently on the conveyor belt
     private int SR;  // SR - number of pieces of luggage belonging to passengers in transit presently stored at the storeroom
+    ArrivalLounge arrivalLounge;
 
-    public void life(ArrivalLounge arrivalLounge, TemporaryStorageArea tempStore, BaggageCollectionPoint bColPnt){
+    TemporaryStorageArea tempStore;
+
+    BaggageCollectionPoint bColPnt;
+
+    public void run(){
         Bag bag;
         boolean planeHoldEmpty;
 

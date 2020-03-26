@@ -1,7 +1,9 @@
 package informationSharingRegions;
-import entities.Bag;
+import entities.*;
 
 public class ArrivalLounge {
+
+    public Queue<Passenger> passengerQueue;
 
     /*
      * calling entity: entities.Passenger
@@ -11,8 +13,12 @@ public class ArrivalLounge {
      * @return      true if final destination
      * @see         boolean
      */
-    public boolean whatShouldIDo(int Si){
-        return false;
+    public synchronized boolean whatShouldIDo(Passenger currentPassenger){
+        if(currentPassenger.getSt() == 'F'){
+            return true;
+        }
+        else
+            return false;
     }
 
     /*
@@ -21,7 +27,7 @@ public class ArrivalLounge {
      * @param
      * @return
      */
-    public char takeABus(){
+    public synchronized char takeABus(){
         // 'E' character return means end of state
         return 0;
     }
@@ -31,7 +37,7 @@ public class ArrivalLounge {
      * functionality: change state of entities.Passenger to AT_THE_LUGGAGE_COLLECTION_POINT
      * @param
      */
-    public boolean goCollectABag(){
+    public synchronized boolean goCollectABag(){
         return false;
     }
 
@@ -40,7 +46,7 @@ public class ArrivalLounge {
      * functionality: change state of entities.Passenger to EXITING_THE_ARRIVAL_TERMINAL
      * @param
      */
-    public void goHome(){
+    public synchronized void goHome(){
 
     }
 
@@ -49,7 +55,7 @@ public class ArrivalLounge {
      * calling entity: entities.Porter
      * functionality: change state of entities.Porter to WAITING_FOR_A_PLANE_TO_LAND
      */
-    public char takeARest(){
+    public synchronized char takeARest(){
         // bloqueia porter
 
 
@@ -62,7 +68,7 @@ public class ArrivalLounge {
      * calling entity: entities.Porter
      * functionality:
      */
-    public Bag tryToCollectABag(){
+    public synchronized Bag tryToCollectABag(){
         return new Bag();
     }
 
@@ -71,7 +77,7 @@ public class ArrivalLounge {
      * calling entity: entities.Porter
      * functionality:
      */
-    public void noMoreBagsToCollect(){
+    public synchronized void noMoreBagsToCollect(){
 
     }
 }

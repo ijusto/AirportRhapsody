@@ -45,7 +45,6 @@ public class Passenger {
      */
     // Passageiro tem que dizer quantas malas vai dar ao entities.Porter
     public void setUpPassenger(int maxBags4Passenger){
-
         //originar ou nao a perda de malas
 
         Random r = new Random();
@@ -55,6 +54,22 @@ public class Passenger {
             this.NR = 1;
         } else if(r.nextDouble()*maxBags4Passenger > 1.5){
             this.NR = 2;
+        }
+
+        if(NR > 0){
+            Random missing = new Random();
+            double will_miss = 0.0;
+            double miss_bags = missing.nextDouble()*NR;
+
+            if(miss_bags < 0.5){
+                will_miss = 0;
+            }
+            if (miss_bags > 0.5 && miss_bags<1.5){
+                will_miss = 1;
+            }
+            if (miss_bags > 1.5){
+                will_miss = 2;
+            }
         }
     }
 
@@ -74,7 +89,7 @@ public class Passenger {
         return NR;
     }
 
-    public void life(ArrivalLounge arrivalLounge, int maxBags4Passenger) {
+    public void life(ArrivalLounge arrivalLounge, ArrivalTerminalTransferQuay transferQuay, DepartureTerminalTransferQuay departureTransferQuay, DepartureTerminalEntrance departureEntrance, int maxBags4Passenger) {
         this.setUpPassenger(maxBags4Passenger);
         boolean isFinal = arrivalLounge.whatShouldIDo(this.getSi());
         boolean success = false;
@@ -94,10 +109,10 @@ public class Passenger {
                 //goHome()
             }
         } else {
-            //takeABus();
-            //enterTheBus();
-            //leaveTheBus();
-            //prepareNextLeg();
+            arrivalLounge.takeABus();
+            transferQuay.enterTheBus();
+            departureTransferQuay.leaveTheBus();
+            departureEntrance.prepareNextLeg();
         }
     }
 

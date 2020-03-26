@@ -15,4 +15,18 @@ public class BusDriver {
     private State Stat;  // state of the driver
     private int Q;  // occupation state for the waiting queue (passenger id / - (empty))
     private int S;  // occupation state for seat in the bus (passenger id / - (empty))
+
+    ArrivalTerminalTransferQuay arrivalTerminalQuay;
+    DepartureTransferQuay departureTransferQuay;
+    public void run(){
+        while(arrivalTerminalQuay.hasDaysWorkEnded() != 'F'){
+            arrivalTerminalQuay.announcingBusBoarding();
+            arrivalTerminalQuay.goToDepartureTerminal();
+            departureTransferQuay.parkTheBusAndLetPassOff();
+            departureTransferQuay.goToArrivalTerminal();
+            arrivalTerminalQuay.parkTheBus();
+        }
+    }
+
+
 }

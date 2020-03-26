@@ -33,4 +33,8 @@ public class ArrivalTerminalTransferQuay {
          * functionality: change state of entities.BusDriver to DRIVING_FORWARD
          */
     }
+
+    public void parkTheBus(){
+
+    }
 }
