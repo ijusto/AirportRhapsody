@@ -1,7 +1,6 @@
 package sharedRegions;
 import commonInfrastructures.Bag;
-import commonInfrastructures.EntitiesStates;
-import entities.BusDriver;
+import entities.EntitiesStates;
 import entities.Passenger;
 import entities.Porter;
 

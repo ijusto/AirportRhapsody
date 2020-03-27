@@ -9,7 +9,12 @@ import java.io.IOException;
 import java.util.Queue;
 
 /**
- * ...
+ * The General Repository of Information works solely as the place where the visible internal state of the problem
+ * is stored. The visible internal state is defined by the set of variables whose value is printed in the logging file.
+ * Whenever an entity (porter, passenger, bus driver) executes an operation that changes the values of some of these
+ * variables, the fact must be reported so that a new line group is printed in the logging file. The report operation
+ * must be atomic, that is, when two or more variables are changed, the report operation must be unique so that the new
+ * line group reflects all the changes that have taken place.
  *
  * @author Inês Justo
  * @author Miguel Lopes

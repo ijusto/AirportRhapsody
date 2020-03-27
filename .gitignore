@@ -1,2 +1,6 @@
 .idea/
 AirportRhapsody.iml
+*.html
+*.css
+*.js
+package-list

@@ -1,6 +1,6 @@
 package sharedRegions;
 
-import commonInfrastructures.EntitiesStates;
+import entities.EntitiesStates;
 import entities.BusDriver;
 import entities.Passenger;
 
@@ -50,7 +50,7 @@ public class DepartureTerminalTransferQuay {
           Freeing Condition: Last passenger to exit the bus
           Blocked Entity Reaction: goToArrivalTerminal()
         */
-        
+
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         busDriver.setStat(EntitiesStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         // ...

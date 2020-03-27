@@ -1,4 +1,4 @@
-package commonInfrastructures;
+package entities;
 
 public enum EntitiesStates {
 

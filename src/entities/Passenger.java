@@ -4,7 +4,6 @@ import sharedRegions.ArrivalTerminalTransferQuay;
 import sharedRegions.DepartureTerminalTransferQuay;
 import sharedRegions.DepartureTerminalEntrance;
 import java.util.Random;
-import commonInfrastructures.EntitiesStates;
 
 /**
  * ...

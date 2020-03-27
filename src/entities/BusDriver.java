@@ -1,7 +1,6 @@
 package entities;
 import sharedRegions.ArrivalTerminalTransferQuay;
 import sharedRegions.DepartureTerminalTransferQuay;
-import commonInfrastructures.EntitiesStates;
 
 /**
  * ...
