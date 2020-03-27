@@ -3,13 +3,13 @@ package main;
 import sharedRegions.*;
 
 /**
- * ...
+ *  Main program.
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *  @author Inês Justo
+ *  @author Miguel Lopes
  */
 
-public class AirportRhapsody {
+public class AirportConcurrentVersion {
 
     /**
      * Minimum milliseconds to wakeup.
@@ -25,7 +25,7 @@ public class AirportRhapsody {
 
     private static final int maxBags4Passenger = 2;
 
-    public static void main(final String args[]) {
+    public static void main(final String[] args) {
 
         GenReposInfo repos;
         BaggageColPoint bagColPoint;
@@ -35,10 +35,8 @@ public class AirportRhapsody {
         ArrivalTerminalExit arrivalTerm;
         DepartureTerminalEntrance departureTerm;
 
-
-
-        for(int land = 0; land < SimulPar.K; land++){
-            for(int nPass = 0; nPass < SimilPar.N; nPass++){
+        for(int land = 0; land < SimulationParameters.K; land++){
+            for(int nPass = 0; nPass < SimulationParameters.N; nPass++){
                 destStat[nPass][land] = (Math.random() < 0.4) ? 'F' : 'T';
                 nBags[nPass][land] = (Math.random() < 0.5) ? 2 : (Math.random() < 0.5) ? 1 : 0;
                 nBagsPHold[nPass][land] = nBags[nPass][land];

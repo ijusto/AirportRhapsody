@@ -2,9 +2,8 @@ package sharedRegions;
 import commonInfrastructures.Bag;
 import entities.EntitiesStates;
 import entities.*;
-import main.AirportRhapsody;
+import main.AirportConcurrentVersion;
 
-import java.lang.reflect.Array;
 import java.util.Random;
 import java.util.Queue;
 
@@ -75,7 +74,7 @@ public class ArrivalLounge {
 
         if(currentPassenger.getSt() == EntitiesStates.AT_THE_DISEMBARKING_ZONE) {
             try {
-                sleep((long) (new Random().nextInt(AirportRhapsody.maxSleep - AirportRhapsody.minSleep + 1) + AirportRhapsody.minSleep));
+                sleep((long) (new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1) + AirportConcurrentVersion.minSleep));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
