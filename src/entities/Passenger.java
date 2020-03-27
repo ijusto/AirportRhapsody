@@ -157,7 +157,7 @@ public class Passenger extends Thread {
     public void run() {
 
         this.setUpPassenger(maxBags4Passenger);
-        boolean isFinal = arrivalLounge.whatShouldIDo(this);
+        boolean isFinal = arrivalLounge.whatShouldIDo();
         boolean success = false;
         if (isFinal) {
             if (this.getNR() == 0) {

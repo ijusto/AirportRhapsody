@@ -7,6 +7,8 @@ import main.AirportRhapsody;
 import java.util.Random;
 import java.util.Queue;
 
+import static java.lang.Thread.sleep;
+
 /**
  * ...
  *
@@ -21,17 +23,17 @@ public class ArrivalLounge {
     /**
      *  Operation of deciding what to do next (raised by the Passenger). <p> Head start delay, that represents the time before the passenger chooses between what to do when arriving to the airport.
      *
-     *    @param currentPassenger situation of passenger
-     *
      *    @return <li> true, if final destination
      *            <li> false, otherwise
      */
 
-    public synchronized boolean whatShouldIDo(Passenger currentPassenger){
+    public synchronized boolean whatShouldIDo(){
+
+        Passenger currentPassenger = (Passenger) Thread.currentThread();
 
         if(currentPassenger.getSt() == EntitiesStates.AT_THE_DISEMBARKING_ZONE) {
             try {
-                currentPassenger.sleep((long) (new Random().nextInt(AirportRhapsody.maxSleep - AirportRhapsody.minSleep + 1) + AirportRhapsody.minSleep));
+                sleep((long) (new Random().nextInt(AirportRhapsody.maxSleep - AirportRhapsody.minSleep + 1) + AirportRhapsody.minSleep));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -50,12 +50,7 @@ public class DepartureTerminalTransferQuay {
           Freeing Condition: Last passenger to exit the bus
           Blocked Entity Reaction: goToArrivalTerminal()
         */
-
-        // called by manager
-        // alerts client that the vehicle is ready to be picked up, changes
-        // carFixed[customer] to true
-        // wakes up customers
-
+        
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         busDriver.setStat(EntitiesStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         // ...
