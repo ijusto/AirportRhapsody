@@ -4,6 +4,7 @@ import entities.EntitiesStates;
 import entities.*;
 import main.AirportRhapsody;
 
+import java.lang.reflect.Array;
 import java.util.Random;
 import java.util.Queue;
 
@@ -18,7 +19,48 @@ import static java.lang.Thread.sleep;
 
 public class ArrivalLounge {
 
+    /*
+     *
+     */
+
     public Queue<Passenger> passengerQueue;
+
+    /*
+     *
+     */
+
+    private GenReposInfo repos;
+
+    /*
+     *
+     */
+
+    private BaggageColPoint bagColPoint;
+
+    /*
+     *
+     */
+
+    private int[][] destStat;
+
+    /*
+     *
+     */
+
+    private int[][] nBagsPHold;
+
+    /*
+     *
+     */
+
+    public ArrivalLounge(int[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos){
+        this.destStat = destStat;
+        this.nBagsPHold = nBagsPHold;
+        this.bagColPoint = bagColPoint;
+        this.repos = repos;
+    }
+
+    /* **************************************************Passenger*************************************************** */
 
     /**
      *  Operation of deciding what to do next (raised by the Passenger). <p> Head start delay, that represents the time before the passenger chooses between what to do when arriving to the airport.
@@ -26,7 +68,7 @@ public class ArrivalLounge {
      *    @return <li> true, if final destination
      *            <li> false, otherwise
      */
-
+    // garanteed by prof
     public synchronized boolean whatShouldIDo(){
 
         Passenger currentPassenger = (Passenger) Thread.currentThread();
@@ -59,7 +101,6 @@ public class ArrivalLounge {
         Passenger passenger = (Passenger) Thread.currentThread();
         passenger.setSt(EntitiesStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
 
-
         return 0;
     }
 
@@ -67,6 +108,7 @@ public class ArrivalLounge {
      *  ... (raised by the Passenger).
      *
      */
+
     public synchronized boolean goCollectABag(){
         /*
           Blocked Entity: Passenger
@@ -98,13 +140,16 @@ public class ArrivalLounge {
 
     }
 
+
+    /* **************************************************Porter****************************************************** */
+
     /**
      *  Operation of taking a rest (raised by the Porter). <p> functionality: change state of entities.Porter to WAITING_FOR_A_PLANE_TO_LAND
      *
      *    @return <li> 'E', if end of state
      *            <li> false, otherwise
      */
-
+    // garanteed by prof
     public synchronized char takeARest(){
         /*
           Blocked Entity: Porter
@@ -125,7 +170,7 @@ public class ArrivalLounge {
      *  ... (raised by the Porter).
      *
      */
-
+    // garanteed by prof
     public synchronized Bag tryToCollectABag(){
 
         Porter porter = (Porter) Thread.currentThread();
@@ -138,7 +183,7 @@ public class ArrivalLounge {
      *  ... (raised by the Porter).
      *
      */
-
+    // garanteed by prof
     public synchronized void noMoreBagsToCollect(){
 
         Porter porter = (Porter) Thread.currentThread();

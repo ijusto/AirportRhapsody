@@ -13,7 +13,21 @@ import java.util.Queue;
  * @author Miguel Lopes
  */
 
-public class DepartureTerminalTransferQuay {
+public class DepartureTermTransfQuay {
+
+    /*
+     *
+     */
+
+    private GenReposInfo repos;
+
+    /*
+     *
+     */
+
+    public DepartureTermTransfQuay(GenReposInfo repos){
+        this.repos = repos;
+    }
 
     /**
      *  ... (raised by the Passenger).
@@ -34,14 +48,12 @@ public class DepartureTerminalTransferQuay {
 
     }
 
-
-
     /**
      *  BusDriver informs the passengers they can leave the bus (raised by the BusDriver).
-     *  @param passengerQueue The list of the passengers to inform
+     *  param passengerQueue The list of the passengers to inform
      */
 
-    public void parkTheBusAndLetPassOff(Queue<Passenger> passengerQueue) {
+    public void parkTheBusAndLetPassOff(/*Queue<Passenger> passengerQueue ^add @ in param*/) {
         /*
           Blocked Entity: Driver
           Condition: if number of passengers > 0

@@ -2,7 +2,7 @@ package entities;
 import commonInfrastructures.Bag;
 import sharedRegions.ArrivalLounge;
 import sharedRegions.TemporaryStorageArea;
-import sharedRegions.BaggageCollectionPoint;
+import sharedRegions.BaggageColPoint;
 
 /**
  * ...
@@ -51,7 +51,7 @@ public class Porter extends Thread {
 
     ArrivalLounge arrivalLounge;
     TemporaryStorageArea tempStore;
-    BaggageCollectionPoint bColPnt;
+    BaggageColPoint bColPnt;
 
     /**
      *  Instantiation of the thread Passenger.

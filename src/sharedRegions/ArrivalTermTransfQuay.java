@@ -11,7 +11,20 @@ import entities.Passenger;
  * @author Miguel Lopes
  */
 
-public class ArrivalTerminalTransferQuay {
+public class ArrivalTermTransfQuay {
+
+    /*
+     *
+     */
+    private GenReposInfo repos;
+
+    /*
+     *
+     */
+
+    public ArrivalTermTransfQuay(GenReposInfo repos){
+        this.repos = repos;
+    }
 
     /**
      *  ... (raised by the Passenger).

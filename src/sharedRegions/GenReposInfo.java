@@ -20,7 +20,7 @@ import java.util.Queue;
  * @author Miguel Lopes
  */
 
-public class generalRepositoryOfInformation {
+public class GenReposInfo {
 
     /**
      *  Flight number
@@ -52,6 +52,19 @@ public class generalRepositoryOfInformation {
 
     private Queue<Passenger> passengers;
 
+    /**
+     *
+     */
+
+    private String fileName;
+
+    /**
+     *
+     */
+
+    public GenReposInfo(String fileName){
+        this.fileName = fileName;
+    }
 
     /**
      *

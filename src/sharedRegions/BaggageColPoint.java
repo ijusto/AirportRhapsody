@@ -11,7 +11,20 @@ import entities.Porter;
  * @author Miguel Lopes
  */
 
-public class BaggageCollectionPoint {
+public class BaggageColPoint {
+
+    /*
+     *
+     */
+    private GenReposInfo repos;
+
+    /*
+     *
+     */
+
+    public BaggageColPoint(GenReposInfo repos){
+        this.repos = repos;
+    }
 
     /**
      *  ... (raised by the Passenger).

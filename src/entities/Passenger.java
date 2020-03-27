@@ -1,7 +1,7 @@
 package entities;
 import sharedRegions.ArrivalLounge;
-import sharedRegions.ArrivalTerminalTransferQuay;
-import sharedRegions.DepartureTerminalTransferQuay;
+import sharedRegions.ArrivalTermTransfQuay;
+import sharedRegions.DepartureTermTransfQuay;
 import sharedRegions.DepartureTerminalEntrance;
 import java.util.Random;
 
@@ -143,8 +143,8 @@ public class Passenger extends Thread {
     }
 
     ArrivalLounge arrivalLounge;
-    ArrivalTerminalTransferQuay transferQuay;
-    DepartureTerminalTransferQuay departureTransferQuay;
+    ArrivalTermTransfQuay transferQuay;
+    DepartureTermTransfQuay departureTransferQuay;
     DepartureTerminalEntrance departureEntrance;
     int maxBags4Passenger = 2;
 

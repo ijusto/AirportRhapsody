@@ -1,6 +1,6 @@
 package entities;
-import sharedRegions.ArrivalTerminalTransferQuay;
-import sharedRegions.DepartureTerminalTransferQuay;
+import sharedRegions.ArrivalTermTransfQuay;
+import sharedRegions.DepartureTermTransfQuay;
 
 /**
  * ...
@@ -48,8 +48,8 @@ public class BusDriver extends Thread {
 
     private int S;
 
-    ArrivalTerminalTransferQuay arrivalTerminalQuay;
-    DepartureTerminalTransferQuay departureTransferQuay;
+    ArrivalTermTransfQuay arrivalTerminalQuay;
+    DepartureTermTransfQuay departureTransferQuay;
 
     /**
      *  Life cycle of the thread BusDriver.

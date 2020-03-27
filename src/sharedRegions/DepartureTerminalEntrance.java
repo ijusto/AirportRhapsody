@@ -12,6 +12,34 @@ import entities.Passenger;
 
 public class DepartureTerminalEntrance {
 
+    /*
+     *
+     */
+
+    private GenReposInfo repos;
+
+    /*
+     *
+     */
+
+    private ArrivalLounge arrivLounge;
+
+    /*
+     *
+     */
+
+    private ArrivalTermTransfQuay arrivalQuay;
+
+    /*
+     *
+     */
+
+    public DepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay,GenReposInfo repos){
+        this.arrivLounge = arrivLounge;
+        this.arrivalQuay = arrivalQuay;
+        this.repos = repos;
+    }
+
     /**
      *  ... (raised by the Passenger).
      *
