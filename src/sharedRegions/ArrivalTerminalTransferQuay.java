@@ -26,12 +26,19 @@ public class ArrivalTerminalTransferQuay {
         return 'F';
     }
 
+    /*
+     * params:
+     * calling entity: entities.BusDriver
+     * functionality: change state of entities.BusDriver to PARKING_AT_THE_ARRIVAL_TERMINAL
+     */
     public void announcingBusBoarding(){
         /*
-         * params:
-         * calling entity: entities.BusDriver
-         * functionality: change state of entities.BusDriver to PARKING_AT_THE_ARRIVAL_TERMINAL
-         */
+          Blocked Entity: Driver
+          Freeing Entity: Passenger
+          Freeing Method: enterTheBus()
+          Freeing Condition: Last passenger in queue
+          Blocked Entity Reaction: goToDepartureTerminal()
+        */
     }
 
     public void goToDepartureTerminal(){
@@ -43,6 +50,17 @@ public class ArrivalTerminalTransferQuay {
     }
 
     public void parkTheBus(){
+        /*
+          Blocked Entity: Driver
+          Freeing Entity: Passenger
+          Freeing Method: takeABus()
+          Freeing Condition: place in waiting queue = bus capacity
+          Blocked Entity Reactions: announcingBusBoarding()
 
+          Freeing Entity: Driver
+          Freeing Method: time
+          Freeing Condition: at least 1 passenger in queue
+          Blocked Entity Reaction: announcingBusBoarding()
+        */
     }
 }

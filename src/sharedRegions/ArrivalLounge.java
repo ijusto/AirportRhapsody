@@ -36,7 +36,7 @@ public class ArrivalLounge {
                 e.printStackTrace();
             }
         }
-        
+
         return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
     }
 
@@ -47,6 +47,12 @@ public class ArrivalLounge {
      */
 
     public synchronized char takeABus(){
+        /*
+          Blocked Entity: Passenger
+          Freeing Entity: Driver
+          Freeing Method: announcingBusBoarding()
+          Blocked Entity Reactions: enterTheBus()
+        */
 
         return 0;
     }
@@ -57,6 +63,19 @@ public class ArrivalLounge {
      * @param
      */
     public synchronized boolean goCollectABag(){
+        /*
+          Blocked Entity: Passenger
+          Freeing Entity: Porter
+
+          Freeing Method: carryItToAppropriateStore()
+          Freeing Condition: porter bring their bag
+          Blocked Entity Reactions: -> if all bags collected: goHome() else goCollectABag()
+
+          Freeing Method: tryToCollectABag()
+          Freeing Condition: no more pieces of luggage
+          Blocked Entity Reaction: reportMissingBags()
+        */
+
         return false;
     }
 
@@ -77,11 +96,16 @@ public class ArrivalLounge {
      */
 
     public synchronized char takeARest(){
+        /*
+          Blocked Entity: Porter
+          Freeing Entity: Passenger
+          Freeing Method: whatShouldIDo()
+          Freeing Condition: Last passenger to reach the arrival lounge
+          Blocked Entity Reaction: tryToCollectABag()
+         */
+
         // bloqueia porter
-
-
-        return 'E';
-        // 'E' character return means end of state
+        return 'E'; // 'E' character return means end of state
     }
 
     /*
