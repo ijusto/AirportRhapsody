@@ -96,4 +96,17 @@ public class BusDriver extends Thread {
     public int getS() {
         return S;
     }
+
+
+    public void setStat(EntitiesStates stat) {
+        Stat = stat;
+    }
+
+    public void setQ(int q) {
+        Q = q;
+    }
+
+    public void setS(int s) {
+        S = s;
+    }
 }

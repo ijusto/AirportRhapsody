@@ -1,5 +1,9 @@
 package sharedRegions;
 
+import commonInfrastructures.EntitiesStates;
+import entities.Passenger;
+import entities.Porter;
+
 /**
  * ...
  *
@@ -15,6 +19,9 @@ public class ArrivalTerminalExit {
      */
 
     public void goHome(){
+
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(EntitiesStates.EXITING_THE_ARRIVAL_TERMINAL);
 
     }
 }

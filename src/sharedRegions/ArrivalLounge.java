@@ -54,13 +54,16 @@ public class ArrivalLounge {
           Blocked Entity Reactions: enterTheBus()
         */
 
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(EntitiesStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+
+
         return 0;
     }
 
-    /*
-     * calling entity: entities.Passenger
-     * functionality: change state of entities.Passenger to AT_THE_LUGGAGE_COLLECTION_POINT
-     * @param
+    /**
+     *  ... (raised by the Passenger).
+     *
      */
     public synchronized boolean goCollectABag(){
         /*
@@ -76,15 +79,20 @@ public class ArrivalLounge {
           Blocked Entity Reaction: reportMissingBags()
         */
 
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(EntitiesStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+
         return false;
     }
 
-    /*
-     * calling entity: entities.Passenger
-     * functionality: change state of entities.Passenger to EXITING_THE_ARRIVAL_TERMINAL
-     * @param
+    /**
+     *  ... (raised by the Passenger).
+     *
      */
     public synchronized void goHome(){
+
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(EntitiesStates.EXITING_THE_ARRIVAL_TERMINAL);
 
     }
 
@@ -104,25 +112,35 @@ public class ArrivalLounge {
           Blocked Entity Reaction: tryToCollectABag()
          */
 
+        Porter porter = (Porter) Thread.currentThread();
+        porter.setStat(EntitiesStates.WAITING_FOR_A_PLANE_TO_LAND);
+
         // bloqueia porter
         return 'E'; // 'E' character return means end of state
     }
 
-    /*
-     * @param
-     * calling entity: entities.Porter
-     * functionality:
+    /**
+     *  ... (raised by the Porter).
+     *
      */
+
     public synchronized Bag tryToCollectABag(){
+
+        Porter porter = (Porter) Thread.currentThread();
+        porter.setStat(EntitiesStates.AT_THE_PLANES_HOLD);
+
         return new Bag();
     }
 
-    /*
-     * @param
-     * calling entity: entities.Porter
-     * functionality:
+    /**
+     *  ... (raised by the Porter).
+     *
      */
+
     public synchronized void noMoreBagsToCollect(){
+
+        Porter porter = (Porter) Thread.currentThread();
+        porter.setStat(EntitiesStates.WAITING_FOR_A_PLANE_TO_LAND);
 
     }
 }

@@ -182,4 +182,19 @@ public class Passenger extends Thread {
         }
     }
 
+    public void setSt(EntitiesStates st) {
+        St = st;
+    }
+
+    public void setSi(SituationPassenger si) {
+        Si = si;
+    }
+
+    public void setNR(int NR) {
+        this.NR = NR;
+    }
+
+    public void setNA(int NA) {
+        this.NA = NA;
+    }
 }

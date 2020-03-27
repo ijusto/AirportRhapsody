@@ -1,5 +1,8 @@
 package sharedRegions;
 
+import commonInfrastructures.EntitiesStates;
+import entities.Passenger;
+
 /**
  * ...
  *
@@ -8,16 +11,16 @@ package sharedRegions;
  */
 
 public class BaggageReclaimOffice {
-    /*
-     * calling entity:
-     * functionality:
+
+    /**
+     *  ... (raised by the Passenger).
+     *
      */
 
     public void goHome(){
-        /*
-         * params:
-         * calling entity: entities.Passenger
-         * functionality: change state of entities.Passenger to EXITING_THE_ARRIVAL_TERMINAL
-         */
+
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(EntitiesStates.EXITING_THE_ARRIVAL_TERMINAL);
+
     }
 }

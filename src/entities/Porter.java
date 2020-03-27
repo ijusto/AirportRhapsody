@@ -93,4 +93,16 @@ public class Porter extends Thread {
             arrivalLounge.noMoreBagsToCollect();
         }
     }
+
+    public void setStat(EntitiesStates stat) {
+        Stat = stat;
+    }
+
+    public void setCB(int CB) {
+        this.CB = CB;
+    }
+
+    public void setSR(int SR) {
+        this.SR = SR;
+    }
 }

@@ -1,5 +1,11 @@
 package sharedRegions;
 
+import commonInfrastructures.EntitiesStates;
+import entities.BusDriver;
+import entities.Passenger;
+
+import java.util.Queue;
+
 /**
  * ...
  *
@@ -8,11 +14,12 @@ package sharedRegions;
  */
 
 public class DepartureTerminalTransferQuay {
-    /*
-     * @param
-     * calling entity: entities.Passenger
-     * functionality: change state of entities.Passenger to AT_THE_DEPARTURE_TRANSFER_TERMINAL
+
+    /**
+     *  ... (raised by the Passenger).
+     *
      */
+
     public void leaveTheBus(){
         /*
           Blocked Entity: Passenger
@@ -21,22 +28,30 @@ public class DepartureTerminalTransferQuay {
           Freeing Method: parkTheBusAndLetPassOff()
           Blocked Entity Reactions: leaveTheBus()
         */
+
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(EntitiesStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
+
     }
+
+    /**
+     *  ... (raised by the BusDriver).
+     *
+     */
 
     public void goToArrivalTerminal(){
-        /*
-         * params:
-         * calling entity: entities.BusDriver
-         * functionality: change state of entities.BusDriver to DRIVING_BACKWARD
-         */
+
+        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        busDriver.setStat(EntitiesStates.DRIVING_BACKWARD);
+
     }
 
-    /*
-     * @param
-     * calling entity: entities.BusDriver
-     * functionality: change state of entities.BusDriver to PARKING_AT_THE_DEPARTURE_TERMINAL
+    /**
+     *  BusDriver informs the passengers they can leave the bus (raised by the BusDriver).
+     *  @param passengerQueue The list of the passengers to inform
      */
-    public void parkTheBusAndLetPassOff(){
+
+    public void parkTheBusAndLetPassOff(Queue<Passenger> passengerQueue) {
         /*
           Blocked Entity: Driver
           Condition: if number of passengers > 0
@@ -45,5 +60,15 @@ public class DepartureTerminalTransferQuay {
           Freeing Condition: Last passenger to exit the bus
           Blocked Entity Reaction: goToArrivalTerminal()
         */
+
+        // called by manager
+        // alerts client that the vehicle is ready to be picked up, changes
+        // carFixed[customer] to true
+        // wakes up customers
+
+        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        busDriver.setStat(EntitiesStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
+        // ...
+        notifyAll(); // ?
     }
 }

@@ -1,5 +1,9 @@
 package sharedRegions;
 
+import commonInfrastructures.EntitiesStates;
+import entities.BusDriver;
+import entities.Passenger;
+
 /**
  * ...
  *
@@ -9,28 +13,36 @@ package sharedRegions;
 
 public class ArrivalTerminalTransferQuay {
 
+    /**
+     *  ... (raised by the Passenger).
+     *
+     */
+
     public void enterTheBus(){
-        /*
-         * params:
-         * calling entity: entities.Passenger
-         * functionality: change state of entities.Passenger to TERMINAL_TRANSFER
-         */
+
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(EntitiesStates.TERMINAL_TRANSFER);
+
     }
 
+    /**
+     *  ... (raised by the BusDriver).
+     *
+     */
+
     public char hasDaysWorkEnded(){
-        /*
-         * params:
-         * calling entity: entities.BusDriver
-         * functionality: change state of entities.BusDriver to PARKING_AT_THE_ARRIVAL_TERMINAL
-         */
+
+        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        busDriver.setStat(EntitiesStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+
         return 'F';
     }
 
-    /*
-     * params:
-     * calling entity: entities.BusDriver
-     * functionality: change state of entities.BusDriver to PARKING_AT_THE_ARRIVAL_TERMINAL
+    /**
+     *  ... (raised by the BusDriver).
+     *
      */
+
     public void announcingBusBoarding(){
         /*
           Blocked Entity: Driver
@@ -39,15 +51,28 @@ public class ArrivalTerminalTransferQuay {
           Freeing Condition: Last passenger in queue
           Blocked Entity Reaction: goToDepartureTerminal()
         */
+
+        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        busDriver.setStat(EntitiesStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+
     }
 
+    /**
+     *  ... (raised by the BusDriver).
+     *
+     */
+
     public void goToDepartureTerminal(){
-        /*
-         * params:
-         * calling entity: entities.BusDriver
-         * functionality: change state of entities.BusDriver to DRIVING_FORWARD
-         */
+
+        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        busDriver.setStat(EntitiesStates.DRIVING_FORWARD);
+
     }
+
+    /**
+     *  ... (raised by the BusDriver).
+     *
+     */
 
     public void parkTheBus(){
         /*
@@ -62,5 +87,9 @@ public class ArrivalTerminalTransferQuay {
           Freeing Condition: at least 1 passenger in queue
           Blocked Entity Reaction: announcingBusBoarding()
         */
+
+        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        busDriver.setStat(EntitiesStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+
     }
 }

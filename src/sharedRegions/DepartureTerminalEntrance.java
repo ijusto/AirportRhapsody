@@ -1,5 +1,8 @@
 package sharedRegions;
 
+import commonInfrastructures.EntitiesStates;
+import entities.Passenger;
+
 /**
  * ...
  *
@@ -8,17 +11,17 @@ package sharedRegions;
  */
 
 public class DepartureTerminalEntrance {
-    /*
-     * calling entity:
-     * functionality:
+
+    /**
+     *  ... (raised by the Passenger).
+     *
      */
 
     public void prepareNextLeg(){
-        /*
-         * params:
-         * calling entity: entities.Passenger
-         * functionality: change state of entities.Passenger to ENTERING_THE_DEPARTURE_TERMINAL
-         */
+
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(EntitiesStates.ENTERING_THE_DEPARTURE_TERMINAL);
+
     }
 
 

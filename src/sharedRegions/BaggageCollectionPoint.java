@@ -1,5 +1,9 @@
 package sharedRegions;
 import commonInfrastructures.Bag;
+import commonInfrastructures.EntitiesStates;
+import entities.BusDriver;
+import entities.Passenger;
+import entities.Porter;
 
 /**
  * ...
@@ -9,29 +13,51 @@ import commonInfrastructures.Bag;
  */
 
 public class BaggageCollectionPoint {
+
+    /**
+     *  ... (raised by the Passenger).
+     *
+     */
+
     public void goCollectABag(){
-        /*
-         * params:
-         * calling entity: entities.Passenger
-         * functionality: change state of entities.Passenger to AT_THE_LUGGAGE_COLLECTION_POINT
-         */
+
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(EntitiesStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+
     }
+
+    /**
+     *  ... (raised by the Passenger).
+     *
+     */
 
     public void reportMissingBags(){
-        /*
-         * params:
-         * calling entity: entities.Passenger
-         * functionality: change state of entities.Passenger to AT_THE_BAGGAGE_RECLAIM_OFFICE
-         */
+
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(EntitiesStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+
     }
+
+    /**
+     *  ... (raised by the Passenger).
+     *
+     */
 
     public void goHome(){
-        /*
-         * params:
-         * calling entity: entities.Passenger
-         * functionality: change state of entities.Passenger to EXITING_THE_ARRIVAL_TERMINAL
-         */
+
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(EntitiesStates.EXITING_THE_ARRIVAL_TERMINAL);
+
     }
 
-    public void carryItToAppropriateStore(Bag bag){}
+    /**
+     *  ... (raised by the Porter).
+     *
+     */
+    public void carryItToAppropriateStore(Bag bag){
+
+        Porter porter = (Porter) Thread.currentThread();
+        porter.setStat(EntitiesStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
+
+    }
 }
