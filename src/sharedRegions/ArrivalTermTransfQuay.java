@@ -1,6 +1,7 @@
 package sharedRegions;
 
-import entities.EntitiesStates;
+import entities.BusDriverStates;
+import entities.PassengerStates;
 import entities.BusDriver;
 import entities.Passenger;
 
@@ -34,7 +35,7 @@ public class ArrivalTermTransfQuay {
     public void enterTheBus(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(EntitiesStates.TERMINAL_TRANSFER);
+        passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
 
     }
 
@@ -46,7 +47,7 @@ public class ArrivalTermTransfQuay {
     public char hasDaysWorkEnded(){
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
-        busDriver.setStat(EntitiesStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         return 'F';
     }
@@ -66,7 +67,7 @@ public class ArrivalTermTransfQuay {
         */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
-        busDriver.setStat(EntitiesStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
     }
 
@@ -90,7 +91,7 @@ public class ArrivalTermTransfQuay {
         */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
-        busDriver.setStat(EntitiesStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
     }
 }

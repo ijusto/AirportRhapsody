@@ -1,6 +1,7 @@
 package sharedRegions;
 import commonInfrastructures.Bag;
-import entities.EntitiesStates;
+import entities.PassengerStates;
+import entities.PorterStates;
 import entities.Passenger;
 import entities.Porter;
 
@@ -34,7 +35,7 @@ public class BaggageColPoint {
     public void goCollectABag(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(EntitiesStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
     }
 
@@ -46,7 +47,7 @@ public class BaggageColPoint {
     public void reportMissingBags(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(EntitiesStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+        passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
 
     }
 
@@ -58,7 +59,7 @@ public class BaggageColPoint {
     public void goHome(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(EntitiesStates.EXITING_THE_ARRIVAL_TERMINAL);
+        passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
     }
 
@@ -69,7 +70,7 @@ public class BaggageColPoint {
     public void carryItToAppropriateStore(Bag bag){
 
         Porter porter = (Porter) Thread.currentThread();
-        porter.setStat(EntitiesStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
+        porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
 
     }
 }

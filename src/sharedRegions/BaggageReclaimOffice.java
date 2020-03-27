@@ -1,6 +1,6 @@
 package sharedRegions;
 
-import entities.EntitiesStates;
+import entities.PassengerStates;
 import entities.Passenger;
 
 /**
@@ -20,7 +20,7 @@ public class BaggageReclaimOffice {
     public void goHome(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(EntitiesStates.EXITING_THE_ARRIVAL_TERMINAL);
+        passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
     }
 }

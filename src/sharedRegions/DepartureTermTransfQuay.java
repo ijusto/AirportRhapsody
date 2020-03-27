@@ -1,10 +1,9 @@
 package sharedRegions;
 
-import entities.EntitiesStates;
+import entities.BusDriverStates;
+import entities.PassengerStates;
 import entities.BusDriver;
 import entities.Passenger;
-
-import java.util.Queue;
 
 /**
  * ...
@@ -44,7 +43,7 @@ public class DepartureTermTransfQuay {
         */
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(EntitiesStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
+        passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
 
     }
 
@@ -64,7 +63,7 @@ public class DepartureTermTransfQuay {
         */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
-        busDriver.setStat(EntitiesStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
+        busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         // ...
         notifyAll(); // ?
     }

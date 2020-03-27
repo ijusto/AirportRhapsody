@@ -1,6 +1,6 @@
 package sharedRegions;
 import commonInfrastructures.Bag;
-import entities.EntitiesStates;
+import entities.PorterStates;
 import entities.Porter;
 
 /**
@@ -24,7 +24,7 @@ public class TemporaryStorageArea {
     public void carryItToAppropriateStore(Bag bag){
 
         Porter porter = (Porter) Thread.currentThread();
-        porter.setStat(EntitiesStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
+        porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
 
     }
 }

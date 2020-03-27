@@ -1,6 +1,6 @@
 package sharedRegions;
 
-import entities.EntitiesStates;
+import entities.PassengerStates;
 import entities.Passenger;
 
 /**
@@ -48,7 +48,7 @@ public class DepartureTerminalEntrance {
     public void prepareNextLeg(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(EntitiesStates.ENTERING_THE_DEPARTURE_TERMINAL);
+        passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
     }
 

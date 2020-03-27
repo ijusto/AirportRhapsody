@@ -31,7 +31,7 @@ public class Porter extends Thread {
      *    @serialField Stat
      */
 
-    private EntitiesStates Stat;
+    private PorterStates Stat;
 
     /**
      *  Number of pieces of luggage presently on the conveyor belt
@@ -61,7 +61,7 @@ public class Porter extends Thread {
      *    @param SR number of pieces of luggage belonging to passengers in transit presently stored at the storeroom
      */
 
-    public Porter(EntitiesStates Stat, int CB, int SR){
+    public Porter(PorterStates Stat, int CB, int SR){
         this.Stat = Stat;
         this.CB = CB;
         this.SR = SR;
@@ -93,7 +93,7 @@ public class Porter extends Thread {
         }
     }
 
-    public void setStat(EntitiesStates stat) {
+    public void setStat(PorterStates stat) {
         Stat = stat;
     }
 

@@ -30,7 +30,7 @@ public class BusDriver extends Thread {
      *    @serialField Stat
      */
 
-    private EntitiesStates Stat;
+    private BusDriverStates Stat;
 
     /**
      *  Occupation state for the waiting queue (passenger id / - (empty))
@@ -73,7 +73,7 @@ public class BusDriver extends Thread {
 
     public void goToArrivalTerminal(){
 
-        this.setStat(EntitiesStates.DRIVING_BACKWARD);
+        this.setStat(BusDriverStates.DRIVING_BACKWARD);
 
     }
 
@@ -84,7 +84,7 @@ public class BusDriver extends Thread {
 
     public void goToDepartureTerminal(){
 
-        this.setStat(EntitiesStates.DRIVING_FORWARD);
+        this.setStat(BusDriverStates.DRIVING_FORWARD);
 
     }
 
@@ -94,7 +94,7 @@ public class BusDriver extends Thread {
      *    @return Stat
      */
 
-    public EntitiesStates getStat() {
+    public BusDriverStates getStat() {
         return Stat;
     }
 
@@ -119,7 +119,7 @@ public class BusDriver extends Thread {
     }
 
 
-    public void setStat(EntitiesStates stat) {
+    public void setStat(BusDriverStates stat) {
         Stat = stat;
     }
 

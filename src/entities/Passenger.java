@@ -48,7 +48,7 @@ public class Passenger extends Thread {
      *    @serialField St
      */
 
-    private EntitiesStates St;
+    private PassengerStates St;
 
     /**
      *  Situation of passenger
@@ -83,7 +83,7 @@ public class Passenger extends Thread {
      *    @param NA number of pieces of luggage the passenger she has presently collected
      */
 
-    public Passenger(EntitiesStates St, SituationPassenger Si, int NR, int NA){
+    public Passenger(PassengerStates St, SituationPassenger Si, int NR, int NA){
         this.St = St;
         this.Si = Si;
         this.NR = NR;
@@ -130,7 +130,7 @@ public class Passenger extends Thread {
         return Si;
     }
 
-    public EntitiesStates getSt() {
+    public PassengerStates getSt() {
         return St;
     }
 
@@ -181,7 +181,7 @@ public class Passenger extends Thread {
         }
     }
 
-    public void setSt(EntitiesStates st) {
+    public void setSt(PassengerStates st) {
         St = st;
     }
 

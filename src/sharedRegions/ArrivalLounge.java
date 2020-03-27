@@ -1,6 +1,6 @@
 package sharedRegions;
 import commonInfrastructures.Bag;
-import entities.EntitiesStates;
+import entities.BusDriverStates;
 import entities.*;
 import main.AirportConcurrentVersion;
 
@@ -72,7 +72,7 @@ public class ArrivalLounge {
 
         Passenger currentPassenger = (Passenger) Thread.currentThread();
 
-        if(currentPassenger.getSt() == EntitiesStates.AT_THE_DISEMBARKING_ZONE) {
+        if(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE) {
             try {
                 sleep((long) (new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1) + AirportConcurrentVersion.minSleep));
             } catch (InterruptedException e) {
@@ -98,7 +98,7 @@ public class ArrivalLounge {
         */
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(EntitiesStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
 
         return 0;
     }
@@ -123,7 +123,7 @@ public class ArrivalLounge {
         */
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(EntitiesStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         return false;
     }
@@ -135,7 +135,7 @@ public class ArrivalLounge {
     public synchronized void goHome(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(EntitiesStates.EXITING_THE_ARRIVAL_TERMINAL);
+        passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
     }
 
@@ -159,7 +159,7 @@ public class ArrivalLounge {
          */
 
         Porter porter = (Porter) Thread.currentThread();
-        porter.setStat(EntitiesStates.WAITING_FOR_A_PLANE_TO_LAND);
+        porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
         // bloqueia porter
         return 'E'; // 'E' character return means end of state
@@ -173,7 +173,7 @@ public class ArrivalLounge {
     public synchronized Bag tryToCollectABag(){
 
         Porter porter = (Porter) Thread.currentThread();
-        porter.setStat(EntitiesStates.AT_THE_PLANES_HOLD);
+        porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
 
         return new Bag();
     }
@@ -186,7 +186,7 @@ public class ArrivalLounge {
     public synchronized void noMoreBagsToCollect(){
 
         Porter porter = (Porter) Thread.currentThread();
-        porter.setStat(EntitiesStates.WAITING_FOR_A_PLANE_TO_LAND);
+        porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
     }
 }
