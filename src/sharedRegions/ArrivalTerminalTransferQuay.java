@@ -62,18 +62,6 @@ public class ArrivalTerminalTransferQuay {
      *
      */
 
-    public void goToDepartureTerminal(){
-
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
-        busDriver.setStat(EntitiesStates.DRIVING_FORWARD);
-
-    }
-
-    /**
-     *  ... (raised by the BusDriver).
-     *
-     */
-
     public void parkTheBus(){
         /*
           Blocked Entity: Driver

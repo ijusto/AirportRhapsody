@@ -34,17 +34,7 @@ public class DepartureTerminalTransferQuay {
 
     }
 
-    /**
-     *  ... (raised by the BusDriver).
-     *
-     */
 
-    public void goToArrivalTerminal(){
-
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
-        busDriver.setStat(EntitiesStates.DRIVING_BACKWARD);
-
-    }
 
     /**
      *  BusDriver informs the passengers they can leave the bus (raised by the BusDriver).

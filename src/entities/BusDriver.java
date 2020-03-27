@@ -60,11 +60,33 @@ public class BusDriver extends Thread {
     public void run() {
         while(arrivalTerminalQuay.hasDaysWorkEnded() != 'F'){
             arrivalTerminalQuay.announcingBusBoarding();
-            arrivalTerminalQuay.goToDepartureTerminal();
+            goToDepartureTerminal();
             departureTransferQuay.parkTheBusAndLetPassOff();
-            departureTransferQuay.goToArrivalTerminal();
+            goToArrivalTerminal();
             arrivalTerminalQuay.parkTheBus();
         }
+    }
+
+    /**
+     *
+     *
+     */
+
+    public void goToArrivalTerminal(){
+
+        this.setStat(EntitiesStates.DRIVING_BACKWARD);
+
+    }
+
+    /**
+     *  
+     *
+     */
+
+    public void goToDepartureTerminal(){
+
+        this.setStat(EntitiesStates.DRIVING_FORWARD);
+
     }
 
     /**
