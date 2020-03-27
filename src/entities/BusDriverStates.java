@@ -1,5 +1,12 @@
 package entities;
 
+/**
+ * ...
+ *
+ * @author Inês Justo
+ * @author Miguel Lopes
+ */
+
 public enum BusDriverStates {
     PARKING_AT_THE_ARRIVAL_TERMINAL,
     DRIVING_FORWARD,

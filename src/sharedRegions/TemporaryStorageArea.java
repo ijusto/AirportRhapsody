@@ -24,7 +24,7 @@ public class TemporaryStorageArea {
     public void carryItToAppropriateStore(Bag bag){
 
         Porter porter = (Porter) Thread.currentThread();
-        porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
+        porter.setStat(PorterStates.AT_THE_STOREROOM);
 
     }
 }

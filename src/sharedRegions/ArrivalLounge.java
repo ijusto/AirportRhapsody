@@ -1,12 +1,9 @@
 package sharedRegions;
 import commonInfrastructures.Bag;
-import entities.BusDriverStates;
 import entities.*;
 import main.AirportConcurrentVersion;
-
 import java.util.Random;
 import java.util.Queue;
-
 import static java.lang.Thread.sleep;
 
 /**
@@ -17,6 +14,10 @@ import static java.lang.Thread.sleep;
  */
 
 public class ArrivalLounge {
+
+    /*
+     * TODO: add Stack (guardar as malas para irem para o aviao)
+     * */
 
     /*
      *

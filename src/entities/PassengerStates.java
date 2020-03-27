@@ -1,5 +1,12 @@
 package entities;
 
+/**
+ * ...
+ *
+ * @author Inês Justo
+ * @author Miguel Lopes
+ */
+
 public enum PassengerStates {
     AT_THE_DISEMBARKING_ZONE,
     AT_THE_LUGGAGE_COLLECTION_POINT,

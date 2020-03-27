@@ -4,7 +4,7 @@ package commonInfrastructures;
  *    Parametric stack derived from a parametric memory.
  *    Errors are reported.
  *
- *    @author ANTÓNIO RUI DE OLIVEIRA E SILVA BORGES
+ *    @author António Rui De Oliveira E Silva Borges
  *    @param <R> data type of stored objects
  */
 

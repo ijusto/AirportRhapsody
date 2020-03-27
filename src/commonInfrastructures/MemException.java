@@ -7,7 +7,7 @@ package commonInfrastructures;
  *       write operation on a full memory;
  *       read operation on an empty memory.
  *
- *    @author ANTÓNIO RUI DE OLIVEIRA E SILVA BORGES
+ *    @author António Rui De Oliveira E Silva Borges
  */
 
 public class MemException extends Exception

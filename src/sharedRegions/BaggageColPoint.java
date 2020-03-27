@@ -14,6 +14,11 @@ import entities.Porter;
 
 public class BaggageColPoint {
 
+    /* TODO:
+        add CAM (memoria associativa para guardar as malas - tapete rolante
+    *
+    * */
+
     /*
      *
      */

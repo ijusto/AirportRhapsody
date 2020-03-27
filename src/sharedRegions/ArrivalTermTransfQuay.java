@@ -15,6 +15,11 @@ import entities.Passenger;
 public class ArrivalTermTransfQuay {
 
     /*
+    * TODO:
+        add FIFO (cais de chegadas precisa de guardar a fila de passageiros que querem entrar no autocarro)
+    * */
+
+    /*
      *
      */
     private GenReposInfo repos;
