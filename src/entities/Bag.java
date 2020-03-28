@@ -13,10 +13,11 @@ public class Bag {
     private static final char FINAL = 'F';  // final
 
     private char destStat;
-    private Passenger owner;
+    private int idOwner;
 
-    public Bag(char destStat){
+    public Bag(char destStat, int idOwner){
         this.destStat = destStat;
+        this.idOwner = idOwner;
     }
 
     public void setDestStat(char destStat) {

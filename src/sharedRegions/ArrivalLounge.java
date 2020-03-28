@@ -19,13 +19,7 @@ import java.util.*;
 public class ArrivalLounge {
 
     /*
-     *  Number of bags on the plane hold
-     */
-
-    private int nBagsPlane;
-
-    /*
-     *   Stack of bags on the planes hold
+     *   Stack of bags on the plane's hold
      */
 
     private MemStack<Bag> bagStack;
@@ -60,19 +54,23 @@ public class ArrivalLounge {
      */
 
     public ArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos) throws MemException {
-        this.repos = repos;
-        Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<Integer,  MemFIFO<Bag>>();
-        Map<Integer, Integer> numberOfBags = new HashMap<Integer, Integer>();
 
-        this.nBagsPlane = 0;
+        this.repos = repos;
+
+        Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
+        Map<Integer, Integer> nBagsPerPass = new HashMap<>();
+
+        int nTotalBags = 0;
         for(int nPass = 0; nPass < SimulationParameters.N; nPass++){
-            this.nBagsPlane += nBagsPHold[nPass][repos.getFN()];
-            numberOfBags.put(nPass, nBagsPHold[nPass][repos.getFN()]);
+            nTotalBags += nBagsPHold[nPass][repos.getFN()];
+            nBagsPerPass.put(nPass, nBagsPHold[nPass][repos.getFN()]);
         }
-        this.bagStack = new MemStack<> (new Bag [this.nBagsPlane]);     // stack instantiation
+
+        this.bagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
+
         for(int nPass = 0; nPass < SimulationParameters.N; nPass++){
-            this.bagStack.write(new Bag(destStat[nPass][repos.getFN()]));
-            MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [numberOfBags.get(nPass)]);        // FIFO instantiation
+            this.bagStack.write(new Bag(destStat[nPass][repos.getFN()], nPass));
+            MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);        // FIFO instantiation
             treadmill.put(nPass, bagPassFIFO);
         }
 
@@ -97,13 +95,14 @@ public class ArrivalLounge {
 
         notifyAll();  // wake up Porter in takeARest()
 
-        if(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE) {
-            try {
-                wait(new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1) + AirportConcurrentVersion.minSleep);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+
+        try {
+            wait(new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1) + AirportConcurrentVersion.minSleep);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
 
         return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
     }
@@ -128,6 +127,7 @@ public class ArrivalLounge {
         */
 
         Passenger passenger = (Passenger) Thread.currentThread();
+        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         return false;
@@ -140,6 +140,7 @@ public class ArrivalLounge {
     public synchronized void goHome(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
+        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
     }
@@ -164,7 +165,7 @@ public class ArrivalLounge {
          */
 
         Porter porter = (Porter) Thread.currentThread();
-        porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
         // bloqueia porter
         return 'E';
@@ -178,6 +179,7 @@ public class ArrivalLounge {
     public synchronized Bag tryToCollectABag(){
 
         Porter porter = (Porter) Thread.currentThread();
+        assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
 
         notifyAll();  // wake up Passengers in goCollectABag()
@@ -199,6 +201,7 @@ public class ArrivalLounge {
     public synchronized void noMoreBagsToCollect(){
 
         Porter porter = (Porter) Thread.currentThread();
+        assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
     }

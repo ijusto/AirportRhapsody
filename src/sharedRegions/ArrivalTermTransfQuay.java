@@ -43,18 +43,7 @@ public class ArrivalTermTransfQuay {
         this.boardBus = false;
     }
 
-    /**
-     *  ... (raised by the BusDriver).
-     *
-     */
-
-    public char hasDaysWorkEnded(){
-
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
-        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
-
-        return 'F';
-    }
+    /* ************************************************Passenger***************************************************** */
 
     /**
      *  Operation of taking a Bus (raised by the Passenger). <p> functionality: change state of entities.Passenger to AT_THE_ARRIVAL_TRANSFER_TERMINAL
@@ -63,6 +52,8 @@ public class ArrivalTermTransfQuay {
 
     public synchronized void takeABus() {
         Passenger passenger = (Passenger) Thread.currentThread();
+
+        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
 
         try {
@@ -92,6 +83,40 @@ public class ArrivalTermTransfQuay {
     }
 
     /**
+     *  ... (raised by the Passenger).
+     *
+     */
+
+    public void enterTheBus(){
+
+        Passenger passenger = (Passenger) Thread.currentThread();
+        assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
+
+        try{
+            waitingPass.read();
+        } catch (MemException e) {
+            notifyAll();  // wake up Bus driver in announcingBusBoarding()
+        }
+    }
+
+    /* ************************************************Bus Driver**************************************************** */
+
+    /**
+     *  ... (raised by the BusDriver).
+     *
+     */
+
+    public char hasDaysWorkEnded(){
+
+        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+
+        return 'F';
+    }
+
+    /**
      *  ... (raised by the BusDriver).
      *
      */
@@ -102,6 +127,7 @@ public class ArrivalTermTransfQuay {
         */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
+        assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         /*
@@ -140,6 +166,7 @@ public class ArrivalTermTransfQuay {
         */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
+        assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         this.boardBus = true;
@@ -155,20 +182,4 @@ public class ArrivalTermTransfQuay {
 
     }
 
-    /**
-     *  ... (raised by the Passenger).
-     *
-     */
-
-    public void enterTheBus(){
-
-        Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
-
-        try{
-            waitingPass.read();
-        } catch (MemException e) {
-            notifyAll();  // wake up Bus driver in announcingBusBoarding()
-        }
-    }
 }

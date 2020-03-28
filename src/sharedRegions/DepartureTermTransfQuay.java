@@ -28,6 +28,9 @@ public class DepartureTermTransfQuay {
         this.repos = repos;
     }
 
+
+    /* ************************************************Passenger***************************************************** */
+
     /**
      *  ... (raised by the Passenger).
      *
@@ -37,15 +40,19 @@ public class DepartureTermTransfQuay {
         /*
           Blocked Entity: Passenger
           Freeing Entity: Driver
-
           Freeing Method: parkTheBusAndLetPassOff()
-          Blocked Entity Reactions: leaveTheBus()
+          Blocked Entity Reactions: prepareNextLeg()
         */
 
         Passenger passenger = (Passenger) Thread.currentThread();
+        assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
 
+        notifyAll();  // wake up Bus Driver no parkTheBusAndLetPassOff().
+
     }
+
+    /* *************************************************Bus Driver*************************************************** */
 
     /**
      *  BusDriver informs the passengers they can leave the bus (raised by the BusDriver).

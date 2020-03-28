@@ -37,6 +37,11 @@ public class AirportConcurrentVersion {
         DepartureTerminalEntrance departureTerm;
 
         String fileName;
+        char[][] destStat;
+        int[][] nBags;
+        int[][] nBagsPHold;
+        char opt;
+        boolean success;
 
         do {
             /* ... */

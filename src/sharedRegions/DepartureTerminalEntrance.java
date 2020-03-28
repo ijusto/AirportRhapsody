@@ -48,6 +48,7 @@ public class DepartureTerminalEntrance {
     public void prepareNextLeg(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
+        assert(passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
     }

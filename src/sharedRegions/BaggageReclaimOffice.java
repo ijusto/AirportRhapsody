@@ -20,6 +20,7 @@ public class BaggageReclaimOffice {
     public void goHome(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
+        assert(passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
     }

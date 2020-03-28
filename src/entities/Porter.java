@@ -93,7 +93,11 @@ public class Porter extends Thread {
     }
 
     public void setStat(PorterStates stat) {
-        Stat = stat;
+        this.Stat = stat;
+    }
+
+    public PorterStates getStat() {
+        return this.Stat;
     }
 
     public void setCB(int CB) {

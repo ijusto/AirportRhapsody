@@ -14,10 +14,9 @@ import java.util.Map;
 
 public class BaggageColPoint {
 
-    /* TODO:
-        add CAM (memoria associativa para guardar as malas - tapete rolante
-    *
-    * */
+    /*
+     *   Map to store
+     */
 
     private Map<Integer, MemFIFO<Bag>> treadmill;
 
@@ -34,6 +33,9 @@ public class BaggageColPoint {
         this.repos = repos;
     }
 
+
+    /* ************************************************Passenger***************************************************** */
+
     /**
      *  ... (raised by the Passenger).
      *
@@ -42,7 +44,7 @@ public class BaggageColPoint {
     public void goCollectABag(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
     }
 
@@ -54,6 +56,7 @@ public class BaggageColPoint {
     public void reportMissingBags(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
+        assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
 
     }
@@ -69,6 +72,8 @@ public class BaggageColPoint {
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
     }
+
+    /* **************************************************Porter****************************************************** */
 
     /**
      *  ... (raised by the Porter).
