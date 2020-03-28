@@ -31,6 +31,11 @@ public class ArrivalTermTransfQuay {
     /*
      *
      */
+    private boolean existsPassengers;
+
+    /*
+     *
+     */
     private GenReposInfo repos;
 
     /*
@@ -41,6 +46,7 @@ public class ArrivalTermTransfQuay {
         this.repos = repos;
         this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.T]);        // FIFO instantiation
         this.boardBus = false;
+        this.existsPassengers = false;
     }
 
     /* ************************************************Passenger***************************************************** */
@@ -111,7 +117,8 @@ public class ArrivalTermTransfQuay {
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
-        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+
+        /* TODO: if(this.existsPass) wake up the bus driver*/
 
         return 'F';
     }
@@ -129,6 +136,8 @@ public class ArrivalTermTransfQuay {
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+
+        /* TODO: if(this.existsPass) wake up the bus driver*/
 
         /*
             1) Freeing Entity: Passenger
@@ -167,7 +176,8 @@ public class ArrivalTermTransfQuay {
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
-        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+
+        /* TODO: if(this.existsPass) wake up the bus driver*/
 
         this.boardBus = true;
         notifyAll();  // wake up Passengers in takeABus()

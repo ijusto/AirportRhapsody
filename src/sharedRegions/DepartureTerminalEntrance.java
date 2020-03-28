@@ -34,10 +34,24 @@ public class DepartureTerminalEntrance {
      *
      */
 
+    private ArrivalTerminalExit arrivalTerm;
+
+    /*
+     *
+     */
+
     public DepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay,GenReposInfo repos){
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
+    }
+
+    /*
+     *
+     */
+
+    public void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
+        this.arrivalTerm = arrivalTerm;
     }
 
     /**
