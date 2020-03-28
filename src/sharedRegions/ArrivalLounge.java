@@ -50,8 +50,13 @@ public class ArrivalLounge {
 
     private BaggageColPoint bagColPoint;
 
-    /*
+    /**
+     *  Instantiation of the Arrival Lounge.
      *
+     *    @param destStat destination state of the bags
+     *    @param nBagsPHold number of bags per passenger and flight
+     *    @param bagColPoint baggage collection point
+     *    @param repos general repository of information
      */
 
     public ArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos) throws MemException {
