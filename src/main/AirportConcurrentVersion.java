@@ -1,6 +1,6 @@
 package main;
-
 import sharedRegions.*;
+import genclass.GenericIO;
 
 /**
  *  Main program.
@@ -34,6 +34,18 @@ public class AirportConcurrentVersion {
         DepartureTermTransfQuay departureQuay;
         ArrivalTerminalExit arrivalTerm;
         DepartureTerminalEntrance departureTerm;
+
+        do {
+            /* ... */
+            {
+                do {
+                    GenericIO.writeString("There is already a file with this name. Delete it (y - yes; n - no)? ");
+                    opt = GenericIO.readlnChar();
+                } while( (opt != 'y') && (opt != 'n'));
+            } else {
+                success = true;
+            }
+        } while(success);
 
         for(int land = 0; land < SimulationParameters.K; land++){
             for(int nPass = 0; nPass < SimulationParameters.N; nPass++){
