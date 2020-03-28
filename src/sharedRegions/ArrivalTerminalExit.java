@@ -78,13 +78,15 @@ public class ArrivalTerminalExit {
      *  ... (raised by the Passenger).
      *
      */
-    public synchronized void goHome(){
+    public synchronized void goHome() throws InterruptedException {
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
                 passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
                 passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+
+        passenger.join();
 
         this.exitPassenger();
     }
