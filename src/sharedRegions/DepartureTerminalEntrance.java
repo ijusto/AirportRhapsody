@@ -2,6 +2,7 @@ package sharedRegions;
 
 import entities.PassengerStates;
 import entities.Passenger;
+import main.SimulationParameters;
 
 /**
  * ...
@@ -40,10 +41,17 @@ public class DepartureTerminalEntrance {
      *
      */
 
+    private int termPass;
+
+    /*
+     *
+     */
+
     public DepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay,GenReposInfo repos){
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
+        this.termPass = 0;
     }
 
     /*
@@ -52,6 +60,18 @@ public class DepartureTerminalEntrance {
 
     public void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
         this.arrivalTerm = arrivalTerm;
+    }
+
+    public void exitPassenger(){
+        this.termPass += 1;
+        if( (this.termPass + this.arrivalTerm.getTermPass()) == SimulationParameters.N * SimulationParameters.K){
+            this.arrivLounge.setExistsPassengers(false);
+            this.arrivalQuay.setExistsPassengers(false);
+        }
+    }
+
+    public int getTermPass(){
+        return this.termPass;
     }
 
     /**
@@ -65,6 +85,7 @@ public class DepartureTerminalEntrance {
         assert(passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
+        this.exitPassenger();
     }
 
 

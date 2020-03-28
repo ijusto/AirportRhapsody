@@ -29,6 +29,11 @@ public class ArrivalLounge {
     /*
      *
      */
+    private boolean existsPassengers;
+
+    /*
+     *
+     */
 
     public Queue<Passenger> passengerQueue;
 
@@ -54,6 +59,8 @@ public class ArrivalLounge {
      */
 
     public ArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos) throws MemException {
+
+        this.existsPassengers = true;
 
         this.repos = repos;
 
@@ -143,6 +150,7 @@ public class ArrivalLounge {
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
+
     }
 
 
@@ -167,6 +175,8 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
+        /* TODO: if(!this.existsPass) wake up the porter*/
+
         // bloqueia porter
         return 'E';
     }
@@ -181,6 +191,8 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
+
+        /* TODO: if(!this.existsPass) wake up the porter*/
 
         notifyAll();  // wake up Passengers in goCollectABag()
 
@@ -204,5 +216,12 @@ public class ArrivalLounge {
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
+
+        /* TODO: if(!this.existsPass) wake up the porter*/
+
+    }
+
+    public void setExistsPassengers(boolean existsPassengers) {
+        this.existsPassengers = existsPassengers;
     }
 }
