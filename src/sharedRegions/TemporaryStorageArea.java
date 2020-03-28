@@ -1,4 +1,6 @@
 package sharedRegions;
+import commonInfrastructures.MemException;
+import commonInfrastructures.MemStack;
 import entities.Bag;
 import entities.PorterStates;
 import entities.Porter;
@@ -11,6 +13,9 @@ import entities.Porter;
  */
 
 public class TemporaryStorageArea {
+
+    private MemStack<Bag> tmpStorageStack;
+
     
     TemporaryStorageArea(){
 
@@ -26,5 +31,13 @@ public class TemporaryStorageArea {
         Porter porter = (Porter) Thread.currentThread();
         porter.setStat(PorterStates.AT_THE_STOREROOM);
 
+        notifyAll();
+
+        try {
+            tmpStorageStack.write(bag);
+            wait();
+        } catch (MemException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
