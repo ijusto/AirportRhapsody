@@ -64,6 +64,9 @@ public class GenReposInfo {
      */
     private PassengerStates[] passengerStates;
     private int passengersQueue;
+    private String[] passengerSituation;
+    private int[] totalLuggage;
+    private int[] collectedLuggage;
 
     /*
      *   Arrival Lounge
@@ -209,11 +212,11 @@ public class GenReposInfo {
     }
 
     /**
-     *  Update the passenger situation (in transit or final)
+     *  Get the passenger situation (in transit or final)
      */
 
-    public synchronized  void updatePassengerSituation(){
-
+    public synchronized  void getPassengerSituation(int id, Passenger passenger){
+        passengerSituation[id] = passenger.getSi().toString();
         printLog();
     }
 
@@ -221,8 +224,8 @@ public class GenReposInfo {
      *  Update the passengers luggage at the start of the journey
      */
 
-    public synchronized  void numberOfPassangerLuggage(){
-
+    public synchronized  void numberOfPassangerLuggage(int id, Passenger passenger){
+        totalLuggage[id] = passenger.getNR();
         printLog();
     }
 
@@ -230,8 +233,8 @@ public class GenReposInfo {
      *  Update the number of luggage a passenger collected
      */
 
-    public synchronized  void baggageCollected(){
-
+    public synchronized  void baggageCollected(int id, Passenger passenger){
+        collectedLuggage[id] = passenger.getNR();
         printLog();
     }
 
@@ -239,7 +242,7 @@ public class GenReposInfo {
      *  Number of bags carried by a passanger at the end of the jorney
      */
 
-    public synchronized  void finalPassangeBags(){
+    public synchronized  void finalReport(){
 
         printLog();
     }
