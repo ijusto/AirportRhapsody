@@ -1,9 +1,9 @@
 package sharedRegions;
-import entities.Bag;
-import entities.PassengerStates;
-import entities.PorterStates;
-import entities.Passenger;
-import entities.Porter;
+
+import commonInfrastructures.MemFIFO;
+import entities.*;
+
+import java.util.Map;
 
 /**
  * ...
@@ -18,6 +18,8 @@ public class BaggageColPoint {
         add CAM (memoria associativa para guardar as malas - tapete rolante
     *
     * */
+
+    private Map<Integer, MemFIFO<Bag>> treadmill;
 
     /*
      *
@@ -77,5 +79,13 @@ public class BaggageColPoint {
         Porter porter = (Porter) Thread.currentThread();
         porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
 
+    }
+
+    public Map<Integer, MemFIFO<Bag>> getTreadmill() {
+        return treadmill;
+    }
+
+    public void setTreadmill(Map<Integer, MemFIFO<Bag>> treadmill) {
+        this.treadmill = treadmill;
     }
 }

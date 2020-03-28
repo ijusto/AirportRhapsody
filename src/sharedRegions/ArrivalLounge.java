@@ -1,13 +1,13 @@
 package sharedRegions;
 
 import commonInfrastructures.MemException;
+import commonInfrastructures.MemFIFO;
 import commonInfrastructures.MemStack;
 import entities.*;
 import main.AirportConcurrentVersion;
 import main.SimulationParameters;
 
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 /**
  * ...
@@ -61,17 +61,24 @@ public class ArrivalLounge {
 
     public ArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos) throws MemException {
         this.repos = repos;
+        Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<Integer,  MemFIFO<Bag>>();
+        Map<Integer, Integer> numberOfBags = new HashMap<Integer, Integer>();
 
         this.nBagsPlane = 0;
         for(int nPass = 0; nPass < SimulationParameters.N; nPass++){
             this.nBagsPlane += nBagsPHold[nPass][repos.getFN()];
+            numberOfBags.put(nPass, nBagsPHold[nPass][repos.getFN()]);
         }
         this.bagStack = new MemStack<> (new Bag [this.nBagsPlane]);     // stack instantiation
         for(int nPass = 0; nPass < SimulationParameters.N; nPass++){
             this.bagStack.write(new Bag(destStat[nPass][repos.getFN()]));
+            MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [numberOfBags.get(nPass)]);        // FIFO instantiation
+            treadmill.put(nPass, bagPassFIFO);
         }
 
         this.bagColPoint = bagColPoint;
+        this.bagColPoint.setTreadmill(treadmill);
+
         this.passCounter = 0;
     }
 
@@ -83,10 +90,12 @@ public class ArrivalLounge {
      *    @return <li> true, if final destination
      *            <li> false, otherwise
      */
-    // garanteed by prof
+
     public synchronized boolean whatShouldIDo(){
 
         Passenger currentPassenger = (Passenger) Thread.currentThread();
+
+        notifyAll();  // wake up Porter in takeARest()
 
         if(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE) {
             try {
@@ -144,7 +153,7 @@ public class ArrivalLounge {
      *    @return <li> 'E', if end of state
      *            <li> false, otherwise
      */
-    // garanteed by prof
+
     public synchronized char takeARest(){
         /*
           Blocked Entity: Porter
@@ -165,11 +174,13 @@ public class ArrivalLounge {
      *  ... (raised by the Porter).
      *
      */
-    // garanteed by prof
+
     public synchronized Bag tryToCollectABag(){
 
         Porter porter = (Porter) Thread.currentThread();
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
+
+        notifyAll();  // wake up Passengers in goCollectABag()
 
         try {
             return bagStack.read();
@@ -184,7 +195,7 @@ public class ArrivalLounge {
      *  ... (raised by the Porter).
      *
      */
-    // garanteed by prof
+
     public synchronized void noMoreBagsToCollect(){
 
         Porter porter = (Porter) Thread.currentThread();

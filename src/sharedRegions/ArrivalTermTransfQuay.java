@@ -72,7 +72,7 @@ public class ArrivalTermTransfQuay {
         }
 
         if(waitingPass.isFull()){
-            notifyAll();
+            notifyAll();  // wake up Bus Driver in parkTheBus()
         }
 
         /*
@@ -143,7 +143,7 @@ public class ArrivalTermTransfQuay {
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         this.boardBus = true;
-        notifyAll();
+        notifyAll();  // wake up Passengers in takeABus()
 
         while(!waitingPass.isEmpty()) {
             try {
@@ -168,7 +168,7 @@ public class ArrivalTermTransfQuay {
         try{
             waitingPass.read();
         } catch (MemException e) {
-            notifyAll();
+            notifyAll();  // wake up Bus driver in announcingBusBoarding()
         }
     }
 }
