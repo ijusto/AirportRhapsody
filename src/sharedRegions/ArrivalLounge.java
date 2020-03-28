@@ -23,6 +23,8 @@ public class ArrivalLounge {
     int numberOfBags = 8; /* delete later */
     private MemStack<Bag> bagStack;
 
+    private int passCounter;
+
     /*
      *
      */
@@ -63,6 +65,7 @@ public class ArrivalLounge {
         this.bagColPoint = bagColPoint;
         this.repos = repos;
         this.bagStack = new MemStack<> (new Bag [numberOfBags]);     // stack instantiation
+        this.passCounter = 0;
     }
 
     /* **************************************************Passenger*************************************************** */
@@ -168,7 +171,7 @@ public class ArrivalLounge {
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
         // bloqueia porter
-        return 'E'; // 'E' character return means end of state
+        return 'E';
     }
 
     /**

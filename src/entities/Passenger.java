@@ -3,7 +3,6 @@ import sharedRegions.ArrivalLounge;
 import sharedRegions.ArrivalTermTransfQuay;
 import sharedRegions.DepartureTermTransfQuay;
 import sharedRegions.DepartureTerminalEntrance;
-import java.util.Random;
 
 /**
  * ...
@@ -100,29 +99,11 @@ public class Passenger extends Thread {
     public void setUpPassenger(int maxBags4Passenger){
         //originar ou nao a perda de malas
 
-        Random r = new Random();
-        if(r.nextDouble()*maxBags4Passenger < 0.5){
-            this.NR = 0;
-        } else if(r.nextDouble()*maxBags4Passenger > 0.5 && r.nextDouble()*maxBags4Passenger < 1.5){
-            this.NR = 1;
-        } else if(r.nextDouble()*maxBags4Passenger > 1.5){
-            this.NR = 2;
-        }
+        /* nr is passed in arrival lounge, delete next instantiation */
+        this.NR = (Math.random()*maxBags4Passenger < 0.5) ? 0 : (Math.random()*maxBags4Passenger < 0.5) ? 1 : 2;
 
         if(NR > 0){
-            Random missing = new Random();
-            double will_miss = 0.0;
-            double miss_bags = missing.nextDouble()*NR;
-
-            if(miss_bags < 0.5){
-                will_miss = 0;
-            }
-            if (miss_bags > 0.5 && miss_bags<1.5){
-                will_miss = 1;
-            }
-            if (miss_bags > 1.5){
-                will_miss = 2;
-            }
+            double will_miss = (Math.random()*NR < 0.5) ? 0 : (Math.random()*NR < 0.5) ? 1 : 2;
         }
     }
 
