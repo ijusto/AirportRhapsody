@@ -1,9 +1,7 @@
 package sharedRegions;
 import  entities.*;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Queue;
 
 /**
@@ -20,8 +18,8 @@ import java.util.Queue;
 
 public class GenReposInfo {
 
-    private final String[] state = ["ATDZ", "ATLCP", "ETAT", "ATBRO", "ATATT", "TT", "ATDTT", "ETDT", "PATAT", "DF",
-                                    "PATDT", "DB"];
+    private final String[] state = {"ATDZ", "ATLCP", "ETAT", "ATBRO", "ATATT", "TT", "ATDTT", "ETDT", "PATAT", "DF",
+                                    "DB", "PATDT"};
 
     /**
      *  Flight number
@@ -125,7 +123,7 @@ public class GenReposInfo {
      *  Update flight number after the previous flight is finished
      */
 
-    public synchronized updateFlightNumber(int flight){
+    public synchronized void updateFlightNumber(int flight){
         FN = flight + 1;
         printLog();
     }
@@ -134,7 +132,7 @@ public class GenReposInfo {
      *  Update baggage stored in the cargo hold when porter retrieves the baggage
      */
 
-    public synchronized  updateStoredBaggage(int baggage){
+    public synchronized void  updateStoredBaggage(int baggage){
         BN = BN - baggage;
         printLog();
     }
@@ -154,7 +152,7 @@ public class GenReposInfo {
      */
     public synchronized void updatePassengerState(int id, PassengerStates passengerState){
         if(passengerStates[id] != passengerState){
-            passengerState[id] = passengerState;
+            passengerStates[id] = passengerState;
         }
         printLog();
     }
@@ -232,7 +230,7 @@ public class GenReposInfo {
      *  Update the number of luggage a passenger collected
      */
 
-    public synchronized  void BaggageCollected(){
+    public synchronized  void baggageCollected(){
 
         printLog();
     }
@@ -248,7 +246,7 @@ public class GenReposInfo {
 
 
     private void printLog(){
-        /*
+
         String log =
         String.format("\t\tAIRPORT RHAPSODY - Description of the internal state of the problem" +
         "\nPLANE\tPORTER\t\t\tDRIVER" +
@@ -259,8 +257,8 @@ public class GenReposInfo {
         "\nN. of passengers which have this airport as their final destination = %2d" +
         "\nN. of passengers in transit = %2d" +
         "\nN. of bags that should have been transported in the the planes hold = %2d" +
-        "\nN. of bags that were lost = %2d", );
-         */
+        "\nN. of bags that were lost = %2d");
+
 
         /*
               AIRPORT RHAPSODY - Description of the internal state of the problem
