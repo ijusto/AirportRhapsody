@@ -29,6 +29,7 @@ public class TemporaryStorageArea {
     public void carryItToAppropriateStore(Bag bag){
 
         Porter porter = (Porter) Thread.currentThread();
+        assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.AT_THE_STOREROOM);
 
         notifyAll();

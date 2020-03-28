@@ -1,8 +1,5 @@
 package entities;
-import sharedRegions.ArrivalLounge;
-import sharedRegions.ArrivalTermTransfQuay;
-import sharedRegions.DepartureTermTransfQuay;
-import sharedRegions.DepartureTerminalEntrance;
+import sharedRegions.*;
 
 /**
  * ...
@@ -138,6 +135,7 @@ public class Passenger extends Thread {
     ArrivalTermTransfQuay transferQuay;
     DepartureTermTransfQuay departureTransferQuay;
     DepartureTerminalEntrance departureEntrance;
+    ArrivalTerminalExit arrivalTerminalExit;
     int maxBags4Passenger = 2;
 
     /**
@@ -152,7 +150,7 @@ public class Passenger extends Thread {
         boolean success = false;
         if (isFinal) {
             if (this.getNR() == 0) {
-                arrivalLounge.goHome();
+                arrivalTerminalExit.goHome();
             } else {
                 for (int i = 0; i < this.getNR(); i++) {
                     success = arrivalLounge.goCollectABag(); // porter diz se ja nao existem malas e então seria false
@@ -163,7 +161,7 @@ public class Passenger extends Thread {
                 if (!success) {
                     //reportMissingBags()
                 }
-                //goHome()
+                //arrivalTerminalExit.goHome()
             }
         } else {
             transferQuay.takeABus();

@@ -64,7 +64,7 @@ public class ArrivalTerminalExit {
 
     public void exitPassenger(){
         this.termPass += 1;
-        if( (this.termPass + this.departureTerm.getTermPass()) == SimulationParameters.N * SimulationParameters.K){
+        if( (this.termPass + this.departureTerm.getTermPass()) == SimulationParameters.N_PASS_PER_FLIGHT * SimulationParameters.N_FLIGHTS){
             this.arrivLounge.setExistsPassengers(false);
             this.arrivalQuay.setExistsPassengers(false);
         }

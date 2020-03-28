@@ -44,7 +44,7 @@ public class ArrivalTermTransfQuay {
 
     public ArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
         this.repos = repos;
-        this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.T]);        // FIFO instantiation
+        this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.BUS_CAP]);        // FIFO instantiation
         this.boardBus = false;
         this.existsPassengers = true;
     }

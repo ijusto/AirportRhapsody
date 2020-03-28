@@ -62,14 +62,14 @@ public class ArrivalLounge {
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
 
         int nTotalBags = 0;
-        for(int nPass = 0; nPass < SimulationParameters.N; nPass++){
+        for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
             nTotalBags += nBagsPHold[nPass][repos.getFN()];
             nBagsPerPass.put(nPass, nBagsPHold[nPass][repos.getFN()]);
         }
 
         this.bagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
 
-        for(int nPass = 0; nPass < SimulationParameters.N; nPass++){
+        for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
             this.bagStack.write(new Bag(destStat[nPass][repos.getFN()], nPass));
             MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);        // FIFO instantiation
             treadmill.put(nPass, bagPassFIFO);
@@ -104,7 +104,6 @@ public class ArrivalLounge {
             e.printStackTrace();
         }
 
-
         return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
     }
 
@@ -130,6 +129,8 @@ public class ArrivalLounge {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+
+
 
         return false;
     }
@@ -158,7 +159,7 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        while (this.passCounter != SimulationParameters.K*SimulationParameters.N || !this.existsPassengers){
+        while (this.passCounter != SimulationParameters.N_PASS_PER_FLIGHT || !this.existsPassengers){
             try {
                 wait();
             } catch (InterruptedException e) {

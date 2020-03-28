@@ -3,9 +3,6 @@ import  entities.*;
 import main.SimulationParameters;
 
 import java.io.PrintWriter;
-import java.util.Queue;
-
-import static entities.PorterStates.WAITING_FOR_A_PLANE_TO_LAND;
 
 /**
  * The General Repository of Information works solely as the place where the visible internal state of the problem
@@ -123,7 +120,7 @@ public class GenReposInfo {
         this.fileName = fileName;
 
         porterState = PorterStates.WAITING_FOR_A_PLANE_TO_LAND;
-        passengerStates = new PassengerStates[SimulationParameters.N];
+        passengerStates = new PassengerStates[SimulationParameters.N_PASS_PER_FLIGHT];
         for (int i = 0; i< passengerStates.length; i++){
             passengerStates[i] = PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL;
         }

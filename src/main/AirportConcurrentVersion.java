@@ -56,8 +56,8 @@ public class AirportConcurrentVersion {
             }
         } while(success);
 
-        for(int land = 0; land < SimulationParameters.K; land++){
-            for(int nPass = 0; nPass < SimulationParameters.N; nPass++){
+        for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
+            for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
                 destStat[nPass][land] = (Math.random() < 0.4) ? 'F' : 'T';
                 nBags[nPass][land] = (Math.random() < 0.5) ? 2 : (Math.random() < 0.5) ? 1 : 0;
                 nBagsPHold[nPass][land] = nBags[nPass][land];
