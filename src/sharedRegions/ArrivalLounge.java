@@ -35,12 +35,6 @@ public class ArrivalLounge {
      *
      */
 
-    public Queue<Passenger> passengerQueue;
-
-    /*
-     *
-     */
-
     private GenReposInfo repos;
 
     /*
@@ -99,10 +93,10 @@ public class ArrivalLounge {
     public synchronized boolean whatShouldIDo(){
 
         Passenger currentPassenger = (Passenger) Thread.currentThread();
+        assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        passCounter += 1;
 
         notifyAll();  // wake up Porter in takeARest()
-
-        assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
 
         try {
             wait(new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1) + AirportConcurrentVersion.minSleep);
@@ -146,7 +140,7 @@ public class ArrivalLounge {
      *  Operation of taking a rest (raised by the Porter). <p> functionality: change state of entities.Porter to WAITING_FOR_A_PLANE_TO_LAND
      *
      *    @return <li> 'E', if end of state
-     *            <li> false, otherwise
+     *            <li> 'R', otherwise
      */
 
     public synchronized char takeARest(){
@@ -156,14 +150,24 @@ public class ArrivalLounge {
           Freeing Method: whatShouldIDo()
           Freeing Condition: Last passenger to reach the arrival lounge
           Blocked Entity Reaction: tryToCollectABag()
+
+          Freeing Condition: No more passengers in the airport
+          Blocked Entity Reaction: finish the thread
          */
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        /* TODO: if(!this.existsPass) wake up the porter*/
-
-        // bloqueia porter
+        while (this.passCounter != SimulationParameters.K*SimulationParameters.N || !this.existsPassengers){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        if(this.existsPassengers){
+            return 'R';
+        }
         return 'E';
     }
 
@@ -177,8 +181,6 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
-
-        /* TODO: if(!this.existsPass) wake up the porter*/
 
         notifyAll();  // wake up Passengers in goCollectABag()
 
@@ -201,9 +203,6 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-
-
-        /* TODO: if(!this.existsPass) wake up the porter */
 
     }
 
