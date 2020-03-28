@@ -132,6 +132,8 @@ public class Passenger extends Thread {
         return NR;
     }
 
+    public int getID() { return id;}
+
     ArrivalLounge arrivalLounge;
     ArrivalTermTransfQuay transferQuay;
     DepartureTermTransfQuay departureTransferQuay;
