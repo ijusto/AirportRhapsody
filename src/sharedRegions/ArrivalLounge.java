@@ -49,12 +49,6 @@ public class ArrivalLounge {
 
     private BaggageColPoint bagColPoint;
 
-    /*
-     *
-     */
-
-    private ArrivalTerminalExit arrivalTerminalExit;
-
     /**
      *  Instantiation of the Arrival Lounge.
      *
@@ -146,20 +140,6 @@ public class ArrivalLounge {
         return false;
     }
 
-    /**
-     *  ... (raised by the Passenger).
-     *
-     */
-    public synchronized void goHome(){
-
-        Passenger passenger = (Passenger) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
-
-        this.arrivalTerminalExit.exitPassenger();
-    }
-
-
     /* **************************************************Porter****************************************************** */
 
     /**
@@ -231,11 +211,4 @@ public class ArrivalLounge {
         this.existsPassengers = existsPassengers;
     }
 
-    /*
-     *
-     */
-
-    public void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
-        this.arrivalTerminalExit = arrivalTerm;
-    }
 }
