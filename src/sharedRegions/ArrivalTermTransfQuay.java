@@ -113,7 +113,7 @@ public class ArrivalTermTransfQuay {
                     2) Freeing Entity: Driver
                     2) Freeing Method: time
                  */
-                wait(1000);
+                wait(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -123,7 +123,7 @@ public class ArrivalTermTransfQuay {
           2) Freeing Condition: at least 1 passenger in queue
           2) Blocked Entity Reaction: announcingBusBoarding()
          */
-        while(!waitingPass.isEmpty()){
+        while(waitingPass.isEmpty()){
             try {
                 wait();
             } catch (InterruptedException e) {
