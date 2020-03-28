@@ -49,6 +49,12 @@ public class ArrivalLounge {
 
     private BaggageColPoint bagColPoint;
 
+    /*
+     *
+     */
+
+    private ArrivalTerminalExit arrivalTerminalExit;
+
     /**
      *  Instantiation of the Arrival Lounge.
      *
@@ -150,7 +156,7 @@ public class ArrivalLounge {
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
-
+        this.arrivalTerminalExit.exitPassenger();
     }
 
 
@@ -217,11 +223,19 @@ public class ArrivalLounge {
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
 
-        /* TODO: if(!this.existsPass) wake up the porter*/
+        /* TODO: if(!this.existsPass) wake up the porter */
 
     }
 
     public void setExistsPassengers(boolean existsPassengers) {
         this.existsPassengers = existsPassengers;
+    }
+
+    /*
+     *
+     */
+
+    public void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
+        this.arrivalTerminalExit = arrivalTerm;
     }
 }

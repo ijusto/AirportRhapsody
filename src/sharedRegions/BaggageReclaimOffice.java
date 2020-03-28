@@ -12,6 +12,25 @@ import entities.Passenger;
 
 public class BaggageReclaimOffice {
 
+    /*
+     *
+     */
+    private GenReposInfo repos;
+
+    /*
+     *
+     */
+
+    private ArrivalTerminalExit arrivalTerminalExit;
+
+    /*
+     *
+     */
+
+    public BaggageReclaimOffice(GenReposInfo repos){
+        this.repos = repos;
+    }
+
     /**
      *  ... (raised by the Passenger).
      *
@@ -23,5 +42,10 @@ public class BaggageReclaimOffice {
         assert(passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
+        this.arrivalTerminalExit.exitPassenger();
+    }
+
+    public void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
+        this.arrivalTerminalExit = arrivalTerm;
     }
 }

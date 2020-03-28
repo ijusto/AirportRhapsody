@@ -25,6 +25,13 @@ public class BaggageColPoint {
      */
     private GenReposInfo repos;
 
+
+    /*
+     *
+     */
+
+    private ArrivalTerminalExit arrivalTerminalExit;
+
     /*
      *
      */
@@ -71,6 +78,7 @@ public class BaggageColPoint {
         Passenger passenger = (Passenger) Thread.currentThread();
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
+        this.arrivalTerminalExit.exitPassenger();
     }
 
     /* **************************************************Porter****************************************************** */
@@ -92,5 +100,9 @@ public class BaggageColPoint {
 
     public void setTreadmill(Map<Integer, MemFIFO<Bag>> treadmill) {
         this.treadmill = treadmill;
+    }
+
+    public void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
+        this.arrivalTerminalExit = arrivalTerm;
     }
 }
