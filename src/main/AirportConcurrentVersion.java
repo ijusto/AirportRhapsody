@@ -1,4 +1,5 @@
 package main;
+import commonInfrastructures.MemException;
 import sharedRegions.*;
 import genclass.GenericIO;
 
@@ -25,7 +26,7 @@ public class AirportConcurrentVersion {
 
     private static final int maxBags4Passenger = 2;
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws MemException {
 
         GenReposInfo repos;
         BaggageColPoint bagColPoint;
