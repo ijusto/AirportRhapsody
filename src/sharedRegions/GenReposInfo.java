@@ -281,4 +281,8 @@ public class GenReposInfo {
         printW.write(log);
         printW.flush();
     }
+
+    public int getFN() {
+        return FN;
+    }
 }

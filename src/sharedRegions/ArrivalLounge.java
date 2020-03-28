@@ -4,6 +4,7 @@ import commonInfrastructures.MemException;
 import commonInfrastructures.MemStack;
 import entities.*;
 import main.AirportConcurrentVersion;
+import main.SimulationParameters;
 
 import java.util.Queue;
 import java.util.Random;
@@ -18,9 +19,15 @@ import java.util.Random;
 public class ArrivalLounge {
 
     /*
-     * TODO: add Stack (guardar as malas para irem para o aviao)
-     * */
-    int numberOfBags = 8; /* delete later */
+     *  Number of bags on the plane hold
+     */
+
+    private int nBagsPlane;
+
+    /*
+     *   Stack of bags on the planes hold
+     */
+
     private MemStack<Bag> bagStack;
 
     private int passCounter;
@@ -47,24 +54,19 @@ public class ArrivalLounge {
      *
      */
 
-    private int[][] destStat;
-
-    /*
-     *
-     */
-
-    private int[][] nBagsPHold;
-
-    /*
-     *
-     */
-
-    public ArrivalLounge(int[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos) throws MemException {
-        this.destStat = destStat;
-        this.nBagsPHold = nBagsPHold;
-        this.bagColPoint = bagColPoint;
+    public ArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos) throws MemException {
         this.repos = repos;
-        this.bagStack = new MemStack<> (new Bag [numberOfBags]);     // stack instantiation
+
+        this.nBagsPlane = 0;
+        for(int nPass = 0; nPass < SimulationParameters.N; nPass++){
+            this.nBagsPlane += nBagsPHold[nPass][repos.getFN()];
+        }
+        this.bagStack = new MemStack<> (new Bag [this.nBagsPlane]);     // stack instantiation
+        for(int nPass = 0; nPass < SimulationParameters.N; nPass++){
+            this.bagStack.write(new Bag(destStat[nPass][repos.getFN()]));
+        }
+
+        this.bagColPoint = bagColPoint;
         this.passCounter = 0;
     }
 
@@ -164,7 +166,13 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
 
-        return new Bag();
+        try {
+            return bagStack.read();
+        } catch (MemException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     /**

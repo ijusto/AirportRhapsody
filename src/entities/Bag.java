@@ -15,6 +15,10 @@ public class Bag {
     private char destStat;
     private Passenger owner;
 
+    public Bag(char destStat){
+        this.destStat = destStat;
+    }
+
     public void setDestStat(char destStat) {
         this.destStat = destStat;
     }
