@@ -35,7 +35,8 @@ public class TemporaryStorageArea {
 
         try {
             tmpStorageStack.write(bag);
-        } catch (MemException e) {
+            wait();
+        } catch (MemException | InterruptedException e) {
             e.printStackTrace();
         }
     }
