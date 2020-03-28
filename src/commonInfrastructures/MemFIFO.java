@@ -86,4 +86,31 @@ public class MemFIFO<R> extends MemObject<R>
         else throw new MemException ("Fifo empty!");
         return val;
     }
+
+    /* ******************************************** NEW METHODS ***************************************************** */
+    /**
+     *   @author Inês Justo
+     *   @author Miguel Lopes
+     *   Check if FIFO is full.
+     *
+     *    @return <li> true, if the FIFO is full
+     *            <li> false, otherwise
+     */
+
+    public boolean isFull(){
+        return (inPnt == outPnt) && !empty;
+    }
+
+    /**
+     *   @author Inês Justo
+     *   @author Miguel Lopes
+     *   Check if FIFO is empty.
+     *
+     *    @return <li> true, if the FIFO is empty
+     *            <li> false, otherwise
+     */
+
+    public boolean isEmpty(){
+        return empty;
+    }
 }
