@@ -83,33 +83,13 @@ public class ArrivalLounge {
 
         if(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE) {
             try {
-                Thread.sleep((long) (new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1) + AirportConcurrentVersion.minSleep));
+                wait(new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1) + AirportConcurrentVersion.minSleep);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
         return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
-    }
-
-    /**
-     *  Operation of taking a Bus (raised by the Passenger). <p> functionality: change state of entities.Passenger to AT_THE_ARRIVAL_TRANSFER_TERMINAL
-     *
-     *    @return idk
-     */
-
-    public synchronized char takeABus(){
-        /*
-          Blocked Entity: Passenger
-          Freeing Entity: Driver
-          Freeing Method: announcingBusBoarding()
-          Blocked Entity Reactions: enterTheBus()
-        */
-
-        Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-
-        return 0;
     }
 
     /**

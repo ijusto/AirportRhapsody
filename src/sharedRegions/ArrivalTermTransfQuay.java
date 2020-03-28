@@ -6,6 +6,7 @@ import entities.BusDriver;
 import entities.BusDriverStates;
 import entities.Passenger;
 import entities.PassengerStates;
+import main.SimulationParameters;
 
 /**
  * ...
@@ -17,11 +18,15 @@ import entities.PassengerStates;
 public class ArrivalTermTransfQuay {
 
     /*
-    * TODO:
-        add FIFO (cais de chegadas precisa de guardar a fila de passageiros que querem entrar no autocarro)
-    * */
-    int numberOfPassengers = 8; /* delete later */
+     *    FIFO of passengers that want to enter the bus
+     */
+
     private MemFIFO<Passenger> waitingPass;
+
+    /*
+     *
+     */
+    private boolean boardBus;
 
     /*
      *
@@ -34,23 +39,8 @@ public class ArrivalTermTransfQuay {
 
     public ArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
         this.repos = repos;
-        this.waitingPass = new MemFIFO<>(new Passenger [numberOfPassengers]);        // FIFO instantiation
-    }
-
-    /**
-     *  ... (raised by the Passenger).
-     *
-     */
-
-    public void enterTheBus(){
-
-        Passenger passenger = (Passenger) Thread.currentThread();
-        passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
-
-        /*
-         *  FIFO Access - mutual exclusion
-         */
-
+        this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.T]);        // FIFO instantiation
+        this.boardBus = false;
     }
 
     /**
@@ -64,6 +54,75 @@ public class ArrivalTermTransfQuay {
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         return 'F';
+    }
+
+    /**
+     *  Operation of taking a Bus (raised by the Passenger). <p> functionality: change state of entities.Passenger to AT_THE_ARRIVAL_TRANSFER_TERMINAL
+     *
+     */
+
+    public synchronized void takeABus() {
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+
+        try {
+            waitingPass.write(passenger);
+        } catch (MemException e) {
+            e.printStackTrace();
+        }
+
+        if(waitingPass.isFull()){
+            notifyAll();
+        }
+
+        /*
+          Blocked Entity: Passenger
+          Freeing Entity: Driver
+          Freeing Method: announcingBusBoarding()
+          Blocked Entity Reactions: enterTheBus()
+        */
+        while(!this.boardBus){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    /**
+     *  ... (raised by the BusDriver).
+     *
+     */
+
+    public void parkTheBus(){
+        /*
+            Blocked Entity: Driver
+        */
+
+        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+
+        /*
+            1) Freeing Entity: Passenger
+            1) Freeing Method: takeABus()
+            1) Freeing Condition: place in waiting queue = bus capacity
+            1) Blocked Entity Reactions: announcingBusBoarding()
+            2) Freeing Entity: Driver
+            2) Freeing Method: time
+            2) Freeing Condition: at least 1 passenger in queue
+            2) Blocked Entity Reaction: announcingBusBoarding()
+         */
+
+       do {
+            try {
+                wait(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+       } while(waitingPass.isEmpty());
+
     }
 
     /**
@@ -83,53 +142,33 @@ public class ArrivalTermTransfQuay {
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-    }
-
-    /**
-     *  ... (raised by the BusDriver).
-     *
-     */
-
-    public void parkTheBus(){
-        /*
-            Blocked Entity: Driver
-        */
-
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
-        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
-
-
+        this.boardBus = true;
         notifyAll();
 
-        /*
-          1) Freeing Entity: Passenger
-          1) Freeing Method: takeABus()
-          1) Freeing Condition: place in waiting queue = bus capacity
-          1) Blocked Entity Reactions: announcingBusBoarding()
-        */
-        while (!waitingPass.isFull()) {
-            try {
-                /*
-                    2) Freeing Entity: Driver
-                    2) Freeing Method: time
-                 */
-                wait(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        /*
-          2) Freeing Condition: at least 1 passenger in queue
-          2) Blocked Entity Reaction: announcingBusBoarding()
-         */
-        while(waitingPass.isEmpty()){
+        while(!waitingPass.isEmpty()) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+
     }
 
+    /**
+     *  ... (raised by the Passenger).
+     *
+     */
+
+    public void enterTheBus(){
+
+        Passenger passenger = (Passenger) Thread.currentThread();
+        passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
+
+        try{
+            waitingPass.read();
+        } catch (MemException e) {
+            notifyAll();
+        }
+    }
 }

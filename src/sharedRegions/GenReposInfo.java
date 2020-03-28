@@ -22,7 +22,7 @@ public class GenReposInfo {
 
     private final String[] state = ["ATDZ", "ATLCP", "ETAT", "ATBRO", "ATATT", "TT", "ATDTT", "ETDT", "PATAT", "DF",
                                     "PATDT", "DB"];
-
+    ;
     /**
      *  Flight number
      */

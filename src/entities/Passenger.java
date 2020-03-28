@@ -164,7 +164,7 @@ public class Passenger extends Thread {
                 //goHome()
             }
         } else {
-            arrivalLounge.takeABus();
+            transferQuay.takeABus();
             transferQuay.enterTheBus();
             departureTransferQuay.leaveTheBus();
             departureEntrance.prepareNextLeg();
