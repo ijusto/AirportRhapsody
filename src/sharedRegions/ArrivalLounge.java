@@ -150,11 +150,12 @@ public class ArrivalLounge {
      *  ... (raised by the Passenger).
      *
      */
-    public synchronized void goHome(){
+    public synchronized void goHome() throws InterruptedException {
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+        passenger.join();
 
         this.arrivalTerminalExit.exitPassenger();
     }

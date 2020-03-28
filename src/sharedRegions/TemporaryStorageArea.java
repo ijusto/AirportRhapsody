@@ -11,7 +11,7 @@ import entities.Porter;
  */
 
 public class TemporaryStorageArea {
-
+    
     TemporaryStorageArea(){
 
     }

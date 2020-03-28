@@ -1,8 +1,11 @@
 package sharedRegions;
 import  entities.*;
+import main.SimulationParameters;
 
 import java.io.PrintWriter;
 import java.util.Queue;
+
+import static entities.PorterStates.WAITING_FOR_A_PLANE_TO_LAND;
 
 /**
  * The General Repository of Information works solely as the place where the visible internal state of the problem
@@ -18,8 +21,9 @@ import java.util.Queue;
 
 public class GenReposInfo {
 
-    private final String[] state = {"ATDZ", "ATLCP", "ETAT", "ATBRO", "ATATT", "TT", "ATDTT", "ETDT", "PATAT", "DF",
-                                    "DB", "PATDT"};
+    private final String[] passState = {"ATDZ", "ATLCP", "ETAT", "ATBRO", "ATATT", "TT", "ATDTT", "ETDT"};
+    private final String[] portState = {"WFPL", "APH", "ALBC", "ASR"};
+    private final String[] busState  = {"PATAT", "DF", "DB", "PATDT"};
 
     /**
      *  Flight number
@@ -50,13 +54,12 @@ public class GenReposInfo {
      *   Porters
      */
 
-    private PorterStates porterStates;
-    private Queue<Porter> porters;
+    private PorterStates porterState;
 
     /*
      *   BusDrivers
      */
-    private BusDriverStates busDriverStates;
+    private BusDriverStates busDriverState;
     private int busQueue;
 
     /*
@@ -117,9 +120,19 @@ public class GenReposInfo {
      */
 
     public GenReposInfo(String fileName){
-
-
         this.fileName = fileName;
+
+        porterState = PorterStates.WAITING_FOR_A_PLANE_TO_LAND;
+        passengerStates = new PassengerStates[SimulationParameters.N];
+        for (int i = 0; i< passengerStates.length; i++){
+            passengerStates[i] = PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL;
+        }
+        busDriverState = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL;
+
+        FN = 0;
+        passengersQueue = 0;
+        busQueue = 0;
+
     }
 
     /**
@@ -144,8 +157,8 @@ public class GenReposInfo {
      *  Update the Porter state
      */
     public synchronized void updatePorterState(PorterStates porterState){
-        if(porterStates != porterState){
-            porterStates = porterState;
+        if(this.porterState != porterState){
+            this.porterState = porterState;
         }
         printLog();
     }
@@ -164,8 +177,8 @@ public class GenReposInfo {
      *  Update the Bus Driver State
      */
     public synchronized void updateBusDriverState(BusDriverStates busDriverState){
-        if(busDriverStates != busDriverState){
-            busDriverStates = busDriverState;
+        if(this.busDriverState != busDriverState){
+            this.busDriverState = busDriverState;
         }
         printLog();
     }
