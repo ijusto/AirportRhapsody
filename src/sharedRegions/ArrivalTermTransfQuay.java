@@ -1,9 +1,11 @@
 package sharedRegions;
 
-import entities.BusDriverStates;
-import entities.PassengerStates;
+import commonInfrastructures.MemException;
+import commonInfrastructures.MemFIFO;
 import entities.BusDriver;
+import entities.BusDriverStates;
 import entities.Passenger;
+import entities.PassengerStates;
 
 /**
  * ...
@@ -18,6 +20,8 @@ public class ArrivalTermTransfQuay {
     * TODO:
         add FIFO (cais de chegadas precisa de guardar a fila de passageiros que querem entrar no autocarro)
     * */
+    int numberOfPassengers = 8; /* delete later */
+    private MemFIFO<Passenger> passFIFO;
 
     /*
      *
@@ -28,8 +32,9 @@ public class ArrivalTermTransfQuay {
      *
      */
 
-    public ArrivalTermTransfQuay(GenReposInfo repos){
+    public ArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
         this.repos = repos;
+        this.passFIFO = new MemFIFO<>(new Passenger [numberOfPassengers]);        // FIFO instantiation
     }
 
     /**

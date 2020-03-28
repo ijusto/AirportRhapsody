@@ -1,5 +1,5 @@
 package sharedRegions;
-import commonInfrastructures.Bag;
+import entities.Bag;
 import entities.PassengerStates;
 import entities.PorterStates;
 import entities.Passenger;

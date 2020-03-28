@@ -1,6 +1,4 @@
-package commonInfrastructures;
-
-import entities.Passenger;
+package entities;
 
 /**
  * ...

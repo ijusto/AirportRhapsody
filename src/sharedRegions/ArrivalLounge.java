@@ -1,10 +1,12 @@
 package sharedRegions;
-import commonInfrastructures.Bag;
+
+import commonInfrastructures.MemException;
+import commonInfrastructures.MemStack;
 import entities.*;
 import main.AirportConcurrentVersion;
-import java.util.Random;
+
 import java.util.Queue;
-import static java.lang.Thread.sleep;
+import java.util.Random;
 
 /**
  * ...
@@ -18,6 +20,8 @@ public class ArrivalLounge {
     /*
      * TODO: add Stack (guardar as malas para irem para o aviao)
      * */
+    int numberOfBags = 8; /* delete later */
+    private MemStack<Bag> bagStack;
 
     /*
      *
@@ -53,11 +57,12 @@ public class ArrivalLounge {
      *
      */
 
-    public ArrivalLounge(int[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos){
+    public ArrivalLounge(int[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos) throws MemException {
         this.destStat = destStat;
         this.nBagsPHold = nBagsPHold;
         this.bagColPoint = bagColPoint;
         this.repos = repos;
+        this.bagStack = new MemStack<> (new Bag [numberOfBags]);     // stack instantiation
     }
 
     /* **************************************************Passenger*************************************************** */
@@ -75,7 +80,7 @@ public class ArrivalLounge {
 
         if(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE) {
             try {
-                sleep((long) (new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1) + AirportConcurrentVersion.minSleep));
+                Thread.sleep((long) (new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1) + AirportConcurrentVersion.minSleep));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
