@@ -1,7 +1,5 @@
 package sharedRegions;
-import entities.BusDriver;
-import entities.Passenger;
-import entities.Porter;
+import  entities.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -22,6 +20,9 @@ import java.util.Queue;
 
 public class GenReposInfo {
 
+    private final String[] state = ["ATDZ", "ATLCP", "ETAT", "ATBRO", "ATATT", "TT", "ATDTT", "ETDT", "PATAT", "DF",
+                                    "PATDT", "DB"];
+
     /**
      *  Flight number
      */
@@ -34,23 +35,69 @@ public class GenReposInfo {
 
     private int BN;
 
+    /**
+     *  Number of pieces of luggage presently at the conveyors belt
+     */
+
+    private int CB;
+
+
+    /**
+     *  Number of pieces of luggage from transit passengers
+     */
+
+    private int SR;
+
     /*
      *   Porters
      */
 
+    private PorterStates porterStates;
     private Queue<Porter> porters;
 
     /*
      *   BusDrivers
      */
-
-    private Queue<BusDriver> busDrivers;
+    private BusDriverStates busDriverStates;
+    private int busQueue;
 
     /*
      *   Passengers
      */
+    private PassengerStates[] passengerStates;
+    private int passengersQueue;
 
-    private Queue<Passenger> passengers;
+    /*
+     *   Arrival Lounge
+     */
+
+    /*
+     *   Arrival Terminal Exit
+     */
+
+    /*
+     *   Arrival Terminal Transfer Quay
+     */
+
+    /*
+     *  Baggage Collection Point
+     */
+
+    /*
+     *   Baggage Reclaim Office
+     */
+
+    /*
+     *   Departure Terminal Entrance
+     */
+
+    /*
+     *   Departure Terminal Transfer Quay
+     */
+
+    /*
+     *   Temporary Storage Area
+     */
 
     /**
      *
@@ -62,15 +109,145 @@ public class GenReposInfo {
      *
      */
 
-    public GenReposInfo(String fileName){
-        this.fileName = fileName;
-    }
+    private PrintWriter printW;
 
     /**
      *
      */
 
-    private synchronized void printLog(){
+    public GenReposInfo(String fileName){
+
+
+        this.fileName = fileName;
+    }
+
+    /**
+     *  Update flight number after the previous flight is finished
+     */
+
+    public synchronized updateFlightNumber(int flight){
+        FN = flight + 1;
+        printLog();
+    }
+
+    /**
+     *  Update baggage stored in the cargo hold when porter retrieves the baggage
+     */
+
+    public synchronized  updateStoredBaggage(int baggage){
+        BN = BN - baggage;
+        printLog();
+    }
+
+    /**
+     *  Update the Porter state
+     */
+    public synchronized void updatePorterState(PorterStates porterState){
+        if(porterStates != porterState){
+            porterStates = porterState;
+        }
+        printLog();
+    }
+
+    /**
+     *  Update the Passenger State
+     */
+    public synchronized void updatePassengerState(int id, PassengerStates passengerState){
+        if(passengerStates[id] != passengerState){
+            passengerState[id] = passengerState;
+        }
+        printLog();
+    }
+
+    /**
+     *  Update the Bus Driver State
+     */
+    public synchronized void updateBusDriverState(BusDriverStates busDriverState){
+        if(busDriverStates != busDriverState){
+            busDriverStates = busDriverState;
+        }
+        printLog();
+    }
+
+    /**
+     *  Update the number of bags in the conveyor belt
+     */
+
+    public synchronized  void updateConveyorsBelt(int cb){
+        CB = CB + cb;
+        printLog();
+    }
+
+    /**
+     *  Update the queue of passengers
+     */
+
+    public synchronized  void passengerQueueStateIn(Passenger passenger){
+        passengersQueue++;
+        passenger.setSt(PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        printLog();
+    }
+
+    public synchronized  void passengerQueueStateOut(Passenger passenger){
+        passengersQueue--;
+        printLog();
+    }
+
+    /**
+     *  Update of the occupation state of the bus seat
+     */
+    public synchronized  void busSeatStateIn(Passenger passenger, BusDriver busDriver){
+        busQueue++;
+        passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
+        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        printLog();
+    }
+
+    public synchronized  void busSeatStateOut(Passenger passenger, BusDriver busDriver){
+        busQueue--;
+        passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
+        busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
+        printLog();
+    }
+
+    /**
+     *  Update the passenger situation (in transit or final)
+     */
+
+    public synchronized  void updatePassengerSituation(){
+
+        printLog();
+    }
+
+    /**
+     *  Update the passengers luggage at the start of the journey
+     */
+
+    public synchronized  void numberOfPassangerLuggage(){
+
+        printLog();
+    }
+
+    /**
+     *  Update the number of luggage a passenger collected
+     */
+
+    public synchronized  void BaggageCollected(){
+
+        printLog();
+    }
+
+    /**
+     *  Number of bags carried by a passanger at the end of the jorney
+     */
+
+    public synchronized  void finalPassangeBags(){
+
+        printLog();
+    }
+
+
+    private void printLog(){
         /*
         String log =
         String.format("\t\tAIRPORT RHAPSODY - Description of the internal state of the problem" +
@@ -102,5 +279,8 @@ public class GenReposInfo {
             N. of bags that should have been transported in the the planes hold = ##
             N. of bags that were lost = ##
         */
+        System.out.println(log);
+        printW.write(log);
+        printW.flush();
     }
 }

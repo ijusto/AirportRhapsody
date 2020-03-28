@@ -74,6 +74,14 @@ public class Passenger extends Thread {
     private int NA;
 
     /**
+     *  Passenger ID
+     *
+     *    @serialField id
+     */
+
+    private int id;
+
+    /**
      *  Instantiation of the thread Passenger.
      *
      *    @param St state of passenger
@@ -82,11 +90,12 @@ public class Passenger extends Thread {
      *    @param NA number of pieces of luggage the passenger she has presently collected
      */
 
-    public Passenger(PassengerStates St, SituationPassenger Si, int NR, int NA){
+    public Passenger(PassengerStates St, SituationPassenger Si, int NR, int NA, int id){
         this.St = St;
         this.Si = Si;
         this.NR = NR;
         this.NA = NA;
+        this.id = id;
 
     }
 
@@ -176,5 +185,9 @@ public class Passenger extends Thread {
 
     public void setNA(int NA) {
         this.NA = NA;
+    }
+
+    public void setID(int id) {
+        this.id = id;
     }
 }

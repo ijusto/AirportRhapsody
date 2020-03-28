@@ -36,6 +36,8 @@ public class AirportConcurrentVersion {
         ArrivalTerminalExit arrivalTerm;
         DepartureTerminalEntrance departureTerm;
 
+        String fileName;
+
         do {
             /* ... */
             {
