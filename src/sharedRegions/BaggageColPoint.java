@@ -67,14 +67,21 @@ public class BaggageColPoint {
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
-        while(!this.isCollected()) {
+        boolean bagsForPass = false;
+
+        if(this.treadmill.containsKey(passenger.getID())){
+            if(!this.treadmill.get(passenger.getID()).isEmpty()){
+                bagsForPass = true;
+            }
+        }
+
+        while(!this.isCollected() && !bagsForPass) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
         if(passenger.getNA() != passenger.getNR()) {
             if (this.treadmill.containsKey(passenger.getID())) {
                 passenger.setNA(passenger.getNA() + 1);
@@ -141,6 +148,10 @@ public class BaggageColPoint {
 
     public boolean isCollected() {
         return collected;
+    }
+
+    public void setCollected(boolean collected) {
+        this.collected = collected;
     }
 
 }

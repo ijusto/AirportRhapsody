@@ -173,6 +173,7 @@ public class ArrivalLounge {
         try {
             return bagStack.read();
         } catch (MemException e) {
+            bagColPoint.setCollected(true);
             return null;
         }
 
