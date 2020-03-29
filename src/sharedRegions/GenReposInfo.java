@@ -320,7 +320,7 @@ public class GenReposInfo {
      */
 
     public synchronized void passengerQueueStateOut(int ID){
-        passengersQueue.remove(ID);
+        passengersQueue.remove(1);
         printLog();
     }
 
@@ -344,7 +344,7 @@ public class GenReposInfo {
      */
 
     public synchronized void busSeatStateOut(int ID){
-        busSeatOccupation.remove(ID);
+        busSeatOccupation.remove(1);
         printLog();
     }
 
