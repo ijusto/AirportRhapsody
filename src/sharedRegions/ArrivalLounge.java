@@ -25,7 +25,7 @@ public class ArrivalLounge {
     private MemStack<Bag> bagStack;
 
     /*
-     *
+     *   Number of passengers that already arrived.
      */
 
     private int passCounter;
@@ -36,24 +36,24 @@ public class ArrivalLounge {
     private boolean existsPassengers;
 
     /*
-     *
+     *   General repository of information.
      */
 
     private GenReposInfo repos;
 
     /*
-     *
+     *   Baggage Collection Point.
      */
 
     private BaggageColPoint bagColPoint;
 
     /**
-     *  Instantiation of the Arrival Lounge.
+     *   Instantiation of the Arrival Lounge.
      *
-     *    @param destStat destination state of the bags
-     *    @param nBagsPHold number of bags per passenger and flight
-     *    @param bagColPoint baggage collection point
-     *    @param repos general repository of information
+     *     @param destStat destination state of the bags
+     *     @param nBagsPHold number of bags per passenger and flight
+     *     @param bagColPoint baggage collection point
+     *     @param repos general repository of information
      */
 
     public ArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos) throws MemException {
@@ -89,12 +89,12 @@ public class ArrivalLounge {
     /* **************************************************Passenger*************************************************** */
 
     /**
-     *  Operation of deciding what to do next (raised by the Passenger).
-     *  <p> Head start delay, that represents the time before the passenger chooses between what to do when arriving to
-     *  the airport.
+     *   Operation of deciding what to do next (raised by the Passenger).
+     *   <p> Head start delay, that represents the time before the passenger chooses between what to do when arriving to
+     *   the airport.
      *
-     *    @return <li> true, if final destination
-     *            <li> false, otherwise
+     *     @return <li> true, if final destination
+     *             <li> false, otherwise
      */
 
     public synchronized boolean whatShouldIDo(){
@@ -118,10 +118,10 @@ public class ArrivalLounge {
     /* **************************************************Porter****************************************************** */
 
     /**
-     *  Operation of taking a rest (raised by the Porter).
+     *   Operation of taking a rest (raised by the Porter).
      *
-     *    @return <li> 'E', if end of state
-     *            <li> 'R', otherwise
+     *     @return <li> 'E', if end of state </li>
+     *             <li> 'R', otherwise </li>
      */
 
     public synchronized char takeARest(){
@@ -153,8 +153,10 @@ public class ArrivalLounge {
     }
 
     /**
-     *  ... (raised by the Porter).
+     *   Operation of trying to collect a bag from the Plane's hold (raised by the Porter).
      *
+     *     @return <li> a bag, if there is still bags on the Plane's hold.</li>
+     *             <li> null, otherwise. </li>
      */
 
     public synchronized Bag tryToCollectABag(){
@@ -174,7 +176,7 @@ public class ArrivalLounge {
     }
 
     /**
-     *  ... (raised by the Porter).
+     *   ... (raised by the Porter).
      *
      */
 
@@ -188,8 +190,10 @@ public class ArrivalLounge {
 
     /* ******************************************** Getters and Setters ***********************************************/
 
-    /*
+    /**
+     *   Setter for existsPassengers.
      *
+     *   @param existsPassengers ...
      */
 
     public void setExistsPassengers(boolean existsPassengers) {
