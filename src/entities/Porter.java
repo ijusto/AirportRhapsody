@@ -21,22 +21,6 @@ public class Porter extends Thread {
     private PorterStates Stat;
 
     /**
-     *  Number of pieces of luggage presently on the conveyor belt
-     *
-     *    @serialField CB
-     */
-
-    private int CB;
-
-    /**
-     *  Number of pieces of luggage belonging to passengers in transit presently stored at the storeroom
-     *
-     *    @serialField SR
-     */
-
-    private int SR;
-
-    /**
      *  ...
      *
      *    @serialField arrivalLounge
@@ -71,12 +55,9 @@ public class Porter extends Thread {
      *    @param bColPnt ....
      */
 
-    public Porter(PorterStates Stat, int CB, int SR, ArrivalLounge arrivalLounge, TemporaryStorageArea tempStore,
+    public Porter(PorterStates Stat, ArrivalLounge arrivalLounge, TemporaryStorageArea tempStore,
                   BaggageColPoint bColPnt){
         this.Stat = Stat;
-        this.CB = CB;
-        this.SR = SR;
-
         this.arrivalLounge = arrivalLounge;
         this.tempStore = tempStore;
         this.bColPnt = bColPnt;
@@ -126,19 +107,4 @@ public class Porter extends Thread {
         this.Stat = stat;
     }
 
-    /*
-     *
-     */
-
-    public void setCB(int CB) {
-        this.CB = CB;
-    }
-
-    /*
-     *
-     */
-
-    public void setSR(int SR) {
-        this.SR = SR;
-    }
 }

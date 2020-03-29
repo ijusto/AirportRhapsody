@@ -10,7 +10,8 @@ import sharedRegions.*;
 
 public class Passenger extends Thread {
 
-    public enum SituationPassenger {TRT, FDT};
+    public enum SituationPassenger {TRT,   // in transit
+                                    FDT};  // final destination
 
     /**
      *  State of the passenger

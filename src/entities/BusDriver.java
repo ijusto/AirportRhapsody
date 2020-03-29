@@ -20,25 +20,9 @@ public class BusDriver extends Thread {
     private BusDriverStates Stat;
 
     /**
-     *  Occupation state for the waiting queue (passenger id / - (empty))
-     *
-     *    @serialField Q
-     */
-
-    private int Q;
-
-    /**
-     *  Occupation state for seat in the bus (passenger id / - (empty))
-     *
-     *    @serialField S
-     */
-
-    private int S;
-
-    /**
      *  Number os passengers on the bus.
      *
-     *    @serialField S
+     *    @serialField nPass
      */
 
     private int nPass;
@@ -125,48 +109,12 @@ public class BusDriver extends Thread {
         return Stat;
     }
 
-    /**
-     *  Occupation state for the waiting queue (passenger id / - (empty))
-     *
-     *    @return Q
-     */
-
-    public int getQ() {
-        return Q;
-    }
-
-    /**
-     *  Occupation state for seat in the bus (passenger id / - (empty))
-     *
-     *    @return S
-     */
-
-    public int getS() {
-        return S;
-    }
-
     /*
      *
      */
 
     public void setStat(BusDriverStates stat) {
         Stat = stat;
-    }
-
-    /*
-     *
-     */
-
-    public void setQ(int q) {
-        Q = q;
-    }
-
-    /*
-     *
-     */
-
-    public void setS(int s) {
-        S = s;
     }
 
     /*
