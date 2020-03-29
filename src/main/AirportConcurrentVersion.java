@@ -8,6 +8,8 @@ import sharedRegions.*;
 import java.io.File;
 import java.io.IOException;
 
+import java.io.FileNotFoundException;
+
 /**
  *   Main program.
  *
@@ -31,7 +33,7 @@ public class AirportConcurrentVersion {
 
     private static final int maxBags4Passenger = 2;
 
-    public static void main(final String[] args) throws MemException {
+    public static void main(final String[] args) throws MemException, FileNotFoundException {
 
         GenReposInfo repos;
         BaggageColPoint bagColPoint;
@@ -83,6 +85,7 @@ public class AirportConcurrentVersion {
                         }
                     }
                 }
+                repos.initializeCargoHold(nBagsPHold.length);
             }
         }
 
@@ -109,17 +112,24 @@ public class AirportConcurrentVersion {
         BusDriver[] busDrivers = new BusDriver[SimulationParameters.N_FLIGHTS];
 
         for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
+            repos.updateFlightNumber(land);
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
                 Passenger.SituationPassenger Si = (destStat[nPass][land] == 'F') ? Passenger.SituationPassenger.FDT :
                         Passenger.SituationPassenger.TRT;
                 passengers[nPass][land] = new Passenger(PassengerStates.AT_THE_DISEMBARKING_ZONE, Si,
                         nBags[nPass][land], 0, nPass, arrivLounge, arrivalQuay, departureQuay,
                         departureTerm, arrivalTerm, bagColPoint, bagRecOffice);
+
+                repos.updatePassengerState(passengers[nPass][land].getID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
+                repos.getPassengerSituation(passengers[nPass][land].getID(),passengers[nPass][land]);
             }
             porters[land] = new Porter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND, arrivLounge, tmpStorageArea,
                                         bagColPoint);
+            repos.updatePorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+
             busDrivers[land] = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuay,
-                                                departureQuay);
+                                                departureQuay,repos);
+            repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
                 passengers[nPass][land].start();
@@ -151,6 +161,5 @@ public class AirportConcurrentVersion {
             }
         }
 
-        repos.finalReport();
     }
 }

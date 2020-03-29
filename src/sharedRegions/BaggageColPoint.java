@@ -66,6 +66,7 @@ public class BaggageColPoint {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        repos.updatePassengerState(passenger.getID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         boolean bagsForPass = false;
 
@@ -86,6 +87,7 @@ public class BaggageColPoint {
         if(passenger.getNA() != passenger.getNR()) {
             if (this.treadmill.containsKey(passenger.getID())) {
                 passenger.setNA(passenger.getNA() + 1);
+                repos.updateStoredBaggageConveyorBeltDec();
                 try {
                     this.treadmill.get(passenger.getID()).read();
                     return true;
@@ -111,7 +113,7 @@ public class BaggageColPoint {
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
         repos.updatePorterState(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
-
+        repos.updateStoredBaggageConveyorBeltInc();
         notifyAll();  // wake up Passengers in goCollectABag()
 
         try {

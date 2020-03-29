@@ -46,6 +46,7 @@ public class TemporaryStorageArea {
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.AT_THE_STOREROOM);
         repos.updatePorterState(PorterStates.AT_THE_STOREROOM);
+        repos.updateStoredBaggageStorageRoom();
 
         try {
             tmpStorageStack.write(bag);

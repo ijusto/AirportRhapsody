@@ -1,6 +1,7 @@
 package entities;
 import sharedRegions.ArrivalTermTransfQuay;
 import sharedRegions.DepartureTermTransfQuay;
+import sharedRegions.GenReposInfo;
 
 /**
  * ...
@@ -44,6 +45,14 @@ public class BusDriver extends Thread {
     DepartureTermTransfQuay departureTransferQuay;
 
     /**
+     *  ...
+     *
+     *    @serialField arrivalTerminalQuay
+     */
+
+    GenReposInfo repos;
+
+    /**
      *  Instantiation of the thread BusDriver.
      *
      *    @param arrivalTerminalQuay ...
@@ -51,11 +60,12 @@ public class BusDriver extends Thread {
      */
 
     public BusDriver(BusDriverStates Stat, ArrivalTermTransfQuay arrivalTerminalQuay,
-                     DepartureTermTransfQuay departureTransferQuay){
+                     DepartureTermTransfQuay departureTransferQuay, GenReposInfo repos){
         this.Stat = Stat;
         this.arrivalTerminalQuay = arrivalTerminalQuay;
         this.departureTransferQuay = departureTransferQuay;
         this.nPass = 0;
+        this.repos = repos;
     }
 
     /**
@@ -82,7 +92,7 @@ public class BusDriver extends Thread {
 
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_BACKWARD);
-
+        repos.updateBusDriverState(BusDriverStates.DRIVING_BACKWARD);
     }
 
     /**
@@ -94,6 +104,7 @@ public class BusDriver extends Thread {
 
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_FORWARD);
+        repos.updateBusDriverState(BusDriverStates.DRIVING_FORWARD);
 
     }
 

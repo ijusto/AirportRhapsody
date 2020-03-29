@@ -171,6 +171,7 @@ public class ArrivalLounge {
         notifyAll();  // wake up Passengers in goCollectABag()
 
         try {
+            repos.updateStoredBaggageCargoHold();
             return bagStack.read();
         } catch (MemException e) {
             bagColPoint.setCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint

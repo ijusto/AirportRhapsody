@@ -70,6 +70,7 @@ public class DepartureTermTransfQuay {
 
         while(!this.letPassOff) {
             try {
+                repos.busSeatStateOut(passenger.getID());
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -98,7 +99,6 @@ public class DepartureTermTransfQuay {
         repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.nPass = busDriver.getNPass();
         this.letPassOff = true;
-
         notifyAll();
 
         while(this.nPass > 0) {
