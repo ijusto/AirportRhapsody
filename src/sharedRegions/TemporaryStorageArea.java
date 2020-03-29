@@ -16,9 +16,10 @@ public class TemporaryStorageArea {
 
     private MemStack<Bag> tmpStorageStack;
 
-    
-    public TemporaryStorageArea(){
+    private GenReposInfo repos;
 
+    public TemporaryStorageArea(GenReposInfo repos){
+        this.repos = repos;
     }
 
     /**
@@ -31,6 +32,8 @@ public class TemporaryStorageArea {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.AT_THE_STOREROOM);
+        repos.updatePorterState(PorterStates.AT_THE_STOREROOM);
+
 
         notifyAll();
 

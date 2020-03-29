@@ -134,6 +134,24 @@ public class Passenger extends Thread {
         this.baggageColPoint = baggageColPoint;
     }
 
+    public int getNA() {
+        return NA;
+    }
+
+    public int getNR() {
+        return NR;
+    }
+
+    public int getID() { return id;}
+
+    ArrivalLounge arrivalLounge;
+    ArrivalTermTransfQuay transferQuay;
+    DepartureTermTransfQuay departureTransferQuay;
+    DepartureTerminalEntrance departureEntrance;
+    ArrivalTerminalExit arrivalTerminalExit;
+    BaggageReclaimOffice baggageReclaimOffice;
+    int maxBags4Passenger = 2;
+
     /**
      *  Life cycle of the thread Passenger.
      */
@@ -154,7 +172,7 @@ public class Passenger extends Thread {
                     }
                 }
                 if (!success) {
-                    //reportMissingBags()
+                    baggageReclaimOffice.reportMissingBags();
                 }
                 //arrivalTerminalExit.goHome()
             }

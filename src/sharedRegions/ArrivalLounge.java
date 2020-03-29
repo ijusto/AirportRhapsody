@@ -164,6 +164,7 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
+        repos.updatePorterState(PorterStates.AT_THE_PLANES_HOLD);
 
         notifyAll();  // wake up Passengers in goCollectABag()
 
@@ -185,7 +186,7 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-
+        repos.updatePorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
     }
 
     /* ******************************************** Getters and Setters ***********************************************/

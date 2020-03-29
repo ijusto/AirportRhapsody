@@ -76,6 +76,7 @@ public class DepartureTerminalEntrance {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
+        repos.updatePassengerState(passenger.getID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
         this.exitPassenger();
     }

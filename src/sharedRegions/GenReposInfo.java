@@ -3,6 +3,7 @@ import  entities.*;
 import main.SimulationParameters;
 
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 /**
  * The General Repository of Information works solely as the place where the visible internal state of the problem
@@ -121,9 +122,7 @@ public class GenReposInfo {
 
         porterState = PorterStates.WAITING_FOR_A_PLANE_TO_LAND;
         passengerStates = new PassengerStates[SimulationParameters.N_PASS_PER_FLIGHT];
-        for (int i = 0; i< passengerStates.length; i++){
-            passengerStates[i] = PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL;
-        }
+        Arrays.fill(passengerStates, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         busDriverState = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL;
 
         FN = 0;
