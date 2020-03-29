@@ -35,6 +35,13 @@ public class BusDriver extends Thread {
 
     private int S;
 
+    /**
+     *  Number os passengers on the bus.
+     *
+     *    @serialField S
+     */
+
+    private int nPass;
 
     /**
      *  ...
@@ -64,6 +71,7 @@ public class BusDriver extends Thread {
         this.Stat = Stat;
         this.arrivalTerminalQuay = arrivalTerminalQuay;
         this.departureTransferQuay = departureTransferQuay;
+        this.nPass = 0;
     }
 
     /**
@@ -159,5 +167,21 @@ public class BusDriver extends Thread {
 
     public void setS(int s) {
         S = s;
+    }
+
+    /*
+     *
+     */
+
+    public void setNPass(int nPass) {
+        this.nPass = nPass;
+    }
+
+    /*
+     *
+     */
+
+    public int getNPass() {
+        return this.nPass;
     }
 }

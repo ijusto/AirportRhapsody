@@ -31,12 +31,6 @@ public class DepartureTermTransfQuay {
 
     private int nPass;
 
-    /*
-     *   Arrival Terminal Transfer Quay.
-     */
-
-    private ArrivalTermTransfQuay arrivalQuay;
-
     /**
      *   Instantiation of the Departure Terminal Transfer Quay.
      *
@@ -102,7 +96,7 @@ public class DepartureTermTransfQuay {
         assert(this.nPass > 0);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
-
+        this.nPass = busDriver.getNPass();
         this.letPassOff = true;
 
         notifyAll();
@@ -116,14 +110,4 @@ public class DepartureTermTransfQuay {
         }
     }
 
-    /* ******************************************** Getters and Setters ***********************************************/
-
-    /*
-     *
-     */
-
-    public void setArrivalQuayRef(ArrivalTermTransfQuay arrivalQuay){
-        this.arrivalQuay = arrivalQuay;
-        this.nPass = arrivalQuay.getNPassOnTheBus();
-    }
 }

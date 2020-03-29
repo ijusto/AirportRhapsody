@@ -111,8 +111,6 @@ public class BaggageColPoint {
         porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
         repos.updatePorterState(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
 
-        /* TODO: turn collected to true on carryItTo... when no more bags at phold*/
-
         notifyAll();  // wake up Passengers in goCollectABag()
 
         try {

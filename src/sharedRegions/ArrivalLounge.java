@@ -173,7 +173,7 @@ public class ArrivalLounge {
         try {
             return bagStack.read();
         } catch (MemException e) {
-            bagColPoint.setCollected(true);
+            bagColPoint.setCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint
             return null;
         }
 

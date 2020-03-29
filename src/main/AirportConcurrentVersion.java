@@ -89,8 +89,6 @@ public class AirportConcurrentVersion {
         departureTerm = new DepartureTerminalEntrance(arrivLounge, arrivalQuay, repos);
         arrivalTerm.setDepartureTerminalRef(departureTerm);
         departureTerm.setArrivalTerminalRef(arrivalTerm);
-        arrivalQuay.setDepartureQuayRef(departureQuay);
-        departureQuay.setArrivalQuayRef(arrivalQuay);
 
         /*
          *   instantiation of the entities

@@ -27,12 +27,6 @@ public class ArrivalTermTransfQuay {
     private int nPassOnTheBus;
 
     /*
-     *   Departure Terminal Transfer Quay.
-     */
-
-    private DepartureTermTransfQuay departureQuay;
-
-    /*
      *
      */
 
@@ -173,6 +167,7 @@ public class ArrivalTermTransfQuay {
             }
         } while(waitingPass.isEmpty() && this.existsPassengers);
 
+        busDriver.setNPass(this.nPassOnTheBus);
     }
 
     /**
@@ -212,16 +207,6 @@ public class ArrivalTermTransfQuay {
 
     public void setExistsPassengers(boolean existsPassengers) {
         this.existsPassengers = existsPassengers;
-    }
-
-    /**
-     *   ...
-     *
-     *   @param departureQuay Departure Terminal Transfer Quay
-     */
-
-    public void setDepartureQuayRef(DepartureTermTransfQuay departureQuay){
-        this.departureQuay = departureQuay;
     }
 
     /*
