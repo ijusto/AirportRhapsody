@@ -31,19 +31,19 @@ public class GenReposInfo {
      *
      */
 
-    private final String[] passState = {"ATDZ", "ATLCP", "ETAT", "ATBRO", "ATATT", "TT", "ATDTT", "ETDT"};
+    private final String[] passState = {"ADZ", "LCP", "EAT", "BRO", "ATT", "TT", "DTT", "EDT"};
 
     /*
      *
      */
 
-    private final String[] portState = {"WFPL", "APH", "ALBC", "ASR"};
+    private final String[] portState = {"WPL", "APH", "LBC", "ASR"};
 
     /*
      *
      */
 
-    private final String[] busState  = {"PATAT", "DF", "DB", "PATDT"};
+    private final String[] busState  = {"PAT", "DF", "DB", "PDT"};
 
     /**
      *  Flight number
@@ -396,34 +396,34 @@ public class GenReposInfo {
 
         StringBuilder log = new StringBuilder();;
         log.append("\n\n\t\tAIRPORT RHAPSODY - Description of the internal state of the problem\n");
-        log.append("PLANE\t\t\tPORTER\t\t\t\t\t\tDRIVER");
-        log.append("\t\t\t\t\t\t\t\t\tPASSENGERS\n");
-        log.append("FN  BN\t\t\tStat  CB  SR\t\t\t\tStat Q1 Q2 Q3 Q4 Q5 Q6 S1 S2 S3\t\t\t" +
-                "St1  Si1 NR1 NA1   St2  Si2 NR2 NA2   St3  Si3 NR3 NA3   St4  Si4 NR4 NA4   St5  Si5 NR5 NA5   St6  Si6 NR6 NA6");
-        log.append(String.format("\n%3d %3d\t\t", FN, BN));
-        log.append(String.format("\t%ss %3d %3d\t\t\t\t", portState[porterState.ordinal()], CB, SR));
-        log.append(String.format("%s ", busState[busDriverState.ordinal()]));
+        log.append("PLANE       PORTER              DRIVER                                             PASSENGERS\n");
+        log.append("FN  BN      Stat  CB  SR        Stat  Q1  Q2  Q3  Q4  Q5  Q6  S1  S2  S3           St1   Si1  NR1  NA1   " +
+                "St2  Si2  NR2  NA2    St3  Si3  NR3  NA3    St4  Si4  NR4  NA4    St5  Si5  NR5  NA5    St6  Si6  NR6  NA6");
+        log.append(String.format("\n%d %3d      ", FN, BN));
+        log.append(String.format(" %s    %d %3d        ", portState[porterState.ordinal()], CB, SR));
+        log.append(String.format("%s    ", busState[busDriverState.ordinal()]));
         for(int j = 0; j < SimulationParameters.N_PASS_PER_FLIGHT; j++){
             String passId;
             if(j > passWaitingQueue.size() - 1){
-                passId = "- ";
+                passId = "-  ";
             } else {
-                passId = "" + passWaitingQueue.get(j);
+                passId = "" + passWaitingQueue.get(j) + "  ";
             }
             log.append(String.format("%s ", passId));
         }
         for(int k = 0; k < SimulationParameters.BUS_CAP; k++){
             String occupStat;
             if(k > busSeatOccupation.size() - 1){
-                occupStat = "- ";
+                occupStat = "-  ";
             } else {
-                occupStat = "" + busSeatOccupation.get(k);
+                occupStat = "" + busSeatOccupation.get(k) + "  ";
             }
             log.append(String.format("%s ", occupStat));
         }
-        log.append(("\t"));
+        log.append("\t\t  ");
         for (int i = 0; i< SimulationParameters.N_PASS_PER_FLIGHT; i++){
-            log.append(String.format("    %s %s %3d %3d", passState[passengerStates[i].ordinal()], passengerSituation[i],
+            log.append(String.format(" %s  %s  %3d  %3d   ",
+                    passState[passengerStates[i].ordinal()], passengerSituation[i],
                     totalLuggage[i], collectedLuggage[i]));
         }
 
