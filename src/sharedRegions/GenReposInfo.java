@@ -402,10 +402,14 @@ public class GenReposInfo {
         log.append("PLANE\tPORTER\t\t\tDRIVER");
         log.append(String.format("\n%3d %3d\t", FN, BN));
         log.append(String.format("\t%ss %3d %3d\t", portState[porterState.ordinal()], CB, SR));
-        log.append(String.format("%s %3d %3d %3d %3d %3d %3d %3d %3d", busState[busDriverState.ordinal()],
-                passengersQueue.get(1), passengersQueue.get(2), passengersQueue.get(3), passengersQueue.get(4),
-                passengersQueue.get(5), busSeatOccupation.get(0), busSeatOccupation.get(1),
-                busSeatOccupation.get(2)));
+        log.append(String.format("%s ", busState[busDriverState.ordinal()]));
+        for(int j = 0; j < passengersQueue.size()-1; j++){
+            log.append(String.format("%3d ", passengersQueue.get(j)));
+        }
+
+        for(int k = 0; k < busSeatOccupation.size()-1; k++){
+            log.append(String.format("%3d ", busSeatOccupation.get(k)));
+        }
 
         log.append("\n\t\t\t\tPASSENGERS");
         for (int i = 0; i< SimulationParameters.N_PASS_PER_FLIGHT; i++){
