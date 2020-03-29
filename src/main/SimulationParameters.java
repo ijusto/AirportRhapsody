@@ -1,5 +1,12 @@
 package main;
 
+/**
+ *   ...
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class SimulationParameters {
 
     /* number of passengers per flight */

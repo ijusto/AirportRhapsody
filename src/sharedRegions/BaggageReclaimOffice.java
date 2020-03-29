@@ -4,10 +4,10 @@ import entities.Passenger;
 import entities.PassengerStates;
 
 /**
- * ...
+ *   ...
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class BaggageReclaimOffice {
@@ -15,15 +15,23 @@ public class BaggageReclaimOffice {
     /*
      *
      */
+
     private GenReposInfo repos;
 
-    /*
+
+    /**
+     *   Instantiation of the Baggage Collection Point.
      *
+     *     @param repos general repository of information
      */
 
     public BaggageReclaimOffice(GenReposInfo repos){
         this.repos = repos;
     }
+
+    /*
+     *
+     */
 
     public void reportMissingBags(){
 

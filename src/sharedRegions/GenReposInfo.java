@@ -1,26 +1,39 @@
 package sharedRegions;
 import  entities.*;
 import main.SimulationParameters;
-
 import java.io.PrintWriter;
 import java.util.Arrays;
 
 /**
- * The General Repository of Information works solely as the place where the visible internal state of the problem
- * is stored. The visible internal state is defined by the set of variables whose value is printed in the logging file.
- * Whenever an entity (porter, passenger, bus driver) executes an operation that changes the values of some of these
- * variables, the fact must be reported so that a new line group is printed in the logging file. The report operation
- * must be atomic, that is, when two or more variables are changed, the report operation must be unique so that the new
- * line group reflects all the changes that have taken place.
+ *   The General Repository of Information works solely as the place where the visible internal state of the problem
+ *   is stored. The visible internal state is defined by the set of variables whose value is printed in the logging file.
+ *   Whenever an entity (porter, passenger, bus driver) executes an operation that changes the values of some of these
+ *   variables, the fact must be reported so that a new line group is printed in the logging file. The report operation
+ *   must be atomic, that is, when two or more variables are changed, the report operation must be unique so that the
+ *   new line group reflects all the changes that have taken place.
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class GenReposInfo {
 
+    /*
+     *
+     */
+
     private final String[] passState = {"ATDZ", "ATLCP", "ETAT", "ATBRO", "ATATT", "TT", "ATDTT", "ETDT"};
+
+    /*
+     *
+     */
+
     private final String[] portState = {"WFPL", "APH", "ALBC", "ASR"};
+
+    /*
+     *
+     */
+
     private final String[] busState  = {"PATAT", "DF", "DB", "PATDT"};
 
     /**
@@ -41,7 +54,6 @@ public class GenReposInfo {
 
     private int CB;
 
-
     /**
      *  Number of pieces of luggage from transit passengers
      */
@@ -57,16 +69,43 @@ public class GenReposInfo {
     /*
      *   BusDrivers
      */
+
     private BusDriverStates busDriverState;
+
+    /*
+     *
+     */
+
     private int busQueue;
 
     /*
      *   Passengers
      */
+
     private PassengerStates[] passengerStates;
+
+    /*
+     *
+     */
+
     private int passengersQueue;
+
+    /*
+     *
+     */
+
     private String[] passengerSituation;
+
+    /*
+     *
+     */
+
     private int[] totalLuggage;
+
+    /*
+     *
+     */
+
     private int[] collectedLuggage;
 
     /*
@@ -114,7 +153,9 @@ public class GenReposInfo {
     private PrintWriter printW;
 
     /**
+     *   Instantiation of the General Repository of Information.
      *
+     *     @param fileName ...
      */
 
     public GenReposInfo(String fileName){
@@ -152,6 +193,7 @@ public class GenReposInfo {
     /**
      *  Update the Porter state
      */
+
     public synchronized void updatePorterState(PorterStates porterState){
         if(this.porterState != porterState){
             this.porterState = porterState;
@@ -162,6 +204,7 @@ public class GenReposInfo {
     /**
      *  Update the Passenger State
      */
+
     public synchronized void updatePassengerState(int id, PassengerStates passengerState){
         if(passengerStates[id] != passengerState){
             passengerStates[id] = passengerState;
@@ -172,6 +215,7 @@ public class GenReposInfo {
     /**
      *  Update the Bus Driver State
      */
+
     public synchronized void updateBusDriverState(BusDriverStates busDriverState){
         if(this.busDriverState != busDriverState){
             this.busDriverState = busDriverState;
@@ -198,6 +242,10 @@ public class GenReposInfo {
         printLog();
     }
 
+    /*
+     *
+     */
+
     public synchronized void passengerQueueStateOut(Passenger passenger){
         passengersQueue--;
         printLog();
@@ -206,12 +254,17 @@ public class GenReposInfo {
     /**
      *  Update of the occupation state of the bus seat
      */
+
     public synchronized void busSeatStateIn(Passenger passenger, BusDriver busDriver){
         busQueue++;
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         printLog();
     }
+
+    /*
+     *
+     */
 
     public synchronized void busSeatStateOut(Passenger passenger, BusDriver busDriver){
         busQueue--;
@@ -256,6 +309,10 @@ public class GenReposInfo {
         printLog();
     }
 
+    /*
+     *
+     */
+
     private void printLog(){
 
         String log =
@@ -295,6 +352,10 @@ public class GenReposInfo {
 
 
     /* ******************************************** Getters and Setters ***********************************************/
+
+    /*
+     *
+     */
 
     public int getFN() {
         return FN;

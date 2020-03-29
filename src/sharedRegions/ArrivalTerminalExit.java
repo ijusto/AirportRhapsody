@@ -43,8 +43,12 @@ public class ArrivalTerminalExit {
 
     private int termPass;
 
-    /*
+    /**
+     *   Instantiation of the Arrival Terminal Exit.
      *
+     *     @param arrivLounge ...
+     *     @param arrivalQuay ...
+     *     @param repos general repository of information
      */
 
     public ArrivalTerminalExit(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay, GenReposInfo repos){

@@ -14,9 +14,23 @@ import entities.Porter;
 
 public class TemporaryStorageArea {
 
+    /*
+     *   Stack of bags on the Temporary Storage Area.
+     */
+
     private MemStack<Bag> tmpStorageStack;
 
+    /*
+     *
+     */
+
     private GenReposInfo repos;
+
+    /**
+     *   Instantiation of the Temporary Storage Area.
+     *
+     *     @param repos general repository of information
+     */
 
     public TemporaryStorageArea(GenReposInfo repos){
         this.repos = repos;

@@ -43,9 +43,14 @@ public class DepartureTerminalEntrance {
 
     private int termPass;
 
-    /*
+    /**
+     *   Instantiation of the Departure Terminal Entrance.
      *
+     *     @param arrivLounge ....
+     *     @param arrivalQuay ...
+     *     @param repos general repository of information
      */
+
 
     public DepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay,GenReposInfo repos){
         this.arrivLounge = arrivLounge;

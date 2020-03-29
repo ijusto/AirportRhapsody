@@ -19,7 +19,7 @@ import java.util.*;
 public class ArrivalLounge {
 
     /*
-     *   Stack of bags on the plane's hold
+     *   Stack of bags on the plane's hold.
      */
 
     private MemStack<Bag> bagStack;
@@ -33,6 +33,7 @@ public class ArrivalLounge {
     /*
      *
      */
+
     private boolean existsPassengers;
 
     /*

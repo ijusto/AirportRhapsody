@@ -5,23 +5,23 @@ import sharedRegions.*;
 import genclass.GenericIO;
 
 /**
- *  Main program.
+ *   Main program.
  *
- *  @author Inês Justo
- *  @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class AirportConcurrentVersion {
 
     /**
-     * Minimum milliseconds to wakeup.
-     * Affects ...(see functions)
+     *   Minimum milliseconds to wakeup.
+     *   Affects ...(see functions)
      */
     public static final int minSleep = 5;
 
     /**
-     * Maximum milliseconds to wakeup.
-     * Affects ...(see functions)
+     *   Maximum milliseconds to wakeup.
+     *   Affects ...(see functions)
      */
     public static final int maxSleep = 10;
 
@@ -76,7 +76,7 @@ public class AirportConcurrentVersion {
         }
 
         /*
-         *  instantiation of the shared regions
+         *   instantiation of the shared regions
          */
         repos = new GenReposInfo(fileName);
         bagColPoint = new BaggageColPoint(repos);
@@ -94,7 +94,7 @@ public class AirportConcurrentVersion {
         tempStore = new TemporaryStorageArea();
 
         /*
-         *  instantiation of the entities
+         *   instantiation of the entities
          */
         Passenger[][] passengers = new Passenger[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
         Porter[] porters = new Porter[SimulationParameters.N_FLIGHTS];

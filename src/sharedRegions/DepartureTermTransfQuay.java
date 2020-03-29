@@ -6,10 +6,10 @@ import entities.Passenger;
 import entities.PassengerStates;
 
 /**
- * ...
+ *   ...
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class DepartureTermTransfQuay {
@@ -28,6 +28,7 @@ public class DepartureTermTransfQuay {
     /*
      *
      */
+
     private int nPass;
 
     /*
@@ -36,8 +37,10 @@ public class DepartureTermTransfQuay {
 
     private ArrivalTermTransfQuay arrivalQuay;
 
-    /*
+    /**
+     *   Instantiation of the Departure Terminal Transfer Quay.
      *
+     *     @param repos general repository of information.
      */
 
     public DepartureTermTransfQuay(GenReposInfo repos){
@@ -50,7 +53,7 @@ public class DepartureTermTransfQuay {
     /* ************************************************Passenger***************************************************** */
 
     /**
-     *  ... (raised by the Passenger).
+     *   ... (raised by the Passenger).
      *
      */
 
@@ -84,7 +87,7 @@ public class DepartureTermTransfQuay {
     /* *************************************************Bus Driver*************************************************** */
 
     /**
-     *  BusDriver informs the passengers they can leave the bus (raised by the BusDriver).
+     *   BusDriver informs the passengers they can leave the bus (raised by the BusDriver).
      */
 
     public void parkTheBusAndLetPassOff() {

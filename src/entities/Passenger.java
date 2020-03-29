@@ -101,6 +101,14 @@ public class Passenger extends Thread {
     private BaggageColPoint baggageColPoint;
 
     /**
+     *  ...
+     *
+     *    @serialField baggageReclaimOffice
+     */
+
+    private BaggageReclaimOffice baggageReclaimOffice;
+
+    /**
      *  Instantiation of the thread Passenger.
      *
      *    @param St state of passenger
@@ -114,12 +122,13 @@ public class Passenger extends Thread {
      *    @param departureEntrance ...
      *    @param arrivalTerminalExit ...
      *    @param baggageColPoint ...
+     *    @param baggageReclaimOffice ...
      */
 
     public Passenger(PassengerStates St, SituationPassenger Si, int NR, int NA, int id, ArrivalLounge arrivalLounge,
                      ArrivalTermTransfQuay arrivalTermTransfQuay, DepartureTermTransfQuay departureTransferQuay,
                      DepartureTerminalEntrance departureEntrance, ArrivalTerminalExit arrivalTerminalExit,
-                     BaggageColPoint baggageColPoint){
+                     BaggageColPoint baggageColPoint, BaggageReclaimOffice baggageReclaimOffice){
         this.St = St;
         this.Si = Si;
         this.NR = NR;
@@ -132,25 +141,8 @@ public class Passenger extends Thread {
         this.departureEntrance = departureEntrance;
         this.arrivalTerminalExit = arrivalTerminalExit;
         this.baggageColPoint = baggageColPoint;
+        this.baggageReclaimOffice = baggageReclaimOffice;
     }
-
-    public int getNA() {
-        return NA;
-    }
-
-    public int getNR() {
-        return NR;
-    }
-
-    public int getID() { return id;}
-
-    ArrivalLounge arrivalLounge;
-    ArrivalTermTransfQuay transferQuay;
-    DepartureTermTransfQuay departureTransferQuay;
-    DepartureTerminalEntrance departureEntrance;
-    ArrivalTerminalExit arrivalTerminalExit;
-    BaggageReclaimOffice baggageReclaimOffice;
-    int maxBags4Passenger = 2;
 
     /**
      *  Life cycle of the thread Passenger.

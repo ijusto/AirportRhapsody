@@ -29,8 +29,10 @@ public class BaggageColPoint {
 
     private boolean collected;
 
-    /*
+    /**
+     *   Instantiation of the Baggage Collection Point.
      *
+     *     @param repos general repository of information
      */
 
     public BaggageColPoint(GenReposInfo repos){
