@@ -60,7 +60,10 @@ public class DepartureTermTransfQuay {
         assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
 
-        notifyAll();
+        nPass -= 1;
+        if(nPass == 0){
+            notifyAll();  // wake up Bus Driver in parkTheBus()
+        }
 
         while(!this.letPassOff) {
             try {
@@ -69,7 +72,6 @@ public class DepartureTermTransfQuay {
                 e.printStackTrace();
             }
         }
-        nPass -= 1;
     }
 
     /* *************************************************Bus Driver*************************************************** */
