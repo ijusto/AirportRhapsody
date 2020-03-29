@@ -37,21 +37,26 @@ public class BusDriver extends Thread {
 
 
     /**
+     *  ...
      *
-     *
+     *    @serialField arrivalTerminalQuay
      */
 
     ArrivalTermTransfQuay arrivalTerminalQuay;
 
     /**
+     *  ...
      *
-     *
+     *    @serialField departureTransferQuay
      */
+
     DepartureTermTransfQuay departureTransferQuay;
 
     /**
+     *  Instantiation of the thread BusDriver.
      *
-     *
+     *    @param arrivalTerminalQuay ...
+     *    @param departureTransferQuay ...
      */
 
     public BusDriver(ArrivalTermTransfQuay arrivalTerminalQuay, DepartureTermTransfQuay departureTransferQuay){

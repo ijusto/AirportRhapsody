@@ -92,7 +92,6 @@ public class Passenger extends Thread {
 
     private ArrivalTerminalExit arrivalTerminalExit;
 
-
     /**
      *  Instantiation of the thread Passenger.
      *
@@ -100,6 +99,12 @@ public class Passenger extends Thread {
      *    @param Si situation of passenger
      *    @param NR number of pieces of luggage the passenger carried at the start of her journey
      *    @param NA number of pieces of luggage the passenger she has presently collected
+     *    @param id ...
+     *    @param arrivalLounge ...
+     *    @param transferQuay ...
+     *    @param departureTransferQuay ...
+     *    @param departureEntrance ...
+     *    @param arrivalTerminalExit ...
      */
 
     public Passenger(PassengerStates St, SituationPassenger Si, int NR, int NA, int id, ArrivalLounge arrivalLounge,

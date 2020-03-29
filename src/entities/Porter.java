@@ -1,7 +1,7 @@
 package entities;
 import sharedRegions.ArrivalLounge;
-import sharedRegions.TemporaryStorageArea;
 import sharedRegions.BaggageColPoint;
+import sharedRegions.TemporaryStorageArea;
 
 /**
  * ...
@@ -36,22 +36,50 @@ public class Porter extends Thread {
 
     private int SR;
 
+    /**
+     *  ...
+     *
+     *    @serialField arrivalLounge
+     */
+
     ArrivalLounge arrivalLounge;
+
+    /**
+     *  ...
+     *
+     *    @serialField tempStore
+     */
+
     TemporaryStorageArea tempStore;
+
+    /**
+     *  ...
+     *
+     *    @serialField bColPnt
+     */
+
     BaggageColPoint bColPnt;
 
     /**
-     *  Instantiation of the thread Passenger.
+     *  Instantiation of the thread Porter.
      *
      *    @param Stat state of the porter
      *    @param CB number of pieces of luggage presently on the conveyor belt
      *    @param SR number of pieces of luggage belonging to passengers in transit presently stored at the storeroom
+     *    @param arrivalLounge  ...
+     *    @param tempStore ...
+     *    @param bColPnt ....
      */
 
-    public Porter(PorterStates Stat, int CB, int SR){
+    public Porter(PorterStates Stat, int CB, int SR, ArrivalLounge arrivalLounge, TemporaryStorageArea tempStore,
+                  BaggageColPoint bColPnt){
         this.Stat = Stat;
         this.CB = CB;
         this.SR = SR;
+
+        this.arrivalLounge = arrivalLounge;
+        this.tempStore = tempStore;
+        this.bColPnt = bColPnt;
     }
 
     /**
