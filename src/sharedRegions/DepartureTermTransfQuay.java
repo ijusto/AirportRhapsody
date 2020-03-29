@@ -70,13 +70,12 @@ public class DepartureTermTransfQuay {
 
         while(!this.letPassOff) {
             try {
+                repos.busSeatStateOut(passenger.getID());
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-        repos.busSeatStateOut(passenger.getID());
     }
 
     /* *************************************************Bus Driver*************************************************** */

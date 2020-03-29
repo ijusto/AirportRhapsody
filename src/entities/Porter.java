@@ -85,7 +85,7 @@ public class Porter extends Thread {
                     bColPnt.carryItToAppropriateStore(bag);
                 }
             }
-            arrivalLounge.noMoreBagsToCollect();
+            // arrivalLounge.noMoreBagsToCollect();
         }
     }
 

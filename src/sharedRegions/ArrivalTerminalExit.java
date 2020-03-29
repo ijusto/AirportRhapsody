@@ -2,6 +2,7 @@ package sharedRegions;
 
 import entities.Passenger;
 import entities.PassengerStates;
+import genclass.GenericIO;
 import main.SimulationParameters;
 
 /**
@@ -68,6 +69,8 @@ public class ArrivalTerminalExit {
                                                                                     SimulationParameters.N_FLIGHTS){
             this.arrivLounge.setExistsPassengers(false);
             this.arrivalQuay.setExistsPassengers(false);
+            GenericIO.writeString("MESMO QUE TU TENTES");
+            System.exit(-1);
         }
     }
 

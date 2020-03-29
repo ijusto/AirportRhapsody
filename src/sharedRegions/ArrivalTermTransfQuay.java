@@ -170,7 +170,6 @@ public class ArrivalTermTransfQuay {
             }
         } while(waitingPass.isEmpty() && this.existsPassengers);
 
-        busDriver.setNPass(this.nPassOnTheBus);
     }
 
     /**
@@ -200,6 +199,7 @@ public class ArrivalTermTransfQuay {
             }
         }
 
+        busDriver.setNPass(this.nPassOnTheBus);
     }
 
     /* ******************************************** Getters and Setters ***********************************************/

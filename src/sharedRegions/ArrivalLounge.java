@@ -172,6 +172,8 @@ public class ArrivalLounge {
             return tmpBag;
         } catch (MemException e) {
             bagColPoint.setCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint
+            // GenericIO.writeString("ACABOU VÊ SE ENTENDES");
+            // System.exit(-1);
             return null;
         }
 
