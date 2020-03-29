@@ -237,7 +237,7 @@ public class ArrivalLounge {
     /*
      *
      */
-    
+
     public void setExistsPassengers(boolean existsPassengers) {
         this.existsPassengers = existsPassengers;
     }

@@ -11,19 +11,6 @@ import sharedRegions.DepartureTermTransfQuay;
 
 public class BusDriver extends Thread {
 
-    /*
-    private static final int PARKING_AT_THE_ARRIVAL_TERMINAL = 0;
-    private static final int DRIVING_FORWARD = 1;
-    private static final int PARKING_AT_THE_DEPARTURE_TERMINAL = 2;
-    private static final int DRIVING_BACKWARD = 3;
-
-    private enum State { PARKING_AT_THE_ARRIVAL_TERMINAL,
-                         DRIVING_FORWARD,
-                         PARKING_AT_THE_DEPARTURE_TERMINAL,
-                         DRIVING_BACKWARD
-                        }
-     */
-
     /**
      *  State of the driver
      *
@@ -90,6 +77,8 @@ public class BusDriver extends Thread {
 
     }
 
+    /* ******************************************** Getters and Setters ***********************************************/
+
     /**
      *  State of the BusDriver
      *
@@ -120,13 +109,25 @@ public class BusDriver extends Thread {
         return S;
     }
 
+    /*
+     *
+     */
+
     public void setStat(BusDriverStates stat) {
         Stat = stat;
     }
 
+    /*
+     *
+     */
+
     public void setQ(int q) {
         Q = q;
     }
+
+    /*
+     *
+     */
 
     public void setS(int s) {
         S = s;

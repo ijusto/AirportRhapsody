@@ -11,18 +11,6 @@ import sharedRegions.BaggageColPoint;
  */
 
 public class Porter extends Thread {
-    private static final int WAITING_FOR_A_PLANE_TO_LAND = 0;
-    private static final int AT_THE_PLANES_HOLD = 1;
-    private static final int AT_THE_LUGGAGE_BELT_CONVEYOR = 2;
-    private static final int AT_THE_STOREROOM = 3;
-
-    /*
-    private enum State { WAITING_FOR_A_PLANE_TO_LAND,
-                         AT_THE_PLANES_HOLD,
-                         AT_THE_LUGGAGE_BELT_CONVEYOR,
-                         AT_THE_STOREROOM
-                        }
-     */
 
     /**
      *  State of the porter
@@ -92,17 +80,35 @@ public class Porter extends Thread {
         }
     }
 
-    public void setStat(PorterStates stat) {
-        this.Stat = stat;
-    }
+    /* ******************************************** Getters and Setters ***********************************************/
+
+    /*
+     *
+     */
 
     public PorterStates getStat() {
         return this.Stat;
     }
 
+    /*
+     *
+     */
+
+    public void setStat(PorterStates stat) {
+        this.Stat = stat;
+    }
+
+    /*
+     *
+     */
+
     public void setCB(int CB) {
         this.CB = CB;
     }
+
+    /*
+     *
+     */
 
     public void setSR(int SR) {
         this.SR = SR;

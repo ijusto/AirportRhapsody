@@ -60,7 +60,8 @@ public class ArrivalTerminalExit {
 
     public void exitPassenger(){
         this.termPass += 1;
-        if( (this.termPass + this.departureTerm.getTermPass()) == SimulationParameters.N_PASS_PER_FLIGHT * SimulationParameters.N_FLIGHTS){
+        if( (this.termPass + this.departureTerm.getTermPass()) == SimulationParameters.N_PASS_PER_FLIGHT *
+                                                                                    SimulationParameters.N_FLIGHTS){
             this.arrivLounge.setExistsPassengers(false);
             this.arrivalQuay.setExistsPassengers(false);
         }
@@ -70,7 +71,7 @@ public class ArrivalTerminalExit {
      *  ... (raised by the Passenger).
      *
      */
-    public synchronized void goHome() throws InterruptedException {
+    public synchronized void goHome(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
