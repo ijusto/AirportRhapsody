@@ -65,6 +65,7 @@ public class DepartureTermTransfQuay {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(this.nPass != -1 && passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
+        repos.updatePassengerState(passenger.getID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
 
         this.nPass -= 1;
         if(this.nPass == 0){
@@ -98,6 +99,7 @@ public class DepartureTermTransfQuay {
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(this.nPass > 0);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
+        repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
 
         this.letPassOff = true;
 

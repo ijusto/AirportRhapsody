@@ -31,6 +31,7 @@ public class AirportConcurrentVersion {
         GenReposInfo repos;
         BaggageColPoint bagColPoint;
         BaggageReclaimOffice bagRecOffice;
+        TemporaryStorageArea tmpStorageArea;
         ArrivalLounge arrivLounge;
         ArrivalTermTransfQuay arrivalQuay;
         DepartureTermTransfQuay departureQuay;
@@ -78,6 +79,7 @@ public class AirportConcurrentVersion {
         repos = new GenReposInfo(fileName);
         bagColPoint = new BaggageColPoint(repos);
         bagRecOffice = new BaggageReclaimOffice(repos);
+        tmpStorageArea = new TemporaryStorageArea(repos);
         arrivLounge = new ArrivalLounge(destStat, nBagsPHold, bagColPoint, repos);
         arrivalQuay = new ArrivalTermTransfQuay(repos);
         departureQuay = new DepartureTermTransfQuay(repos);

@@ -74,6 +74,7 @@ public class ArrivalTermTransfQuay {
 
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        repos.updatePassengerState(passenger.getID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
 
         try {
             waitingPass.write(passenger);
@@ -111,6 +112,7 @@ public class ArrivalTermTransfQuay {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
+        repos.updatePassengerState(passenger.getID(),PassengerStates.TERMINAL_TRANSFER);
 
         try{
             this.waitingPass.read();
@@ -150,6 +152,7 @@ public class ArrivalTermTransfQuay {
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         /* TODO: if(!this.existsPass) wake up the bus driver*/
 

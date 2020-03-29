@@ -93,13 +93,14 @@ public class BaggageColPoint {
      *
      */
 
-    public void reportMissingBags(){
-
-        Passenger passenger = (Passenger) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
-        passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
-
-    }
+//    public void reportMissingBags(){
+//
+//        Passenger passenger = (Passenger) Thread.currentThread();
+//        assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+//        passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+//        repos.updatePassengerState(passenger.getID(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+//
+//    }
 
 
     /* **************************************************Porter****************************************************** */
@@ -112,6 +113,7 @@ public class BaggageColPoint {
 
         Porter porter = (Porter) Thread.currentThread();
         porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
+        repos.updatePorterState(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
         /* TODO: turn collected to true on carryItTo... when no more bags at phold*/
     }
 
