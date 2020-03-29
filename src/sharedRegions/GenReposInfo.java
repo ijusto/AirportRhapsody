@@ -121,38 +121,18 @@ public class GenReposInfo {
     private int[] collectedLuggage;
 
     /*
-     *   Arrival Lounge
+     *
      */
+
+    int missing_bags;
 
     /*
-     *   Arrival Terminal Exit
+     *
      */
+
+    StringBuilder log;
 
     /*
-     *   Arrival Terminal Transfer Quay
-     */
-
-    /*
-     *  Baggage Collection Point
-     */
-
-    /*
-     *   Baggage Reclaim Office
-     */
-
-    /*
-     *   Departure Terminal Entrance
-     */
-
-    /*
-     *   Departure Terminal Transfer Quay
-     */
-
-    /*
-     *   Temporary Storage Area
-     */
-
-    /**
      *
      */
 
@@ -191,12 +171,15 @@ public class GenReposInfo {
         BN = 0;
         SR = 0;
         busQueue = 0;
+        missing_bags = 0;
 
         passengerSituation = new String[SimulationParameters.N_PASS_PER_FLIGHT];
         totalLuggage = new int[SimulationParameters.N_PASS_PER_FLIGHT];
         collectedLuggage = new int[SimulationParameters.N_PASS_PER_FLIGHT];
         passengersQueue = new ArrayList<>();
         busSeatOccupation = new ArrayList<>();
+
+        StringBuilder log = new StringBuilder();
     }
 
     /**
@@ -383,12 +366,21 @@ public class GenReposInfo {
         collectedLuggage[id] = passenger.getNA();
     }
 
+    public synchronized  void numberMissingBags(){
+        missing_bags += 1;
+    }
+
     /**
      *  Number of bags carried by a passenger at the end of the journey
      */
 
     public synchronized void finalReport(){
 
+        log.append(String.format("\n\n\nFinal report" ));
+        log.append(String.format("\nN. of passengers which have this airport as their final destination = %2d"));
+        log.append(String.format("\nN. of passengers in transit = %2d"));
+        log.append(String.format("\nN. of bags that should have been transported in the the planes hold = %2d"));
+        log.append(String.format("\nN. of bags that were lost = %2d\n\n", missing_bags));
         printLog();
         printW.close();
     }
@@ -399,9 +391,9 @@ public class GenReposInfo {
 
     private void printLog(){
 
-        StringBuilder log = new StringBuilder();
+
         log.append("\t\tAIRPORT RHAPSODY - Description of the internal state of the problem\n");
-        log.append("PLANE\tPORTER\t\t\tDRIVER");
+        log.append("PLANE\t\t\tPORTER\t\t\t\t\t\tDRIVER");
         log.append(String.format("\n%3d %3d\t", FN, BN));
         log.append(String.format("\t%ss %3d %3d\t", portState[porterState.ordinal()], CB, SR));
         log.append(String.format("%s ", busState[busDriverState.ordinal()]));
@@ -413,18 +405,11 @@ public class GenReposInfo {
             log.append(String.format("%3d ", busSeatOccupation.get(k)));
         }
 
-        log.append("\n\t\t\t\tPASSENGERS");
+        log.append("\n\t\t\t\tPASSENGERS\n");
         for (int i = 0; i< SimulationParameters.N_PASS_PER_FLIGHT; i++){
-            log.append(String.format("\n%s %s %3d %3d", passState[passengerStates[i].ordinal()], passengerSituation[i],
+            log.append(String.format("%s %s %3d %3d", passState[passengerStates[i].ordinal()], passengerSituation[i],
                     totalLuggage[i], collectedLuggage[i]));
         }
-
-        log.append("\nFinal report" );
-        log.append("\nN. of passengers which have this airport as their final destination = %2d");
-        log.append("\nN. of passengers in transit = %2d");
-        log.append("\nN. of bags that should have been transported in the the planes hold = %2d");
-        log.append("\nN. of bags that were lost = %2d");
-
 
         /*
               AIRPORT RHAPSODY - Description of the internal state of the problem

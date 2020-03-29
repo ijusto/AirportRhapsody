@@ -39,6 +39,7 @@ public class BaggageReclaimOffice {
         assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         repos.updatePassengerState(passenger.getID(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+        repos.numberMissingBags();
 
     }
 }
