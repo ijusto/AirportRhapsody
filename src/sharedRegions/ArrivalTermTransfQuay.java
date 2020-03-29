@@ -87,7 +87,7 @@ public class ArrivalTermTransfQuay {
          *   Freeing Method: announcingBusBoarding()
          *   Blocked Entity Reactions: enterTheBus()
         */
-        while(!this.boardBus){
+        while(!this.boardBus && this.nPassOnTheBus>=SimulationParameters.BUS_CAP){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -209,11 +209,4 @@ public class ArrivalTermTransfQuay {
         this.existsPassengers = existsPassengers;
     }
 
-    /*
-     *
-     */
-
-    public int getNPassOnTheBus() {
-        return nPassOnTheBus;
-    }
 }

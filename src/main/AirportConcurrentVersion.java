@@ -5,7 +5,6 @@ import entities.*;
 import genclass.GenericIO;
 import sharedRegions.*;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 
@@ -45,34 +44,31 @@ public class AirportConcurrentVersion {
         DepartureTerminalEntrance departureTerm;
         TemporaryStorageArea tempStore;
 
-        String fileName;
-        char[][] destStat;
-        int[][] nBags;
-        int[][] nBagsPHold;
+        String fileName = "log.txt";
+        char[][] destStat = new char[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
+        int[][] nBags = new int[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
+        int[][] nBagsPHold = new int[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
         char opt;
-        boolean success;
 
-        File myfile = new File(fileName);
+        File loggerFile = new File(fileName);
         try {
-            if (myfile.createNewFile()) {
-                GenericIO.writeString("File created: " + myfile.getName());
+            if (loggerFile.createNewFile()) {
+                GenericIO.writeString("File created: " + loggerFile.getName());
             } else {
                 do {
                     GenericIO.writeString("There is already a file with this name. Delete it (y - yes; n - no)? ");
                     opt = GenericIO.readlnChar();
                 } while( (opt != 'y') && (opt != 'n'));
                 if(opt == 'y'){
-                    myfile.delete();
-                    myfile.createNewFile();
-                    GenericIO.writeString("File created: " + myfile.getName());
+                    loggerFile.delete();
+                    loggerFile.createNewFile();
+                    GenericIO.writeString("File created: " + loggerFile.getName());
                 }
             }
         } catch (IOException e) {
             GenericIO.writeString("An error occurred.");
             e.printStackTrace();
         }
-
-        BufferedWriter bw = new BufferedWriter(myfile);
 
         for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
@@ -155,5 +151,6 @@ public class AirportConcurrentVersion {
             }
         }
 
+        repos.finalReport();
     }
 }
