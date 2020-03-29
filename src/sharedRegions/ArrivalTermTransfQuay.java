@@ -2,10 +2,7 @@ package sharedRegions;
 
 import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
-import entities.BusDriver;
-import entities.BusDriverStates;
-import entities.Passenger;
-import entities.PassengerStates;
+import entities.*;
 import main.SimulationParameters;
 
 /**
@@ -130,8 +127,10 @@ public class ArrivalTermTransfQuay {
     /* ************************************************Bus Driver**************************************************** */
 
     /**
-     *  ... (raised by the BusDriver).
+     *   Operation of checking if the passengers all left and the day ended (raised by the BusDriver).
      *
+     *     @return <li> 'F', if end of day </li>
+     *             <li> 'R', otherwise </li>
      */
 
     public char hasDaysWorkEnded(){
@@ -139,9 +138,12 @@ public class ArrivalTermTransfQuay {
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        /* TODO: if(!this.existsPass) wake up the bus driver*/
+        if(this.existsPassengers){
+            return 'R';
+        }
 
         return 'F';
+
     }
 
     /**
@@ -151,34 +153,29 @@ public class ArrivalTermTransfQuay {
 
     public void parkTheBus(){
         /*
-            Blocked Entity: Driver
-        */
+         *   Blocked Entity: Driver
+         *   1) Freeing Entity: Passenger
+         *   1) Freeing Method: takeABus()
+         *   1) Freeing Condition: place in waiting queue = bus capacity
+         *   1) Blocked Entity Reactions: announcingBusBoarding()
+         *   2) Freeing Entity: Driver
+         *   2) Freeing Method: time
+         *   2) Freeing Condition: at least 1 passenger in queue
+         *   2) Blocked Entity Reaction: announcingBusBoarding()
+         */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        /* TODO: if(!this.existsPass) wake up the bus driver*/
-
-        /*
-            1) Freeing Entity: Passenger
-            1) Freeing Method: takeABus()
-            1) Freeing Condition: place in waiting queue = bus capacity
-            1) Blocked Entity Reactions: announcingBusBoarding()
-            2) Freeing Entity: Driver
-            2) Freeing Method: time
-            2) Freeing Condition: at least 1 passenger in queue
-            2) Blocked Entity Reaction: announcingBusBoarding()
-         */
-
-       do {
+        do {
             try {
                 wait(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-       } while(waitingPass.isEmpty());
+        } while(waitingPass.isEmpty() && this.existsPassengers);
 
     }
 
@@ -189,22 +186,20 @@ public class ArrivalTermTransfQuay {
 
     public void announcingBusBoarding(){
         /*
-          Blocked Entity: Driver
-          Freeing Entity: Passenger
-          Freeing Method: enterTheBus()
-          Freeing Condition: Last passenger in queue
-          Blocked Entity Reaction: goToDepartureTerminal()
+         *   Blocked Entity: Driver
+         *   Freeing Entity: Passenger
+         *   Freeing Method: enterTheBus()
+         *   Freeing Condition: Last passenger in queue
+         *   Blocked Entity Reaction: goToDepartureTerminal()
         */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        /* TODO: if(!this.existsPass) wake up the bus driver*/
-
         this.boardBus = true;
         notifyAll();  // wake up Passengers in takeABus()
 
-        while(!waitingPass.isEmpty()) {
+        while(!waitingPass.isEmpty() && this.existsPassengers) {
             try {
                 wait();
             } catch (InterruptedException e) {
