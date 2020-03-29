@@ -73,6 +73,7 @@ public class ArrivalLounge {
             nBagsPerPass.put(nPass, nBagsPHold[nPass][repos.getFN()]);
         }
 
+        repos.initializeCargoHold(nTotalBags);
         this.bagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
 
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
@@ -173,8 +174,9 @@ public class ArrivalLounge {
         notifyAll();  // wake up Passengers in goCollectABag()
 
         try {
+            Bag tmpBag = bagStack.read();
             repos.updateStoredBaggageCargoHold();
-            return bagStack.read();
+            return tmpBag;
         } catch (MemException e) {
             bagColPoint.setCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint
             return null;

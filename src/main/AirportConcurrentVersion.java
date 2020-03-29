@@ -108,7 +108,6 @@ public class AirportConcurrentVersion {
         Passenger[][] passengers = new Passenger[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
         Porter[] porters = new Porter[SimulationParameters.N_FLIGHTS];
         BusDriver[] busDrivers = new BusDriver[SimulationParameters.N_FLIGHTS];
-        repos.initializeCargoHold(nBagsPHold.length);
 
         for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
             repos.updateFlightNumber(land);
