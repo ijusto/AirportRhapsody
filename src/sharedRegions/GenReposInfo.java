@@ -97,7 +97,7 @@ public class GenReposInfo {
      *
      */
 
-    private ArrayList<Integer> passengersQueue;
+    private ArrayList<Integer> passWaitingQueue;
 
     /*
      *
@@ -129,13 +129,6 @@ public class GenReposInfo {
 
     int missing_bags;
 
-
-    /*
-     *
-     */
-
-    private String fileName;
-
     /**
      *
      */
@@ -164,8 +157,6 @@ public class GenReposInfo {
             e.printStackTrace();
         }
 
-        this.fileName = fileName;
-
         porterState = PorterStates.WAITING_FOR_A_PLANE_TO_LAND;
         passengerStates = new PassengerStates[SimulationParameters.N_PASS_PER_FLIGHT];
         Arrays.fill(passengerStates, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
@@ -180,7 +171,7 @@ public class GenReposInfo {
         passengerSituation = new String[SimulationParameters.N_PASS_PER_FLIGHT];
         totalLuggage = new int[SimulationParameters.N_PASS_PER_FLIGHT];
         collectedLuggage = new int[SimulationParameters.N_PASS_PER_FLIGHT];
-        passengersQueue = new ArrayList<>();
+        passWaitingQueue = new ArrayList<>();
         busSeatOccupation = new ArrayList<>();
 
 
@@ -296,7 +287,7 @@ public class GenReposInfo {
      */
 
     public synchronized void passengerQueueStateIn(int ID){
-        passengersQueue.add(ID);
+        passWaitingQueue.add(ID);
         printLog();
     }
 
@@ -307,8 +298,8 @@ public class GenReposInfo {
      */
 
     public synchronized void passengerQueueStateOut(int ID){
-        int index = passengersQueue.indexOf(ID);
-        passengersQueue.remove(index);
+        int index = passWaitingQueue.indexOf(ID);
+        passWaitingQueue.remove(index);
         printLog();
     }
 
@@ -412,13 +403,25 @@ public class GenReposInfo {
         log.append(String.format("\n%3d %3d\t\t", FN, BN));
         log.append(String.format("\t%ss %3d %3d\t\t\t\t", portState[porterState.ordinal()], CB, SR));
         log.append(String.format("%s ", busState[busDriverState.ordinal()]));
-        for(int j = 0; j < passengersQueue.size()-1; j++){
-            log.append(String.format("%3d ", passengersQueue.get(j)));
+        for(int j = 0; j < SimulationParameters.N_PASS_PER_FLIGHT; j++){
+            String passId;
+            if(j > passWaitingQueue.size() - 1){
+                passId = "- ";
+            } else {
+                passId = "" + passWaitingQueue.get(j);
+            }
+            log.append(String.format("%s ", passId));
         }
-        for(int k = 0; k < busSeatOccupation.size()-1; k++){
-            log.append(String.format("%3d ", busSeatOccupation.get(k)));
+        for(int k = 0; k < SimulationParameters.BUS_CAP; k++){
+            String occupStat;
+            if(k > busSeatOccupation.size() - 1){
+                occupStat = "- ";
+            } else {
+                occupStat = "" + busSeatOccupation.get(k);
+            }
+            log.append(String.format("%s ", occupStat));
         }
-        log.append(("\t\t\t\t\t\t\t"));
+        log.append(("\t"));
         for (int i = 0; i< SimulationParameters.N_PASS_PER_FLIGHT; i++){
             log.append(String.format("    %s %s %3d %3d", passState[passengerStates[i].ordinal()], passengerSituation[i],
                     totalLuggage[i], collectedLuggage[i]));
