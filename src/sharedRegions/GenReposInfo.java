@@ -390,22 +390,23 @@ public class GenReposInfo {
     private void printLog(){
 
         StringBuilder log = new StringBuilder();;
-        log.append("\t\tAIRPORT RHAPSODY - Description of the internal state of the problem\n");
+        log.append("\n\n\t\tAIRPORT RHAPSODY - Description of the internal state of the problem\n");
         log.append("PLANE\t\t\tPORTER\t\t\t\t\t\tDRIVER");
-        log.append(String.format("\n%3d %3d\t", FN, BN));
-        log.append(String.format("\t%ss %3d %3d\t", portState[porterState.ordinal()], CB, SR));
+        log.append("\t\t\t\t\t\t\t\t\tPASSENGERS\n");
+        log.append("FN  BN\t\t\tStat  CB  SR\t\t\t\tStat Q1 Q2 Q3 Q4 Q5 Q6 S1 S2 S3\t\t\t" +
+                "St1  Si1 NR1 NA1   St2  Si2 NR2 NA2   St3  Si3 NR3 NA3   St4  Si4 NR4 NA4   St5  Si5 NR5 NA5   St6  Si6 NR6 NA6");
+        log.append(String.format("\n%3d %3d\t\t", FN, BN));
+        log.append(String.format("\t%ss %3d %3d\t\t\t\t", portState[porterState.ordinal()], CB, SR));
         log.append(String.format("%s ", busState[busDriverState.ordinal()]));
         for(int j = 0; j < passengersQueue.size()-1; j++){
             log.append(String.format("%3d ", passengersQueue.get(j)));
         }
-
         for(int k = 0; k < busSeatOccupation.size()-1; k++){
             log.append(String.format("%3d ", busSeatOccupation.get(k)));
         }
-
-        log.append("\n\t\t\t\tPASSENGERS\n");
+        log.append(("\t\t\t\t\t\t\t"));
         for (int i = 0; i< SimulationParameters.N_PASS_PER_FLIGHT; i++){
-            log.append(String.format("%s %s %3d %3d", passState[passengerStates[i].ordinal()], passengerSituation[i],
+            log.append(String.format("    %s %s %3d %3d", passState[passengerStates[i].ordinal()], passengerSituation[i],
                     totalLuggage[i], collectedLuggage[i]));
         }
 
