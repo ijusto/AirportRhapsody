@@ -79,12 +79,15 @@ public class ArrivalLounge {
         this.bagColPoint.setTreadmill(treadmill);
 
         this.passCounter = 0;
+
     }
 
     /* **************************************************Passenger*************************************************** */
 
     /**
-     *  Operation of deciding what to do next (raised by the Passenger). <p> Head start delay, that represents the time before the passenger chooses between what to do when arriving to the airport.
+     *  Operation of deciding what to do next (raised by the Passenger).
+     *  <p> Head start delay, that represents the time before the passenger chooses between what to do when arriving to
+     *  the airport.
      *
      *    @return <li> true, if final destination
      *            <li> false, otherwise
@@ -99,7 +102,8 @@ public class ArrivalLounge {
         notifyAll();  // wake up Porter in takeARest()
 
         try {
-            wait(new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1) + AirportConcurrentVersion.minSleep);
+            wait(new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1)
+                    + AirportConcurrentVersion.minSleep);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -130,7 +134,25 @@ public class ArrivalLounge {
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
+        while(!this.bagColPoint.isCollected()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
+        if(passenger.getNA() != passenger.getNR()) {
+            if (this.bagColPoint.getTreadmill().containsKey(passenger.getID())) {
+                passenger.setNA(passenger.getNA() + 1);
+                try {
+                    this.bagColPoint.getTreadmill().get(passenger.getID()).read();
+                    return true;
+                } catch (MemException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         return false;
     }
@@ -138,7 +160,7 @@ public class ArrivalLounge {
     /* **************************************************Porter****************************************************** */
 
     /**
-     *  Operation of taking a rest (raised by the Porter). <p> functionality: change state of entities.Porter to WAITING_FOR_A_PLANE_TO_LAND
+     *  Operation of taking a rest (raised by the Porter).
      *
      *    @return <li> 'E', if end of state
      *            <li> 'R', otherwise
@@ -188,10 +210,9 @@ public class ArrivalLounge {
         try {
             return bagStack.read();
         } catch (MemException e) {
-            e.printStackTrace();
+            return null;
         }
 
-        return null;
     }
 
     /**

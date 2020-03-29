@@ -25,12 +25,17 @@ public class BaggageColPoint {
      */
     private GenReposInfo repos;
 
+
+    private boolean collected;
+
     /*
      *
      */
 
     public BaggageColPoint(GenReposInfo repos){
         this.repos = repos;
+
+        this.collected = false;
     }
 
 
@@ -72,7 +77,7 @@ public class BaggageColPoint {
 
         Porter porter = (Porter) Thread.currentThread();
         porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
-
+        /* TODO: turn collected to true on carryItTo... when no more bags at phold*/
     }
 
     public Map<Integer, MemFIFO<Bag>> getTreadmill() {
@@ -82,4 +87,13 @@ public class BaggageColPoint {
     public void setTreadmill(Map<Integer, MemFIFO<Bag>> treadmill) {
         this.treadmill = treadmill;
     }
+
+    /*
+     *
+     */
+
+    public boolean isCollected() {
+        return collected;
+    }
+
 }
