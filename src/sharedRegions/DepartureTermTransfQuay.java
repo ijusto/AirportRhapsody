@@ -50,7 +50,7 @@ public class DepartureTermTransfQuay {
      *   ... (raised by the Passenger).
      */
 
-    public void leaveTheBus(){
+    public synchronized void leaveTheBus(){
         /*
          *   Blocked Entity: Passenger
          *   Freeing Entity: Driver
@@ -84,7 +84,7 @@ public class DepartureTermTransfQuay {
      *   BusDriver informs the passengers they can leave the bus (raised by the BusDriver).
      */
 
-    public void parkTheBusAndLetPassOff() {
+    public synchronized void parkTheBusAndLetPassOff() {
         /*
          *   Blocked Entity: Driver
          *   Freeing Entity: Passenger

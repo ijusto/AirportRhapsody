@@ -102,7 +102,7 @@ public class ArrivalTermTransfQuay {
      *   ... (raised by the Passenger).
      */
 
-    public void enterTheBus(){
+    public synchronized void enterTheBus(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
@@ -129,7 +129,7 @@ public class ArrivalTermTransfQuay {
      *             <li> 'R', otherwise </li>
      */
 
-    public char hasDaysWorkEnded(){
+    public synchronized char hasDaysWorkEnded(){
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
@@ -145,7 +145,7 @@ public class ArrivalTermTransfQuay {
      *   ... (raised by the BusDriver).
      */
 
-    public void parkTheBus(){
+    public synchronized void parkTheBus(){
         /*
          *   Blocked Entity: Driver
          *   1) Freeing Entity: Passenger
@@ -178,7 +178,7 @@ public class ArrivalTermTransfQuay {
      *   ... (raised by the BusDriver).
      */
 
-    public void announcingBusBoarding(){
+    public synchronized void announcingBusBoarding(){
         /*
          *   Blocked Entity: Driver
          *   Freeing Entity: Passenger
