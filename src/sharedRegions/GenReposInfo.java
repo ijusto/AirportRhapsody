@@ -3,6 +3,10 @@ import  entities.*;
 import genclass.GenericIO;
 import main.SimulationParameters;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import java.io.*;
 import java.util.Arrays;
 
@@ -90,7 +94,13 @@ public class GenReposInfo {
      *
      */
 
-    private int passengersQueue;
+    private ArrayList<Integer> passengersQueue;
+
+    /*
+     *
+     */
+
+    private ArrayList<Integer> busSeatOccupation;
 
     /*
      *
@@ -161,7 +171,7 @@ public class GenReposInfo {
      *   @param fileName ...
      */
 
-    public GenReposInfo(String fileName){
+    public GenReposInfo(String fileName) throws FileNotFoundException{
 
         try {
             this.printW = new PrintWriter(fileName);
@@ -178,9 +188,15 @@ public class GenReposInfo {
         busDriverState = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL;
 
         FN = 0;
-        passengersQueue = 0;
+        BN = 0;
+        SR = 0;
         busQueue = 0;
 
+        passengerSituation = new String[SimulationParameters.N_PASS_PER_FLIGHT];
+        totalLuggage = new int[SimulationParameters.N_PASS_PER_FLIGHT];
+        collectedLuggage = new int[SimulationParameters.N_PASS_PER_FLIGHT];
+        passengersQueue = new ArrayList<>();
+        busSeatOccupation = new ArrayList<>();
     }
 
     /**
@@ -193,13 +209,46 @@ public class GenReposInfo {
         printLog();
     }
 
+
+    public synchronized void initializeCargoHold(int bn){
+        BN = bn;
+        printLog();
+    }
+
     /**
      *   Update baggage stored in the cargo hold when porter retrieves the baggage.
      *
-     *   @param baggage baggage.
      */
-    public synchronized void updateStoredBaggage(int baggage){
-        BN = BN - baggage;
+
+    public synchronized void updateStoredBaggageCargoHold(){
+        BN = BN - 1;
+        printLog();
+    }
+
+    /**
+     *  Update baggage stored in the Conveyor Belt when porter puts the baggage
+     */
+
+    public synchronized void updateStoredBaggageConveyorBeltInc(){
+        CB = CB + 1;
+        printLog();
+    }
+
+    /**
+     *  Update baggage stored in the Conveyor Belt when passenger retrieves the baggage
+     */
+
+    public synchronized void updateStoredBaggageConveyorBeltDec(){
+        CB = CB  - 1;
+        printLog();
+    }
+
+    /**
+     *  Update baggage stored in the Storage Room when porter puts the baggage
+     */
+
+    public synchronized void updateStoredBaggageStorageRoom(){
+        SR = SR + 1;
         printLog();
     }
 
@@ -256,51 +305,46 @@ public class GenReposInfo {
     /**
      *   Update the queue of passengers.
      *
-     *   @param passenger passenger.
+     * @param ID
      */
 
-    public synchronized void passengerQueueStateIn(Passenger passenger){
-        passengersQueue++;
-        passenger.setSt(PassengerStates.AT_THE_DISEMBARKING_ZONE);
+    public synchronized void passengerQueueStateIn(int ID){
+        passengersQueue.add(ID);
         printLog();
     }
 
     /**
      *
+     * @param ID
      *
-     *   @param passenger passenger.
      */
 
-    public synchronized void passengerQueueStateOut(Passenger passenger){
-        passengersQueue--;
+    public synchronized void passengerQueueStateOut(int ID){
+        passengersQueue.remove(ID);
         printLog();
     }
+
 
     /**
      *   Update of the occupation state of the bus seat.
      *
-     *   @param passenger passenger.
-     *   @param busDriver bus driver.
+     *   @param ID passenger.
+
      */
 
-    public synchronized void busSeatStateIn(Passenger passenger, BusDriver busDriver){
-        busQueue++;
-        passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
-        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+    public synchronized void busSeatStateIn(int ID){
+        busSeatOccupation.add(ID);
         printLog();
     }
 
     /**
      *
      *
-     *   @param passenger passenger.
-     *   @param busDriver bus driver.
+     *   @param ID passenger.
      */
 
-    public synchronized void busSeatStateOut(Passenger passenger, BusDriver busDriver){
-        busQueue--;
-        passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
-        busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
+    public synchronized void busSeatStateOut(int ID){
+        busSeatOccupation.remove(ID);
         printLog();
     }
 
@@ -313,7 +357,6 @@ public class GenReposInfo {
 
     public synchronized void getPassengerSituation(int id, Passenger passenger){
         passengerSituation[id] = passenger.getSi().toString();
-        printLog();
     }
 
     /**
@@ -325,7 +368,6 @@ public class GenReposInfo {
 
     public synchronized void numberOfPassangerLuggage(int id, Passenger passenger){
         totalLuggage[id] = passenger.getNR();
-        printLog();
     }
 
     /**
@@ -336,8 +378,7 @@ public class GenReposInfo {
      */
 
     public synchronized void baggageCollected(int id, Passenger passenger){
-        collectedLuggage[id] = passenger.getNR();
-        printLog();
+        collectedLuggage[id] = passenger.getNA();
     }
 
     /**
@@ -366,7 +407,7 @@ public class GenReposInfo {
         "\nN. of passengers which have this airport as their final destination = %2d" +
         "\nN. of passengers in transit = %2d" +
         "\nN. of bags that should have been transported in the the planes hold = %2d" +
-        "\nN. of bags that were lost = %2d");
+        "\nN. of bags that were lost = %2d", FN, BN, porterState, CB, SR, busDriverState, );
 
 
         /*
