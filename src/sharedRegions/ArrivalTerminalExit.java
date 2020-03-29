@@ -62,6 +62,10 @@ public class ArrivalTerminalExit {
         this.departureTerm = departureTerm;
     }
 
+    /*
+     *
+     */
+
     public void exitPassenger(){
         this.termPass += 1;
         if( (this.termPass + this.departureTerm.getTermPass()) == SimulationParameters.N_PASS_PER_FLIGHT * SimulationParameters.N_FLIGHTS){
@@ -69,6 +73,10 @@ public class ArrivalTerminalExit {
             this.arrivalQuay.setExistsPassengers(false);
         }
     }
+
+    /*
+     *
+     */
 
     public int getTermPass(){
         return this.termPass;
@@ -85,8 +93,6 @@ public class ArrivalTerminalExit {
                 passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
                 passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
-
-        passenger.join();
 
         this.exitPassenger();
     }
