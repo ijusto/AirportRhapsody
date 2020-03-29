@@ -91,7 +91,7 @@ public class AirportConcurrentVersion {
         departureTerm.setArrivalTerminalRef(arrivalTerm);
         arrivalQuay.setDepartureQuayRef(departureQuay);
         departureQuay.setArrivalQuayRef(arrivalQuay);
-        tempStore = new TemporaryStorageArea();
+        tempStore = new TemporaryStorageArea(repos);
 
         /*
          *   instantiation of the entities
@@ -102,11 +102,14 @@ public class AirportConcurrentVersion {
 
         for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
-                passengers[nPass][land] = new Passenger(St, Si, NR, NA, id, arrivLounge, arrivalQuay, departureQuay,
+                passengers[nPass][land] = new Passenger(PassengerStates.AT_THE_DISEMBARKING_ZONE, Si,
+                        nBags[nPass][land], 0, nPass, arrivLounge, arrivalQuay, departureQuay,
                         departureTerm, arrivalTerm, bagColPoint);
             }
-            porters[land] = new Porter(Stat, CB, SR, arrivLounge, tempStore, bagColPoint);
-            busDrivers[land] = new BusDriver(arrivalQuay,departureQuay);
+            porters[land] = new Porter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND, CB, SR,
+                                        arrivLounge, tempStore, bagColPoint);
+            busDrivers[land] = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuay,
+                                                departureQuay);
 
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
                 passengers[nPass][land].start();

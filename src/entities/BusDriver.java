@@ -59,7 +59,9 @@ public class BusDriver extends Thread {
      *    @param departureTransferQuay ...
      */
 
-    public BusDriver(ArrivalTermTransfQuay arrivalTerminalQuay, DepartureTermTransfQuay departureTransferQuay){
+    public BusDriver(BusDriverStates Stat, ArrivalTermTransfQuay arrivalTerminalQuay,
+                     DepartureTermTransfQuay departureTransferQuay){
+        this.Stat = Stat;
         this.arrivalTerminalQuay = arrivalTerminalQuay;
         this.departureTransferQuay = departureTransferQuay;
     }
