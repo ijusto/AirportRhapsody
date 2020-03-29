@@ -1,8 +1,13 @@
 package main;
+
 import commonInfrastructures.MemException;
 import entities.*;
-import sharedRegions.*;
 import genclass.GenericIO;
+import sharedRegions.*;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 
 /**
  *   Main program.
@@ -47,17 +52,27 @@ public class AirportConcurrentVersion {
         char opt;
         boolean success;
 
-        do {
-            /* ... */
-            {
+        File myfile = new File(fileName);
+        try {
+            if (myfile.createNewFile()) {
+                GenericIO.writeString("File created: " + myfile.getName());
+            } else {
                 do {
                     GenericIO.writeString("There is already a file with this name. Delete it (y - yes; n - no)? ");
                     opt = GenericIO.readlnChar();
                 } while( (opt != 'y') && (opt != 'n'));
-            } else {
-                success = true;
+                if(opt == 'y'){
+                    myfile.delete();
+                    myfile.createNewFile();
+                    GenericIO.writeString("File created: " + myfile.getName());
+                }
             }
-        } while(success);
+        } catch (IOException e) {
+            GenericIO.writeString("An error occurred.");
+            e.printStackTrace();
+        }
+
+        BufferedWriter bw = new BufferedWriter(myfile);
 
         for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){

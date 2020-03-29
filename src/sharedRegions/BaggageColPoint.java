@@ -82,6 +82,7 @@ public class BaggageColPoint {
                 e.printStackTrace();
             }
         }
+
         if(passenger.getNA() != passenger.getNR()) {
             if (this.treadmill.containsKey(passenger.getID())) {
                 passenger.setNA(passenger.getNA() + 1);
