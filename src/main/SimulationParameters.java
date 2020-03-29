@@ -3,7 +3,7 @@ package main;
 public class SimulationParameters {
 
     /* number of passengers per flight */
-    public static final int N_PASS_PER_FLIGHT = 2; /* TODO: Change value*/
+    public static final int N_PASS_PER_FLIGHT = 6; /* TODO: Change value*/
 
     /* number of flights/landings */
     public static final  int N_FLIGHTS = 5; /* TODO: Change value*/

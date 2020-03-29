@@ -167,11 +167,7 @@ public class Passenger extends Thread {
             transferQuay.takeABus();
             transferQuay.enterTheBus();
             departureTransferQuay.leaveTheBus();
-            try {
-                departureEntrance.prepareNextLeg();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            departureEntrance.prepareNextLeg();
         }
     }
 
