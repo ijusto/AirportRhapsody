@@ -87,9 +87,10 @@ public class BaggageColPoint {
         if(passenger.getNA() != passenger.getNR()) {
             if (this.treadmill.containsKey(passenger.getID())) {
                 passenger.setNA(passenger.getNA() + 1);
-                repos.updateStoredBaggageConveyorBeltDec();
+
                 try {
                     this.treadmill.get(passenger.getID()).read();
+                    repos.updateStoredBaggageConveyorBeltDec();
                     return true;
                 } catch (MemException e) {
                     e.printStackTrace();
@@ -113,11 +114,11 @@ public class BaggageColPoint {
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
         repos.updatePorterState(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
-        repos.updateStoredBaggageConveyorBeltInc();
         notifyAll();  // wake up Passengers in goCollectABag()
 
         try {
             this.treadmill.get(bag.getIdOwner()).write(bag);
+            repos.updateStoredBaggageConveyorBeltInc();
         } catch (MemException e) {
             e.printStackTrace();
         }

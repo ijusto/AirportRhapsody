@@ -49,10 +49,10 @@ public class TemporaryStorageArea {
         assert(bag != null);
         porter.setStat(PorterStates.AT_THE_STOREROOM);
         repos.updatePorterState(PorterStates.AT_THE_STOREROOM);
-        repos.updateStoredBaggageStorageRoom();
 
         try {
             tmpStorageStack.write(bag);
+            repos.updateStoredBaggageStorageRoom();
         } catch (MemException e) {
             e.printStackTrace();
         }

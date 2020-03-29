@@ -70,10 +70,10 @@ public class ArrivalTermTransfQuay {
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         repos.updatePassengerState(passenger.getID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        repos.passengerQueueStateIn(passenger.getID());
 
         try {
             waitingPass.write(passenger);
+            repos.passengerQueueStateIn(passenger.getID());
         } catch (MemException e) {
             e.printStackTrace();
         }
@@ -114,7 +114,6 @@ public class ArrivalTermTransfQuay {
             this.nPassOnTheBus += 1;
             repos.passengerQueueStateOut(passenger.getID());
             repos.busSeatStateIn(passenger.getID());
-
         } catch (MemException e) {
             notifyAll();  // wake up Bus driver in announcingBusBoarding()
         }

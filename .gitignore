@@ -4,3 +4,6 @@ AirportRhapsody.iml
 *.css
 *.js
 package-list
+out/*
+src/main/log.txt
+log.txt
