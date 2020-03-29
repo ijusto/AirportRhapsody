@@ -6,16 +6,16 @@ import entities.*;
 import main.SimulationParameters;
 
 /**
- * ...
+ *   ...
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class ArrivalTermTransfQuay {
 
     /*
-     *    FIFO of passengers that want to enter the bus
+     *    FIFO of passengers that want to enter the bus.
      */
 
     private MemFIFO<Passenger> waitingPass;
@@ -67,8 +67,7 @@ public class ArrivalTermTransfQuay {
     /* ************************************************Passenger***************************************************** */
 
     /**
-     *  Operation of taking a Bus (raised by the Passenger).
-     *
+     *   Operation of taking a Bus (raised by the Passenger).
      */
 
     public synchronized void takeABus() {
@@ -89,10 +88,10 @@ public class ArrivalTermTransfQuay {
         }
 
         /*
-          Blocked Entity: Passenger
-          Freeing Entity: Driver
-          Freeing Method: announcingBusBoarding()
-          Blocked Entity Reactions: enterTheBus()
+         *   Blocked Entity: Passenger
+         *   Freeing Entity: Driver
+         *   Freeing Method: announcingBusBoarding()
+         *   Blocked Entity Reactions: enterTheBus()
         */
         while(!this.boardBus){
             try {
@@ -105,8 +104,7 @@ public class ArrivalTermTransfQuay {
     }
 
     /**
-     *  ... (raised by the Passenger).
-     *
+     *   ... (raised by the Passenger).
      */
 
     public void enterTheBus(){
@@ -143,12 +141,10 @@ public class ArrivalTermTransfQuay {
         }
 
         return 'F';
-
     }
 
     /**
-     *  ... (raised by the BusDriver).
-     *
+     *   ... (raised by the BusDriver).
      */
 
     public void parkTheBus(){
@@ -180,8 +176,7 @@ public class ArrivalTermTransfQuay {
     }
 
     /**
-     *  ... (raised by the BusDriver).
-     *
+     *   ... (raised by the BusDriver).
      */
 
     public void announcingBusBoarding(){
@@ -219,8 +214,10 @@ public class ArrivalTermTransfQuay {
         this.existsPassengers = existsPassengers;
     }
 
-    /*
+    /**
+     *   ...
      *
+     *   @param departureQuay Departure Terminal Transfer Quay
      */
 
     public void setDepartureQuayRef(DepartureTermTransfQuay departureQuay){

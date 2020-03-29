@@ -10,10 +10,10 @@ import main.SimulationParameters;
 import java.util.*;
 
 /**
- * ...
+ *   ...
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class ArrivalLounge {
@@ -57,7 +57,8 @@ public class ArrivalLounge {
      *     @param repos general repository of information
      */
 
-    public ArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos) throws MemException {
+    public ArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos)
+            throws MemException {
 
         this.existsPassengers = true;
 

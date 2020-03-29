@@ -7,10 +7,10 @@ import entities.*;
 import java.util.Map;
 
 /**
- * ...
+ *   ...
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class BaggageColPoint {
@@ -115,8 +115,10 @@ public class BaggageColPoint {
         return treadmill;
     }
 
-    /*
+    /**
+     *   ...
      *
+     *   @param treadmill ...
      */
 
     public void setTreadmill(Map<Integer, MemFIFO<Bag>> treadmill) {

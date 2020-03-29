@@ -30,7 +30,7 @@ public class BaggageReclaimOffice {
     }
 
     /*
-     *
+     *   ... (raised by the Passenger).
      */
 
     public void reportMissingBags(){

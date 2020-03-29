@@ -54,15 +54,14 @@ public class DepartureTermTransfQuay {
 
     /**
      *   ... (raised by the Passenger).
-     *
      */
 
     public void leaveTheBus(){
         /*
-          Blocked Entity: Passenger
-          Freeing Entity: Driver
-          Freeing Method: parkTheBusAndLetPassOff()
-          Blocked Entity Reactions: prepareNextLeg()
+         *   Blocked Entity: Passenger
+         *   Freeing Entity: Driver
+         *   Freeing Method: parkTheBusAndLetPassOff()
+         *   Blocked Entity Reactions: prepareNextLeg()
         */
 
         Passenger passenger = (Passenger) Thread.currentThread();
@@ -92,11 +91,11 @@ public class DepartureTermTransfQuay {
 
     public void parkTheBusAndLetPassOff() {
         /*
-          Blocked Entity: Driver
-          Freeing Entity: Passenger
-          Freeing Method: leaveTheBus()
-          Freeing Condition: Last passenger to exit the bus
-          Blocked Entity Reaction: goToArrivalTerminal()
+         *   Blocked Entity: Driver
+         *   Freeing Entity: Passenger
+         *   Freeing Method: leaveTheBus()
+         *   Freeing Condition: Last passenger to exit the bus
+         *   Blocked Entity Reaction: goToArrivalTerminal()
         */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();

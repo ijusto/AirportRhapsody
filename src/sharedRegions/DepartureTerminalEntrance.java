@@ -5,10 +5,10 @@ import entities.Passenger;
 import main.SimulationParameters;
 
 /**
- * ...
+ *   ...
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class DepartureTerminalEntrance {
@@ -26,13 +26,13 @@ public class DepartureTerminalEntrance {
     private ArrivalLounge arrivLounge;
 
     /*
-     *
+     *   Arrival Terminal Transfer Quay.
      */
 
     private ArrivalTermTransfQuay arrivalQuay;
 
     /*
-     *
+     *   Arrival Terminal Exit.
      */
 
     private ArrivalTerminalExit arrivalTerm;
@@ -96,8 +96,10 @@ public class DepartureTerminalEntrance {
         return this.termPass;
     }
 
-    /*
+    /**
+     *   ...
      *
+     *   @param arrivalTerm Arrival Terminal Exit
      */
 
     public void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
