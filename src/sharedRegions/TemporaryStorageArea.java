@@ -17,7 +17,7 @@ public class TemporaryStorageArea {
     private MemStack<Bag> tmpStorageStack;
 
     
-    TemporaryStorageArea(){
+    public TemporaryStorageArea(){
 
     }
 

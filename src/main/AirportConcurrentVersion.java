@@ -1,5 +1,6 @@
 package main;
 import commonInfrastructures.MemException;
+import entities.*;
 import sharedRegions.*;
 import genclass.GenericIO;
 
@@ -36,6 +37,7 @@ public class AirportConcurrentVersion {
         DepartureTermTransfQuay departureQuay;
         ArrivalTerminalExit arrivalTerm;
         DepartureTerminalEntrance departureTerm;
+        TemporaryStorageArea tempStore;
 
         String fileName;
         char[][] destStat;
@@ -87,7 +89,52 @@ public class AirportConcurrentVersion {
         departureTerm.setArrivalTerminalRef(arrivalTerm);
         arrivalQuay.setDepartureQuayRef(departureQuay);
         departureQuay.setArrivalQuayRef(arrivalQuay);
+        tempStore = new TemporaryStorageArea();
 
+        /*
+         *  instantiation of the entities
+         */
+        Passenger[][] passengers = new Passenger[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
+        Porter[] porters = new Porter[SimulationParameters.N_FLIGHTS];
+        BusDriver[] busDrivers = new BusDriver[SimulationParameters.N_FLIGHTS];
+
+        for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
+            for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
+                passengers[nPass][land] = new Passenger(St, Si, NR, NA, id, arrivLounge, arrivalQuay, departureQuay,
+                        departureTerm, arrivalTerm, bagColPoint);
+            }
+            porters[land] = new Porter(Stat, CB, SR, arrivLounge, tempStore, bagColPoint);
+            busDrivers[land] = new BusDriver(arrivalQuay,departureQuay);
+
+            for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
+                passengers[nPass][land].start();
+            }
+            porters[land].start();
+            busDrivers[land].start();
+
+            for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++) {
+                try {
+                    passengers[nPass][land].join();
+                } catch (InterruptedException e) {
+                    GenericIO.writeString("Main Program - One thread of Passenger " + nPass + " from flight " +
+                            land + " was interrupted.");
+                }
+            }
+
+            try {
+                porters[land].join();
+            } catch (InterruptedException e) {
+                GenericIO.writeString("Main Program - One thread of Porter from flight " + land +
+                        " was interrupted.");
+            }
+
+            try {
+                busDrivers[land].join();
+            } catch (InterruptedException e) {
+                GenericIO.writeString("Main Program - One thread of BusDriver from flight " + land +
+                        " was interrupted.");
+            }
+        }
 
     }
 }

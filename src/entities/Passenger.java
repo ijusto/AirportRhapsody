@@ -109,7 +109,7 @@ public class Passenger extends Thread {
      *    @param NA number of pieces of luggage the passenger she has presently collected
      *    @param id ...
      *    @param arrivalLounge ...
-     *    @param transferQuay ...
+     *    @param arrivalTermTransfQuay ...
      *    @param departureTransferQuay ...
      *    @param departureEntrance ...
      *    @param arrivalTerminalExit ...
@@ -117,7 +117,7 @@ public class Passenger extends Thread {
      */
 
     public Passenger(PassengerStates St, SituationPassenger Si, int NR, int NA, int id, ArrivalLounge arrivalLounge,
-                     ArrivalTermTransfQuay transferQuay, DepartureTermTransfQuay departureTransferQuay,
+                     ArrivalTermTransfQuay arrivalTermTransfQuay, DepartureTermTransfQuay departureTransferQuay,
                      DepartureTerminalEntrance departureEntrance, ArrivalTerminalExit arrivalTerminalExit,
                      BaggageColPoint baggageColPoint){
         this.St = St;
@@ -127,7 +127,7 @@ public class Passenger extends Thread {
         this.id = id;
 
         this.arrivalLounge = arrivalLounge;
-        this.arruvTransferQuay = transferQuay;
+        this.arruvTransferQuay = arrivalTermTransfQuay;
         this.departureTransferQuay = departureTransferQuay;
         this.departureEntrance = departureEntrance;
         this.arrivalTerminalExit = arrivalTerminalExit;
