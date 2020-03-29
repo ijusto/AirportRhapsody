@@ -34,10 +34,16 @@ public class DepartureTermTransfQuay {
      *
      */
 
+    private ArrivalTermTransfQuay arrivalQuay;
+
+    /*
+     *
+     */
+
     public DepartureTermTransfQuay(GenReposInfo repos){
         this.repos = repos;
         this.letPassOff = false;
-        this.nPass = busNPass;
+        this.nPass = -1;
     }
 
 
@@ -57,11 +63,11 @@ public class DepartureTermTransfQuay {
         */
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
+        assert(this.nPass != -1 && passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
 
-        nPass -= 1;
-        if(nPass == 0){
+        this.nPass -= 1;
+        if(this.nPass == 0){
             notifyAll();  // wake up Bus Driver in parkTheBus()
         }
 
@@ -90,19 +96,24 @@ public class DepartureTermTransfQuay {
         */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
-        assert(nPass > 0);
+        assert(this.nPass > 0);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
 
         this.letPassOff = true;
 
         notifyAll();
 
-        while(nPass > 0) {
+        while(this.nPass > 0) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void setArrivalQuayRef(ArrivalTermTransfQuay arrivalQuay){
+        this.arrivalQuay = arrivalQuay;
+        this.nPass = arrivalQuay.getNPassOnTheBus();
     }
 }

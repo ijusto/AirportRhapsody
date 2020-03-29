@@ -26,6 +26,18 @@ public class ArrivalTermTransfQuay {
     /*
      *
      */
+
+    private int nPassOnTheBus;
+
+    /*
+     *
+     */
+
+    private DepartureTermTransfQuay departureQuay;
+
+    /*
+     *
+     */
     private boolean boardBus;
 
     /*
@@ -45,6 +57,7 @@ public class ArrivalTermTransfQuay {
     public ArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
         this.repos = repos;
         this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.BUS_CAP]);        // FIFO instantiation
+        this.nPassOnTheBus = 0;
         this.boardBus = false;
         this.existsPassengers = true;
     }
@@ -100,7 +113,8 @@ public class ArrivalTermTransfQuay {
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
 
         try{
-            waitingPass.read();
+            this.waitingPass.read();
+            this.nPassOnTheBus += 1;
         } catch (MemException e) {
             notifyAll();  // wake up Bus driver in announcingBusBoarding()
         }
@@ -195,5 +209,18 @@ public class ArrivalTermTransfQuay {
     public void setExistsPassengers(boolean existsPassengers) {
         this.existsPassengers = existsPassengers;
     }
+
+    /*
+     *
+     */
+
+    public void setDepartureQuayRef(DepartureTermTransfQuay departureQuay){
+        this.departureQuay = departureQuay;
+    }
+
+    public int getNPassOnTheBus() {
+        return nPassOnTheBus;
+    }
+
 
 }
