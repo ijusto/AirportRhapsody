@@ -126,11 +126,6 @@ public class GenReposInfo {
 
     int missing_bags;
 
-    /*
-     *
-     */
-
-    StringBuilder log;
 
     /*
      *
@@ -179,7 +174,7 @@ public class GenReposInfo {
         passengersQueue = new ArrayList<>();
         busSeatOccupation = new ArrayList<>();
 
-        StringBuilder log = new StringBuilder();
+
     }
 
     /**
@@ -374,7 +369,7 @@ public class GenReposInfo {
      *  Number of bags carried by a passenger at the end of the journey
      */
 
-    public synchronized void finalReport(){
+    public synchronized void finalReport(StringBuilder log){
 
         log.append(String.format("\n\n\nFinal report" ));
         log.append(String.format("\nN. of passengers which have this airport as their final destination = %2d"));
@@ -388,10 +383,13 @@ public class GenReposInfo {
     /*
      *
      */
+    public void print_header(){
+
+    }
 
     private void printLog(){
 
-
+        StringBuilder log = new StringBuilder();;
         log.append("\t\tAIRPORT RHAPSODY - Description of the internal state of the problem\n");
         log.append("PLANE\t\t\tPORTER\t\t\t\t\t\tDRIVER");
         log.append(String.format("\n%3d %3d\t", FN, BN));
