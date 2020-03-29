@@ -90,27 +90,13 @@ public class BaggageColPoint {
         return false;
     }
 
-    /**
-     *  ... (raised by the Passenger).
-     *
-     */
-
-//    public void reportMissingBags(){
-//
-//        Passenger passenger = (Passenger) Thread.currentThread();
-//        assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
-//        passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
-//        repos.updatePassengerState(passenger.getID(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
-//
-//    }
-
 
     /* **************************************************Porter****************************************************** */
 
     /**
-     *  ... (raised by the Porter).
-     *
+     *  Operation of carrying a bag from the plane's hold to the temporary storage area (raised by the Porter).
      */
+
     public void carryItToAppropriateStore(Bag bag){
 
         Porter porter = (Porter) Thread.currentThread();

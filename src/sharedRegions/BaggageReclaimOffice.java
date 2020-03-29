@@ -13,7 +13,7 @@ import entities.PassengerStates;
 public class BaggageReclaimOffice {
 
     /*
-     *
+     *   General Repository of Information.
      */
 
     private GenReposInfo repos;

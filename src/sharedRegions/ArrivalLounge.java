@@ -127,14 +127,14 @@ public class ArrivalLounge {
 
     public synchronized char takeARest(){
         /*
-          Blocked Entity: Porter
-          Freeing Entity: Passenger
-          Freeing Method: whatShouldIDo()
-          Freeing Condition: Last passenger to reach the arrival lounge
-          Blocked Entity Reaction: tryToCollectABag()
-
-          Freeing Condition: No more passengers in the airport
-          Blocked Entity Reaction: finish the thread
+         *   Blocked Entity: Porter
+         *   Freeing Entity: Passenger
+         *   Freeing Method: whatShouldIDo()
+         *   Freeing Condition: Last passenger to reach the arrival lounge
+         *   Blocked Entity Reaction: tryToCollectABag()
+         *
+         *   Freeing Condition: No more passengers in the airport
+         *   Blocked Entity Reaction: finish the thread
          */
 
         Porter porter = (Porter) Thread.currentThread();

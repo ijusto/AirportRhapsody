@@ -14,19 +14,19 @@ import main.SimulationParameters;
 public class ArrivalTerminalExit {
 
     /*
-     *
+     *   General Repository of Information.
      */
 
     private GenReposInfo repos;
 
     /*
-     *
+     *   Arrival Lounge.
      */
 
     private ArrivalLounge arrivLounge;
 
     /*
-     *
+     *   Arrival Terminal Transfer Quay.
      */
 
     private ArrivalTermTransfQuay arrivalQuay;

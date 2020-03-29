@@ -14,13 +14,13 @@ import main.SimulationParameters;
 public class DepartureTerminalEntrance {
 
     /*
-     *
+     *   General Repository of Information.
      */
 
     private GenReposInfo repos;
 
     /*
-     *
+     *   Arrival Lounge.
      */
 
     private ArrivalLounge arrivLounge;

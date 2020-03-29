@@ -6,10 +6,10 @@ import entities.PorterStates;
 import entities.Porter;
 
 /**
- * ...
+ *   ...
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class TemporaryStorageArea {
@@ -21,7 +21,7 @@ public class TemporaryStorageArea {
     private MemStack<Bag> tmpStorageStack;
 
     /*
-     *
+     *   General Repository of Information.
      */
 
     private GenReposInfo repos;
@@ -37,8 +37,7 @@ public class TemporaryStorageArea {
     }
 
     /**
-     *  ... (raised by the Porter).
-     *
+     *  Operation of carrying a bag from the plane's hold to the temporary storage area (raised by the Porter).
      */
 
     public void carryItToAppropriateStore(Bag bag){

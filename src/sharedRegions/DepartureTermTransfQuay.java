@@ -15,7 +15,7 @@ import entities.PassengerStates;
 public class DepartureTermTransfQuay {
 
     /*
-     *
+     *   General Repository of Information.
      */
 
     private GenReposInfo repos;
@@ -32,7 +32,7 @@ public class DepartureTermTransfQuay {
     private int nPass;
 
     /*
-     *
+     *   Arrival Terminal Transfer Quay.
      */
 
     private ArrivalTermTransfQuay arrivalQuay;

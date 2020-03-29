@@ -30,7 +30,7 @@ public class ArrivalTermTransfQuay {
     private int nPassOnTheBus;
 
     /*
-     *
+     *   Departure Terminal Transfer Quay.
      */
 
     private DepartureTermTransfQuay departureQuay;
@@ -38,20 +38,25 @@ public class ArrivalTermTransfQuay {
     /*
      *
      */
+
     private boolean boardBus;
 
     /*
      *
      */
+
     private boolean existsPassengers;
 
     /*
-     *
+     *   General Repository of Information.
      */
+
     private GenReposInfo repos;
 
-    /*
+    /**
+     *   Instantiation of the Arrival Terminal Transfer Quay.
      *
+     *     @param repos general repository of information
      */
 
     public ArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
