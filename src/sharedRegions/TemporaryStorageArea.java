@@ -44,6 +44,7 @@ public class TemporaryStorageArea {
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
+        assert(bag != null);
         porter.setStat(PorterStates.AT_THE_STOREROOM);
         repos.updatePorterState(PorterStates.AT_THE_STOREROOM);
 

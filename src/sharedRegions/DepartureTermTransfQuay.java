@@ -99,7 +99,7 @@ public class DepartureTermTransfQuay {
         this.nPass = busDriver.getNPass();
         this.letPassOff = true;
 
-        notifyAll();
+        notifyAll();  // wake up Passengers in leaveTheBus()
 
         while(this.nPass > 0) {
             try {

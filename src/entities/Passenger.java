@@ -112,18 +112,18 @@ public class Passenger extends Thread {
     /**
      *  Instantiation of the thread Passenger.
      *
-     *    @param St state of passenger
-     *    @param Si situation of passenger
-     *    @param NR number of pieces of luggage the passenger carried at the start of her journey
-     *    @param NA number of pieces of luggage the passenger she has presently collected
-     *    @param id ...
-     *    @param arrivalLounge ...
-     *    @param arrivalTermTransfQuay ...
-     *    @param departureTransferQuay ...
-     *    @param departureEntrance ...
-     *    @param arrivalTerminalExit ...
-     *    @param baggageColPoint ...
-     *    @param baggageReclaimOffice ...
+     *    @param St State of passenger.
+     *    @param Si Situation of passenger.
+     *    @param NR Number of pieces of luggage the passenger carried at the start of her journey.
+     *    @param NA Number of pieces of luggage the passenger she has presently collected.
+     *    @param id passenger's id.
+     *    @param arrivalLounge Arrival Lounge.
+     *    @param arrivalTermTransfQuay Arrival Terminal Transfer Quay.
+     *    @param departureTransferQuay Departure Transfer Quay.
+     *    @param departureEntrance Departure Entrance.
+     *    @param arrivalTerminalExit Arrival Terminal Exit.
+     *    @param baggageColPoint Baggage Collection Point.
+     *    @param baggageReclaimOffice Baggage Reclaim Office.
      */
 
     public Passenger(PassengerStates St, SituationPassenger Si, int NR, int NA, int id, ArrivalLounge arrivalLounge,
@@ -146,7 +146,7 @@ public class Passenger extends Thread {
     }
 
     /**
-     *  Life cycle of the thread Passenger.
+     *   Life cycle of the thread Passenger.
      */
 
     @Override
@@ -155,11 +155,9 @@ public class Passenger extends Thread {
         boolean isFinal = arrivalLounge.whatShouldIDo();
         boolean success = false;
         if (isFinal) {
-            if (this.getNR() == 0) {
-                arrivalTerminalExit.goHome();
-            } else {
+            if (this.getNR() != 0) {
                 for (int i = 0; i < this.getNR(); i++) {
-                    success = baggageColPoint.goCollectABag(); // porter diz se ja nao existem malas e então seria false
+                    success = baggageColPoint.goCollectABag();
                     if (!success) {
                         break;
                     }
@@ -167,8 +165,8 @@ public class Passenger extends Thread {
                 if (!success) {
                     baggageReclaimOffice.reportMissingBags();
                 }
-                //arrivalTerminalExit.goHome()
             }
+            arrivalTerminalExit.goHome();
         } else {
             arruvTransferQuay.takeABus();
             arruvTransferQuay.enterTheBus();
@@ -229,31 +227,8 @@ public class Passenger extends Thread {
      *
      */
 
-    public void setSi(SituationPassenger si) {
-        Si = si;
-    }
-
-    /*
-     *
-     */
-
-    public void setNR(int NR) {
-        this.NR = NR;
-    }
-
-    /*
-     *
-     */
-
     public void setNA(int NA) {
         this.NA = NA;
     }
 
-    /*
-     *
-     */
-
-    public void setID(int id) {
-        this.id = id;
-    }
 }

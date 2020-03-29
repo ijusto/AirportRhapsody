@@ -42,7 +42,6 @@ public class AirportConcurrentVersion {
         DepartureTermTransfQuay departureQuay;
         ArrivalTerminalExit arrivalTerm;
         DepartureTerminalEntrance departureTerm;
-        TemporaryStorageArea tempStore;
 
         String fileName = "log.txt";
         char[][] destStat = new char[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
