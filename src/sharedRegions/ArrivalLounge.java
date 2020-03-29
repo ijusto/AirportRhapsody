@@ -4,10 +4,10 @@ import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
 import commonInfrastructures.MemStack;
 import entities.*;
-import main.AirportConcurrentVersion;
 import main.SimulationParameters;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *   ...
@@ -109,13 +109,6 @@ public class ArrivalLounge {
         passCounter += 1;
 
         notifyAll();  // wake up Porter in takeARest()
-
-        try {
-            wait(new Random().nextInt(AirportConcurrentVersion.maxSleep - AirportConcurrentVersion.minSleep + 1)
-                    + AirportConcurrentVersion.minSleep);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
     }

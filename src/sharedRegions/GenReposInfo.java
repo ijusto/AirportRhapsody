@@ -1,13 +1,16 @@
 package sharedRegions;
-import  entities.*;
+
+import entities.BusDriverStates;
+import entities.Passenger;
+import entities.PassengerStates;
+import entities.PorterStates;
 import genclass.GenericIO;
 import main.SimulationParameters;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-
-import java.io.*;
 import java.util.Arrays;
 
 /**
@@ -137,8 +140,13 @@ public class GenReposInfo {
      *
      */
 
-    private PrintWriter printW;
+    private BufferedWriter bWritter;
 
+    /**
+     *
+     */
+
+    private FileWriter fw;
 
     /**
      *   Instantiation of the General Repository of Information.
@@ -146,10 +154,11 @@ public class GenReposInfo {
      *   @param fileName ...
      */
 
-    public GenReposInfo(String fileName) throws FileNotFoundException{
+    public GenReposInfo(String fileName) {
 
         try {
-            this.printW = new PrintWriter(fileName);
+            this.fw = new FileWriter(fileName, true);
+            this.bWritter = new BufferedWriter(this.fw);
         } catch (IOException e) {
             GenericIO.writeString("An error occurred.");
             e.printStackTrace();
@@ -377,7 +386,12 @@ public class GenReposInfo {
         log.append(String.format("\nN. of bags that should have been transported in the the planes hold = %2d"));
         log.append(String.format("\nN. of bags that were lost = %2d\n\n", missing_bags));
         printLog();
-        printW.close();
+        try {
+            fw.close();
+            bWritter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /*
@@ -428,8 +442,12 @@ public class GenReposInfo {
             N. of bags that were lost = ##
         */
         GenericIO.writeString(log.toString());
-        printW.write(log.toString());
-        printW.flush();
+        try {
+            bWritter.write(log.toString());
+            bWritter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
