@@ -397,17 +397,27 @@ public class GenReposInfo {
 
     private void printLog(){
 
-        String log =
-        String.format("\t\tAIRPORT RHAPSODY - Description of the internal state of the problem" +
-        "\nPLANE\tPORTER\t\t\tDRIVER" +
-        "\n%3d %3d\t%3d %3d %3d\t\t%3d %3d %3d %3d %3d %3d %3d %3d %3d %3d" +
-        "\n\t\t\t\tPASSENGERS" +
-        "\n%3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d %3d " +
-        "\nFinal report" +
-        "\nN. of passengers which have this airport as their final destination = %2d" +
-        "\nN. of passengers in transit = %2d" +
-        "\nN. of bags that should have been transported in the the planes hold = %2d" +
-        "\nN. of bags that were lost = %2d", FN, BN, porterState, CB, SR, busDriverState, );
+        StringBuilder log = new StringBuilder();
+        log.append("\t\tAIRPORT RHAPSODY - Description of the internal state of the problem\n");
+        log.append("PLANE\tPORTER\t\t\tDRIVER");
+        log.append(String.format("\n%3d %3d\t", FN, BN));
+        log.append(String.format("\t%ss %3d %3d\t", portState[porterState.ordinal()], CB, SR));
+        log.append(String.format("%s %3d %3d %3d %3d %3d %3d %3d %3d", busState[busDriverState.ordinal()],
+                passengersQueue.get(1), passengersQueue.get(2), passengersQueue.get(3), passengersQueue.get(4),
+                passengersQueue.get(5), busSeatOccupation.get(0), busSeatOccupation.get(1),
+                busSeatOccupation.get(2)));
+
+        log.append("\n\t\t\t\tPASSENGERS");
+        for (int i = 0; i< SimulationParameters.N_PASS_PER_FLIGHT; i++){
+            log.append(String.format("\n%s %s %3d %3d", passState[passengerStates[i].ordinal()], passengerSituation[i],
+                    totalLuggage[i], collectedLuggage[i]));
+        }
+
+        log.append("\nFinal report" );
+        log.append("\nN. of passengers which have this airport as their final destination = %2d");
+        log.append("\nN. of passengers in transit = %2d");
+        log.append("\nN. of bags that should have been transported in the the planes hold = %2d");
+        log.append("\nN. of bags that were lost = %2d");
 
 
         /*
@@ -427,8 +437,8 @@ public class GenReposInfo {
             N. of bags that should have been transported in the the planes hold = ##
             N. of bags that were lost = ##
         */
-        System.out.println(log);
-        printW.write(log);
+        GenericIO.writeString(log.toString());
+        printW.write(log.toString());
         printW.flush();
     }
 
