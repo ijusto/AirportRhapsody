@@ -80,9 +80,19 @@ public class BaggageColPoint {
         /* TODO: turn collected to true on carryItTo... when no more bags at phold*/
     }
 
+    /* ******************************************** Getters and Setters ***********************************************/
+
+    /*
+     *
+     */
+
     public Map<Integer, MemFIFO<Bag>> getTreadmill() {
         return treadmill;
     }
+
+    /*
+     *
+     */
 
     public void setTreadmill(Map<Integer, MemFIFO<Bag>> treadmill) {
         this.treadmill = treadmill;

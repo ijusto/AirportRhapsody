@@ -65,7 +65,7 @@ public class ArrivalTermTransfQuay {
     /* ************************************************Passenger***************************************************** */
 
     /**
-     *  Operation of taking a Bus (raised by the Passenger). <p> functionality: change state of entities.Passenger to AT_THE_ARRIVAL_TRANSFER_TERMINAL
+     *  Operation of taking a Bus (raised by the Passenger).
      *
      */
 
@@ -206,6 +206,12 @@ public class ArrivalTermTransfQuay {
 
     }
 
+    /* ******************************************** Getters and Setters ***********************************************/
+
+    /*
+     *
+     */
+
     public void setExistsPassengers(boolean existsPassengers) {
         this.existsPassengers = existsPassengers;
     }
@@ -218,9 +224,11 @@ public class ArrivalTermTransfQuay {
         this.departureQuay = departureQuay;
     }
 
+    /*
+     *
+     */
+
     public int getNPassOnTheBus() {
         return nPassOnTheBus;
     }
-
-
 }

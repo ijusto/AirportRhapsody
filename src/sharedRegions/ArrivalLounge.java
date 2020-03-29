@@ -24,6 +24,10 @@ public class ArrivalLounge {
 
     private MemStack<Bag> bagStack;
 
+    /*
+     *
+     */
+
     private int passCounter;
 
     /*
@@ -228,6 +232,12 @@ public class ArrivalLounge {
 
     }
 
+    /* ******************************************** Getters and Setters ***********************************************/
+
+    /*
+     *
+     */
+    
     public void setExistsPassengers(boolean existsPassengers) {
         this.existsPassengers = existsPassengers;
     }

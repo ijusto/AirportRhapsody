@@ -112,6 +112,12 @@ public class DepartureTermTransfQuay {
         }
     }
 
+    /* ******************************************** Getters and Setters ***********************************************/
+
+    /*
+     *
+     */
+
     public void setArrivalQuayRef(ArrivalTermTransfQuay arrivalQuay){
         this.arrivalQuay = arrivalQuay;
         this.nPass = arrivalQuay.getNPassOnTheBus();

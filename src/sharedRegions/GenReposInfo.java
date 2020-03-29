@@ -145,7 +145,7 @@ public class GenReposInfo {
      *  Update baggage stored in the cargo hold when porter retrieves the baggage
      */
 
-    public synchronized void  updateStoredBaggage(int baggage){
+    public synchronized void updateStoredBaggage(int baggage){
         BN = BN - baggage;
         printLog();
     }
@@ -184,7 +184,7 @@ public class GenReposInfo {
      *  Update the number of bags in the conveyor belt
      */
 
-    public synchronized  void updateConveyorsBelt(int cb){
+    public synchronized void updateConveyorsBelt(int cb){
         CB = CB + cb;
         printLog();
     }
@@ -193,13 +193,13 @@ public class GenReposInfo {
      *  Update the queue of passengers
      */
 
-    public synchronized  void passengerQueueStateIn(Passenger passenger){
+    public synchronized void passengerQueueStateIn(Passenger passenger){
         passengersQueue++;
         passenger.setSt(PassengerStates.AT_THE_DISEMBARKING_ZONE);
         printLog();
     }
 
-    public synchronized  void passengerQueueStateOut(Passenger passenger){
+    public synchronized void passengerQueueStateOut(Passenger passenger){
         passengersQueue--;
         printLog();
     }
@@ -207,14 +207,14 @@ public class GenReposInfo {
     /**
      *  Update of the occupation state of the bus seat
      */
-    public synchronized  void busSeatStateIn(Passenger passenger, BusDriver busDriver){
+    public synchronized void busSeatStateIn(Passenger passenger, BusDriver busDriver){
         busQueue++;
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         printLog();
     }
 
-    public synchronized  void busSeatStateOut(Passenger passenger, BusDriver busDriver){
+    public synchronized void busSeatStateOut(Passenger passenger, BusDriver busDriver){
         busQueue--;
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
@@ -225,7 +225,7 @@ public class GenReposInfo {
      *  Get the passenger situation (in transit or final)
      */
 
-    public synchronized  void getPassengerSituation(int id, Passenger passenger){
+    public synchronized void getPassengerSituation(int id, Passenger passenger){
         passengerSituation[id] = passenger.getSi().toString();
         printLog();
     }
@@ -234,7 +234,7 @@ public class GenReposInfo {
      *  Update the passengers luggage at the start of the journey
      */
 
-    public synchronized  void numberOfPassangerLuggage(int id, Passenger passenger){
+    public synchronized void numberOfPassangerLuggage(int id, Passenger passenger){
         totalLuggage[id] = passenger.getNR();
         printLog();
     }
@@ -243,7 +243,7 @@ public class GenReposInfo {
      *  Update the number of luggage a passenger collected
      */
 
-    public synchronized  void baggageCollected(int id, Passenger passenger){
+    public synchronized void baggageCollected(int id, Passenger passenger){
         collectedLuggage[id] = passenger.getNR();
         printLog();
     }
@@ -252,11 +252,10 @@ public class GenReposInfo {
      *  Number of bags carried by a passanger at the end of the jorney
      */
 
-    public synchronized  void finalReport(){
+    public synchronized void finalReport(){
 
         printLog();
     }
-
 
     private void printLog(){
 
@@ -294,6 +293,9 @@ public class GenReposInfo {
         printW.write(log);
         printW.flush();
     }
+
+
+    /* ******************************************** Getters and Setters ***********************************************/
 
     public int getFN() {
         return FN;
