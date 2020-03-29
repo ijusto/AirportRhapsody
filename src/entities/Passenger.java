@@ -66,7 +66,7 @@ public class Passenger extends Thread {
      *    @serialField transferQuay
      */
 
-    private ArrivalTermTransfQuay transferQuay;
+    private ArrivalTermTransfQuay arruvTransferQuay;
 
     /**
      *  ...
@@ -93,6 +93,14 @@ public class Passenger extends Thread {
     private ArrivalTerminalExit arrivalTerminalExit;
 
     /**
+     *  ...
+     *
+     *    @serialField baggageColPoint
+     */
+
+    private BaggageColPoint baggageColPoint;
+
+    /**
      *  Instantiation of the thread Passenger.
      *
      *    @param St state of passenger
@@ -105,11 +113,13 @@ public class Passenger extends Thread {
      *    @param departureTransferQuay ...
      *    @param departureEntrance ...
      *    @param arrivalTerminalExit ...
+     *    @param baggageColPoint ...
      */
 
     public Passenger(PassengerStates St, SituationPassenger Si, int NR, int NA, int id, ArrivalLounge arrivalLounge,
                      ArrivalTermTransfQuay transferQuay, DepartureTermTransfQuay departureTransferQuay,
-                     DepartureTerminalEntrance departureEntrance, ArrivalTerminalExit arrivalTerminalExit){
+                     DepartureTerminalEntrance departureEntrance, ArrivalTerminalExit arrivalTerminalExit,
+                     BaggageColPoint baggageColPoint){
         this.St = St;
         this.Si = Si;
         this.NR = NR;
@@ -117,10 +127,11 @@ public class Passenger extends Thread {
         this.id = id;
 
         this.arrivalLounge = arrivalLounge;
-        this.transferQuay = transferQuay;
+        this.arruvTransferQuay = transferQuay;
         this.departureTransferQuay = departureTransferQuay;
         this.departureEntrance = departureEntrance;
         this.arrivalTerminalExit = arrivalTerminalExit;
+        this.baggageColPoint = baggageColPoint;
     }
 
     /**
@@ -137,7 +148,7 @@ public class Passenger extends Thread {
                 arrivalTerminalExit.goHome();
             } else {
                 for (int i = 0; i < this.getNR(); i++) {
-                    success = arrivalLounge.goCollectABag(); // porter diz se ja nao existem malas e então seria false
+                    success = baggageColPoint.goCollectABag(); // porter diz se ja nao existem malas e então seria false
                     if (!success) {
                         break;
                     }
@@ -148,8 +159,8 @@ public class Passenger extends Thread {
                 //arrivalTerminalExit.goHome()
             }
         } else {
-            transferQuay.takeABus();
-            transferQuay.enterTheBus();
+            arruvTransferQuay.takeABus();
+            arruvTransferQuay.enterTheBus();
             departureTransferQuay.leaveTheBus();
             departureEntrance.prepareNextLeg();
         }

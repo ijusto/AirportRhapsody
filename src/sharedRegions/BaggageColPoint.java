@@ -1,5 +1,6 @@
 package sharedRegions;
 
+import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
 import entities.*;
 
@@ -46,11 +47,45 @@ public class BaggageColPoint {
      *
      */
 
-    public void goCollectABag(){
+    public synchronized boolean goCollectABag(){
+        /*
+          Blocked Entity: Passenger
+          Freeing Entity: Porter
+
+          Freeing Method: carryItToAppropriateStore()
+          Freeing Condition: porter bring their bag
+          Blocked Entity Reactions: -> if all bags collected: goHome() else goCollectABag()
+
+          Freeing Method: tryToCollectABag()
+          Freeing Condition: no more pieces of luggage
+          Blocked Entity Reaction: reportMissingBags()
+        */
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
+        while(!this.isCollected()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(passenger.getNA() != passenger.getNR()) {
+            if (this.treadmill.containsKey(passenger.getID())) {
+                passenger.setNA(passenger.getNA() + 1);
+                try {
+                    this.treadmill.get(passenger.getID()).read();
+                    return true;
+                } catch (MemException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
