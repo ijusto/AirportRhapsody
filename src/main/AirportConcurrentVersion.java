@@ -76,15 +76,14 @@ public class AirportConcurrentVersion {
                 destStat[nPass][land] = (Math.random() < 0.4) ? 'F' : 'T';
                 nBags[nPass][land] = (Math.random() < 0.5) ? 2 : (Math.random() < 0.5) ? 1 : 0;
                 nBagsPHold[nPass][land] = nBags[nPass][land];
-                if(nBagsPHold[nPass][land] > 0){
-                    if(Math.random() < 0.2){
+                if(nBagsPHold[nPass][land] > 0) {
+                    if (Math.random() < 0.2) {
                         nBagsPHold[nPass][land] -= 1;
-                        if( (nBagsPHold[nPass][land] > 0) && (Math.random() < 0.2)){
+                        if ((nBagsPHold[nPass][land] > 0) && (Math.random() < 0.2)) {
                             nBagsPHold[nPass][land] -= 1;
                         }
                     }
                 }
-                repos.initializeCargoHold(nBagsPHold.length);
             }
         }
 
@@ -102,13 +101,13 @@ public class AirportConcurrentVersion {
         departureTerm = new DepartureTerminalEntrance(arrivLounge, arrivalQuay, repos);
         arrivalTerm.setDepartureTerminalRef(departureTerm);
         departureTerm.setArrivalTerminalRef(arrivalTerm);
-
         /*
          *   instantiation of the entities
          */
         Passenger[][] passengers = new Passenger[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
         Porter[] porters = new Porter[SimulationParameters.N_FLIGHTS];
         BusDriver[] busDrivers = new BusDriver[SimulationParameters.N_FLIGHTS];
+        repos.initializeCargoHold(nBagsPHold.length);
 
         for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
             repos.updateFlightNumber(land);
