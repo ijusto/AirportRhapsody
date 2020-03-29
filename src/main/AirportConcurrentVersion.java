@@ -99,12 +99,14 @@ public class AirportConcurrentVersion {
 
         for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
+                Passenger.SituationPassenger Si = (destStat[nPass][land] == 'F') ? Passenger.SituationPassenger.FDT :
+                        Passenger.SituationPassenger.TRT;
                 passengers[nPass][land] = new Passenger(PassengerStates.AT_THE_DISEMBARKING_ZONE, Si,
                         nBags[nPass][land], 0, nPass, arrivLounge, arrivalQuay, departureQuay,
                         departureTerm, arrivalTerm, bagColPoint, bagRecOffice);
             }
-            porters[land] = new Porter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND, CB, SR,
-                                        arrivLounge, tmpStorageArea, bagColPoint);
+            porters[land] = new Porter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND, arrivLounge, tmpStorageArea,
+                                        bagColPoint);
             busDrivers[land] = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuay,
                                                 departureQuay);
 
