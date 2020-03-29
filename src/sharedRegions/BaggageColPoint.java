@@ -94,15 +94,25 @@ public class BaggageColPoint {
     /* **************************************************Porter****************************************************** */
 
     /**
-     *  Operation of carrying a bag from the plane's hold to the temporary storage area (raised by the Porter).
+     *  Operation of carrying a bag from the plane's hold to the baggage colletion point (raised by the Porter).
      */
 
     public void carryItToAppropriateStore(Bag bag){
 
         Porter porter = (Porter) Thread.currentThread();
+        assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
         repos.updatePorterState(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
+
         /* TODO: turn collected to true on carryItTo... when no more bags at phold*/
+
+        notifyAll();  // wake up Passengers in goCollectABag()
+
+        try {
+            this.treadmill.get(bag.getIdOwner()).write(bag);
+        } catch (MemException e) {
+            e.printStackTrace();
+        }
     }
 
     /* ******************************************** Getters and Setters ***********************************************/

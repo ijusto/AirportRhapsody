@@ -13,6 +13,7 @@ public class Bag {
     private static final char FINAL = 'F';  // final
 
     private char destStat;
+
     private int idOwner;
 
     public Bag(char destStat, int idOwner){
@@ -26,5 +27,9 @@ public class Bag {
 
     public char getDestStat(){
         return destStat; // 'T' means transit, 'F' means final
+    }
+
+    public int getIdOwner() {
+        return idOwner;
     }
 }

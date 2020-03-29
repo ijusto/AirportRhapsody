@@ -47,13 +47,9 @@ public class TemporaryStorageArea {
         porter.setStat(PorterStates.AT_THE_STOREROOM);
         repos.updatePorterState(PorterStates.AT_THE_STOREROOM);
 
-
-        notifyAll();
-
         try {
             tmpStorageStack.write(bag);
-            wait();
-        } catch (MemException | InterruptedException e) {
+        } catch (MemException e) {
             e.printStackTrace();
         }
     }
