@@ -76,7 +76,9 @@ public class ArrivalLounge {
         this.bagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
 
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
-            this.bagStack.write(new Bag(destStat[nPass][repos.getFN()], nPass));
+            for(int bag = 0; bag < nBagsPHold[nPass][repos.getFN()]; bag++){
+                this.bagStack.write(new Bag(destStat[nPass][repos.getFN()], nPass));
+            }
             MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);        // FIFO instantiation
             treadmill.put(nPass, bagPassFIFO);
         }
