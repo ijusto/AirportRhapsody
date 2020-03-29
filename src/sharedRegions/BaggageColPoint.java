@@ -107,7 +107,7 @@ public class BaggageColPoint {
      *  Operation of carrying a bag from the plane's hold to the baggage colletion point (raised by the Porter).
      */
 
-    public void carryItToAppropriateStore(Bag bag){
+    public synchronized void carryItToAppropriateStore(Bag bag){
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);

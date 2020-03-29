@@ -4,6 +4,7 @@ import commonInfrastructures.MemStack;
 import entities.Bag;
 import entities.PorterStates;
 import entities.Porter;
+import main.SimulationParameters;
 
 /**
  *   ...
@@ -32,8 +33,9 @@ public class TemporaryStorageArea {
      *     @param repos general repository of information
      */
 
-    public TemporaryStorageArea(GenReposInfo repos){
+    public TemporaryStorageArea(GenReposInfo repos) throws MemException {
         this.repos = repos;
+        tmpStorageStack = new MemStack<>(new Bag [SimulationParameters.N_PASS_PER_FLIGHT * SimulationParameters.N_BAGS_PER_PASS]);     // stack instantiation
     }
 
     /**

@@ -320,7 +320,8 @@ public class GenReposInfo {
      */
 
     public synchronized void passengerQueueStateOut(int ID){
-        passengersQueue.remove(ID);
+        int index = passengersQueue.indexOf(ID);
+        passengersQueue.remove(index);
         printLog();
     }
 
@@ -344,7 +345,8 @@ public class GenReposInfo {
      */
 
     public synchronized void busSeatStateOut(int ID){
-        busSeatOccupation.remove(ID);
+        int index = busSeatOccupation.indexOf(ID);
+        busSeatOccupation.remove(index);
         printLog();
     }
 
