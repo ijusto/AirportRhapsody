@@ -35,8 +35,29 @@ public class BusDriver extends Thread {
 
     private int S;
 
+
+    /**
+     *
+     *
+     */
+
     ArrivalTermTransfQuay arrivalTerminalQuay;
+
+    /**
+     *
+     *
+     */
     DepartureTermTransfQuay departureTransferQuay;
+
+    /**
+     *
+     *
+     */
+
+    public BusDriver(ArrivalTermTransfQuay arrivalTerminalQuay, DepartureTermTransfQuay departureTransferQuay){
+        this.arrivalTerminalQuay = arrivalTerminalQuay;
+        this.departureTransferQuay = departureTransferQuay;
+    }
 
     /**
      *  Life cycle of the thread BusDriver.

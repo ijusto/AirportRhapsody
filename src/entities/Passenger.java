@@ -53,6 +53,47 @@ public class Passenger extends Thread {
     private int id;
 
     /**
+     *  ...
+     *
+     *    @serialField arrivalLounge
+     */
+
+    private ArrivalLounge arrivalLounge;
+
+    /**
+     *  ...
+     *
+     *    @serialField transferQuay
+     */
+
+    private ArrivalTermTransfQuay transferQuay;
+
+    /**
+     *  ...
+     *
+     *    @serialField departureTransferQuay
+     */
+
+    private DepartureTermTransfQuay departureTransferQuay;
+
+    /**
+     *  ...
+     *
+     *    @serialField departureEntrance
+     */
+
+    private DepartureTerminalEntrance departureEntrance;
+
+    /**
+     *  ...
+     *
+     *    @serialField arrivalTerminalExit
+     */
+
+    private ArrivalTerminalExit arrivalTerminalExit;
+
+
+    /**
      *  Instantiation of the thread Passenger.
      *
      *    @param St state of passenger
@@ -61,20 +102,21 @@ public class Passenger extends Thread {
      *    @param NA number of pieces of luggage the passenger she has presently collected
      */
 
-    public Passenger(PassengerStates St, SituationPassenger Si, int NR, int NA, int id){
+    public Passenger(PassengerStates St, SituationPassenger Si, int NR, int NA, int id, ArrivalLounge arrivalLounge,
+                     ArrivalTermTransfQuay transferQuay, DepartureTermTransfQuay departureTransferQuay,
+                     DepartureTerminalEntrance departureEntrance, ArrivalTerminalExit arrivalTerminalExit){
         this.St = St;
         this.Si = Si;
         this.NR = NR;
         this.NA = NA;
         this.id = id;
 
+        this.arrivalLounge = arrivalLounge;
+        this.transferQuay = transferQuay;
+        this.departureTransferQuay = departureTransferQuay;
+        this.departureEntrance = departureEntrance;
+        this.arrivalTerminalExit = arrivalTerminalExit;
     }
-
-    ArrivalLounge arrivalLounge;
-    ArrivalTermTransfQuay transferQuay;
-    DepartureTermTransfQuay departureTransferQuay;
-    DepartureTerminalEntrance departureEntrance;
-    ArrivalTerminalExit arrivalTerminalExit;
 
     /**
      *  Life cycle of the thread Passenger.
