@@ -375,6 +375,16 @@ public class GenReposInfo {
     }
 
     /**
+     *
+     */
+    public synchronized void passengerExit(int id){
+        this.passengerSituation[id] = null;
+        this.passState[passengerStates[id].ordinal()] = null;
+        this.totalLuggage[id] = 0;
+        this.collectedLuggage[id] = 0;
+    }
+
+    /**
      *  Number of bags carried by a passenger at the end of the journey
      */
 
@@ -434,11 +444,16 @@ public class GenReposInfo {
         log.append(" ");
         for (int i = 0; i< SimulationParameters.N_PASS_PER_FLIGHT; i++){
             String psi = "---";
+            String pst =  "---";
+
             if(passengerSituation[i] != null){
                 psi =  passengerSituation[i];
             }
+            if(passState[passengerStates[i].ordinal()] != null){
+                pst = passState[passengerStates[i].ordinal()];
+            }
             log.append(String.format(" |%3s|%3s|%3d|%3d|",
-                    passState[passengerStates[i].ordinal()], psi,
+                    pst, psi,
                     totalLuggage[i], collectedLuggage[i]));
         }
 

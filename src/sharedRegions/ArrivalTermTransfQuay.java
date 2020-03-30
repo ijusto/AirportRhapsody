@@ -36,6 +36,11 @@ public class ArrivalTermTransfQuay {
 
     private int aboutToEnter;
 
+    /**
+     *
+     */
+    private int workDay;
+
     /*
      *
      */
@@ -74,6 +79,7 @@ public class ArrivalTermTransfQuay {
         this.existsPassengers = true;
         this.nWaitingPass = 0;
         this.aboutToEnter = 0;
+        this.workDay = 0;
     }
 
     /* ************************************************Passenger***************************************************** */
@@ -165,11 +171,13 @@ public class ArrivalTermTransfQuay {
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        if(this.existsPassengers){
-            return 'R';
+        if(!this.existsPassengers){
+            this.workDay += 1;
+            if(this.workDay == SimulationParameters.N_PASS_PER_FLIGHT){
+                return 'F';
+            }
         }
-
-        return 'F';
+        return 'R';
     }
 
     /**

@@ -168,7 +168,7 @@ public class ArrivalLounge {
             arrvJustBegan = false;
             return 'R';
         } else {
-            while(this.existsPassengers){
+            while (this.existsPassengers) {
                 GenericIO.writeString("\nsleep takeARest");
                 try {
                     wait();
@@ -177,8 +177,13 @@ public class ArrivalLounge {
                 }
                 GenericIO.writeString("\nwake up takeARest");
             }
+        }
+        if(this.currentFlight == SimulationParameters.N_FLIGHTS && !this.doPassExist()) {
             return 'E';
         }
+        return 'R';
+        //    return 'E';
+        //}
     }
 
     /**

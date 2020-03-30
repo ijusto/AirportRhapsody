@@ -86,6 +86,7 @@ public class DepartureTerminalEntrance {
         repos.updatePassengerState(passenger.getID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
         this.exitPassenger();
+        this.repos.passengerExit(passenger.getID());
     }
 
     public void resetDepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
