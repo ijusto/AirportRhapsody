@@ -400,7 +400,7 @@ public class GenReposInfo {
 
     public void print_header(){
         log.append("\n\n\t\t\t\t\tAIRPORT RHAPSODY - Description of the internal state of the problem");
-        log.append("\n    PLANE      PORTER               DRIVER                                                               PASSENGERS");
+        log.append("\n PLANE      PORTER                 DRIVER                                                               PASSENGERS");
     }
 
     /*
@@ -408,10 +408,10 @@ public class GenReposInfo {
      */
 
     private void printLog(){
-        log.append("\n|FN|BN|Stat|  |CB|SR|  |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3|  |St1|Si1|NR1|NA1| " +
+        log.append("\n|FN|BN|  |Stat|CB|SR|  |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3|  |St1|Si1|NR1|NA1| " +
                 "|St2|Si2|NR2|NA2| |St3|Si3|NR3|NA3| |St4|Si4|NR4|NA4| |St5|Si5|NR5|NA5| |St6|Si6|NR6|NA6|");
-        log.append(String.format("\n|%d |%2d|", FN, BN));
-        log.append(String.format(" %s|  |%2d|%2d|  |", portState[porterState.ordinal()], CB, SR));
+        log.append(String.format("\n|%2d|%2d|", FN, BN));
+        log.append(String.format("  |%4s|%2d|%2d|  |", portState[porterState.ordinal()], CB, SR));
         log.append(String.format("%4s|",  busState[busDriverState.ordinal()]));
         for(int j = 0; j < SimulationParameters.N_PASS_PER_FLIGHT; j++){
             String passId;

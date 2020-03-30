@@ -63,8 +63,8 @@ public class DepartureTermTransfQuay {
         assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         repos.updatePassengerState(passenger.getID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
-        GenericIO.writeString("\nleaveTheBus: " + passenger.getID());
-        do {
+        GenericIO.writeString("\npass that left the bus(id): " + passenger.getID());
+        while(!this.doesBDLetPassOff()) {
             GenericIO.writeString("\nsleep leaveTheBus");
             try {
                 wait();
@@ -73,10 +73,10 @@ public class DepartureTermTransfQuay {
             }
             GenericIO.writeString("\nwake up leaveTheBus");
             GenericIO.writeString("\nDBDLPO: " + this.doesBDLetPassOff());
-        } while(!this.doesBDLetPassOff());
+        }
 
         this.passOnTheBus -= 1;
-        GenericIO.writeString("\nnPass: " + this.getPassOnTheBus());
+        GenericIO.writeString("\na pass left, nPass remaining: " + this.getPassOnTheBus());
         repos.busSeatStateOut(passenger.getID());
         if(this.getPassOnTheBus() == 0){
             notifyAll();  // wake up Bus Driver in parkTheBusAndLetPassOff()
@@ -105,7 +105,8 @@ public class DepartureTermTransfQuay {
         assert(busDriver.getStat() == BusDriverStates.DRIVING_FORWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
-        this.setPassOnTheBus(busDriver.getNPass());
+        this.setPassOnTheBus(busDriver.getNPassOnTheBus());
+        GenericIO.writeString("\nPassengers on the bus at dep quay " + this.passOnTheBus);
         GenericIO.writeString("\nBus driver set nPass: " + this.getPassOnTheBus());
         this.bdLetPassOff();
 

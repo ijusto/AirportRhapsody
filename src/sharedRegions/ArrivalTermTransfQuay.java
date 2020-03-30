@@ -2,7 +2,10 @@ package sharedRegions;
 
 import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
-import entities.*;
+import entities.BusDriver;
+import entities.BusDriverStates;
+import entities.Passenger;
+import entities.PassengerStates;
 import genclass.GenericIO;
 import main.SimulationParameters;
 
@@ -181,16 +184,16 @@ public class ArrivalTermTransfQuay {
         this.nPassOnTheBus = 0;
 
         GenericIO.writeString("\nnWaitingPass parkTheBus " + this.nWaitingPass);
-        while (this.nWaitingPass == 0 && this.existsPassengers){
+
+        while(this.nWaitingPass == 0 && this.existsPassengers){
             GenericIO.writeString("\nsleep parkTheBus");
             try {
                 wait(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            GenericIO.writeString("\nwake up parkTheBus");
         }
-
+        GenericIO.writeString("\nwake up parkTheBus");
     }
 
     /**
@@ -227,7 +230,8 @@ public class ArrivalTermTransfQuay {
         }
 
         this.allowBoardBus = false;
-        busDriver.setNPass(this.nPassOnTheBus);
+        busDriver.setNPassOnTheBus(this.nPassOnTheBus);
+        GenericIO.writeString("\nPassengers on the bus at arr quay " + this.nPassOnTheBus);
     }
 
     public void resetArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
