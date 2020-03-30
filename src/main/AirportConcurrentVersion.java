@@ -92,11 +92,21 @@ public class AirportConcurrentVersion {
          *   instantiation of the entities
          */
         Passenger[][] passengers = new Passenger[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
-        Porter[] porters = new Porter[SimulationParameters.N_FLIGHTS];
-        BusDriver[] busDrivers = new BusDriver[SimulationParameters.N_FLIGHTS];
+        Porter porter;
+        BusDriver busDriver;
+
+        porter = new Porter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND, arrivLounge, tmpStorageArea,
+                bagColPoint);
+        repos.updatePorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+
+        busDriver = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuay,
+                departureQuay,repos);
+        repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+
+        porter.start();
+        busDriver.start();
 
         for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
-            repos.updateFlightNumber(land);
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
                 Passenger.SituationPassenger Si = (destStat[nPass][land] == 'F') ? Passenger.SituationPassenger.FDT :
                         Passenger.SituationPassenger.TRT;
@@ -107,19 +117,10 @@ public class AirportConcurrentVersion {
                 repos.updatePassengerState(passengers[nPass][land].getID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
                 repos.getPassengerSituation(passengers[nPass][land].getID(),passengers[nPass][land]);
             }
-            porters[land] = new Porter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND, arrivLounge, tmpStorageArea,
-                                        bagColPoint);
-            repos.updatePorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-
-            busDrivers[land] = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuay,
-                                                departureQuay,repos);
-            repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
                 passengers[nPass][land].start();
             }
-            porters[land].start();
-            busDrivers[land].start();
 
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++) {
                 try {
@@ -130,29 +131,27 @@ public class AirportConcurrentVersion {
                 }
             }
 
-            try {
-                porters[land].join();
-            } catch (InterruptedException e) {
-                GenericIO.writeString("Main Program - One thread of Porter from flight " + land +
-                        " was interrupted.");
-            }
-
-            try {
-                busDrivers[land].join();
-            } catch (InterruptedException e) {
-                GenericIO.writeString("Main Program - One thread of BusDriver from flight " + land +
-                        " was interrupted.");
-            }
-
-            bagColPoint.resetBaggageColPoint(repos);
-            tmpStorageArea.resetTemporaryStorageArea(repos);
-            arrivLounge.resetArrivalLounge(destStat, nBagsPHold, bagColPoint, repos);
-            arrivalQuay.resetArrivalTermTransfQuay(repos);
-            departureQuay.resetDepartureTermTransfQuay(repos);
-            arrivalTerm.resetArrivalTerminalExit(arrivLounge, arrivalQuay, repos);
-            departureTerm.resetDepartureTerminalEntrance(arrivLounge, arrivalQuay, repos);
+            bagColPoint.resetBaggageColPoint();
+            tmpStorageArea.resetTemporaryStorageArea();
+            arrivLounge.resetArrivalLounge(destStat, nBagsPHold, bagColPoint);
+            arrivalQuay.resetArrivalTermTransfQuay();
+            departureQuay.resetDepartureTermTransfQuay();
+            arrivalTerm.resetArrivalTerminalExit(arrivLounge, arrivalQuay);
+            departureTerm.resetDepartureTerminalEntrance(arrivLounge, arrivalQuay);
             arrivalTerm.setDepartureTerminalRef(departureTerm);
             departureTerm.setArrivalTerminalRef(arrivalTerm);
+        }
+
+        try {
+            porter.join();
+        } catch (InterruptedException e) {
+            GenericIO.writeString("Main Program - One thread of Porter was interrupted.");
+        }
+
+        try {
+            busDriver.join();
+        } catch (InterruptedException e) {
+            GenericIO.writeString("Main Program - One thread of BusDriver was interrupted.");
         }
 
     }

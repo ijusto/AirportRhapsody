@@ -58,8 +58,7 @@ public class TemporaryStorageArea {
         }
     }
 
-    public void resetTemporaryStorageArea(GenReposInfo repos) throws MemException {
-        this.repos = repos;
+    public void resetTemporaryStorageArea() throws MemException {
         tmpStorageStack = new MemStack<>(new Bag [SimulationParameters.N_PASS_PER_FLIGHT * SimulationParameters.N_BAGS_PER_PASS]);     // stack instantiation
     }
 }

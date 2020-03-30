@@ -90,10 +90,9 @@ public class ArrivalTerminalExit {
         this.exitPassenger();
     }
 
-    public void resetArrivalTerminalExit(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay, GenReposInfo repos){
+    public void resetArrivalTerminalExit(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
-        this.repos = repos;
         this.termPass = 0;
     }
 

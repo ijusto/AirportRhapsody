@@ -248,8 +248,7 @@ public class ArrivalTermTransfQuay {
         GenericIO.writeString("\nPassengers on the bus at arr quay " + this.nPassOnTheBus);
     }
 
-    public void resetArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
-        this.repos = repos;
+    public void resetArrivalTermTransfQuay() throws MemException {
         this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.nPassOnTheBus = 0;
         this.allowBoardBus = false;

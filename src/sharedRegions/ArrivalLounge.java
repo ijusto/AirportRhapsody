@@ -54,6 +54,11 @@ public class ArrivalLounge {
 
     private BaggageColPoint bagColPoint;
 
+    /*
+     *
+     */
+    private int currentFlight;
+
     /**
      *   Instantiation of the Arrival Lounge.
      *
@@ -70,21 +75,24 @@ public class ArrivalLounge {
 
         this.repos = repos;
 
+        this.currentFlight = 0;
+        repos.updateFlightNumber(this.currentFlight);
+
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
 
         int nTotalBags = 0;
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
-            nTotalBags += nBagsPHold[nPass][repos.getFN()];
-            nBagsPerPass.put(nPass, nBagsPHold[nPass][repos.getFN()]);
+            nTotalBags += nBagsPHold[nPass][this.currentFlight];
+            nBagsPerPass.put(nPass, nBagsPHold[nPass][this.currentFlight]);
         }
 
         repos.initializeCargoHold(nTotalBags);
         this.bagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
 
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
-            for(int bag = 0; bag < nBagsPHold[nPass][repos.getFN()]; bag++){
-                this.bagStack.write(new Bag(destStat[nPass][repos.getFN()], nPass));
+            for(int bag = 0; bag < nBagsPHold[nPass][this.currentFlight]; bag++){
+                this.bagStack.write(new Bag(destStat[nPass][this.currentFlight], nPass));
             }
             MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);        // FIFO instantiation
             treadmill.put(nPass, bagPassFIFO);
@@ -217,26 +225,27 @@ public class ArrivalLounge {
 
     }
 
-    public void resetArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos) throws MemException {
-        this.existsPassengers = true;
+    public void resetArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint) throws MemException {
+        this.currentFlight += 1;
+        repos.updateFlightNumber(this.currentFlight);
 
-        this.repos = repos;
+        this.existsPassengers = true;
 
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
 
         int nTotalBags = 0;
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
-            nTotalBags += nBagsPHold[nPass][repos.getFN()];
-            nBagsPerPass.put(nPass, nBagsPHold[nPass][repos.getFN()]);
+            nTotalBags += nBagsPHold[nPass][this.currentFlight];
+            nBagsPerPass.put(nPass, nBagsPHold[nPass][this.currentFlight]);
         }
 
         repos.initializeCargoHold(nTotalBags);
         this.bagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
 
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
-            for(int bag = 0; bag < nBagsPHold[nPass][repos.getFN()]; bag++){
-                this.bagStack.write(new Bag(destStat[nPass][repos.getFN()], nPass));
+            for(int bag = 0; bag < nBagsPHold[nPass][this.currentFlight]; bag++){
+                this.bagStack.write(new Bag(destStat[nPass][this.currentFlight], nPass));
             }
             MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);        // FIFO instantiation
             treadmill.put(nPass, bagPassFIFO);

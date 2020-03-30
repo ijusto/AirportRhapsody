@@ -150,8 +150,7 @@ public class BaggageColPoint {
         }
     }
 
-    public void resetBaggageColPoint(GenReposInfo repos){
-        this.repos = repos;
+    public void resetBaggageColPoint(){
         this.nBagsInTreadmill = 0;
         this.allBagsCollects = false;
         this.lastBagId = -1;
