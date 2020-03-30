@@ -86,7 +86,7 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
-        do {
+        while(true) {
             GenericIO.writeString("\nAre all bags collected: " + this.areAllBagsCollects());
             GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
             GenericIO.writeString("\nNo more bags: " + this.noMoreBags);
@@ -97,23 +97,27 @@ public class BaggageColPoint {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            GenericIO.writeString("\nwake up gocollectabag");
-
-        } while (!this.noMoreBags && this.treadmill.get(passenger.getID()).isEmpty());
-
-        try {
-            this.treadmill.get(passenger.getID()).read();
-            //GenericIO.writeString("\nREMOVED");
-            //System.exit(-1);
-            this.nBagsInTreadmill -= 1;
-            GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
-            passenger.setNA(passenger.getNA() + 1);
-            repos.baggageCollected(passenger.getID(), passenger);
-            repos.updateStoredBaggageConveyorBeltDec();
-            return true;
-        } catch (MemException e) {
-            return false;
+            if(this.noMoreBags && this.treadmill.get(passenger.getID()).isEmpty()){
+                break;
+            }
+            try {
+                this.treadmill.get(passenger.getID()).read();
+                //GenericIO.writeString("\nREMOVED");
+                //System.exit(-1);
+                this.nBagsInTreadmill -= 1;
+                GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
+                passenger.setNA(passenger.getNA() + 1);
+                repos.baggageCollected(passenger.getID(), passenger);
+                repos.updateStoredBaggageConveyorBeltDec();
+                GenericIO.writeString("\nwake up gocollectabag");
+                return true;
+            } catch (MemException e) {
+                break;
+            }
         }
+        GenericIO.writeString("\nwake up gocollectabag");
+
+        return false;
     }
 
 

@@ -34,6 +34,12 @@ public class ArrivalTermTransfQuay {
      *
      */
 
+    private int aboutToEnter;
+
+    /*
+     *
+     */
+
     private int nWaitingPass;
 
     /*
@@ -67,6 +73,7 @@ public class ArrivalTermTransfQuay {
         this.allowBoardBus = false;
         this.existsPassengers = true;
         this.nWaitingPass = 0;
+        this.aboutToEnter = 0;
     }
 
     /* ************************************************Passenger***************************************************** */
@@ -89,13 +96,18 @@ public class ArrivalTermTransfQuay {
             e.printStackTrace();
         }
 
+        this.nWaitingPass += 1;
+        if(this.nWaitingPass == SimulationParameters.BUS_CAP){
+            notifyAll();  // wake up Bus Driver in parkTheBus()
+        }
+
         /*
          *   Blocked Entity: Passenger
          *   Freeing Entity: Driver
          *   Freeing Method: announcingBusBoarding()
          *   Blocked Entity Reactions: enterTheBus()
         */
-        while(!this.allowBoardBus){
+        while(true){
             GenericIO.writeString("\nsleep takeABus");
             try {
                 wait();
@@ -103,11 +115,11 @@ public class ArrivalTermTransfQuay {
                 e.printStackTrace();
             }
             GenericIO.writeString("\nwake up takeABus");
+            if(this.allowBoardBus && this.aboutToEnter < SimulationParameters.BUS_CAP){
+                break;
+            }
         }
-        this.nWaitingPass += 1;
-        if(this.nWaitingPass == SimulationParameters.BUS_CAP){
-            notifyAll();  // wake up Bus Driver in parkTheBus()
-        }
+
     }
 
     /**
@@ -129,6 +141,7 @@ public class ArrivalTermTransfQuay {
                 this.incPassOnTheBus();
                 repos.passengerQueueStateOut(passenger.getID());
                 repos.busSeatStateIn(passenger.getID());
+                this.aboutToEnter += 1;
                 if(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.nWaitingPass == 0){
                     notifyAll();  // wake up Bus driver in announcingBusBoarding()
                 }
@@ -185,8 +198,8 @@ public class ArrivalTermTransfQuay {
 
         GenericIO.writeString("\nnWaitingPass parkTheBus " + this.nWaitingPass);
 
+        GenericIO.writeString("\nsleep parkTheBus");
         while(this.nWaitingPass == 0 && this.existsPassengers){
-            GenericIO.writeString("\nsleep parkTheBus");
             try {
                 wait(10);
             } catch (InterruptedException e) {
@@ -230,6 +243,7 @@ public class ArrivalTermTransfQuay {
         }
 
         this.allowBoardBus = false;
+        this.aboutToEnter = 0;
         busDriver.setNPassOnTheBus(this.nPassOnTheBus);
         GenericIO.writeString("\nPassengers on the bus at arr quay " + this.nPassOnTheBus);
     }
@@ -241,6 +255,7 @@ public class ArrivalTermTransfQuay {
         this.allowBoardBus = false;
         this.existsPassengers = true;
         this.nWaitingPass = 0;
+        this.aboutToEnter = 0;
     }
 
     /* ******************************************** Getters and Setters ***********************************************/
