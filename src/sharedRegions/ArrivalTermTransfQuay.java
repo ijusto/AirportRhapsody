@@ -230,6 +230,15 @@ public class ArrivalTermTransfQuay {
         busDriver.setNPass(this.nPassOnTheBus);
     }
 
+    public void resetArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
+        this.repos = repos;
+        this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
+        this.nPassOnTheBus = 0;
+        this.allowBoardBus = false;
+        this.existsPassengers = true;
+        this.nWaitingPass = 0;
+    }
+
     /* ******************************************** Getters and Setters ***********************************************/
 
     /*

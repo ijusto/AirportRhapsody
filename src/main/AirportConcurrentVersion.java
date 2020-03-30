@@ -143,6 +143,16 @@ public class AirportConcurrentVersion {
                 GenericIO.writeString("Main Program - One thread of BusDriver from flight " + land +
                         " was interrupted.");
             }
+
+            bagColPoint.resetBaggageColPoint(repos);
+            tmpStorageArea.resetTemporaryStorageArea(repos);
+            arrivLounge.resetArrivalLounge(destStat, nBagsPHold, bagColPoint, repos);
+            arrivalQuay.resetArrivalTermTransfQuay(repos);
+            departureQuay.resetDepartureTermTransfQuay(repos);
+            arrivalTerm.resetArrivalTerminalExit(arrivLounge, arrivalQuay, repos);
+            departureTerm.resetDepartureTerminalEntrance(arrivLounge, arrivalQuay, repos);
+            arrivalTerm.setDepartureTerminalRef(departureTerm);
+            departureTerm.setArrivalTerminalRef(arrivalTerm);
         }
 
     }

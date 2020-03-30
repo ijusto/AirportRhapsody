@@ -217,6 +217,39 @@ public class ArrivalLounge {
 
     }
 
+    public void resetArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos) throws MemException {
+        this.existsPassengers = true;
+
+        this.repos = repos;
+
+        Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
+        Map<Integer, Integer> nBagsPerPass = new HashMap<>();
+
+        int nTotalBags = 0;
+        for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
+            nTotalBags += nBagsPHold[nPass][repos.getFN()];
+            nBagsPerPass.put(nPass, nBagsPHold[nPass][repos.getFN()]);
+        }
+
+        repos.initializeCargoHold(nTotalBags);
+        this.bagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
+
+        for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
+            for(int bag = 0; bag < nBagsPHold[nPass][repos.getFN()]; bag++){
+                this.bagStack.write(new Bag(destStat[nPass][repos.getFN()], nPass));
+            }
+            MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);        // FIFO instantiation
+            treadmill.put(nPass, bagPassFIFO);
+        }
+
+        this.bagColPoint = bagColPoint;
+        this.bagColPoint.setTreadmill(treadmill);
+
+        this.nArrivPass = 0;
+
+        this.arrvJustBegan = true;
+    }
+
     /* ******************************************** Getters and Setters ***********************************************/
 
     public boolean doPassExist() {

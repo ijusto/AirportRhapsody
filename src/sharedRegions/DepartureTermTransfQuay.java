@@ -139,4 +139,10 @@ public class DepartureTermTransfQuay {
         return this.letPassOff;
     }
 
+    public void resetDepartureTermTransfQuay(GenReposInfo repos){
+        this.repos = repos;
+        this.letPassOff = false;
+        this.passOnTheBus = -1;
+    }
+
 }

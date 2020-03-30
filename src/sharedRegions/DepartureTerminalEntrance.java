@@ -88,6 +88,13 @@ public class DepartureTerminalEntrance {
         this.exitPassenger();
     }
 
+    public void resetDepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay,GenReposInfo repos){
+        this.arrivLounge = arrivLounge;
+        this.arrivalQuay = arrivalQuay;
+        this.repos = repos;
+        this.termPass = 0;
+    }
+
     /* ******************************************** Getters and Setters ***********************************************/
 
     /*

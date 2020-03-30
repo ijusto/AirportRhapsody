@@ -146,6 +146,14 @@ public class BaggageColPoint {
         }
     }
 
+    public void resetBaggageColPoint(GenReposInfo repos){
+        this.repos = repos;
+        this.nBagsInTreadmill = 0;
+        this.allBagsCollects = false;
+        this.lastBagId = -1;
+        this.noMoreBags = false;
+    }
+
     /* ******************************************** Getters and Setters ***********************************************/
 
     /*
