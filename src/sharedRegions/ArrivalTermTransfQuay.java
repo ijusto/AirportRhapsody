@@ -120,7 +120,7 @@ public class ArrivalTermTransfQuay {
                 }
             }
         } catch (MemException ignored) {
-
+            notifyAll();  // wake up Bus driver in announcingBusBoarding()
         }
     }
 
@@ -167,13 +167,13 @@ public class ArrivalTermTransfQuay {
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        do {
+        while (waitingPass.isEmpty() && this.existsPassengers){
             try {
                 wait(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        } while(waitingPass.isEmpty() && this.existsPassengers);
+        }
 
     }
 

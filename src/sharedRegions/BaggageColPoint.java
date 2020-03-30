@@ -74,7 +74,7 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
-        while(true){
+        while(!(this.areAllBagsCollects() && this.nBagsInTreadmill == 0)){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -85,17 +85,16 @@ public class BaggageColPoint {
                     this.treadmill.get(passenger.getID()).read();
                     //GenericIO.writeString("\nREMOVED");
                     //System.exit(-1);
+                    this.nBagsInTreadmill -= 1;
                     passenger.setNA(passenger.getNA() + 1);
                     repos.baggageCollected(passenger.getID(), passenger);
                     repos.updateStoredBaggageConveyorBeltDec();
                     return true;
-                } catch (MemException e) {
-                    if(this.areAllBagsCollects() && this.nBagsInTreadmill == 0) {
-                        return false;
-                    }
+                } catch (MemException ignored) {
                 }
             }
         }
+        return false;
     }
 
 

@@ -63,7 +63,7 @@ public class DepartureTermTransfQuay {
         assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         repos.updatePassengerState(passenger.getID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
-
+        GenericIO.writeString("\nleaveTheBus: " + passenger.getID());
         do {
             try {
                 wait();
@@ -73,8 +73,9 @@ public class DepartureTermTransfQuay {
             GenericIO.writeString("\nDBDLPO: " + this.doesBDLetPassOff());
         } while(!this.doesBDLetPassOff());
 
-        this.nPass -= 1;
-        if(this.nPass == 0){
+        this.setnPass(this.getnPass() - 1);
+        GenericIO.writeString("\nnPass: " + this.getnPass());
+        if(this.getnPass() == 0){
             notifyAll();  // wake up Bus Driver in parkTheBus()
         }
 
@@ -82,6 +83,8 @@ public class DepartureTermTransfQuay {
     }
 
     /* *************************************************Bus Driver*************************************************** */
+
+
 
     /**
      *   BusDriver informs the passengers they can leave the bus (raised by the BusDriver).
@@ -97,15 +100,16 @@ public class DepartureTermTransfQuay {
         */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
-        assert(this.nPass > 0);
+        assert(busDriver.getStat() == BusDriverStates.DRIVING_FORWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
-        this.nPass = busDriver.getNPass();
+        this.setnPass(busDriver.getNPass());
+        GenericIO.writeString("\nBus driver set nPass: " + this.getnPass());
         this.bdLetPassOff();
 
         notifyAll();  // wake up Passengers in leaveTheBus()
 
-        while(this.nPass > 0) {
+        while(this.getnPass() > 0) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -113,6 +117,11 @@ public class DepartureTermTransfQuay {
             }
         }
     }
+
+    public void setnPass(int nPass) {
+        this.nPass = nPass;
+    }
+
 
     public int getnPass() {
         return this.nPass;

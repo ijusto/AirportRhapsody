@@ -28,7 +28,7 @@ public class ArrivalLounge {
      *   Number of passengers that already arrived.
      */
 
-    private int passCounter;
+    private int nArrivPass;
 
     /*
      *
@@ -87,7 +87,7 @@ public class ArrivalLounge {
         this.bagColPoint = bagColPoint;
         this.bagColPoint.setTreadmill(treadmill);
 
-        this.passCounter = 0;
+        this.nArrivPass = 0;
 
     }
 
@@ -106,7 +106,7 @@ public class ArrivalLounge {
 
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        passCounter += 1;
+        nArrivPass += 1;
         this.repos.numberOfPassangerLuggage(currentPassenger.getID(), currentPassenger);
 
         notifyAll();  // wake up Porter in takeARest()
@@ -138,7 +138,7 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        while (this.passCounter < SimulationParameters.N_PASS_PER_FLIGHT){
+        while (this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || (this.nArrivPass == SimulationParameters.N_PASS_PER_FLIGHT && this.doPassExist())){
             try {
                 wait();
             } catch (InterruptedException e) {
