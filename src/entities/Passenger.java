@@ -1,4 +1,5 @@
 package entities;
+import genclass.GenericIO;
 import sharedRegions.*;
 
 /**
@@ -173,6 +174,7 @@ public class Passenger extends Thread {
             departureTransferQuay.leaveTheBus();
             departureEntrance.prepareNextLeg();
         }
+        GenericIO.writeString("\nENDED PASSENGER.");
     }
 
     /* ******************************************** Getters and Setters ***********************************************/

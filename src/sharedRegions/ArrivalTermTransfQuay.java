@@ -180,7 +180,7 @@ public class ArrivalTermTransfQuay {
         repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         this.nPassOnTheBus = 0;
 
-        GenericIO.writeString("\nnWaitingPass parkTheBus " + this.waitingPass);
+        GenericIO.writeString("\nnWaitingPass parkTheBus " + this.nWaitingPass);
         while (this.nWaitingPass == SimulationParameters.BUS_CAP && this.existsPassengers){
             GenericIO.writeString("\nsleep parkTheBus");
             try {

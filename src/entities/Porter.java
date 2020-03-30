@@ -1,4 +1,5 @@
 package entities;
+import genclass.GenericIO;
 import sharedRegions.ArrivalLounge;
 import sharedRegions.BaggageColPoint;
 import sharedRegions.TemporaryStorageArea;
@@ -85,6 +86,7 @@ public class Porter extends Thread {
             }
             // arrivalLounge.noMoreBagsToCollect();
         }
+        GenericIO.writeString("\nENDED PORTER.");
     }
 
     /* ******************************************** Getters and Setters ***********************************************/
