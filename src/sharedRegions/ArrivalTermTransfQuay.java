@@ -30,7 +30,13 @@ public class ArrivalTermTransfQuay {
      *
      */
 
-    private boolean boardBus;
+    private int nWaitingPass;
+
+    /*
+     *
+     */
+
+    private boolean allowBoardBus;
 
     /*
      *
@@ -54,8 +60,9 @@ public class ArrivalTermTransfQuay {
         this.repos = repos;
         this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.BUS_CAP]);        // FIFO instantiation
         this.nPassOnTheBus = 0;
-        this.boardBus = false;
+        this.allowBoardBus = false;
         this.existsPassengers = true;
+        this.nWaitingPass = 0;
     }
 
     /* ************************************************Passenger***************************************************** */
@@ -84,15 +91,15 @@ public class ArrivalTermTransfQuay {
          *   Freeing Method: announcingBusBoarding()
          *   Blocked Entity Reactions: enterTheBus()
         */
-        while(!this.boardBus && !(this.nPassOnTheBus<SimulationParameters.BUS_CAP)){
+        while(!this.allowBoardBus){
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-        if(waitingPass.isFull()){
+        this.nWaitingPass += 1;
+        if(this.nWaitingPass == SimulationParameters.BUS_CAP){
             notifyAll();  // wake up Bus Driver in parkTheBus()
         }
     }
@@ -112,7 +119,8 @@ public class ArrivalTermTransfQuay {
         try{
             if(this.nPassOnTheBus < SimulationParameters.BUS_CAP) {
                 this.waitingPass.read();
-                this.nPassOnTheBus += 1;
+                this.nWaitingPass -= 1;
+                this.incPassOnTheBus();
                 repos.passengerQueueStateOut(passenger.getID());
                 repos.busSeatStateIn(passenger.getID());
                 if(this.nPassOnTheBus == SimulationParameters.BUS_CAP){
@@ -193,7 +201,7 @@ public class ArrivalTermTransfQuay {
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        this.boardBus = true;
+        this.allowBoardBus = true;
         notifyAll();  // wake up Passengers in takeABus()
 
         while(!waitingPass.isEmpty() && this.existsPassengers) {
@@ -204,7 +212,7 @@ public class ArrivalTermTransfQuay {
             }
         }
 
-        this.boardBus = false;
+        this.allowBoardBus = false;
         busDriver.setNPass(this.nPassOnTheBus);
     }
 
@@ -216,6 +224,14 @@ public class ArrivalTermTransfQuay {
 
     public void setNoPassAtAirport() {
         this.existsPassengers = false;
+    }
+
+    public void incPassOnTheBus(){
+        this.nPassOnTheBus += 1;
+    }
+
+    public void decPassOnTheBus(){
+        this.nPassOnTheBus -= 1;
     }
 
 }
