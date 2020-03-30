@@ -123,12 +123,12 @@ public class ArrivalTermTransfQuay {
                 this.incPassOnTheBus();
                 repos.passengerQueueStateOut(passenger.getID());
                 repos.busSeatStateIn(passenger.getID());
-                if(this.nPassOnTheBus == SimulationParameters.BUS_CAP){
+                if(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.nWaitingPass == 0){
                     notifyAll();  // wake up Bus driver in announcingBusBoarding()
                 }
             }
         } catch (MemException e) {
-            notifyAll();  // wake up Bus driver in announcingBusBoarding()
+            e.printStackTrace();
         }
     }
 

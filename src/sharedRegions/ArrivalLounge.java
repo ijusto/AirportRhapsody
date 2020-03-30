@@ -158,13 +158,13 @@ public class ArrivalLounge {
             arrvJustBegan = false;
             return 'R';
         } else {
-            do {
+            while(this.existsPassengers){
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            } while (this.doPassExist());
+            } ;
             return 'E';
         }
     }

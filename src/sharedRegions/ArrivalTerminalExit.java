@@ -63,11 +63,13 @@ public class ArrivalTerminalExit {
      */
 
     public void exitPassenger(){
+        //GenericIO.writeString("\nNAO POSSO MAIS");
         this.termPass += 1;
+
         if( !((this.termPass + this.departureTerm.getTermPass()) < SimulationParameters.N_PASS_PER_FLIGHT)){
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
-            //GenericIO.writeString("MESMO QUE TU TENTES");
+            //GenericIO.writeString("\nMESMO QUE TU TENTES");
             //System.exit(-1);
         }
     }

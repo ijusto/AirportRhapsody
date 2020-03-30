@@ -399,8 +399,8 @@ public class GenReposInfo {
      */
 
     public void print_header(){
-        log.append("\n\n\t\tAIRPORT RHAPSODY - Description of the internal state of the problem");
-        log.append("\n   PLANE     PORTER              DRIVER                                                              PASSENGERS");
+        log.append("\n\n\t\t\t\t\tAIRPORT RHAPSODY - Description of the internal state of the problem");
+        log.append("\n    PLANE      PORTER               DRIVER                                                               PASSENGERS");
     }
 
     /*
