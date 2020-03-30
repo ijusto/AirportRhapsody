@@ -66,9 +66,9 @@ public class DepartureTerminalEntrance {
 
     public void exitPassenger(){
         this.termPass += 1;
-        if( (this.termPass + this.arrivalTerm.getTermPass()) == SimulationParameters.N_PASS_PER_FLIGHT){
-            this.arrivLounge.setExistsPassengers(false);
-            this.arrivalQuay.setExistsPassengers(false);
+        if( !((this.termPass + this.arrivalTerm.getTermPass()) < SimulationParameters.N_PASS_PER_FLIGHT)){
+            this.arrivLounge.setNoPassAtAirport();
+            this.arrivalQuay.setNoPassAtAirport();
             GenericIO.writeString("NAO VALE A PENA");
             System.exit(-1);
         }

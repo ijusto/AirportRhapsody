@@ -59,22 +59,21 @@ public class DepartureTermTransfQuay {
         */
 
         Passenger passenger = (Passenger) Thread.currentThread();
-        assert(this.nPass != -1 && passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
+        assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         repos.updatePassengerState(passenger.getID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
 
-        this.nPass -= 1;
-        if(this.nPass == 0){
-            notifyAll();  // wake up Bus Driver in parkTheBus()
-        }
-
-        while(!this.letPassOff) {
+        do {
             try {
                 wait();
+                this.nPass -= 1;
+                if(this.nPass == 0){
+                    notifyAll();  // wake up Bus Driver in parkTheBus()
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        } while(!this.doesBDLetPassOff());
 
         repos.busSeatStateOut(passenger.getID());
     }
@@ -99,7 +98,7 @@ public class DepartureTermTransfQuay {
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.nPass = busDriver.getNPass();
-        this.letPassOff = true;
+        bdLetPassOff();
 
         notifyAll();  // wake up Passengers in leaveTheBus()
 
@@ -110,6 +109,18 @@ public class DepartureTermTransfQuay {
                 e.printStackTrace();
             }
         }
+    }
+
+    public int getnPass() {
+        return this.nPass;
+    }
+
+    public void bdLetPassOff() {
+        this.letPassOff = true;
+    }
+
+    public boolean doesBDLetPassOff() {
+        return this.letPassOff;
     }
 
 }

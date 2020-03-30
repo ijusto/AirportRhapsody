@@ -208,8 +208,8 @@ public class ArrivalTermTransfQuay {
      *
      */
 
-    public void setExistsPassengers(boolean existsPassengers) {
-        this.existsPassengers = existsPassengers;
+    public void setNoPassAtAirport() {
+        this.existsPassengers = false;
     }
 
 }

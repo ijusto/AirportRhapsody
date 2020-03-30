@@ -65,10 +65,10 @@ public class ArrivalTerminalExit {
 
     public void exitPassenger(){
         this.termPass += 1;
-        if( (this.termPass + this.departureTerm.getTermPass()) == SimulationParameters.N_PASS_PER_FLIGHT *
-                                                                                    SimulationParameters.N_FLIGHTS){
-            this.arrivLounge.setExistsPassengers(false);
-            this.arrivalQuay.setExistsPassengers(false);
+        if( !((this.termPass + this.departureTerm.getTermPass()) < SimulationParameters.N_PASS_PER_FLIGHT *
+                                                                                    SimulationParameters.N_FLIGHTS)){
+            this.arrivLounge.setNoPassAtAirport();
+            this.arrivalQuay.setNoPassAtAirport();
             GenericIO.writeString("MESMO QUE TU TENTES");
             System.exit(-1);
         }

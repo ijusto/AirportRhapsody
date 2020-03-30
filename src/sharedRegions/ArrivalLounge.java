@@ -138,14 +138,15 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        while (this.passCounter != SimulationParameters.N_PASS_PER_FLIGHT || !this.existsPassengers){
+        while (this.passCounter != SimulationParameters.N_PASS_PER_FLIGHT
+                || !this.doPassExist()){
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        if(this.existsPassengers){
+        if(this.doPassExist()){
             return 'R';
         }
         return 'E';
@@ -190,18 +191,21 @@ public class ArrivalLounge {
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         repos.updatePorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+
     }
 
     /* ******************************************** Getters and Setters ***********************************************/
 
+    public boolean doPassExist() {
+        return this.existsPassengers;
+    }
+
     /**
-     *   Setter for existsPassengers.
-     *
-     *   @param existsPassengers ...
+     *   Setter for existsPassengers to false.
      */
 
-    public void setExistsPassengers(boolean existsPassengers) {
-        this.existsPassengers = existsPassengers;
+    public void setNoPassAtAirport() {
+        this.existsPassengers = false;
     }
 
 }
