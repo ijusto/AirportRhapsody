@@ -355,7 +355,7 @@ public class GenReposInfo {
      *   @param passenger passenger.
      */
 
-    public synchronized void numberOfPassangerLuggage(int id, Passenger passenger){
+    public synchronized void numberOfPassengerLuggage(int id, Passenger passenger){
         totalLuggage[id] = passenger.getNR();
     }
 

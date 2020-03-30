@@ -4,6 +4,7 @@ import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
 import commonInfrastructures.MemStack;
 import entities.*;
+import genclass.GenericIO;
 import main.SimulationParameters;
 
 import java.util.HashMap;
@@ -114,7 +115,7 @@ public class ArrivalLounge {
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         nArrivPass += 1;
-        this.repos.numberOfPassangerLuggage(currentPassenger.getID(), currentPassenger);
+        this.repos.numberOfPassengerLuggage(currentPassenger.getID(), currentPassenger);
 
         notifyAll();  // wake up Porter in takeARest()
 
@@ -188,6 +189,7 @@ public class ArrivalLounge {
             return tmpBag;
         } catch (MemException e) {
             bagColPoint.setAllBagsCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint
+            GenericIO.writeString("\nsetAllBagsCollected " + this.bagColPoint.areAllBagsCollects());
             notifyAll();  // wake up Passengers in goCollectABag()
             // GenericIO.writeString("ACABOU VÊ SE ENTENDES");
             // System.exit(-1);

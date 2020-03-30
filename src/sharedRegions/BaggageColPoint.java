@@ -22,6 +22,15 @@ public class BaggageColPoint {
 
     private Map<Integer, MemFIFO<Bag>> treadmill;
 
+    /*
+     *
+     */
+    private boolean noMoreBags;
+
+    /**
+     *
+     */
+    private int lastBagId;
 
     /**
      *
@@ -46,6 +55,8 @@ public class BaggageColPoint {
         this.repos = repos;
         this.nBagsInTreadmill = 0;
         this.allBagsCollects = false;
+        this.lastBagId = -1;
+        this.noMoreBags = false;
     }
 
 
@@ -75,7 +86,7 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
-        while(!(this.areAllBagsCollects() && this.nBagsInTreadmill == 0)){
+        while(!this.noMoreBags && this.treadmill.get(passenger.getID()).isEmpty()){
             GenericIO.writeString("\nAre all bags collected: " + this.areAllBagsCollects());
             GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
             try {
@@ -83,22 +94,22 @@ public class BaggageColPoint {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (this.treadmill.containsKey(passenger.getID())){
-                try {
-                    this.treadmill.get(passenger.getID()).read();
-                    //GenericIO.writeString("\nREMOVED");
-                    //System.exit(-1);
-                    this.nBagsInTreadmill -= 1;
-                    passenger.setNA(passenger.getNA() + 1);
-                    repos.baggageCollected(passenger.getID(), passenger);
-                    repos.updateStoredBaggageConveyorBeltDec();
-                    return true;
-                } catch (MemException e) {
-                }
-            }
 
         }
-        return false;
+
+        try {
+            this.treadmill.get(passenger.getID()).read();
+            //GenericIO.writeString("\nREMOVED");
+            //System.exit(-1);
+            this.nBagsInTreadmill -= 1;
+            GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
+            passenger.setNA(passenger.getNA() + 1);
+            repos.baggageCollected(passenger.getID(), passenger);
+            repos.updateStoredBaggageConveyorBeltDec();
+            return true;
+        } catch (MemException e) {
+            return false;
+        }
     }
 
 
@@ -117,11 +128,16 @@ public class BaggageColPoint {
 
         try {
             this.treadmill.get(bag.getIdOwner()).write(bag);
+            this.lastBagId = bag.getIdOwner();
             this.nBagsInTreadmill += 1;
+            GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
             repos.updateStoredBaggageConveyorBeltInc();
             notifyAll();  // wake up Passengers in goCollectABag()
         } catch (MemException e) {
             e.printStackTrace();
+        }
+        if(this.areAllBagsCollects()){
+            this.noMoreBags = true;
         }
     }
 
