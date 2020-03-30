@@ -65,21 +65,23 @@ public class DepartureTermTransfQuay {
         repos.updatePassengerState(passenger.getID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         GenericIO.writeString("\nleaveTheBus: " + passenger.getID());
         do {
+            GenericIO.writeString("\nsleep leaveTheBus");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            GenericIO.writeString("\nwake up leaveTheBus");
             GenericIO.writeString("\nDBDLPO: " + this.doesBDLetPassOff());
         } while(!this.doesBDLetPassOff());
 
-        this.setPassOnTheBus(this.getPassOnTheBus() - 1);
+        this.passOnTheBus -= 1;
         GenericIO.writeString("\nnPass: " + this.getPassOnTheBus());
+        repos.busSeatStateOut(passenger.getID());
         if(this.getPassOnTheBus() == 0){
-            notifyAll();  // wake up Bus Driver in parkTheBus()
+            notifyAll();  // wake up Bus Driver in parkTheBusAndLetPassOff()
         }
 
-        repos.busSeatStateOut(passenger.getID());
     }
 
     /* *************************************************Bus Driver*************************************************** */
@@ -109,12 +111,14 @@ public class DepartureTermTransfQuay {
 
         notifyAll();  // wake up Passengers in leaveTheBus()
 
-        while(this.getPassOnTheBus() > 0) {
+        while(this.getPassOnTheBus() != 0) {
+            GenericIO.writeString("\nsleep parkTheBusAndLetPassOff");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            GenericIO.writeString("\nwake up parkTheBusAndLetPassOff");
         }
     }
 

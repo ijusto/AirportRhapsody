@@ -149,6 +149,8 @@ public class ArrivalLounge {
 
         if(arrvJustBegan){
             while(nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT){
+
+                GenericIO.writeString("\nsleep takeARest");
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -159,12 +161,14 @@ public class ArrivalLounge {
             return 'R';
         } else {
             while(this.existsPassengers){
+                GenericIO.writeString("\nsleep takeARest");
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            } ;
+                GenericIO.writeString("\nwake up takeARest");
+            }
             return 'E';
         }
     }
@@ -191,6 +195,7 @@ public class ArrivalLounge {
             bagColPoint.setAllBagsCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint
             GenericIO.writeString("\nsetAllBagsCollected " + this.bagColPoint.areAllBagsCollects());
             notifyAll();  // wake up Passengers in goCollectABag()
+            GenericIO.writeString("\ntrytocollectabag notify no more bags");
             // GenericIO.writeString("ACABOU VÊ SE ENTENDES");
             // System.exit(-1);
             return null;

@@ -86,16 +86,20 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
-        while(!this.noMoreBags && this.treadmill.get(passenger.getID()).isEmpty()){
+        do {
             GenericIO.writeString("\nAre all bags collected: " + this.areAllBagsCollects());
             GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
+            GenericIO.writeString("\nNo more bags: " + this.noMoreBags);
+            GenericIO.writeString("\nstack do pass na treadmill, empty: " + this.treadmill.get(passenger.getID()).isEmpty());
+            GenericIO.writeString("\nsleep gocollectabag");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            GenericIO.writeString("\nwake up gocollectabag");
 
-        }
+        } while (!this.noMoreBags && this.treadmill.get(passenger.getID()).isEmpty());
 
         try {
             this.treadmill.get(passenger.getID()).read();
@@ -133,6 +137,7 @@ public class BaggageColPoint {
             GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
             repos.updateStoredBaggageConveyorBeltInc();
             notifyAll();  // wake up Passengers in goCollectABag()
+            GenericIO.writeString("\ncarryItToAppropriateStore notify bag in treadmill");
         } catch (MemException e) {
             e.printStackTrace();
         }

@@ -3,6 +3,7 @@ package sharedRegions;
 import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
 import entities.*;
+import genclass.GenericIO;
 import main.SimulationParameters;
 
 /**
@@ -92,11 +93,13 @@ public class ArrivalTermTransfQuay {
          *   Blocked Entity Reactions: enterTheBus()
         */
         while(!this.allowBoardBus){
+            GenericIO.writeString("\nsleep takeABus");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            GenericIO.writeString("\nwake up takeABus");
         }
         this.nWaitingPass += 1;
         if(this.nWaitingPass == SimulationParameters.BUS_CAP){
@@ -164,6 +167,7 @@ public class ArrivalTermTransfQuay {
          *   1) Freeing Method: takeABus()
          *   1) Freeing Condition: place in waiting queue = bus capacity
          *   1) Blocked Entity Reactions: announcingBusBoarding()
+         *
          *   2) Freeing Entity: Driver
          *   2) Freeing Method: time
          *   2) Freeing Condition: at least 1 passenger in queue
@@ -174,13 +178,17 @@ public class ArrivalTermTransfQuay {
         assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        this.nPassOnTheBus = 0;
 
-        while (waitingPass.isEmpty() && this.existsPassengers){
+        GenericIO.writeString("\nnWaitingPass parkTheBus " + this.waitingPass);
+        while (this.nWaitingPass == SimulationParameters.BUS_CAP && this.existsPassengers){
+            GenericIO.writeString("\nsleep parkTheBus");
             try {
                 wait(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            GenericIO.writeString("\nwake up parkTheBus");
         }
 
     }
@@ -204,12 +212,18 @@ public class ArrivalTermTransfQuay {
         this.allowBoardBus = true;
         notifyAll();  // wake up Passengers in takeABus()
 
-        while(!waitingPass.isEmpty() && this.existsPassengers) {
+
+
+        while(!(this.nPassOnTheBus == SimulationParameters.BUS_CAP
+                || (this.nPassOnTheBus < SimulationParameters.BUS_CAP && this.nPassOnTheBus > 0
+                && this.nWaitingPass == 0))) {
+            GenericIO.writeString("\nsleep announcingBusBoarding");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            GenericIO.writeString("\nwake up announcingBusBoarding");
         }
 
         this.allowBoardBus = false;
