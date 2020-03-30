@@ -138,8 +138,7 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        while (this.passCounter != SimulationParameters.N_PASS_PER_FLIGHT
-                || !this.doPassExist()){
+        while (this.passCounter < SimulationParameters.N_PASS_PER_FLIGHT){
             try {
                 wait();
             } catch (InterruptedException e) {
