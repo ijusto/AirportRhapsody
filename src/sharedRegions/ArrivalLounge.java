@@ -107,6 +107,7 @@ public class ArrivalLounge {
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passCounter += 1;
+        this.repos.numberOfPassangerLuggage(currentPassenger.getID(), currentPassenger);
 
         notifyAll();  // wake up Porter in takeARest()
 
@@ -171,7 +172,7 @@ public class ArrivalLounge {
             repos.updateStoredBaggageCargoHold();
             return tmpBag;
         } catch (MemException e) {
-            bagColPoint.setCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint
+            bagColPoint.setAllBagsCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint
             // GenericIO.writeString("ACABOU VÊ SE ENTENDES");
             // System.exit(-1);
             return null;
