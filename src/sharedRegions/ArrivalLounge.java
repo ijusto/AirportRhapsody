@@ -165,14 +165,13 @@ public class ArrivalLounge {
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
         repos.updatePorterState(PorterStates.AT_THE_PLANES_HOLD);
 
-        notifyAll();  // wake up Passengers in goCollectABag()
-
         try {
             Bag tmpBag = bagStack.read();
             repos.updateStoredBaggageCargoHold();
             return tmpBag;
         } catch (MemException e) {
             bagColPoint.setAllBagsCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint
+            notifyAll();  // wake up Passengers in goCollectABag()
             // GenericIO.writeString("ACABOU VÊ SE ENTENDES");
             // System.exit(-1);
             return null;

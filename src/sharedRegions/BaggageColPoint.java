@@ -21,10 +21,6 @@ public class BaggageColPoint {
 
     private Map<Integer, MemFIFO<Bag>> treadmill;
 
-    /**
-     *
-     */
-    private int passIdBagCollected;
 
     /**
      *
@@ -49,7 +45,6 @@ public class BaggageColPoint {
         this.repos = repos;
         this.nBagsInTreadmill = 0;
         this.allBagsCollects = false;
-        this.passIdBagCollected = -1;
     }
 
 
@@ -79,38 +74,28 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
-        boolean carryWake = false;
-        boolean tryCollWake = false;
-
-        while(!carryWake && !tryCollWake){
+        while(true){
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(passenger.getId() == this.passIdBagCollected){
-                carryWake = true;
-            }
-            if(this.areAllBagsCollects() && this.nBagsInTreadmill == 0){
-                tryCollWake = true;
-            }
-        }
-        this.passIdBagCollected = -1;
-        if(passenger.getNA() != passenger.getNR()) {
-            if (this.treadmill.containsKey(passenger.getID())) {
+            if (this.treadmill.containsKey(passenger.getID())){
                 try {
                     this.treadmill.get(passenger.getID()).read();
+                    //GenericIO.writeString("\nREMOVED");
+                    //System.exit(-1);
                     passenger.setNA(passenger.getNA() + 1);
                     repos.baggageCollected(passenger.getID(), passenger);
                     repos.updateStoredBaggageConveyorBeltDec();
                     return true;
                 } catch (MemException e) {
-                    e.printStackTrace();
+                    if(this.areAllBagsCollects() && this.nBagsInTreadmill == 0) {
+                        return false;
+                    }
                 }
             }
         }
-
-        return false;
     }
 
 
@@ -130,10 +115,8 @@ public class BaggageColPoint {
         try {
             this.treadmill.get(bag.getIdOwner()).write(bag);
             this.nBagsInTreadmill += 1;
-            this.passIdBagCollected = bag.getIdOwner();
-            notifyAll();  // wake up Passengers in goCollectABag()
             repos.updateStoredBaggageConveyorBeltInc();
-
+            notifyAll();  // wake up Passengers in goCollectABag()
         } catch (MemException e) {
             e.printStackTrace();
         }
