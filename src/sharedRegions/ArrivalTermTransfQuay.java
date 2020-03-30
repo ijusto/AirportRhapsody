@@ -181,7 +181,7 @@ public class ArrivalTermTransfQuay {
         this.nPassOnTheBus = 0;
 
         GenericIO.writeString("\nnWaitingPass parkTheBus " + this.nWaitingPass);
-        while (this.nWaitingPass == SimulationParameters.BUS_CAP && this.existsPassengers){
+        while (this.nWaitingPass == 0 && this.existsPassengers){
             GenericIO.writeString("\nsleep parkTheBus");
             try {
                 wait(10);

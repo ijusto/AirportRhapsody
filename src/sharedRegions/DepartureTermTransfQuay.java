@@ -120,6 +120,8 @@ public class DepartureTermTransfQuay {
             }
             GenericIO.writeString("\nwake up parkTheBusAndLetPassOff");
         }
+
+        this.letPassOff = false;
     }
 
     public void setPassOnTheBus(int passOnTheBus) {
