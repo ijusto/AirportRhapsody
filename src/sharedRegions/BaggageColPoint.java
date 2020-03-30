@@ -3,6 +3,7 @@ package sharedRegions;
 import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
 import entities.*;
+import genclass.GenericIO;
 
 import java.util.Map;
 
@@ -75,6 +76,8 @@ public class BaggageColPoint {
         */
 
         while(!(this.areAllBagsCollects() && this.nBagsInTreadmill == 0)){
+            GenericIO.writeString("\nAre all bags collected: " + this.areAllBagsCollects());
+            GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -90,9 +93,10 @@ public class BaggageColPoint {
                     repos.baggageCollected(passenger.getID(), passenger);
                     repos.updateStoredBaggageConveyorBeltDec();
                     return true;
-                } catch (MemException ignored) {
+                } catch (MemException e) {
                 }
             }
+
         }
         return false;
     }

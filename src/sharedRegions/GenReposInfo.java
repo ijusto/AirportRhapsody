@@ -409,7 +409,7 @@ public class GenReposInfo {
      */
 
     private void printLog(){
-        log.append("\nFN  BN      Stat  CB  SR        Stat  Q1  Q2  Q3  Q4  Q5  Q6  S1  S2  S3           St1   Si1  NR1  NA1   " +
+        log.append("\nFN  BN      Stat  CB  SR        Stat  Q1  Q2  Q3  Q4  Q5  Q6  S1  S2  S3    St1   Si1  NR1  NA1   " +
                 "St2  Si2  NR2  NA2    St3  Si3  NR3  NA3    St4  Si4  NR4  NA4    St5  Si5  NR5  NA5    St6  Si6  NR6  NA6");
         log.append(String.format("\n%d %3d      ", FN, BN));
         log.append(String.format(" %s    %d %3d        ", portState[porterState.ordinal()], CB, SR));
@@ -432,9 +432,9 @@ public class GenReposInfo {
             }
             log.append(String.format("%s ", occupStat));
         }
-        log.append("\t\t  ");
+        log.append(" ");
         for (int i = 0; i< SimulationParameters.N_PASS_PER_FLIGHT; i++){
-            log.append(String.format(" %s  %s  %3d  %3d   ",
+            log.append(String.format("%s  %s  %3d  %3d   ",
                     passState[passengerStates[i].ordinal()], passengerSituation[i],
                     totalLuggage[i], collectedLuggage[i]));
         }

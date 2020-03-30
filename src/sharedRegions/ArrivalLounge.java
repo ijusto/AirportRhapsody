@@ -42,6 +42,11 @@ public class ArrivalLounge {
 
     private GenReposInfo repos;
 
+    /**
+     *
+     */
+    private boolean arrvJustBegan;
+
     /*
      *   Baggage Collection Point.
      */
@@ -89,6 +94,8 @@ public class ArrivalLounge {
 
         this.nArrivPass = 0;
 
+        this.arrvJustBegan = true;
+
     }
 
     /* **************************************************Passenger*************************************************** */
@@ -110,6 +117,7 @@ public class ArrivalLounge {
         this.repos.numberOfPassangerLuggage(currentPassenger.getID(), currentPassenger);
 
         notifyAll();  // wake up Porter in takeARest()
+
 
         return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
     }
@@ -138,17 +146,26 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        while (this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || (this.nArrivPass == SimulationParameters.N_PASS_PER_FLIGHT && this.doPassExist())){
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        if(arrvJustBegan){
+            while(nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT){
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-        if(this.doPassExist()){
+            arrvJustBegan = false;
             return 'R';
+        } else {
+            do {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (this.doPassExist());
+            return 'E';
         }
-        return 'E';
     }
 
     /**

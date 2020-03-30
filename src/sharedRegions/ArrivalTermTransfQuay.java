@@ -58,7 +58,7 @@ public class ArrivalTermTransfQuay {
 
     public ArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
         this.repos = repos;
-        this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.BUS_CAP]);        // FIFO instantiation
+        this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.nPassOnTheBus = 0;
         this.allowBoardBus = false;
         this.existsPassengers = true;
@@ -127,7 +127,7 @@ public class ArrivalTermTransfQuay {
                     notifyAll();  // wake up Bus driver in announcingBusBoarding()
                 }
             }
-        } catch (MemException ignored) {
+        } catch (MemException e) {
             notifyAll();  // wake up Bus driver in announcingBusBoarding()
         }
     }
