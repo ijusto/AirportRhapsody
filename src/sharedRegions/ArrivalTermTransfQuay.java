@@ -78,17 +78,13 @@ public class ArrivalTermTransfQuay {
             e.printStackTrace();
         }
 
-        if(waitingPass.isFull()){
-            notifyAll();  // wake up Bus Driver in parkTheBus()
-        }
-
         /*
          *   Blocked Entity: Passenger
          *   Freeing Entity: Driver
          *   Freeing Method: announcingBusBoarding()
          *   Blocked Entity Reactions: enterTheBus()
         */
-        while(!this.boardBus && this.nPassOnTheBus>=SimulationParameters.BUS_CAP){
+        while(!this.boardBus && !(this.nPassOnTheBus<SimulationParameters.BUS_CAP)){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -96,6 +92,9 @@ public class ArrivalTermTransfQuay {
             }
         }
 
+        if(waitingPass.isFull()){
+            notifyAll();  // wake up Bus Driver in parkTheBus()
+        }
     }
 
     /**
@@ -109,13 +108,19 @@ public class ArrivalTermTransfQuay {
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
         repos.updatePassengerState(passenger.getID(),PassengerStates.TERMINAL_TRANSFER);
 
+
         try{
-            this.waitingPass.read();
-            this.nPassOnTheBus += 1;
-            repos.passengerQueueStateOut(passenger.getID());
-            repos.busSeatStateIn(passenger.getID());
-        } catch (MemException e) {
-            notifyAll();  // wake up Bus driver in announcingBusBoarding()
+            if(this.nPassOnTheBus < SimulationParameters.BUS_CAP) {
+                this.waitingPass.read();
+                this.nPassOnTheBus += 1;
+                repos.passengerQueueStateOut(passenger.getID());
+                repos.busSeatStateIn(passenger.getID());
+                if(this.nPassOnTheBus == SimulationParameters.BUS_CAP){
+                    notifyAll();  // wake up Bus driver in announcingBusBoarding()
+                }
+            }
+        } catch (MemException ignored) {
+
         }
     }
 
@@ -199,6 +204,7 @@ public class ArrivalTermTransfQuay {
             }
         }
 
+        this.boardBus = false;
         busDriver.setNPass(this.nPassOnTheBus);
     }
 

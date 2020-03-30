@@ -4,6 +4,7 @@ import entities.BusDriver;
 import entities.BusDriverStates;
 import entities.Passenger;
 import entities.PassengerStates;
+import genclass.GenericIO;
 
 /**
  *   ...
@@ -66,14 +67,16 @@ public class DepartureTermTransfQuay {
         do {
             try {
                 wait();
-                this.nPass -= 1;
-                if(this.nPass == 0){
-                    notifyAll();  // wake up Bus Driver in parkTheBus()
-                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            GenericIO.writeString("\nDBDLPO: " + this.doesBDLetPassOff());
         } while(!this.doesBDLetPassOff());
+
+        this.nPass -= 1;
+        if(this.nPass == 0){
+            notifyAll();  // wake up Bus Driver in parkTheBus()
+        }
 
         repos.busSeatStateOut(passenger.getID());
     }
@@ -98,7 +101,7 @@ public class DepartureTermTransfQuay {
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.nPass = busDriver.getNPass();
-        bdLetPassOff();
+        this.bdLetPassOff();
 
         notifyAll();  // wake up Passengers in leaveTheBus()
 
