@@ -299,7 +299,7 @@ public class ArrivalTermTransfQuay {
         this.nPassOnTheBus -= 1;
     }
 
-    public void busdriverStart() {
+    public synchronized void busdriverStart() {
         this.busdriverStop = false;
     }
 

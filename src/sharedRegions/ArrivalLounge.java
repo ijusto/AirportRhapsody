@@ -64,6 +64,7 @@ public class ArrivalLounge {
      */
     private boolean porterStop;
 
+
     /**
      *   Instantiation of the Arrival Lounge.
      *
@@ -109,6 +110,7 @@ public class ArrivalLounge {
         this.nArrivPass = 0;
 
         this.porterStop = false;
+
     }
 
     /* **************************************************Passenger*************************************************** */
@@ -162,7 +164,7 @@ public class ArrivalLounge {
 
         GenericIO.writeString("\n-------------TAKE A REST-------------------------");
 
-        while(this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStop){ // && !this.changedFlight) {
+        while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStop) && this.currentFlight < SimulationParameters.N_FLIGHTS - 1){ // && !this.changedFlight) {
             GenericIO.writeString("\nsleep takeARest");
             try {
                 wait();
@@ -271,7 +273,7 @@ public class ArrivalLounge {
         this.existsPassengers = false;
     }
 
-    public void porterStart(){
+    public synchronized void porterStart(){
         this.porterStop = false;
     }
 
