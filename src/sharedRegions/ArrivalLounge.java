@@ -52,12 +52,17 @@ public class ArrivalLounge {
     /*
      *
      */
-    private boolean changedFlight;
+    //private boolean changedFlight;
 
     /*
      *
      */
     private int currentFlight;
+
+    /**
+     *
+     */
+    private boolean porterStop;
 
     /**
      *   Instantiation of the Arrival Lounge.
@@ -72,7 +77,7 @@ public class ArrivalLounge {
             throws MemException {
 
         this.existsPassengers = true;
-        this.changedFlight = false;
+        //this.changedFlight = false;
         this.repos = repos;
 
         this.currentFlight = 0;
@@ -102,6 +107,8 @@ public class ArrivalLounge {
         this.bagColPoint.setTreadmill(treadmill);
 
         this.nArrivPass = 0;
+
+        this.porterStop = false;
     }
 
     /* **************************************************Passenger*************************************************** */
@@ -117,6 +124,7 @@ public class ArrivalLounge {
 
     public synchronized boolean whatShouldIDo(){
 
+        GenericIO.writeString("\nwhatShouldIDo");
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         nArrivPass += 1;
@@ -148,12 +156,13 @@ public class ArrivalLounge {
          *   Blocked Entity Reaction: finish the thread
          */
 
+        GenericIO.writeString("\ntakeARest");
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
         GenericIO.writeString("\n-------------TAKE A REST-------------------------");
 
-        while(this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT && !this.changedFlight) {
+        while(this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStop){ // && !this.changedFlight) {
             GenericIO.writeString("\nsleep takeARest");
             try {
                 wait();
@@ -164,9 +173,9 @@ public class ArrivalLounge {
         }
         this.bagColPoint.setPorterAwake(true);
         this.nArrivPass = 0;
-        if(this.changedFlight){
-            this.changedFlight = false;
-        }
+        //if(this.changedFlight){
+        //    this.changedFlight = false;
+        //}
 
         GenericIO.writeString("\n-------------END TAKE A REST-------------------------");
         if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && !this.doPassExist()) {
@@ -183,7 +192,9 @@ public class ArrivalLounge {
      */
 
     public synchronized Bag tryToCollectABag(){
+        GenericIO.writeString("\ntryToCollectABag");
 
+        GenericIO.writeString("\ntryToCollectABag");
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
@@ -196,7 +207,7 @@ public class ArrivalLounge {
         } catch (MemException e) {
             bagColPoint.setAllBagsCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint
             GenericIO.writeString("\nsetAllBagsCollected " + this.bagColPoint.pHoldEmpty());
-            notifyAll();  // wake up Passengers in goCollectABag()
+            //notifyAll();  // wake up Passengers in goCollectABag()
             GenericIO.writeString("\ntrytocollectabag notify no more bags");
             // GenericIO.writeString("ACABOU VÊ SE ENTENDES");
             // System.exit(-1);
@@ -212,14 +223,24 @@ public class ArrivalLounge {
 
     public synchronized void noMoreBagsToCollect(){
 
+        GenericIO.writeString("\nnoMoreBagsToCollect");
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         repos.updatePorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
+        notifyAll();  // wake up Passengers in goCollectABag()
+        this.porterStop = true;
+
     }
 
-    public void resetArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint) throws MemException {
+    public synchronized void resetArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint) throws MemException {
+
+        GenericIO.writeString("\nresetArrivalLounge");
+        GenericIO.writeString("Porter stoped");
+        do {
+        } while (this.porterStop);
+        GenericIO.writeString("Porter started");
         this.currentFlight += 1;
         repos.updateFlightNumber(this.currentFlight);
 
@@ -249,7 +270,7 @@ public class ArrivalLounge {
         this.bagColPoint.setTreadmill(treadmill);
 
         this.nArrivPass = 0;
-        this.changedFlight = true;
+        //this.changedFlight = true;
 
     }
 
@@ -265,6 +286,10 @@ public class ArrivalLounge {
 
     public void setNoPassAtAirport() {
         this.existsPassengers = false;
+    }
+
+    public void porterStart(){
+        this.porterStop = false;
     }
 
 }

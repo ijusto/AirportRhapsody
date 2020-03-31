@@ -52,6 +52,7 @@ public class DepartureTermTransfQuay {
      */
 
     public synchronized void leaveTheBus(){
+        GenericIO.writeString("\nleaveTheBus");
         /*
          *   Blocked Entity: Passenger
          *   Freeing Entity: Driver
@@ -94,6 +95,7 @@ public class DepartureTermTransfQuay {
      */
 
     public synchronized void parkTheBusAndLetPassOff() {
+        GenericIO.writeString("\nparkTheBusAndLetPassOff");
         /*
          *   Blocked Entity: Driver
          *   Freeing Entity: Passenger
@@ -144,7 +146,9 @@ public class DepartureTermTransfQuay {
         return this.letPassOff;
     }
 
-    public void resetDepartureTermTransfQuay(){
+    public synchronized void resetDepartureTermTransfQuay(){
+        GenericIO.writeString("\nresetDepartureTermTransfQuay");
+        //while(true){if(this.letPassOff){break;}}
         this.letPassOff = false;
         this.passOnTheBus = -1;
     }

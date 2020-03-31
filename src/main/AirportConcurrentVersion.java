@@ -133,15 +133,23 @@ public class AirportConcurrentVersion {
 
             if(land < SimulationParameters.N_FLIGHTS - 1) {
                 bagColPoint.resetBaggageColPoint();
+                GenericIO.writeString("\nHelp1");
                 tmpStorageArea.resetTemporaryStorageArea();
+                GenericIO.writeString("\nHelp2");
                 arrivLounge.resetArrivalLounge(destStat, nBagsPHold, bagColPoint);
+                GenericIO.writeString("\nHelp3");
                 arrivalQuay.resetArrivalTermTransfQuay();
+                GenericIO.writeString("\nHelp4");
                 departureQuay.resetDepartureTermTransfQuay();
+                GenericIO.writeString("\nHelp5");
                 arrivalTerm.resetArrivalTerminalExit(arrivLounge, arrivalQuay);
+                GenericIO.writeString("\nHelp6");
                 departureTerm.resetDepartureTerminalEntrance(arrivLounge, arrivalQuay);
+                GenericIO.writeString("\nHelp7");
                 // arrivalTerm.setDepartureTerminalRef(departureTerm);
                 // departureTerm.setArrivalTerminalRef(arrivalTerm);
             }
+            GenericIO.writeString("\nHelp");
         }
 
         try {

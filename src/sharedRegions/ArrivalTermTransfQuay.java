@@ -59,6 +59,11 @@ public class ArrivalTermTransfQuay {
 
     private boolean existsPassengers;
 
+    /**
+     *
+     */
+    private boolean busdriverStop;
+
     /*
      *   General Repository of Information.
      */
@@ -80,6 +85,7 @@ public class ArrivalTermTransfQuay {
         this.nWaitingPass = 0;
         this.aboutToEnter = 0;
         this.workDay = 0;
+        this.busdriverStop = true;
     }
 
     /* ************************************************Passenger***************************************************** */
@@ -89,6 +95,8 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void takeABus() {
+        GenericIO.writeString("\ntakeABus");
+
         Passenger passenger = (Passenger) Thread.currentThread();
 
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
@@ -133,6 +141,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void enterTheBus(){
+        GenericIO.writeString("\nenterTheBus");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
@@ -169,6 +178,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized char hasDaysWorkEnded(){
+        GenericIO.writeString("\nhasDaysWorkEnded");
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
@@ -187,6 +197,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void parkTheBus(){
+        GenericIO.writeString("\nparkTheBus");
         /*
          *   Blocked Entity: Driver
          *   1) Freeing Entity: Passenger
@@ -224,6 +235,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void announcingBusBoarding(){
+        GenericIO.writeString("\nannouncingBusBoarding");
         /*
          *   Blocked Entity: Driver
          *   Freeing Entity: Passenger
@@ -254,13 +266,19 @@ public class ArrivalTermTransfQuay {
         GenericIO.writeString("\nPassengers on the bus at arr quay " + this.nPassOnTheBus);
     }
 
-    public void resetArrivalTermTransfQuay() throws MemException {
+    public synchronized void resetArrivalTermTransfQuay() throws MemException {
+        GenericIO.writeString("\nresetArrivalTermTransfQuay");
+        GenericIO.writeString("\nbusdriver stoped");
+        do {
+        } while (this.busdriverStop);
+        GenericIO.writeString("\nbusdriver start");
         this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.nPassOnTheBus = 0;
         this.allowBoardBus = false;
         this.existsPassengers = true;
         this.nWaitingPass = 0;
         this.aboutToEnter = 0;
+        this.busdriverStop = true;
     }
 
     /* ******************************************** Getters and Setters ***********************************************/
@@ -279,6 +297,10 @@ public class ArrivalTermTransfQuay {
 
     public void decPassOnTheBus(){
         this.nPassOnTheBus -= 1;
+    }
+
+    public void busdriverStart() {
+        this.busdriverStop = false;
     }
 
 }

@@ -64,7 +64,8 @@ public class DepartureTerminalEntrance {
      *
      */
 
-    public boolean exitPassenger(){
+    public synchronized boolean exitPassenger(){
+        GenericIO.writeString("\nexitPassenger");
         this.termPass += 1;
         GenericIO.writeString("\nExited n pass in dpterm: " + this.termPass);
         if( !((this.termPass + this.arrivalTerm.getTermPass()) < SimulationParameters.N_PASS_PER_FLIGHT)){
@@ -83,6 +84,7 @@ public class DepartureTerminalEntrance {
      */
 
     public synchronized void prepareNextLeg(){
+        GenericIO.writeString("\nprepareNextLeg");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
@@ -92,10 +94,14 @@ public class DepartureTerminalEntrance {
         this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
             notifyAll();
+            GenericIO.writeString("NOTIFY LAST PREPARE NEXT LEG");
+            arrivLounge.porterStart();
+            arrivalQuay.busdriverStart();
         }
     }
 
-    public void resetDepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
+    public synchronized void resetDepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
+        GenericIO.writeString("\nresetDepartureTerminalEntrance");
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.termPass = 0;

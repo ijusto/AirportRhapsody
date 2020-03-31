@@ -69,6 +69,7 @@ public class BaggageColPoint {
      */
 
     public synchronized boolean goCollectABag(){
+        GenericIO.writeString("\ngoCollectABag");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
@@ -84,7 +85,7 @@ public class BaggageColPoint {
           Freeing Condition: porter bring their bag
           Blocked Entity Reactions: -> if all bags collected: goHome() else goCollectABag()
 
-          Freeing Method: tryToCollectABag()
+          Freeing Method: noMoreBagsToCollect()
           Freeing Condition: no more pieces of luggage
           Blocked Entity Reaction: reportMissingBags()
         */
@@ -97,6 +98,8 @@ public class BaggageColPoint {
             }
             if(!this.porterAwake){
                 continue;
+            } else if(this.pHoldEmpty() && this.nBagsInTreadmill == 0) {
+                return false;
             }
             if(!this.treadmill.get(passenger.getPassengerID()).isEmpty()){
                 try {
@@ -114,10 +117,8 @@ public class BaggageColPoint {
                 } catch (MemException e) {
                     e.printStackTrace();
                 }
-            } else {
-                if(this.pHoldEmpty()){
-                    return false;
-                }
+            } else if(this.pHoldEmpty()){
+                return false;
             }
         }
 
@@ -175,6 +176,7 @@ public class BaggageColPoint {
      */
 
     public synchronized void carryItToAppropriateStore(Bag bag){
+        GenericIO.writeString("\ncarryItToAppropriateStore");
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
@@ -188,13 +190,14 @@ public class BaggageColPoint {
             GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
             repos.updateStoredBaggageConveyorBeltInc();
             notifyAll();  // wake up Passengers in goCollectABag()
-            GenericIO.writeString("\ncarryItToAppropriateStore notify bag in treadmill");
+            GenericIO.writeString("\ncarryItToAppropriateStore notify bag in treadmill from pass " + bag.getIdOwner());
         } catch (MemException e) {
             e.printStackTrace();
         }
     }
 
-    public void resetBaggageColPoint(){
+    public synchronized void resetBaggageColPoint(){
+        GenericIO.writeString("\nresetBaggageColPoint");
         this.nBagsInTreadmill = 0;
         this.allBagsCollects = false;
         this.lastBagId = -1;

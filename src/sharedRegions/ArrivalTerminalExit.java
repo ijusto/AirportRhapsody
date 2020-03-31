@@ -63,7 +63,8 @@ public class ArrivalTerminalExit {
      *
      */
 
-    public boolean exitPassenger(){
+    public synchronized boolean exitPassenger(){
+        GenericIO.writeString("\nexitPassenger");
         //GenericIO.writeString("\nNAO POSSO MAIS");
         this.termPass += 1;
         GenericIO.writeString("\nExited n pass in arrterm: " + this.termPass);
@@ -82,6 +83,7 @@ public class ArrivalTerminalExit {
      *
      */
     public synchronized void goHome(){
+        GenericIO.writeString("\ngoHome");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
@@ -93,10 +95,14 @@ public class ArrivalTerminalExit {
         this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
             notifyAll();
+            GenericIO.writeString("NOTIFY LAST GO HOME");
+            arrivLounge.porterStart();
+            arrivalQuay.busdriverStart();
         }
     }
 
-    public void resetArrivalTerminalExit(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
+    public synchronized void resetArrivalTerminalExit(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
+        GenericIO.writeString("\nresetArrivalTerminalExit");
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.termPass = 0;
