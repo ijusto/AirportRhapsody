@@ -138,8 +138,8 @@ public class AirportConcurrentVersion {
             departureQuay.resetDepartureTermTransfQuay();
             arrivalTerm.resetArrivalTerminalExit(arrivLounge, arrivalQuay);
             departureTerm.resetDepartureTerminalEntrance(arrivLounge, arrivalQuay);
-            arrivalTerm.setDepartureTerminalRef(departureTerm);
-            departureTerm.setArrivalTerminalRef(arrivalTerm);
+            // arrivalTerm.setDepartureTerminalRef(departureTerm);
+            // departureTerm.setArrivalTerminalRef(arrivalTerm);
         }
 
         try {

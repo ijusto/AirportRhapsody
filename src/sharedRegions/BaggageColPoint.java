@@ -82,7 +82,11 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
-        while(!(this.areAllBagsCollects() && this.treadmill.get(passenger.getID()).isEmpty())) {
+        while(!( this.areAllBagsCollects()
+                 && this.treadmill.containsKey(passenger.getID())
+                 && this.treadmill.get(passenger.getID()).isEmpty())
+              || (!this.treadmill.containsKey(passenger.getID()))){
+
             GenericIO.writeString("\nAre all bags collected: " + this.areAllBagsCollects());
             GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
             GenericIO.writeString("\nstack do pass na treadmill, empty: " + this.treadmill.get(passenger.getID()).isEmpty());
@@ -143,7 +147,7 @@ public class BaggageColPoint {
         this.nBagsInTreadmill = 0;
         this.allBagsCollects = false;
         this.lastBagId = -1;
-        this.treadmill = null;
+        this.treadmill.clear();
     }
 
     /* ******************************************** Getters and Setters ***********************************************/
