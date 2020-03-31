@@ -125,6 +125,7 @@ public class ArrivalTermTransfQuay {
                 break;
             }
         }
+        this.aboutToEnter += 1;
 
     }
 
@@ -147,7 +148,6 @@ public class ArrivalTermTransfQuay {
                 this.incPassOnTheBus();
                 repos.passengerQueueStateOut(passenger.getID());
                 repos.busSeatStateIn(passenger.getID());
-                this.aboutToEnter += 1;
                 if(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.nWaitingPass == 0){
                     notifyAll();  // wake up Bus driver in announcingBusBoarding()
                 }
@@ -236,11 +236,7 @@ public class ArrivalTermTransfQuay {
         this.allowBoardBus = true;
         notifyAll();  // wake up Passengers in takeABus()
 
-
-
-        while(!(this.nPassOnTheBus == SimulationParameters.BUS_CAP
-                || (this.nPassOnTheBus < SimulationParameters.BUS_CAP && this.nPassOnTheBus > 0
-                && this.nWaitingPass == 0))) {
+        while(!(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.nWaitingPass == 0)) {
             GenericIO.writeString("\nsleep announcingBusBoarding");
             try {
                 wait();
