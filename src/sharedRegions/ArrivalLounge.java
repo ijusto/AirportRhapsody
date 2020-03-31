@@ -122,9 +122,7 @@ public class ArrivalLounge {
         nArrivPass += 1;
         this.repos.numberOfPassengerLuggage(currentPassenger.getPassengerID(), currentPassenger);
 
-        if(nArrivPass == SimulationParameters.N_PASS_PER_FLIGHT){
-            notifyAll();  // wake up Porter in takeARest()
-        }
+        notifyAll();  // wake up Porter in takeARest()
 
         return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
     }
@@ -164,6 +162,7 @@ public class ArrivalLounge {
             }
             GenericIO.writeString("\nwake up takeARest (normal state)");
         }
+        this.bagColPoint.setPorterAwake(true);
         this.nArrivPass = 0;
         if(this.changedFlight){
             this.changedFlight = false;

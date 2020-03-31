@@ -22,6 +22,12 @@ public class BaggageColPoint {
 
     private Map<Integer, MemFIFO<Bag>> treadmill;
 
+    /*
+     *
+     */
+
+    private boolean porterAwake;
+
     /**
      *
      */
@@ -51,6 +57,7 @@ public class BaggageColPoint {
         this.nBagsInTreadmill = 0;
         this.allBagsCollects = false;
         this.lastBagId = -1;
+        this.porterAwake = false;
     }
 
 
@@ -82,6 +89,39 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
+        while(true) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(!this.porterAwake){
+                continue;
+            }
+            if(!this.treadmill.get(passenger.getPassengerID()).isEmpty()){
+                try {
+                    this.treadmill.get(passenger.getPassengerID()).read();
+                    //GenericIO.writeString("\nREMOVED");
+                    //System.exit(-1);
+                    this.nBagsInTreadmill -= 1;
+                    GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
+                    passenger.setNA(passenger.getNA() + 1);
+                    repos.baggageCollected(passenger.getPassengerID(), passenger);
+                    repos.updateStoredBaggageConveyorBeltDec();
+                    GenericIO.writeString("\nwake up gocollectabag");
+                    GenericIO.writeString(" passid " + passenger.getPassengerID());
+                    return true;
+                } catch (MemException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                if(this.pHoldEmpty()){
+                    return false;
+                }
+            }
+        }
+
+        /*
         while(!this.pHoldEmpty() || (this.pHoldEmpty()
                                       && this.treadmill.containsKey(passenger.getPassengerID())
                                       && !this.treadmill.get(passenger.getPassengerID()).isEmpty())){
@@ -124,6 +164,7 @@ public class BaggageColPoint {
         }
 
         return false;
+        */
     }
 
 
@@ -158,6 +199,7 @@ public class BaggageColPoint {
         this.allBagsCollects = false;
         this.lastBagId = -1;
         this.treadmill.clear();
+        this.porterAwake = false;
     }
 
     /* ******************************************** Getters and Setters ***********************************************/
@@ -192,4 +234,7 @@ public class BaggageColPoint {
         this.allBagsCollects = allBagsCollects;
     }
 
+    public void setPorterAwake(boolean porterAwake) {
+        this.porterAwake = porterAwake;
+    }
 }
