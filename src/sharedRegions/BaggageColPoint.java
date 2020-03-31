@@ -22,11 +22,6 @@ public class BaggageColPoint {
 
     private Map<Integer, MemFIFO<Bag>> treadmill;
 
-    /*
-     *
-     */
-    private boolean noMoreBags;
-
     /**
      *
      */
@@ -56,7 +51,6 @@ public class BaggageColPoint {
         this.nBagsInTreadmill = 0;
         this.allBagsCollects = false;
         this.lastBagId = -1;
-        this.noMoreBags = false;
     }
 
 
@@ -68,9 +62,11 @@ public class BaggageColPoint {
      */
 
     public synchronized boolean goCollectABag(){
+
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        GenericIO.writeString("\nPASSENGER AT GOCOLLECTABAG");
         repos.updatePassengerState(passenger.getID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         /*
@@ -86,18 +82,19 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
-        while(!(this.noMoreBags && this.treadmill.get(passenger.getID()).isEmpty())) {
+        while(!(this.areAllBagsCollects() && this.treadmill.get(passenger.getID()).isEmpty())) {
             GenericIO.writeString("\nAre all bags collected: " + this.areAllBagsCollects());
             GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
-            GenericIO.writeString("\nNo more bags: " + this.noMoreBags);
             GenericIO.writeString("\nstack do pass na treadmill, empty: " + this.treadmill.get(passenger.getID()).isEmpty());
             GenericIO.writeString("\nsleep gocollectabag");
+            GenericIO.writeString(" passid " + passenger.getId());
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             GenericIO.writeString("\nwake up gocollectabag");
+            GenericIO.writeString(" passid " + passenger.getId());
             try {
                 this.treadmill.get(passenger.getID()).read();
                 //GenericIO.writeString("\nREMOVED");
@@ -140,16 +137,13 @@ public class BaggageColPoint {
         } catch (MemException e) {
             e.printStackTrace();
         }
-        if(this.areAllBagsCollects()){
-            this.noMoreBags = true;
-        }
     }
 
     public void resetBaggageColPoint(){
         this.nBagsInTreadmill = 0;
         this.allBagsCollects = false;
         this.lastBagId = -1;
-        this.noMoreBags = false;
+        this.treadmill = null;
     }
 
     /* ******************************************** Getters and Setters ***********************************************/

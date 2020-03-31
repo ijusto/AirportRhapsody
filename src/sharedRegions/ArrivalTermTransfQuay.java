@@ -105,6 +105,7 @@ public class ArrivalTermTransfQuay {
         this.nWaitingPass += 1;
         if(this.nWaitingPass == SimulationParameters.BUS_CAP){
             notifyAll();  // wake up Bus Driver in parkTheBus()
+            GenericIO.writeString("\nnotify parkTheBus at arrival terminal (at least 3 passengers waiting)");
         }
 
         /*
@@ -125,6 +126,7 @@ public class ArrivalTermTransfQuay {
                 break;
             }
         }
+        GenericIO.writeString("\nexit takeABus");
         this.aboutToEnter += 1;
 
     }
@@ -149,7 +151,7 @@ public class ArrivalTermTransfQuay {
                 repos.passengerQueueStateOut(passenger.getID());
                 repos.busSeatStateIn(passenger.getID());
 
-                GenericIO.writeString("\nPass " + passenger.getId() + "entered the bus.");
+                GenericIO.writeString("\nPass " + passenger.getID() + " entered the bus.");
                 if(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.nWaitingPass == 0){
                     GenericIO.writeString("\nLast passenger. notify announcingBusBoarding");
                     notifyAll();  // wake up Bus driver in announcingBusBoarding()
