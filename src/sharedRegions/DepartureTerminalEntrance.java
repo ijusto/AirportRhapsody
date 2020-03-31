@@ -63,14 +63,16 @@ public class DepartureTerminalEntrance {
      *
      */
 
-    public void exitPassenger(){
+    public boolean exitPassenger(){
         this.termPass += 1;
         if( !((this.termPass + this.arrivalTerm.getTermPass()) < SimulationParameters.N_PASS_PER_FLIGHT)){
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
             //GenericIO.writeString("NAO VALE A PENA");
             //System.exit(-1);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -85,8 +87,10 @@ public class DepartureTerminalEntrance {
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
         repos.updatePassengerState(passenger.getID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
-        this.exitPassenger();
         this.repos.passengerExit(passenger.getID());
+        if(this.exitPassenger()){
+            notifyAll();
+        }
     }
 
     public void resetDepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){

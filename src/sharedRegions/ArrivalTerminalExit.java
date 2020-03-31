@@ -62,7 +62,7 @@ public class ArrivalTerminalExit {
      *
      */
 
-    public void exitPassenger(){
+    public boolean exitPassenger(){
         //GenericIO.writeString("\nNAO POSSO MAIS");
         this.termPass += 1;
 
@@ -71,7 +71,9 @@ public class ArrivalTerminalExit {
             this.arrivalQuay.setNoPassAtAirport();
             //GenericIO.writeString("\nMESMO QUE TU TENTES");
             //System.exit(-1);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -87,8 +89,10 @@ public class ArrivalTerminalExit {
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
         repos.updatePassengerState(passenger.getID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
-        this.exitPassenger();
         this.repos.passengerExit(passenger.getID());
+        if(this.exitPassenger()){
+            notifyAll();
+        }
     }
 
     public void resetArrivalTerminalExit(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){

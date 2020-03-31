@@ -262,6 +262,7 @@ public class ArrivalLounge {
         this.nArrivPass = 0;
 
         this.arrvJustBegan = true;
+
     }
 
     /* ******************************************** Getters and Setters ***********************************************/
