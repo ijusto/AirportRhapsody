@@ -114,7 +114,7 @@ public class ArrivalTermTransfQuay {
          *   Freeing Method: announcingBusBoarding()
          *   Blocked Entity Reactions: enterTheBus()
         */
-        while(true){
+        while(!this.allowBoardBus || this.aboutToEnter >= SimulationParameters.BUS_CAP){
             GenericIO.writeString("\nsleep takeABus");
             try {
                 wait();
@@ -122,9 +122,6 @@ public class ArrivalTermTransfQuay {
                 e.printStackTrace();
             }
             GenericIO.writeString("\nwake up takeABus");
-            if(this.allowBoardBus && this.aboutToEnter < SimulationParameters.BUS_CAP){
-                break;
-            }
         }
         GenericIO.writeString("\nexit takeABus");
         this.aboutToEnter += 1;

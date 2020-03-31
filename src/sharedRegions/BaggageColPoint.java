@@ -82,12 +82,8 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
-        while(!( this.areAllBagsCollects()
-                 && this.treadmill.containsKey(passenger.getID())
-                 && this.treadmill.get(passenger.getID()).isEmpty())
-              || (!this.treadmill.containsKey(passenger.getID()))){
-
-            GenericIO.writeString("\nAre all bags collected: " + this.areAllBagsCollects());
+        while(!this.pHoldEmpty()){
+            GenericIO.writeString("\nAre all bags collected: " + this.pHoldEmpty());
             GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
             GenericIO.writeString("\nstack do pass na treadmill, empty: " + this.treadmill.get(passenger.getID()).isEmpty());
             GenericIO.writeString("\nsleep gocollectabag");
@@ -96,6 +92,11 @@ public class BaggageColPoint {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+
+            GenericIO.writeString("\nwake up gocollectabag");
+            if(this.pHoldEmpty() && !this.treadmill.containsKey(passenger.getID())) {
+                return false;
             }
             GenericIO.writeString("\nwake up gocollectabag");
             GenericIO.writeString(" passid " + passenger.getId());
@@ -109,10 +110,15 @@ public class BaggageColPoint {
                 repos.baggageCollected(passenger.getID(), passenger);
                 repos.updateStoredBaggageConveyorBeltDec();
                 GenericIO.writeString("\nwake up gocollectabag");
+                GenericIO.writeString(" passid " + passenger.getId());
                 return true;
-            } catch (MemException ignored) {
+            } catch (MemException e) {
+                if (this.pHoldEmpty() && this.treadmill.containsKey(passenger.getID())){
+                    return false;
+                }
             }
         }
+
         return false;
     }
 
@@ -174,7 +180,7 @@ public class BaggageColPoint {
      *
      */
 
-    public boolean areAllBagsCollects() {
+    public boolean pHoldEmpty() {
         return allBagsCollects;
     }
 

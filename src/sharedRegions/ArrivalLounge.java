@@ -223,7 +223,7 @@ public class ArrivalLounge {
             return tmpBag;
         } catch (MemException e) {
             bagColPoint.setAllBagsCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint
-            GenericIO.writeString("\nsetAllBagsCollected " + this.bagColPoint.areAllBagsCollects());
+            GenericIO.writeString("\nsetAllBagsCollected " + this.bagColPoint.pHoldEmpty());
             notifyAll();  // wake up Passengers in goCollectABag()
             GenericIO.writeString("\ntrytocollectabag notify no more bags");
             // GenericIO.writeString("ACABOU VÊ SE ENTENDES");

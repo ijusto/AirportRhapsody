@@ -131,15 +131,17 @@ public class AirportConcurrentVersion {
                 }
             }
 
-            bagColPoint.resetBaggageColPoint();
-            tmpStorageArea.resetTemporaryStorageArea();
-            arrivLounge.resetArrivalLounge(destStat, nBagsPHold, bagColPoint);
-            arrivalQuay.resetArrivalTermTransfQuay();
-            departureQuay.resetDepartureTermTransfQuay();
-            arrivalTerm.resetArrivalTerminalExit(arrivLounge, arrivalQuay);
-            departureTerm.resetDepartureTerminalEntrance(arrivLounge, arrivalQuay);
-            // arrivalTerm.setDepartureTerminalRef(departureTerm);
-            // departureTerm.setArrivalTerminalRef(arrivalTerm);
+            if(land < SimulationParameters.N_FLIGHTS - 1) {
+                bagColPoint.resetBaggageColPoint();
+                tmpStorageArea.resetTemporaryStorageArea();
+                arrivLounge.resetArrivalLounge(destStat, nBagsPHold, bagColPoint);
+                arrivalQuay.resetArrivalTermTransfQuay();
+                departureQuay.resetDepartureTermTransfQuay();
+                arrivalTerm.resetArrivalTerminalExit(arrivLounge, arrivalQuay);
+                departureTerm.resetDepartureTerminalEntrance(arrivLounge, arrivalQuay);
+                // arrivalTerm.setDepartureTerminalRef(departureTerm);
+                // departureTerm.setArrivalTerminalRef(arrivalTerm);
+            }
         }
 
         try {
