@@ -57,6 +57,11 @@ public class ArrivalLounge {
     /*
      *
      */
+    private boolean changedFlight;
+
+    /*
+     *
+     */
     private int currentFlight;
 
     /**
@@ -72,7 +77,7 @@ public class ArrivalLounge {
             throws MemException {
 
         this.existsPassengers = true;
-
+        this.changedFlight = false;
         this.repos = repos;
 
         this.currentFlight = 0;
@@ -127,7 +132,6 @@ public class ArrivalLounge {
 
         notifyAll();  // wake up Porter in takeARest()
 
-
         return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
     }
 
@@ -155,20 +159,28 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
+
+        GenericIO.writeString("\n-------------TAKE A REST-------------------------");
+        GenericIO.writeString("\narrJustBegan: " + this.arrvJustBegan);
         if(arrvJustBegan){
             while(nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT){
-
+                GenericIO.writeString("\nnArrivPass: " + this.nArrivPass);
                 GenericIO.writeString("\nsleep takeARest");
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                GenericIO.writeString("\nnArrivPass: " + this.nArrivPass);
             }
+            GenericIO.writeString("\nwake up takeARest (normal state)");
             arrvJustBegan = false;
+            GenericIO.writeString("\n-------------END TAKE A REST-------------------------");
             return 'R';
         } else {
-            while (this.existsPassengers) {
+            GenericIO.writeString("\narrJustBegan: " + this.arrvJustBegan);
+            GenericIO.writeString("\nexistsPassengers : " + this.existsPassengers);
+            while (!this.changedFlight) {
                 GenericIO.writeString("\nsleep takeARest");
                 try {
                     wait();
@@ -177,7 +189,12 @@ public class ArrivalLounge {
                 }
                 GenericIO.writeString("\nwake up takeARest");
             }
+            GenericIO.writeString("\nexistsPassengers : " + this.existsPassengers);
         }
+        if(this.changedFlight){
+            this.changedFlight = false;
+        }
+        GenericIO.writeString("\n-------------END TAKE A REST-------------------------");
         if(this.currentFlight == SimulationParameters.N_FLIGHTS && !this.doPassExist()) {
             return 'E';
         }
@@ -262,6 +279,7 @@ public class ArrivalLounge {
         this.nArrivPass = 0;
 
         this.arrvJustBegan = true;
+        this.changedFlight = true;
 
     }
 

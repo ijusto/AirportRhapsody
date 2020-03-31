@@ -86,7 +86,7 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
-        while(true) {
+        while(!(this.noMoreBags && this.treadmill.get(passenger.getID()).isEmpty())) {
             GenericIO.writeString("\nAre all bags collected: " + this.areAllBagsCollects());
             GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
             GenericIO.writeString("\nNo more bags: " + this.noMoreBags);
@@ -97,28 +97,21 @@ public class BaggageColPoint {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(this.lastBagId == passenger.getID()) {
-                break;
-            } else if(this.noMoreBags && this.treadmill.get(passenger.getID()).isEmpty()){
-                return false;
+            GenericIO.writeString("\nwake up gocollectabag");
+            try {
+                this.treadmill.get(passenger.getID()).read();
+                //GenericIO.writeString("\nREMOVED");
+                //System.exit(-1);
+                this.nBagsInTreadmill -= 1;
+                GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
+                passenger.setNA(passenger.getNA() + 1);
+                repos.baggageCollected(passenger.getID(), passenger);
+                repos.updateStoredBaggageConveyorBeltDec();
+                GenericIO.writeString("\nwake up gocollectabag");
+                return true;
+            } catch (MemException ignored) {
             }
         }
-        GenericIO.writeString("\nwake up gocollectabag");
-        try {
-            this.treadmill.get(passenger.getID()).read();
-            //GenericIO.writeString("\nREMOVED");
-            //System.exit(-1);
-            this.nBagsInTreadmill -= 1;
-            GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
-            passenger.setNA(passenger.getNA() + 1);
-            repos.baggageCollected(passenger.getID(), passenger);
-            repos.updateStoredBaggageConveyorBeltDec();
-            GenericIO.writeString("\nwake up gocollectabag");
-            return true;
-        } catch (MemException e) {
-            e.printStackTrace();
-        }
-
         return false;
     }
 

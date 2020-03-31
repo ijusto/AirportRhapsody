@@ -148,7 +148,10 @@ public class ArrivalTermTransfQuay {
                 this.incPassOnTheBus();
                 repos.passengerQueueStateOut(passenger.getID());
                 repos.busSeatStateIn(passenger.getID());
+
+                GenericIO.writeString("\nPass " + passenger.getId() + "entered the bus.");
                 if(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.nWaitingPass == 0){
+                    GenericIO.writeString("\nLast passenger. notify announcingBusBoarding");
                     notifyAll();  // wake up Bus driver in announcingBusBoarding()
                 }
             }
