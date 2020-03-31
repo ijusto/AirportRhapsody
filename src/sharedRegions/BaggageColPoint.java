@@ -67,7 +67,7 @@ public class BaggageColPoint {
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         GenericIO.writeString("\nPASSENGER AT GOCOLLECTABAG");
-        repos.updatePassengerState(passenger.getID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        repos.updatePassengerState(passenger.getPassengerID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         /*
           Blocked Entity: Passenger
@@ -82,12 +82,14 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
-        while(!this.pHoldEmpty()){
+        while(!this.pHoldEmpty() || (this.pHoldEmpty()
+                                      && this.treadmill.containsKey(passenger.getPassengerID())
+                                      && !this.treadmill.get(passenger.getPassengerID()).isEmpty())){
             GenericIO.writeString("\nAre all bags collected: " + this.pHoldEmpty());
             GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
-            GenericIO.writeString("\nstack do pass na treadmill, empty: " + this.treadmill.get(passenger.getID()).isEmpty());
+            GenericIO.writeString("\nstack do pass na treadmill, empty: " + this.treadmill.get(passenger.getPassengerID()).isEmpty());
             GenericIO.writeString("\nsleep gocollectabag");
-            GenericIO.writeString(" passid " + passenger.getId());
+            GenericIO.writeString(" passid " + passenger.getPassengerID());
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -95,25 +97,27 @@ public class BaggageColPoint {
             }
 
             GenericIO.writeString("\nwake up gocollectabag");
-            if(this.pHoldEmpty() && !this.treadmill.containsKey(passenger.getID())) {
-                return false;
+            if(this.pHoldEmpty()){
+                if(!this.treadmill.containsKey(passenger.getPassengerID()) || this.treadmill.get(passenger.getPassengerID()).isEmpty()) {
+                    return false;
+                }
             }
             GenericIO.writeString("\nwake up gocollectabag");
-            GenericIO.writeString(" passid " + passenger.getId());
+            GenericIO.writeString(" passid " + passenger.getPassengerID());
             try {
-                this.treadmill.get(passenger.getID()).read();
+                this.treadmill.get(passenger.getPassengerID()).read();
                 //GenericIO.writeString("\nREMOVED");
                 //System.exit(-1);
                 this.nBagsInTreadmill -= 1;
                 GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
                 passenger.setNA(passenger.getNA() + 1);
-                repos.baggageCollected(passenger.getID(), passenger);
+                repos.baggageCollected(passenger.getPassengerID(), passenger);
                 repos.updateStoredBaggageConveyorBeltDec();
                 GenericIO.writeString("\nwake up gocollectabag");
-                GenericIO.writeString(" passid " + passenger.getId());
+                GenericIO.writeString(" passid " + passenger.getPassengerID());
                 return true;
             } catch (MemException e) {
-                if (this.pHoldEmpty() && this.treadmill.containsKey(passenger.getID())){
+                if (this.pHoldEmpty() && this.treadmill.containsKey(passenger.getPassengerID())){
                     return false;
                 }
             }

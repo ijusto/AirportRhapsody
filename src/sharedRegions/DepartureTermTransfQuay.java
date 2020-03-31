@@ -62,8 +62,8 @@ public class DepartureTermTransfQuay {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
-        repos.updatePassengerState(passenger.getID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
-        GenericIO.writeString("\npass that left the bus(id): " + passenger.getID());
+        repos.updatePassengerState(passenger.getPassengerID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
+        GenericIO.writeString("\npass that left the bus(id): " + passenger.getPassengerID());
 
         while(!this.doesBDLetPassOff()) {
             GenericIO.writeString("\nsleep leaveTheBus");
@@ -78,7 +78,7 @@ public class DepartureTermTransfQuay {
 
         this.passOnTheBus -= 1;
         GenericIO.writeString("\na pass left, nPass remaining: " + this.getPassOnTheBus());
-        repos.busSeatStateOut(passenger.getID());
+        repos.busSeatStateOut(passenger.getPassengerID());
         if(this.getPassOnTheBus() == 0){
             notifyAll();  // wake up Bus Driver in parkTheBusAndLetPassOff()
         }

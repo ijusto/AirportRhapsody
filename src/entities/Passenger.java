@@ -213,7 +213,7 @@ public class Passenger extends Thread {
      *
      */
 
-    public int getID() { return id;}
+    public int getPassengerID() { return id;}
 
     /*
      *

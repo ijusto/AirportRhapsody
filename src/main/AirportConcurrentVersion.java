@@ -114,8 +114,8 @@ public class AirportConcurrentVersion {
                         nBags[nPass][land], 0, nPass, arrivLounge, arrivalQuay, departureQuay,
                         departureTerm, arrivalTerm, bagColPoint, bagRecOffice);
 
-                repos.updatePassengerState(passengers[nPass][land].getID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
-                repos.getPassengerSituation(passengers[nPass][land].getID(),passengers[nPass][land]);
+                repos.updatePassengerState(passengers[nPass][land].getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
+                repos.getPassengerSituation(passengers[nPass][land].getPassengerID(),passengers[nPass][land]);
             }
 
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
@@ -156,5 +156,6 @@ public class AirportConcurrentVersion {
             GenericIO.writeString("Main Program - One thread of BusDriver was interrupted.");
         }
 
+        repos.finalReport();
     }
 }

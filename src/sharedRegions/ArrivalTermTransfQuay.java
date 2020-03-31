@@ -93,11 +93,11 @@ public class ArrivalTermTransfQuay {
 
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        repos.updatePassengerState(passenger.getID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        repos.updatePassengerState(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
 
         try {
             waitingPass.write(passenger);
-            repos.passengerQueueStateIn(passenger.getID());
+            repos.passengerQueueStateIn(passenger.getPassengerID());
         } catch (MemException e) {
             e.printStackTrace();
         }
@@ -137,7 +137,7 @@ public class ArrivalTermTransfQuay {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
-        repos.updatePassengerState(passenger.getID(),PassengerStates.TERMINAL_TRANSFER);
+        repos.updatePassengerState(passenger.getPassengerID(),PassengerStates.TERMINAL_TRANSFER);
 
 
         try{
@@ -145,10 +145,10 @@ public class ArrivalTermTransfQuay {
                 this.waitingPass.read();
                 this.nWaitingPass -= 1;
                 this.incPassOnTheBus();
-                repos.passengerQueueStateOut(passenger.getID());
-                repos.busSeatStateIn(passenger.getID());
+                repos.passengerQueueStateOut(passenger.getPassengerID());
+                repos.busSeatStateIn(passenger.getPassengerID());
 
-                GenericIO.writeString("\nPass " + passenger.getID() + " entered the bus.");
+                GenericIO.writeString("\nPass " + passenger.getPassengerID() + " entered the bus.");
                 if(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.nWaitingPass == 0){
                     GenericIO.writeString("\nLast passenger. notify announcingBusBoarding");
                     notifyAll();  // wake up Bus driver in announcingBusBoarding()

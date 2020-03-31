@@ -43,11 +43,6 @@ public class ArrivalLounge {
 
     private GenReposInfo repos;
 
-    /**
-     *
-     */
-    private boolean arrvJustBegan;
-
     /*
      *   Baggage Collection Point.
      */
@@ -107,9 +102,6 @@ public class ArrivalLounge {
         this.bagColPoint.setTreadmill(treadmill);
 
         this.nArrivPass = 0;
-
-        this.arrvJustBegan = true;
-
     }
 
     /* **************************************************Passenger*************************************************** */
@@ -128,9 +120,11 @@ public class ArrivalLounge {
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         nArrivPass += 1;
-        this.repos.numberOfPassengerLuggage(currentPassenger.getID(), currentPassenger);
+        this.repos.numberOfPassengerLuggage(currentPassenger.getPassengerID(), currentPassenger);
 
-        notifyAll();  // wake up Porter in takeARest()
+        if(nArrivPass == SimulationParameters.N_PASS_PER_FLIGHT){
+            notifyAll();  // wake up Porter in takeARest()
+        }
 
         return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
     }
@@ -159,48 +153,27 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-
         GenericIO.writeString("\n-------------TAKE A REST-------------------------");
-        GenericIO.writeString("\narrJustBegan: " + this.arrvJustBegan);
-        if(arrvJustBegan){
-            while(nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT){
-                GenericIO.writeString("\nnArrivPass: " + this.nArrivPass);
-                GenericIO.writeString("\nsleep takeARest");
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                GenericIO.writeString("\nnArrivPass: " + this.nArrivPass);
+
+        while(this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT && !this.changedFlight) {
+            GenericIO.writeString("\nsleep takeARest");
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             GenericIO.writeString("\nwake up takeARest (normal state)");
-            arrvJustBegan = false;
-            GenericIO.writeString("\n-------------END TAKE A REST-------------------------");
-            return 'R';
-        } else {
-            GenericIO.writeString("\narrJustBegan: " + this.arrvJustBegan);
-            GenericIO.writeString("\nexistsPassengers : " + this.existsPassengers);
-            while (!this.changedFlight) {
-                GenericIO.writeString("\nsleep takeARest");
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                GenericIO.writeString("\nwake up takeARest");
-            }
-            GenericIO.writeString("\nexistsPassengers : " + this.existsPassengers);
         }
+        this.nArrivPass = 0;
         if(this.changedFlight){
             this.changedFlight = false;
         }
+
         GenericIO.writeString("\n-------------END TAKE A REST-------------------------");
-        if(this.currentFlight == SimulationParameters.N_FLIGHTS && !this.doPassExist()) {
+        if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && !this.doPassExist()) {
             return 'E';
         }
         return 'R';
-        //    return 'E';
-        //}
     }
 
     /**
@@ -277,8 +250,6 @@ public class ArrivalLounge {
         this.bagColPoint.setTreadmill(treadmill);
 
         this.nArrivPass = 0;
-
-        this.arrvJustBegan = true;
         this.changedFlight = true;
 
     }

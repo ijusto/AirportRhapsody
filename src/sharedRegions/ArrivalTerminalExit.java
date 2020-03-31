@@ -88,9 +88,9 @@ public class ArrivalTerminalExit {
                 passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
                 passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
-        repos.updatePassengerState(passenger.getID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+        repos.updatePassengerState(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
-        this.repos.passengerExit(passenger.getID());
+        this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
             notifyAll();
         }
