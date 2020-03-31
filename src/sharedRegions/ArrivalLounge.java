@@ -172,7 +172,6 @@ public class ArrivalLounge {
             GenericIO.writeString("\nwake up takeARest (normal state)");
         }
         this.bagColPoint.setPorterAwake(true);
-        this.nArrivPass = 0;
         //if(this.changedFlight){
         //    this.changedFlight = false;
         //}
@@ -194,7 +193,6 @@ public class ArrivalLounge {
     public synchronized Bag tryToCollectABag(){
         GenericIO.writeString("\ntryToCollectABag");
 
-        GenericIO.writeString("\ntryToCollectABag");
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
@@ -211,26 +209,11 @@ public class ArrivalLounge {
             GenericIO.writeString("\ntrytocollectabag notify no more bags");
             // GenericIO.writeString("ACABOU VÊ SE ENTENDES");
             // System.exit(-1);
+
+            this.porterStop = true;
+            this.nArrivPass = 0;
             return null;
         }
-
-    }
-
-    /**
-     *   ... (raised by the Porter).
-     *
-     */
-
-    public synchronized void noMoreBagsToCollect(){
-
-        GenericIO.writeString("\nnoMoreBagsToCollect");
-        Porter porter = (Porter) Thread.currentThread();
-        assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
-        porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-        repos.updatePorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-
-        notifyAll();  // wake up Passengers in goCollectABag()
-        this.porterStop = true;
 
     }
 

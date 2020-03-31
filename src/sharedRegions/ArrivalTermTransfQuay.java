@@ -184,7 +184,6 @@ public class ArrivalTermTransfQuay {
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         if(!this.existsPassengers){
-            this.workDay += 1;
             if(this.workDay == SimulationParameters.N_PASS_PER_FLIGHT){
                 return 'F';
             }
@@ -220,7 +219,7 @@ public class ArrivalTermTransfQuay {
         GenericIO.writeString("\nnWaitingPass parkTheBus " + this.nWaitingPass);
 
         GenericIO.writeString("\nsleep parkTheBus");
-        while(this.nWaitingPass == 0 && this.existsPassengers){
+        while(this.nWaitingPass == 0 && this.workDay < SimulationParameters.N_FLIGHTS){// && this.existsPassengers){
             try {
                 wait(10);
             } catch (InterruptedException e) {
@@ -279,6 +278,7 @@ public class ArrivalTermTransfQuay {
         this.nWaitingPass = 0;
         this.aboutToEnter = 0;
         this.busdriverStop = true;
+        this.workDay += 1;
     }
 
     /* ******************************************** Getters and Setters ***********************************************/

@@ -90,18 +90,19 @@ public class BaggageColPoint {
           Blocked Entity Reaction: reportMissingBags()
         */
 
-        while(true) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if(!this.porterAwake){
-                continue;
-            } else if(this.pHoldEmpty() && this.nBagsInTreadmill == 0) {
+        do {
+            //if(!this.porterAwake){
+            //    GenericIO.writeString("\ngoCollectABag pass: " + passenger.getPassengerID() + " porterAwake false");
+            //    continue;
+            //} else
+            GenericIO.writeString("\ngoCollectABag pass: " + passenger.getPassengerID() + " nBagsInTreadmill = " + this.nBagsInTreadmill);
+
+            if(this.pHoldEmpty() && this.treadmill.get(passenger.getPassengerID()).isEmpty()) {
+                GenericIO.writeString("\ngoCollectABag pass: " + passenger.getPassengerID() + " this.treadmill.get(passenger.getPassengerID()).isEmpty()");
                 return false;
             }
             if(!this.treadmill.get(passenger.getPassengerID()).isEmpty()){
+                GenericIO.writeString("\ngoCollectABag pass: " + passenger.getPassengerID() + " !this.treadmill.get(passenger.getPassengerID()).isEmpty()");
                 try {
                     this.treadmill.get(passenger.getPassengerID()).read();
                     //GenericIO.writeString("\nREMOVED");
@@ -118,9 +119,17 @@ public class BaggageColPoint {
                     e.printStackTrace();
                 }
             } else if(this.pHoldEmpty()){
+                GenericIO.writeString("\ngoCollectABag pass: " + passenger.getPassengerID() + " this.pHoldEmpty()");
                 return false;
             }
-        }
+
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            GenericIO.writeString("\ngoCollectABag pass wake up: " + passenger.getPassengerID());
+        } while(true);
 
         /*
         while(!this.pHoldEmpty() || (this.pHoldEmpty()
@@ -170,6 +179,23 @@ public class BaggageColPoint {
 
 
     /* **************************************************Porter****************************************************** */
+
+    /**
+     *   ... (raised by the Porter).
+     *
+     */
+
+    public synchronized void noMoreBagsToCollect(){
+
+        GenericIO.writeString("\nnoMoreBagsToCollect");
+        Porter porter = (Porter) Thread.currentThread();
+        assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
+        porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        repos.updatePorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+
+        notifyAll();  // wake up Passengers in goCollectABag()
+
+    }
 
     /**
      *  Operation of carrying a bag from the plane's hold to the baggage colletion point (raised by the Porter).
