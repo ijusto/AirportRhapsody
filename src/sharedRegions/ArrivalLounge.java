@@ -29,7 +29,7 @@ public class ArrivalLounge {
      *   Number of passengers that already arrived.
      */
 
-    private int nArrivPass;
+    private int nPassAtArrivLounge;
 
     /*
      *
@@ -107,7 +107,7 @@ public class ArrivalLounge {
         this.bagColPoint = bagColPoint;
         this.bagColPoint.setTreadmill(treadmill);
 
-        this.nArrivPass = 0;
+        this.nPassAtArrivLounge = 0;
 
         this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = false;
 
@@ -129,7 +129,7 @@ public class ArrivalLounge {
         GenericIO.writeString("\nwhatShouldIDo");
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        nArrivPass += 1;
+        this.nPassAtArrivLounge += 1;
         this.repos.numberOfPassengerLuggage(currentPassenger.getPassengerID(), currentPassenger);
 
         notifyAll();  // wake up Porter in takeARest()
@@ -164,8 +164,7 @@ public class ArrivalLounge {
 
         GenericIO.writeString("\n-------------TAKE A REST-------------------------");
 
-        while ((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT && this.existsPassengers) ||
-                (this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp && this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){
+        while (this.nPassAtArrivLounge < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp){
 
        // while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp) && (this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){ // && !this.changedFlight) {
             GenericIO.writeString("\nsleep takeARest");
@@ -175,15 +174,20 @@ public class ArrivalLounge {
                 e.printStackTrace();
             }
             GenericIO.writeString("\nwake up takeARest (normal state)");
+            GenericIO.writeString("Take a rest, currentflight: " + this.currentFlight);
+            GenericIO.writeString("Take a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.areAllBagsCollects());
+            if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && bagColPoint.areAllBagsCollects()) {
+                return 'E';
+            }
         }
+
+        this.nPassAtArrivLounge = 0;
         //if(this.changedFlight){
         //    this.changedFlight = false;
         //}
 
         GenericIO.writeString("\n-------------END TAKE A REST-------------------------");
-        if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && !this.doPassExist()) {
-            return 'E';
-        }
+
         return 'R';
     }
 
@@ -207,7 +211,7 @@ public class ArrivalLounge {
             repos.updateStoredBaggageCargoHold();
             return tmpBag;
         } catch (MemException e) {
-            bagColPoint.setAllBagsCollected(true);  // tell the passengers that there is no more bags arriving the bcColPoint
+            bagColPoint.setAllBagsCollected();  // tell the passengers that there is no more bags arriving the bcColPoint
             GenericIO.writeString("\nsetAllBagsCollected " + this.bagColPoint.pHoldEmpty());
             //notifyAll();  // wake up Passengers in goCollectABag()
             GenericIO.writeString("\ntrytocollectabag notify no more bags");
@@ -215,7 +219,6 @@ public class ArrivalLounge {
             // System.exit(-1);
 
             this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = true;
-            this.nArrivPass = 0;
             return null;
         }
 
@@ -256,9 +259,14 @@ public class ArrivalLounge {
         this.bagColPoint = bagColPoint;
         this.bagColPoint.setTreadmill(treadmill);
 
-        this.nArrivPass = 0;
+        this.nPassAtArrivLounge = 0;
         //this.changedFlight = true;
 
+    }
+
+    public synchronized void wakeUpForNextShift(){
+        this.porterStart();
+        notifyAll();
     }
 
     /* ******************************************** Getters and Setters ***********************************************/

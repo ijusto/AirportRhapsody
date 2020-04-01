@@ -390,10 +390,10 @@ public class GenReposInfo {
 
     public synchronized void finalReport(){
 
-        log.append(String.format("\n\n\nFinal report" ));
-        log.append(String.format("\nN. of passengers which have this airport as their final destination = %2d"));
-        log.append(String.format("\nN. of passengers in transit = %2d"));
-        log.append(String.format("\nN. of bags that should have been transported in the the planes hold = %2d"));
+        log.append("\n\n\nFinal report");
+        log.append(String.format("\nN. of passengers which have this airport as their final destination = %2d", 1));
+        log.append(String.format("\nN. of passengers in transit = %2d", 2));
+        log.append(String.format("\nN. of bags that should have been transported in the the planes hold = %2d", 3));
         log.append(String.format("\nN. of bags that were lost = %2d\n\n", missing_bags));
         printLog();
         try {

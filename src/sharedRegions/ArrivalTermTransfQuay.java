@@ -300,6 +300,11 @@ public class ArrivalTermTransfQuay {
         this.workDay += 1;
     }
 
+    public synchronized void wakeUpForNextShift(){
+        this.busdriverStart();
+        notifyAll();
+    }
+
     /* ******************************************** Getters and Setters ***********************************************/
 
     /*

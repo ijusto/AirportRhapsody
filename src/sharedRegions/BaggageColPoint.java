@@ -194,7 +194,7 @@ public class BaggageColPoint {
         repos.updatePorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
         notifyAll();  // wake up Passengers in goCollectABag()
-
+        this.setAllBagsCollected();
     }
 
     /**
@@ -259,7 +259,11 @@ public class BaggageColPoint {
         return allBagsCollects;
     }
 
-    public void setAllBagsCollected(boolean allBagsCollects) {
-        this.allBagsCollects = allBagsCollects;
+    public boolean areAllBagsCollects() {
+        return allBagsCollects;
+    }
+
+    public void setAllBagsCollected() {
+        this.allBagsCollects = true;
     }
 }

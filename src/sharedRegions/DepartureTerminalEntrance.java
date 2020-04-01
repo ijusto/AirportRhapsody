@@ -94,9 +94,8 @@ public class DepartureTerminalEntrance {
         this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
             GenericIO.writeString("NOTIFY LAST PREPARE NEXT LEG");
-            arrivLounge.porterStart();
-            arrivalQuay.busdriverStart();
-            notifyAll();
+            arrivLounge.wakeUpForNextShift();
+            arrivalQuay.wakeUpForNextShift();
         }
     }
 
