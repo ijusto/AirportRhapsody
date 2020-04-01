@@ -50,13 +50,13 @@ public class DepartureTerminalEntrance {
     /**
      *   Instantiation of the Departure Terminal Entrance.
      *
+     *     @param repos General Repository of Information.
      *     @param arrivLounge Arrival Lounge.
      *     @param arrivalQuay Arrival Terminal Transfer Quay.
-     *     @param repos General Repository of Information.
      */
 
 
-    public DepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay,GenReposInfo repos){
+    public DepartureTerminalEntrance(GenReposInfo repos, ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
@@ -116,8 +116,6 @@ public class DepartureTerminalEntrance {
         this.arrivalQuay = arrivalQuay;
         this.nPassDead = 0;
     }
-
-    /* ************************************************* Getters ******************************************************/
 
     /* ************************************************* Setters ******************************************************/
 

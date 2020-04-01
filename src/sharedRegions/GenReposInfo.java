@@ -162,7 +162,7 @@ public class GenReposInfo {
     /**
      *   Instantiation of the General Repository of Information.
      *
-     *   @param fileName ...
+     *   @param fileName Name of the log file.
      */
 
     public GenReposInfo(String fileName) {

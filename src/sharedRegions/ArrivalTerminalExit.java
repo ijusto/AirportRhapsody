@@ -50,12 +50,12 @@ public class ArrivalTerminalExit {
     /**
      *   Instantiation of the Arrival Terminal Exit.
      *
+     *     @param repos General Repository of Information.
      *     @param arrivLounge Arrival Lounge.
      *     @param arrivalQuay Arrival Terminal Transfer Quay.
-     *     @param repos General Repository of Information.
      */
 
-    public ArrivalTerminalExit(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay, GenReposInfo repos){
+    public ArrivalTerminalExit(GenReposInfo repos, ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
@@ -68,14 +68,11 @@ public class ArrivalTerminalExit {
 
     public synchronized boolean exitPassenger(){
         GenericIO.writeString("\nexitPassenger");
-        //GenericIO.writeString("\nNAO POSSO MAIS");
         this.nPassDead += 1;
         GenericIO.writeString("\nExited n pass in arrterm: " + this.nPassDead);
         if( !((this.nPassDead + this.departureTerm.getNPassDead()) < SimulationParameters.N_PASS_PER_FLIGHT)){
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
-            GenericIO.writeString("\nMESMO QUE TU TENTES");
-            //System.exit(-1);
             return true;
         }
         return false;

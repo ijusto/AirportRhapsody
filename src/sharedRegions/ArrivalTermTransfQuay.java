@@ -315,9 +315,7 @@ public class ArrivalTermTransfQuay {
         this.busDriverStart();
         notifyAll();
     }
-
-    /* ************************************************* Getters ******************************************************/
-
+    
     /* ************************************************* Setters ******************************************************/
 
     /**
@@ -325,7 +323,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public void setNoPassAtAirport() {
-        this.allPassDead = true; //false;
+        this.allPassDead = true;
         this.busDriverStop = true;
     }
 

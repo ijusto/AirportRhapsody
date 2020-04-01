@@ -71,13 +71,13 @@ public class ArrivalLounge {
     /**
      *   Instantiation of the Arrival Lounge.
      *
+     *     @param repos general repository of information.
+     *     @param bagColPoint baggage collection point.
      *     @param destStat destination state of the bags.
      *     @param nBagsPHold number of bags per passenger and flight.
-     *     @param bagColPoint baggage collection point.
-     *     @param repos general repository of information.
      */
 
-    public ArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos)
+    public ArrivalLounge(GenReposInfo repos, BaggageColPoint bagColPoint, char[][] destStat, int[][] nBagsPHold)
             throws MemException {
 
         this.repos = repos;
@@ -217,8 +217,6 @@ public class ArrivalLounge {
             GenericIO.writeString("\nsetAllBagsCollected " + this.bagColPoint.pHoldEmpty());
             //notifyAll();  // wake up Passengers in goCollectABag()
             GenericIO.writeString("\ntrytocollectabag notify no more bags");
-            // GenericIO.writeString("ACABOU VÊ SE ENTENDES");
-            // System.exit(-1);
 
             this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = true;
             return null;
@@ -263,7 +261,6 @@ public class ArrivalLounge {
         this.bagColPoint.setTreadmill(treadmill);
 
         this.nPassAtArrivL = 0;
-        //this.changedFlight = true;
         this.reset = true;
     }
 
@@ -285,7 +282,7 @@ public class ArrivalLounge {
      */
 
     public void setNoPassAtAirport() {
-        this.allPassDead = true; //false;
+        this.allPassDead = true;
     }
 
     /**

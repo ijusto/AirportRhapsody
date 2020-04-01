@@ -88,8 +88,6 @@ public class DepartureTermTransfQuay {
 
     /* *************************************************Bus Driver*************************************************** */
 
-
-
     /**
      *   BusDriver informs the passengers they can leave the bus (raised by the BusDriver).
      */

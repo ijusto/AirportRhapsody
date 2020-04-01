@@ -73,24 +73,20 @@ public class AirportConcurrentVersion {
             }
         }
 
-        /*
-         *   instantiation of the shared regions
-         */
+        /* instantiation of the shared regions */
         repos = new GenReposInfo(fileName);
         bagColPoint = new BaggageColPoint(repos);
         bagRecOffice = new BaggageReclaimOffice(repos);
         tmpStorageArea = new TemporaryStorageArea(repos);
-        arrivLounge = new ArrivalLounge(destStat, nBagsPHold, bagColPoint, repos);
+        arrivLounge = new ArrivalLounge(repos, bagColPoint, destStat, nBagsPHold);
         arrivalQuay = new ArrivalTermTransfQuay(repos);
         departureQuay = new DepartureTermTransfQuay(repos);
-        arrivalTerm = new ArrivalTerminalExit(arrivLounge, arrivalQuay, repos);
-        departureTerm = new DepartureTerminalEntrance(arrivLounge, arrivalQuay, repos);
+        arrivalTerm = new ArrivalTerminalExit(repos, arrivLounge, arrivalQuay);
+        departureTerm = new DepartureTerminalEntrance(repos, arrivLounge, arrivalQuay);
         arrivalTerm.setDepartureTerminalRef(departureTerm);
         departureTerm.setArrivalTerminalRef(arrivalTerm);
 
-        /*
-         *   instantiation of the entities
-         */
+        /* instantiation of the entities */
         Passenger[][] passengers = new Passenger[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
         Porter porter;
         BusDriver busDriver;
