@@ -19,35 +19,35 @@ import java.util.Map;
 
 public class ArrivalLounge {
 
+    /**
+     *   General repository of information.
+     */
+
+    private GenReposInfo repos;
+
+    /**
+     *   Baggage Collection Point.
+     */
+
+    private BaggageColPoint bagColPoint;
+
     /*
      *   Stack of bags on the plane's hold.
      */
 
-    private MemStack<Bag> bagStack;
+    private MemStack<Bag> pHoldBagStack;
 
     /*
      *   Number of passengers that already arrived.
      */
 
-    private int nPassAtArrivLounge;
+    private int nPassAtArrivL;
 
     /*
      *
      */
 
     private boolean existsPassengers;
-
-    /*
-     *   General repository of information.
-     */
-
-    private GenReposInfo repos;
-
-    /*
-     *   Baggage Collection Point.
-     */
-
-    private BaggageColPoint bagColPoint;
 
     /*
      *
@@ -58,6 +58,16 @@ public class ArrivalLounge {
      *
      */
     private int currentFlight;
+
+    /*
+     *
+     */
+    private boolean reset;
+
+    /*
+     *
+     */
+    private int shift;
 
     /**
      *
@@ -77,28 +87,25 @@ public class ArrivalLounge {
     public ArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint, GenReposInfo repos)
             throws MemException {
 
-        this.existsPassengers = true;
-        //this.changedFlight = false;
         this.repos = repos;
+
+        this.existsPassengers = true;
 
         this.currentFlight = 0;
         repos.updateFlightNumber(this.currentFlight);
 
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
-
         int nTotalBags = 0;
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
             nTotalBags += nBagsPHold[nPass][this.currentFlight];
             nBagsPerPass.put(nPass, nBagsPHold[nPass][this.currentFlight]);
         }
-
         repos.initializeCargoHold(nTotalBags);
-        this.bagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
-
+        this.pHoldBagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
             for(int bag = 0; bag < nBagsPHold[nPass][this.currentFlight]; bag++){
-                this.bagStack.write(new Bag(destStat[nPass][this.currentFlight], nPass));
+                this.pHoldBagStack.write(new Bag(destStat[nPass][this.currentFlight], nPass));
             }
             MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);        // FIFO instantiation
             treadmill.put(nPass, bagPassFIFO);
@@ -107,9 +114,12 @@ public class ArrivalLounge {
         this.bagColPoint = bagColPoint;
         this.bagColPoint.setTreadmill(treadmill);
 
-        this.nPassAtArrivLounge = 0;
+        this.nPassAtArrivL = 0;
 
         this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = false;
+        this.reset = false;
+
+        this.shift = 0;
 
     }
 
@@ -129,7 +139,7 @@ public class ArrivalLounge {
         GenericIO.writeString("\nwhatShouldIDo");
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        this.nPassAtArrivLounge += 1;
+        this.nPassAtArrivL += 1;
         this.repos.numberOfPassengerLuggage(currentPassenger.getPassengerID(), currentPassenger);
 
         notifyAll();  // wake up Porter in takeARest()
@@ -164,7 +174,7 @@ public class ArrivalLounge {
 
         GenericIO.writeString("\n-------------TAKE A REST-------------------------");
 
-        while (this.nPassAtArrivLounge < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp){
+        while ((this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT || bagColPoint.areAllBagsCollects()) && !this.reset){
 
        // while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp) && (this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){ // && !this.changedFlight) {
             GenericIO.writeString("\nsleep takeARest");
@@ -179,12 +189,17 @@ public class ArrivalLounge {
             if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && bagColPoint.areAllBagsCollects()) {
                 return 'E';
             }
+            if(this.shift < this.currentFlight){
+                break;
+            }
         }
 
-        this.nPassAtArrivLounge = 0;
-        //if(this.changedFlight){
-        //    this.changedFlight = false;
-        //}
+        if(this.reset){
+            this.reset = false;
+        }
+        if(this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT){
+            this.nPassAtArrivL = 0;
+        }
 
         GenericIO.writeString("\n-------------END TAKE A REST-------------------------");
 
@@ -207,7 +222,7 @@ public class ArrivalLounge {
         repos.updatePorterState(PorterStates.AT_THE_PLANES_HOLD);
 
         try {
-            Bag tmpBag = bagStack.read();
+            Bag tmpBag = pHoldBagStack.read();
             repos.updateStoredBaggageCargoHold();
             return tmpBag;
         } catch (MemException e) {
@@ -226,12 +241,13 @@ public class ArrivalLounge {
 
     public synchronized void resetArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint) throws MemException {
 
+        this.currentFlight += 1;
+        notifyAll();
         GenericIO.writeString("\nresetArrivalLounge");
         GenericIO.writeString("Porter stoped");
         do {
         } while (this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp);
         GenericIO.writeString("Porter started");
-        this.currentFlight += 1;
         repos.updateFlightNumber(this.currentFlight);
 
         this.existsPassengers = true;
@@ -246,11 +262,11 @@ public class ArrivalLounge {
         }
 
         repos.initializeCargoHold(nTotalBags);
-        this.bagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
+        this.pHoldBagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
 
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
             for(int bag = 0; bag < nBagsPHold[nPass][this.currentFlight]; bag++){
-                this.bagStack.write(new Bag(destStat[nPass][this.currentFlight], nPass));
+                this.pHoldBagStack.write(new Bag(destStat[nPass][this.currentFlight], nPass));
             }
             MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);        // FIFO instantiation
             treadmill.put(nPass, bagPassFIFO);
@@ -259,21 +275,29 @@ public class ArrivalLounge {
         this.bagColPoint = bagColPoint;
         this.bagColPoint.setTreadmill(treadmill);
 
-        this.nPassAtArrivLounge = 0;
+        this.nPassAtArrivL = 0;
         //this.changedFlight = true;
-
+        this.reset = true;
+        this.shift += 1;
     }
 
-    public synchronized void wakeUpForNextShift(){
+    public synchronized void wakeUpForNextFlight(){
         this.porterStart();
-        notifyAll();
     }
 
-    /* ******************************************** Getters and Setters ***********************************************/
+    /* ************************************************* Getters ******************************************************/
+
+    /**
+     *
+     *   @return existsPassengers
+     */
 
     public boolean doPassExist() {
         return this.existsPassengers;
     }
+
+    /* ************************************************* Setters ******************************************************/
+
 
     /**
      *   Setter for existsPassengers to false.
@@ -283,7 +307,11 @@ public class ArrivalLounge {
         this.existsPassengers = false;
     }
 
-    public synchronized void porterStart(){
+    /**
+     *   Setter for existsPassengers to false.
+     */
+
+    public void porterStart(){
         this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = false;
     }
 

@@ -60,6 +60,11 @@ public class TemporaryStorageArea {
         }
     }
 
+    /**
+     *
+     *   @throws MemException
+     */
+
     public synchronized void resetTemporaryStorageArea() throws MemException {
         GenericIO.writeString("\nresetTemporaryStorageArea");
         tmpStorageStack = new MemStack<>(new Bag [SimulationParameters.N_PASS_PER_FLIGHT * SimulationParameters.N_BAGS_PER_PASS]);     // stack instantiation

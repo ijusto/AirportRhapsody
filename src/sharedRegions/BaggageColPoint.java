@@ -231,7 +231,7 @@ public class BaggageColPoint {
         this.porterAwake = false;
     }
 
-    /* ******************************************** Getters and Setters ***********************************************/
+    /* ************************************************* Getters ******************************************************/
 
     /*
      *
@@ -243,6 +243,26 @@ public class BaggageColPoint {
 
     /**
      *   ...
+     *    @return allBagsCollects
+     */
+
+    public boolean pHoldEmpty() {
+        return allBagsCollects;
+    }
+
+    /**
+     *
+     *   @return allBagsCollects
+     */
+
+    public boolean areAllBagsCollects() {
+        return allBagsCollects;
+    }
+
+    /* ************************************************* Setters ******************************************************/
+
+    /**
+     *   ...
      *
      *   @param treadmill ...
      */
@@ -251,17 +271,9 @@ public class BaggageColPoint {
         this.treadmill = treadmill;
     }
 
-    /*
+    /**
      *
      */
-
-    public boolean pHoldEmpty() {
-        return allBagsCollects;
-    }
-
-    public boolean areAllBagsCollects() {
-        return allBagsCollects;
-    }
 
     public void setAllBagsCollected() {
         this.allBagsCollects = true;

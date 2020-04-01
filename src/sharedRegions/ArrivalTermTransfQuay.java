@@ -19,18 +19,24 @@ import main.SimulationParameters;
 public class ArrivalTermTransfQuay {
 
     /*
+     *   General Repository of Information.
+     */
+
+    private GenReposInfo repos;
+
+    /*
      *    FIFO of passengers that want to enter the bus.
      */
 
-    private MemFIFO<Passenger> waitingPass;
+    private MemFIFO<Passenger> waitingLine;
 
-    /*
+    /**
      *
      */
 
     private int nPassOnTheBus;
 
-    /*
+    /**
      *
      */
 
@@ -39,21 +45,22 @@ public class ArrivalTermTransfQuay {
     /**
      *
      */
-    private int workDay;
 
-    /*
+    private int nFlights;
+
+    /**
      *
      */
 
     private int nWaitingPass;
 
-    /*
+    /**
      *
      */
 
     private boolean allowBoardBus;
 
-    /*
+    /**
      *
      */
 
@@ -62,13 +69,8 @@ public class ArrivalTermTransfQuay {
     /**
      *
      */
-    private boolean busdriverStop;
 
-    /*
-     *   General Repository of Information.
-     */
-
-    private GenReposInfo repos;
+    private boolean busDriverStop;
 
     /**
      *   Instantiation of the Arrival Terminal Transfer Quay.
@@ -78,14 +80,14 @@ public class ArrivalTermTransfQuay {
 
     public ArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
         this.repos = repos;
-        this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
+        this.waitingLine = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.nPassOnTheBus = 0;
         this.allowBoardBus = false;
         this.existsPassengers = true;
         this.nWaitingPass = 0;
         this.aboutToEnter = 0;
-        this.workDay = 0;
-        this.busdriverStop = false;
+        this.nFlights = 0;
+        this.busDriverStop = false;
     }
 
     /* ************************************************Passenger***************************************************** */
@@ -104,7 +106,7 @@ public class ArrivalTermTransfQuay {
         repos.updatePassengerState(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
 
         try {
-            waitingPass.write(passenger);
+            waitingLine.write(passenger);
             repos.passengerQueueStateIn(passenger.getPassengerID());
         } catch (MemException e) {
             e.printStackTrace();
@@ -130,7 +132,7 @@ public class ArrivalTermTransfQuay {
                 e.printStackTrace();
             }
             GenericIO.writeString("\nwake up takeABus");
-            GenericIO.writeString("this.waitingPass.isEmpty(): " + this.waitingPass.isEmpty());
+            GenericIO.writeString("this.waitingPass.isEmpty(): " + this.waitingLine.isEmpty());
         }
         GenericIO.writeString("\nexit takeABus");
         this.aboutToEnter += 1;
@@ -152,9 +154,9 @@ public class ArrivalTermTransfQuay {
 
         try{
             if(this.nPassOnTheBus < SimulationParameters.BUS_CAP) {
-                this.waitingPass.read();
+                this.waitingLine.read();
                 this.nWaitingPass -= 1;
-                this.incPassOnTheBus();
+                this.nPassOnTheBus += 1;
                 repos.passengerQueueStateOut(passenger.getPassengerID());
                 repos.busSeatStateIn(passenger.getPassengerID());
 
@@ -172,7 +174,7 @@ public class ArrivalTermTransfQuay {
     /* ************************************************Bus Driver**************************************************** */
 
     /**
-     *   Operation of checking if the passengers all left and the day ended (raised by the BusDriver).
+     *   Operation of checking if all the flights ended (raised by the BusDriver).
      *
      *     @return <li> 'F', if end of day </li>
      *             <li> 'R', otherwise </li>
@@ -180,12 +182,12 @@ public class ArrivalTermTransfQuay {
 
     public synchronized char hasDaysWorkEnded(){
         GenericIO.writeString("\nhasDaysWorkEnded");
-        GenericIO.writeString("\nworkday: "+this.workDay);
+        GenericIO.writeString("\nworkday: "+this.nFlights);
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        if(this.workDay == SimulationParameters.N_FLIGHTS - 1 && !this.existsPassengers){
+        if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && !this.existsPassengers){
             return 'F';
         }
 
@@ -227,20 +229,20 @@ public class ArrivalTermTransfQuay {
 
 
         GenericIO.writeString("this.nWaitingPass == 0 : " + (this.nWaitingPass == 0));
-        GenericIO.writeString("this.busdriverStop: " + this.busdriverStop);
-        GenericIO.writeString("this.workDay < SimulationParameters.N_FLIGHTS - 1: " + (this.workDay < SimulationParameters.N_FLIGHTS - 1));
+        GenericIO.writeString("this.busdriverStop: " + this.busDriverStop);
+        GenericIO.writeString("this.workDay < SimulationParameters.N_FLIGHTS - 1: " + (this.nFlights < SimulationParameters.N_FLIGHTS - 1));
 
-        GenericIO.writeString("\nthis.waitingPass.isEmpty(): " + this.waitingPass.isEmpty());
+        GenericIO.writeString("\nthis.waitingPass.isEmpty(): " + this.waitingLine.isEmpty());
         while(true){// || this.busdriverStop) && this.workDay < SimulationParameters.N_FLIGHTS - 1){// this.existsPassengers){
             try {
                 wait(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(this.workDay == SimulationParameters.N_FLIGHTS - 1 && !this.existsPassengers){
+            if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && !this.existsPassengers){
                 break;
             }
-            if(!this.waitingPass.isEmpty()){
+            if(!this.waitingLine.isEmpty()){
                 GenericIO.writeString("\nWTTTTFFFFFFFFFFFFFFFFFFFFFFF");
                 break;
             }
@@ -284,48 +286,54 @@ public class ArrivalTermTransfQuay {
         GenericIO.writeString("\nPassengers on the bus at arr quay " + this.nPassOnTheBus);
     }
 
+    /**
+     *
+     */
+
     public synchronized void resetArrivalTermTransfQuay() throws MemException {
         GenericIO.writeString("\nresetArrivalTermTransfQuay");
         GenericIO.writeString("\nbusdriver stoped");
         do {
-        } while (this.busdriverStop);
+        } while (this.busDriverStop);
         GenericIO.writeString("\nbusdriver start");
-        this.waitingPass = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
+        this.waitingLine = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.nPassOnTheBus = 0;
         this.allowBoardBus = false;
         this.existsPassengers = true;
         this.nWaitingPass = 0;
         this.aboutToEnter = 0;
-        this.busdriverStop = false;
-        this.workDay += 1;
+        this.busDriverStop = false;
+        this.nFlights += 1;
     }
 
-    public synchronized void wakeUpForNextShift(){
-        this.busdriverStart();
+    /**
+     *
+     */
+
+    public synchronized void wakeUpForNextFlight(){
+        this.busDriverStart();
         notifyAll();
     }
 
-    /* ******************************************** Getters and Setters ***********************************************/
+    /* ************************************************* Getters ******************************************************/
 
-    /*
+    /* ************************************************* Setters ******************************************************/
+
+    /**
      *
      */
 
     public void setNoPassAtAirport() {
         this.existsPassengers = false;
-        this.busdriverStop = true;
+        this.busDriverStop = true;
     }
 
-    public void incPassOnTheBus(){
-        this.nPassOnTheBus += 1;
-    }
+    /**
+     *
+     */
 
-    public void decPassOnTheBus(){
-        this.nPassOnTheBus -= 1;
-    }
-
-    public synchronized void busdriverStart() {
-        this.busdriverStop = false;
+    public synchronized void busDriverStart() {
+        this.busDriverStop = false;
     }
 
 }

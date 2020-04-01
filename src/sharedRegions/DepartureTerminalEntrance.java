@@ -39,10 +39,10 @@ public class DepartureTerminalEntrance {
     private ArrivalTerminalExit arrivalTerm;
 
     /*
-     *
+     *   Number of passengers of the current flight/shift that left the airport at the Departure Terminal.
      */
 
-    private int termPass;
+    private int nPassDead;
 
     /**
      *   Instantiation of the Departure Terminal Entrance.
@@ -57,7 +57,7 @@ public class DepartureTerminalEntrance {
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
-        this.termPass = 0;
+        this.nPassDead = 0;
     }
 
     /*
@@ -66,9 +66,9 @@ public class DepartureTerminalEntrance {
 
     public synchronized boolean exitPassenger(){
         GenericIO.writeString("\nexitPassenger");
-        this.termPass += 1;
-        GenericIO.writeString("\nExited n pass in dpterm: " + this.termPass);
-        if( !((this.termPass + this.arrivalTerm.getTermPass()) < SimulationParameters.N_PASS_PER_FLIGHT)){
+        this.nPassDead += 1;
+        GenericIO.writeString("\nExited n pass in dpterm: " + this.nPassDead);
+        if( !((this.nPassDead + this.arrivalTerm.getNPassDead()) < SimulationParameters.N_PASS_PER_FLIGHT)){
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
             GenericIO.writeString("\nNAO VALE A PENA");
@@ -94,8 +94,8 @@ public class DepartureTerminalEntrance {
         this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
             GenericIO.writeString("NOTIFY LAST PREPARE NEXT LEG");
-            arrivLounge.wakeUpForNextShift();
-            arrivalQuay.wakeUpForNextShift();
+            arrivLounge.wakeUpForNextFlight();
+            arrivalQuay.wakeUpForNextFlight();
         }
     }
 
@@ -103,17 +103,19 @@ public class DepartureTerminalEntrance {
         GenericIO.writeString("\nresetDepartureTerminalEntrance");
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
-        this.termPass = 0;
+        this.nPassDead = 0;
     }
 
-    /* ******************************************** Getters and Setters ***********************************************/
+    /* ************************************************* Getters ******************************************************/
+
+    /* ************************************************* Setters ******************************************************/
 
     /*
      *
      */
 
-    public int getTermPass(){
-        return this.termPass;
+    public int getNPassDead(){
+        return this.nPassDead;
     }
 
     /**

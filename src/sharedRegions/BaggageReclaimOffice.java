@@ -19,7 +19,6 @@ public class BaggageReclaimOffice {
 
     private GenReposInfo repos;
 
-
     /**
      *   Instantiation of the Baggage Collection Point.
      *

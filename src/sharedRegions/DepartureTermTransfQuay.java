@@ -24,13 +24,13 @@ public class DepartureTermTransfQuay {
     /*
      *
      */
-    private boolean letPassOff;
+    private boolean busDoorsOpen;
 
     /*
      *
      */
 
-    private int passOnTheBus;
+    private int nPassOnTheBus;
 
     /**
      *   Instantiation of the Departure Terminal Transfer Quay.
@@ -40,8 +40,8 @@ public class DepartureTermTransfQuay {
 
     public DepartureTermTransfQuay(GenReposInfo repos){
         this.repos = repos;
-        this.letPassOff = false;
-        this.passOnTheBus = -1;
+        this.busDoorsOpen = false;
+        this.nPassOnTheBus = -1;
     }
 
 
@@ -66,7 +66,7 @@ public class DepartureTermTransfQuay {
         repos.updatePassengerState(passenger.getPassengerID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         GenericIO.writeString("\npass that left the bus(id): " + passenger.getPassengerID());
 
-        while(!this.doesBDLetPassOff()) {
+        while(!this.canPassLeaveTheBus()) {
             GenericIO.writeString("\nsleep leaveTheBus");
             try {
                 wait();
@@ -74,15 +74,15 @@ public class DepartureTermTransfQuay {
                 e.printStackTrace();
             }
             GenericIO.writeString("\nwake up leaveTheBus");
-            GenericIO.writeString("\nDBDLPO: " + this.doesBDLetPassOff());
+            GenericIO.writeString("\nDBDLPO: " + this.canPassLeaveTheBus());
         }
 
-        this.passOnTheBus -= 1;
-        GenericIO.writeString("\na pass left, nPass remaining: " + this.getPassOnTheBus());
+        this.nPassOnTheBus -= 1;
+        GenericIO.writeString("\na pass left, nPass remaining: " + this.getNPassOnTheBus());
         repos.busSeatStateOut(passenger.getPassengerID());
-        if(this.getPassOnTheBus() == 0){
+        //if(this.getnPassOnTheBus() == 0){
             notifyAll();  // wake up Bus Driver in parkTheBusAndLetPassOff()
-        }
+        //}
 
     }
 
@@ -108,14 +108,14 @@ public class DepartureTermTransfQuay {
         assert(busDriver.getStat() == BusDriverStates.DRIVING_FORWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
-        this.setPassOnTheBus(busDriver.getNPassOnTheBus());
-        GenericIO.writeString("\nPassengers on the bus at dep quay " + this.passOnTheBus);
-        GenericIO.writeString("\nBus driver set nPass: " + this.getPassOnTheBus());
+        this.setNPassOnTheBus(busDriver.getNPassOnTheBus());
+        GenericIO.writeString("\nPassengers on the bus at dep quay " + this.nPassOnTheBus);
+        GenericIO.writeString("\nBus driver set nPass: " + this.getNPassOnTheBus());
 
-        this.bdLetPassOff();
+        this.pleaseLeaveTheBus();
         notifyAll();  // wake up Passengers in leaveTheBus()
 
-        while(this.getPassOnTheBus() != 0) {
+        while(this.getNPassOnTheBus() != 0) {
             GenericIO.writeString("\nsleep parkTheBusAndLetPassOff");
             try {
                 wait();
@@ -125,32 +125,57 @@ public class DepartureTermTransfQuay {
             GenericIO.writeString("\nwake up parkTheBusAndLetPassOff");
         }
 
-        busDriver.setNPassOnTheBus(this.getPassOnTheBus());
-        this.letPassOff = false;
+        busDriver.setNPassOnTheBus(this.getNPassOnTheBus());
+        this.busDoorsOpen = false;
     }
 
-    public void setPassOnTheBus(int passOnTheBus) {
-        this.passOnTheBus = passOnTheBus;
-    }
-
-
-    public int getPassOnTheBus() {
-        return this.passOnTheBus;
-    }
-
-    public void bdLetPassOff() {
-        this.letPassOff = true;
-    }
-
-    public boolean doesBDLetPassOff() {
-        return this.letPassOff;
-    }
+    /**
+     *
+     */
 
     public synchronized void resetDepartureTermTransfQuay(){
         GenericIO.writeString("\nresetDepartureTermTransfQuay");
         //while(true){if(this.letPassOff){break;}}
-        this.letPassOff = false;
-        this.passOnTheBus = -1;
+        this.busDoorsOpen = false;
+        this.nPassOnTheBus = -1;
+    }
+
+    /* ************************************************* Getters ******************************************************/
+
+    /**
+     *
+     *    @return passOnTheBus
+     */
+
+    public int getNPassOnTheBus() {
+        return this.nPassOnTheBus;
+    }
+
+    /**
+     *
+     *    @return letPassOff
+     */
+    public boolean canPassLeaveTheBus() {
+        return this.busDoorsOpen;
+    }
+
+    /* ************************************************* Setters ******************************************************/
+
+    /**
+     *
+     *    @param nPassOnTheBus
+     */
+
+    public void setNPassOnTheBus(int nPassOnTheBus) {
+        this.nPassOnTheBus = nPassOnTheBus;
+    }
+
+    /**
+     *
+     */
+
+    public void pleaseLeaveTheBus() {
+        this.busDoorsOpen = true;
     }
 
 }

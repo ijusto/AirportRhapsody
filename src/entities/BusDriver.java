@@ -14,23 +14,15 @@ import sharedRegions.GenReposInfo;
 public class BusDriver extends Thread {
 
     /**
-     *  State of the driver
+     *  General repository of information.
      *
-     *    @serialField Stat
+     *    @serialField repos
      */
 
-    private BusDriverStates Stat;
+    GenReposInfo repos;
 
     /**
-     *  Number os passengers on the bus.
-     *
-     *    @serialField nPass
-     */
-
-    private int nPassOnTheBus;
-
-    /**
-     *  ...
+     *   Arrival Terminal Transfer Quay.
      *
      *    @serialField arrivalTerminalQuay
      */
@@ -38,7 +30,7 @@ public class BusDriver extends Thread {
     ArrivalTermTransfQuay arrivalTerminalQuay;
 
     /**
-     *  ...
+     *   Departure Terminal Transfer Quay.
      *
      *    @serialField departureTransferQuay
      */
@@ -46,18 +38,28 @@ public class BusDriver extends Thread {
     DepartureTermTransfQuay departureTransferQuay;
 
     /**
-     *  ...
+     *   State of the driver.
      *
-     *    @serialField arrivalTerminalQuay
+     *    @serialField Stat
      */
 
-    GenReposInfo repos;
+    private BusDriverStates Stat;
+
+    /**
+     *   Number os passengers on the bus.
+     *
+     *    @serialField nPass
+     */
+
+    private int nPassOnTheBus;
 
     /**
      *  Instantiation of the thread BusDriver.
      *
-     *    @param arrivalTerminalQuay ...
-     *    @param departureTransferQuay ...
+     *    @param Stat State of the driver.
+     *    @param arrivalTerminalQuay Arrival Terminal Transfer Quay.
+     *    @param departureTransferQuay Departure Terminal Transfer Quay.
+     *    @param repos General Repository of Information.
      */
 
     public BusDriver(BusDriverStates Stat, ArrivalTermTransfQuay arrivalTerminalQuay,
@@ -70,7 +72,7 @@ public class BusDriver extends Thread {
     }
 
     /**
-     *  Life cycle of the thread BusDriver.
+     *   Life cycle of the thread BusDriver.
      */
 
     @Override
@@ -87,10 +89,9 @@ public class BusDriver extends Thread {
 
     /**
      *
-     *
      */
 
-    public void goToArrivalTerminal(){
+    public synchronized void goToArrivalTerminal(){
 
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_BACKWARD);
@@ -99,10 +100,9 @@ public class BusDriver extends Thread {
 
     /**
      *
-     *
      */
 
-    public void goToDepartureTerminal(){
+    public synchronized void goToDepartureTerminal(){
 
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_FORWARD);
@@ -110,10 +110,10 @@ public class BusDriver extends Thread {
 
     }
 
-    /* ******************************************** Getters and Setters ***********************************************/
+    /* ************************************************* Getters ******************************************************/
 
     /**
-     *  State of the BusDriver
+     *   State of the BusDriver.
      *
      *    @return Stat
      */
@@ -122,27 +122,37 @@ public class BusDriver extends Thread {
         return Stat;
     }
 
-    /*
+
+    /**
+     *   Number os passengers on the bus.
      *
+     *    @return nPassOnTheBus
+     */
+
+    public int getNPassOnTheBus() {
+        return this.nPassOnTheBus;
+    }
+
+    /* ************************************************* Setters ******************************************************/
+
+    /**
+     *   ...
+     *
+     *    @param stat Bus Driver State.
      */
 
     public void setStat(BusDriverStates stat) {
         Stat = stat;
     }
 
-    /*
+    /**
+     *   ...
      *
+     *    @param nPassOnTheBus Number os passengers on the bus.
      */
 
     public void setNPassOnTheBus(int nPassOnTheBus) {
         this.nPassOnTheBus = nPassOnTheBus;
     }
 
-    /*
-     *
-     */
-
-    public int getNPassOnTheBus() {
-        return this.nPassOnTheBus;
-    }
 }
