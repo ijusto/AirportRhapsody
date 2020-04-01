@@ -64,7 +64,7 @@ public class ArrivalTermTransfQuay {
      *
      */
 
-    private boolean existsPassengers;
+    private boolean allPassDead;
 
     /**
      *
@@ -83,7 +83,7 @@ public class ArrivalTermTransfQuay {
         this.waitingLine = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.nPassOnTheBus = 0;
         this.allowBoardBus = false;
-        this.existsPassengers = true;
+        this.allPassDead = false;
         this.nWaitingPass = 0;
         this.aboutToEnter = 0;
         this.nFlights = 0;
@@ -132,7 +132,7 @@ public class ArrivalTermTransfQuay {
                 e.printStackTrace();
             }
             GenericIO.writeString("\nwake up takeABus");
-            GenericIO.writeString("this.waitingPass.isEmpty(): " + this.waitingLine.isEmpty());
+            GenericIO.writeString("\nthis.waitingPass.isEmpty(): " + this.waitingLine.isEmpty());
         }
         GenericIO.writeString("\nexit takeABus");
         this.aboutToEnter += 1;
@@ -187,7 +187,7 @@ public class ArrivalTermTransfQuay {
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && !this.existsPassengers){
+        if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){
             return 'F';
         }
 
@@ -228,18 +228,19 @@ public class ArrivalTermTransfQuay {
         //        || (this.busdriverStop && this.workDay < SimulationParameters.N_FLIGHTS - 1)){
 
 
-        GenericIO.writeString("this.nWaitingPass == 0 : " + (this.nWaitingPass == 0));
-        GenericIO.writeString("this.busdriverStop: " + this.busDriverStop);
-        GenericIO.writeString("this.workDay < SimulationParameters.N_FLIGHTS - 1: " + (this.nFlights < SimulationParameters.N_FLIGHTS - 1));
+        GenericIO.writeString("\nthis.nWaitingPass == 0 : " + (this.nWaitingPass == 0));
+        GenericIO.writeString("\nthis.busdriverStop: " + this.busDriverStop);
+        GenericIO.writeString("\nthis.workDay == SimulationParameters.N_FLIGHTS - 1: " + (this.nFlights == SimulationParameters.N_FLIGHTS - 1));
 
         GenericIO.writeString("\nthis.waitingPass.isEmpty(): " + this.waitingLine.isEmpty());
+        GenericIO.writeString("\nthis.allPassDead " + this.allPassDead);
         while(true){// || this.busdriverStop) && this.workDay < SimulationParameters.N_FLIGHTS - 1){// this.existsPassengers){
             try {
                 wait(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && !this.existsPassengers){
+            if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){ //!this.busDriverStop){
                 break;
             }
             if(!this.waitingLine.isEmpty()){
@@ -299,7 +300,7 @@ public class ArrivalTermTransfQuay {
         this.waitingLine = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.nPassOnTheBus = 0;
         this.allowBoardBus = false;
-        this.existsPassengers = true;
+        this.allPassDead = false;
         this.nWaitingPass = 0;
         this.aboutToEnter = 0;
         this.busDriverStop = false;
@@ -324,7 +325,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public void setNoPassAtAirport() {
-        this.existsPassengers = false;
+        this.allPassDead = true; //false;
         this.busDriverStop = true;
     }
 

@@ -94,7 +94,7 @@ public class ArrivalTerminalExit {
 
         this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
-            GenericIO.writeString("NOTIFY LAST GO HOME");
+            GenericIO.writeString("\nNOTIFY LAST GO HOME");
             arrivLounge.wakeUpForNextFlight();
             arrivalQuay.wakeUpForNextFlight();
         }

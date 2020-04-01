@@ -93,7 +93,7 @@ public class DepartureTerminalEntrance {
 
         this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
-            GenericIO.writeString("NOTIFY LAST PREPARE NEXT LEG");
+            GenericIO.writeString("\nNOTIFY LAST PREPARE NEXT LEG");
             arrivLounge.wakeUpForNextFlight();
             arrivalQuay.wakeUpForNextFlight();
         }

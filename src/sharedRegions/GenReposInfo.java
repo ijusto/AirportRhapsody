@@ -129,6 +129,24 @@ public class GenReposInfo {
 
     int missing_bags;
 
+    /*
+     *
+     */
+
+    int transPassTotal;
+
+    /*
+     *
+     */
+
+    int finalPassTotal;
+
+    /*
+     *
+     */
+
+    int nrTotal;
+
     /**
      *
      */
@@ -173,6 +191,9 @@ public class GenReposInfo {
         SR = 0;
         busQueue = 0;
         missing_bags = 0;
+        nrTotal = 0;
+        transPassTotal = 0;
+        finalPassTotal = 0;
 
         passengerSituation = new String[SimulationParameters.N_PASS_PER_FLIGHT];
         totalLuggage = new int[SimulationParameters.N_PASS_PER_FLIGHT];
@@ -370,8 +391,21 @@ public class GenReposInfo {
         collectedLuggage[id] = passenger.getNA();
     }
 
-    public synchronized  void numberMissingBags(){
+    public synchronized  void missingBagReported(){
         missing_bags += 1;
+    }
+
+    public synchronized  void numberNRTotal(int nr){
+        nrTotal += nr;
+    }
+
+    public synchronized  void newPass(Passenger.SituationPassenger passSi){
+
+        if(passSi == Passenger.SituationPassenger.TRT){
+            transPassTotal += 1;
+        } else if(passSi == Passenger.SituationPassenger.FDT) {
+            finalPassTotal += 1;
+        }
     }
 
     /**
@@ -391,12 +425,14 @@ public class GenReposInfo {
     public synchronized void finalReport(){
 
         log.append("\n\n\nFinal report");
-        log.append(String.format("\nN. of passengers which have this airport as their final destination = %2d", 1));
-        log.append(String.format("\nN. of passengers in transit = %2d", 2));
-        log.append(String.format("\nN. of bags that should have been transported in the the planes hold = %2d", 3));
+        log.append(String.format("\nN. of passengers which have this airport as their final destination = %2d", this.finalPassTotal));
+        log.append(String.format("\nN. of passengers in transit = %2d", this.transPassTotal));
+        log.append(String.format("\nN. of bags that should have been transported in the the planes hold = %2d", this.nrTotal));
         log.append(String.format("\nN. of bags that were lost = %2d\n\n", missing_bags));
-        printLog();
+
         try {
+            bWritter.write(log.toString());
+            bWritter.flush();
             fw.close();
             bWritter.close();
         } catch (IOException e) {

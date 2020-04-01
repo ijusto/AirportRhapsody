@@ -47,7 +47,7 @@ public class ArrivalLounge {
      *
      */
 
-    private boolean existsPassengers;
+    private boolean allPassDead;
 
     /*
      *
@@ -63,11 +63,6 @@ public class ArrivalLounge {
      *
      */
     private boolean reset;
-
-    /*
-     *
-     */
-    private int shift;
 
     /**
      *
@@ -89,7 +84,7 @@ public class ArrivalLounge {
 
         this.repos = repos;
 
-        this.existsPassengers = true;
+        this.allPassDead = false; //true;
 
         this.currentFlight = 0;
         repos.updateFlightNumber(this.currentFlight);
@@ -119,8 +114,6 @@ public class ArrivalLounge {
         this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = false;
         this.reset = false;
 
-        this.shift = 0;
-
     }
 
     /* **************************************************Passenger*************************************************** */
@@ -141,7 +134,9 @@ public class ArrivalLounge {
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         this.nPassAtArrivL += 1;
         this.repos.numberOfPassengerLuggage(currentPassenger.getPassengerID(), currentPassenger);
-
+        this.repos.numberNRTotal(currentPassenger.getNR());
+        this.repos.newPass(currentPassenger.getSi());
+        this.reset = false;
         notifyAll();  // wake up Porter in takeARest()
 
         return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
@@ -184,19 +179,13 @@ public class ArrivalLounge {
                 e.printStackTrace();
             }
             GenericIO.writeString("\nwake up takeARest (normal state)");
-            GenericIO.writeString("Take a rest, currentflight: " + this.currentFlight);
-            GenericIO.writeString("Take a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.areAllBagsCollects());
+            GenericIO.writeString("\nTake a rest, currentflight: " + this.currentFlight);
+            GenericIO.writeString("\nTake a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.areAllBagsCollects());
             if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && bagColPoint.areAllBagsCollects()) {
                 return 'E';
             }
-            if(this.shift < this.currentFlight){
-                break;
-            }
         }
 
-        if(this.reset){
-            this.reset = false;
-        }
         if(this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT){
             this.nPassAtArrivL = 0;
         }
@@ -244,13 +233,13 @@ public class ArrivalLounge {
         this.currentFlight += 1;
         notifyAll();
         GenericIO.writeString("\nresetArrivalLounge");
-        GenericIO.writeString("Porter stoped");
+        GenericIO.writeString("\nPorter stoped");
         do {
         } while (this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp);
-        GenericIO.writeString("Porter started");
+        GenericIO.writeString("\nPorter started");
         repos.updateFlightNumber(this.currentFlight);
 
-        this.existsPassengers = true;
+        this.allPassDead = false; //true;
 
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
@@ -278,7 +267,6 @@ public class ArrivalLounge {
         this.nPassAtArrivL = 0;
         //this.changedFlight = true;
         this.reset = true;
-        this.shift += 1;
     }
 
     public synchronized void wakeUpForNextFlight(){
@@ -293,7 +281,7 @@ public class ArrivalLounge {
      */
 
     public boolean doPassExist() {
-        return this.existsPassengers;
+        return !this.allPassDead; // this.allPassDead;
     }
 
     /* ************************************************* Setters ******************************************************/
@@ -304,7 +292,7 @@ public class ArrivalLounge {
      */
 
     public void setNoPassAtAirport() {
-        this.existsPassengers = false;
+        this.allPassDead = true; //false;
     }
 
     /**
