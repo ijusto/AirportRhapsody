@@ -151,19 +151,24 @@ public class AirportConcurrentVersion {
             }
             GenericIO.writeString("\nHelp");
         }
+        GenericIO.writeString("before porter join");
 
         try {
             porter.join();
         } catch (InterruptedException e) {
             GenericIO.writeString("Main Program - One thread of Porter was interrupted.");
         }
-
+        GenericIO.writeString("after porter join / before bus driver join");
         try {
             busDriver.join();
         } catch (InterruptedException e) {
             GenericIO.writeString("Main Program - One thread of BusDriver was interrupted.");
         }
 
+
         repos.finalReport();
+
+        GenericIO.writeString("\n after final report");
+
     }
 }

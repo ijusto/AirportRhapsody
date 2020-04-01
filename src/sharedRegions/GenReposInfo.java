@@ -423,12 +423,14 @@ public class GenReposInfo {
      */
 
     public synchronized void finalReport(){
-
         log.append("\n\n\nFinal report");
         log.append(String.format("\nN. of passengers which have this airport as their final destination = %2d", this.finalPassTotal));
         log.append(String.format("\nN. of passengers in transit = %2d", this.transPassTotal));
         log.append(String.format("\nN. of bags that should have been transported in the the planes hold = %2d", this.nrTotal));
         log.append(String.format("\nN. of bags that were lost = %2d\n\n", missing_bags));
+
+
+        GenericIO.writeString(log.toString());
 
         try {
             bWritter.write(log.toString());
