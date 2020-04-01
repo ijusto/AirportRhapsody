@@ -4,7 +4,6 @@ import commonInfrastructures.MemStack;
 import entities.Bag;
 import entities.PorterStates;
 import entities.Porter;
-import genclass.GenericIO;
 import main.SimulationParameters;
 
 /**
@@ -44,7 +43,7 @@ public class TemporaryStorageArea {
      */
 
     public synchronized void carryItToAppropriateStore(Bag bag){
-        GenericIO.writeString("\ncarryItToAppropriateStore");
+        System.out.print("\ncarryItToAppropriateStore");
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
@@ -66,7 +65,7 @@ public class TemporaryStorageArea {
      */
 
     public synchronized void resetTemporaryStorageArea() throws MemException {
-        GenericIO.writeString("\nresetTemporaryStorageArea");
+        System.out.print("\nresetTemporaryStorageArea");
         tmpStorageStack = new MemStack<>(new Bag [SimulationParameters.N_PASS_PER_FLIGHT * SimulationParameters.N_BAGS_PER_PASS]);     // stack instantiation
     }
 }

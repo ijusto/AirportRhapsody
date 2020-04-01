@@ -3,7 +3,6 @@ package sharedRegions;
 import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
 import entities.*;
-import genclass.GenericIO;
 
 import java.util.Map;
 
@@ -69,12 +68,12 @@ public class BaggageColPoint {
      */
 
     public synchronized boolean goCollectABag(){
-        GenericIO.writeString("\ngoCollectABag");
+        System.out.print("\ngoCollectABag");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
-        GenericIO.writeString("\nPASSENGER AT GOCOLLECTABAG");
+        System.out.print("\nPASSENGER AT GOCOLLECTABAG");
         repos.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         /*
@@ -92,32 +91,32 @@ public class BaggageColPoint {
 
         do {
             //if(!this.porterAwake){
-            //    GenericIO.writeString("\ngoCollectABag pass: " + passenger.getPassengerID() + " porterAwake false");
+            //    System.out.print("\ngoCollectABag pass: " + passenger.getPassengerID() + " porterAwake false");
             //    continue;
             //} else
-            GenericIO.writeString("\ngoCollectABag pass: " + passenger.getPassengerID() + " nBagsInTreadmill = " + this.nBagsInTreadmill);
+            System.out.print("\ngoCollectABag pass: " + passenger.getPassengerID() + " nBagsInTreadmill = " + this.nBagsInTreadmill);
 
             if(this.pHoldEmpty() && this.treadmill.get(passenger.getPassengerID()).isEmpty()) {
-                GenericIO.writeString("\ngoCollectABag pass: " + passenger.getPassengerID() + " this.treadmill.get(passenger.getPassengerID()).isEmpty()");
+                System.out.print("\ngoCollectABag pass: " + passenger.getPassengerID() + " this.treadmill.get(passenger.getPassengerID()).isEmpty()");
                 return false;
             }
             if(!this.treadmill.get(passenger.getPassengerID()).isEmpty()){
-                GenericIO.writeString("\ngoCollectABag pass: " + passenger.getPassengerID() + " !this.treadmill.get(passenger.getPassengerID()).isEmpty()");
+                System.out.print("\ngoCollectABag pass: " + passenger.getPassengerID() + " !this.treadmill.get(passenger.getPassengerID()).isEmpty()");
                 try {
                     this.treadmill.get(passenger.getPassengerID()).read();
                     this.nBagsInTreadmill -= 1;
-                    GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
+                    System.out.print("\nBags in treadmill: " + this.nBagsInTreadmill);
                     passenger.setNA(passenger.getNA() + 1);
                     repos.updatesPassNA(passenger.getPassengerID(), passenger.getNA());
                     repos.pGetsABag();
-                    GenericIO.writeString("\nwake up gocollectabag");
-                    GenericIO.writeString(" passid " + passenger.getPassengerID());
+                    System.out.print("\nwake up gocollectabag");
+                    System.out.print(" passid " + passenger.getPassengerID());
                     return true;
                 } catch (MemException e) {
                     e.printStackTrace();
                 }
             } else if(this.pHoldEmpty()){
-                GenericIO.writeString("\ngoCollectABag pass: " + passenger.getPassengerID() + " this.pHoldEmpty()");
+                System.out.print("\ngoCollectABag pass: " + passenger.getPassengerID() + " this.pHoldEmpty()");
                 return false;
             }
 
@@ -126,7 +125,7 @@ public class BaggageColPoint {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            GenericIO.writeString("\ngoCollectABag pass wake up: " + passenger.getPassengerID());
+            System.out.print("\ngoCollectABag pass wake up: " + passenger.getPassengerID());
         } while(true);
 
     }
@@ -141,7 +140,7 @@ public class BaggageColPoint {
 
     public synchronized void noMoreBagsToCollect(){
 
-        GenericIO.writeString("\nnoMoreBagsToCollect");
+        System.out.print("\nnoMoreBagsToCollect");
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
@@ -156,7 +155,7 @@ public class BaggageColPoint {
      */
 
     public synchronized void carryItToAppropriateStore(Bag bag){
-        GenericIO.writeString("\ncarryItToAppropriateStore");
+        System.out.print("\ncarryItToAppropriateStore");
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
@@ -167,17 +166,17 @@ public class BaggageColPoint {
             this.treadmill.get(bag.getIdOwner()).write(bag);
             this.lastBagId = bag.getIdOwner();
             this.nBagsInTreadmill += 1;
-            GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
+            System.out.print("\nBags in treadmill: " + this.nBagsInTreadmill);
             repos.incBaggageCB();
             notifyAll();  // wake up Passengers in goCollectABag()
-            GenericIO.writeString("\ncarryItToAppropriateStore notify bag in treadmill from pass " + bag.getIdOwner());
+            System.out.print("\ncarryItToAppropriateStore notify bag in treadmill from pass " + bag.getIdOwner());
         } catch (MemException e) {
             e.printStackTrace();
         }
     }
 
     public synchronized void resetBaggageColPoint(){
-        GenericIO.writeString("\nresetBaggageColPoint");
+        System.out.print("\nresetBaggageColPoint");
         this.nBagsInTreadmill = 0;
         this.allBagsCollects = false;
         this.lastBagId = -1;

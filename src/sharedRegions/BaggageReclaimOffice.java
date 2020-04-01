@@ -2,7 +2,6 @@ package sharedRegions;
 
 import entities.Passenger;
 import entities.PassengerStates;
-import genclass.GenericIO;
 
 /**
  *   ...
@@ -34,7 +33,7 @@ public class BaggageReclaimOffice {
      */
 
     public synchronized void reportMissingBags(){
-        GenericIO.writeString("\nreportMissingBags");
+        System.out.print("\nreportMissingBags");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);

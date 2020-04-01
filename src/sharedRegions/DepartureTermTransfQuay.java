@@ -4,7 +4,6 @@ import entities.BusDriver;
 import entities.BusDriverStates;
 import entities.Passenger;
 import entities.PassengerStates;
-import genclass.GenericIO;
 
 /**
  *   ...
@@ -52,7 +51,7 @@ public class DepartureTermTransfQuay {
      */
 
     public synchronized void leaveTheBus(){
-        GenericIO.writeString("\nleaveTheBus");
+        System.out.print("\nleaveTheBus");
         /*
          *   Blocked Entity: Passenger
          *   Freeing Entity: Driver
@@ -64,21 +63,21 @@ public class DepartureTermTransfQuay {
         assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         repos.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
-        GenericIO.writeString("\npass that left the bus(id): " + passenger.getPassengerID());
+        System.out.print("\npass that left the bus(id): " + passenger.getPassengerID());
 
         while(!this.canPassLeaveTheBus()) {
-            GenericIO.writeString("\nsleep leaveTheBus");
+            System.out.print("\nsleep leaveTheBus");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            GenericIO.writeString("\nwake up leaveTheBus");
-            GenericIO.writeString("\nDBDLPO: " + this.canPassLeaveTheBus());
+            System.out.print("\nwake up leaveTheBus");
+            System.out.print("\nDBDLPO: " + this.canPassLeaveTheBus());
         }
 
         this.nPassOnTheBus -= 1;
-        GenericIO.writeString("\na pass left, nPass remaining: " + this.getNPassOnTheBus());
+        System.out.print("\na pass left, nPass remaining: " + this.getNPassOnTheBus());
         repos.freeBusSeat(passenger.getPassengerID());
         //if(this.getnPassOnTheBus() == 0){
             notifyAll();  // wake up Bus Driver in parkTheBusAndLetPassOff()
@@ -93,7 +92,7 @@ public class DepartureTermTransfQuay {
      */
 
     public synchronized void parkTheBusAndLetPassOff() {
-        GenericIO.writeString("\nparkTheBusAndLetPassOff");
+        System.out.print("\nparkTheBusAndLetPassOff");
         /*
          *   Blocked Entity: Driver
          *   Freeing Entity: Passenger
@@ -107,20 +106,20 @@ public class DepartureTermTransfQuay {
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.setNPassOnTheBus(busDriver.getNPassOnTheBus());
-        GenericIO.writeString("\nPassengers on the bus at dep quay " + this.nPassOnTheBus);
-        GenericIO.writeString("\nBus driver set nPass: " + this.getNPassOnTheBus());
+        System.out.print("\nPassengers on the bus at dep quay " + this.nPassOnTheBus);
+        System.out.print("\nBus driver set nPass: " + this.getNPassOnTheBus());
 
         this.pleaseLeaveTheBus();
         notifyAll();  // wake up Passengers in leaveTheBus()
 
         while(this.getNPassOnTheBus() != 0) {
-            GenericIO.writeString("\nsleep parkTheBusAndLetPassOff");
+            System.out.print("\nsleep parkTheBusAndLetPassOff");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            GenericIO.writeString("\nwake up parkTheBusAndLetPassOff");
+            System.out.print("\nwake up parkTheBusAndLetPassOff");
         }
 
         busDriver.setNPassOnTheBus(this.getNPassOnTheBus());
@@ -132,7 +131,7 @@ public class DepartureTermTransfQuay {
      */
 
     public synchronized void resetDepartureTermTransfQuay(){
-        GenericIO.writeString("\nresetDepartureTermTransfQuay");
+        System.out.print("\nresetDepartureTermTransfQuay");
         //while(true){if(this.letPassOff){break;}}
         this.busDoorsOpen = false;
         this.nPassOnTheBus = -1;

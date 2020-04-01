@@ -1,5 +1,4 @@
 package entities;
-import genclass.GenericIO;
 import sharedRegions.ArrivalTermTransfQuay;
 import sharedRegions.DepartureTermTransfQuay;
 import sharedRegions.GenReposInfo;
@@ -84,7 +83,7 @@ public class BusDriver extends Thread {
             goToArrivalTerminal();
             arrivalTerminalQuay.parkTheBus();
         }
-        GenericIO.writeString("\nENDED BUS DRIVER.");
+        System.out.print("\nENDED BUS DRIVER.");
     }
 
     /**

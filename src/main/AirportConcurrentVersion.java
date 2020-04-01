@@ -2,13 +2,12 @@ package main;
 
 import commonInfrastructures.MemException;
 import entities.*;
-import genclass.GenericIO;
 import sharedRegions.*;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-
-import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 
 /**
  *   Main program.
@@ -19,7 +18,7 @@ import java.io.FileNotFoundException;
 
 public class AirportConcurrentVersion {
 
-    public static void main(final String[] args) throws MemException, FileNotFoundException {
+    public static void main(final String[] args) throws MemException {
 
         GenReposInfo repos;
         BaggageColPoint bagColPoint;
@@ -40,20 +39,22 @@ public class AirportConcurrentVersion {
         File loggerFile = new File(fileName);
         try {
             if (loggerFile.createNewFile()) {
-                GenericIO.writeString("File created: " + loggerFile.getName());
+                System.out.print("File created: " + loggerFile.getName());
             } else {
                 do {
-                    GenericIO.writeString("There is already a file with this name. Delete it (y - yes; n - no)? ");
-                    opt = GenericIO.readlnChar();
+                    System.out.print("There is already a file with this name. Delete it (y - yes; n - no)? ");
+                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                    opt = 'y';
+                    //opt = (char)br.read();
                 } while( (opt != 'y') && (opt != 'n'));
                 if(opt == 'y'){
                     loggerFile.delete();
                     loggerFile.createNewFile();
-                    GenericIO.writeString("File created: " + loggerFile.getName());
+                    System.out.print("File created: " + loggerFile.getName());
                 }
             }
         } catch (IOException e) {
-            GenericIO.writeString("An error occurred.");
+            System.out.print("An error occurred.");
             e.printStackTrace();
         }
 
@@ -122,49 +123,49 @@ public class AirportConcurrentVersion {
                 try {
                     passengers[nPass][land].join();
                 } catch (InterruptedException e) {
-                    GenericIO.writeString("Main Program - One thread of Passenger " + nPass + " from flight " +
+                    System.out.print("Main Program - One thread of Passenger " + nPass + " from flight " +
                             land + " was interrupted.");
                 }
             }
 
             if(land < SimulationParameters.N_FLIGHTS - 1) {
                 bagColPoint.resetBaggageColPoint();
-                GenericIO.writeString("\nHelp1");
+                System.out.print("\nHelp1");
                 tmpStorageArea.resetTemporaryStorageArea();
-                GenericIO.writeString("\nHelp2");
+                System.out.print("\nHelp2");
                 arrivLounge.resetArrivalLounge(destStat, nBagsPHold, bagColPoint);
-                GenericIO.writeString("\nHelp3");
+                System.out.print("\nHelp3");
                 arrivalQuay.resetArrivalTermTransfQuay();
-                GenericIO.writeString("\nHelp4");
+                System.out.print("\nHelp4");
                 departureQuay.resetDepartureTermTransfQuay();
-                GenericIO.writeString("\nHelp5");
+                System.out.print("\nHelp5");
                 arrivalTerm.resetArrivalTerminalExit(arrivLounge, arrivalQuay);
-                GenericIO.writeString("\nHelp6");
+                System.out.print("\nHelp6");
                 departureTerm.resetDepartureTerminalEntrance(arrivLounge, arrivalQuay);
-                GenericIO.writeString("\nHelp7");
+                System.out.print("\nHelp7");
                 // arrivalTerm.setDepartureTerminalRef(departureTerm);
                 // departureTerm.setArrivalTerminalRef(arrivalTerm);
             }
-            GenericIO.writeString("\nHelp");
+            System.out.print("\nHelp");
         }
-        GenericIO.writeString("before porter join");
+        System.out.print("before porter join");
 
         try {
             porter.join();
         } catch (InterruptedException e) {
-            GenericIO.writeString("Main Program - One thread of Porter was interrupted.");
+            System.out.print("Main Program - One thread of Porter was interrupted.");
         }
-        GenericIO.writeString("after porter join / before bus driver join");
+        System.out.print("after porter join / before bus driver join");
         try {
             busDriver.join();
         } catch (InterruptedException e) {
-            GenericIO.writeString("Main Program - One thread of BusDriver was interrupted.");
+            System.out.print("Main Program - One thread of BusDriver was interrupted.");
         }
 
 
         repos.finalReport();
 
-        GenericIO.writeString("\n after final report");
+        System.out.print("\n after final report");
 
     }
 }

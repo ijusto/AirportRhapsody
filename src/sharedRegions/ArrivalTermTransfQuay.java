@@ -6,7 +6,6 @@ import entities.BusDriver;
 import entities.BusDriverStates;
 import entities.Passenger;
 import entities.PassengerStates;
-import genclass.GenericIO;
 import main.SimulationParameters;
 
 /**
@@ -97,7 +96,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void takeABus() {
-        GenericIO.writeString("\ntakeABus");
+        System.out.print("\ntakeABus");
 
         Passenger passenger = (Passenger) Thread.currentThread();
 
@@ -115,7 +114,7 @@ public class ArrivalTermTransfQuay {
         this.nWaitingPass += 1;
         //if(this.nWaitingPass == SimulationParameters.BUS_CAP){
             notifyAll();  // wake up Bus Driver in parkTheBus()
-            GenericIO.writeString("\nnotify parkTheBus at arrival terminal (at least 3 passengers waiting)");
+            System.out.print("\nnotify parkTheBus at arrival terminal (at least 3 passengers waiting)");
         //}
 
         /*
@@ -125,16 +124,16 @@ public class ArrivalTermTransfQuay {
          *   Blocked Entity Reactions: enterTheBus()
         */
         while(!this.allowBoardBus || this.aboutToEnter >= SimulationParameters.BUS_CAP){
-            GenericIO.writeString("\nsleep takeABus");
+            System.out.print("\nsleep takeABus");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            GenericIO.writeString("\nwake up takeABus");
-            GenericIO.writeString("\nthis.waitingPass.isEmpty(): " + this.waitingLine.isEmpty());
+            System.out.print("\nwake up takeABus");
+            System.out.print("\nthis.waitingPass.isEmpty(): " + this.waitingLine.isEmpty());
         }
-        GenericIO.writeString("\nexit takeABus");
+        System.out.print("\nexit takeABus");
         this.aboutToEnter += 1;
 
     }
@@ -144,7 +143,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void enterTheBus(){
-        GenericIO.writeString("\nenterTheBus");
+        System.out.print("\nenterTheBus");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
@@ -160,9 +159,9 @@ public class ArrivalTermTransfQuay {
                 repos.pLeftWaitingQueue(passenger.getPassengerID());
                 repos.occupyBusSeat(passenger.getPassengerID());
 
-                GenericIO.writeString("\nPass " + passenger.getPassengerID() + " entered the bus.");
+                System.out.print("\nPass " + passenger.getPassengerID() + " entered the bus.");
                 if(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.nWaitingPass == 0){
-                    GenericIO.writeString("\nLast passenger. notify announcingBusBoarding");
+                    System.out.print("\nLast passenger. notify announcingBusBoarding");
                     notifyAll();  // wake up Bus driver in announcingBusBoarding()
                 }
             }
@@ -181,8 +180,8 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized char hasDaysWorkEnded(){
-        GenericIO.writeString("\nhasDaysWorkEnded");
-        GenericIO.writeString("\nworkday: "+this.nFlights);
+        System.out.print("\nhasDaysWorkEnded");
+        System.out.print("\nworkday: "+this.nFlights);
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
@@ -199,7 +198,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void parkTheBus(){
-        GenericIO.writeString("\nparkTheBus");
+        System.out.print("\nparkTheBus");
         /*
          *   Blocked Entity: Driver
          *   1) Freeing Entity: Passenger
@@ -219,21 +218,21 @@ public class ArrivalTermTransfQuay {
         repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         this.nPassOnTheBus = 0;
 
-        GenericIO.writeString("\nnWaitingPass parkTheBus " + this.nWaitingPass);
+        System.out.print("\nnWaitingPass parkTheBus " + this.nWaitingPass);
 
-        GenericIO.writeString("\nsleep parkTheBus");
+        System.out.print("\nsleep parkTheBus");
 
 
         //while ((this.nWaitingPass == 0 && this.workDay < SimulationParameters.N_FLIGHTS)
         //        || (this.busdriverStop && this.workDay < SimulationParameters.N_FLIGHTS - 1)){
 
 
-        GenericIO.writeString("\nthis.nWaitingPass == 0 : " + (this.nWaitingPass == 0));
-        GenericIO.writeString("\nthis.busdriverStop: " + this.busDriverStop);
-        GenericIO.writeString("\nthis.workDay == SimulationParameters.N_FLIGHTS - 1: " + (this.nFlights == SimulationParameters.N_FLIGHTS - 1));
+        System.out.print("\nthis.nWaitingPass == 0 : " + (this.nWaitingPass == 0));
+        System.out.print("\nthis.busdriverStop: " + this.busDriverStop);
+        System.out.print("\nthis.workDay == SimulationParameters.N_FLIGHTS - 1: " + (this.nFlights == SimulationParameters.N_FLIGHTS - 1));
 
-        GenericIO.writeString("\nthis.waitingPass.isEmpty(): " + this.waitingLine.isEmpty());
-        GenericIO.writeString("\nthis.allPassDead " + this.allPassDead);
+        System.out.print("\nthis.waitingPass.isEmpty(): " + this.waitingLine.isEmpty());
+        System.out.print("\nthis.allPassDead " + this.allPassDead);
         while(true){// || this.busdriverStop) && this.workDay < SimulationParameters.N_FLIGHTS - 1){// this.existsPassengers){
             try {
                 wait(10);
@@ -244,11 +243,11 @@ public class ArrivalTermTransfQuay {
                 break;
             }
             if(!this.waitingLine.isEmpty()){
-                GenericIO.writeString("\nWTTTTFFFFFFFFFFFFFFFFFFFFFFF");
+                System.out.print("\nWTTTTFFFFFFFFFFFFFFFFFFFFFFF");
                 break;
             }
         }
-        GenericIO.writeString("\nwake up parkTheBus");
+        System.out.print("\nwake up parkTheBus");
     }
 
     /**
@@ -256,7 +255,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void announcingBusBoarding(){
-        GenericIO.writeString("\nannouncingBusBoarding");
+        System.out.print("\nannouncingBusBoarding");
         /*
          *   Blocked Entity: Driver
          *   Freeing Entity: Passenger
@@ -272,19 +271,19 @@ public class ArrivalTermTransfQuay {
         notifyAll();  // wake up Passengers in takeABus()
 
         while(!(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.nWaitingPass == 0)) {
-            GenericIO.writeString("\nsleep announcingBusBoarding");
+            System.out.print("\nsleep announcingBusBoarding");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            GenericIO.writeString("\nwake up announcingBusBoarding");
+            System.out.print("\nwake up announcingBusBoarding");
         }
 
         this.allowBoardBus = false;
         this.aboutToEnter = 0;
         busDriver.setNPassOnTheBus(this.nPassOnTheBus);
-        GenericIO.writeString("\nPassengers on the bus at arr quay " + this.nPassOnTheBus);
+        System.out.print("\nPassengers on the bus at arr quay " + this.nPassOnTheBus);
     }
 
     /**
@@ -292,11 +291,11 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void resetArrivalTermTransfQuay() throws MemException {
-        GenericIO.writeString("\nresetArrivalTermTransfQuay");
-        GenericIO.writeString("\nbusdriver stoped");
+        System.out.print("\nresetArrivalTermTransfQuay");
+        System.out.print("\nbusdriver stoped");
         do {
         } while (this.busDriverStop);
-        GenericIO.writeString("\nbusdriver start");
+        System.out.print("\nbusdriver start");
         this.waitingLine = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.nPassOnTheBus = 0;
         this.allowBoardBus = false;
@@ -315,7 +314,7 @@ public class ArrivalTermTransfQuay {
         this.busDriverStart();
         notifyAll();
     }
-    
+
     /* ************************************************* Setters ******************************************************/
 
     /**

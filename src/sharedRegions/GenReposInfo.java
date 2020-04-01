@@ -4,7 +4,6 @@ import entities.BusDriverStates;
 import entities.Passenger;
 import entities.PassengerStates;
 import entities.PorterStates;
-import genclass.GenericIO;
 import main.SimulationParameters;
 
 import java.io.BufferedWriter;
@@ -171,7 +170,7 @@ public class GenReposInfo {
             this.fw = new FileWriter(fileName, true);
             this.bWritter = new BufferedWriter(this.fw);
         } catch (IOException e) {
-            GenericIO.writeString("An error occurred.");
+            System.out.print("An error occurred.");
             e.printStackTrace();
         }
 
@@ -255,7 +254,7 @@ public class GenReposInfo {
                     totalLuggage[i], collectedLuggage[i]));
         }
 
-        GenericIO.writeString(log.toString());
+        System.out.print(log.toString());
         try {
             bWritter.write(log.toString());
             bWritter.flush();
@@ -279,7 +278,7 @@ public class GenReposInfo {
         log.append(String.format("\nN. of bags that were lost = %3d\n\n", missing_bags));
 
 
-        GenericIO.writeString(log.toString());
+        System.out.print(log.toString());
 
         try {
             bWritter.write(log.toString());

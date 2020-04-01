@@ -2,7 +2,6 @@ package sharedRegions;
 
 import entities.Passenger;
 import entities.PassengerStates;
-import genclass.GenericIO;
 import main.SimulationParameters;
 
 /**
@@ -70,13 +69,13 @@ public class DepartureTerminalEntrance {
      */
 
     public synchronized boolean exitPassenger(){
-        GenericIO.writeString("\nexitPassenger");
+        System.out.print("\nexitPassenger");
         this.nPassDead += 1;
-        GenericIO.writeString("\nExited n pass in dpterm: " + this.nPassDead);
+        System.out.print("\nExited n pass in dpterm: " + this.nPassDead);
         if( !((this.nPassDead + this.arrivalTerm.getNPassDead()) < SimulationParameters.N_PASS_PER_FLIGHT)){
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
-            GenericIO.writeString("\nNAO VALE A PENA");
+            System.out.print("\nNAO VALE A PENA");
             //System.exit(-1);
             return true;
         }
@@ -89,7 +88,7 @@ public class DepartureTerminalEntrance {
      */
 
     public synchronized void prepareNextLeg(){
-        GenericIO.writeString("\nprepareNextLeg");
+        System.out.print("\nprepareNextLeg");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
@@ -98,7 +97,7 @@ public class DepartureTerminalEntrance {
 
         this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
-            GenericIO.writeString("\nNOTIFY LAST PREPARE NEXT LEG");
+            System.out.print("\nNOTIFY LAST PREPARE NEXT LEG");
             arrivLounge.wakeUpForNextFlight();
             arrivalQuay.wakeUpForNextFlight();
         }
@@ -111,7 +110,7 @@ public class DepartureTerminalEntrance {
      */
 
     public synchronized void resetDepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
-        GenericIO.writeString("\nresetDepartureTerminalEntrance");
+        System.out.print("\nresetDepartureTerminalEntrance");
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.nPassDead = 0;

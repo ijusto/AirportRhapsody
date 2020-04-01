@@ -2,7 +2,6 @@ package sharedRegions;
 
 import entities.Passenger;
 import entities.PassengerStates;
-import genclass.GenericIO;
 import main.SimulationParameters;
 
 /**
@@ -67,9 +66,9 @@ public class ArrivalTerminalExit {
      */
 
     public synchronized boolean exitPassenger(){
-        GenericIO.writeString("\nexitPassenger");
+        System.out.print("\nexitPassenger");
         this.nPassDead += 1;
-        GenericIO.writeString("\nExited n pass in arrterm: " + this.nPassDead);
+        System.out.print("\nExited n pass in arrterm: " + this.nPassDead);
         if( !((this.nPassDead + this.departureTerm.getNPassDead()) < SimulationParameters.N_PASS_PER_FLIGHT)){
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
@@ -83,7 +82,7 @@ public class ArrivalTerminalExit {
      *
      */
     public synchronized void goHome(){
-        GenericIO.writeString("\ngoHome");
+        System.out.print("\ngoHome");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
@@ -94,14 +93,14 @@ public class ArrivalTerminalExit {
 
         this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
-            GenericIO.writeString("\nNOTIFY LAST GO HOME");
+            System.out.print("\nNOTIFY LAST GO HOME");
             arrivLounge.wakeUpForNextFlight();
             arrivalQuay.wakeUpForNextFlight();
         }
     }
 
     public synchronized void resetArrivalTerminalExit(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
-        GenericIO.writeString("\nresetArrivalTerminalExit");
+        System.out.print("\nresetArrivalTerminalExit");
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.nPassDead = 0;
