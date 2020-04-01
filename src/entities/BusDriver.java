@@ -95,7 +95,7 @@ public class BusDriver extends Thread {
 
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_BACKWARD);
-        repos.updateBusDriverState(BusDriverStates.DRIVING_BACKWARD);
+        repos.updateBDriverStat(BusDriverStates.DRIVING_BACKWARD);
     }
 
     /**
@@ -106,7 +106,7 @@ public class BusDriver extends Thread {
 
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_FORWARD);
-        repos.updateBusDriverState(BusDriverStates.DRIVING_FORWARD);
+        repos.updateBDriverStat(BusDriverStates.DRIVING_FORWARD);
 
     }
 

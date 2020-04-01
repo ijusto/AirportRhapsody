@@ -38,8 +38,11 @@ public class DepartureTerminalEntrance {
 
     private ArrivalTerminalExit arrivalTerm;
 
-    /*
-     *   Number of passengers of the current flight/shift that left the airport at the Departure Terminal.
+    /**
+     *   Number of passengers of the current flight that left the airport at the Departure Terminal.
+     *   If summed up with the number of passengers of the current flight that left the airport at the Arrival
+     *   Terminal isn't smaller than the number of passengers per flight, change boolean allPassDead at the Arrival
+     *   Lounge and the Arrival Terminal Quay to true;
      */
 
     private int nPassDead;
@@ -47,9 +50,9 @@ public class DepartureTerminalEntrance {
     /**
      *   Instantiation of the Departure Terminal Entrance.
      *
-     *     @param arrivLounge ....
-     *     @param arrivalQuay ...
-     *     @param repos general repository of information
+     *     @param arrivLounge Arrival Lounge.
+     *     @param arrivalQuay Arrival Terminal Transfer Quay.
+     *     @param repos General Repository of Information.
      */
 
 
@@ -60,8 +63,10 @@ public class DepartureTerminalEntrance {
         this.nPassDead = 0;
     }
 
-    /*
+    /**
      *
+     *    @return <li> true, if all passengers from the current flight left.</li>
+     *            <li> false, otherwise.</li>
      */
 
     public synchronized boolean exitPassenger(){
@@ -89,7 +94,7 @@ public class DepartureTerminalEntrance {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
-        repos.updatePassengerState(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
+        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
         this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
@@ -98,6 +103,12 @@ public class DepartureTerminalEntrance {
             arrivalQuay.wakeUpForNextFlight();
         }
     }
+
+    /**
+     *
+     *    @param arrivLounge Arrival Lounge.
+     *    @param arrivalQuay Arrival Terminal Transfer Quay.
+     */
 
     public synchronized void resetDepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
         GenericIO.writeString("\nresetDepartureTerminalEntrance");
@@ -110,8 +121,9 @@ public class DepartureTerminalEntrance {
 
     /* ************************************************* Setters ******************************************************/
 
-    /*
+    /**
      *
+     *    @return Number of passengers of the current flight that left the airport at the Departure Terminal.
      */
 
     public int getNPassDead(){
@@ -121,7 +133,7 @@ public class DepartureTerminalEntrance {
     /**
      *   ...
      *
-     *   @param arrivalTerm Arrival Terminal Exit
+     *    @param arrivalTerm Arrival Terminal Exit.
      */
 
     public void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){

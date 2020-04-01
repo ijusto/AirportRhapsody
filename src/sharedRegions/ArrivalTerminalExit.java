@@ -39,7 +39,10 @@ public class ArrivalTerminalExit {
     private DepartureTerminalEntrance departureTerm;
 
     /**
-     *   Number of passengers of the current flight/shift that left the airport at the Arrival Terminal.
+     *   Number of passengers of the current flight that left the airport at the Arrival Terminal.
+     *   If summed up with the number of passengers of the current flight that left the airport at the Departure
+     *   Terminal isn't smaller than the number of passengers per flight, change boolean allPassDead at the Arrival
+     *   Lounge and the Arrival Terminal Quay to true;
      */
 
     private int nPassDead;
@@ -90,7 +93,7 @@ public class ArrivalTerminalExit {
                 passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
                 passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
-        repos.updatePassengerState(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
         this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
@@ -111,7 +114,7 @@ public class ArrivalTerminalExit {
 
     /**
      *
-     *   @return nPassThatLeft
+     *    @return Number of passengers of the current flight that left the airport at the Arrival Terminal.
      */
 
     public int getNPassDead(){
@@ -121,9 +124,9 @@ public class ArrivalTerminalExit {
     /* ************************************************* Setters ******************************************************/
 
     /**
-     *   Sets the Departure Terminal Entrance Reference
+     *   Sets the Departure Terminal Entrance Reference.
      *
-     *   @param departureTerm Departure Terminal Entrance.
+     *    @param departureTerm Departure Terminal Entrance.
      */
 
     public void setDepartureTerminalRef(DepartureTerminalEntrance departureTerm){

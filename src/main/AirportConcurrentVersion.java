@@ -101,7 +101,7 @@ public class AirportConcurrentVersion {
 
         busDriver = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuay,
                 departureQuay,repos);
-        repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         porter.start();
         busDriver.start();
@@ -114,8 +114,8 @@ public class AirportConcurrentVersion {
                         nBags[nPass][land], 0, nPass, arrivLounge, arrivalQuay, departureQuay,
                         departureTerm, arrivalTerm, bagColPoint, bagRecOffice);
 
-                repos.updatePassengerState(passengers[nPass][land].getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
-                repos.getPassengerSituation(passengers[nPass][land].getPassengerID(),passengers[nPass][land]);
+                repos.updatePassSt(passengers[nPass][land].getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
+                repos.getPassSi(passengers[nPass][land].getPassengerID(),passengers[nPass][land].getSi().toString());
             }
 
             for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){

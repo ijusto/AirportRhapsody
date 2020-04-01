@@ -75,7 +75,7 @@ public class BaggageColPoint {
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         GenericIO.writeString("\nPASSENGER AT GOCOLLECTABAG");
-        repos.updatePassengerState(passenger.getPassengerID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        repos.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         /*
           Blocked Entity: Passenger
@@ -110,8 +110,8 @@ public class BaggageColPoint {
                     this.nBagsInTreadmill -= 1;
                     GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
                     passenger.setNA(passenger.getNA() + 1);
-                    repos.baggageCollected(passenger.getPassengerID(), passenger);
-                    repos.updateStoredBaggageConveyorBeltDec();
+                    repos.updatesPassNA(passenger.getPassengerID(), passenger.getNA());
+                    repos.pGetsABag();
                     GenericIO.writeString("\nwake up gocollectabag");
                     GenericIO.writeString(" passid " + passenger.getPassengerID());
                     return true;
@@ -214,7 +214,7 @@ public class BaggageColPoint {
             this.lastBagId = bag.getIdOwner();
             this.nBagsInTreadmill += 1;
             GenericIO.writeString("\nBags in treadmill: " + this.nBagsInTreadmill);
-            repos.updateStoredBaggageConveyorBeltInc();
+            repos.incBaggageCB();
             notifyAll();  // wake up Passengers in goCollectABag()
             GenericIO.writeString("\ncarryItToAppropriateStore notify bag in treadmill from pass " + bag.getIdOwner());
         } catch (MemException e) {

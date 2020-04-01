@@ -44,24 +44,22 @@ public class ArrivalLounge {
     private int nPassAtArrivL;
 
     /*
-     *
+     *   True if all the passengers from the current flight left, false otherwise.
      */
 
     private boolean allPassDead;
 
     /*
-     *
+     *   Number of the current flight.
      */
-    //private boolean changedFlight;
 
-    /*
-     *
-     */
     private int currentFlight;
 
     /*
-     *
+     *   True if resetArrivalLounge is called and there are no passengers in the arrival Lounge, false otherwise.
+     *   If false, the porter must wait when there is no more bags in the plane's Hold.
      */
+
     private boolean reset;
 
     /**
@@ -84,7 +82,7 @@ public class ArrivalLounge {
 
         this.repos = repos;
 
-        this.allPassDead = false; //true;
+        this.allPassDead = false;
 
         this.currentFlight = 0;
         repos.updateFlightNumber(this.currentFlight);
@@ -133,7 +131,7 @@ public class ArrivalLounge {
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         this.nPassAtArrivL += 1;
-        this.repos.numberOfPassengerLuggage(currentPassenger.getPassengerID(), currentPassenger);
+        this.repos.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
         this.repos.numberNRTotal(currentPassenger.getNR());
         this.repos.newPass(currentPassenger.getSi());
         this.reset = false;
@@ -239,7 +237,7 @@ public class ArrivalLounge {
         GenericIO.writeString("\nPorter started");
         repos.updateFlightNumber(this.currentFlight);
 
-        this.allPassDead = false; //true;
+        this.allPassDead = false;
 
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
@@ -269,20 +267,15 @@ public class ArrivalLounge {
         this.reset = true;
     }
 
-    public synchronized void wakeUpForNextFlight(){
-        this.porterStart();
-    }
-
-    /* ************************************************* Getters ******************************************************/
-
     /**
      *
-     *   @return existsPassengers
      */
 
-    public boolean doPassExist() {
-        return !this.allPassDead; // this.allPassDead;
+    public synchronized void wakeUpForNextFlight(){
+        this.porterStart();
+        notifyAll();
     }
+
 
     /* ************************************************* Setters ******************************************************/
 

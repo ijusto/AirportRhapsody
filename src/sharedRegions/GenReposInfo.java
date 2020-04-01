@@ -82,12 +82,6 @@ public class GenReposInfo {
     private BusDriverStates busDriverState;
 
     /*
-     *
-     */
-
-    private int busQueue;
-
-    /*
      *   Passengers' States
      */
 
@@ -142,7 +136,7 @@ public class GenReposInfo {
     int finalPassTotal;
 
     /*
-     *
+     *   Number of pieces of luggage all passengers combined had at the start of the journey.
      */
 
     int nrTotal;
@@ -189,7 +183,6 @@ public class GenReposInfo {
         FN = 0;
         BN = 0;
         SR = 0;
-        busQueue = 0;
         missing_bags = 0;
         nrTotal = 0;
         transPassTotal = 0;
@@ -207,251 +200,18 @@ public class GenReposInfo {
 
     }
 
-    /**
-     *   Update flight number after the previous flight is finished.
-     *
-     *   @param flight flight.
-     */
-    public synchronized void updateFlightNumber(int flight){
-        FN = flight + 1;
-        printLog();
-    }
-
-
-    public synchronized void initializeCargoHold(int bn){
-        BN = bn;
-        printLog();
-    }
 
     /**
-     *   Update baggage stored in the cargo hold when porter retrieves the baggage.
-     *
-     */
-
-    public synchronized void updateStoredBaggageCargoHold(){
-        BN = BN - 1;
-        printLog();
-    }
-
-    /**
-     *  Update baggage stored in the Conveyor Belt when porter puts the baggage
-     */
-
-    public synchronized void updateStoredBaggageConveyorBeltInc(){
-        CB = CB + 1;
-        printLog();
-    }
-
-    /**
-     *  Update baggage stored in the Conveyor Belt when passenger retrieves the baggage
-     */
-
-    public synchronized void updateStoredBaggageConveyorBeltDec(){
-        CB = CB  - 1;
-        printLog();
-    }
-
-    /**
-     *  Update baggage stored in the Storage Room when porter puts the baggage
-     */
-
-    public synchronized void updateStoredBaggageStorageRoom(){
-        SR = SR + 1;
-        printLog();
-    }
-
-    /**
-     *   Update the Porter state.
-     *
-     *   @param porterState porterState.
-     */
-    public synchronized void updatePorterState(PorterStates porterState){
-        if(this.porterState != porterState){
-            this.porterState = porterState;
-        }
-        printLog();
-    }
-
-    /**
-     *   Update the Passenger State.
-     *
-     *   @param id id.
-     *   @param passengerState passengerState.
-     */
-
-    public synchronized void updatePassengerState(int id, PassengerStates passengerState){
-        if(passengerStates[id] != passengerState){
-            passengerStates[id] = passengerState;
-        }
-        printLog();
-    }
-
-    /**
-     *   Update the Bus Driver State.
-     *
-     *   @param busDriverState busDriverState.
-     */
-
-    public synchronized void updateBusDriverState(BusDriverStates busDriverState){
-        if(this.busDriverState != busDriverState){
-            this.busDriverState = busDriverState;
-        }
-        printLog();
-    }
-
-    /**
-     *   Update the number of bags in the conveyor belt.
-     *
-     *   @param cb CB.
-     */
-
-    public synchronized void updateConveyorsBelt(int cb){
-        CB = CB + cb;
-        printLog();
-    }
-
-    /**
-     *   Update the queue of passengers.
-     *
-     * @param ID
-     */
-
-    public synchronized void passengerQueueStateIn(int ID){
-        passWaitingQueue.add(ID);
-        printLog();
-    }
-
-    /**
-     *
-     * @param ID
-     *
-     */
-
-    public synchronized void passengerQueueStateOut(int ID){
-        int index = passWaitingQueue.indexOf(ID);
-        passWaitingQueue.remove(index);
-        printLog();
-    }
-
-
-    /**
-     *   Update of the occupation state of the bus seat.
-     *
-     *   @param ID passenger.
-
-     */
-
-    public synchronized void busSeatStateIn(int ID){
-        busSeatOccupation.add(ID);
-        printLog();
-    }
-
-    /**
-     *
-     *
-     *   @param ID passenger.
-     */
-
-    public synchronized void busSeatStateOut(int ID){
-        int index = busSeatOccupation.indexOf(ID);
-        busSeatOccupation.remove(index);
-        printLog();
-    }
-
-    /**
-     *   Get the passenger situation (in transit or final).
-     *
-     *   @param id id.
-     *   @param passenger passenger.
-     */
-
-    public synchronized void getPassengerSituation(int id, Passenger passenger){
-        passengerSituation[id] = passenger.getSi().toString();
-    }
-
-    /**
-     *   Update the passengers luggage at the start of the journey.
-     *
-     *   @param id id.
-     *   @param passenger passenger.
-     */
-
-    public synchronized void numberOfPassengerLuggage(int id, Passenger passenger){
-        totalLuggage[id] = passenger.getNR();
-    }
-
-    /**
-     *   Update the number of luggage a passenger collected.
-     *
-     *   @param id id.
-     *   @param passenger passenger.
-     */
-
-    public synchronized void baggageCollected(int id, Passenger passenger){
-        collectedLuggage[id] = passenger.getNA();
-    }
-
-    public synchronized  void missingBagReported(){
-        missing_bags += 1;
-    }
-
-    public synchronized  void numberNRTotal(int nr){
-        nrTotal += nr;
-    }
-
-    public synchronized  void newPass(Passenger.SituationPassenger passSi){
-
-        if(passSi == Passenger.SituationPassenger.TRT){
-            transPassTotal += 1;
-        } else if(passSi == Passenger.SituationPassenger.FDT) {
-            finalPassTotal += 1;
-        }
-    }
-
-    /**
-     *
-     */
-    public synchronized void passengerExit(int id){
-        this.passengerSituation[id] = null;
-        this.passState[passengerStates[id].ordinal()] = null;
-        this.totalLuggage[id] = 0;
-        this.collectedLuggage[id] = 0;
-    }
-
-    /**
-     *  Number of bags carried by a passenger at the end of the journey
-     */
-
-    public synchronized void finalReport(){
-        log.append("\n\n\nFinal report");
-        log.append(String.format("\nN. of passengers which have this airport as their final destination = %2d", this.finalPassTotal));
-        log.append(String.format("\nN. of passengers in transit = %2d", this.transPassTotal));
-        log.append(String.format("\nN. of bags that should have been transported in the the planes hold = %2d", this.nrTotal));
-        log.append(String.format("\nN. of bags that were lost = %2d\n\n", missing_bags));
-
-
-        GenericIO.writeString(log.toString());
-
-        try {
-            bWritter.write(log.toString());
-            bWritter.flush();
-            fw.close();
-            bWritter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /*
      *
      */
 
     public void print_header(){
         log.append("\n\n\t\t\t\t\tAIRPORT RHAPSODY - Description of the internal state of the problem");
-        log.append("\n PLANE      PORTER                 DRIVER                                                               PASSENGERS");
+        log.append("\n PLANE      PORTER                 DRIVER                                                      " +
+                "         PASSENGERS");
     }
 
-    /*
+    /**
      *
      */
 
@@ -495,23 +255,6 @@ public class GenReposInfo {
                     totalLuggage[i], collectedLuggage[i]));
         }
 
-        /*
-              AIRPORT RHAPSODY - Description of the internal state of the problem
-        PLANE       PORTER          DRIVER
-        FN BN       Stat CB SR      Stat Q1 Q2 Q3 Q4 Q5 Q6 S1 S2 S3
-                                    PASSENGERS
-        St1 Si1 NR1 NA1 St2 Si2 NR2 NA2 St3 Si3 NR3 NA3 St4 Si4 NR4 NA4 St5 Si5 NR5 NA5 St6 Si6 NR6 NA6
-        ## ## #### ## ## #### # # # # # # # # #
-        ### ### # # ### ### # # ### ### # # ### ### # # ### ### # # ### ### # #
-        */
-
-        /*
-            Final report
-            N. of passengers which have this airport as their final destination = ##
-            N. of passengers in transit = ##
-            N. of bags that should have been transported in the the planes hold = ##
-            N. of bags that were lost = ##
-        */
         GenericIO.writeString(log.toString());
         try {
             bWritter.write(log.toString());
@@ -522,14 +265,258 @@ public class GenReposInfo {
         log.setLength(0);
     }
 
-
-    /* ******************************************** Getters and Setters ***********************************************/
-
-    /*
+    /**
      *
      */
 
-    public int getFN() {
-        return FN;
+    public synchronized void finalReport(){
+        log.append("\n\n\nFinal report");
+        log.append(String.format("\nN. of passengers which have this airport as their final destination = %3d",
+                this.finalPassTotal));
+        log.append(String.format("\nN. of passengers in transit = %2d", this.transPassTotal));
+        log.append(String.format("\nN. of bags that should have been transported in the the planes hold = %3d",
+                this.nrTotal));
+        log.append(String.format("\nN. of bags that were lost = %3d\n\n", missing_bags));
+
+
+        GenericIO.writeString(log.toString());
+
+        try {
+            bWritter.write(log.toString());
+            bWritter.flush();
+            fw.close();
+            bWritter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    /* **************************************************Plane******************************************************* */
+
+    /**
+     *   Update flight number after the previous flight is finished.
+     *
+     *   @param flight flight.
+     */
+    public synchronized void updateFlightNumber(int flight){
+        FN = flight + 1;
+        printLog();
+    }
+
+    /**
+     *   Initializes the number of pieces of luggage at the plane's hold.
+     *
+     *    @param bn Number of pieces of luggage presently at the plane's hold.
+     */
+
+    public synchronized void initializeCargoHold(int bn){
+        BN = bn;
+        printLog();
+    }
+
+    /**
+     *   Update baggage stored in the cargo hold when porter retrieves the baggage.
+     *
+     */
+
+    public synchronized void updateStoredBaggageCargoHold(){
+        BN = BN - 1;
+        printLog();
+    }
+
+    /* **************************************************Porter****************************************************** */
+
+    /**
+     *   Update baggage stored in the Conveyor Belt when porter adds bags.
+     */
+
+    public synchronized void incBaggageCB(){
+        CB = CB + 1;
+        printLog();
+    }
+
+    /**
+     *   Update baggage stored in the Conveyor Belt when passenger gets the baggage.
+     */
+
+    public synchronized void pGetsABag(){
+        CB = CB - 1;
+        printLog();
+    }
+
+    /**
+     *   Update baggage stored in the Storage Room when porter puts the baggage
+     */
+
+    public synchronized void saveBagINSR(){
+        SR = SR + 1;
+        printLog();
+    }
+
+    /**
+     *   Update the Porter state.
+     *
+     *    @param porterState porterState.
+     */
+
+    public synchronized void updatePorterState(PorterStates porterState){
+        if(this.porterState != porterState){
+            this.porterState = porterState;
+        }
+        printLog();
+    }
+
+    /* ************************************************Bus Driver**************************************************** */
+
+    /**
+     *   Update the Bus Driver State.
+     *
+     *   @param busDriverState busDriverState.
+     */
+
+    public synchronized void updateBDriverStat(BusDriverStates busDriverState){
+        if(this.busDriverState != busDriverState){
+            this.busDriverState = busDriverState;
+        }
+        printLog();
+    }
+
+    /**
+     *   Update the queue of passengers.
+     *
+     *    @param id Passenger ID.
+     */
+
+    public synchronized void pJoinWaitingQueue(int id){
+        passWaitingQueue.add(id);
+        printLog();
+    }
+
+    /**
+     *
+     *    @param id Passenger ID.
+     */
+
+    public synchronized void pLeftWaitingQueue(int id){
+        passWaitingQueue.remove(passWaitingQueue.indexOf(id));
+        printLog();
+    }
+
+    /**
+     *   Update of the occupation state of the bus seat.
+     *
+     *   @param id passenger.
+     */
+
+    public synchronized void occupyBusSeat(int id){
+        busSeatOccupation.add(id);
+        printLog();
+    }
+
+    /**
+     *   Removes the passenger id from the bus seat.
+     *
+     *    @param id Passenger ID.
+     */
+
+    public synchronized void freeBusSeat(int id){
+        busSeatOccupation.remove(busSeatOccupation.indexOf(id));
+        printLog();
+    }
+
+    /* **************************************************Passenger*************************************************** */
+
+    /**
+     *   Increments the number of passengers from a certain passenger situation.
+     *
+     *    @param passSi Passenger situation.
+     */
+
+    public synchronized  void newPass(Passenger.SituationPassenger passSi){
+        if(passSi == Passenger.SituationPassenger.TRT){
+            transPassTotal += 1;
+        } else if(passSi == Passenger.SituationPassenger.FDT) {
+            finalPassTotal += 1;
+        }
+    }
+
+    /**
+     *   Update the Passenger State.
+     *
+     *   @param id id.
+     *   @param passengerState passengerState.
+     */
+
+    public synchronized void updatePassSt(int id, PassengerStates passengerState){
+        if(passengerStates[id] != passengerState){
+            passengerStates[id] = passengerState;
+            printLog();
+        }
+    }
+
+    /**
+     *   Get the passenger situation (in transit or final).
+     *
+     *   @param id Passenger ID.
+     *   @param si Passenger Situation.
+     */
+
+    public synchronized void getPassSi(int id, String si){
+        passengerSituation[id] = si;
+    }
+
+    /**
+     *   Update the passengers luggage at the start of the journey.
+     *
+     *   @param id id.
+     *   @param nr Number of pieces of luggage the passenger had at the start of the journey.
+     */
+
+    public synchronized void updatesPassNR(int id, int nr){
+        totalLuggage[id] = nr;
+    }
+
+    /**
+     *   Update the number of luggage a passenger collected.
+     *
+     *   @param id Passenger ID.
+     *   @param na Number of pieces of luggage the passenger has collected.
+     */
+
+    public synchronized void updatesPassNA(int id, int na){
+        collectedLuggage[id] = na;
+    }
+
+    /**
+     *
+     *    @param id Passenger ID.
+     */
+
+    public synchronized void passengerExit(int id){
+        this.passengerSituation[id] = null;
+        this.passState[passengerStates[id].ordinal()] = null;
+        this.totalLuggage[id] = 0;
+        this.collectedLuggage[id] = 0;
+    }
+
+    /* ***********************************************Final Report*************************************************** */
+
+    /**
+     *   Updates the number of reported missing bags.
+     */
+
+    public synchronized void missingBagReported(){
+        missing_bags += 1;
+    }
+
+    /**
+     *   Updates the number of pieces of luggage all passengers combined had at the start of the journey.
+     *
+     *    @param nr Number of pieces of luggage all passengers combined had at the start of the journey.
+     */
+
+    public synchronized void numberNRTotal(int nr){
+        nrTotal += nr;
+    }
+
 }

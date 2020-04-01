@@ -54,7 +54,7 @@ public class TemporaryStorageArea {
 
         try {
             tmpStorageStack.write(bag);
-            repos.updateStoredBaggageStorageRoom();
+            repos.saveBagINSR();
         } catch (MemException e) {
             e.printStackTrace();
         }

@@ -103,11 +103,11 @@ public class ArrivalTermTransfQuay {
 
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        repos.updatePassengerState(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
 
         try {
             waitingLine.write(passenger);
-            repos.passengerQueueStateIn(passenger.getPassengerID());
+            repos.pJoinWaitingQueue(passenger.getPassengerID());
         } catch (MemException e) {
             e.printStackTrace();
         }
@@ -149,7 +149,7 @@ public class ArrivalTermTransfQuay {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
-        repos.updatePassengerState(passenger.getPassengerID(),PassengerStates.TERMINAL_TRANSFER);
+        repos.updatePassSt(passenger.getPassengerID(),PassengerStates.TERMINAL_TRANSFER);
 
 
         try{
@@ -157,8 +157,8 @@ public class ArrivalTermTransfQuay {
                 this.waitingLine.read();
                 this.nWaitingPass -= 1;
                 this.nPassOnTheBus += 1;
-                repos.passengerQueueStateOut(passenger.getPassengerID());
-                repos.busSeatStateIn(passenger.getPassengerID());
+                repos.pLeftWaitingQueue(passenger.getPassengerID());
+                repos.occupyBusSeat(passenger.getPassengerID());
 
                 GenericIO.writeString("\nPass " + passenger.getPassengerID() + " entered the bus.");
                 if(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.nWaitingPass == 0){
@@ -216,7 +216,7 @@ public class ArrivalTermTransfQuay {
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
-        repos.updateBusDriverState(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         this.nPassOnTheBus = 0;
 
         GenericIO.writeString("\nnWaitingPass parkTheBus " + this.nWaitingPass);
