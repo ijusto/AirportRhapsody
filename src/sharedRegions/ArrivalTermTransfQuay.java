@@ -111,10 +111,10 @@ public class ArrivalTermTransfQuay {
         }
 
         this.nWaitingPass += 1;
-        if(this.nWaitingPass == SimulationParameters.BUS_CAP){
+        //if(this.nWaitingPass == SimulationParameters.BUS_CAP){
             notifyAll();  // wake up Bus Driver in parkTheBus()
             GenericIO.writeString("\nnotify parkTheBus at arrival terminal (at least 3 passengers waiting)");
-        }
+        //}
 
         /*
          *   Blocked Entity: Passenger
@@ -130,6 +130,7 @@ public class ArrivalTermTransfQuay {
                 e.printStackTrace();
             }
             GenericIO.writeString("\nwake up takeABus");
+            GenericIO.writeString("this.waitingPass.isEmpty(): " + this.waitingPass.isEmpty());
         }
         GenericIO.writeString("\nexit takeABus");
         this.aboutToEnter += 1;
@@ -184,7 +185,7 @@ public class ArrivalTermTransfQuay {
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        if(this.workDay == SimulationParameters.N_FLIGHTS - 1){
+        if(this.workDay == SimulationParameters.N_FLIGHTS - 1 && !this.existsPassengers){
             return 'F';
         }
 
@@ -225,13 +226,22 @@ public class ArrivalTermTransfQuay {
         //        || (this.busdriverStop && this.workDay < SimulationParameters.N_FLIGHTS - 1)){
 
 
-        while((this.nWaitingPass == 0 || this.busdriverStop) && this.workDay < SimulationParameters.N_FLIGHTS - 1){// this.existsPassengers){
+        GenericIO.writeString("this.nWaitingPass == 0 : " + (this.nWaitingPass == 0));
+        GenericIO.writeString("this.busdriverStop: " + this.busdriverStop);
+        GenericIO.writeString("this.workDay < SimulationParameters.N_FLIGHTS - 1: " + (this.workDay < SimulationParameters.N_FLIGHTS - 1));
+
+        GenericIO.writeString("\nthis.waitingPass.isEmpty(): " + this.waitingPass.isEmpty());
+        while(true){// || this.busdriverStop) && this.workDay < SimulationParameters.N_FLIGHTS - 1){// this.existsPassengers){
             try {
                 wait(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(this.nWaitingPass != 0){
+            if(this.workDay == SimulationParameters.N_FLIGHTS - 1 && !this.existsPassengers){
+                break;
+            }
+            if(!this.waitingPass.isEmpty()){
+                GenericIO.writeString("\nWTTTTFFFFFFFFFFFFFFFFFFFFFFF");
                 break;
             }
         }
