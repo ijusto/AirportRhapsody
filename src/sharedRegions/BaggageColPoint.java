@@ -262,8 +262,4 @@ public class BaggageColPoint {
     public void setAllBagsCollected(boolean allBagsCollects) {
         this.allBagsCollects = allBagsCollects;
     }
-
-    public void setPorterAwake(boolean porterAwake) {
-        this.porterAwake = porterAwake;
-    }
 }

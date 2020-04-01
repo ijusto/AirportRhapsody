@@ -94,10 +94,10 @@ public class ArrivalTerminalExit {
 
         this.repos.passengerExit(passenger.getPassengerID());
         if(this.exitPassenger()){
-            notifyAll();
             GenericIO.writeString("NOTIFY LAST GO HOME");
             arrivLounge.porterStart();
             arrivalQuay.busdriverStart();
+            notifyAll();
         }
     }
 

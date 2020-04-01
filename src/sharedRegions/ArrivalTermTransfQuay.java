@@ -85,7 +85,7 @@ public class ArrivalTermTransfQuay {
         this.nWaitingPass = 0;
         this.aboutToEnter = 0;
         this.workDay = 0;
-        this.busdriverStop = true;
+        this.busdriverStop = false;
     }
 
     /* ************************************************Passenger***************************************************** */
@@ -179,15 +179,15 @@ public class ArrivalTermTransfQuay {
 
     public synchronized char hasDaysWorkEnded(){
         GenericIO.writeString("\nhasDaysWorkEnded");
+        GenericIO.writeString("\nworkday: "+this.workDay);
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        if(!this.existsPassengers){
-            if(this.workDay == SimulationParameters.N_PASS_PER_FLIGHT){
-                return 'F';
-            }
+        if(this.workDay == SimulationParameters.N_FLIGHTS - 1){
+            return 'F';
         }
+
         return 'R';
     }
 
@@ -219,11 +219,20 @@ public class ArrivalTermTransfQuay {
         GenericIO.writeString("\nnWaitingPass parkTheBus " + this.nWaitingPass);
 
         GenericIO.writeString("\nsleep parkTheBus");
-        while(this.nWaitingPass == 0 && this.workDay < SimulationParameters.N_FLIGHTS){// && this.existsPassengers){
+
+
+        //while ((this.nWaitingPass == 0 && this.workDay < SimulationParameters.N_FLIGHTS)
+        //        || (this.busdriverStop && this.workDay < SimulationParameters.N_FLIGHTS - 1)){
+
+
+        while((this.nWaitingPass == 0 || this.busdriverStop) && this.workDay < SimulationParameters.N_FLIGHTS - 1){// this.existsPassengers){
             try {
                 wait(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            if(this.nWaitingPass != 0){
+                break;
             }
         }
         GenericIO.writeString("\nwake up parkTheBus");
@@ -277,7 +286,7 @@ public class ArrivalTermTransfQuay {
         this.existsPassengers = true;
         this.nWaitingPass = 0;
         this.aboutToEnter = 0;
-        this.busdriverStop = true;
+        this.busdriverStop = false;
         this.workDay += 1;
     }
 
@@ -289,6 +298,7 @@ public class ArrivalTermTransfQuay {
 
     public void setNoPassAtAirport() {
         this.existsPassengers = false;
+        this.busdriverStop = true;
     }
 
     public void incPassOnTheBus(){

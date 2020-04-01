@@ -62,7 +62,7 @@ public class ArrivalLounge {
     /**
      *
      */
-    private boolean porterStop;
+    private boolean porterStopNoMoreBagsAndThereAreStillPassOnTheAirp;
 
 
     /**
@@ -109,7 +109,7 @@ public class ArrivalLounge {
 
         this.nArrivPass = 0;
 
-        this.porterStop = false;
+        this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = false;
 
     }
 
@@ -164,7 +164,10 @@ public class ArrivalLounge {
 
         GenericIO.writeString("\n-------------TAKE A REST-------------------------");
 
-        while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStop) && this.currentFlight < SimulationParameters.N_FLIGHTS - 1){ // && !this.changedFlight) {
+        while ((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT && this.existsPassengers) ||
+                (this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp && this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){
+
+       // while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp) && (this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){ // && !this.changedFlight) {
             GenericIO.writeString("\nsleep takeARest");
             try {
                 wait();
@@ -173,7 +176,6 @@ public class ArrivalLounge {
             }
             GenericIO.writeString("\nwake up takeARest (normal state)");
         }
-        this.bagColPoint.setPorterAwake(true);
         //if(this.changedFlight){
         //    this.changedFlight = false;
         //}
@@ -212,7 +214,7 @@ public class ArrivalLounge {
             // GenericIO.writeString("ACABOU VÊ SE ENTENDES");
             // System.exit(-1);
 
-            this.porterStop = true;
+            this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = true;
             this.nArrivPass = 0;
             return null;
         }
@@ -224,7 +226,7 @@ public class ArrivalLounge {
         GenericIO.writeString("\nresetArrivalLounge");
         GenericIO.writeString("Porter stoped");
         do {
-        } while (this.porterStop);
+        } while (this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp);
         GenericIO.writeString("Porter started");
         this.currentFlight += 1;
         repos.updateFlightNumber(this.currentFlight);
@@ -274,7 +276,7 @@ public class ArrivalLounge {
     }
 
     public synchronized void porterStart(){
-        this.porterStop = false;
+        this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = false;
     }
 
 }
