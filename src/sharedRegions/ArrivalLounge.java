@@ -104,6 +104,7 @@ public class ArrivalLounge {
         }
 
         this.bagColPoint = bagColPoint;
+        this.bagColPoint.setPHoldNotEmpty();
         this.bagColPoint.setTreadmill(treadmill);
 
         this.nPassAtArrivL = 0;
@@ -178,7 +179,7 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        while ((this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT || bagColPoint.pHoldEmpty()) && this.porterStop){
+        while ((this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT || bagColPoint.pHoldEmpty()) &&  !this.allPassDead && !this.reset){//&& this.porterStop){
 
         // while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp) && (this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){ // && !this.changedFlight) {
             System.out.print("\nsleep takeARest");
@@ -199,11 +200,20 @@ public class ArrivalLounge {
             }
         }
 
+        System.out.print("\nthis.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT: " + (this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT));
+
         // if porter wakes up from take a rest, it means the next time he returns, all passengers have arrived to the
         // airport
         if(this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT){
             this.nPassAtArrivL = 0;
         }
+
+        if(this.reset){
+            this.reset = false;
+        }
+
+        System.out.print("\nthis.currentFlight == SimulationParameters.N_FLIGHTS - 1: " + (this.currentFlight == SimulationParameters.N_FLIGHTS - 1));
+        System.out.print("\nthis.allPassDead " + this.allPassDead);
 
         if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){ // && bagColPoint.areAllBagsCollects()) {
             return 'E';
@@ -276,8 +286,6 @@ public class ArrivalLounge {
         System.out.print("\nreset "+ this.reset);
         System.out.print("\nPorter started");
 
-        this.allPassDead = false;
-
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
 
@@ -304,6 +312,7 @@ public class ArrivalLounge {
         }
 
         this.bagColPoint = bagColPoint;
+        this.bagColPoint.setPHoldNotEmpty();
         this.bagColPoint.setTreadmill(treadmill);
 
         // reset the number of passengers that arrived the airport
@@ -311,6 +320,7 @@ public class ArrivalLounge {
 
 
         this.reset = true;
+        this.allPassDead = true;
         /*
         this.reset = true;
 
@@ -326,7 +336,7 @@ public class ArrivalLounge {
 
     public synchronized void wakeUpForNextFlight(){
         //while (!reset){}
-        this.reset = false;
+        //this.reset = false;
         this.porterStop = false;
         //notifyAll();
     }
@@ -340,6 +350,7 @@ public class ArrivalLounge {
      */
 
     public void setNoPassAtAirport() {
+        System.out.print("\nsetNoPassAtAirport");
         this.allPassDead = true;
     }
 

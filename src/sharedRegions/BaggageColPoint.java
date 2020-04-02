@@ -54,7 +54,7 @@ public class BaggageColPoint {
     public BaggageColPoint(GenReposInfo repos){
         this.repos = repos;
         this.nBagsInTreadmill = 0;
-        this.pHoldEmpty = false;
+        this.pHoldEmpty = true;
         this.lastBagId = -1;
         this.porterAwake = false;
     }
@@ -184,7 +184,7 @@ public class BaggageColPoint {
         System.out.print("\nresetBaggageColPoint");
         while(!pHoldEmpty()){}
         this.nBagsInTreadmill = 0;
-        this.pHoldEmpty = false;
+        this.pHoldEmpty = true;
         this.lastBagId = -1;
         this.treadmill.clear();
         this.porterAwake = false;
@@ -200,6 +200,7 @@ public class BaggageColPoint {
     }
 
     /* ************************************************* Getters ******************************************************/
+
 
     /**
      *   ...
@@ -230,5 +231,8 @@ public class BaggageColPoint {
         this.pHoldEmpty = true;
     }
 
+    public void setPHoldNotEmpty(){
+        this.pHoldEmpty = false;
+    }
 
 }

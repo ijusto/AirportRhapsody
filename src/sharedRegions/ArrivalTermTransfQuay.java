@@ -65,6 +65,8 @@ public class ArrivalTermTransfQuay {
 
     private boolean allPassDead;
 
+    private boolean reset;
+
     /**
      *
      */
@@ -89,6 +91,8 @@ public class ArrivalTermTransfQuay {
         // this.nWaitingPass = 0;
         this.nFlights = 0;
         this.busDriverStop = false;
+
+        this.reset = false;
     }
 
     /* ************************************************Passenger***************************************************** */
@@ -282,6 +286,11 @@ public class ArrivalTermTransfQuay {
                 System.out.print("\nwake up parkTheBus because !this.waitingLine.isEmpty()");
                 break;
             }
+
+            if(this.allPassDead && this.reset){
+                this.reset = false;
+                break;
+            }
         }
 
         System.out.print("\nwake up parkTheBus");
@@ -341,6 +350,8 @@ public class ArrivalTermTransfQuay {
         //this.nWaitingPass = 0;
         this.busDriverStop = false;
         this.nFlights += 1;
+
+        this.reset = true;
     }
 
     /**
