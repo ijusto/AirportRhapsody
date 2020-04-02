@@ -36,6 +36,7 @@ public class ArrivalTermTransfQuay {
 
     private int nPassOnTheBus;
 
+
     /**
      *   True, if the bus driver is waiting in announcingBusBoarding();
      *   If false, when the passengers are waken up in takeABus() they go back to sleep.
@@ -217,7 +218,7 @@ public class ArrivalTermTransfQuay {
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         // if the last flight arrived and all passengers left the airport, end the bus driver life cycle
-        if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){
+        if(this.nFlights == SimulationParameters.N_FLIGHTS && this.allPassDead){
             return 'F';
         }
 
@@ -263,10 +264,9 @@ public class ArrivalTermTransfQuay {
 
 
         // System.out.print("\nthis.nWaitingPass == 0 : " + (this.nWaitingPass == 0));
-        System.out.print("\nthis.busdriverStop: " + this.busDriverStop);
-        System.out.print("\nthis.workDay == SimulationParameters.N_FLIGHTS - 1: " + (this.nFlights == SimulationParameters.N_FLIGHTS - 1));
-        System.out.print("\nthis.waitingPass.isEmpty(): " + this.waitingLine.isEmpty());
-        System.out.print("\nthis.allPassDead " + this.allPassDead);
+        System.out.print("\nwaitingLine.getNObjects() != SimulationParameters.BUS_CAP " + (waitingLine.getNObjects() != SimulationParameters.BUS_CAP));
+        System.out.print("\nthis.nFlights == SimulationParameters.N_FLIGHTS && this.allPassDead " + (this.nFlights == SimulationParameters.N_FLIGHTS && this.allPassDead));
+        System.out.print("\n!this.waitingLine.isEmpty() " + (!this.waitingLine.isEmpty()));
 
         while(waitingLine.getNObjects() != SimulationParameters.BUS_CAP){ // if false waken up by takeABus()
             try {
@@ -277,18 +277,13 @@ public class ArrivalTermTransfQuay {
             }
 
             // if the last flight arrived and all passengers left the airport, stop waiting
-            if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){ //!this.busDriverStop){
+            if(this.nFlights == SimulationParameters.N_FLIGHTS && this.allPassDead){ //!this.busDriverStop){
                 break;
             }
 
             // if there are passengers waiting
             if(!this.waitingLine.isEmpty()){
                 System.out.print("\nwake up parkTheBus because !this.waitingLine.isEmpty()");
-                break;
-            }
-
-            if(this.allPassDead && this.reset){
-                this.reset = false;
                 break;
             }
         }
@@ -347,23 +342,8 @@ public class ArrivalTermTransfQuay {
         this.nPassOnTheBus = 0;
         this.allowBoardBus = false;
         this.allPassDead = false;
-        //this.nWaitingPass = 0;
-        this.busDriverStop = false;
         this.nFlights += 1;
 
-        this.reset = true;
-    }
-
-    /**
-     *
-     */
-
-    public synchronized void wakeUpForNextFlight(){
-        //System.out.print("\n Waiting all pass dead false ");
-        //while (allPassDead){}
-        //System.out.print("\n all pass dead is false ");
-        this.busDriverStop = false;
-        notifyAll();
     }
 
     /* ************************************************* Setters ******************************************************/

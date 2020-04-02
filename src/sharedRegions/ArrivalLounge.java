@@ -134,7 +134,6 @@ public class ArrivalLounge {
 
         // increment passengers that arrive so the porter knows when to wake up in takeARest()
         this.nPassAtArrivL += 1;
-
         // update logger
         this.repos.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
         this.repos.numberNRTotal(currentPassenger.getNR());
@@ -179,7 +178,7 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        while ((this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT || bagColPoint.pHoldEmpty()) &&  !this.allPassDead && !this.reset){//&& this.porterStop){
+        while (this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT || bagColPoint.pHoldEmpty()){//&& this.porterStop){
 
         // while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp) && (this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){ // && !this.changedFlight) {
             System.out.print("\nsleep takeARest");
@@ -201,12 +200,6 @@ public class ArrivalLounge {
         }
 
         System.out.print("\nthis.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT: " + (this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT));
-
-        // if porter wakes up from take a rest, it means the next time he returns, all passengers have arrived to the
-        // airport
-        if(this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT){
-            this.nPassAtArrivL = 0;
-        }
 
         if(this.reset){
             this.reset = false;
@@ -320,7 +313,7 @@ public class ArrivalLounge {
 
 
         this.reset = true;
-        this.allPassDead = true;
+        this.allPassDead = false;
         /*
         this.reset = true;
 
@@ -329,18 +322,6 @@ public class ArrivalLounge {
 
          */
     }
-
-    /**
-     *
-     */
-
-    public synchronized void wakeUpForNextFlight(){
-        //while (!reset){}
-        //this.reset = false;
-        this.porterStop = false;
-        //notifyAll();
-    }
-
 
     /* ************************************************* Setters ******************************************************/
 

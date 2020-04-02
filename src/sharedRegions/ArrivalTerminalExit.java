@@ -1,12 +1,9 @@
 package sharedRegions;
 
+import commonInfrastructures.Counter;
 import entities.Passenger;
 import entities.PassengerStates;
 import main.SimulationParameters;
-
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *   ...
@@ -50,11 +47,9 @@ public class ArrivalTerminalExit {
 
     private int nPassDead;
 
-    private int allNotified;
+    private Counter allNotified;
 
-    private final Lock lock = new ReentrantLock();
-    private final Condition waitAllPassDead = lock.newCondition();
-    private final Condition allPassNotified = lock.newCondition();
+    private Counter deadPassCounter;
 
     /**
      *   Instantiation of the Arrival Terminal Exit.
@@ -68,8 +63,8 @@ public class ArrivalTerminalExit {
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
-        this.nPassDead = 0;
-        this.allNotified = 0;
+        deadPassCounter = new Counter(SimulationParameters.N_PASS_PER_FLIGHT);
+        allNotified = new Counter(SimulationParameters.N_PASS_PER_FLIGHT - 1);
     }
 
     /**
@@ -87,9 +82,10 @@ public class ArrivalTerminalExit {
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
         // increment the number of passengers that leave the arrival terminal
-        this.nPassDead += 1;
+        //this.nPassDead += 1;
+        boolean isLastPass = this.deadPassCounter.increaseCounter();
 
-        System.out.print("\npass " + passenger.getPassengerID() + " in goHome, npass: " + this.getAllDeadPass());
+        System.out.print("\npass " + passenger.getPassengerID() + " in goHome, npass: " + this.deadPassCounter.getValue());
 
         // update logger
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
@@ -99,12 +95,12 @@ public class ArrivalTerminalExit {
         System.out.print("\nExited n pass in arrterm: " + this.nPassDead);
 
         // TODO: allpassDead e allNotified só um cada partilhado entre as duas e fazer wait antes de se incrementar
-        if(this.getAllDeadPass() == SimulationParameters.N_PASS_PER_FLIGHT) {
-            System.out.print("\npass " + passenger.getPassengerID() + " last in goHome, npass: " + this.getAllDeadPass());
+        if(isLastPass) {
+            System.out.print("\npass " + passenger.getPassengerID() + " last in goHome, npass: " + this.deadPassCounter.getValue());
             notifyAll();
             departureTerm.notifyFromGoHome();
 
-            while((this.allNotified + departureTerm.getAllNotified()) < SimulationParameters.N_PASS_PER_FLIGHT - 1) {
+            while(this.allNotified.getValue() < SimulationParameters.N_PASS_PER_FLIGHT - 1) {
                 System.out.print("\npass " + passenger.getPassengerID() + " last in goHome, sleep");
                 try {
                     wait();
@@ -116,53 +112,23 @@ public class ArrivalTerminalExit {
 
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
-            arrivLounge.wakeUpForNextFlight();
-            arrivalQuay.wakeUpForNextFlight();
         } else {
-            System.out.print("\npass " + passenger.getPassengerID() + " NOT last in goHome, npass: " + this.getAllDeadPass());
+            System.out.print("\npass " + passenger.getPassengerID() + " NOT last in goHome, npass: " + this.deadPassCounter.getValue());
 
-            while (getAllDeadPass() < SimulationParameters.N_PASS_PER_FLIGHT) {
-                System.out.print("\npass " + passenger.getPassengerID() + " NOT last in goHome, wake up");
+            while (this.deadPassCounter.getValue() < SimulationParameters.N_PASS_PER_FLIGHT) {
+                System.out.print("\npass " + passenger.getPassengerID() + " NOT last in goHome, sleep");
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 System.out.print("\npass " + passenger.getPassengerID() + " NOT last in goHome, wake up");
-                allNotified += 1;
-                notifyAll();
-            }
-        }
-
-        /*
-        if(this.getAllDeadPass() == SimulationParameters.N_PASS_PER_FLIGHT){
-
-            this.arrivLounge.setNoPassAtAirport();
-            this.arrivalQuay.setNoPassAtAirport();
-
-            System.out.print("\nNOTIFY LAST GO HOME");
-
-            departureTerm.notifyFromGoHome();
-            arrivLounge.wakeUpForNextFlight();
-            arrivalQuay.wakeUpForNextFlight();
-        } else {
-
-            // if the number of passengers that wants to leave the airport is smaller than the number of passengers per flight
-            while (this.getAllDeadPass() < SimulationParameters.N_PASS_PER_FLIGHT) {
-
-                System.out.print("\npass " + passenger.getPassengerID() + " sleep goHome, npass: " + this.getAllDeadPass());
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if(this.allNotified.increaseCounter()){
+                    System.out.print("\npass " + passenger.getPassengerID() + " last to be notified, notifies last to exit");
+                    notifyAll();
                 }
-
-                System.out.print("\npass " + passenger.getPassengerID() + " wake up goHome, npass: " + this.getAllDeadPass());
-
             }
         }
-
-         */
     }
 
     public synchronized void notifyFromPrepareNextLeg(){
@@ -170,19 +136,13 @@ public class ArrivalTerminalExit {
         notifyAll();
     }
 
-    public void signalFromPrepareNextLeg(){
-        System.out.print("\nsignalFromPrepareNextLeg");
-        waitAllPassDead.signal();
-    }
-
     public synchronized void resetArrivalTerminalExit(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
         System.out.print("\nresetArrivalTerminalExit");
 
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
-        this.nPassDead = 0;
-
-        this.allNotified = 0;
+        deadPassCounter = new Counter(SimulationParameters.N_PASS_PER_FLIGHT);
+        allNotified = new Counter(SimulationParameters.N_PASS_PER_FLIGHT - 1);
     }
 
     /* ************************************************* Getters ******************************************************/
@@ -192,22 +152,13 @@ public class ArrivalTerminalExit {
      *    @return Number of passengers of the current flight that left the airport at the Arrival Terminal.
      */
 
-    public int getNPassDead(){
-        return this.nPassDead;
+    public Counter getDeadPassCounter(){
+        return this.deadPassCounter;
     }
 
-    public int getAllNotified(){
-        return this.allNotified;
+    public Counter getAllNotified(){
+        return allNotified;
     }
-
-    /**
-     *
-     */
-
-    public int getAllDeadPass(){
-        return this.nPassDead + this.departureTerm.getNPassDead();
-    }
-
 
     /* ************************************************* Setters ******************************************************/
 

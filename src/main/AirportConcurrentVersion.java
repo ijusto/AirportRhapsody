@@ -143,8 +143,8 @@ public class AirportConcurrentVersion {
                 System.out.print("\nHelp6");
                 departureTerm.resetDepartureTerminalEntrance(arrivLounge, arrivalQuay);
                 System.out.print("\nHelp7");
-                // arrivalTerm.setDepartureTerminalRef(departureTerm);
-                // departureTerm.setArrivalTerminalRef(arrivalTerm);
+                arrivalTerm.setDepartureTerminalRef(departureTerm);
+                departureTerm.setArrivalTerminalRef(arrivalTerm);
             }
             System.out.print("\nHelp");
         }

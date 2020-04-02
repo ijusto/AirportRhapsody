@@ -4,10 +4,6 @@ import entities.Passenger;
 import entities.PassengerStates;
 import main.SimulationParameters;
 
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 /**
  *   ...
  *
@@ -42,21 +38,6 @@ public class DepartureTerminalEntrance {
     private ArrivalTerminalExit arrivalTerm;
 
     /**
-     *   Number of passengers of the current flight that left the airport at the Departure Terminal.
-     *   If summed up with the number of passengers of the current flight that left the airport at the Arrival
-     *   Terminal isn't smaller than the number of passengers per flight, change boolean allPassDead at the Arrival
-     *   Lounge and the Arrival Terminal Quay to true;
-     */
-
-    private int nPassDead;
-
-
-    private int allNotified;
-    private final Lock lock = new ReentrantLock();
-    private final Condition waitAllPassDead = lock.newCondition();
-    private final Condition allPassNotified = lock.newCondition();
-
-    /**
      *   Instantiation of the Departure Terminal Entrance.
      *
      *     @param repos General Repository of Information.
@@ -69,8 +50,6 @@ public class DepartureTerminalEntrance {
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
-        this.nPassDead = 0;
-        this.allNotified = 0;
     }
 
     /**
@@ -87,78 +66,51 @@ public class DepartureTerminalEntrance {
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
         // increment the number of passengers that leave the departure terminal
-        this.nPassDead += 1;
+        boolean isLastPass = this.arrivalTerm.getDeadPassCounter().increaseCounter();
 
-        System.out.print("\npass " + passenger.getPassengerID() + " in prepareNextLeg, npass: " + this.getAllDeadPass());
+        System.out.print("\npass " + passenger.getPassengerID() + " in prepareNextLeg, npass: " + this.arrivalTerm.getDeadPassCounter().getValue());
 
         // update logger
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
         this.repos.passengerExit(passenger.getPassengerID());
 
         System.out.print("\nexitPassenger");
-        if(this.getAllDeadPass() == SimulationParameters.N_PASS_PER_FLIGHT) {
-            System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, npass: " + this.getAllDeadPass());
+        if(isLastPass) {
+            System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, npass: " + this.arrivalTerm.getDeadPassCounter().getValue());
             notifyAll();
             arrivalTerm.notifyFromPrepareNextLeg();
 
-            while ((this.allNotified + arrivalTerm.getAllNotified()) < SimulationParameters.N_PASS_PER_FLIGHT - 1) {
+            while (this.arrivalTerm.getAllNotified().getValue() < SimulationParameters.N_PASS_PER_FLIGHT - 1) {
                 System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, sleep");
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                System.out.print("\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa");
                 System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, wake up");
             }
 
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
-            arrivLounge.wakeUpForNextFlight();
-            arrivalQuay.wakeUpForNextFlight();
         } else {
-            System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, npass: " + this.getAllDeadPass());
+            System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, npass: " + this.arrivalTerm.getDeadPassCounter().getValue());
 
-            while (getAllDeadPass() < SimulationParameters.N_PASS_PER_FLIGHT) {
-                System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, wake up");
+            while (this.arrivalTerm.getDeadPassCounter().getValue() < SimulationParameters.N_PASS_PER_FLIGHT) {
+                System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, sleep");
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, wake up");
-                allNotified += 1;
-                notifyAll();
-            }
-        }
 
-        /*
-        if(this.getAllDeadPass() == SimulationParameters.N_PASS_PER_FLIGHT){
-            System.out.print("\nExited n pass in dpterm: " + this.nPassDead);
-
-            this.arrivLounge.setNoPassAtAirport();
-            this.arrivalQuay.setNoPassAtAirport();
-
-            System.out.print("\nNOTIFY LAST PREPARE NEXT LEG");
-
-            arrivalTerm.notifyFromPrepareNextLeg();
-            arrivLounge.wakeUpForNextFlight();
-            arrivalQuay.wakeUpForNextFlight();
-        } else {
-
-            // if the number of passengers that wants to leave the airport is smaller than the number of passengers per flight
-            while (this.getAllDeadPass() < SimulationParameters.N_PASS_PER_FLIGHT) {
-
-                System.out.print("\npass " + passenger.getPassengerID() + " sleep prepareNextLeg, npass: " + this.getAllDeadPass());
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if(this.arrivalTerm.getAllNotified().increaseCounter()){
+                    System.out.print("\npass " + passenger.getPassengerID() + " last to be notified, notifies last to exit");
+                    notifyAll();
                 }
-
-                System.out.print("\npass " + passenger.getPassengerID() + " wakeup prepareNextLeg, npass: " + this.getAllDeadPass());
             }
         }
-        */
     }
 
     /**
@@ -167,16 +119,6 @@ public class DepartureTerminalEntrance {
 
     public synchronized void notifyFromGoHome(){
         System.out.print("\nnotifyFromGoHome");
-        notifyAll();
-    }
-
-    public void signalFromGoHome(){
-        System.out.print("\nsignalFromPrepareNextLeg");
-        waitAllPassDead.signal();
-    }
-
-    public synchronized void notifyHere(){
-        System.out.print("\nnotifyHere");
         notifyAll();
     }
 
@@ -191,32 +133,13 @@ public class DepartureTerminalEntrance {
 
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
-        this.nPassDead = 0;
-        this.allNotified = 0;
     }
 
     /* ************************************************* Getters ******************************************************/
 
     /**
      *
-     *    @return Number of passengers of the current flight that left the airport at the Departure Terminal.
      */
-
-    public int getNPassDead(){
-        return this.nPassDead;
-    }
-
-    public int getAllNotified(){
-        return this.allNotified;
-    }
-
-    /**
-     *
-     */
-
-    public int getAllDeadPass(){
-        return this.nPassDead + this.arrivalTerm.getNPassDead();
-    }
 
     /* ************************************************* Setters ******************************************************/
 
