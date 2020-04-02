@@ -127,14 +127,25 @@ public class ArrivalLounge {
     public synchronized boolean whatShouldIDo(){
 
         System.out.print("\nwhatShouldIDo");
+
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+
+        // increment passengers that arrive so the porter knows when to wake up in takeARest()
         this.nPassAtArrivL += 1;
+
+        // update logger
         this.repos.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
         this.repos.numberNRTotal(currentPassenger.getNR());
         this.repos.newPass(currentPassenger.getSi());
+
+        //
         this.reset = false;
-        notifyAll();  // wake up Porter in takeARest()
+
+        if(this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT) {
+            // wake up Porter in takeARest()
+            notifyAll();
+        }
 
         return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
     }
@@ -143,6 +154,8 @@ public class ArrivalLounge {
 
     /**
      *   Operation of taking a rest (raised by the Porter).
+     *   The porter is waken up by the operation whatShouldIDo of the last of the passengers to reach the arrival
+     *   lounge.
      *
      *     @return <li> 'E', if end of state </li>
      *             <li> 'R', otherwise </li>
@@ -161,15 +174,16 @@ public class ArrivalLounge {
          */
 
         System.out.print("\ntakeARest");
+        System.out.print("\n-------------TAKE A REST-------------------------");
+
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        System.out.print("\n-------------TAKE A REST-------------------------");
+        while ((this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT || bagColPoint.pHoldEmpty()) && !this.reset){
 
-        while ((this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT || bagColPoint.areAllBagsCollects()) && !this.reset){
-
-       // while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp) && (this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){ // && !this.changedFlight) {
+        // while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp) && (this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){ // && !this.changedFlight) {
             System.out.print("\nsleep takeARest");
+
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -177,12 +191,17 @@ public class ArrivalLounge {
             }
             System.out.print("\nwake up takeARest (normal state)");
             System.out.print("\nTake a rest, currentflight: " + this.currentFlight);
-            System.out.print("\nTake a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.areAllBagsCollects());
-            if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && bagColPoint.areAllBagsCollects()) {
+            System.out.print("\nTake a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.pHoldEmpty());
+
+            // end he's life cycle if the porter is resting in the last flight and all passengers left the airport
+            // TODO: verify if this needs to change and allPassDead is set in the right places
+            if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){ // && bagColPoint.areAllBagsCollects()) {
                 return 'E';
             }
         }
 
+        // if porter wakes up from take a rest, it means the next time he returns, all passengers have arrived to the
+        // airport
         if(this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT){
             this.nPassAtArrivL = 0;
         }
@@ -205,28 +224,48 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
-        repos.updatePorterState(PorterStates.AT_THE_PLANES_HOLD);
+
+        // update logger
+        repos.updatePorterStat(PorterStates.AT_THE_PLANES_HOLD);
 
         try {
             Bag tmpBag = pHoldBagStack.read();
-            repos.updateStoredBaggageCargoHold();
+
+            // update logger
+            repos.removeBagFromCargoHold();
+
             return tmpBag;
         } catch (MemException e) {
-            bagColPoint.setAllBagsCollected();  // tell the passengers that there is no more bags arriving the bcColPoint
+
+            // change allBagsCollected so the passengers know there are no more bags arriving the bcColPoint
+            // when they get awaken up by noMoreBagsToCollect()
+            bagColPoint.setAllBagsCollected();
+
             System.out.print("\nsetAllBagsCollected " + this.bagColPoint.pHoldEmpty());
-            //notifyAll();  // wake up Passengers in goCollectABag()
+
+            // notify passenger in goCollectABag()
+            bagColPoint.noMoreBags();
+
             System.out.print("\ntrytocollectabag notify no more bags");
 
             this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = true;
+
             return null;
         }
 
     }
 
-    public synchronized void resetArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint) throws MemException {
+    public synchronized void resetArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint)
+            throws MemException {
 
+        // update flight number
         this.currentFlight += 1;
+
+        // update logger
+        repos.updateFlightNumber(this.currentFlight);
+
         notifyAll();
+
         System.out.print("\nresetArrivalLounge");
         System.out.print("\nPorter stoped");
         System.out.print("\nreset "+ this.reset);
@@ -234,7 +273,6 @@ public class ArrivalLounge {
         //} while (this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp);
         System.out.print("\nreset "+ this.reset);
         System.out.print("\nPorter started");
-        repos.updateFlightNumber(this.currentFlight);
 
         this.allPassDead = false;
 
@@ -247,21 +285,28 @@ public class ArrivalLounge {
             nBagsPerPass.put(nPass, nBagsPHold[nPass][this.currentFlight]);
         }
 
+        // update logger
         repos.initializeCargoHold(nTotalBags);
-        this.pHoldBagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
+
+        // plane's hold baggage stack instantiation
+        this.pHoldBagStack = new MemStack<> (new Bag [nTotalBags]);
 
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
             for(int bag = 0; bag < nBagsPHold[nPass][this.currentFlight]; bag++){
                 this.pHoldBagStack.write(new Bag(destStat[nPass][this.currentFlight], nPass));
             }
-            MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);        // FIFO instantiation
+
+            // instantiation of the passenger's bag FIFO for the treadmill in the baggage collection point
+            MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);
             treadmill.put(nPass, bagPassFIFO);
         }
 
         this.bagColPoint = bagColPoint;
         this.bagColPoint.setTreadmill(treadmill);
 
+        // reset the number of passengers that arrived the airport
         this.nPassAtArrivL = 0;
+
         this.reset = true;
     }
 

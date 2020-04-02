@@ -1,0 +1,928 @@
+					AIRPORT RHAPSODY - Description of the internal state of the problem
+ PLANE      PORTER                 DRIVER                                                               PASSENGERS
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | WPL| 0| 0| | PAT|--|--|--|--|--|--|--|--|--| |ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--|--|--|--| |ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--|--|--|--| |ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--|--|--|--| |ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+takeARest
+-------------TAKE A REST-------------------------
+sleep takeARest
+hasDaysWorkEnded
+workday: 0
+announcingBusBoarding
+Passengers on the bus at arr quay 0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| |  DF|--|--|--|--|--|--|--|--|--| |ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| |  DF|--|--|--|--|--|--|--|--|--| |ADZ|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PDT|--|--|--|--|--|--|--|--|--| |ADZ|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+Passengers on the bus at dep quay 0
+Bus driver set nPass: 0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PDT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| |  DB|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+parkTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| |  DB|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+nWaitingPass parkTheBus 0
+sleep parkTheBus
+this.nWaitingPass == 0 : true
+this.busdriverStop: false
+this.workDay == SimulationParameters.N_FLIGHTS - 1: false
+this.waitingPass.isEmpty(): true
+this.allPassDead false
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|---|  0|  0|ATT|---|  0|  0|ATT|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|---|  0|  0|ATT|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|---|  0|  0
+whatShouldIDo
+takeABus
+wake up takeARest (normal state)
+Take a rest, currentflight: 0
+Take a rest, bagColPoint.areAllBagsCollects(): false
+sleep takeARest
+whatShouldIDo
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--|--|--|--| |ATT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+whatShouldIDo
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT| 0|--|--|--|--|--|--|--|--| |ATT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+notify parkTheBus at arrival terminal (at least 3 passengers waiting)
+sleep takeABus
+goCollectABag
+wake up takeARest (normal state)
+WTTTTFFFFFFFFFFFFFFFFFFFFFFF
+wake up parkTheBus
+hasDaysWorkEnded
+workday: 0
+announcingBusBoarding
+sleep announcingBusBoarding
+PASSENGER AT GOCOLLECTABAG
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT| 0|--|--|--|--|--|--|--|--| |ATT|TRT|  2|  0|LCP|FDT|  2|  0|ADZ|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+goCollectABag pass: 1 nBagsInTreadmill = 0
+wake up takeABus
+this.waitingPass.isEmpty(): false
+exit takeABus
+enterTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT| 0|--|--|--|--|--|--|--|--| | TT|TRT|  2|  0|LCP|FDT|  2|  0|ADZ|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--|--|--|--| | TT|TRT|  2|  0|LCP|FDT|  2|  0|ADZ|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--| 0|--|--| | TT|TRT|  2|  0|LCP|FDT|  2|  0|ADZ|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+Pass 0 entered the bus.
+Last passenger. notify announcingBusBoarding
+leaveTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--| 0|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|ADZ|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+pass that left the bus(id): 0
+sleep leaveTheBus
+Take a rest, currentflight: 0
+Take a rest, bagColPoint.areAllBagsCollects(): false
+sleep takeARest
+takeABus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--| 0|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|ATT|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+whatShouldIDo
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT| 2|--|--|--|--|--| 0|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|ATT|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+notify parkTheBus at arrival terminal (at least 3 passengers waiting)
+exit takeABus
+enterTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT| 2|--|--|--|--|--| 0|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0| TT|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--| 0|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0| TT|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--| 0| 2|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0| TT|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  2|  0
+Pass 2 entered the bus.
+Last passenger. notify announcingBusBoarding
+leaveTheBus
+wake up announcingBusBoarding
+Passengers on the bus at arr quay 2
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PAT|--|--|--|--|--|--| 0| 2|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|DTT|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  2|  0
+pass that left the bus(id): 2
+sleep leaveTheBus
+takeABus
+whatShouldIDo
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| |  DF|--|--|--|--|--|--| 0| 2|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|DTT|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  2|  0
+parkTheBusAndLetPassOff
+whatShouldIDo
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PDT|--|--|--|--|--|--| 0| 2|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|DTT|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  1|  0|ADZ|TRT|  2|  0
+Passengers on the bus at dep quay 2
+Bus driver set nPass: 2
+sleep parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PDT|--|--|--|--|--|--| 0| 2|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|DTT|TRT|  1|  0|ADZ|TRT|  0|  0|ADZ|TRT|  1|  0|ATT|TRT|  2|  0
+wake up takeARest (normal state)
+Take a rest, currentflight: 0
+Take a rest, bagColPoint.areAllBagsCollects(): false
+-------------END TAKE A REST-------------------------
+tryToCollectABag
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | WPL| 0| 0| | PDT| 5|--|--|--|--|--| 0| 2|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|DTT|TRT|  1|  0|ADZ|TRT|  2|  0|ADZ|TRT|  1|  0|ATT|TRT|  2|  0
+notify parkTheBus at arrival terminal (at least 3 passengers waiting)
+sleep takeABus
+takeABus
+wake up leaveTheBus
+DBDLPO: true
+a pass left, nPass remaining: 1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | APH| 0| 0| | PDT| 5|--|--|--|--|--| 0| 2|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|DTT|TRT|  1|  0|ADZ|TRT|  2|  0|ADZ|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | APH| 0| 0| | PDT| 5|--|--|--|--|--| 0|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|DTT|TRT|  1|  0|ADZ|TRT|  2|  0|ADZ|TRT|  1|  0|ATT|TRT|  2|  0
+prepareNextLeg
+wake up leaveTheBus
+DBDLPO: true
+a pass left, nPass remaining: 0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | APH| 0| 0| | PDT| 5|--|--|--|--|--| 0|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|DTT|TRT|  1|  0|ATT|TRT|  2|  0|ADZ|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | APH| 0| 0| | PDT| 5| 3|--|--|--|--| 0|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|DTT|TRT|  1|  0|ATT|TRT|  2|  0|ADZ|TRT|  1|  0|ATT|TRT|  2|  0
+notify parkTheBus at arrival terminal (at least 3 passengers waiting)
+sleep takeABus
+takeABus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | APH| 0| 0| | PDT| 5| 3|--|--|--|--|--|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|DTT|TRT|  1|  0|ATT|TRT|  2|  0|ADZ|TRT|  1|  0|ATT|TRT|  2|  0
+wake up parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 7| | APH| 0| 0| | PDT| 5| 3|--|--|--|--|--|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|EDT|TRT|  1|  0|ATT|TRT|  2|  0|ADZ|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 6| | APH| 0| 0| | PDT| 5| 3|--|--|--|--|--|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|EDT|TRT|  1|  0|ATT|TRT|  2|  0|ADZ|TRT|  1|  0|ATT|TRT|  2|  0
+carryItToAppropriateStore
+exitPassenger
+Exited n pass in dpterm: 1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 6| | APH| 0| 0| |  DB| 5| 3|--|--|--|--|--|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ADZ|TRT|  1|  0|ATT|TRT|  2|  0
+prepareNextLeg
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 6| | APH| 0| 0| |  DB| 5| 3|--|--|--|--|--|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 6| | APH| 0| 0| |  DB| 5| 3| 4|--|--|--|--|--|--| |DTT|TRT|  2|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+notify parkTheBus at arrival terminal (at least 3 passengers waiting)
+sleep takeABus
+wake up takeABus
+this.waitingPass.isEmpty(): false
+sleep takeABus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 6| | APH| 0| 0| |  DB| 5| 3| 4|--|--|--|--|--|--| |---|TRT|  2|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+exitPassenger
+Exited n pass in dpterm: 2
+parkTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 6| | ASR| 0| 0| |  DB| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 6| | ASR| 0| 0| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+nWaitingPass parkTheBus 3
+sleep parkTheBus
+this.nWaitingPass == 0 : false
+this.busdriverStop: false
+this.workDay == SimulationParameters.N_FLIGHTS - 1: false
+this.waitingPass.isEmpty(): false
+this.allPassDead false
+wake up takeABus
+this.waitingPass.isEmpty(): false
+sleep takeABus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 6| | ASR| 0| 1| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+tryToCollectABag
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 6| | APH| 0| 1| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 5| | APH| 0| 1| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+carryItToAppropriateStore
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 5| | ASR| 0| 1| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 5| | ASR| 0| 2| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+tryToCollectABag
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 5| | APH| 0| 2| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 4| | APH| 0| 2| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+carryItToAppropriateStore
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 4| | ASR| 0| 2| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 4| | ASR| 0| 3| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+tryToCollectABag
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 4| | APH| 0| 3| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 3| | APH| 0| 3| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+carryItToAppropriateStore
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 3| | ASR| 0| 3| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 3| | ASR| 0| 4| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+tryToCollectABag
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 3| | APH| 0| 4| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 2| | APH| 0| 4| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+carryItToAppropriateStore
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 2| | LBC| 0| 4| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+Bags in treadmill: 1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 2| | LBC| 1| 4| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+carryItToAppropriateStore notify bag in treadmill from pass 1
+tryToCollectABag
+goCollectABag pass wake up: 1
+goCollectABag pass: 1 nBagsInTreadmill = 1
+goCollectABag pass: 1 !this.treadmill.get(passenger.getPassengerID()).isEmpty()
+Bags in treadmill: 0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 2| | APH| 1| 4| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | APH| 1| 4| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | APH| 0| 4| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+wake up gocollectabag passid 1
+goCollectABag
+PASSENGER AT GOCOLLECTABAG
+goCollectABag pass: 1 nBagsInTreadmill = 0
+carryItToAppropriateStore
+WTTTTFFFFFFFFFFFFFFFFFFFFFFF
+wake up parkTheBus
+hasDaysWorkEnded
+workday: 0
+announcingBusBoarding
+sleep announcingBusBoarding
+wake up takeABus
+this.waitingPass.isEmpty(): false
+exit takeABus
+enterTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 0| 4| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0|ATT|TRT|  2|  0
+Bags in treadmill: 1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 0| 4| | PAT| 5| 3| 4|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0| TT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 0| 4| | PAT| 3| 4|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0| TT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 0| 4| | PAT| 3| 4|--|--|--|--| 5|--|--| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0| TT|TRT|  2|  0
+Pass 5 entered the bus.
+leaveTheBus
+wake up takeABus
+this.waitingPass.isEmpty(): false
+exit takeABus
+enterTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 1| 4| | PAT| 3| 4|--|--|--|--| 5|--|--| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0|ATT|TRT|  2|  0|ATT|TRT|  1|  0| TT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 1| 4| | PAT| 3| 4|--|--|--|--| 5|--|--| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0| TT|TRT|  2|  0|ATT|TRT|  1|  0| TT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 1| 4| | PAT| 4|--|--|--|--|--| 5|--|--| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0| TT|TRT|  2|  0|ATT|TRT|  1|  0| TT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 1| 4| | PAT| 4|--|--|--|--|--| 5| 3|--| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0| TT|TRT|  2|  0|ATT|TRT|  1|  0| TT|TRT|  2|  0
+Pass 3 entered the bus.
+wake up takeABus
+this.waitingPass.isEmpty(): false
+exit takeABus
+enterTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 1| 4| | PAT| 4|--|--|--|--|--| 5| 3|--| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0| TT|TRT|  2|  0| TT|TRT|  1|  0| TT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 1| 4| | PAT|--|--|--|--|--|--| 5| 3|--| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0| TT|TRT|  2|  0| TT|TRT|  1|  0| TT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 1| 4| | PAT|--|--|--|--|--|--| 5| 3| 4| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0| TT|TRT|  2|  0| TT|TRT|  1|  0| TT|TRT|  2|  0
+Pass 4 entered the bus.
+Last passenger. notify announcingBusBoarding
+wake up announcingBusBoarding
+Passengers on the bus at arr quay 3
+carryItToAppropriateStore notify bag in treadmill from pass 1
+goCollectABag pass wake up: 1
+goCollectABag pass: 1 nBagsInTreadmill = 1
+goCollectABag pass: 1 !this.treadmill.get(passenger.getPassengerID()).isEmpty()
+Bags in treadmill: 0
+tryToCollectABag
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 1| 4| |  DF|--|--|--|--|--|--| 5| 3| 4| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0| TT|TRT|  2|  0| TT|TRT|  1|  0| TT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | LBC| 1| 4| |  DF|--|--|--|--|--|--| 5| 3| 4| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0| TT|TRT|  2|  0| TT|TRT|  1|  0|DTT|TRT|  2|  0
+pass that left the bus(id): 5
+sleep leaveTheBus
+parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | APH| 1| 4| |  DF|--|--|--|--|--|--| 5| 3| 4| |---|---|  0|  0|LCP|FDT|  2|  1|---|---|  0|  0| TT|TRT|  2|  0| TT|TRT|  1|  0|DTT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | APH| 0| 4| |  DF|--|--|--|--|--|--| 5| 3| 4| |---|---|  0|  0|LCP|FDT|  2|  2|---|---|  0|  0| TT|TRT|  2|  0| TT|TRT|  1|  0|DTT|TRT|  2|  0
+wake up gocollectabag passid 1
+goHome
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 1| | APH| 0| 4| | PDT|--|--|--|--|--|--| 5| 3| 4| |---|---|  0|  0|LCP|FDT|  2|  2|---|---|  0|  0| TT|TRT|  2|  0| TT|TRT|  1|  0|DTT|TRT|  2|  0
+Passengers on the bus at dep quay 3
+Bus driver set nPass: 3
+sleep parkTheBusAndLetPassOff
+leaveTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | APH| 0| 4| | PDT|--|--|--|--|--|--| 5| 3| 4| |---|---|  0|  0|LCP|FDT|  2|  2|---|---|  0|  0| TT|TRT|  2|  0| TT|TRT|  1|  0|DTT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | APH| 0| 4| | PDT|--|--|--|--|--|--| 5| 3| 4| |---|---|  0|  0|EAT|FDT|  2|  2|---|---|  0|  0| TT|TRT|  2|  0| TT|TRT|  1|  0|DTT|TRT|  2|  0
+exitPassenger
+Exited n pass in arrterm: 1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | APH| 0| 4| | PDT|--|--|--|--|--|--| 5| 3| 4| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0| TT|TRT|  2|  0|DTT|TRT|  1|  0|DTT|TRT|  2|  0
+pass that left the bus(id): 4
+a pass left, nPass remaining: 2
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | APH| 0| 4| | PDT|--|--|--|--|--|--| 5| 3|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0| TT|TRT|  2|  0|DTT|TRT|  1|  0|DTT|TRT|  2|  0
+leaveTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | APH| 0| 4| | PDT|--|--|--|--|--|--| 5| 3|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|DTT|TRT|  2|  0|DTT|TRT|  1|  0|DTT|TRT|  2|  0
+pass that left the bus(id): 3
+a pass left, nPass remaining: 1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | APH| 0| 4| | PDT|--|--|--|--|--|--| 5|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|DTT|TRT|  2|  0|DTT|TRT|  1|  0|DTT|TRT|  2|  0
+prepareNextLeg
+wake up parkTheBusAndLetPassOff
+sleep parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | APH| 0| 4| | PDT|--|--|--|--|--|--| 5|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|TRT|  2|  0|DTT|TRT|  1|  0|DTT|TRT|  2|  0
+exitPassenger
+Exited n pass in dpterm: 3
+prepareNextLeg
+wake up leaveTheBus
+DBDLPO: true
+a pass left, nPass remaining: 0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | APH| 0| 4| | PDT|--|--|--|--|--|--| 5|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|TRT|  1|  0|DTT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | APH| 0| 4| | PDT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|TRT|  1|  0|DTT|TRT|  2|  0
+wake up parkTheBusAndLetPassOff
+carryItToAppropriateStore
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | APH| 0| 4| |  DB|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|TRT|  1|  0|DTT|TRT|  2|  0
+parkTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | ASR| 0| 4| |  DB|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|TRT|  1|  0|DTT|TRT|  2|  0
+exitPassenger
+Exited n pass in dpterm: 4
+prepareNextLeg
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | ASR| 0| 4| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|DTT|TRT|  2|  0
+nWaitingPass parkTheBus 0
+sleep parkTheBus
+this.nWaitingPass == 0 : true
+this.busdriverStop: false
+this.workDay == SimulationParameters.N_FLIGHTS - 1: false
+this.waitingPass.isEmpty(): true
+this.allPassDead false
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | ASR| 0| 4| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|TRT|  2|  0
+exitPassenger
+Exited n pass in dpterm: 5
+NAO VALE A PENA
+NOTIFY LAST PREPARE NEXT LEG
+resetBaggageColPoint
+Help1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | ASR| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+tryToCollectABag
+resetTemporaryStorageArea
+Help2
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 1| 0| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+setAllBagsCollected true
+trytocollectabag notify no more bags
+resetArrivalLounge
+Porter stoped
+reset true
+reset true
+Porter started
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 0| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+Help3
+resetArrivalTermTransfQuay
+busdriver stoped
+busdriver start
+Help4
+resetDepartureTermTransfQuay
+Help5
+resetArrivalTerminalExit
+Help6
+resetDepartureTerminalEntrance
+Help7
+Help
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|---|  0|  0
+noMoreBagsToCollect
+whatShouldIDo
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+takeABus
+takeARest
+-------------TAKE A REST-------------------------
+sleep takeARest
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ATT|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT| 0|--|--|--|--|--|--|--|--| |ATT|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+notify parkTheBus at arrival terminal (at least 3 passengers waiting)
+sleep takeABus
+WTTTTFFFFFFFFFFFFFFFFFFFFFFF
+wake up parkTheBus
+hasDaysWorkEnded
+workday: 1
+announcingBusBoarding
+sleep announcingBusBoarding
+wake up takeABus
+this.waitingPass.isEmpty(): false
+exit takeABus
+enterTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT| 0|--|--|--|--|--|--|--|--| | TT|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| | TT|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--| 0|--|--| | TT|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+Pass 0 entered the bus.
+Last passenger. notify announcingBusBoarding
+leaveTheBus
+wake up announcingBusBoarding
+Passengers on the bus at arr quay 1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--| 0|--|--| |DTT|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| |  DF|--|--|--|--|--|--| 0|--|--| |DTT|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+pass that left the bus(id): 0
+sleep leaveTheBus
+parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PDT|--|--|--|--|--|--| 0|--|--| |DTT|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+Passengers on the bus at dep quay 1
+Bus driver set nPass: 1
+sleep parkTheBusAndLetPassOff
+wake up leaveTheBus
+DBDLPO: true
+a pass left, nPass remaining: 0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PDT|--|--|--|--|--|--|--|--|--| |DTT|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+prepareNextLeg
+wake up parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PDT|--|--|--|--|--|--|--|--|--| |---|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+exitPassenger
+Exited n pass in dpterm: 1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| |  DB|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+parkTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0
+nWaitingPass parkTheBus 0
+sleep parkTheBus
+this.nWaitingPass == 0 : true
+this.busdriverStop: false
+this.workDay == SimulationParameters.N_FLIGHTS - 1: false
+this.waitingPass.isEmpty(): true
+this.allPassDead false
+whatShouldIDo
+wake up takeARest (normal state)
+Take a rest, currentflight: 1
+Take a rest, bagColPoint.areAllBagsCollects(): true
+sleep takeARest
+goCollectABag
+PASSENGER AT GOCOLLECTABAG
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|LCP|FDT|  2|  0|ADZ|FDT|  0|  0
+goCollectABag pass: 4 nBagsInTreadmill = 0
+goCollectABag pass: 4 this.treadmill.get(passenger.getPassengerID()).isEmpty()
+reportMissingBags
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|BRO|FDT|  2|  0|ADZ|FDT|  0|  0
+goHome
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|---|FDT|  2|  0|ADZ|FDT|  0|  0
+exitPassenger
+Exited n pass in arrterm: 1
+whatShouldIDo
+wake up takeARest (normal state)
+Take a rest, currentflight: 1
+Take a rest, bagColPoint.areAllBagsCollects(): true
+sleep takeARest
+goCollectABag
+PASSENGER AT GOCOLLECTABAG
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|LCP|FDT|  2|  0|---|---|  0|  0|ADZ|FDT|  0|  0
+goCollectABag pass: 3 nBagsInTreadmill = 0
+goCollectABag pass: 3 this.treadmill.get(passenger.getPassengerID()).isEmpty()
+reportMissingBags
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|BRO|FDT|  2|  0|---|---|  0|  0|ADZ|FDT|  0|  0
+goHome
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|---|FDT|  2|  0|---|---|  0|  0|ADZ|FDT|  0|  0
+exitPassenger
+Exited n pass in arrterm: 2
+whatShouldIDo
+takeABus
+wake up takeARest (normal state)
+Take a rest, currentflight: 1
+Take a rest, bagColPoint.areAllBagsCollects(): true
+sleep takeARest
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|ATT|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|ADZ|FDT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT| 2|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|ATT|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|ADZ|FDT|  0|  0
+notify parkTheBus at arrival terminal (at least 3 passengers waiting)
+sleep takeABus
+WTTTTFFFFFFFFFFFFFFFFFFFFFFF
+wake up parkTheBus
+hasDaysWorkEnded
+workday: 1
+announcingBusBoarding
+sleep announcingBusBoarding
+wake up takeABus
+this.waitingPass.isEmpty(): false
+exit takeABus
+enterTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT| 2|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0| TT|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|ADZ|FDT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0| TT|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|ADZ|FDT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--| 2|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0| TT|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|ADZ|FDT|  0|  0
+Pass 2 entered the bus.
+Last passenger. notify announcingBusBoarding
+leaveTheBus
+wake up announcingBusBoarding
+Passengers on the bus at arr quay 1
+whatShouldIDo
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--| 2|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|DTT|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|ADZ|FDT|  0|  0
+pass that left the bus(id): 2
+sleep leaveTheBus
+goHome
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| |  DF|--|--|--|--|--|--| 2|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|DTT|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|ADZ|FDT|  0|  0
+parkTheBusAndLetPassOff
+wake up takeARest (normal state)
+Take a rest, currentflight: 1
+Take a rest, bagColPoint.areAllBagsCollects(): true
+sleep takeARest
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| |  DF|--|--|--|--|--|--| 2|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|DTT|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|---|FDT|  0|  0
+exitPassenger
+Exited n pass in arrterm: 3
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PDT|--|--|--|--|--|--| 2|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|DTT|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+Passengers on the bus at dep quay 1
+Bus driver set nPass: 1
+sleep parkTheBusAndLetPassOff
+wake up leaveTheBus
+DBDLPO: true
+a pass left, nPass remaining: 0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PDT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|DTT|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+prepareNextLeg
+wake up parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PDT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|---|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| |  DB|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|---|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+parkTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|ADZ|FDT|  0|  0|---|TRT|  2|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+nWaitingPass parkTheBus 0
+sleep parkTheBus
+this.nWaitingPass == 0 : true
+this.busdriverStop: false
+this.workDay == SimulationParameters.N_FLIGHTS - 1: false
+this.waitingPass.isEmpty(): true
+this.allPassDead false
+exitPassenger
+Exited n pass in dpterm: 2
+whatShouldIDo
+goCollectABag
+PASSENGER AT GOCOLLECTABAG
+wake up takeARest (normal state)
+Take a rest, currentflight: 1
+Take a rest, bagColPoint.areAllBagsCollects(): true
+sleep takeARest
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+goCollectABag pass: 1 nBagsInTreadmill = 0
+goCollectABag pass: 1 this.treadmill.get(passenger.getPassengerID()).isEmpty()
+reportMissingBags
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|BRO|FDT|  1|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+goHome
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | WPL| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|FDT|  1|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+exitPassenger
+Exited n pass in arrterm: 4
+NOTIFY LAST GO HOME
+resetBaggageColPoint
+Help1
+resetTemporaryStorageArea
+wake up takeARest (normal state)
+Take a rest, currentflight: 1
+Take a rest, bagColPoint.areAllBagsCollects(): false
+-------------END TAKE A REST-------------------------
+tryToCollectABag
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 6| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 2| 5| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+Help2
+resetArrivalLounge
+Porter stoped
+reset true
+reset true
+Porter started
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 5| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+Help3
+resetArrivalTermTransfQuay
+busdriver stoped
+busdriver start
+Help4
+resetDepartureTermTransfQuay
+Help5
+resetArrivalTerminalExit
+Help6
+resetDepartureTerminalEntrance
+Help7
+Help
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|---|  0|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|---|  0|  0|---|---|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | APH| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|---|  0|  0
+carryItToAppropriateStore
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ADZ|TRT|  0|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0Exception in thread "Thread-0" java.lang.ArrayIndexOutOfBoundsException: 0
+	at commonInfrastructures.MemFIFO.write(MemFIFO.java:60)
+	at sharedRegions.BaggageColPoint.carryItToAppropriateStore(BaggageColPoint.java:166)
+	at entities.Porter.run(Porter.java:83)
+
+whatShouldIDo
+takeABus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |ATT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 0|--|--|--|--|--|--|--|--| |ATT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+notify parkTheBus at arrival terminal (at least 3 passengers waiting)
+sleep takeABus
+WTTTTFFFFFFFFFFFFFFFFFFFFFFF
+wake up parkTheBus
+hasDaysWorkEnded
+workday: 2
+announcingBusBoarding
+sleep announcingBusBoarding
+wake up takeABus
+this.waitingPass.isEmpty(): false
+exit takeABus
+enterTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 0|--|--|--|--|--|--|--|--| | TT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| | TT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--| 0|--|--| | TT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+Pass 0 entered the bus.
+Last passenger. notify announcingBusBoarding
+wake up announcingBusBoarding
+Passengers on the bus at arr quay 1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| |  DF|--|--|--|--|--|--| 0|--|--| | TT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT|--|--|--|--|--|--| 0|--|--| | TT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+Passengers on the bus at dep quay 1
+Bus driver set nPass: 1
+sleep parkTheBusAndLetPassOff
+leaveTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT|--|--|--|--|--|--| 0|--|--| |DTT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+pass that left the bus(id): 0
+a pass left, nPass remaining: 0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT|--|--|--|--|--|--|--|--|--| |DTT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+wake up parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| |  DB|--|--|--|--|--|--|--|--|--| |DTT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+parkTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |DTT|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+nWaitingPass parkTheBus 0
+sleep parkTheBus
+this.nWaitingPass == 0 : true
+this.busdriverStop: false
+this.workDay == SimulationParameters.N_FLIGHTS - 1: false
+this.waitingPass.isEmpty(): true
+this.allPassDead false
+prepareNextLeg
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|TRT|  2|  0|ADZ|FDT|  0|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+exitPassenger
+Exited n pass in dpterm: 1
+whatShouldIDo
+goCollectABag
+PASSENGER AT GOCOLLECTABAG
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|ADZ|FDT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+goCollectABag pass: 1 nBagsInTreadmill = 0
+whatShouldIDo
+goCollectABag
+PASSENGER AT GOCOLLECTABAG
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0|ADZ|TRT|  0|  0
+goCollectABag pass: 2 nBagsInTreadmill = 0
+whatShouldIDo
+takeABus
+whatShouldIDo
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ADZ|TRT|  0|  0|ATT|TRT|  0|  0|ADZ|TRT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 4|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ADZ|TRT|  0|  0|ATT|TRT|  0|  0|ADZ|TRT|  0|  0
+notify parkTheBus at arrival terminal (at least 3 passengers waiting)
+sleep takeABus
+WTTTTFFFFFFFFFFFFFFFFFFFFFFF
+wake up parkTheBus
+hasDaysWorkEnded
+workday: 2
+announcingBusBoarding
+sleep announcingBusBoarding
+wake up takeABus
+this.waitingPass.isEmpty(): false
+exit takeABus
+enterTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 4|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ADZ|TRT|  0|  0| TT|TRT|  0|  0|ADZ|TRT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ADZ|TRT|  0|  0| TT|TRT|  0|  0|ADZ|TRT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--| 4|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ADZ|TRT|  0|  0| TT|TRT|  0|  0|ADZ|TRT|  0|  0
+Pass 4 entered the bus.
+Last passenger. notify announcingBusBoarding
+wake up announcingBusBoarding
+Passengers on the bus at arr quay 1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| |  DF|--|--|--|--|--|--| 4|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ADZ|TRT|  0|  0| TT|TRT|  0|  0|ADZ|TRT|  0|  0
+parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT|--|--|--|--|--|--| 4|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ADZ|TRT|  0|  0| TT|TRT|  0|  0|ADZ|TRT|  0|  0
+Passengers on the bus at dep quay 1
+takeABus
+Bus driver set nPass: 1
+sleep parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT|--|--|--|--|--|--| 4|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ATT|TRT|  0|  0| TT|TRT|  0|  0|ADZ|TRT|  0|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT| 3|--|--|--|--|--| 4|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ATT|TRT|  0|  0| TT|TRT|  0|  0|ADZ|TRT|  0|  0
+notify parkTheBus at arrival terminal (at least 3 passengers waiting)
+sleep takeABus
+leaveTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT| 3|--|--|--|--|--| 4|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ATT|TRT|  0|  0|DTT|TRT|  0|  0|ADZ|TRT|  0|  0
+pass that left the bus(id): 4
+a pass left, nPass remaining: 0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT| 3|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ATT|TRT|  0|  0|DTT|TRT|  0|  0|ADZ|TRT|  0|  0
+prepareNextLeg
+wake up parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT| 3|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ATT|TRT|  0|  0|---|TRT|  0|  0|ADZ|TRT|  0|  0
+exitPassenger
+Exited n pass in dpterm: 2
+whatShouldIDo
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| |  DB| 3|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ATT|TRT|  0|  0|---|---|  0|  0|ADZ|TRT|  0|  0
+parkTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 3|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ATT|TRT|  0|  0|---|---|  0|  0|ADZ|TRT|  2|  0
+nWaitingPass parkTheBus 1
+sleep parkTheBus
+this.nWaitingPass == 0 : false
+this.busdriverStop: false
+this.workDay == SimulationParameters.N_FLIGHTS - 1: false
+this.waitingPass.isEmpty(): false
+this.allPassDead false
+takeABus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 3|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ATT|TRT|  0|  0|---|---|  0|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 3| 5|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|ATT|TRT|  0|  0|---|---|  0|  0|ATT|TRT|  2|  0
+notify parkTheBus at arrival terminal (at least 3 passengers waiting)
+sleep takeABus
+WTTTTFFFFFFFFFFFFFFFFFFFFFFF
+wake up parkTheBus
+hasDaysWorkEnded
+workday: 2
+announcingBusBoarding
+sleep announcingBusBoarding
+wake up takeABus
+this.waitingPass.isEmpty(): false
+exit takeABus
+enterTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 3| 5|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0| TT|TRT|  0|  0|---|---|  0|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 5|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0| TT|TRT|  0|  0|---|---|  0|  0|ATT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 5|--|--|--|--|--| 3|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0| TT|TRT|  0|  0|---|---|  0|  0|ATT|TRT|  2|  0
+Pass 3 entered the bus.
+leaveTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 5|--|--|--|--|--| 3|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|DTT|TRT|  0|  0|---|---|  0|  0|ATT|TRT|  2|  0
+pass that left the bus(id): 3
+sleep leaveTheBus
+wake up takeABus
+this.waitingPass.isEmpty(): false
+exit takeABus
+enterTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT| 5|--|--|--|--|--| 3|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|DTT|TRT|  0|  0|---|---|  0|  0| TT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--| 3|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|DTT|TRT|  0|  0|---|---|  0|  0| TT|TRT|  2|  0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--| 3| 5|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|DTT|TRT|  0|  0|---|---|  0|  0| TT|TRT|  2|  0
+Pass 5 entered the bus.
+Last passenger. notify announcingBusBoarding
+leaveTheBus
+wake up announcingBusBoarding
+Passengers on the bus at arr quay 2
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--| 3| 5|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|DTT|TRT|  0|  0|---|---|  0|  0|DTT|TRT|  2|  0
+pass that left the bus(id): 5
+sleep leaveTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| |  DF|--|--|--|--|--|--| 3| 5|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|DTT|TRT|  0|  0|---|---|  0|  0|DTT|TRT|  2|  0
+parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT|--|--|--|--|--|--| 3| 5|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|DTT|TRT|  0|  0|---|---|  0|  0|DTT|TRT|  2|  0
+Passengers on the bus at dep quay 2
+Bus driver set nPass: 2
+sleep parkTheBusAndLetPassOff
+wake up leaveTheBus
+DBDLPO: true
+a pass left, nPass remaining: 1
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT|--|--|--|--|--|--| 3|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|DTT|TRT|  0|  0|---|---|  0|  0|DTT|TRT|  2|  0
+prepareNextLeg
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT|--|--|--|--|--|--| 3|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|DTT|TRT|  0|  0|---|---|  0|  0|---|TRT|  2|  0
+wake up leaveTheBus
+exitPassenger
+DBDLPO: true
+Exited n pass in dpterm: 3
+a pass left, nPass remaining: 0
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|DTT|TRT|  0|  0|---|---|  0|  0|---|---|  0|  0
+prepareNextLeg
+wake up parkTheBusAndLetPassOff
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PDT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|---|TRT|  0|  0|---|---|  0|  0|---|---|  0|  0
+exitPassenger
+Exited n pass in dpterm: 4
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| |  DB|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+parkTheBus
+FN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6
+ 3| 7| | LBC| 0| 5| | PAT|--|--|--|--|--|--|--|--|--| |---|---|  0|  0|LCP|FDT|  1|  0|LCP|FDT|  2|  0|---|---|  0|  0|---|---|  0|  0|---|---|  0|  0
+nWaitingPass parkTheBus 0
+sleep parkTheBus
+this.nWaitingPass == 0 : true
+this.busdriverStop: false
+this.workDay == SimulationParameters.N_FLIGHTS - 1: false
+this.waitingPass.isEmpty(): true
+this.allPassDead false
+

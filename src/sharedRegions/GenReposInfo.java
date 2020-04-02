@@ -215,11 +215,18 @@ public class GenReposInfo {
      */
 
     private void printLog(){
-        log.append("\n|FN|BN|  |Stat|CB|SR|  |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3|  |St1|Si1|NR1|NA1| " +
-                "|St2|Si2|NR2|NA2| |St3|Si3|NR3|NA3| |St4|Si4|NR4|NA4| |St5|Si5|NR5|NA5| |St6|Si6|NR6|NA6|");
-        log.append(String.format("\n|%2d|%2d|", FN, BN));
-        log.append(String.format("  |%4s|%2d|%2d|  |", portState[porterState.ordinal()], CB, SR));
+        log.append("\nFN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6");
+        //log.append("\n|FN|BN|  |Stat|CB|SR|  |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3|  |St1|Si1|NR1|NA1| " +
+        //        "|St2|Si2|NR2|NA2| |St3|Si3|NR3|NA3| |St4|Si4|NR4|NA4| |St5|Si5|NR5|NA5| |St6|Si6|NR6|NA6|");
+
+        log.append(String.format("\n%2d|%2d|", FN, BN));
+        //log.append(String.format("\n|%2d|%2d|", FN, BN));
+
+        log.append(String.format(" |%4s|%2d|%2d| |", portState[porterState.ordinal()], CB, SR));
+        //log.append(String.format("  |%4s|%2d|%2d|  |", portState[porterState.ordinal()], CB, SR));
+
         log.append(String.format("%4s|",  busState[busDriverState.ordinal()]));
+        //log.append(String.format("%4s|",  busState[busDriverState.ordinal()]));
         for(int j = 0; j < SimulationParameters.N_PASS_PER_FLIGHT; j++){
             String passId;
             if(j > passWaitingQueue.size() - 1){
@@ -229,6 +236,7 @@ public class GenReposInfo {
             }
             log.append(String.format("%s|", passId));
         }
+
         for(int k = 0; k < SimulationParameters.BUS_CAP; k++){
             String occupStat;
             if(k > busSeatOccupation.size() - 1){
@@ -237,8 +245,11 @@ public class GenReposInfo {
                 occupStat = String.format("%2s", busSeatOccupation.get(k));
             }
             log.append(String.format("%s|", occupStat));
+            //log.append(String.format("%s|", occupStat));
         }
+
         log.append(" ");
+        //log.append(" ");
         for (int i = 0; i< SimulationParameters.N_PASS_PER_FLIGHT; i++){
             String psi = "---";
             String pst =  "---";
@@ -249,7 +260,8 @@ public class GenReposInfo {
             if(passState[passengerStates[i].ordinal()] != null){
                 pst = passState[passengerStates[i].ordinal()];
             }
-            log.append(String.format(" |%3s|%3s|%3d|%3d|",
+            log.append(String.format("|%3s|%3s|%3d|%3d",
+            //log.append(String.format(" |%3s|%3s|%3d|%3d|",
                     pst, psi,
                     totalLuggage[i], collectedLuggage[i]));
         }
@@ -318,7 +330,7 @@ public class GenReposInfo {
      *
      */
 
-    public synchronized void updateStoredBaggageCargoHold(){
+    public synchronized void removeBagFromCargoHold(){
         BN = BN - 1;
         printLog();
     }
@@ -358,7 +370,7 @@ public class GenReposInfo {
      *    @param porterState porterState.
      */
 
-    public synchronized void updatePorterState(PorterStates porterState){
+    public synchronized void updatePorterStat(PorterStates porterState){
         if(this.porterState != porterState){
             this.porterState = porterState;
         }

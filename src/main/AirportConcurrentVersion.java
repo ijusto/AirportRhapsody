@@ -94,7 +94,7 @@ public class AirportConcurrentVersion {
 
         porter = new Porter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND, arrivLounge, tmpStorageArea,
                 bagColPoint);
-        repos.updatePorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        repos.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
         busDriver = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuay,
                 departureQuay,repos);

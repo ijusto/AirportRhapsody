@@ -3,6 +3,7 @@ package commonInfrastructures;
 /**
  *    Parametric FIFO derived from a parametric memory.
  *    Errors are reported.
+ *    Minor additions to this class where made by Inês Justo and Miguel Lopes.
  *
  *    @author António Rui De Oliveira E Silva Borges
  *    @param <R> data type of stored objects
@@ -29,6 +30,12 @@ public class MemFIFO<R> extends MemObject<R>
     private boolean empty;
 
     /**
+     *   Number of parametric objects written into the FIFO.
+     */
+
+    private int nObjects;
+
+    /**
      *   FIFO instantiation.
      *   The instantiation only takes place if the memory exists.
      *   Otherwise, an error is reported.
@@ -42,6 +49,7 @@ public class MemFIFO<R> extends MemObject<R>
         super (storage);
         inPnt = outPnt = 0;
         empty = true;
+        nObjects = 0;
     }
 
     /**
@@ -58,6 +66,7 @@ public class MemFIFO<R> extends MemObject<R>
     {
         if ((inPnt != outPnt) || empty)
         { mem[inPnt] = val;
+            nObjects += 1;
             inPnt = (inPnt + 1) % mem.length;
             empty = false;
         }
@@ -80,6 +89,7 @@ public class MemFIFO<R> extends MemObject<R>
 
         if (!empty)
         { val = mem[outPnt];
+            nObjects -= 1;
             outPnt = (outPnt + 1) % mem.length;
             empty = (inPnt == outPnt);
         }
@@ -91,14 +101,13 @@ public class MemFIFO<R> extends MemObject<R>
     /**
      *   @author Inês Justo
      *   @author Miguel Lopes
-     *   Check if FIFO is full.
+     *   Get the number of parametric objects that were writter into the FIFO.
      *
-     *    @return <li> true, if the FIFO is full
-     *            <li> false, otherwise
+     *    @return number of parametric objects that was written
      */
 
-    public boolean isFull(){
-        return (inPnt == outPnt) && !empty;
+    public int getNObjects(){
+        return nObjects;
     }
 
     /**

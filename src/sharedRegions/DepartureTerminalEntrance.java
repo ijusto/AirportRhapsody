@@ -63,26 +63,6 @@ public class DepartureTerminalEntrance {
     }
 
     /**
-     *
-     *    @return <li> true, if all passengers from the current flight left.</li>
-     *            <li> false, otherwise.</li>
-     */
-
-    public synchronized boolean exitPassenger(){
-        System.out.print("\nexitPassenger");
-        this.nPassDead += 1;
-        System.out.print("\nExited n pass in dpterm: " + this.nPassDead);
-        if( !((this.nPassDead + this.arrivalTerm.getNPassDead()) < SimulationParameters.N_PASS_PER_FLIGHT)){
-            this.arrivLounge.setNoPassAtAirport();
-            this.arrivalQuay.setNoPassAtAirport();
-            System.out.print("\nNAO VALE A PENA");
-            //System.exit(-1);
-            return true;
-        }
-        return false;
-    }
-
-    /**
      *  ... (raised by the Passenger).
      *
      */
@@ -93,11 +73,33 @@ public class DepartureTerminalEntrance {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
-        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
+        // update logger
+        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
         this.repos.passengerExit(passenger.getPassengerID());
-        if(this.exitPassenger()){
+
+        this.exitPassenger();
+    }
+
+    /**
+     *
+     */
+
+    public synchronized void exitPassenger(){
+        System.out.print("\nexitPassenger");
+
+        // increment the number of passengers that leave the departure terminal
+        this.nPassDead += 1;
+
+        System.out.print("\nExited n pass in dpterm: " + this.nPassDead);
+
+        // if the number of passengers that left the airport isn't smaller than the number of passengers per flight
+        if( !((this.nPassDead + this.arrivalTerm.getNPassDead()) < SimulationParameters.N_PASS_PER_FLIGHT)){
+            this.arrivLounge.setNoPassAtAirport();
+            this.arrivalQuay.setNoPassAtAirport();
+
             System.out.print("\nNOTIFY LAST PREPARE NEXT LEG");
+
             arrivLounge.wakeUpForNextFlight();
             arrivalQuay.wakeUpForNextFlight();
         }
@@ -111,6 +113,7 @@ public class DepartureTerminalEntrance {
 
     public synchronized void resetDepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
         System.out.print("\nresetDepartureTerminalEntrance");
+
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.nPassDead = 0;

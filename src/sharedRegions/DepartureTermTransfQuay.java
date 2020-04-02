@@ -79,9 +79,12 @@ public class DepartureTermTransfQuay {
         this.nPassOnTheBus -= 1;
         System.out.print("\na pass left, nPass remaining: " + this.getNPassOnTheBus());
         repos.freeBusSeat(passenger.getPassengerID());
-        //if(this.getnPassOnTheBus() == 0){
-            notifyAll();  // wake up Bus Driver in parkTheBusAndLetPassOff()
-        //}
+
+        // if the passenger is the last to exit the bus
+        if(this.getNPassOnTheBus() == 0){
+            // wake up Bus Driver in parkTheBusAndLetPassOff()
+            notifyAll();
+        }
 
     }
 
@@ -133,7 +136,11 @@ public class DepartureTermTransfQuay {
     public synchronized void resetDepartureTermTransfQuay(){
         System.out.print("\nresetDepartureTermTransfQuay");
         //while(true){if(this.letPassOff){break;}}
-        this.busDoorsOpen = false;
+        if(this.busDoorsOpen){
+            //
+            notifyAll();
+            this.busDoorsOpen = false;
+        }
         this.nPassOnTheBus = -1;
     }
 

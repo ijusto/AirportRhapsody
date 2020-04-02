@@ -43,7 +43,7 @@ public class BaggageColPoint {
     private GenReposInfo repos;
 
 
-    private boolean allBagsCollects;
+    private boolean allBagsCollected;
 
     /**
      *   Instantiation of the Baggage Collection Point.
@@ -54,7 +54,7 @@ public class BaggageColPoint {
     public BaggageColPoint(GenReposInfo repos){
         this.repos = repos;
         this.nBagsInTreadmill = 0;
-        this.allBagsCollects = false;
+        this.allBagsCollected = false;
         this.lastBagId = -1;
         this.porterAwake = false;
     }
@@ -64,16 +64,22 @@ public class BaggageColPoint {
 
     /**
      *  ... (raised by the Passenger).
+     *   The passenger is waken up by the operations carryItToAppropriateStore and tryToCollectABag of the porter when
+     *   he places on the conveyor belt a bag she owns, the former, or when he signals that there are no more pieces
+     *   of luggage in the plane hold, the latter, and makes a transition when either she has in her possession all the
+     *   bags she owns, or was signaled that there are no more bags in the plane hold
      *
      */
 
     public synchronized boolean goCollectABag(){
         System.out.print("\ngoCollectABag");
+        System.out.print("\nPASSENGER AT GOCOLLECTABAG");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
-        System.out.print("\nPASSENGER AT GOCOLLECTABAG");
+
+        // update logger
         repos.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         /*
@@ -90,12 +96,10 @@ public class BaggageColPoint {
         */
 
         do {
-            //if(!this.porterAwake){
-            //    System.out.print("\ngoCollectABag pass: " + passenger.getPassengerID() + " porterAwake false");
-            //    continue;
-            //} else
+
             System.out.print("\ngoCollectABag pass: " + passenger.getPassengerID() + " nBagsInTreadmill = " + this.nBagsInTreadmill);
 
+            //
             if(this.pHoldEmpty() && this.treadmill.get(passenger.getPassengerID()).isEmpty()) {
                 System.out.print("\ngoCollectABag pass: " + passenger.getPassengerID() + " this.treadmill.get(passenger.getPassengerID()).isEmpty()");
                 return false;
@@ -139,16 +143,17 @@ public class BaggageColPoint {
      */
 
     public synchronized void noMoreBagsToCollect(){
-
         System.out.print("\nnoMoreBagsToCollect");
+
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-        repos.updatePorterState(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        notifyAll();  // wake up Passengers in goCollectABag()
-        this.setAllBagsCollected();
-    }
+        // update logger
+        repos.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+
+        //this.setAllBagsCollected();
+     }
 
     /**
      *  Operation of carrying a bag from the plane's hold to the baggage colletion point (raised by the Porter).
@@ -160,7 +165,7 @@ public class BaggageColPoint {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
-        repos.updatePorterState(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
+        repos.updatePorterStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
 
         try {
             this.treadmill.get(bag.getIdOwner()).write(bag);
@@ -178,10 +183,19 @@ public class BaggageColPoint {
     public synchronized void resetBaggageColPoint(){
         System.out.print("\nresetBaggageColPoint");
         this.nBagsInTreadmill = 0;
-        this.allBagsCollects = false;
+        this.allBagsCollected = false;
         this.lastBagId = -1;
         this.treadmill.clear();
         this.porterAwake = false;
+    }
+
+    /**
+     *   Called by Porter in tryToCollectABag when it isn't successful.
+     */
+
+    public synchronized void noMoreBags() {
+        // wake up Passengers in goCollectABag()
+        notifyAll();
     }
 
     /* ************************************************* Getters ******************************************************/
@@ -200,16 +214,7 @@ public class BaggageColPoint {
      */
 
     public boolean pHoldEmpty() {
-        return allBagsCollects;
-    }
-
-    /**
-     *
-     *    @return allBagsCollects
-     */
-
-    public boolean areAllBagsCollects() {
-        return allBagsCollects;
+        return allBagsCollected;
     }
 
     /* ************************************************* Setters ******************************************************/
@@ -229,6 +234,8 @@ public class BaggageColPoint {
      */
 
     public void setAllBagsCollected() {
-        this.allBagsCollects = true;
+        this.allBagsCollected = true;
     }
+
+
 }
