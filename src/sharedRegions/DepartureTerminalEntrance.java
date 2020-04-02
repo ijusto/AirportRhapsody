@@ -38,6 +38,11 @@ public class DepartureTerminalEntrance {
     private ArrivalTerminalExit arrivalTerm;
 
     /**
+     *
+     */
+    private boolean tellPassToGetOut;
+
+    /**
      *   Number of passengers of the current flight that left the airport at the Departure Terminal.
      *   If summed up with the number of passengers of the current flight that left the airport at the Arrival
      *   Terminal isn't smaller than the number of passengers per flight, change boolean allPassDead at the Arrival
@@ -64,7 +69,8 @@ public class DepartureTerminalEntrance {
 
     /**
      *  ... (raised by the Passenger).
-     *
+     *    the passenger is waken up by the operations goHome or prepareNextLeg of the last passenger of each flight to
+     *    exit the arrival terminal or to enter the departure terminal
      */
 
     public synchronized void prepareNextLeg(){
@@ -78,14 +84,6 @@ public class DepartureTerminalEntrance {
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
         this.repos.passengerExit(passenger.getPassengerID());
 
-        this.exitPassenger();
-    }
-
-    /**
-     *
-     */
-
-    public synchronized void exitPassenger(){
         System.out.print("\nexitPassenger");
 
         // increment the number of passengers that leave the departure terminal
@@ -93,8 +91,9 @@ public class DepartureTerminalEntrance {
 
         System.out.print("\nExited n pass in dpterm: " + this.nPassDead);
 
-        // if the number of passengers that left the airport isn't smaller than the number of passengers per flight
-        if( !((this.nPassDead + this.arrivalTerm.getNPassDead()) < SimulationParameters.N_PASS_PER_FLIGHT)){
+        if(this.nPassDead + this.arrivalTerm.getNPassDead() == SimulationParameters.N_PASS_PER_FLIGHT){
+            arrivalTerm.notifyFromPrepareNextLeg();
+
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
 
@@ -102,7 +101,30 @@ public class DepartureTerminalEntrance {
 
             arrivLounge.wakeUpForNextFlight();
             arrivalQuay.wakeUpForNextFlight();
+        } else {
+
+            // if the number of passengers that wants to leave the airport is smaller than the number of passengers per flight
+            while (this.nPassDead + this.arrivalTerm.getNPassDead() < SimulationParameters.N_PASS_PER_FLIGHT && tellPassToGetOut) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // TODO: if i am the last passenger wake up gohome, do the same in gohome to wake up here
+            // TODO: fazer notify numa função à parte notifyFromGoHome aqui e notifyFromPrepareNextLeg
+
         }
+    }
+
+    /**
+     *
+     */
+
+    public synchronized void notifyFromGoHome(){
+        tellPassToGetOut = true;
+        notifyAll();
     }
 
     /**
@@ -117,6 +139,7 @@ public class DepartureTerminalEntrance {
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.nPassDead = 0;
+        tellPassToGetOut = false;
     }
 
     /* ************************************************* Setters ******************************************************/

@@ -333,10 +333,6 @@ public class ArrivalTermTransfQuay {
 
     public synchronized void resetArrivalTermTransfQuay() throws MemException {
         System.out.print("\nresetArrivalTermTransfQuay");
-        System.out.print("\nbusdriver stoped");
-        do {
-        } while (this.busDriverStop);
-        System.out.print("\nbusdriver start");
         this.waitingLine = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.nPassAllowedToEnter = 0;
         this.nPassOnTheBus = 0;
@@ -352,6 +348,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void wakeUpForNextFlight(){
+        while (allPassDead){}
         this.busDriverStart();
         notifyAll();
     }

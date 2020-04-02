@@ -64,7 +64,7 @@ public class ArrivalLounge {
     /**
      *
      */
-    private boolean porterStopNoMoreBagsAndThereAreStillPassOnTheAirp;
+    private boolean porterStop;
 
 
     /**
@@ -108,7 +108,7 @@ public class ArrivalLounge {
 
         this.nPassAtArrivL = 0;
 
-        this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = false;
+        this.porterStop = true;
         this.reset = false;
 
     }
@@ -139,8 +139,7 @@ public class ArrivalLounge {
         this.repos.numberNRTotal(currentPassenger.getNR());
         this.repos.newPass(currentPassenger.getSi());
 
-        //
-        this.reset = false;
+        //this.reset = false;
 
         if(this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT) {
             // wake up Porter in takeARest()
@@ -179,7 +178,7 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        while ((this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT || bagColPoint.pHoldEmpty()) && !this.reset){
+        while ((this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT || bagColPoint.pHoldEmpty()) && this.porterStop){
 
         // while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp) && (this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){ // && !this.changedFlight) {
             System.out.print("\nsleep takeARest");
@@ -248,7 +247,7 @@ public class ArrivalLounge {
 
             System.out.print("\ntrytocollectabag notify no more bags");
 
-            this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = true;
+            //this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = true;
 
             return null;
         }
@@ -263,8 +262,6 @@ public class ArrivalLounge {
 
         // update logger
         repos.updateFlightNumber(this.currentFlight);
-
-        notifyAll();
 
         System.out.print("\nresetArrivalLounge");
         System.out.print("\nPorter stoped");
@@ -307,7 +304,15 @@ public class ArrivalLounge {
         // reset the number of passengers that arrived the airport
         this.nPassAtArrivL = 0;
 
+
         this.reset = true;
+        /*
+        this.reset = true;
+
+
+        notifyAll();
+
+         */
     }
 
     /**
@@ -315,7 +320,9 @@ public class ArrivalLounge {
      */
 
     public synchronized void wakeUpForNextFlight(){
-        this.reset = true;
+        while (!reset){}
+        this.reset = false;
+        porterStart();
         notifyAll();
     }
 
@@ -336,7 +343,7 @@ public class ArrivalLounge {
      */
 
     public void porterStart(){
-        this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = false;
+        this.porterStop = false;
     }
 
 }
