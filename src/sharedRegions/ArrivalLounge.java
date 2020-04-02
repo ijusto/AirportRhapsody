@@ -325,10 +325,10 @@ public class ArrivalLounge {
      */
 
     public synchronized void wakeUpForNextFlight(){
-        while (!reset){}
+        //while (!reset){}
         this.reset = false;
         this.porterStop = false;
-        notifyAll();
+        //notifyAll();
     }
 
 

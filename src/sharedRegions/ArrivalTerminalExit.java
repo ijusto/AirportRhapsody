@@ -98,6 +98,7 @@ public class ArrivalTerminalExit {
         System.out.print("\nexitPassenger");
         System.out.print("\nExited n pass in arrterm: " + this.nPassDead);
 
+        // TODO: allpassDead e allNotified só um cada partilhado entre as duas e fazer wait antes de se incrementar
         if(this.getAllDeadPass() == SimulationParameters.N_PASS_PER_FLIGHT) {
             System.out.print("\npass " + passenger.getPassengerID() + " last in goHome, npass: " + this.getAllDeadPass());
             notifyAll();

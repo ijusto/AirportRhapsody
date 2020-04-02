@@ -348,9 +348,9 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void wakeUpForNextFlight(){
-        System.out.print("\n Waiting all pass dead false ");
-        while (allPassDead){}
-        System.out.print("\n all pass dead is false ");
+        //System.out.print("\n Waiting all pass dead false ");
+        //while (allPassDead){}
+        //System.out.print("\n all pass dead is false ");
         this.busDriverStop = false;
         notifyAll();
     }
