@@ -112,6 +112,13 @@ public class ArrivalTerminalExit {
 
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
+
+
+            System.out.print("\nthis.arrivLounge.getCurrentFlight() == SimulationParameters.N_FLIGHTS " + (this.arrivLounge.getCurrentFlight() == SimulationParameters.N_FLIGHTS - 1));
+
+            if(this.arrivLounge.getCurrentFlight() == SimulationParameters.N_FLIGHTS - 1){
+                this.arrivLounge.dayOver();
+            }
         } else {
             System.out.print("\npass " + passenger.getPassengerID() + " NOT last in goHome, npass: " + this.deadPassCounter.getValue());
 
@@ -126,6 +133,7 @@ public class ArrivalTerminalExit {
                 if(this.allNotified.increaseCounter()){
                     System.out.print("\npass " + passenger.getPassengerID() + " last to be notified, notifies last to exit");
                     notifyAll();
+                    departureTerm.notifyFromGoHome();
                 }
             }
         }

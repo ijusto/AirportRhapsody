@@ -93,6 +93,12 @@ public class DepartureTerminalEntrance {
 
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
+
+            System.out.print("\nthis.arrivLounge.getCurrentFlight() == SimulationParameters.N_FLIGHTS - 1" + (this.arrivLounge.getCurrentFlight() == SimulationParameters.N_FLIGHTS - 1));
+
+            if(this.arrivLounge.getCurrentFlight() == SimulationParameters.N_FLIGHTS - 1){
+                this.arrivLounge.dayOver();
+            }
         } else {
             System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, npass: " + this.arrivalTerm.getDeadPassCounter().getValue());
 
@@ -108,6 +114,8 @@ public class DepartureTerminalEntrance {
                 if(this.arrivalTerm.getAllNotified().increaseCounter()){
                     System.out.print("\npass " + passenger.getPassengerID() + " last to be notified, notifies last to exit");
                     notifyAll();
+                    arrivalTerm.notifyFromPrepareNextLeg();
+
                 }
             }
         }

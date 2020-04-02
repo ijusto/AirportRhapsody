@@ -218,7 +218,7 @@ public class ArrivalTermTransfQuay {
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         // if the last flight arrived and all passengers left the airport, end the bus driver life cycle
-        if(this.nFlights == SimulationParameters.N_FLIGHTS && this.allPassDead){
+        if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){
             return 'F';
         }
 
@@ -277,7 +277,7 @@ public class ArrivalTermTransfQuay {
             }
 
             // if the last flight arrived and all passengers left the airport, stop waiting
-            if(this.nFlights == SimulationParameters.N_FLIGHTS && this.allPassDead){ //!this.busDriverStop){
+            if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){ //!this.busDriverStop){
                 break;
             }
 
@@ -356,5 +356,4 @@ public class ArrivalTermTransfQuay {
         this.allPassDead = true;
         this.busDriverStop = true;
     }
-
 }

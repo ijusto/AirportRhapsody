@@ -134,6 +134,7 @@ public class ArrivalLounge {
 
         // increment passengers that arrive so the porter knows when to wake up in takeARest()
         this.nPassAtArrivL += 1;
+        allPassDead = false;
         // update logger
         this.repos.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
         this.repos.numberNRTotal(currentPassenger.getNR());
@@ -252,6 +253,9 @@ public class ArrivalLounge {
             if(!allPassDead)
                 // notify passenger in goCollectABag()
                 bagColPoint.noMoreBags();
+            else {
+                notifyAll(); // wake up dayOver
+            }
 
             System.out.print("\ntrytocollectabag notify no more bags");
 
@@ -313,7 +317,6 @@ public class ArrivalLounge {
 
 
         this.reset = true;
-        this.allPassDead = false;
         /*
         this.reset = true;
 
@@ -333,6 +336,24 @@ public class ArrivalLounge {
     public void setNoPassAtAirport() {
         System.out.print("\nsetNoPassAtAirport");
         this.allPassDead = true;
+    }
+
+    public synchronized void dayOver(){ //wake up porter in take a rest
+        System.out.print("\nbagColPoint.pHoldEmpty(): " + bagColPoint.pHoldEmpty());
+        System.out.print("\ndayOver sleep");
+        while (!bagColPoint.pHoldEmpty()) {//&& this.porterStop){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.print("\ndayOver wake up ");
+        notify();
+    }
+
+    public int getCurrentFlight(){
+        return currentFlight;
     }
 
 }
