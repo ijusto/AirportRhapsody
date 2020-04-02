@@ -54,6 +54,14 @@ public class Passenger extends Thread {
     private int id;
 
     /**
+     *
+     *
+     *    @serialField nPassThatWantToLeave
+     */
+
+    private int nPassThatWantToLeave;
+
+    /**
      *  ...
      *
      *    @serialField arrivalLounge

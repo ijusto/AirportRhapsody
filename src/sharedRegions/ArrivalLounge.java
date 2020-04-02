@@ -205,6 +205,10 @@ public class ArrivalLounge {
             this.nPassAtArrivL = 0;
         }
 
+        if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){ // && bagColPoint.areAllBagsCollects()) {
+            return 'E';
+        }
+
         System.out.print("\n-------------END TAKE A REST-------------------------");
 
         return 'R';
@@ -242,8 +246,9 @@ public class ArrivalLounge {
 
             System.out.print("\nsetAllBagsCollected " + this.bagColPoint.pHoldEmpty());
 
-            // notify passenger in goCollectABag()
-            bagColPoint.noMoreBags();
+            if(!allPassDead)
+                // notify passenger in goCollectABag()
+                bagColPoint.noMoreBags();
 
             System.out.print("\ntrytocollectabag notify no more bags");
 
@@ -322,7 +327,7 @@ public class ArrivalLounge {
     public synchronized void wakeUpForNextFlight(){
         while (!reset){}
         this.reset = false;
-        porterStart();
+        this.porterStop = false;
         notifyAll();
     }
 
@@ -336,14 +341,6 @@ public class ArrivalLounge {
 
     public void setNoPassAtAirport() {
         this.allPassDead = true;
-    }
-
-    /**
-     *   Setter for existsPassengers to false.
-     */
-
-    public void porterStart(){
-        this.porterStop = false;
     }
 
 }

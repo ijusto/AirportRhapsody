@@ -359,7 +359,7 @@ public class GenReposInfo {
      *   Update baggage stored in the Storage Room when porter puts the baggage
      */
 
-    public synchronized void saveBagINSR(){
+    public synchronized void saveBagInSR(){
         SR = SR + 1;
         printLog();
     }

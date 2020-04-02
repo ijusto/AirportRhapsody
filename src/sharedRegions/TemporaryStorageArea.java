@@ -35,7 +35,8 @@ public class TemporaryStorageArea {
 
     public TemporaryStorageArea(GenReposInfo repos) throws MemException {
         this.repos = repos;
-        tmpStorageStack = new MemStack<>(new Bag [SimulationParameters.N_PASS_PER_FLIGHT * SimulationParameters.N_BAGS_PER_PASS]);     // stack instantiation
+        tmpStorageStack = new MemStack<>(new Bag [SimulationParameters.N_PASS_PER_FLIGHT
+                                                    * SimulationParameters.N_BAGS_PER_PASS]);     // stack instantiation
     }
 
     /**
@@ -46,14 +47,17 @@ public class TemporaryStorageArea {
         System.out.print("\ncarryItToAppropriateStore");
 
         Porter porter = (Porter) Thread.currentThread();
-        assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
-        assert(bag != null);
+        assert porter.getStat() == PorterStates.AT_THE_PLANES_HOLD;
+        assert bag != null;
         porter.setStat(PorterStates.AT_THE_STOREROOM);
+
+        // logger
         repos.updatePorterStat(PorterStates.AT_THE_STOREROOM);
 
         try {
             tmpStorageStack.write(bag);
-            repos.saveBagINSR();
+
+            repos.saveBagInSR();
         } catch (MemException e) {
             e.printStackTrace();
         }
@@ -66,6 +70,8 @@ public class TemporaryStorageArea {
 
     public synchronized void resetTemporaryStorageArea() throws MemException {
         System.out.print("\nresetTemporaryStorageArea");
-        tmpStorageStack = new MemStack<>(new Bag [SimulationParameters.N_PASS_PER_FLIGHT * SimulationParameters.N_BAGS_PER_PASS]);     // stack instantiation
+
+        tmpStorageStack = new MemStack<>(new Bag [SimulationParameters.N_PASS_PER_FLIGHT
+                                                    * SimulationParameters.N_BAGS_PER_PASS]);     // stack instantiation
     }
 }

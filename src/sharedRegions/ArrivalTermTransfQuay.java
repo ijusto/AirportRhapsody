@@ -348,8 +348,10 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void wakeUpForNextFlight(){
+        System.out.print("\n Waiting all pass dead false ");
         while (allPassDead){}
-        this.busDriverStart();
+        System.out.print("\n all pass dead is false ");
+        this.busDriverStop = false;
         notifyAll();
     }
 
@@ -362,14 +364,6 @@ public class ArrivalTermTransfQuay {
     public void setNoPassAtAirport() {
         this.allPassDead = true;
         this.busDriverStop = true;
-    }
-
-    /**
-     *
-     */
-
-    public synchronized void busDriverStart() {
-        this.busDriverStop = false;
     }
 
 }

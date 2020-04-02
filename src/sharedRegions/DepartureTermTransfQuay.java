@@ -77,11 +77,11 @@ public class DepartureTermTransfQuay {
         }
 
         this.nPassOnTheBus -= 1;
-        System.out.print("\na pass left, nPass remaining: " + this.getNPassOnTheBus());
+        System.out.print("\na pass left, nPass remaining: " + this.nPassOnTheBus);
         repos.freeBusSeat(passenger.getPassengerID());
 
         // if the passenger is the last to exit the bus
-        if(this.getNPassOnTheBus() == 0){
+        if(this.nPassOnTheBus == 0){
             // wake up Bus Driver in parkTheBusAndLetPassOff()
             notifyAll();
         }
@@ -108,14 +108,16 @@ public class DepartureTermTransfQuay {
         assert(busDriver.getStat() == BusDriverStates.DRIVING_FORWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
-        this.setNPassOnTheBus(busDriver.getNPassOnTheBus());
+
+        this.nPassOnTheBus = busDriver.getNPassOnTheBus();
+
         System.out.print("\nPassengers on the bus at dep quay " + this.nPassOnTheBus);
-        System.out.print("\nBus driver set nPass: " + this.getNPassOnTheBus());
+        System.out.print("\nBus driver set nPass: " + this.nPassOnTheBus);
 
         this.pleaseLeaveTheBus();
         notifyAll();  // wake up Passengers in leaveTheBus()
 
-        while(this.getNPassOnTheBus() != 0) {
+        while(this.nPassOnTheBus != 0) {
             System.out.print("\nsleep parkTheBusAndLetPassOff");
             try {
                 wait();
@@ -125,7 +127,8 @@ public class DepartureTermTransfQuay {
             System.out.print("\nwake up parkTheBusAndLetPassOff");
         }
 
-        busDriver.setNPassOnTheBus(this.getNPassOnTheBus());
+        busDriver.setNPassOnTheBus(this.nPassOnTheBus);
+
         this.busDoorsOpen = false;
     }
 
@@ -138,7 +141,7 @@ public class DepartureTermTransfQuay {
         //while(true){if(this.letPassOff){break;}}
         if(this.busDoorsOpen){
             System.out.print("\nresetDepartureTermTransfQuay");
-            System.out.print("\nthis.getNPassOnTheBus() != 0 " + (this.getNPassOnTheBus() != 0));
+            System.out.print("\nthis.getNPassOnTheBus() != 0 " + (this.nPassOnTheBus != 0));
 
             //
             notifyAll();
@@ -152,15 +155,6 @@ public class DepartureTermTransfQuay {
 
     /**
      *
-     *    @return passOnTheBus
-     */
-
-    public int getNPassOnTheBus() {
-        return this.nPassOnTheBus;
-    }
-
-    /**
-     *
      *    @return letPassOff
      */
     public boolean canPassLeaveTheBus() {
@@ -168,15 +162,6 @@ public class DepartureTermTransfQuay {
     }
 
     /* ************************************************* Setters ******************************************************/
-
-    /**
-     *
-     *    @param nPassOnTheBus
-     */
-
-    public void setNPassOnTheBus(int nPassOnTheBus) {
-        this.nPassOnTheBus = nPassOnTheBus;
-    }
 
     /**
      *

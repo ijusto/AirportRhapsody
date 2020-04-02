@@ -47,11 +47,6 @@ public class ArrivalTerminalExit {
     private int nPassDead;
 
     /**
-     *
-     */
-    private boolean tellPassToGetOut;
-
-    /**
      *   Instantiation of the Arrival Terminal Exit.
      *
      *     @param repos General Repository of Information.
@@ -64,7 +59,6 @@ public class ArrivalTerminalExit {
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
         this.nPassDead = 0;
-        this.tellPassToGetOut = false;
     }
 
     /**
@@ -81,51 +75,59 @@ public class ArrivalTerminalExit {
                 passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
+        // increment the number of passengers that leave the arrival terminal
+        this.nPassDead += 1;
+
+        int allDead = this.nPassDead + this.departureTerm.getNPassDead();
+        System.out.print("\npass " + passenger.getPassengerID() + " in goHome, npass: " + allDead);
+
         // update logger
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
         this.repos.passengerExit(passenger.getPassengerID());
 
         System.out.print("\nexitPassenger");
 
-        // increment the number of passengers that leave the arrival terminal
-        this.nPassDead += 1;
 
         System.out.print("\nExited n pass in arrterm: " + this.nPassDead);
 
-        if(this.nPassDead + this.departureTerm.getNPassDead() == SimulationParameters.N_PASS_PER_FLIGHT){
-            departureTerm.notifyFromGoHome();
+        if((this.nPassDead + this.departureTerm.getNPassDead()) == SimulationParameters.N_PASS_PER_FLIGHT){
 
             this.arrivLounge.setNoPassAtAirport();
             this.arrivalQuay.setNoPassAtAirport();
 
             System.out.print("\nNOTIFY LAST GO HOME");
 
+            notifyPassengersInArr();
+            departureTerm.notifyFromGoHome();
             arrivLounge.wakeUpForNextFlight();
             arrivalQuay.wakeUpForNextFlight();
         } else {
 
             // if the number of passengers that wants to leave the airport is smaller than the number of passengers per flight
-            while (this.nPassDead + this.departureTerm.getNPassDead() < SimulationParameters.N_PASS_PER_FLIGHT && tellPassToGetOut) {
+            while ((this.nPassDead + this.departureTerm.getNPassDead()) < SimulationParameters.N_PASS_PER_FLIGHT) {
+                allDead = this.nPassDead + this.departureTerm.getNPassDead();
+                System.out.print("\npass " + passenger.getPassengerID() + " sleep goHome, npass: " + allDead);
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                allDead = this.nPassDead + this.departureTerm.getNPassDead();
+                System.out.print("\npass " + passenger.getPassengerID() + " wake up goHome, npass: " + allDead);
+
             }
         }
     }
 
+    public synchronized void notifyFromPrepareNextLeg(){
+        notifyAll();
+    }
 
     /**
      *
      */
 
-    public synchronized void exitPassenger(){
-
-    }
-
-    public synchronized void notifyFromPrepareNextLeg(){
-        this.tellPassToGetOut = true;
+    public synchronized void notifyPassengersInArr(){
         notifyAll();
     }
 
@@ -135,7 +137,6 @@ public class ArrivalTerminalExit {
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.nPassDead = 0;
-        this.tellPassToGetOut = false;
     }
 
     /* ************************************************* Getters ******************************************************/

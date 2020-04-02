@@ -43,7 +43,7 @@ public class BaggageColPoint {
     private GenReposInfo repos;
 
 
-    private boolean allBagsCollected;
+    private boolean pHoldEmpty;
 
     /**
      *   Instantiation of the Baggage Collection Point.
@@ -54,7 +54,7 @@ public class BaggageColPoint {
     public BaggageColPoint(GenReposInfo repos){
         this.repos = repos;
         this.nBagsInTreadmill = 0;
-        this.allBagsCollected = false;
+        this.pHoldEmpty = false;
         this.lastBagId = -1;
         this.porterAwake = false;
     }
@@ -184,7 +184,7 @@ public class BaggageColPoint {
         System.out.print("\nresetBaggageColPoint");
         while(!pHoldEmpty()){}
         this.nBagsInTreadmill = 0;
-        this.allBagsCollected = false;
+        this.pHoldEmpty = false;
         this.lastBagId = -1;
         this.treadmill.clear();
         this.porterAwake = false;
@@ -201,21 +201,13 @@ public class BaggageColPoint {
 
     /* ************************************************* Getters ******************************************************/
 
-    /*
-     *
-     */
-
-    public Map<Integer, MemFIFO<Bag>> getTreadmill() {
-        return treadmill;
-    }
-
     /**
      *   ...
      *    @return allBagsCollects
      */
 
     public boolean pHoldEmpty() {
-        return allBagsCollected;
+        return pHoldEmpty;
     }
 
     /* ************************************************* Setters ******************************************************/
@@ -235,7 +227,7 @@ public class BaggageColPoint {
      */
 
     public void setAllBagsCollected() {
-        this.allBagsCollected = true;
+        this.pHoldEmpty = true;
     }
 
 
