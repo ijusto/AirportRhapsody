@@ -118,7 +118,7 @@ public class DepartureTerminalEntrance {
             }
 
             // wakes up the porter in takeARest
-            this.arrivLounge.allPassExited();
+            this.arrivLounge.notifyAllPassExited();
 
             // he call's the function that verifies if the current flight was the last and if so, notifies the porter
             //this.arrivLounge.dayOver();
