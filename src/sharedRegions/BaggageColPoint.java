@@ -164,7 +164,6 @@ public class BaggageColPoint {
 
     public synchronized void resetBaggageColPoint(){
         System.out.print("\nresetBaggageColPoint");
-        while(!pHoldEmpty()){}
         this.nBagsInTreadmill = 0;
         this.pHoldEmpty = true;
         this.lastBagId = -1;

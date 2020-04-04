@@ -284,17 +284,17 @@ public class ArrivalLounge {
             System.out.print("\nsetAllBagsCollected " + this.bagColPoint.pHoldEmpty());
 
             this.pHEmpty = true;
-            if(!allPassAtExits) {
+            //if(!allPassAtExits) {
                 // change allBagsCollected so the passengers know there are no more bags arriving the bcColPoint
                 bagColPoint.setAllBagsCollected();
                 // notify passenger in goCollectABag()
                 bagColPoint.noMoreBags();
-            } else if(!allPassExited){
+            //} else if(!allPassExited){
                 // notify last passenger to arrive an exit
                 depTerm.notifyPHEmpty();
                 arrivTerm.notifyPHEmpty();
                 //notifyAll(); // wake up dayOver
-            }
+            //}
 
             System.out.print("\ntrytocollectabag notify no more bags");
 
@@ -446,8 +446,10 @@ public class ArrivalLounge {
     }
 
     public synchronized void notifyAllPassExited(){
-        allPassExited = true;
-        notify();
+        //if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1) {
+            allPassExited = true;
+            notify();
+        //}
     }
 
 }
