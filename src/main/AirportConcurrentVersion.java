@@ -147,6 +147,9 @@ public class AirportConcurrentVersion {
                 System.out.print("\nHelp7");
                 arrivalTerm.setDepartureTerminalRef(departureTerm);
                 departureTerm.setArrivalTerminalRef(arrivalTerm);
+            } else {
+                arrivLounge.setEndDay();
+                arrivalQuay.setEndDay();
             }
             System.out.print("\nHelp");
         }

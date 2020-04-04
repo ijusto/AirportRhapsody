@@ -68,6 +68,8 @@ public class ArrivalTermTransfQuay {
 
     private boolean reset;
 
+    private boolean endDay;
+
     /**
      *
      */
@@ -94,6 +96,7 @@ public class ArrivalTermTransfQuay {
         this.busDriverStop = false;
 
         this.reset = false;
+        this.endDay = false;
     }
 
     /* ************************************************Passenger***************************************************** */
@@ -218,7 +221,7 @@ public class ArrivalTermTransfQuay {
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         // if the last flight arrived and all passengers left the airport, end the bus driver life cycle
-        if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){
+        if(this.endDay){
             return 'F';
         }
 
@@ -277,7 +280,7 @@ public class ArrivalTermTransfQuay {
             }
 
             // if the last flight arrived and all passengers left the airport, stop waiting
-            if(this.nFlights == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){ //!this.busDriverStop){
+            if(this.endDay){ //!this.busDriverStop){
                 break;
             }
 
@@ -355,5 +358,10 @@ public class ArrivalTermTransfQuay {
     public synchronized void setNoPassAtAirport() {
         this.allPassDead = true;
         this.busDriverStop = true;
+    }
+
+
+    public synchronized void setEndDay(){
+        this.endDay = true;
     }
 }

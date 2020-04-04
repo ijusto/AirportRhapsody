@@ -49,6 +49,12 @@ public class ArrivalLounge {
     private boolean allPassAtExits;
 
     /*
+     *
+     */
+
+    private boolean endDay;
+
+    /*
      *   Number of the current flight.
      */
 
@@ -139,6 +145,7 @@ public class ArrivalLounge {
         this.reset = false;
         this.pHEmpty = false;
         this.allPassExited = false;
+        endDay = false;
 
     }
 
@@ -209,40 +216,22 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        if(this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT){
-            while(this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT){
 
-                System.out.print("\nsleep takeARest");
+        while(this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT){
 
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.print("\nwake up takeARest (normal state)");
-                System.out.print("\nTake a rest, currentflight: " + this.currentFlight);
-                System.out.print("\nTake a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.pHoldEmpty());
+            System.out.print("\nsleep takeARest");
+
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        } else {
-
-            while(this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT && !this.allPassExited){
-
-                System.out.print("\nsleep takeARest");
-
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.print("\nwake up takeARest (normal state)");
-                System.out.print("\nTake a rest, currentflight: " + this.currentFlight);
-                System.out.print("\nTake a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.pHoldEmpty());
-            }
+            System.out.print("\nwake up takeARest (normal state)");
+            System.out.print("\nTake a rest, currentflight: " + this.currentFlight);
+            System.out.print("\nTake a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.pHoldEmpty());
         }
 
-
-
-        if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.allPassExited && this.pHEmpty){
+        if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.endDay){
             return 'E';
         }
 
@@ -291,8 +280,8 @@ public class ArrivalLounge {
                 bagColPoint.noMoreBags();
             //} else if(!allPassExited){
                 // notify last passenger to arrive an exit
-                depTerm.notifyPHEmpty();
-                arrivTerm.notifyPHEmpty();
+                //depTerm.notifyPHEmpty();
+                //notifyPHEmpty();
                 //notifyAll(); // wake up dayOver
             //}
 
@@ -344,7 +333,8 @@ public class ArrivalLounge {
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
 
-        int nTotalBags = 0;
+        int nSRprev = this.pHoldBagStack.getPointer();
+        int nTotalBags = nSRprev;
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
             nTotalBags += nBagsPHold[nPass][this.currentFlight];
             nBagsPerPass.put(nPass, nBagsPHold[nPass][this.currentFlight]);
@@ -352,9 +342,21 @@ public class ArrivalLounge {
 
         // update logger
         repos.initializeCargoHold(nTotalBags);
+        MemStack<Bag> tempStack = null;
+        if(nSRprev != 0) {
+            tempStack = new MemStack<>(new Bag[nSRprev]);
+            for (int nSRbag = 0; nSRbag < nSRprev; nSRbag++) {
+                tempStack.write(this.pHoldBagStack.read());
+            }
+        }
 
         // plane's hold baggage stack instantiation
         this.pHoldBagStack = new MemStack<> (new Bag [nTotalBags]);
+        if(nSRprev != 0) {
+            for (int nSRbag = 0; nSRbag < nSRprev; nSRbag++) {
+                this.pHoldBagStack.write(tempStack.read());
+            }
+        }
 
         for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
             for(int bag = 0; bag < nBagsPHold[nPass][this.currentFlight]; bag++){
@@ -450,6 +452,10 @@ public class ArrivalLounge {
             allPassExited = true;
             notify();
         //}
+    }
+
+    public synchronized void setEndDay(){
+        this.endDay = true;
     }
 
 }

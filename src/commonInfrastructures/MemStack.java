@@ -68,4 +68,17 @@ public class MemStack<R> extends MemObject<R>
         }
         else throw new MemException ("Stack empty!");
     }
+
+    /* ******************************************** NEW METHODS ***************************************************** */
+    /**
+     *   @author Inês Justo
+     *   @author Miguel Lopes
+     *   Get the pointer to the first empty location.
+     *
+     *    @return Pointer to the first empty location.
+     */
+
+    public int getPointer(){
+        return stackPnt;
+    }
 }

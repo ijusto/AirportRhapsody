@@ -77,26 +77,26 @@ public class DepartureTerminalEntrance {
 
         if(isLastPass) {
             // he changes the boolean of no passengers at the airport to true, so the porter and bus driver know
-            this.arrivLounge.setNoPassAtAirport();
-            this.arrivalQuay.setNoPassAtAirport();
+            //this.arrivLounge.setNoPassAtAirport();
+            //this.arrivalQuay.setNoPassAtAirport();
 
             System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, npass: " + this.arrivalTerm.getDeadPassCounter().getValue());
 
             // the last passenger wanting to leave waits for the notification of the porter if there are still bags in
             // the plane hold
-            while(arrivLounge.ispHoldNotEmpty()){
+            //while(arrivLounge.ispHoldNotEmpty()){
 
-                System.out.print("\narrivLounge.ispHEmpty() " + arrivLounge.ispHoldNotEmpty());
-                System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, sleep");
+            //    System.out.print("\narrivLounge.ispHEmpty() " + arrivLounge.ispHoldNotEmpty());
+            //    System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, sleep");
 
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            //    try {
+            //        wait();
+            //    } catch (InterruptedException e) {
+            //        e.printStackTrace();
+            //    }
 
-                System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, wake up");
-            }
+            //    System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, wake up");
+            //}
 
             arrivalTerm.setLastWakeUp(true);
 
@@ -118,7 +118,7 @@ public class DepartureTerminalEntrance {
             }
 
             // wakes up the porter in takeARest
-            this.arrivLounge.notifyAllPassExited();
+            //this.arrivLounge.notifyAllPassExited();
 
             // he call's the function that verifies if the current flight was the last and if so, notifies the porter
             //this.arrivLounge.dayOver();
