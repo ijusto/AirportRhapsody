@@ -76,14 +76,13 @@ public class Porter extends Thread {
                 bag = arrivalLounge.tryToCollectABag();
                 if (bag == null) {
                     planeHoldEmpty = true;
-                    bColPnt.noMoreBagsToCollect();
                 } else if (bag.getDestStat() == 'T'){    // 'T' means transit, 'F' means final
                     tempStore.carryItToAppropriateStore(bag);
                 } else {
                     bColPnt.carryItToAppropriateStore(bag);
                 }
             }
-            // arrivalLounge.noMoreBagsToCollect();
+            arrivalLounge.noMoreBagsToCollect();
         }
         System.out.print("\nENDED PORTER.");
     }

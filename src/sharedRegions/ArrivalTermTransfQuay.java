@@ -352,7 +352,7 @@ public class ArrivalTermTransfQuay {
      *
      */
 
-    public void setNoPassAtAirport() {
+    public synchronized void setNoPassAtAirport() {
         this.allPassDead = true;
         this.busDriverStop = true;
     }

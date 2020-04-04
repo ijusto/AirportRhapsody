@@ -138,24 +138,6 @@ public class BaggageColPoint {
     /* **************************************************Porter****************************************************** */
 
     /**
-     *   ... (raised by the Porter).
-     *
-     */
-
-    public synchronized void noMoreBagsToCollect(){
-        System.out.print("\nnoMoreBagsToCollect");
-
-        Porter porter = (Porter) Thread.currentThread();
-        assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
-        porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-
-        // update logger
-        repos.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-
-        //this.setAllBagsCollected();
-     }
-
-    /**
      *  Operation of carrying a bag from the plane's hold to the baggage colletion point (raised by the Porter).
      */
 
@@ -207,7 +189,7 @@ public class BaggageColPoint {
      *    @return allBagsCollects
      */
 
-    public boolean pHoldEmpty() {
+    public synchronized boolean pHoldEmpty() {
         return pHoldEmpty;
     }
 
@@ -219,7 +201,7 @@ public class BaggageColPoint {
      *    @param treadmill ...
      */
 
-    public void setTreadmill(Map<Integer, MemFIFO<Bag>> treadmill) {
+    public synchronized void setTreadmill(Map<Integer, MemFIFO<Bag>> treadmill) {
         this.treadmill = treadmill;
     }
 
@@ -227,11 +209,11 @@ public class BaggageColPoint {
      *
      */
 
-    public void setAllBagsCollected() {
+    public synchronized void setAllBagsCollected() {
         this.pHoldEmpty = true;
     }
 
-    public void setPHoldNotEmpty(){
+    public synchronized void setPHoldNotEmpty(){
         this.pHoldEmpty = false;
     }
 
