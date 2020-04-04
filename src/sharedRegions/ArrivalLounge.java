@@ -76,6 +76,8 @@ public class ArrivalLounge {
      *
      */
     private boolean porterSleep;
+    private boolean notifPassExit;
+
 
     /*
      *   Arrival Terminal Exit.
@@ -138,6 +140,7 @@ public class ArrivalLounge {
         this.reset = false;
         this.porterSleep = true;
         this.pHEmpty = false;
+        this.notifPassExit = false;
 
     }
 
@@ -162,6 +165,7 @@ public class ArrivalLounge {
         // increment passengers that arrive so the porter knows when to wake up in takeARest()
         this.nPassAtArrivL += 1;
         allPassDead = false;
+
         // update logger
         this.repos.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
         this.repos.numberNRTotal(currentPassenger.getNR());
@@ -171,6 +175,7 @@ public class ArrivalLounge {
 
         if(this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT) {
             // wake up Porter in takeARest()
+            notifPassExit = false;
             notifyAll();
         }
 
@@ -206,57 +211,52 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        if(this.allPassDead){ // && bagColPoint.areAllBagsCollects()) {
-            System.out.print("\nallPassDead " + allPassDead);
-            if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1){
-                System.out.print("\nthis.currentFlight == SimulationParameters.N_FLIGHTS - 1 " + (this.currentFlight == SimulationParameters.N_FLIGHTS - 1));
-                return 'E';
-            } else {
-                System.out.print("\nthis.currentFlight == SimulationParameters.N_FLIGHTS - 1 " + (this.currentFlight == SimulationParameters.N_FLIGHTS - 1));
-                System.out.print("\nallPassDead " + allPassDead);
-                return 'R';
-            }
+        if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead && this.pHEmpty){ // && bagColPoint.areAllBagsCollects()) {
+            return 'E';
         } else {
-            while (this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT || bagColPoint.pHoldEmpty()) {//&& this.porterStop){
+            if(this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT) {
+                while (this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT) {//&& this.porterStop){
 
-                // while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp) && (this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){ // && !this.changedFlight) {
-                System.out.print("\nsleep takeARest");
+                    // while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp) && (this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){ // && !this.changedFlight) {
+                    System.out.print("\nsleep takeARest");
 
-                this.porterSleep = true;
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    this.porterSleep = true;
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.print("\nwake up takeARest (normal state)");
+                    System.out.print("\nTake a rest, currentflight: " + this.currentFlight);
+                    System.out.print("\nTake a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.pHoldEmpty());
+
+                    // end he's life cycle if the porter is resting in the last flight and all passengers left the airport
+                    // TODO: verify if this needs to change and allPassDead is set in the right places
+
                 }
-                System.out.print("\nwake up takeARest (normal state)");
-                System.out.print("\nTake a rest, currentflight: " + this.currentFlight);
-                System.out.print("\nTake a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.pHoldEmpty());
+            } else {
+                while (!this.notifPassExit) {//&& this.porterStop){
+                    // while((this.nArrivPass < SimulationParameters.N_PASS_PER_FLIGHT || this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp) && (this.currentFlight < SimulationParameters.N_FLIGHTS - 1)){ // && !this.changedFlight) {
+                    System.out.print("\nsleep takeARest");
 
-                // end he's life cycle if the porter is resting in the last flight and all passengers left the airport
-                // TODO: verify if this needs to change and allPassDead is set in the right places
-                if (this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead) { // && bagColPoint.areAllBagsCollects()) {
-                    break;
+                    this.porterSleep = true;
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
         this.porterSleep = false;
 
-        if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){ // && bagColPoint.areAllBagsCollects()) {
-            return 'E';
-        }
+
 
         System.out.print("\nthis.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT: " + (this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT));
-
-        if(this.reset){
-            this.reset = false;
-        }
 
         System.out.print("\nthis.currentFlight == SimulationParameters.N_FLIGHTS - 1: " + (this.currentFlight == SimulationParameters.N_FLIGHTS - 1));
         System.out.print("\nthis.allPassDead " + this.allPassDead);
 
-        if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.allPassDead){ // && bagColPoint.areAllBagsCollects()) {
-            return 'E';
-        }
 
         System.out.print("\n-------------END TAKE A REST-------------------------");
 
@@ -295,15 +295,18 @@ public class ArrivalLounge {
 
             System.out.print("\nsetAllBagsCollected " + this.bagColPoint.pHoldEmpty());
 
-            //if(!allPassDead)
+            this.pHEmpty = true;
+            if(!allPassDead) {
                 // notify passenger in goCollectABag()
                 bagColPoint.noMoreBags();
-            //else {
-                this.pHEmpty = true;
-                depTerm.notifyPHEmpty();
-                arrivTerm.notifyPHEmpty();
-                notifyAll(); // wake up dayOver
-            //}
+            } else {
+                if(!notifPassExit){
+                    depTerm.notifyPHEmpty();
+                    arrivTerm.notifyPHEmpty();
+                    notifPassExit = true;
+                    //notifyAll(); // wake up dayOver
+                }
+            }
 
             System.out.print("\ntrytocollectabag notify no more bags");
 
@@ -451,6 +454,11 @@ public class ArrivalLounge {
 
     public synchronized  boolean ispHoldNotEmpty() {
         return !pHEmpty;
+    }
+
+    public synchronized void allPassExited(){
+        notifPassExit = true;
+        notify();
     }
 
 }
