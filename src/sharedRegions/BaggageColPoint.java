@@ -74,6 +74,7 @@ public class BaggageColPoint {
           Freeing Condition: no more pieces of luggage
           Blocked Entity Reaction: reportMissingBags()
         */
+        repos.printLog();
 
         do {
 
@@ -104,7 +105,6 @@ public class BaggageColPoint {
                 e.printStackTrace();
             }
 
-            repos.printLog();
         } while(true);
 
     }
@@ -117,8 +117,6 @@ public class BaggageColPoint {
      */
 
     public synchronized void carryItToAppropriateStore(Bag bag){
-        System.out.print("\n carryItToAppropriateStore " + this.treadmill.get(bag.getIdOwner()));
-
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         assert(this.treadmill.containsKey(bag.getIdOwner()));

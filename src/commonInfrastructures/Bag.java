@@ -10,19 +10,19 @@ package commonInfrastructures;
 public class Bag {
 
     /**
-     *
+     *   Enum containing the type of destination a bag can have.
      */
 
-    public enum DestStat { TRANSIT, FINAL };
+    public enum DestStat { TRANSIT, FINAL }
 
     /**
-     *
+     *   Destination of the bag.
      */
 
     private DestStat destStat;
 
     /**
-     *
+     *   Id of the owner of the bag.
      */
 
     private int idOwner;
@@ -30,8 +30,8 @@ public class Bag {
     /**
      *   Instantiation of the class Bag.
      *
-     *    @param destStat
-     *    @param idOwner
+     *    @param destStat bag's destination.
+     *    @param idOwner bag's owner's id.
      */
 
     public Bag(DestStat destStat, int idOwner){
@@ -40,8 +40,8 @@ public class Bag {
     }
 
     /**
-     *
-     *    @return
+     *   Gets the destination of the bag.
+     *    @return bag's destination.
      */
 
     public DestStat getDestStat(){
@@ -49,8 +49,8 @@ public class Bag {
     }
 
     /**
-     *
-     *    @return
+     *   Gets the id of the passenger owner of the bag.
+     *    @return owner's id.
      */
 
     public int getIdOwner() {

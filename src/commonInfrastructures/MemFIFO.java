@@ -99,11 +99,9 @@ public class MemFIFO<R> extends MemObject<R>
 
     /* ******************************************** NEW METHODS ***************************************************** */
     /**
-     *   @author Inês Justo
-     *   @author Miguel Lopes
-     *   Get the number of parametric objects that were writter into the FIFO.
+     *   Get the number of parametric objects that were written into the FIFO.
      *
-     *    @return number of parametric objects that was written
+     *    @return number of parametric objects that was written.
      */
 
     public int getNObjects(){
@@ -111,12 +109,10 @@ public class MemFIFO<R> extends MemObject<R>
     }
 
     /**
-     *   @author Inês Justo
-     *   @author Miguel Lopes
      *   Check if FIFO is empty.
      *
-     *    @return <li> true, if the FIFO is empty
-     *            <li> false, otherwise
+     *    @return <li> true, if the FIFO is empty </li>
+     *            <li> false, otherwise </li>
      */
 
     public boolean isEmpty(){

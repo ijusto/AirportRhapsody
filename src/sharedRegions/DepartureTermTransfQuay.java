@@ -1,5 +1,6 @@
 package sharedRegions;
 
+import commonInfrastructures.Counter;
 import entities.BusDriver;
 import entities.BusDriverStates;
 import entities.Passenger;
@@ -29,7 +30,7 @@ public class DepartureTermTransfQuay {
      *
      */
 
-    private int nPassOnTheBus;
+    private Counter nPassOnTheBus;
 
     /**
      *   Instantiation of the Departure Terminal Transfer Quay.
@@ -40,7 +41,7 @@ public class DepartureTermTransfQuay {
     public DepartureTermTransfQuay(GenReposInfo repos){
         this.repos = repos;
         this.busDoorsOpen = false;
-        this.nPassOnTheBus = -1;
+        this.nPassOnTheBus = new Counter(0, false);
     }
 
 
@@ -71,18 +72,16 @@ public class DepartureTermTransfQuay {
             }
         }
 
-        this.nPassOnTheBus -= 1;
+        boolean last = this.nPassOnTheBus.incDecCounter();
 
         repos.freeBusSeat(passenger.getPassengerID());
+        repos.printLog();
 
         // if the passenger is the last to exit the bus
-        if(this.nPassOnTheBus == 0){
+        if(last){
             // wake up Bus Driver in parkTheBusAndLetPassOff()
             notifyAll();
         }
-
-        repos.printLog();
-
     }
 
     /* *************************************************Bus Driver*************************************************** */
@@ -105,13 +104,14 @@ public class DepartureTermTransfQuay {
         assert(busDriver.getStat() == BusDriverStates.DRIVING_FORWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
+        repos.printLog();
 
-        this.nPassOnTheBus = busDriver.getNPassOnTheBus();
+        this.nPassOnTheBus.setValue(busDriver.getNPassOnTheBus());
 
         this.pleaseLeaveTheBus();
         notifyAll();  // wake up Passengers in leaveTheBus()
 
-        while(this.nPassOnTheBus != 0) {
+        while(this.nPassOnTheBus.getValue() != 0) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -119,11 +119,9 @@ public class DepartureTermTransfQuay {
             }
         }
 
-        busDriver.setNPassOnTheBus(this.nPassOnTheBus);
+        busDriver.setNPassOnTheBus(this.nPassOnTheBus.getValue());
 
         this.busDoorsOpen = false;
-
-        repos.printLog();
     }
 
     /**
@@ -137,7 +135,7 @@ public class DepartureTermTransfQuay {
             notifyAll();
             this.busDoorsOpen = false;
         }
-        this.nPassOnTheBus = 0;
+        this.nPassOnTheBus.reset();
 
     }
 

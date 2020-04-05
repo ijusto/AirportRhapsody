@@ -57,9 +57,7 @@ public class ArrivalTerminalExit {
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
-        deadPassCounter = new Counter(SimulPar.N_PASS_PER_FLIGHT);
-
-        repos.printLog();
+        deadPassCounter = new Counter(SimulPar.N_PASS_PER_FLIGHT, true);
     }
 
     /**
@@ -76,9 +74,10 @@ public class ArrivalTerminalExit {
 
         // update logger
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+        repos.printLog();
 
         // increment the number of passengers that wants to leave the airport
-        boolean isLastPass = this.deadPassCounter.increaseCounter();
+        boolean isLastPass = this.deadPassCounter.incDecCounter();
 
         if(isLastPass) {
             // wakes up all the passengers
@@ -96,9 +95,11 @@ public class ArrivalTerminalExit {
                     e.printStackTrace();
                 }
             }
-
-            repos.printLog();
         }
+
+
+        repos.passengerExit(passenger.getPassengerID());
+        repos.printLog();
     }
 
     /**

@@ -4,7 +4,7 @@ import sharedRegions.DepartureTermTransfQuay;
 import sharedRegions.GenReposInfo;
 
 /**
- *   ...
+ *   Bus driver thread.
  *
  *   @author Inês Justo
  *   @author Miguel Lopes
@@ -45,7 +45,7 @@ public class BusDriver extends Thread {
     private BusDriverStates Stat;
 
     /**
-     *   Number os passengers on the bus.
+     *   Number of passengers on the bus.
      *
      *    @serialField nPass
      */
@@ -66,8 +66,8 @@ public class BusDriver extends Thread {
         this.Stat = Stat;
         this.arrivalTerminalQuay = arrivalTerminalQuay;
         this.departureTransferQuay = departureTransferQuay;
-        this.nPassOnTheBus = 0;
         this.repos = repos;
+        this.nPassOnTheBus = 0;
     }
 
     /**
@@ -86,7 +86,7 @@ public class BusDriver extends Thread {
     }
 
     /**
-     *
+     *   Operation of changing quay, from the departure terminal quay to the arrival terminal quay.
      */
 
     public synchronized void goToArrivalTerminal() {
@@ -103,7 +103,7 @@ public class BusDriver extends Thread {
     }
 
     /**
-     *
+     *   Operation of changing quay, from the arrival terminal quay to the departure terminal quay.
      */
 
     public synchronized void goToDepartureTerminal(){

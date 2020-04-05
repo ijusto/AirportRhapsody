@@ -1,5 +1,6 @@
 package sharedRegions;
 
+import commonInfrastructures.Counter;
 import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
 import entities.BusDriver;
@@ -34,7 +35,7 @@ public class ArrivalTermTransfQuay {
      *
      */
 
-    private int nPassOnTheBus;
+    private Counter nPassOnTheBus;
 
     /**
      *   True, if the bus driver is waiting in announcingBusBoarding();
@@ -49,7 +50,7 @@ public class ArrivalTermTransfQuay {
      *   seat capacity.
      */
 
-    private int nPassAllowedToEnter;
+    private Counter nPassAllowedToEnter;
 
     /**
      *
@@ -66,9 +67,9 @@ public class ArrivalTermTransfQuay {
     public ArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
         this.repos = repos;
         this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
-        this.nPassAllowedToEnter = 0;
+        this.nPassAllowedToEnter = new Counter(SimulPar.N_PASS_PER_FLIGHT, true);
         this.allowBoardBus = false;
-        this.nPassOnTheBus = 0;
+        this.nPassOnTheBus = new Counter(SimulPar.BUS_CAP, true);
         this.endDay = false;
     }
 
@@ -112,7 +113,7 @@ public class ArrivalTermTransfQuay {
             notifyAll();
         }
 
-        while(!this.allowBoardBus || this.nPassAllowedToEnter >= SimulPar.BUS_CAP){
+        while(!this.allowBoardBus || this.nPassAllowedToEnter.getValue() >= SimulPar.BUS_CAP){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -120,7 +121,7 @@ public class ArrivalTermTransfQuay {
             }
         }
 
-        this.nPassAllowedToEnter += 1;
+        this.nPassAllowedToEnter.incDecCounter();
 
         repos.printLog();
     }
@@ -133,7 +134,7 @@ public class ArrivalTermTransfQuay {
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        assert(this.nPassOnTheBus < SimulPar.BUS_CAP);
+        assert(this.nPassOnTheBus.getValue() < SimulPar.BUS_CAP);
 
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
 
@@ -146,10 +147,10 @@ public class ArrivalTermTransfQuay {
             // update logger
             repos.pLeftWaitingQueue(passenger.getPassengerID());
 
-            this.nPassOnTheBus += 1;
+            boolean last = this.nPassOnTheBus.incDecCounter();
 
             // last passenger to enter the bus wakes up the bus driver
-            if(this.nPassOnTheBus == SimulPar.BUS_CAP || this.waitingLine.isEmpty()){ //this.nWaitingPass == 0){
+            if(last || this.waitingLine.isEmpty()){ //this.nWaitingPass == 0){
 
                 // wake up Bus driver in announcingBusBoarding()
                 notifyAll();
@@ -213,7 +214,7 @@ public class ArrivalTermTransfQuay {
         // update logger
         repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        this.nPassOnTheBus = 0;
+        this.nPassOnTheBus.reset();
 
         while(waitingLine.getNObjects() != SimulPar.BUS_CAP){ // if false waken up by takeABus()
             try {
@@ -259,7 +260,7 @@ public class ArrivalTermTransfQuay {
         // wake up Passengers in takeABus()
         notifyAll();
 
-        while(!(this.nPassOnTheBus == SimulPar.BUS_CAP || this.waitingLine.isEmpty())){ //this.nWaitingPass == 0)) {
+        while(!(this.nPassOnTheBus.getValue() == SimulPar.BUS_CAP || this.waitingLine.isEmpty())){ //this.nWaitingPass == 0)) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -268,8 +269,8 @@ public class ArrivalTermTransfQuay {
         }
 
         this.allowBoardBus = false;
-        this.nPassAllowedToEnter = 0;
-        busDriver.setNPassOnTheBus(this.nPassOnTheBus);
+        this.nPassAllowedToEnter.reset();
+        busDriver.setNPassOnTheBus(this.nPassOnTheBus.getValue());
 
         repos.printLog();
     }
@@ -280,8 +281,8 @@ public class ArrivalTermTransfQuay {
 
     public synchronized void resetArrivalTermTransfQuay() throws MemException {
         this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
-        this.nPassAllowedToEnter = 0;
-        this.nPassOnTheBus = 0;
+        this.nPassAllowedToEnter.reset();
+        this.nPassOnTheBus.reset();
         this.allowBoardBus = false;
     }
 

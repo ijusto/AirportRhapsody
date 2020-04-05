@@ -22,6 +22,12 @@ public class Counter {
     private int limit;
 
     /**
+     *   Type of counter (up or down). If true, it is an up counter, otherwise it is a down counter.
+     */
+
+    private boolean inc;
+
+    /**
      *   Object used for synchronization.
      */
 
@@ -33,21 +39,26 @@ public class Counter {
      *     @param limit limit of incrementation of the counter.
      */
 
-    public Counter(int limit){
+    public Counter(int limit, boolean inc){
         value = 0;
         this.limit = limit;
+        this.inc = inc;
     }
 
     /**
-     *   Operation of incrementing the counter.
+     *   Operation of incrementing/decrementing the counter.
      *
-     *    @return <li>true, if the value of the counter after incrementing is the limit.</li>
+     *    @return <li>true, if the value of the counter after the operation is the limit.</li>
      *            <li>false, otherwise.</li>
      */
 
-    public boolean increaseCounter() {
+    public boolean incDecCounter() {
         synchronized (lock) {
-            value++;
+            if(this.inc) {
+                value++;
+            } else {
+                value--;
+            }
             return value == limit;
         }
     }
@@ -60,6 +71,17 @@ public class Counter {
     public int getValue(){
         synchronized (lock) {
             return value;
+        }
+    }
+
+    /**
+     *   Setter for the value of the counter.
+     *    @return the value of the counter.
+     */
+
+    public void setValue(int value){
+        synchronized (lock) {
+            this.value = value;
         }
     }
 

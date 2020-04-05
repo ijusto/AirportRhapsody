@@ -72,9 +72,10 @@ public class DepartureTerminalEntrance {
 
         // update logger
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
+        repos.printLog();
 
         // increment the number of passengers that wants to leave the airport
-        boolean isLastPass = this.dpc.increaseCounter();
+        boolean isLastPass = this.dpc.incDecCounter();
 
         if(isLastPass) {
 
@@ -106,6 +107,7 @@ public class DepartureTerminalEntrance {
 
         }
 
+        repos.passengerExit(passenger.getPassengerID());
         repos.printLog();
     }
 

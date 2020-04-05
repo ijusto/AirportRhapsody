@@ -48,14 +48,10 @@ public class TemporaryStorageArea {
         assert porter.getStat() == PorterStates.AT_THE_PLANES_HOLD;
         assert bag != null;
         porter.setStat(PorterStates.AT_THE_STOREROOM);
-
-        // log passenger state change
         repos.updatePorterStat(PorterStates.AT_THE_STOREROOM);
 
         try {
             tmpStorageStack.write(bag);
-
-            // log
             repos.saveBagInSR();
         } catch (MemException e) {
             e.printStackTrace();

@@ -28,7 +28,7 @@ public class GenReposInfo {
      *   Array of passenger's states representing strings.
      */
 
-    private final String[] passState = {"ADZ", "LCP", "EAT", "BRO", "ATT", "TT", "DTT", "EDT"};
+    private final String[] passState = {"WSD", "LCP", "EAT", "BRO", "ATT", "TT", "DTT", "EDT"};
 
     /*
      *   Array of porter's states representing strings.
@@ -174,7 +174,7 @@ public class GenReposInfo {
 
         porterState = PorterStates.WAITING_FOR_A_PLANE_TO_LAND;
         passengerStates = new PassengerStates[SimulPar.N_PASS_PER_FLIGHT];
-        Arrays.fill(passengerStates, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        Arrays.fill(passengerStates, PassengerStates.AT_THE_DISEMBARKING_ZONE);
         busDriverState = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL;
 
         FN = BN = SR = missing_bags = nrTotal = transPassTotal = finalPassTotal = 0;

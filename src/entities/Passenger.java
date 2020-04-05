@@ -2,19 +2,23 @@ package entities;
 import sharedRegions.*;
 
 /**
- * ...
+ *   Passenger thread.
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class Passenger extends Thread {
 
+    /**
+     *   Enum containing all the situations a passenger can be in.
+     */
+
     public enum SiPass {TRT,   // in transit
-                                    FDT}   // final destination
+                        FDT}   // final destination
 
     /**
-     *  State of the passenger
+     *   State of the passenger.
      *
      *    @serialField St
      */
@@ -22,7 +26,7 @@ public class Passenger extends Thread {
     private PassengerStates St;
 
     /**
-     *  Situation of passenger
+     *   Situation of passenger.
      *
      *    @serialField Si
      */
@@ -30,7 +34,7 @@ public class Passenger extends Thread {
     private SiPass Si;
 
     /**
-     *  Number of pieces of luggage the passenger carried at the start of her journey
+     *   Number of pieces of luggage the passenger carried at the start of her journey.
      *
      *    @serialField NR
      */
@@ -38,7 +42,7 @@ public class Passenger extends Thread {
     private int NR;
 
     /**
-     *  Number of pieces of luggage the passenger she has presently collected
+     *   Number of pieces of luggage the passenger she has presently collected.
      *
      *    @serialField NA
      */
@@ -46,7 +50,7 @@ public class Passenger extends Thread {
     private int NA;
 
     /**
-     *  Passenger ID
+     *   Passenger ID.
      *
      *    @serialField id
      */
@@ -54,7 +58,7 @@ public class Passenger extends Thread {
     private int id;
 
     /**
-     *  ...
+     *   Arrival Lounge.
      *
      *    @serialField arrivalLounge
      */
@@ -62,12 +66,12 @@ public class Passenger extends Thread {
     private ArrivalLounge arrivalLounge;
 
     /**
-     *  ...
+     *   Arrival Terminal Transfer Quay.
      *
      *    @serialField transferQuay
      */
 
-    private ArrivalTermTransfQuay arruvTransferQuay;
+    private ArrivalTermTransfQuay arrivTransferQuay;
 
     /**
      *  ...
@@ -137,7 +141,7 @@ public class Passenger extends Thread {
         this.id = id;
 
         this.arrivalLounge = arrivalLounge;
-        this.arruvTransferQuay = arrivalTermTransfQuay;
+        this.arrivTransferQuay = arrivalTermTransfQuay;
         this.departureTransferQuay = departureTransferQuay;
         this.departureEntrance = departureEntrance;
         this.arrivalTerminalExit = arrivalTerminalExit;
@@ -168,8 +172,8 @@ public class Passenger extends Thread {
             }
             arrivalTerminalExit.goHome();
         } else {
-            arruvTransferQuay.takeABus();
-            arruvTransferQuay.enterTheBus();
+            arrivTransferQuay.takeABus();
+            arrivTransferQuay.enterTheBus();
             departureTransferQuay.leaveTheBus();
             departureEntrance.prepareNextLeg();
         }

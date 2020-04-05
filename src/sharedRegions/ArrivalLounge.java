@@ -86,13 +86,13 @@ public class ArrivalLounge {
 
         this.currentFlight = 0;
         repos.updateFlightNumber(this.currentFlight);
-
         this.arrQuay = arrQuay;
 
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
         int nTotalBags = 0;
         for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
+            repos.passengerExit(nPass);
             nTotalBags += nBagsPHold[nPass][this.currentFlight];
             nBagsPerPass.put(nPass, nBagsPHold[nPass][this.currentFlight]);
         }
@@ -110,11 +110,11 @@ public class ArrivalLounge {
         this.bagColPoint.setPHoldEmpty(false);
         this.bagColPoint.setTreadmill(treadmill);
 
-        this.nPassAtArrivL = new Counter(SimulPar.N_PASS_PER_FLIGHT);
+        this.nPassAtArrivL = new Counter(SimulPar.N_PASS_PER_FLIGHT, true);
 
         this.pHEmpty = false;
         endDay = false;
-
+        this.repos.printLog();
     }
 
     /* **************************************************Passenger*************************************************** */
@@ -134,7 +134,7 @@ public class ArrivalLounge {
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
 
         // increment passengers that arrive so the porter knows when to wake up in takeARest()
-        boolean last = this.nPassAtArrivL.increaseCounter();
+        boolean last = this.nPassAtArrivL.incDecCounter();
 
         // update logger
         this.repos.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
@@ -178,6 +178,7 @@ public class ArrivalLounge {
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        repos.printLog();
 
         if(this.endDay){
             return 'E';
@@ -190,12 +191,11 @@ public class ArrivalLounge {
                 }
 
                 if (this.endDay) {
-                    repos.printLog();
                     return 'E';
                 }
             }
         }
-        repos.printLog();
+
         return 'R';
     }
 
@@ -321,7 +321,7 @@ public class ArrivalLounge {
             this.nPassAtArrivL.reset();
 
             this.pHEmpty = false;
-
+        }
         repos.printLog();
     }
 

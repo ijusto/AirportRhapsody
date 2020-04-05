@@ -71,10 +71,9 @@ public class MemStack<R> extends MemObject<R>
     }
 
     /* ******************************************** NEW METHODS ***************************************************** */
+
     /**
-     *   @author Inês Justo
-     *   @author Miguel Lopes
-     *   Get the pointer to the first empty location.
+     *   Gets the pointer to the first empty location.
      *
      *    @return Pointer to the first empty location.
      */
