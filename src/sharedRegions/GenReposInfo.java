@@ -179,13 +179,7 @@ public class GenReposInfo {
         Arrays.fill(passengerStates, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         busDriverState = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL;
 
-        FN = 0;
-        BN = 0;
-        SR = 0;
-        missing_bags = 0;
-        nrTotal = 0;
-        transPassTotal = 0;
-        finalPassTotal = 0;
+        FN = BN = SR = missing_bags = nrTotal = transPassTotal = finalPassTotal = 0;
 
         passengerSituation = new String[SimulPar.N_PASS_PER_FLIGHT];
         totalLuggage = new int[SimulPar.N_PASS_PER_FLIGHT];
@@ -196,7 +190,6 @@ public class GenReposInfo {
         log = new StringBuilder();
 
         print_header();
-
     }
 
 
@@ -217,43 +210,28 @@ public class GenReposInfo {
     private synchronized void printLog(){
         log.append("\nFN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|"+
                         "NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6");
-
         log.append(String.format("\n%2d|%2d|", FN, BN));
-
         log.append(String.format(" |%4s|%2d|%2d| |", portState[porterState.ordinal()], CB, SR));
-
         log.append(String.format("%4s|",  busState[busDriverState.ordinal()]));
-        for(int j = 0; j < SimulPar.N_PASS_PER_FLIGHT; j++){
-            String passId;
-            if(j > passWaitingQueue.size() - 1){
-                passId = "--";
-            } else {
-                passId = String.format("%2s", passWaitingQueue.get(j));
-            }
+
+        for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
+            String passId = (nPass > passWaitingQueue.size() - 1)
+                    ? "--" : String.format("%2s", passWaitingQueue.get(nPass));
             log.append(String.format("%s|", passId));
         }
 
-        for(int k = 0; k < SimulPar.BUS_CAP; k++){
-            String occupStat;
-            if(k > busSeatOccupation.size() - 1){
-                occupStat = "--";
-            } else {
-                occupStat = String.format("%2s", busSeatOccupation.get(k));
-            }
+        for(int seat = 0; seat < SimulPar.BUS_CAP; seat++){
+            String occupStat = (seat > busSeatOccupation.size() - 1)
+                                    ? "--" : String.format("%2s", busSeatOccupation.get(seat));
             log.append(String.format("%s|", occupStat));
         }
 
         log.append(" ");
-        for (int i = 0; i< SimulPar.N_PASS_PER_FLIGHT; i++){
-            String psi = "---";
-            String pst =  "---";
 
-            if(passengerSituation[i] != null){
-                psi =  passengerSituation[i];
-            }
-            if(passState[passengerStates[i].ordinal()] != null){
-                pst = passState[passengerStates[i].ordinal()];
-            }
+        for (int i = 0; i< SimulPar.N_PASS_PER_FLIGHT; i++){
+            String psi = (passengerSituation[i] != null) ? passengerSituation[i] :  "---";
+            String pst = (passState[passengerStates[i].ordinal()] != null) ? passState[passengerStates[i].ordinal()] : "---";
+
             log.append(String.format("|%3s|%3s|%3d|%3d",
                     pst, psi,
                     totalLuggage[i], collectedLuggage[i]));

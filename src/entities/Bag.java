@@ -11,9 +11,6 @@ public class Bag {
 
     public enum DestStat { TRANSIT, FINAL };
 
-    private static final char TRANSIT = 'T';  // in transit
-    private static final char FINAL = 'F';  // final
-
     private DestStat destStat;
 
     private int idOwner;
@@ -24,7 +21,7 @@ public class Bag {
     }
 
     public DestStat getDestStat(){
-        return destStat; // 'T' means transit, 'F' means final
+        return destStat;
     }
 
     public int getIdOwner() {

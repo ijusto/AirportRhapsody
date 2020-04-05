@@ -11,7 +11,7 @@ import sharedRegions.*;
 public class Passenger extends Thread {
 
     public enum SituationPassenger {TRT,   // in transit
-                                    FDT};  // final destination
+                                    FDT}   // final destination
 
     /**
      *  State of the passenger
@@ -52,14 +52,6 @@ public class Passenger extends Thread {
      */
 
     private int id;
-
-    /**
-     *
-     *
-     *    @serialField nPassThatWantToLeave
-     */
-
-    private int nPassThatWantToLeave;
 
     /**
      *  ...

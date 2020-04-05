@@ -83,7 +83,6 @@ public class BusDriver extends Thread {
             goToArrivalTerminal();
             arrivalTerminalQuay.parkTheBus();
         }
-        System.out.print("\nENDED BUS DRIVER.");
     }
 
     /**

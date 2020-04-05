@@ -39,14 +39,9 @@ public class ArrivalTerminalExit {
     private DepartureTerminalEntrance departureTerm;
 
     /**
-     *   Number of passengers of the current flight that left the airport at the Arrival Terminal.
-     *   If summed up with the number of passengers of the current flight that left the airport at the Departure
-     *   Terminal isn't smaller than the number of passengers per flight, change boolean allPassDead at the Arrival
-     *   Lounge and the Arrival Terminal Quay to true;
+     *   Number of passengers of the current flight that are at the exit od the Arrival Terminal or at the entrance of
+     *   the Departure Terminal.
      */
-
-
-
 
     private Counter deadPassCounter;
 
@@ -101,8 +96,6 @@ public class ArrivalTerminalExit {
                 }
             }
         }
-
-        //this.repos.passengerExit(passenger.getPassengerID());
     }
 
     /**

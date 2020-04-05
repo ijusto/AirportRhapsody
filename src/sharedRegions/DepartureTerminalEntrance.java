@@ -93,8 +93,6 @@ public class DepartureTerminalEntrance {
             }
 
         }
-
-        //this.repos.passengerExit(passenger.getPassengerID());
     }
 
     /**

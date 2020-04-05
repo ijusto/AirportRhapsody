@@ -35,8 +35,8 @@ public class TemporaryStorageArea {
 
     public TemporaryStorageArea(GenReposInfo repos) throws MemException {
         this.repos = repos;
-        tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT
-                                                    * SimulPar.N_BAGS_PER_PASS]);     // stack instantiation
+        // stack of the store room instantiation
+        tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT * SimulPar.N_BAGS_PER_PASS]);
     }
 
     /**
@@ -49,12 +49,13 @@ public class TemporaryStorageArea {
         assert bag != null;
         porter.setStat(PorterStates.AT_THE_STOREROOM);
 
-        // logger
+        // log passenger state change
         repos.updatePorterStat(PorterStates.AT_THE_STOREROOM);
 
         try {
             tmpStorageStack.write(bag);
 
+            // log
             repos.saveBagInSR();
         } catch (MemException e) {
             e.printStackTrace();
@@ -67,7 +68,7 @@ public class TemporaryStorageArea {
      */
 
     public synchronized void resetTemporaryStorageArea() throws MemException {
-        tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT
-                                                    * SimulPar.N_BAGS_PER_PASS]);     // stack instantiation
+        // stack of the store room instantiation
+        tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT * SimulPar.N_BAGS_PER_PASS]);
     }
 }

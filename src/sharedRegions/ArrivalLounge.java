@@ -140,8 +140,6 @@ public class ArrivalLounge {
 
     public synchronized boolean whatShouldIDo(){
 
-        System.out.print("\nwhatShouldIDo");
-
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
 
@@ -185,9 +183,6 @@ public class ArrivalLounge {
          *   Blocked Entity Reaction: finish the thread
          */
 
-        System.out.print("\ntakeARest");
-        System.out.print("\n-------------TAKE A REST-------------------------");
-
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
@@ -196,27 +191,17 @@ public class ArrivalLounge {
         } else {
             while (this.nPassAtArrivL < SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
 
-                System.out.print("\nsleep takeARest");
-
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.print("\nwake up takeARest (normal state)");
-                System.out.print("\nTake a rest, currentflight: " + this.currentFlight);
-                System.out.print("\nTake a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.pHoldEmpty());
 
                 if (this.currentFlight == SimulPar.N_FLIGHTS - 1 && this.endDay) {
                     return 'E';
                 }
             }
         }
-
-        System.out.print("\nthis.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT: " + (this.nPassAtArrivL == SimulPar.N_PASS_PER_FLIGHT));
-        System.out.print("\nthis.currentFlight == SimulationParameters.N_FLIGHTS - 1: " + (this.currentFlight == SimulPar.N_FLIGHTS - 1));
-        System.out.print("\nthis.allPassDead " + this.allPassAtExits);
-        System.out.print("\n-------------END TAKE A REST-------------------------");
 
         return 'R';
     }
@@ -229,7 +214,6 @@ public class ArrivalLounge {
      */
 
     public synchronized Bag tryToCollectABag(){
-        System.out.print("\ntryToCollectABag");
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
