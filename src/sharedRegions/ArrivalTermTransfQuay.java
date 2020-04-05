@@ -58,23 +58,12 @@ public class ArrivalTermTransfQuay {
 
     private int nFlights;
 
-    //private int nWaitingPass;
-
     /**
      *
      */
 
-    private boolean allPassDead;
-
-    private boolean reset;
 
     private boolean endDay;
-
-    /**
-     *
-     */
-
-    private boolean busDriverStop;
 
     /**
      *   Instantiation of the Arrival Terminal Transfer Quay.
@@ -90,12 +79,8 @@ public class ArrivalTermTransfQuay {
         this.allowBoardBus = false;
 
         this.nPassOnTheBus = 0;
-        this.allPassDead = false;
-        // this.nWaitingPass = 0;
         this.nFlights = 0;
-        this.busDriverStop = false;
 
-        this.reset = false;
         this.endDay = false;
     }
 
@@ -134,9 +119,6 @@ public class ArrivalTermTransfQuay {
         } catch (MemException e) {
             e.printStackTrace();
         }
-
-        // increment the number of passenger waiting to take a bus
-        //this.nWaitingPass += 1;
 
         // the place of this passenger in the waiting queue = bus capacity
         if(waitingLine.getNObjects() == SimulationParameters.BUS_CAP){
@@ -187,7 +169,6 @@ public class ArrivalTermTransfQuay {
             repos.pLeftWaitingQueue(passenger.getPassengerID());
             repos.occupyBusSeat(passenger.getPassengerID());
 
-            //this.nWaitingPass -= 1;
             this.nPassOnTheBus += 1;
 
             System.out.print("\nPass " + passenger.getPassengerID() + " entered the bus.");
@@ -257,18 +238,8 @@ public class ArrivalTermTransfQuay {
 
         this.nPassOnTheBus = 0;
 
-        // System.out.print("\nnWaitingPass parkTheBus " + this.nWaitingPass);
-
         System.out.print("\nsleep parkTheBus");
-
-
-        //while ((this.nWaitingPass == 0 && this.workDay < SimulationParameters.N_FLIGHTS)
-        //        || (this.busdriverStop && this.workDay < SimulationParameters.N_FLIGHTS - 1)){
-
-
-        // System.out.print("\nthis.nWaitingPass == 0 : " + (this.nWaitingPass == 0));
         System.out.print("\nwaitingLine.getNObjects() != SimulationParameters.BUS_CAP " + (waitingLine.getNObjects() != SimulationParameters.BUS_CAP));
-        System.out.print("\nthis.nFlights == SimulationParameters.N_FLIGHTS && this.allPassDead " + (this.nFlights == SimulationParameters.N_FLIGHTS && this.allPassDead));
         System.out.print("\n!this.waitingLine.isEmpty() " + (!this.waitingLine.isEmpty()));
 
         while(waitingLine.getNObjects() != SimulationParameters.BUS_CAP){ // if false waken up by takeABus()
@@ -344,22 +315,11 @@ public class ArrivalTermTransfQuay {
         this.nPassAllowedToEnter = 0;
         this.nPassOnTheBus = 0;
         this.allowBoardBus = false;
-        this.allPassDead = false;
         this.nFlights += 1;
 
     }
 
     /* ************************************************* Setters ******************************************************/
-
-    /**
-     *
-     */
-
-    public synchronized void setNoPassAtAirport() {
-        this.allPassDead = true;
-        this.busDriverStop = true;
-    }
-
 
     public synchronized void setEndDay(){
         this.endDay = true;

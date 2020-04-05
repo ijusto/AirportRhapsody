@@ -60,29 +60,10 @@ public class ArrivalLounge {
 
     private int currentFlight;
 
-    /*
-     *   True if resetArrivalLounge is called and there are no passengers in the arrival Lounge, false otherwise.
-     *   If false, the porter must wait when there is no more bags in the plane's Hold.
-     */
-
-    private boolean reset;
-
-    /**
-     *
-     */
-    private boolean porterStop;
-
     /**
      *
      */
     private boolean pHEmpty;
-
-
-    /**
-     *
-     */
-    private boolean allPassExited;
-
 
     /*
      *   Arrival Terminal Exit.
@@ -141,10 +122,7 @@ public class ArrivalLounge {
 
         this.nPassAtArrivL = 0;
 
-        this.porterStop = true;
-        this.reset = false;
         this.pHEmpty = false;
-        this.allPassExited = false;
         endDay = false;
 
     }
@@ -176,11 +154,8 @@ public class ArrivalLounge {
         this.repos.numberNRTotal(currentPassenger.getNR());
         this.repos.newPass(currentPassenger.getSi());
 
-        //this.reset = false;
-
         if(this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT) {
             // wake up Porter in takeARest()
-            allPassExited = false;
             notifyAll();
         }
 
@@ -216,7 +191,6 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-
         if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.endDay){
             return 'E';
         } else {
@@ -238,8 +212,6 @@ public class ArrivalLounge {
                 }
             }
         }
-
-
 
         System.out.print("\nthis.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT: " + (this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT));
         System.out.print("\nthis.currentFlight == SimulationParameters.N_FLIGHTS - 1: " + (this.currentFlight == SimulationParameters.N_FLIGHTS - 1));
@@ -275,25 +247,16 @@ public class ArrivalLounge {
             return tmpBag;
         } catch (MemException e) {
 
-
             System.out.print("\nsetAllBagsCollected " + this.bagColPoint.pHoldEmpty());
 
             this.pHEmpty = true;
-            //if(!allPassAtExits) {
-                // change allBagsCollected so the passengers know there are no more bags arriving the bcColPoint
-                bagColPoint.setAllBagsCollected();
-                // notify passenger in goCollectABag()
-                bagColPoint.noMoreBags();
-            //} else if(!allPassExited){
-                // notify last passenger to arrive an exit
-                //depTerm.notifyPHEmpty();
-                //notifyPHEmpty();
-                //notifyAll(); // wake up dayOver
-            //}
+
+            // change allBagsCollected so the passengers know there are no more bags arriving the bcColPoint
+            bagColPoint.setAllBagsCollected();
+            // notify passenger in goCollectABag()
+            bagColPoint.noMoreBags();
 
             System.out.print("\ntrytocollectabag notify no more bags");
-
-            //this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp = true;
 
             return null;
         }
@@ -329,12 +292,6 @@ public class ArrivalLounge {
         repos.updateFlightNumber(this.currentFlight);
 
         System.out.print("\nresetArrivalLounge");
-        System.out.print("\nPorter stoped");
-        System.out.print("\nreset "+ this.reset);
-        //do {
-        //} while (this.porterStopNoMoreBagsAndThereAreStillPassOnTheAirp);
-        System.out.print("\nreset "+ this.reset);
-        System.out.print("\nPorter started");
 
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
@@ -380,30 +337,10 @@ public class ArrivalLounge {
         // reset the number of passengers that arrived the airport
         this.nPassAtArrivL = 0;
 
-
-        this.reset = true;
         this.pHEmpty = false;
-        allPassExited = false;
-        /*
-        this.reset = true;
-
-
-        notifyAll();
-
-         */
     }
 
     /* ************************************************* Setters ******************************************************/
-
-
-    /**
-     *   Setter for existsPassengers to false.
-     */
-
-    public synchronized void setNoPassAtAirport() {
-        System.out.print("\nsetNoPassAtAirport");
-        this.allPassAtExits = true;
-    }
 
     /**
      *   Sets the Departure Terminal Entrance Reference.
@@ -425,38 +362,12 @@ public class ArrivalLounge {
         this.arrivTerm = arrivalTerm;
     }
 
-    public synchronized void dayOver(){ //wake up porter in take a rest
-        System.out.print("\nbagColPoint.pHoldEmpty(): " + bagColPoint.pHoldEmpty());
-        System.out.print("\ndayOver sleep");
-
-        if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1) {
-            while (!this.pHEmpty) {//!bagColPoint.pHoldEmpty()) {//&& this.porterStop){
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            System.out.print("\ndayOver wake up ");
-
-            notify();
-        }
-    }
-
-
     public synchronized int getCurrentFlight(){
         return currentFlight;
     }
 
-    public synchronized  boolean ispHoldNotEmpty() {
-        return !pHEmpty;
-    }
-
     public synchronized void notifyAllPassExited(){
-        //if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1) {
-
-            notify();
-        //}
+        notify();
     }
 
     public synchronized void setEndDay(){

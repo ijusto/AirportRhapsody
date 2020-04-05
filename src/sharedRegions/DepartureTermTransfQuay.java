@@ -138,7 +138,7 @@ public class DepartureTermTransfQuay {
 
     public synchronized void resetDepartureTermTransfQuay(){
         System.out.print("\nresetDepartureTermTransfQuay");
-        //while(true){if(this.letPassOff){break;}}
+
         if(this.busDoorsOpen){
             System.out.print("\nresetDepartureTermTransfQuay");
             System.out.print("\nthis.getNPassOnTheBus() != 0 " + (this.nPassOnTheBus != 0));

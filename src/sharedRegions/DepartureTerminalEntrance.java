@@ -34,8 +34,6 @@ public class DepartureTerminalEntrance {
 
     private Counter dpc;
 
-    private boolean lastWakeUp;
-
     /*
      *   Arrival Terminal Exit.
      */
@@ -55,8 +53,6 @@ public class DepartureTerminalEntrance {
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
-        lastWakeUp = false;
-
     }
 
     /**
@@ -82,55 +78,15 @@ public class DepartureTerminalEntrance {
         System.out.print("\nexitPassenger");
 
         if(isLastPass) {
-            // he changes the boolean of no passengers at the airport to true, so the porter and bus driver know
-            //this.arrivLounge.setNoPassAtAirport();
-            //this.arrivalQuay.setNoPassAtAirport();
 
             System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, npass: " + this.dpc.getValue());
-            //System.out.print("\nsetAllLastWakeUp");
-            //arrivalTerm.setLastWakeUp(true);
-            // the last passenger wanting to leave waits for the notification of the porter if there are still bags in
-            // the plane hold
-            //while(arrivLounge.ispHoldNotEmpty()){
-
-            //    System.out.print("\narrivLounge.ispHEmpty() " + arrivLounge.ispHoldNotEmpty());
-            //    System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, sleep");
-
-            //    try {
-            //        wait();
-            //    } catch (InterruptedException e) {
-            //        e.printStackTrace();
-            //    }
-
-            //    System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, wake up");
-            //}
 
             // if the plane's hold is empty, the last passenger to want to leave
-            // wakes up all the passengers in the same terminal
-            //notifyAll();
-            // and wakes up the passengers in the other terminal
-            //arrivalTerm.notifyFromPrepareNextLeg();
+            // wakes up all the passengers
             System.out.print("\nwakeAllPassengers");
             wakeAllPassengers();
             System.out.print("\nnotifyAllPassExited");
             arrivLounge.notifyAllPassExited();
-
-            // the last passenger wanting to for all the other passengers to leave
-            //while(this.arrivalTerm.isLastOfNotLast()){
-
-            //    try {
-            //        wait();
-            //    } catch (InterruptedException e) {
-            //        e.printStackTrace();
-            //    }
-
-            //}
-
-            // wakes up the porter in takeARest
-            //this.arrivLounge.notifyAllPassExited();
-
-            // he call's the function that verifies if the current flight was the last and if so, notifies the porter
-            //this.arrivLounge.dayOver();
 
             System.out.print("\nthis.arrivLounge.getCurrentFlight() == SimulationParameters.N_FLIGHTS - 1" + (this.arrivLounge.getCurrentFlight() == SimulationParameters.N_FLIGHTS - 1));
 
@@ -154,13 +110,6 @@ public class DepartureTerminalEntrance {
 
             }
 
-            //this.arrivalTerm.setLastOfNotLast(this.arrivalTerm.getAllNotified().increaseCounter());
-            //if(this.arrivalTerm.isLastOfNotLast()){
-            //    System.out.print("\npass " + passenger.getPassengerID() + " last to wake up");
-            //    // if this passenger is the last to be awaken by the last passenger, he wakes up, the last passenger
-            //    notifyAll();
-            //    arrivalTerm.notifyFromPrepareNextLeg();
-            //}
         }
 
         //this.repos.passengerExit(passenger.getPassengerID());
@@ -172,10 +121,6 @@ public class DepartureTerminalEntrance {
 
     public synchronized void notifyFromGoHome(){
         System.out.print("\nnotifyFromGoHome");
-        notifyAll();
-    }
-
-    public synchronized void notifyPHEmpty(){
         notifyAll();
     }
 
