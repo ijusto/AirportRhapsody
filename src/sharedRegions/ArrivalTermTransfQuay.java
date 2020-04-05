@@ -10,7 +10,7 @@ import entities.PassengerStates;
 import main.SimulPar;
 
 /**
- *   ...
+ *   Arrival Terminal Transfer Quay.
  *
  *   @author Inês Justo
  *   @author Miguel Lopes
@@ -32,7 +32,7 @@ public class ArrivalTermTransfQuay {
     private MemFIFO<Passenger> waitingLine;
 
     /**
-     *
+     *   Counter of passengers on the bus.
      */
 
     private Counter nPassOnTheBus;
@@ -45,7 +45,7 @@ public class ArrivalTermTransfQuay {
     private boolean allowBoardBus;
 
     /**
-     *   Number of passengers that are allowed by the bus driver to enter.
+     *   Counter of passengers that are allowed by the bus driver to enter.
      *   When the passengers are waken up in takeABus() they go back to sleep if this number isn't smaller than the bus
      *   seat capacity.
      */
@@ -53,7 +53,7 @@ public class ArrivalTermTransfQuay {
     private Counter nPassAllowedToEnter;
 
     /**
-     *
+     *   Signals the end of the day.
      */
 
     private boolean endDay;

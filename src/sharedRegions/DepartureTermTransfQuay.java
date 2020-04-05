@@ -27,7 +27,7 @@ public class DepartureTermTransfQuay {
     private boolean busDoorsOpen;
 
     /*
-     *
+     *   Counter of passengers on the bus.
      */
 
     private Counter nPassOnTheBus;
@@ -44,21 +44,14 @@ public class DepartureTermTransfQuay {
         this.nPassOnTheBus = new Counter(0, false);
     }
 
-
     /* ************************************************Passenger***************************************************** */
 
     /**
-     *   ... (raised by the Passenger).
+     *   Operation of leaving the bus (raised by the Passenger).
+     *   Before leaving, the passenger waits for a notification of the bus driver to let her/him leave.
      */
 
     public synchronized void leaveTheBus(){
-        /*
-         *   Blocked Entity: Passenger
-         *   Freeing Entity: Driver
-         *   Freeing Method: parkTheBusAndLetPassOff()
-         *   Blocked Entity Reactions: prepareNextLeg()
-        */
-
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
@@ -88,17 +81,10 @@ public class DepartureTermTransfQuay {
 
     /**
      *   BusDriver informs the passengers they can leave the bus (raised by the BusDriver).
+     *   Then he waits for a notification of the last passenger to leave the bus.
      */
 
     public synchronized void parkTheBusAndLetPassOff() {
-
-        /*
-         *   Blocked Entity: Driver
-         *   Freeing Entity: Passenger
-         *   Freeing Method: leaveTheBus()
-         *   Freeing Condition: Last passenger to exit the bus
-         *   Blocked Entity Reaction: goToArrivalTerminal()
-        */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.DRIVING_FORWARD);
@@ -120,23 +106,15 @@ public class DepartureTermTransfQuay {
         }
 
         busDriver.setNPassOnTheBus(this.nPassOnTheBus.getValue());
-
         this.busDoorsOpen = false;
     }
 
     /**
-     *
+     *   Resets the counter of passengers on the bus.
      */
 
     public synchronized void resetDepartureTermTransfQuay(){
-
-        if(this.busDoorsOpen){
-            //
-            notifyAll();
-            this.busDoorsOpen = false;
-        }
         this.nPassOnTheBus.reset();
-
     }
 
     /* ************************************************* Getters ******************************************************/
@@ -144,7 +122,8 @@ public class DepartureTermTransfQuay {
     /**
      *   Signaling the bus driver will to let the passengers enter the bus.
      *
-     *    @return letPassOff
+     *    @return <li>true, if the bus driver wants the passengers to leave the bus</li>
+     *            <li>false, otherwise</li>
      */
 
     public boolean canPassLeaveTheBus() {
@@ -154,7 +133,7 @@ public class DepartureTermTransfQuay {
     /* ************************************************* Setters ******************************************************/
 
     /**
-     *
+     *   Sets the bus driver will to let the passengers enter the bus to true.
      */
 
     public void pleaseLeaveTheBus() {

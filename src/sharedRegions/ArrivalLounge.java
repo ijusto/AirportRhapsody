@@ -41,7 +41,7 @@ public class ArrivalLounge {
     private MemStack<Bag> pHoldBagStack;
 
     /*
-     *   Number of passengers that already arrived.
+     *   Counter of passengers that already arrived.
      */
 
     private Counter nPassAtArrivL;

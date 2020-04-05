@@ -67,13 +67,13 @@ public class GenReposInfo {
     private int SR;
 
     /*
-     *   Porter state.
+     *   Porter's state.
      */
 
     private PorterStates porterState;
 
     /*
-     *   Bus driver state.
+     *   Bus driver's state.
      */
 
     private BusDriverStates busDriverState;
@@ -103,31 +103,32 @@ public class GenReposInfo {
     private String[] passSituation;
 
     /*
-     *
+     *   Array with the number of pieces of luggage that each passenger had at the start of the journey.
      */
 
     private int[] totalLuggage;
 
     /*
-     *
+     *   Array with the number of pieces of luggage that each passenger collected by the end of the passenger's life
+     *   cycle.
      */
 
     private int[] collectedLuggage;
 
     /*
-     *
+     *   Number of missed bags.
      */
 
     int missing_bags;
 
     /*
-     *
+     *   Number of passengers in transit.
      */
 
     int transPassTotal;
 
     /*
-     *
+     *   Number of passengers which have this airport as their final destination.
      */
 
     int finalPassTotal;
@@ -139,19 +140,19 @@ public class GenReposInfo {
     int nrTotal;
 
     /**
-     *
+     *   BufferedWriter to write the log to a file.
      */
 
-    private BufferedWriter bWritter;
+    private BufferedWriter bwt;
 
     /**
-     *
+     *   FileWriter to write the log to a file.
      */
 
     private FileWriter fw;
 
     /**
-     *
+     *   StringBuilder used to append all the Strings to log.
      */
 
     private StringBuilder log;
@@ -159,14 +160,14 @@ public class GenReposInfo {
     /**
      *   Instantiation of the General Repository of Information.
      *
-     *   @param fileName Name of the log file.
+     *    @param fileName Name of the log file.
      */
 
     public GenReposInfo(String fileName) {
 
         try {
             this.fw = new FileWriter(fileName, true);
-            this.bWritter = new BufferedWriter(this.fw);
+            this.bwt = new BufferedWriter(this.fw);
         } catch (IOException e) {
             System.out.print("An error occurred.");
             e.printStackTrace();
@@ -190,9 +191,8 @@ public class GenReposInfo {
         print_header();
     }
 
-
     /**
-     *
+     *   Logs the header of the info.
      */
 
     public synchronized void print_header(){
@@ -202,7 +202,7 @@ public class GenReposInfo {
     }
 
     /**
-     *
+     *   Logs the alterations.
      */
 
     public synchronized void printLog(){
@@ -230,15 +230,13 @@ public class GenReposInfo {
             String psi = (passSituation[i] != null) ? passSituation[i] :  "---";
             String pst = (passState[passengerStates[i].ordinal()] != null) ? passState[passengerStates[i].ordinal()] : "---";
 
-            log.append(String.format("|%3s|%3s|%3d|%3d",
-                    pst, psi,
-                    totalLuggage[i], collectedLuggage[i]));
+            log.append(String.format("|%3s|%3s|%3d|%3d", pst, psi, totalLuggage[i], collectedLuggage[i]));
         }
 
         System.out.print(log.toString());
         try {
-            bWritter.write(log.toString());
-            bWritter.flush();
+            bwt.write(log.toString());
+            bwt.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -246,7 +244,7 @@ public class GenReposInfo {
     }
 
     /**
-     *
+     *   Logs the final report of the simulation.
      */
 
     public synchronized void finalReport(){
@@ -262,10 +260,10 @@ public class GenReposInfo {
         System.out.print(log.toString());
 
         try {
-            bWritter.write(log.toString());
-            bWritter.flush();
+            bwt.write(log.toString());
+            bwt.flush();
             fw.close();
-            bWritter.close();
+            bwt.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -295,7 +293,6 @@ public class GenReposInfo {
 
     /**
      *   Update baggage stored in the cargo hold when porter retrieves the baggage.
-     *
      */
 
     public synchronized void removeBagFromCargoHold(){
@@ -331,7 +328,7 @@ public class GenReposInfo {
     /**
      *   Update the Porter state.
      *
-     *    @param porterState porterState.
+     *    @param porterState Porter's state.
      */
 
     public synchronized void updatePorterStat(PorterStates porterState){
@@ -345,7 +342,7 @@ public class GenReposInfo {
     /**
      *   Update the Bus Driver State.
      *
-     *   @param busDriverState busDriverState.
+     *   @param busDriverState Bus driver's state.
      */
 
     public synchronized void updateBDriverStat(BusDriverStates busDriverState){
@@ -357,7 +354,7 @@ public class GenReposInfo {
     /**
      *   Update the queue of passengers.
      *
-     *    @param id Passenger ID.
+     *    @param id Passenger's id.
      */
 
     public synchronized void pJoinWaitingQueue(int id){
@@ -367,7 +364,7 @@ public class GenReposInfo {
     /**
      *   Update of the occupation state of the bus seat.
      *
-     *    @param id Passenger id.
+     *    @param id Passenger's id.
      */
 
     public synchronized void pLeftWaitingQueue(int id){
@@ -378,7 +375,7 @@ public class GenReposInfo {
     /**
      *   Removes the passenger id from the bus seat.
      *
-     *    @param id Passenger ID.
+     *    @param id Passenger's id.
      */
 
     public synchronized void freeBusSeat(int id){
@@ -390,7 +387,7 @@ public class GenReposInfo {
     /**
      *   Increments the number of passengers from a certain passenger situation.
      *
-     *    @param passSi Passenger situation.
+     *    @param passSi Passenger's situation.
      */
 
     public synchronized  void newPass(Passenger.SiPass passSi){
@@ -404,8 +401,8 @@ public class GenReposInfo {
     /**
      *   Update the Passenger State.
      *
-     *   @param id id.
-     *   @param passengerState passengerState.
+     *    @param id Passenger's id.
+     *    @param passengerState Passenger's state.
      */
 
     public synchronized void updatePassSt(int id, PassengerStates passengerState){
@@ -417,8 +414,8 @@ public class GenReposInfo {
     /**
      *   Get the passenger situation (in transit or final).
      *
-     *   @param id Passenger ID.
-     *   @param si Passenger Situation.
+     *    @param id Passenger's id.
+     *    @param si Passenger's situation.
      */
 
     public synchronized void getPassSi(int id, String si){
@@ -428,7 +425,7 @@ public class GenReposInfo {
     /**
      *   Update the passengers luggage at the start of the journey.
      *
-     *   @param id id.
+     *   @param id Passenger's id.
      *   @param nr Number of pieces of luggage the passenger had at the start of the journey.
      */
 
@@ -439,7 +436,7 @@ public class GenReposInfo {
     /**
      *   Update the number of luggage a passenger collected.
      *
-     *   @param id Passenger ID.
+     *   @param id Passenger's id.
      *   @param na Number of pieces of luggage the passenger has collected.
      */
 
@@ -448,8 +445,9 @@ public class GenReposInfo {
     }
 
     /**
+     *   Resets all the info of a passenger with a certain id.
      *
-     *    @param id Passenger ID.
+     *    @param id Passenger's id.
      */
 
     public synchronized void passengerExit(int id){
