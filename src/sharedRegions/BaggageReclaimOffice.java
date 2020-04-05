@@ -40,5 +40,6 @@ public class BaggageReclaimOffice {
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         repos.missingBagReported();
 
+        repos.printLog();
     }
 }

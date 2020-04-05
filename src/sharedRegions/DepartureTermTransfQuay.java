@@ -81,6 +81,8 @@ public class DepartureTermTransfQuay {
             notifyAll();
         }
 
+        repos.printLog();
+
     }
 
     /* *************************************************Bus Driver*************************************************** */
@@ -120,6 +122,8 @@ public class DepartureTermTransfQuay {
         busDriver.setNPassOnTheBus(this.nPassOnTheBus);
 
         this.busDoorsOpen = false;
+
+        repos.printLog();
     }
 
     /**
@@ -134,6 +138,7 @@ public class DepartureTermTransfQuay {
             this.busDoorsOpen = false;
         }
         this.nPassOnTheBus = 0;
+
     }
 
     /* ************************************************* Getters ******************************************************/

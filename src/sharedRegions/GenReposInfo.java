@@ -205,7 +205,7 @@ public class GenReposInfo {
      *
      */
 
-    private synchronized void printLog(){
+    public synchronized void printLog(){
         log.append("\nFN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|"+
                         "NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6");
         log.append(String.format("\n%2d|%2d|", FN, BN));
@@ -281,7 +281,6 @@ public class GenReposInfo {
 
     public synchronized void updateFlightNumber(int flight){
         FN = flight + 1;
-        printLog();
     }
 
     /**
@@ -292,7 +291,6 @@ public class GenReposInfo {
 
     public synchronized void initializeCargoHold(int bn){
         BN = bn;
-        printLog();
     }
 
     /**
@@ -302,7 +300,6 @@ public class GenReposInfo {
 
     public synchronized void removeBagFromCargoHold(){
         BN = BN - 1;
-        printLog();
     }
 
     /* **************************************************Porter****************************************************** */
@@ -313,7 +310,6 @@ public class GenReposInfo {
 
     public synchronized void incBaggageCB(){
         CB = CB + 1;
-        printLog();
     }
 
     /**
@@ -322,7 +318,6 @@ public class GenReposInfo {
 
     public synchronized void pGetsABag(){
         CB = CB - 1;
-        printLog();
     }
 
     /**
@@ -331,7 +326,6 @@ public class GenReposInfo {
 
     public synchronized void saveBagInSR(){
         SR = SR + 1;
-        printLog();
     }
 
     /**
@@ -343,7 +337,6 @@ public class GenReposInfo {
     public synchronized void updatePorterStat(PorterStates porterState){
         if(this.porterState != porterState){
             this.porterState = porterState;
-            printLog();
         }
     }
 
@@ -358,7 +351,6 @@ public class GenReposInfo {
     public synchronized void updateBDriverStat(BusDriverStates busDriverState){
         if(this.busDriverState != busDriverState){
             this.busDriverState = busDriverState;
-            printLog();
         }
     }
 
@@ -370,7 +362,6 @@ public class GenReposInfo {
 
     public synchronized void pJoinWaitingQueue(int id){
         passWaitingQueue.add(id);
-        printLog();
     }
 
     /**
@@ -382,7 +373,6 @@ public class GenReposInfo {
     public synchronized void pLeftWaitingQueue(int id){
         passWaitingQueue.remove(passWaitingQueue.indexOf(id));
         busSeatOccupation.add(id);
-        printLog();
     }
 
     /**
@@ -393,7 +383,6 @@ public class GenReposInfo {
 
     public synchronized void freeBusSeat(int id){
         busSeatOccupation.remove(busSeatOccupation.indexOf(id));
-        printLog();
     }
 
     /* **************************************************Passenger*************************************************** */
@@ -422,7 +411,6 @@ public class GenReposInfo {
     public synchronized void updatePassSt(int id, PassengerStates passengerState){
         if(passengerStates[id] != passengerState){
             passengerStates[id] = passengerState;
-            printLog();
         }
     }
 

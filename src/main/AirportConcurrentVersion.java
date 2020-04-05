@@ -154,6 +154,7 @@ public class AirportConcurrentVersion {
         } catch (InterruptedException e) {
             System.out.print("Main Program - One thread of BusDriver was interrupted.");
         }
+        repos.finalReport();
 
         repos.finalReport();
     }

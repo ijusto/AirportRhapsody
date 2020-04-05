@@ -105,6 +105,8 @@ public class DepartureTerminalEntrance {
             }
 
         }
+
+        repos.printLog();
     }
 
     public synchronized void resetDepartureTerminalExit(){

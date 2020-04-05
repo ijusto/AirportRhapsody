@@ -103,6 +103,8 @@ public class BaggageColPoint {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            repos.printLog();
         } while(true);
 
     }
@@ -130,6 +132,8 @@ public class BaggageColPoint {
         } catch (MemException e) {
             e.printStackTrace();
         }
+
+        repos.printLog();
     }
 
     public synchronized void resetBaggageColPoint(){
