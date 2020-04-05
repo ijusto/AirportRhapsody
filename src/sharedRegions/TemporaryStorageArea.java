@@ -1,7 +1,7 @@
 package sharedRegions;
 import commonInfrastructures.MemException;
 import commonInfrastructures.MemStack;
-import entities.Bag;
+import commonInfrastructures.Bag;
 import entities.PorterStates;
 import entities.Porter;
 import main.SimulPar;

@@ -1,4 +1,5 @@
 package entities;
+import commonInfrastructures.Bag;
 import sharedRegions.ArrivalLounge;
 import sharedRegions.BaggageColPoint;
 import sharedRegions.TemporaryStorageArea;

@@ -89,10 +89,17 @@ public class BusDriver extends Thread {
      *
      */
 
-    public synchronized void goToArrivalTerminal(){
+    public synchronized void goToArrivalTerminal() {
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_BACKWARD);
         repos.updateBDriverStat(BusDriverStates.DRIVING_BACKWARD);
+
+        // simulates the bus going from the departure terminal to the arrival terminal
+        try {
+            sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -103,6 +110,13 @@ public class BusDriver extends Thread {
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_FORWARD);
         repos.updateBDriverStat(BusDriverStates.DRIVING_FORWARD);
+
+        // simulates the bus going from the departure arrival to the departure terminal
+        try {
+            sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /* ************************************************* Getters ******************************************************/

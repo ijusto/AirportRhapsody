@@ -278,5 +278,6 @@ public class ArrivalTermTransfQuay {
 
     public synchronized void setEndDay(){
         this.endDay = true;
+        notifyAll();
     }
 }

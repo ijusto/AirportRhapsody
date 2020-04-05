@@ -1,4 +1,4 @@
-package entities;
+package commonInfrastructures;
 
 /**
  *   Bag belonging to a passenger.

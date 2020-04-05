@@ -1,5 +1,6 @@
 package sharedRegions;
 
+import commonInfrastructures.Bag;
 import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
 import entities.*;
@@ -114,6 +115,7 @@ public class BaggageColPoint {
      */
 
     public synchronized void carryItToAppropriateStore(Bag bag){
+        System.out.print("\n carryItToAppropriateStore " + this.treadmill.get(bag.getIdOwner()));
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
@@ -172,12 +174,8 @@ public class BaggageColPoint {
      *
      */
 
-    public synchronized void setAllBagsCollected() {
-        this.pHoldEmpty = true;
-    }
-
-    public synchronized void setPHoldNotEmpty(){
-        this.pHoldEmpty = false;
+    public synchronized void setPHoldEmpty(boolean pHoldEmpty){
+        this.pHoldEmpty = pHoldEmpty;
     }
 
 }

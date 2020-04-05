@@ -1,5 +1,6 @@
 package main;
 
+import commonInfrastructures.Bag;
 import commonInfrastructures.MemException;
 import entities.*;
 import sharedRegions.*;
@@ -85,8 +86,8 @@ public class AirportConcurrentVersion {
         tmpStorageArea = new TemporaryStorageArea(repos);
         departureQuay = new DepartureTermTransfQuay(repos);
         bagColPoint = new BaggageColPoint(repos);
-        arrivLounge = new ArrivalLounge(repos, bagColPoint, bagAndPassDest, nBagsNA);
         arrivalQuay = new ArrivalTermTransfQuay(repos);
+        arrivLounge = new ArrivalLounge(repos, bagColPoint, arrivalQuay, bagAndPassDest, nBagsNA);
         arrivalTerm = new ArrivalTerminalExit(repos, arrivLounge, arrivalQuay);
         departureTerm = new DepartureTerminalEntrance(repos, arrivLounge, arrivalQuay);
         arrivalTerm.setDepartureTerminalRef(departureTerm);
@@ -134,18 +135,12 @@ public class AirportConcurrentVersion {
                 }
             }
 
-            if(flight < SimulPar.N_FLIGHTS - 1) {
-                bagColPoint.resetBaggageColPoint();
-                tmpStorageArea.resetTemporaryStorageArea();
-                arrivLounge.resetArrivalLounge(bagAndPassDest, nBagsNA);
-                arrivalQuay.resetArrivalTermTransfQuay();
-                departureQuay.resetDepartureTermTransfQuay();
-                arrivalTerm.resetArrivalTerminalExit();
-                departureTerm.resetDepartureTerminalExit();
-            } else {
-                arrivLounge.setEndDay();
-                arrivalQuay.setEndDay();
-            }
+            bagColPoint.resetBaggageColPoint();
+            tmpStorageArea.resetTemporaryStorageArea();
+            arrivalQuay.resetArrivalTermTransfQuay();
+            arrivLounge.resetArrivalLounge(bagAndPassDest, nBagsNA);
+            departureQuay.resetDepartureTermTransfQuay();
+            arrivalTerm.resetArrivalTerminalExit();
         }
 
         try {
