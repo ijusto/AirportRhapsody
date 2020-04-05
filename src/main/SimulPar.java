@@ -7,7 +7,7 @@ package main;
  *   @author Miguel Lopes
  */
 
-public class SimulationParameters {
+public class SimulPar {
 
     /* number of passengers per flight */
     public static final int N_PASS_PER_FLIGHT = 6;

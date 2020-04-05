@@ -33,8 +33,6 @@ public class BaggageReclaimOffice {
      */
 
     public synchronized void reportMissingBags(){
-        System.out.print("\nreportMissingBags");
-
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);

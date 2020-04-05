@@ -6,7 +6,7 @@ import entities.BusDriver;
 import entities.BusDriverStates;
 import entities.Passenger;
 import entities.PassengerStates;
-import main.SimulationParameters;
+import main.SimulPar;
 
 /**
  *   ...
@@ -36,7 +36,6 @@ public class ArrivalTermTransfQuay {
 
     private int nPassOnTheBus;
 
-
     /**
      *   True, if the bus driver is waiting in announcingBusBoarding();
      *   If false, when the passengers are waken up in takeABus() they go back to sleep.
@@ -56,13 +55,6 @@ public class ArrivalTermTransfQuay {
      *
      */
 
-    private int nFlights;
-
-    /**
-     *
-     */
-
-
     private boolean endDay;
 
     /**
@@ -73,14 +65,10 @@ public class ArrivalTermTransfQuay {
 
     public ArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
         this.repos = repos;
-        this.waitingLine = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
-
+        this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.nPassAllowedToEnter = 0;
         this.allowBoardBus = false;
-
         this.nPassOnTheBus = 0;
-        this.nFlights = 0;
-
         this.endDay = false;
     }
 
@@ -102,8 +90,6 @@ public class ArrivalTermTransfQuay {
          *   Blocked Entity Reactions: enterTheBus()
          */
 
-        System.out.print("\ntakeABus");
-
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
@@ -121,27 +107,18 @@ public class ArrivalTermTransfQuay {
         }
 
         // the place of this passenger in the waiting queue = bus capacity
-        if(waitingLine.getNObjects() == SimulationParameters.BUS_CAP){
+        if(waitingLine.getNObjects() == SimulPar.BUS_CAP){
             // wake up Bus Driver in parkTheBus()
             notifyAll();
         }
 
-        System.out.print("\nnotify parkTheBus at arrival terminal (at least 3 passengers waiting)");
-
-        while(!this.allowBoardBus || this.nPassAllowedToEnter >= SimulationParameters.BUS_CAP){
-            System.out.print("\nsleep takeABus");
-
+        while(!this.allowBoardBus || this.nPassAllowedToEnter >= SimulPar.BUS_CAP){
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            System.out.print("\nwake up takeABus");
-            System.out.print("\nthis.waitingPass.isEmpty(): " + this.waitingLine.isEmpty());
         }
-
-        System.out.print("\nexit takeABus");
 
         this.nPassAllowedToEnter += 1;
     }
@@ -151,11 +128,10 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void enterTheBus(){
-        System.out.print("\nenterTheBus");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        assert(this.nPassOnTheBus < SimulationParameters.BUS_CAP);
+        assert(this.nPassOnTheBus < SimulPar.BUS_CAP);
 
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
 
@@ -171,11 +147,8 @@ public class ArrivalTermTransfQuay {
 
             this.nPassOnTheBus += 1;
 
-            System.out.print("\nPass " + passenger.getPassengerID() + " entered the bus.");
-
             // last passenger to enter the bus wakes up the bus driver
-            if(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.waitingLine.isEmpty()){ //this.nWaitingPass == 0){
-                System.out.print("\nLast passenger. notify announcingBusBoarding");
+            if(this.nPassOnTheBus == SimulPar.BUS_CAP || this.waitingLine.isEmpty()){ //this.nWaitingPass == 0){
 
                 // wake up Bus driver in announcingBusBoarding()
                 notifyAll();
@@ -195,8 +168,6 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized char hasDaysWorkEnded(){
-        System.out.print("\nhasDaysWorkEnded");
-        System.out.print("\nworkday: "+this.nFlights);
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
@@ -215,7 +186,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void parkTheBus(){
-        System.out.print("\nparkTheBus");
+
         /*
          *   Blocked Entity: Driver
          *   1) Freeing Entity: Passenger
@@ -238,11 +209,7 @@ public class ArrivalTermTransfQuay {
 
         this.nPassOnTheBus = 0;
 
-        System.out.print("\nsleep parkTheBus");
-        System.out.print("\nwaitingLine.getNObjects() != SimulationParameters.BUS_CAP " + (waitingLine.getNObjects() != SimulationParameters.BUS_CAP));
-        System.out.print("\n!this.waitingLine.isEmpty() " + (!this.waitingLine.isEmpty()));
-
-        while(waitingLine.getNObjects() != SimulationParameters.BUS_CAP){ // if false waken up by takeABus()
+        while(waitingLine.getNObjects() != SimulPar.BUS_CAP){ // if false waken up by takeABus()
             try {
                 // wait until the departure time has been reached and verify again if there are passengers waiting
                 wait(10);
@@ -257,12 +224,10 @@ public class ArrivalTermTransfQuay {
 
             // if there are passengers waiting
             if(!this.waitingLine.isEmpty()){
-                System.out.print("\nwake up parkTheBus because !this.waitingLine.isEmpty()");
                 break;
             }
         }
 
-        System.out.print("\nwake up parkTheBus");
     }
 
     /**
@@ -270,8 +235,6 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void announcingBusBoarding(){
-        System.out.print("\nannouncingBusBoarding");
-
         /*
          *   Blocked Entity: Driver
          *   Freeing Entity: Passenger
@@ -288,21 +251,17 @@ public class ArrivalTermTransfQuay {
         // wake up Passengers in takeABus()
         notifyAll();
 
-        while(!(this.nPassOnTheBus == SimulationParameters.BUS_CAP || this.waitingLine.isEmpty())){ //this.nWaitingPass == 0)) {
-            System.out.print("\nsleep announcingBusBoarding");
+        while(!(this.nPassOnTheBus == SimulPar.BUS_CAP || this.waitingLine.isEmpty())){ //this.nWaitingPass == 0)) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.print("\nwake up announcingBusBoarding");
         }
 
         this.allowBoardBus = false;
         this.nPassAllowedToEnter = 0;
         busDriver.setNPassOnTheBus(this.nPassOnTheBus);
-
-        System.out.print("\nPassengers on the bus at arr quay " + this.nPassOnTheBus);
     }
 
     /**
@@ -310,13 +269,10 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void resetArrivalTermTransfQuay() throws MemException {
-        System.out.print("\nresetArrivalTermTransfQuay");
-        this.waitingLine = new MemFIFO<>(new Passenger [SimulationParameters.N_PASS_PER_FLIGHT]);  // FIFO instantiation
+        this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.nPassAllowedToEnter = 0;
         this.nPassOnTheBus = 0;
         this.allowBoardBus = false;
-        this.nFlights += 1;
-
     }
 
     /* ************************************************* Setters ******************************************************/

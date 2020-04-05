@@ -4,7 +4,7 @@ import entities.BusDriverStates;
 import entities.Passenger;
 import entities.PassengerStates;
 import entities.PorterStates;
-import main.SimulationParameters;
+import main.SimulPar;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -175,7 +175,7 @@ public class GenReposInfo {
         }
 
         porterState = PorterStates.WAITING_FOR_A_PLANE_TO_LAND;
-        passengerStates = new PassengerStates[SimulationParameters.N_PASS_PER_FLIGHT];
+        passengerStates = new PassengerStates[SimulPar.N_PASS_PER_FLIGHT];
         Arrays.fill(passengerStates, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         busDriverState = BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL;
 
@@ -187,9 +187,9 @@ public class GenReposInfo {
         transPassTotal = 0;
         finalPassTotal = 0;
 
-        passengerSituation = new String[SimulationParameters.N_PASS_PER_FLIGHT];
-        totalLuggage = new int[SimulationParameters.N_PASS_PER_FLIGHT];
-        collectedLuggage = new int[SimulationParameters.N_PASS_PER_FLIGHT];
+        passengerSituation = new String[SimulPar.N_PASS_PER_FLIGHT];
+        totalLuggage = new int[SimulPar.N_PASS_PER_FLIGHT];
+        collectedLuggage = new int[SimulPar.N_PASS_PER_FLIGHT];
         passWaitingQueue = new ArrayList<>();
         busSeatOccupation = new ArrayList<>();
 
@@ -217,18 +217,13 @@ public class GenReposInfo {
     private synchronized void printLog(){
         log.append("\nFN|BN| |Stat|CB|SR| |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3| |St1|Si1|NR1|NA1|St2|Si2|NR2|NA2|St3|Si3|"+
                         "NR3|NA3|St4|Si4|NR4|NA4|St5|Si5|NR5|NA5|St6|Si6|NR6|NA6");
-        //log.append("\n|FN|BN|  |Stat|CB|SR|  |Stat|Q1|Q2|Q3|Q4|Q5|Q6|S1|S2|S3|  |St1|Si1|NR1|NA1| " +
-        //        "|St2|Si2|NR2|NA2| |St3|Si3|NR3|NA3| |St4|Si4|NR4|NA4| |St5|Si5|NR5|NA5| |St6|Si6|NR6|NA6|");
 
         log.append(String.format("\n%2d|%2d|", FN, BN));
-        //log.append(String.format("\n|%2d|%2d|", FN, BN));
 
         log.append(String.format(" |%4s|%2d|%2d| |", portState[porterState.ordinal()], CB, SR));
-        //log.append(String.format("  |%4s|%2d|%2d|  |", portState[porterState.ordinal()], CB, SR));
 
         log.append(String.format("%4s|",  busState[busDriverState.ordinal()]));
-        //log.append(String.format("%4s|",  busState[busDriverState.ordinal()]));
-        for(int j = 0; j < SimulationParameters.N_PASS_PER_FLIGHT; j++){
+        for(int j = 0; j < SimulPar.N_PASS_PER_FLIGHT; j++){
             String passId;
             if(j > passWaitingQueue.size() - 1){
                 passId = "--";
@@ -238,7 +233,7 @@ public class GenReposInfo {
             log.append(String.format("%s|", passId));
         }
 
-        for(int k = 0; k < SimulationParameters.BUS_CAP; k++){
+        for(int k = 0; k < SimulPar.BUS_CAP; k++){
             String occupStat;
             if(k > busSeatOccupation.size() - 1){
                 occupStat = "--";
@@ -246,12 +241,10 @@ public class GenReposInfo {
                 occupStat = String.format("%2s", busSeatOccupation.get(k));
             }
             log.append(String.format("%s|", occupStat));
-            //log.append(String.format("%s|", occupStat));
         }
 
         log.append(" ");
-        //log.append(" ");
-        for (int i = 0; i< SimulationParameters.N_PASS_PER_FLIGHT; i++){
+        for (int i = 0; i< SimulPar.N_PASS_PER_FLIGHT; i++){
             String psi = "---";
             String pst =  "---";
 
@@ -262,7 +255,6 @@ public class GenReposInfo {
                 pst = passState[passengerStates[i].ordinal()];
             }
             log.append(String.format("|%3s|%3s|%3d|%3d",
-            //log.append(String.format(" |%3s|%3s|%3d|%3d|",
                     pst, psi,
                     totalLuggage[i], collectedLuggage[i]));
         }
@@ -310,6 +302,7 @@ public class GenReposInfo {
      *
      *   @param flight flight.
      */
+
     public synchronized void updateFlightNumber(int flight){
         FN = flight + 1;
         printLog();
@@ -460,16 +453,10 @@ public class GenReposInfo {
      */
 
     public synchronized void updatePassSt(int id, PassengerStates passengerState){
-        System.out.print("\nupdateState pass id " + id + " state: " + passengerState.toString());
-        System.out.print("\npass state " + passengerStates[id].toString());
-        System.out.print("\npass state " + passState[passengerStates[id].ordinal()]);
         if(passengerStates[id] != passengerState){
             passengerStates[id] = passengerState;
             printLog();
         }
-        System.out.print("\npass state " + passengerStates[id].toString());
-        System.out.print("\npass state " + passState[passengerStates[id].ordinal()]);
-        System.out.print("\nend updateState pass id " + id + " state: " + passengerState.toString());
     }
 
     /**

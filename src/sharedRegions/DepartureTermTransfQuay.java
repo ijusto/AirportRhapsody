@@ -51,7 +51,6 @@ public class DepartureTermTransfQuay {
      */
 
     public synchronized void leaveTheBus(){
-        System.out.print("\nleaveTheBus");
         /*
          *   Blocked Entity: Passenger
          *   Freeing Entity: Driver
@@ -63,21 +62,17 @@ public class DepartureTermTransfQuay {
         assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         repos.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
-        System.out.print("\npass that left the bus(id): " + passenger.getPassengerID());
 
         while(!this.canPassLeaveTheBus()) {
-            System.out.print("\nsleep leaveTheBus");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.print("\nwake up leaveTheBus");
-            System.out.print("\nDBDLPO: " + this.canPassLeaveTheBus());
         }
 
         this.nPassOnTheBus -= 1;
-        System.out.print("\na pass left, nPass remaining: " + this.nPassOnTheBus);
+
         repos.freeBusSeat(passenger.getPassengerID());
 
         // if the passenger is the last to exit the bus
@@ -95,7 +90,7 @@ public class DepartureTermTransfQuay {
      */
 
     public synchronized void parkTheBusAndLetPassOff() {
-        System.out.print("\nparkTheBusAndLetPassOff");
+
         /*
          *   Blocked Entity: Driver
          *   Freeing Entity: Passenger
@@ -111,20 +106,15 @@ public class DepartureTermTransfQuay {
 
         this.nPassOnTheBus = busDriver.getNPassOnTheBus();
 
-        System.out.print("\nPassengers on the bus at dep quay " + this.nPassOnTheBus);
-        System.out.print("\nBus driver set nPass: " + this.nPassOnTheBus);
-
         this.pleaseLeaveTheBus();
         notifyAll();  // wake up Passengers in leaveTheBus()
 
         while(this.nPassOnTheBus != 0) {
-            System.out.print("\nsleep parkTheBusAndLetPassOff");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.print("\nwake up parkTheBusAndLetPassOff");
         }
 
         busDriver.setNPassOnTheBus(this.nPassOnTheBus);
@@ -137,17 +127,12 @@ public class DepartureTermTransfQuay {
      */
 
     public synchronized void resetDepartureTermTransfQuay(){
-        System.out.print("\nresetDepartureTermTransfQuay");
 
         if(this.busDoorsOpen){
-            System.out.print("\nresetDepartureTermTransfQuay");
-            System.out.print("\nthis.getNPassOnTheBus() != 0 " + (this.nPassOnTheBus != 0));
-
             //
             notifyAll();
             this.busDoorsOpen = false;
         }
-        System.out.print("\nendresetDepartureTermTransfQuay");
         this.nPassOnTheBus = 0;
     }
 

@@ -3,7 +3,7 @@ package sharedRegions;
 import commonInfrastructures.Counter;
 import entities.Passenger;
 import entities.PassengerStates;
-import main.SimulationParameters;
+import main.SimulPar;
 
 /**
  *   ...
@@ -62,7 +62,6 @@ public class DepartureTerminalEntrance {
      */
 
     public synchronized void prepareNextLeg(){
-        System.out.print("\nprepareNextLeg");
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL;
@@ -74,40 +73,23 @@ public class DepartureTerminalEntrance {
         // increment the number of passengers that wants to leave the airport
         boolean isLastPass = this.dpc.increaseCounter();
 
-        System.out.print("\npass " + passenger.getPassengerID() + " in prepareNextLeg, npass: " + this.dpc.getValue());
-        System.out.print("\nexitPassenger");
-
         if(isLastPass) {
-
-            System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, npass: " + this.dpc.getValue());
 
             // if the plane's hold is empty, the last passenger to want to leave
             // wakes up all the passengers
-            System.out.print("\nwakeAllPassengers");
             wakeAllPassengers();
-            System.out.print("\nnotifyAllPassExited");
             arrivLounge.notifyAllPassExited();
-
-            System.out.print("\nthis.arrivLounge.getCurrentFlight() == SimulationParameters.N_FLIGHTS - 1" + (this.arrivLounge.getCurrentFlight() == SimulationParameters.N_FLIGHTS - 1));
 
         } else {
 
-            System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, npass: " + this.dpc.getValue());
-
             // the passengers that are not the last ones to want to leave the airport, need to wait for the last one to
             // notify them so they can leave
-            while (this.dpc.getValue() < SimulationParameters.N_PASS_PER_FLIGHT) {
-
-                System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, sleep");
-
+            while (this.dpc.getValue() < SimulPar.N_PASS_PER_FLIGHT) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-                System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, wake up");
-
             }
 
         }
@@ -120,16 +102,12 @@ public class DepartureTerminalEntrance {
      */
 
     public synchronized void notifyFromGoHome(){
-        System.out.print("\nnotifyFromGoHome");
         notifyAll();
     }
 
     public synchronized void wakeAllPassengers(){
-        System.out.print("\nwakeAllPassengers4");
         notifyAll();
-        System.out.print("\nwakeAllPassengers5");
         arrivalTerm.notifyFromPrepareNextLeg();
-        System.out.print("\nwakeAllPassengers6");
     }
 
     /* ************************************************* Getters ******************************************************/

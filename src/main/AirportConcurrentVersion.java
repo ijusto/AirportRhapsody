@@ -31,9 +31,9 @@ public class AirportConcurrentVersion {
         DepartureTerminalEntrance departureTerm;
 
         String fileName = "log.txt";
-        char[][] destStat = new char[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
-        int[][] nBags = new int[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
-        int[][] nBagsPHold = new int[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
+        Bag.DestStat[][] bagAndPassDest = new Bag.DestStat[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
+        int[][] nBagNR = new int[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
+        int[][] nBagsNA = new int[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
         char opt;
 
         File loggerFile = new File(fileName);
@@ -46,7 +46,7 @@ public class AirportConcurrentVersion {
                     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                     opt = 'y';
                     //opt = (char)br.read();
-                } while( (opt != 'y') && (opt != 'n'));
+                } while((opt != 'y') && (opt != 'n'));
                 if(opt == 'y'){
                     loggerFile.delete();
                     loggerFile.createNewFile();
@@ -58,17 +58,22 @@ public class AirportConcurrentVersion {
             e.printStackTrace();
         }
 
-        for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
-            for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
-                destStat[nPass][land] = (Math.random() < 0.4) ? 'F' : 'T';
-                nBags[nPass][land] = (Math.random() < 0.5) ? 2 : (Math.random() < 0.5) ? 1 : 0;
-                nBagsPHold[nPass][land] = nBags[nPass][land];
-                if(nBagsPHold[nPass][land] > 0) {
-                    if (Math.random() < 0.2) {
-                        nBagsPHold[nPass][land] -= 1;
-                        if ((nBagsPHold[nPass][land] > 0) && (Math.random() < 0.2)) {
-                            nBagsPHold[nPass][land] -= 1;
-                        }
+        for(int land = 0; land < SimulPar.N_FLIGHTS; land++){
+            for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
+                // create destination for the passenger and his bags
+                bagAndPassDest[nPass][land] = (Math.random() < 0.4) ? Bag.DestStat.FINAL : Bag.DestStat.TRANSIT;
+
+                // number of bags the passenger had at the beginning of his journey
+                nBagNR[nPass][land] = (Math.random() < 0.5) ? 2 : (Math.random() < 0.5) ? 1 : 0;
+
+                // number of bags of the passenger that weren't lost
+                nBagsNA[nPass][land] = nBagNR[nPass][land];
+                if(nBagsNA[nPass][land] > 0 && Math.random() < 0.2) {
+                    // lose a bag 20% of the times
+                    nBagsNA[nPass][land] -= 1;
+                    // lose two bags bag 4% of the times
+                    if ((nBagsNA[nPass][land] > 0) && (Math.random() < 0.2)) {
+                        nBagsNA[nPass][land] -= 1;
                     }
                 }
             }
@@ -79,7 +84,7 @@ public class AirportConcurrentVersion {
         bagColPoint = new BaggageColPoint(repos);
         bagRecOffice = new BaggageReclaimOffice(repos);
         tmpStorageArea = new TemporaryStorageArea(repos);
-        arrivLounge = new ArrivalLounge(repos, bagColPoint, destStat, nBagsPHold);
+        arrivLounge = new ArrivalLounge(repos, bagColPoint, bagAndPassDest, nBagsNA);
         arrivalQuay = new ArrivalTermTransfQuay(repos);
         departureQuay = new DepartureTermTransfQuay(repos);
         arrivalTerm = new ArrivalTerminalExit(repos, arrivLounge, arrivalQuay);
@@ -90,7 +95,7 @@ public class AirportConcurrentVersion {
         departureTerm.setArrivalTerminalRef(arrivalTerm);
 
         /* instantiation of the entities */
-        Passenger[][] passengers = new Passenger[SimulationParameters.N_PASS_PER_FLIGHT][SimulationParameters.N_FLIGHTS];
+        Passenger[][] passengers = new Passenger[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
         Porter porter;
         BusDriver busDriver;
 
@@ -105,69 +110,56 @@ public class AirportConcurrentVersion {
         porter.start();
         busDriver.start();
 
-        for(int land = 0; land < SimulationParameters.N_FLIGHTS; land++){
-            for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
-                Passenger.SituationPassenger Si = (destStat[nPass][land] == 'F') ? Passenger.SituationPassenger.FDT :
-                        Passenger.SituationPassenger.TRT;
-                passengers[nPass][land] = new Passenger(PassengerStates.AT_THE_DISEMBARKING_ZONE, Si,
-                        nBags[nPass][land], 0, nPass, arrivLounge, arrivalQuay, departureQuay,
+        for(int flight = 0; flight < SimulPar.N_FLIGHTS; flight++){
+            for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
+                Passenger.SituationPassenger Si = (bagAndPassDest[nPass][flight] == Bag.DestStat.FINAL)
+                        ? Passenger.SituationPassenger.FDT : Passenger.SituationPassenger.TRT;
+                passengers[nPass][flight] = new Passenger(PassengerStates.AT_THE_DISEMBARKING_ZONE, Si,
+                        nBagNR[nPass][flight], 0, nPass, arrivLounge, arrivalQuay, departureQuay,
                         departureTerm, arrivalTerm, bagColPoint, bagRecOffice);
 
-                repos.updatePassSt(passengers[nPass][land].getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
-                repos.getPassSi(passengers[nPass][land].getPassengerID(),passengers[nPass][land].getSi().toString());
+                repos.updatePassSt(passengers[nPass][flight].getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
+                repos.getPassSi(passengers[nPass][flight].getPassengerID(),passengers[nPass][flight].getSi().toString());
             }
 
-            for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++){
-                passengers[nPass][land].start();
+            for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
+                passengers[nPass][flight].start();
             }
 
-            for(int nPass = 0; nPass < SimulationParameters.N_PASS_PER_FLIGHT; nPass++) {
+            for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++) {
                 try {
-                    passengers[nPass][land].join();
+                    passengers[nPass][flight].join();
                 } catch (InterruptedException e) {
                     System.out.print("Main Program - One thread of Passenger " + nPass + " from flight " +
-                            land + " was interrupted.");
+                            flight + " was interrupted.");
                 }
             }
 
-            if(land < SimulationParameters.N_FLIGHTS - 1) {
+            if(flight < SimulPar.N_FLIGHTS - 1) {
                 bagColPoint.resetBaggageColPoint();
-                System.out.print("\nHelp1");
                 tmpStorageArea.resetTemporaryStorageArea();
-                System.out.print("\nHelp2");
-                arrivLounge.resetArrivalLounge(destStat, nBagsPHold);
-                System.out.print("\nHelp3");
+                arrivLounge.resetArrivalLounge(bagAndPassDest, nBagsNA);
                 arrivalQuay.resetArrivalTermTransfQuay();
-                System.out.print("\nHelp4");
                 departureQuay.resetDepartureTermTransfQuay();
-                System.out.print("\nHelp5");
                 arrivalTerm.resetArrivalTerminalExit();
-                System.out.print("\nHelp6");
-                System.out.print("\nHelp7");
             } else {
                 arrivLounge.setEndDay();
                 arrivalQuay.setEndDay();
             }
-            System.out.print("\nHelp");
         }
-        System.out.print("before porter join");
 
         try {
             porter.join();
         } catch (InterruptedException e) {
             System.out.print("Main Program - One thread of Porter was interrupted.");
         }
-        System.out.print("after porter join / before bus driver join");
+
         try {
             busDriver.join();
         } catch (InterruptedException e) {
             System.out.print("Main Program - One thread of BusDriver was interrupted.");
         }
 
-
         repos.finalReport();
-
-        System.out.print("\n after final report");
-
     }
 }

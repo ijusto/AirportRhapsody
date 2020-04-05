@@ -76,7 +76,7 @@ public class Porter extends Thread {
                 bag = arrivalLounge.tryToCollectABag();
                 if (bag == null) {
                     planeHoldEmpty = true;
-                } else if (bag.getDestStat() == 'T'){    // 'T' means transit, 'F' means final
+                } else if (bag.getDestStat() == Bag.DestStat.TRANSIT){
                     tempStore.carryItToAppropriateStore(bag);
                 } else {
                     bColPnt.carryItToAppropriateStore(bag);
@@ -84,7 +84,6 @@ public class Porter extends Thread {
             }
             arrivalLounge.noMoreBagsToCollect();
         }
-        System.out.print("\nENDED PORTER.");
     }
 
     /* ******************************************** Getters and Setters ***********************************************/
