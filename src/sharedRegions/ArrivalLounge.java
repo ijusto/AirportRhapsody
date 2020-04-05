@@ -34,7 +34,7 @@ public class ArrivalLounge {
 
     private ArrivalTermTransfQuay arrQuay;
 
-    /*
+    /**
      *   Stack of bags on the plane's hold.
      */
 
@@ -64,7 +64,7 @@ public class ArrivalLounge {
 
     private boolean pHEmpty;
 
-    /*
+    /**
      *   Departure Terminal Entrance.
      */
 
