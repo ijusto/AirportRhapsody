@@ -89,16 +89,16 @@ public class Porter extends Thread {
 
     /* ******************************************** Getters and Setters ***********************************************/
 
-    /*
-     *
+    /**
+     * Get Porter State
      */
 
     public PorterStates getStat() {
         return this.Stat;
     }
 
-    /*
-     *
+    /**
+     * Set Porter State
      */
 
     public void setStat(PorterStates stat) {

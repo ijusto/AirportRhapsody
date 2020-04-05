@@ -181,54 +181,54 @@ public class Passenger extends Thread {
 
     /* ******************************************** Getters and Setters ***********************************************/
 
-    /*
-     *
+    /**
+     * Get Passenger Situation
      */
 
     public SiPass getSi() {
         return Si;
     }
 
-    /*
-     *
+    /**
+     * Get Passenger State
      */
 
     public PassengerStates getSt() {
         return St;
     }
 
-    /*
-     *
+    /**
+     * Get Passenger number of pieces of luggage he has presently collected
      */
 
     public int getNA() {
         return NA;
     }
 
-    /*
-     *
+    /**
+     * Get Passenger number of pieces of luggage he carried at the start of the journey
      */
 
     public int getNR() {
         return NR;
     }
 
-    /*
-     *
+    /**
+     * Get Passenger ID
      */
 
     public int getPassengerID() { return id;}
 
-    /*
-     *
+    /**
+     * Set Passenger State
      */
 
     public void setSt(PassengerStates st) {
         St = st;
     }
 
-    /*
-     *
+    /**
+     * Set Passenger number of pieces of luggage he has presently collected
      */
 
     public void setNA(int NA) {
