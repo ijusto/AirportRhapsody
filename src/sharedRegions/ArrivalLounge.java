@@ -1,9 +1,6 @@
 package sharedRegions;
 
-import commonInfrastructures.Bag;
-import commonInfrastructures.MemException;
-import commonInfrastructures.MemFIFO;
-import commonInfrastructures.MemStack;
+import commonInfrastructures.*;
 import entities.*;
 import main.SimulPar;
 
@@ -47,7 +44,7 @@ public class ArrivalLounge {
      *   Number of passengers that already arrived.
      */
 
-    private int nPassAtArrivL;
+    private Counter nPassAtArrivL;
 
     /*
      *
@@ -113,7 +110,7 @@ public class ArrivalLounge {
         this.bagColPoint.setPHoldEmpty(false);
         this.bagColPoint.setTreadmill(treadmill);
 
-        this.nPassAtArrivL = 0;
+        this.nPassAtArrivL = new Counter(SimulPar.N_PASS_PER_FLIGHT);
 
         this.pHEmpty = false;
         endDay = false;
@@ -137,18 +134,18 @@ public class ArrivalLounge {
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
 
         // increment passengers that arrive so the porter knows when to wake up in takeARest()
-        this.nPassAtArrivL += 1;
+        boolean last = this.nPassAtArrivL.increaseCounter();
 
         // update logger
         this.repos.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
         this.repos.numberNRTotal(currentPassenger.getNR());
         this.repos.newPass(currentPassenger.getSi());
 
-        if(this.nPassAtArrivL == 1) {
+        if(this.nPassAtArrivL.getValue() == 1) {
             this.depTerm.resetDepartureTerminalExit();
         }
 
-        if(this.nPassAtArrivL == SimulPar.N_PASS_PER_FLIGHT) {
+        if(last) {
             // wake up Porter in takeARest()
             notifyAll();
         }
@@ -185,7 +182,7 @@ public class ArrivalLounge {
         if(this.endDay){
             return 'E';
         } else {
-            while (this.nPassAtArrivL < SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
+            while (this.nPassAtArrivL.getValue() < SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -316,7 +313,7 @@ public class ArrivalLounge {
             this.bagColPoint.setTreadmill(treadmill);
 
             // reset the number of passengers that arrived the airport
-            this.nPassAtArrivL = 0;
+            this.nPassAtArrivL.reset();
 
             this.pHEmpty = false;
 
