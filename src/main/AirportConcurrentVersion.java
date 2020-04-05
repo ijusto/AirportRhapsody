@@ -45,7 +45,7 @@ public class AirportConcurrentVersion {
                     System.out.print("There is already a file with this name. Delete it (y - yes; n - no)? ");
                     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                     opt = 'y';
-                    //opt = (char)br.read();
+                    // opt = (char) br.read();
                 } while((opt != 'y') && (opt != 'n'));
                 if(opt == 'y'){
                     loggerFile.delete();
@@ -81,18 +81,17 @@ public class AirportConcurrentVersion {
 
         /* instantiation of the shared regions */
         repos = new GenReposInfo(fileName);
-        bagColPoint = new BaggageColPoint(repos);
         bagRecOffice = new BaggageReclaimOffice(repos);
         tmpStorageArea = new TemporaryStorageArea(repos);
+        departureQuay = new DepartureTermTransfQuay(repos);
+        bagColPoint = new BaggageColPoint(repos);
         arrivLounge = new ArrivalLounge(repos, bagColPoint, bagAndPassDest, nBagsNA);
         arrivalQuay = new ArrivalTermTransfQuay(repos);
-        departureQuay = new DepartureTermTransfQuay(repos);
         arrivalTerm = new ArrivalTerminalExit(repos, arrivLounge, arrivalQuay);
         departureTerm = new DepartureTerminalEntrance(repos, arrivLounge, arrivalQuay);
-        arrivLounge.setDepartureTerminalRef(departureTerm);
-        arrivLounge.setArrivalTerminalRef(arrivalTerm);
         arrivalTerm.setDepartureTerminalRef(departureTerm);
         departureTerm.setArrivalTerminalRef(arrivalTerm);
+        arrivLounge.setDepartureTerminalRef(departureTerm);
 
         /* instantiation of the entities */
         Passenger[][] passengers = new Passenger[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
@@ -142,6 +141,7 @@ public class AirportConcurrentVersion {
                 arrivalQuay.resetArrivalTermTransfQuay();
                 departureQuay.resetDepartureTermTransfQuay();
                 arrivalTerm.resetArrivalTerminalExit();
+                departureTerm.resetDepartureTerminalExit();
             } else {
                 arrivLounge.setEndDay();
                 arrivalQuay.setEndDay();

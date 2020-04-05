@@ -21,11 +21,6 @@ public class BaggageColPoint {
 
     private Map<Integer, MemFIFO<Bag>> treadmill;
 
-    /**
-     *
-     */
-    private int nBagsInTreadmill;
-
     /*
      *
      */
@@ -42,7 +37,6 @@ public class BaggageColPoint {
 
     public BaggageColPoint(GenReposInfo repos){
         this.repos = repos;
-        this.nBagsInTreadmill = 0;
         this.pHoldEmpty = true;
     }
 
@@ -90,7 +84,6 @@ public class BaggageColPoint {
             if(!this.treadmill.get(passenger.getPassengerID()).isEmpty()){
                 try {
                     this.treadmill.get(passenger.getPassengerID()).read();
-                    this.nBagsInTreadmill -= 1;
                     passenger.setNA(passenger.getNA() + 1);
 
                     repos.updatesPassNA(passenger.getPassengerID(), passenger.getNA());
@@ -124,12 +117,12 @@ public class BaggageColPoint {
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
+        assert(this.treadmill.containsKey(bag.getIdOwner()));
         porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
         repos.updatePorterStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
 
         try {
             this.treadmill.get(bag.getIdOwner()).write(bag);
-            this.nBagsInTreadmill += 1;
             repos.incBaggageCB();
             notifyAll();  // wake up Passengers in goCollectABag()
         } catch (MemException e) {
@@ -138,9 +131,8 @@ public class BaggageColPoint {
     }
 
     public synchronized void resetBaggageColPoint(){
-        this.nBagsInTreadmill = 0;
         this.pHoldEmpty = true;
-        this.treadmill.clear();
+        this.treadmill = null;
     }
 
     /**

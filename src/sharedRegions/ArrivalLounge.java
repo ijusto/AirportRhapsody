@@ -43,12 +43,6 @@ public class ArrivalLounge {
     private int nPassAtArrivL;
 
     /*
-     *   True if all the passengers from the current flight left, false otherwise.
-     */
-
-    private boolean allPassAtExits;
-
-    /*
      *
      */
 
@@ -66,18 +60,16 @@ public class ArrivalLounge {
     private boolean pHEmpty;
 
     /*
-     *   Arrival Terminal Exit.
-     */
-
-    private ArrivalTerminalExit arrivTerm;
-
-
-    /*
      *   Departure Terminal Entrance.
      */
 
     private DepartureTerminalEntrance depTerm;
 
+    /**
+     *
+     */
+
+    private static final Object lock = new Object();
 
 
     /**
@@ -93,8 +85,6 @@ public class ArrivalLounge {
             throws MemException {
 
         this.repos = repos;
-
-        this.allPassAtExits = false;
 
         this.currentFlight = 0;
         repos.updateFlightNumber(this.currentFlight);
@@ -145,7 +135,6 @@ public class ArrivalLounge {
 
         // increment passengers that arrive so the porter knows when to wake up in takeARest()
         this.nPassAtArrivL += 1;
-        allPassAtExits = false;
 
         // update logger
         this.repos.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
@@ -190,7 +179,6 @@ public class ArrivalLounge {
             return 'E';
         } else {
             while (this.nPassAtArrivL < SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
-
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -231,13 +219,6 @@ public class ArrivalLounge {
             return tmpBag;
         } catch (MemException e) {
 
-            this.pHEmpty = true;
-
-            // change allBagsCollected so the passengers know there are no more bags arriving the bcColPoint
-            bagColPoint.setAllBagsCollected();
-            // notify passenger in goCollectABag()
-            bagColPoint.noMoreBags();
-
             return null;
         }
 
@@ -257,6 +238,13 @@ public class ArrivalLounge {
         // update logger
         repos.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
+        this.pHEmpty = true;
+        depTerm.noMoreBags();
+
+        // change allBagsCollected so the passengers know there are no more bags arriving the bcColPoint
+        bagColPoint.setAllBagsCollected();
+        // notify passenger in goCollectABag()
+        bagColPoint.noMoreBags();
     }
 
     /**
@@ -320,6 +308,8 @@ public class ArrivalLounge {
         this.nPassAtArrivL = 0;
 
         this.pHEmpty = false;
+
+        notifyAllPassExited();
     }
 
     /* ************************************************* Setters ******************************************************/
@@ -335,22 +325,10 @@ public class ArrivalLounge {
     }
 
     /**
-     *   ...
-     *
-     *    @param arrivalTerm Arrival Terminal Exit.
-     */
-
-    public synchronized void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
-        this.arrivTerm = arrivalTerm;
-    }
-
-    /**
      *
      */
 
-    public synchronized void notifyAllPassExited(){
-        notify();
-    }
+    public synchronized void notifyAllPassExited(){ notifyAll(); }
 
     /**
      *
@@ -360,5 +338,4 @@ public class ArrivalLounge {
         notifyAll();
         this.endDay = true;
     }
-
 }

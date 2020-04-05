@@ -79,10 +79,9 @@ public class ArrivalTerminalExit {
         boolean isLastPass = this.deadPassCounter.increaseCounter();
 
         if(isLastPass) {
-            // if the plane's hold is empty, the last passenger to want to leave
             // wakes up all the passengers
             wakeAllPassengers();
-            arrivLounge.notifyAllPassExited();
+            //arrivLounge.notifyAllPassExited();
 
         } else {
 

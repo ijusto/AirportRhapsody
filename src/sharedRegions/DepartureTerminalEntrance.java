@@ -40,6 +40,8 @@ public class DepartureTerminalEntrance {
 
     private ArrivalTerminalExit arrivalTerm;
 
+    private boolean phEmpty;
+
     /**
      *   Instantiation of the Departure Terminal Entrance.
      *
@@ -53,6 +55,7 @@ public class DepartureTerminalEntrance {
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
+        this.phEmpty = false;
     }
 
     /**
@@ -75,16 +78,25 @@ public class DepartureTerminalEntrance {
 
         if(isLastPass) {
 
+            // if the plane's hold isn't empty, the last passenger to want to leave
+            while (!this.phEmpty){
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
             // if the plane's hold is empty, the last passenger to want to leave
             // wakes up all the passengers
             wakeAllPassengers();
-            arrivLounge.notifyAllPassExited();
+            //arrivLounge.notifyAllPassExited();
 
         } else {
 
             // the passengers that are not the last ones to want to leave the airport, need to wait for the last one to
             // notify them so they can leave
-            while (this.dpc.getValue() < SimulPar.N_PASS_PER_FLIGHT) {
+            while (this.dpc.getValue() < SimulPar.N_PASS_PER_FLIGHT || !this.phEmpty) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -93,6 +105,10 @@ public class DepartureTerminalEntrance {
             }
 
         }
+    }
+
+    public synchronized void resetDepartureTerminalExit(){
+        this.phEmpty = false;
     }
 
     /**
@@ -107,6 +123,17 @@ public class DepartureTerminalEntrance {
         notifyAll();
         arrivalTerm.notifyFromPrepareNextLeg();
     }
+
+    /**
+     *   Called by Porter in tryToCollectABag when it isn't successful.
+     */
+
+    public synchronized void noMoreBags() {
+        // wake up Passengers in goCollectABag()
+        phEmpty = true;
+        notifyAll();
+    }
+
 
     /* ************************************************* Getters ******************************************************/
 
