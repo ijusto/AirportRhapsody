@@ -67,9 +67,9 @@ public class DepartureTerminalEntrance {
     }
 
     /**
-     *  ... (raised by the Passenger).
-     *    the passenger is waken up by the operations goHome or prepareNextLeg of the last passenger of each flight to
-     *    exit the arrival terminal or to enter the departure terminal
+     *   Operation of the passenger of waiting for the last passenger to arrive the Arrival Terminal Exit or the
+     *   Departure Terminal Entrance or, if the last, to notify all the others.
+     *   If there are still bags at the plane's hold, the passenger waits for the signal of the porter.
      */
 
     public synchronized void prepareNextLeg(){
@@ -78,7 +78,6 @@ public class DepartureTerminalEntrance {
         assert passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL;
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
-        // update logger
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
         repos.printLog();
 
@@ -87,7 +86,7 @@ public class DepartureTerminalEntrance {
 
         if(isLastPass) {
 
-            // if the plane's hold isn't empty, the last passenger to want to leave
+            // if the plane's hold isn't empty, the last passenger to want to leave waits
             while (!this.phEmpty){
                 try {
                     wait();
@@ -96,7 +95,6 @@ public class DepartureTerminalEntrance {
                 }
             }
 
-            // if the plane's hold is empty, the last passenger to want to leave
             // wakes up all the passengers
             wakeAllPassengers();
             //arrivLounge.notifyAllPassExited();
@@ -104,7 +102,8 @@ public class DepartureTerminalEntrance {
         } else {
 
             // the passengers that are not the last ones to want to leave the airport, need to wait for the last one to
-            // notify them so they can leave
+            // notify them so they can leave or for the notification of the porter (if the last passenger is at the
+            // arrival terminal exit) and the plane's hold is not empty.
             while (this.dpc.getValue() < SimulPar.N_PASS_PER_FLIGHT || !this.phEmpty) {
                 try {
                     wait();
@@ -120,7 +119,7 @@ public class DepartureTerminalEntrance {
     }
 
     /**
-     *
+     *   Resets the signal of the porter of the plane's hold empty state.
      */
 
     public synchronized void resetDepartureTerminalExit(){
@@ -128,15 +127,7 @@ public class DepartureTerminalEntrance {
     }
 
     /**
-     *
-     */
-
-    public synchronized void notifyFromGoHome(){
-        notifyAll();
-    }
-
-    /**
-     *
+     *   Wakes up all the passengers at the Arrival Terminal Exit and at the Departure Terminal Entrance.
      */
 
     public synchronized void wakeAllPassengers(){
@@ -145,7 +136,16 @@ public class DepartureTerminalEntrance {
     }
 
     /**
-     *   Called by Porter in noMoreBagsToCollect.
+     *   Wakes up all the passengers at the Departure Terminal Entrance.
+     */
+
+    public synchronized void notifyFromGoHome(){
+        notifyAll();
+    }
+
+    /**
+     *   Called by Porter in noMoreBagsToCollect to wake up all the passengers that are waiting for the plane's hold to
+     *   be out of bags.
      */
 
     public synchronized void noMoreBags() {
@@ -157,7 +157,7 @@ public class DepartureTerminalEntrance {
     /* ************************************************* Setters ******************************************************/
 
     /**
-     *   ...
+     *   Sets the Arrival Terminal Exit Reference.
      *
      *    @param arrivalTerm Arrival Terminal Exit.
      */

@@ -7,7 +7,7 @@ import entities.Passenger;
 import entities.PassengerStates;
 
 /**
- *   ...
+ *   Departure Terminal Transfer Quay.
  *
  *   @author Inês Justo
  *   @author Miguel Lopes

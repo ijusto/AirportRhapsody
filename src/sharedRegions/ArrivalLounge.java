@@ -214,7 +214,6 @@ public class ArrivalLounge {
             repos.printLog();
             return null;
         }
-
     }
 
     /**
@@ -240,56 +239,54 @@ public class ArrivalLounge {
     }
 
     /**
-     *
-     *    @param destStat
-     *    @param nBagsPHold
-     *    @throws MemException
+     *   Resets that need to be done after the passengers leave the airport.
+     *   Notifies the porter and bus driver of the end of the day.
+     *    @param bagAndPassDest Destination states of the bags of the passengers.
+     *    @param nBagsNA Numbers of bags per passenger that arrive the plane's hold.
+     *    @throws MemException Exception.
      */
 
-    public synchronized void resetArrivalLounge(Bag.DestStat[][] destStat, int[][] nBagsPHold)
+    public synchronized void resetArrivalLounge(Bag.DestStat[][] bagAndPassDest, int[][] nBagsNA)
             throws MemException {
 
-        // update flight number
         this.currentFlight += 1;
 
         if(this.currentFlight == SimulPar.N_FLIGHTS){
             this.setEndDay();
             this.arrQuay.setEndDay();
         } else {
-            // update logger
             repos.updateFlightNumber(this.currentFlight);
 
             Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
             Map<Integer, Integer> nBagsPerPass = new HashMap<>();
 
-            int nSRprev = this.pHoldBagStack.getPointer();
-            int nTotalBags = nSRprev;
+            // int nSRprev = this.pHoldBagStack.getPointer();
+            int nTotalBags = 0; //nSRprev;
             for (int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++) {
-                nTotalBags += nBagsPHold[nPass][this.currentFlight];
-                nBagsPerPass.put(nPass, nBagsPHold[nPass][this.currentFlight]);
+                nTotalBags += nBagsNA[nPass][this.currentFlight];
+                nBagsPerPass.put(nPass, nBagsNA[nPass][this.currentFlight]);
             }
 
-            // update logger
             repos.initializeCargoHold(nTotalBags);
-            MemStack<Bag> tempStack = null;
-            if (nSRprev != 0) {
-                tempStack = new MemStack<>(new Bag[nSRprev]);
-                for (int nSRbag = 0; nSRbag < nSRprev; nSRbag++) {
-                    tempStack.write(this.pHoldBagStack.read());
-                }
-            }
+            //MemStack<Bag> tempStack = null;
+            //if (nSRprev != 0) {
+            //    tempStack = new MemStack<>(new Bag[nSRprev]);
+            //    for (int nSRbag = 0; nSRbag < nSRprev; nSRbag++) {
+            //        tempStack.write(this.pHoldBagStack.read());
+            //    }
+            //}
 
             // plane's hold baggage stack instantiation
             this.pHoldBagStack = new MemStack<>(new Bag[nTotalBags]);
-            if (nSRprev != 0) {
-                for (int nSRbag = 0; nSRbag < nSRprev; nSRbag++) {
-                    this.pHoldBagStack.write(tempStack.read());
-                }
-            }
+            //if (nSRprev != 0) {
+            //    for (int nSRbag = 0; nSRbag < nSRprev; nSRbag++) {
+            //        this.pHoldBagStack.write(tempStack.read());
+            //    }
+            //}
 
             for (int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++) {
-                for (int bag = 0; bag < nBagsPHold[nPass][this.currentFlight]; bag++) {
-                    this.pHoldBagStack.write(new Bag(destStat[nPass][this.currentFlight], nPass));
+                for (int bag = 0; bag < nBagsNA[nPass][this.currentFlight]; bag++) {
+                    this.pHoldBagStack.write(new Bag(bagAndPassDest[nPass][this.currentFlight], nPass));
                 }
 
                 // instantiation of the passenger's bag FIFO for the treadmill in the baggage collection point
@@ -321,7 +318,7 @@ public class ArrivalLounge {
     }
 
     /**
-     *   Signals the end of the day.
+     *   Signals the end of the day and notifies the Porter if he is waiting in takeARest().
      */
 
     public synchronized void setEndDay(){

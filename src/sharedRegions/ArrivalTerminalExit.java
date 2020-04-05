@@ -39,7 +39,7 @@ public class ArrivalTerminalExit {
     private DepartureTerminalEntrance departureTerm;
 
     /**
-     *   Number of passengers of the current flight that are at the exit od the Arrival Terminal or at the entrance of
+     *   Counter of passengers of the current flight that are at the exit od the Arrival Terminal or at the entrance of
      *   the Departure Terminal.
      */
 
@@ -61,8 +61,8 @@ public class ArrivalTerminalExit {
     }
 
     /**
-     *  ... (raised by the Passenger).
-     *
+     *   Operation of the passenger of waiting for the last passenger to arrive the Arrival Terminal Exit or the
+     *   Departure Terminal Entrance or, if the last, to notify all the others.
      */
 
     public synchronized void goHome(){
@@ -72,7 +72,6 @@ public class ArrivalTerminalExit {
                 passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
-        // update logger
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
         repos.printLog();
 
@@ -97,13 +96,12 @@ public class ArrivalTerminalExit {
             }
         }
 
-
         repos.passengerExit(passenger.getPassengerID());
         repos.printLog();
     }
 
     /**
-     *
+     *   Wakes up the passengers waiting in the Arrival Terminal Entrance.
      */
 
     public synchronized void notifyFromPrepareNextLeg(){
@@ -111,7 +109,25 @@ public class ArrivalTerminalExit {
     }
 
     /**
-     *
+     *   Wakes up all the passengers at the Arrival Terminal Exit and at the Departure Terminal Entrance.
+     */
+
+    public synchronized void wakeAllPassengers(){
+        notifyAll();
+        wakeDepPass();
+    }
+
+    /**
+     *   Wakes up the passengers waiting in the Departure Terminal Entrance.
+     */
+
+    public synchronized void wakeDepPass(){
+        departureTerm.notifyFromGoHome();
+    }
+
+    /**
+     *   Resets the counter of passengers that are at the exit od the Arrival Terminal or at the entrance of the
+     *   Departure Terminal.
      */
 
     public synchronized void resetArrivalTerminalExit(){
@@ -120,22 +136,6 @@ public class ArrivalTerminalExit {
 
     /* ************************************************* Getters ******************************************************/
 
-    /**
-     *
-     */
-
-    public synchronized void wakeAllPassengers(){
-        notifyAll();
-        wakedep();
-    }
-
-    /**
-     *
-     */
-
-    public synchronized void wakedep(){
-        departureTerm.notifyFromGoHome();
-    }
     /**
      *
      *    @return Number of passengers of the current flight that left the airport at the Arrival Terminal.
