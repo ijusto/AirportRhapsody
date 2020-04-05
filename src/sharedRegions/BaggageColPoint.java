@@ -8,7 +8,7 @@ import entities.*;
 import java.util.Map;
 
 /**
- *   ...
+ *   Baggage Collection Point.
  *
  *   @author Inês Justo
  *   @author Miguel Lopes
@@ -23,10 +23,14 @@ public class BaggageColPoint {
     private Map<Integer, MemFIFO<Bag>> treadmill;
 
     /*
-     *
+     *   General Repository of Information.
      */
+
     private GenReposInfo repos;
 
+    /**
+     *   Signaling the empty state of the plane's hold.
+     */
 
     private boolean pHoldEmpty;
 
@@ -45,8 +49,8 @@ public class BaggageColPoint {
     /* ************************************************Passenger***************************************************** */
 
     /**
-     *  ... (raised by the Passenger).
-     *   The passenger is waken up by the operations carryItToAppropriateStore and tryToCollectABag of the porter when
+     *   Operation of trying to collect a bag (raised by the Passenger).
+     *   The passenger is waken up by the operations carryItToAppropriateStore and noMoreBagsToCollect of the porter when
      *   he places on the conveyor belt a bag she owns, the former, or when he signals that there are no more pieces
      *   of luggage in the plane hold, the latter, and makes a transition when either she has in her possession all the
      *   bags she owns, or was signaled that there are no more bags in the plane hold
@@ -78,7 +82,6 @@ public class BaggageColPoint {
 
         do {
 
-            //
             if(this.pHoldEmpty() && this.treadmill.get(passenger.getPassengerID()).isEmpty()) {
                 return false;
             }
@@ -113,7 +116,7 @@ public class BaggageColPoint {
     /* **************************************************Porter****************************************************** */
 
     /**
-     *  Operation of carrying a bag from the plane's hold to the baggage colletion point (raised by the Porter).
+     *  Operation of carrying a bag from the plane's hold to the baggage collection point (raised by the Porter).
      */
 
     public synchronized void carryItToAppropriateStore(Bag bag){
@@ -134,13 +137,17 @@ public class BaggageColPoint {
         repos.printLog();
     }
 
+    /**
+     *
+     */
+
     public synchronized void resetBaggageColPoint(){
         this.pHoldEmpty = true;
         this.treadmill = null;
     }
 
     /**
-     *   Called by Porter in tryToCollectABag when it isn't successful.
+     *   Called by Porter in noMoreBagsToCollect.
      */
 
     public synchronized void noMoreBags() {
@@ -152,8 +159,9 @@ public class BaggageColPoint {
 
 
     /**
-     *   ...
-     *    @return allBagsCollects
+     *   Signaling the empty state of the plane's hold.
+     *
+     *    @return
      */
 
     public synchronized boolean pHoldEmpty() {

@@ -338,13 +338,7 @@ public class ArrivalLounge {
     }
 
     /**
-     *
-     */
-
-    public synchronized void notifyAllPassExited(){ notifyAll(); }
-
-    /**
-     *
+     *   Sets 
      */
 
     public synchronized void setEndDay(){

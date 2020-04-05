@@ -6,7 +6,7 @@ import entities.PassengerStates;
 import main.SimulPar;
 
 /**
- *   ...
+ *   Departure Terminal Entrance.
  *
  *   @author Inês Justo
  *   @author Miguel Lopes
@@ -32,6 +32,10 @@ public class DepartureTerminalEntrance {
 
     private ArrivalTermTransfQuay arrivalQuay;
 
+    /**
+     *   Number of passengers that are at the entrance of the departure terminal or at the exit of the arrival terminal.
+     */
+
     private Counter dpc;
 
     /*
@@ -39,6 +43,10 @@ public class DepartureTerminalEntrance {
      */
 
     private ArrivalTerminalExit arrivalTerm;
+
+    /**
+     *   Signaling the empty state of the plane's hold.
+     */
 
     private boolean phEmpty;
 
@@ -111,6 +119,10 @@ public class DepartureTerminalEntrance {
         repos.printLog();
     }
 
+    /**
+     *
+     */
+
     public synchronized void resetDepartureTerminalExit(){
         this.phEmpty = false;
     }
@@ -123,13 +135,17 @@ public class DepartureTerminalEntrance {
         notifyAll();
     }
 
+    /**
+     *
+     */
+
     public synchronized void wakeAllPassengers(){
         notifyAll();
         arrivalTerm.notifyFromPrepareNextLeg();
     }
 
     /**
-     *   Called by Porter in tryToCollectABag when it isn't successful.
+     *   Called by Porter in noMoreBagsToCollect.
      */
 
     public synchronized void noMoreBags() {
@@ -137,13 +153,6 @@ public class DepartureTerminalEntrance {
         phEmpty = true;
         notifyAll();
     }
-
-
-    /* ************************************************* Getters ******************************************************/
-
-    /**
-     *
-     */
 
     /* ************************************************* Setters ******************************************************/
 

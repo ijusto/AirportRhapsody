@@ -22,7 +22,7 @@ public class DepartureTermTransfQuay {
     private GenReposInfo repos;
 
     /*
-     *
+     *   Signaling the bus driver will to let the passengers enter the bus.
      */
     private boolean busDoorsOpen;
 
@@ -142,9 +142,11 @@ public class DepartureTermTransfQuay {
     /* ************************************************* Getters ******************************************************/
 
     /**
+     *   Signaling the bus driver will to let the passengers enter the bus.
      *
      *    @return letPassOff
      */
+
     public boolean canPassLeaveTheBus() {
         return this.busDoorsOpen;
     }

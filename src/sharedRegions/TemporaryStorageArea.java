@@ -61,12 +61,15 @@ public class TemporaryStorageArea {
     }
 
     /**
-     *
-     *    @throws MemException
+     *   Resets the stack of bags when all passengers from a flight leave the airport.
      */
 
-    public synchronized void resetTemporaryStorageArea() throws MemException {
+    public synchronized void resetTemporaryStorageArea() {
         // stack of the store room instantiation
-        tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT * SimulPar.N_BAGS_PER_PASS]);
+        try {
+            tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT * SimulPar.N_BAGS_PER_PASS]);
+        } catch (MemException e) {
+            e.printStackTrace();
+        }
     }
 }

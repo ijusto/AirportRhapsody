@@ -4,7 +4,7 @@ import entities.Passenger;
 import entities.PassengerStates;
 
 /**
- *   ...
+ *   Baggage Reclaim Office.
  *
  *   @author Inês Justo
  *   @author Miguel Lopes
@@ -29,7 +29,7 @@ public class BaggageReclaimOffice {
     }
 
     /*
-     *   ... (raised by the Passenger).
+     *   Operation of reporting a bag missing. (raised by the Passenger).
      */
 
     public synchronized void reportMissingBags(){
