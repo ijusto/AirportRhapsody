@@ -18,6 +18,14 @@ public class Counter {
     }
 
     public int getValue(){
-        return value;
+        synchronized (lock) {
+            return value;
+        }
+    }
+
+    public void reset(){
+        synchronized (lock) {
+            value = 0;
+        }
     }
 }

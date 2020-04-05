@@ -1,5 +1,6 @@
 package sharedRegions;
 
+import commonInfrastructures.Counter;
 import entities.Passenger;
 import entities.PassengerStates;
 import main.SimulationParameters;
@@ -31,6 +32,10 @@ public class DepartureTerminalEntrance {
 
     private ArrivalTermTransfQuay arrivalQuay;
 
+    private Counter dpc;
+
+    private boolean lastWakeUp;
+
     /*
      *   Arrival Terminal Exit.
      */
@@ -50,6 +55,8 @@ public class DepartureTerminalEntrance {
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
+        lastWakeUp = false;
+
     }
 
     /**
@@ -65,14 +72,13 @@ public class DepartureTerminalEntrance {
         assert passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL;
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
-        // increment the number of passengers that wants to leave the airport
-        boolean isLastPass = this.arrivalTerm.getDeadPassCounter().increaseCounter();
-
-        System.out.print("\npass " + passenger.getPassengerID() + " in prepareNextLeg, npass: " + this.arrivalTerm.getDeadPassCounter().getValue());
-
         // update logger
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
+        // increment the number of passengers that wants to leave the airport
+        boolean isLastPass = this.dpc.increaseCounter();
+
+        System.out.print("\npass " + passenger.getPassengerID() + " in prepareNextLeg, npass: " + this.dpc.getValue());
         System.out.print("\nexitPassenger");
 
         if(isLastPass) {
@@ -80,8 +86,9 @@ public class DepartureTerminalEntrance {
             //this.arrivLounge.setNoPassAtAirport();
             //this.arrivalQuay.setNoPassAtAirport();
 
-            System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, npass: " + this.arrivalTerm.getDeadPassCounter().getValue());
-
+            System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, npass: " + this.dpc.getValue());
+            //System.out.print("\nsetAllLastWakeUp");
+            //arrivalTerm.setLastWakeUp(true);
             // the last passenger wanting to leave waits for the notification of the porter if there are still bags in
             // the plane hold
             //while(arrivLounge.ispHoldNotEmpty()){
@@ -98,24 +105,26 @@ public class DepartureTerminalEntrance {
             //    System.out.print("\npass " + passenger.getPassengerID() + " last in prepareNextLeg, wake up");
             //}
 
-            arrivalTerm.setLastWakeUp(true);
-
             // if the plane's hold is empty, the last passenger to want to leave
             // wakes up all the passengers in the same terminal
-            notifyAll();
+            //notifyAll();
             // and wakes up the passengers in the other terminal
-            arrivalTerm.notifyFromPrepareNextLeg();
+            //arrivalTerm.notifyFromPrepareNextLeg();
+            System.out.print("\nwakeAllPassengers");
+            wakeAllPassengers();
+            System.out.print("\nnotifyAllPassExited");
+            arrivLounge.notifyAllPassExited();
 
             // the last passenger wanting to for all the other passengers to leave
-            while(this.arrivalTerm.isLastOfNotLast()){
+            //while(this.arrivalTerm.isLastOfNotLast()){
 
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            //    try {
+            //        wait();
+            //    } catch (InterruptedException e) {
+            //        e.printStackTrace();
+            //    }
 
-            }
+            //}
 
             // wakes up the porter in takeARest
             //this.arrivLounge.notifyAllPassExited();
@@ -127,11 +136,11 @@ public class DepartureTerminalEntrance {
 
         } else {
 
-            System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, npass: " + this.arrivalTerm.getDeadPassCounter().getValue());
+            System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, npass: " + this.dpc.getValue());
 
             // the passengers that are not the last ones to want to leave the airport, need to wait for the last one to
             // notify them so they can leave
-            while (!this.arrivalTerm.isLastWakeUp()) {
+            while (this.dpc.getValue() < SimulationParameters.N_PASS_PER_FLIGHT) {
 
                 System.out.print("\npass " + passenger.getPassengerID() + " NOT last in prepareNextLeg, sleep");
 
@@ -145,16 +154,16 @@ public class DepartureTerminalEntrance {
 
             }
 
-            this.arrivalTerm.setLastOfNotLast(this.arrivalTerm.getAllNotified().increaseCounter());
-            if(this.arrivalTerm.isLastOfNotLast()){
-                System.out.print("\npass " + passenger.getPassengerID() + " last to wake up");
-                // if this passenger is the last to be awaken by the last passenger, he wakes up, the last passenger
-                notifyAll();
-                arrivalTerm.notifyFromPrepareNextLeg();
-            }
+            //this.arrivalTerm.setLastOfNotLast(this.arrivalTerm.getAllNotified().increaseCounter());
+            //if(this.arrivalTerm.isLastOfNotLast()){
+            //    System.out.print("\npass " + passenger.getPassengerID() + " last to wake up");
+            //    // if this passenger is the last to be awaken by the last passenger, he wakes up, the last passenger
+            //    notifyAll();
+            //    arrivalTerm.notifyFromPrepareNextLeg();
+            //}
         }
 
-        this.repos.passengerExit(passenger.getPassengerID());
+        //this.repos.passengerExit(passenger.getPassengerID());
     }
 
     /**
@@ -170,17 +179,12 @@ public class DepartureTerminalEntrance {
         notifyAll();
     }
 
-    /**
-     *
-     *    @param arrivLounge Arrival Lounge.
-     *    @param arrivalQuay Arrival Terminal Transfer Quay.
-     */
-
-    public synchronized void resetDepartureTerminalEntrance(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
-        System.out.print("\nresetDepartureTerminalEntrance");
-
-        this.arrivLounge = arrivLounge;
-        this.arrivalQuay = arrivalQuay;
+    public synchronized void wakeAllPassengers(){
+        System.out.print("\nwakeAllPassengers4");
+        notifyAll();
+        System.out.print("\nwakeAllPassengers5");
+        arrivalTerm.notifyFromPrepareNextLeg();
+        System.out.print("\nwakeAllPassengers6");
     }
 
     /* ************************************************* Getters ******************************************************/
@@ -199,6 +203,7 @@ public class DepartureTerminalEntrance {
 
     public synchronized void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
         this.arrivalTerm = arrivalTerm;
+        this.dpc = this.arrivalTerm.getDeadPassCounter();
     }
 
 }

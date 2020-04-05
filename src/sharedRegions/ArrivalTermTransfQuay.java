@@ -280,7 +280,7 @@ public class ArrivalTermTransfQuay {
             }
 
             // if the last flight arrived and all passengers left the airport, stop waiting
-            if(this.endDay){ //!this.busDriverStop){
+            if(this.endDay){
                 break;
             }
 

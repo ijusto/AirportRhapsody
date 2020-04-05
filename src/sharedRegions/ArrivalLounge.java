@@ -217,23 +217,29 @@ public class ArrivalLounge {
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
 
-        while(this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT){
-
-            System.out.print("\nsleep takeARest");
-
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.print("\nwake up takeARest (normal state)");
-            System.out.print("\nTake a rest, currentflight: " + this.currentFlight);
-            System.out.print("\nTake a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.pHoldEmpty());
-        }
-
         if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.endDay){
             return 'E';
+        } else {
+            while (this.nPassAtArrivL < SimulationParameters.N_PASS_PER_FLIGHT || this.pHEmpty) {
+
+                System.out.print("\nsleep takeARest");
+
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.print("\nwake up takeARest (normal state)");
+                System.out.print("\nTake a rest, currentflight: " + this.currentFlight);
+                System.out.print("\nTake a rest, bagColPoint.areAllBagsCollects(): " + bagColPoint.pHoldEmpty());
+
+                if (this.currentFlight == SimulationParameters.N_FLIGHTS - 1 && this.endDay) {
+                    return 'E';
+                }
+            }
         }
+
+
 
         System.out.print("\nthis.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT: " + (this.nPassAtArrivL == SimulationParameters.N_PASS_PER_FLIGHT));
         System.out.print("\nthis.currentFlight == SimulationParameters.N_FLIGHTS - 1: " + (this.currentFlight == SimulationParameters.N_FLIGHTS - 1));
@@ -313,7 +319,7 @@ public class ArrivalLounge {
     }
 
 
-    public synchronized void resetArrivalLounge(char[][] destStat, int[][] nBagsPHold, BaggageColPoint bagColPoint)
+    public synchronized void resetArrivalLounge(char[][] destStat, int[][] nBagsPHold)
             throws MemException {
 
         // update flight number
@@ -368,7 +374,6 @@ public class ArrivalLounge {
             treadmill.put(nPass, bagPassFIFO);
         }
 
-        this.bagColPoint = bagColPoint;
         this.bagColPoint.setPHoldNotEmpty();
         this.bagColPoint.setTreadmill(treadmill);
 
@@ -449,12 +454,13 @@ public class ArrivalLounge {
 
     public synchronized void notifyAllPassExited(){
         //if(this.currentFlight == SimulationParameters.N_FLIGHTS - 1) {
-            allPassExited = true;
+
             notify();
         //}
     }
 
     public synchronized void setEndDay(){
+        notifyAll();
         this.endDay = true;
     }
 

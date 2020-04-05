@@ -135,18 +135,15 @@ public class AirportConcurrentVersion {
                 System.out.print("\nHelp1");
                 tmpStorageArea.resetTemporaryStorageArea();
                 System.out.print("\nHelp2");
-                arrivLounge.resetArrivalLounge(destStat, nBagsPHold, bagColPoint);
+                arrivLounge.resetArrivalLounge(destStat, nBagsPHold);
                 System.out.print("\nHelp3");
                 arrivalQuay.resetArrivalTermTransfQuay();
                 System.out.print("\nHelp4");
                 departureQuay.resetDepartureTermTransfQuay();
                 System.out.print("\nHelp5");
-                arrivalTerm.resetArrivalTerminalExit(arrivLounge, arrivalQuay);
+                arrivalTerm.resetArrivalTerminalExit();
                 System.out.print("\nHelp6");
-                departureTerm.resetDepartureTerminalEntrance(arrivLounge, arrivalQuay);
                 System.out.print("\nHelp7");
-                arrivalTerm.setDepartureTerminalRef(departureTerm);
-                departureTerm.setArrivalTerminalRef(arrivalTerm);
             } else {
                 arrivLounge.setEndDay();
                 arrivalQuay.setEndDay();

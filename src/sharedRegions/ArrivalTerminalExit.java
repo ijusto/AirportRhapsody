@@ -88,13 +88,13 @@ public class ArrivalTerminalExit {
                 passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
+        // update logger
+        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+
         // increment the number of passengers that wants to leave the airport
         boolean isLastPass = this.deadPassCounter.increaseCounter();
 
         System.out.print("\npass " + passenger.getPassengerID() + " in goHome, npass: " + this.deadPassCounter.getValue());
-
-        // update logger
-        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
         System.out.print("\nexitPassenger");
         System.out.print("\nExited n pass in arrterm: " + this.nPassDead);
@@ -105,7 +105,8 @@ public class ArrivalTerminalExit {
             //this.arrivalQuay.setNoPassAtAirport();
 
             System.out.print("\npass " + passenger.getPassengerID() + " last in goHome, npass: " + this.deadPassCounter.getValue());
-
+            System.out.print("\nsetAllLastWakeUp");
+            //setLastWakeUp(true);
             // the last passenger wanting to leave waits for the notification of the porter if there are still bags in
             // the plane hold
             //while(arrivLounge.ispHoldNotEmpty()){
@@ -122,24 +123,27 @@ public class ArrivalTerminalExit {
              //   System.out.print("\npass " + passenger.getPassengerID() + " last in goHome, wake up");
             //}
 
-            this.setLastWakeUp(true);
+            //this.setLastWakeUp(true);
 
             // if the plane's hold is empty, the last passenger to want to leave
             // wakes up all the passengers in the same terminal
-            notifyAll();
+            //notifyAll();
             // and wakes up the passengers in the other terminal
-            departureTerm.notifyFromGoHome();
-
+            //departureTerm.notifyFromGoHome();
+            System.out.print("\nwakeAllPassengers");
+            wakeAllPassengers();
+            System.out.print("\nnotifyAllPassExited");
+            arrivLounge.notifyAllPassExited();
             // the last passenger wanting to for all the other passengers to leave
-            while(this.isLastOfNotLast()){
+            //while(this.isLastOfNotLast()){
 
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            //    try {
+            //        wait();
+            //    } catch (InterruptedException e) {
+            //        e.printStackTrace();
+            //    }
 
-            }
+            //}
 
             // wakes up the porter in takeARest
             //this.arrivLounge.notifyAllPassExited();
@@ -154,7 +158,7 @@ public class ArrivalTerminalExit {
 
             // the passengers that are not the last ones to want to leave the airport, need to wait for the last one to
             // notify them so they can leave
-            while (!this.isLastWakeUp()) {
+            while (this.deadPassCounter.getValue() < SimulationParameters.N_PASS_PER_FLIGHT) {
 
                 System.out.print("\npass " + passenger.getPassengerID() + " NOT last in goHome, sleep");
 
@@ -167,16 +171,16 @@ public class ArrivalTerminalExit {
                 System.out.print("\npass " + passenger.getPassengerID() + " NOT last in goHome, wake up");
             }
 
-            this.setLastOfNotLast(this.allNotified.increaseCounter());
-            if(this.isLastOfNotLast()){
-                System.out.print("\npass " + passenger.getPassengerID() + " last to wake up");
-                // if this passenger is the last to be awaken by the last passenger, he wakes up, the last passenger
-                notifyAll();
-                departureTerm.notifyFromGoHome();
-            }
+            //this.setLastOfNotLast(this.allNotified.increaseCounter());
+            //if(this.isLastOfNotLast()){
+            //    System.out.print("\npass " + passenger.getPassengerID() + " last to wake up");
+            //    // if this passenger is the last to be awaken by the last passenger, he wakes up, the last passenger
+            //    notifyAll();
+            //    departureTerm.notifyFromGoHome();
+            //}
         }
 
-        this.repos.passengerExit(passenger.getPassengerID());
+        //this.repos.passengerExit(passenger.getPassengerID());
     }
 
     public synchronized void notifyFromPrepareNextLeg(){
@@ -188,19 +192,25 @@ public class ArrivalTerminalExit {
         notifyAll();
     }
 
-    public synchronized void resetArrivalTerminalExit(ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
+    public synchronized void resetArrivalTerminalExit(){
         System.out.print("\nresetArrivalTerminalExit");
 
-        this.arrivLounge = arrivLounge;
-        this.arrivalQuay = arrivalQuay;
-        deadPassCounter = new Counter(SimulationParameters.N_PASS_PER_FLIGHT);
-        allNotified = new Counter(SimulationParameters.N_PASS_PER_FLIGHT - 1);
-        lastWakeUp = false;
-        lastOfNotLast = false;
+        deadPassCounter.reset();
+        //allNotified = new Counter(SimulationParameters.N_PASS_PER_FLIGHT - 1);
     }
 
     /* ************************************************* Getters ******************************************************/
 
+    public synchronized void wakeAllPassengers(){
+        System.out.print("\nwakeAllPassengers1");
+        notifyAll();
+        System.out.print("\nwakeAllPassengers2");
+        wakedep();
+        System.out.print("\nwakeAllPassengers3");
+    }
+    public synchronized void wakedep(){
+        departureTerm.notifyFromGoHome();
+    }
     /**
      *
      *    @return Number of passengers of the current flight that left the airport at the Arrival Terminal.
@@ -214,14 +224,6 @@ public class ArrivalTerminalExit {
         return allNotified;
     }
 
-    public synchronized boolean isLastWakeUp(){
-        return this.lastWakeUp;
-    }
-
-    public synchronized boolean isLastOfNotLast(){
-        return this.lastOfNotLast;
-    }
-
     /* ************************************************* Setters ******************************************************/
 
     /**
@@ -232,14 +234,6 @@ public class ArrivalTerminalExit {
 
     public synchronized void setDepartureTerminalRef(DepartureTerminalEntrance departureTerm){
         this.departureTerm = departureTerm;
-    }
-
-    public synchronized void setLastWakeUp(boolean lastWakeUp){
-        this.lastWakeUp = lastWakeUp;
-    }
-
-    public synchronized void setLastOfNotLast(boolean lastOfNotLast){
-        this.lastOfNotLast = lastOfNotLast;
     }
 
 }
