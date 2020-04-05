@@ -338,7 +338,7 @@ public class ArrivalLounge {
     }
 
     /**
-     *   Sets 
+     *   Signals the end of the day.
      */
 
     public synchronized void setEndDay(){
