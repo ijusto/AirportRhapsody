@@ -33,7 +33,7 @@ public class DepartureTerminalEntrance {
     private ArrivalTermTransfQuay arrivalQuay;
 
     /**
-     *   Number of passengers that are at the entrance of the departure terminal or at the exit of the arrival terminal.
+     *   Counter of passengers that are at the entrance of the departure terminal or at the exit of the arrival terminal.
      */
 
     private Counter dpc;
@@ -57,7 +57,6 @@ public class DepartureTerminalEntrance {
      *     @param arrivLounge Arrival Lounge.
      *     @param arrivalQuay Arrival Terminal Transfer Quay.
      */
-
 
     public DepartureTerminalEntrance(GenReposInfo repos, ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
         this.arrivLounge = arrivLounge;

@@ -65,6 +65,12 @@ public class ArrivalLounge {
     private boolean pHEmpty;
 
     /**
+     *   Signals the porter is in takearest.
+     */
+
+    private volatile boolean porterSleep;
+
+    /**
      *   Departure Terminal Entrance.
      */
 
@@ -116,6 +122,7 @@ public class ArrivalLounge {
         this.pHEmpty = false;
         endDay = false;
         this.repos.printLog();
+        porterSleep = false;
     }
 
     /* **************************************************Passenger*************************************************** */
@@ -167,11 +174,15 @@ public class ArrivalLounge {
 
     public synchronized char takeARest(){
 
+        porterSleep = true;
+        notifyAll(); // notify Reset (avoid deadlock of passengers entering and notifying before the porter sleeps)
+
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         repos.printLog();
 
         if(this.endDay){
+            porterSleep = false;
             return 'E';
         } else {
             while (this.nPassAtArrivL.getValue() < SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
@@ -182,11 +193,13 @@ public class ArrivalLounge {
                 }
 
                 if (this.endDay) {
+                    porterSleep = false;
                     return 'E';
                 }
             }
         }
 
+        porterSleep = false;
         return 'R';
     }
 
@@ -248,6 +261,14 @@ public class ArrivalLounge {
 
     public synchronized void resetArrivalLounge(Bag.DestStat[][] bagAndPassDest, int[][] nBagsNA)
             throws MemException {
+
+        while(!porterSleep){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         this.currentFlight += 1;
 
