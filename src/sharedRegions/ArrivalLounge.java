@@ -145,7 +145,7 @@ public class ArrivalLounge {
             // wake up Porter in takeARest()
             notifyAll();
         }
-
+        repos.printLog();
         return currentPassenger.getSi() == Passenger.SiPass.FDT;
     }
 
@@ -186,11 +186,12 @@ public class ArrivalLounge {
                 }
 
                 if (this.currentFlight == SimulPar.N_FLIGHTS - 1 && this.endDay) {
+                    repos.printLog();
                     return 'E';
                 }
             }
         }
-
+        repos.printLog();
         return 'R';
     }
 
@@ -216,9 +217,11 @@ public class ArrivalLounge {
             // update logger
             repos.removeBagFromCargoHold();
 
+            repos.printLog();
             return tmpBag;
         } catch (MemException e) {
 
+            repos.printLog();
             return null;
         }
 
@@ -245,6 +248,8 @@ public class ArrivalLounge {
         bagColPoint.setAllBagsCollected();
         // notify passenger in goCollectABag()
         bagColPoint.noMoreBags();
+
+        repos.printLog();
     }
 
     /**
@@ -310,6 +315,9 @@ public class ArrivalLounge {
         this.pHEmpty = false;
 
         notifyAllPassExited();
+
+
+        repos.printLog();
     }
 
     /* ************************************************* Setters ******************************************************/

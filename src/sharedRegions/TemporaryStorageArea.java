@@ -60,6 +60,8 @@ public class TemporaryStorageArea {
         } catch (MemException e) {
             e.printStackTrace();
         }
+
+        repos.printLog();
     }
 
     /**

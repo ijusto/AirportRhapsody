@@ -121,6 +121,8 @@ public class ArrivalTermTransfQuay {
         }
 
         this.nPassAllowedToEnter += 1;
+
+        repos.printLog();
     }
 
     /**
@@ -155,6 +157,8 @@ public class ArrivalTermTransfQuay {
         } catch (MemException e) {
             e.printStackTrace();
         }
+
+        repos.printLog();
     }
 
     /* ************************************************Bus Driver**************************************************** */
@@ -173,9 +177,12 @@ public class ArrivalTermTransfQuay {
 
         // if the last flight arrived and all passengers left the airport, end the bus driver life cycle
         if(this.endDay){
+
+            repos.printLog();
             return 'F';
         }
 
+        repos.printLog();
         return 'R';
     }
 
@@ -227,6 +234,8 @@ public class ArrivalTermTransfQuay {
             }
         }
 
+        repos.printLog();
+
     }
 
     /**
@@ -261,6 +270,8 @@ public class ArrivalTermTransfQuay {
         this.allowBoardBus = false;
         this.nPassAllowedToEnter = 0;
         busDriver.setNPassOnTheBus(this.nPassOnTheBus);
+
+        repos.printLog();
     }
 
     /**

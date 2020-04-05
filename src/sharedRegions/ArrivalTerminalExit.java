@@ -58,6 +58,8 @@ public class ArrivalTerminalExit {
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;
         deadPassCounter = new Counter(SimulPar.N_PASS_PER_FLIGHT);
+
+        repos.printLog();
     }
 
     /**
@@ -94,6 +96,8 @@ public class ArrivalTerminalExit {
                     e.printStackTrace();
                 }
             }
+
+            repos.printLog();
         }
     }
 
