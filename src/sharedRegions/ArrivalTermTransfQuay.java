@@ -143,7 +143,6 @@ public class ArrivalTermTransfQuay {
 
             // update logger
             repos.pLeftWaitingQueue(passenger.getPassengerID());
-            repos.occupyBusSeat(passenger.getPassengerID());
 
             this.nPassOnTheBus += 1;
 

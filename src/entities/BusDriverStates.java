@@ -1,10 +1,10 @@
 package entities;
 
 /**
- * ...
+ *   Enum containing the possible states of the bus driver.
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public enum BusDriverStates {

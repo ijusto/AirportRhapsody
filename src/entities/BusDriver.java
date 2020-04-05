@@ -4,16 +4,16 @@ import sharedRegions.DepartureTermTransfQuay;
 import sharedRegions.GenReposInfo;
 
 /**
- * ...
+ *   ...
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class BusDriver extends Thread {
 
     /**
-     *  General repository of information.
+     *   General repository of information.
      *
      *    @serialField repos
      */
@@ -53,7 +53,7 @@ public class BusDriver extends Thread {
     private int nPassOnTheBus;
 
     /**
-     *  Instantiation of the thread BusDriver.
+     *   Instantiation of the thread BusDriver.
      *
      *    @param Stat State of the driver.
      *    @param arrivalTerminalQuay Arrival Terminal Transfer Quay.
@@ -90,7 +90,6 @@ public class BusDriver extends Thread {
      */
 
     public synchronized void goToArrivalTerminal(){
-
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_BACKWARD);
         repos.updateBDriverStat(BusDriverStates.DRIVING_BACKWARD);
@@ -101,19 +100,17 @@ public class BusDriver extends Thread {
      */
 
     public synchronized void goToDepartureTerminal(){
-
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_FORWARD);
         repos.updateBDriverStat(BusDriverStates.DRIVING_FORWARD);
-
     }
 
     /* ************************************************* Getters ******************************************************/
 
     /**
-     *   State of the BusDriver.
+     *   Gets the state of the BusDriver.
      *
-     *    @return Stat
+     *    @return State of the BusDriver.
      */
 
     public BusDriverStates getStat() {
@@ -122,9 +119,9 @@ public class BusDriver extends Thread {
 
 
     /**
-     *   Number os passengers on the bus.
+     *   Gets the number os passengers on the bus.
      *
-     *    @return nPassOnTheBus
+     *    @return number os passengers on the bus.
      */
 
     public int getNPassOnTheBus() {
@@ -134,7 +131,7 @@ public class BusDriver extends Thread {
     /* ************************************************* Setters ******************************************************/
 
     /**
-     *   ...
+     *   Sets the Bus Driver State.
      *
      *    @param stat Bus Driver State.
      */
@@ -144,7 +141,7 @@ public class BusDriver extends Thread {
     }
 
     /**
-     *   ...
+     *   Sets the Number os passengers on the bus.
      *
      *    @param nPassOnTheBus Number os passengers on the bus.
      */

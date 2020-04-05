@@ -98,12 +98,12 @@ public class AirportConcurrentVersion {
         Porter porter;
         BusDriver busDriver;
 
-        porter = new Porter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND, arrivLounge, tmpStorageArea,
-                bagColPoint);
+        porter = new Porter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND, arrivLounge, tmpStorageArea, bagColPoint);
+
         repos.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        busDriver = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuay,
-                departureQuay,repos);
+        busDriver = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuay,departureQuay,repos);
+
         repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         porter.start();
@@ -111,8 +111,8 @@ public class AirportConcurrentVersion {
 
         for(int flight = 0; flight < SimulPar.N_FLIGHTS; flight++){
             for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
-                Passenger.SituationPassenger Si = (bagAndPassDest[nPass][flight] == Bag.DestStat.FINAL)
-                        ? Passenger.SituationPassenger.FDT : Passenger.SituationPassenger.TRT;
+                Passenger.SiPass Si = (bagAndPassDest[nPass][flight] == Bag.DestStat.FINAL) ? Passenger.SiPass.FDT
+                                                                                            : Passenger.SiPass.TRT;
                 passengers[nPass][flight] = new Passenger(PassengerStates.AT_THE_DISEMBARKING_ZONE, Si,
                         nBagNR[nPass][flight], 0, nPass, arrivLounge, arrivalQuay, departureQuay,
                         departureTerm, arrivalTerm, bagColPoint, bagRecOffice);
@@ -129,8 +129,8 @@ public class AirportConcurrentVersion {
                 try {
                     passengers[nPass][flight].join();
                 } catch (InterruptedException e) {
-                    System.out.print("Main Program - One thread of Passenger " + nPass + " from flight " +
-                            flight + " was interrupted.");
+                    System.out.print("Main Program - One thread of Passenger " + nPass + " from flight " + flight +
+                                     " was interrupted.");
                 }
             }
 

@@ -1,7 +1,7 @@
 package commonInfrastructures;
 
 /**
- * ...
+ *   Counter.
  *
  *   @author Inês Justo
  *   @author Miguel Lopes
@@ -10,19 +10,19 @@ package commonInfrastructures;
 public class Counter {
 
     /**
-     *
+     *   Value of the counter.
      */
 
     private int value;
 
     /**
-     *
+     *   Limit of incrementation of the counter.
      */
 
     private int limit;
 
     /**
-     *
+     *   Object used for synchronization.
      */
 
     private static final Object lock = new Object();
@@ -30,7 +30,7 @@ public class Counter {
     /**
      *   Instantiation of the Counter.
      *
-     *     @param limit
+     *     @param limit limit of incrementation of the counter.
      */
 
     public Counter(int limit){
@@ -39,8 +39,10 @@ public class Counter {
     }
 
     /**
+     *   Operation of incrementing the counter.
      *
-     *    @return
+     *    @return <li>true, if the value of the counter after incrementing is the limit.</li>
+     *            <li>false, otherwise.</li>
      */
 
     public boolean increaseCounter() {
@@ -51,8 +53,8 @@ public class Counter {
     }
 
     /**
-     *
-     *    @return
+     *   Getter for the value of the counter.
+     *    @return the value of the counter.
      */
 
     public int getValue(){
@@ -62,11 +64,11 @@ public class Counter {
     }
 
     /**
-     *
+     *   Sets the value of the counter to zero.
      */
 
     public void reset(){
-        synchronized (lock) {
+        synchronized (lock) { // Locks on the private Object
             value = 0;
         }
     }

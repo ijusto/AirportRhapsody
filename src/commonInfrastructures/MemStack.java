@@ -3,6 +3,7 @@ package commonInfrastructures;
 /**
  *    Parametric stack derived from a parametric memory.
  *    Errors are reported.
+ *    Minor additions to this class where made by Inês Justo and Miguel Lopes.
  *
  *    @author António Rui De Oliveira E Silva Borges
  *    @param <R> data type of stored objects

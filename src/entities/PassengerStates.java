@@ -1,10 +1,10 @@
 package entities;
 
 /**
- * ...
+ *   Enum containing the possible states of the passenger.
  *
- * @author Inês Justo
- * @author Miguel Lopes
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public enum PassengerStates {

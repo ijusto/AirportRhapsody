@@ -7,7 +7,7 @@ import entities.Porter;
 import main.SimulPar;
 
 /**
- *   ...
+ *   Temporary Storage Area.
  *
  *   @author Inês Justo
  *   @author Miguel Lopes

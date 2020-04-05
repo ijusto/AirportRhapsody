@@ -10,7 +10,7 @@ import sharedRegions.*;
 
 public class Passenger extends Thread {
 
-    public enum SituationPassenger {TRT,   // in transit
+    public enum SiPass {TRT,   // in transit
                                     FDT}   // final destination
 
     /**
@@ -27,7 +27,7 @@ public class Passenger extends Thread {
      *    @serialField Si
      */
 
-    private SituationPassenger Si;
+    private SiPass Si;
 
     /**
      *  Number of pieces of luggage the passenger carried at the start of her journey
@@ -126,7 +126,7 @@ public class Passenger extends Thread {
      *    @param baggageReclaimOffice Baggage Reclaim Office.
      */
 
-    public Passenger(PassengerStates St, SituationPassenger Si, int NR, int NA, int id, ArrivalLounge arrivalLounge,
+    public Passenger(PassengerStates St, SiPass Si, int NR, int NA, int id, ArrivalLounge arrivalLounge,
                      ArrivalTermTransfQuay arrivalTermTransfQuay, DepartureTermTransfQuay departureTransferQuay,
                      DepartureTerminalEntrance departureEntrance, ArrivalTerminalExit arrivalTerminalExit,
                      BaggageColPoint baggageColPoint, BaggageReclaimOffice baggageReclaimOffice){
@@ -181,7 +181,7 @@ public class Passenger extends Thread {
      *
      */
 
-    public SituationPassenger getSi() {
+    public SiPass getSi() {
         return Si;
     }
 

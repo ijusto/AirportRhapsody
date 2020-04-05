@@ -146,7 +146,7 @@ public class ArrivalLounge {
             notifyAll();
         }
 
-        return currentPassenger.getSi() == Passenger.SituationPassenger.FDT;
+        return currentPassenger.getSi() == Passenger.SiPass.FDT;
     }
 
     /* **************************************************Porter****************************************************** */

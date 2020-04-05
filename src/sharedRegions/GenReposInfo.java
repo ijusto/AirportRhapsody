@@ -16,9 +16,7 @@ import java.util.Arrays;
  *   The General Repository of Information works solely as the place where the visible internal state of the problem
  *   is stored. The visible internal state is defined by the set of variables whose value is printed in the logging file.
  *   Whenever an entity (porter, passenger, bus driver) executes an operation that changes the values of some of these
- *   variables, the fact must be reported so that a new line group is printed in the logging file. The report operation
- *   must be atomic, that is, when two or more variables are changed, the report operation must be unique so that the
- *   new line group reflects all the changes that have taken place.
+ *   variables, the fact must be reported so that a new line group is printed in the logging file.
  *
  *   @author Inês Justo
  *   @author Miguel Lopes
@@ -27,82 +25,82 @@ import java.util.Arrays;
 public class GenReposInfo {
 
     /*
-     *
+     *   Array of passenger's states representing strings.
      */
 
     private final String[] passState = {"ADZ", "LCP", "EAT", "BRO", "ATT", "TT", "DTT", "EDT"};
 
     /*
-     *
+     *   Array of porter's states representing strings.
      */
 
     private final String[] portState = {"WPL", "APH", "LBC", "ASR"};
 
     /*
-     *
+     *   Array of bus driver's states representing strings.
      */
 
     private final String[] busState  = {"PAT", "DF", "PDT", "DB"};
 
     /**
-     *  Flight number
+     *   Flight number.
      */
 
     private int FN;
 
     /**
-     *  Number of pieces of luggage presently at the plane's hold
+     *   Number of pieces of luggage presently at the plane's hold.
      */
 
     private int BN;
 
     /**
-     *  Number of pieces of luggage presently at the conveyors belt
+     *   Number of pieces of luggage presently at the conveyors belt.
      */
 
     private int CB;
 
     /**
-     *  Number of pieces of luggage from transit passengers
+     *   Number of pieces of luggage from transit passengers.
      */
 
     private int SR;
 
     /*
-     *   Porters
+     *   Porter state.
      */
 
     private PorterStates porterState;
 
     /*
-     *   BusDrivers
+     *   Bus driver state.
      */
 
     private BusDriverStates busDriverState;
 
     /*
-     *   Passengers' States
+     *   Passengers' States.
      */
 
     private PassengerStates[] passengerStates;
 
     /*
-     *
+     *   ArrayList of passengers waiting for the bus driver.
      */
 
     private ArrayList<Integer> passWaitingQueue;
 
     /*
-     *
+     *   ArrayList of passengers seating on the bus.
      */
 
     private ArrayList<Integer> busSeatOccupation;
 
     /*
-     *
+     *   Situation of all the passengers.
      */
 
-    private String[] passengerSituation;
+    private String[] passSituation;
 
     /*
      *
@@ -181,7 +179,7 @@ public class GenReposInfo {
 
         FN = BN = SR = missing_bags = nrTotal = transPassTotal = finalPassTotal = 0;
 
-        passengerSituation = new String[SimulPar.N_PASS_PER_FLIGHT];
+        passSituation = new String[SimulPar.N_PASS_PER_FLIGHT];
         totalLuggage = new int[SimulPar.N_PASS_PER_FLIGHT];
         collectedLuggage = new int[SimulPar.N_PASS_PER_FLIGHT];
         passWaitingQueue = new ArrayList<>();
@@ -229,7 +227,7 @@ public class GenReposInfo {
         log.append(" ");
 
         for (int i = 0; i< SimulPar.N_PASS_PER_FLIGHT; i++){
-            String psi = (passengerSituation[i] != null) ? passengerSituation[i] :  "---";
+            String psi = (passSituation[i] != null) ? passSituation[i] :  "---";
             String pst = (passState[passengerStates[i].ordinal()] != null) ? passState[passengerStates[i].ordinal()] : "---";
 
             log.append(String.format("|%3s|%3s|%3d|%3d",
@@ -376,22 +374,13 @@ public class GenReposInfo {
     }
 
     /**
+     *   Update of the occupation state of the bus seat.
      *
-     *    @param id Passenger ID.
+     *    @param id Passenger id.
      */
 
     public synchronized void pLeftWaitingQueue(int id){
         passWaitingQueue.remove(passWaitingQueue.indexOf(id));
-        printLog();
-    }
-
-    /**
-     *   Update of the occupation state of the bus seat.
-     *
-     *   @param id passenger.
-     */
-
-    public synchronized void occupyBusSeat(int id){
         busSeatOccupation.add(id);
         printLog();
     }
@@ -415,10 +404,10 @@ public class GenReposInfo {
      *    @param passSi Passenger situation.
      */
 
-    public synchronized  void newPass(Passenger.SituationPassenger passSi){
-        if(passSi == Passenger.SituationPassenger.TRT){
+    public synchronized  void newPass(Passenger.SiPass passSi){
+        if(passSi == Passenger.SiPass.TRT){
             transPassTotal += 1;
-        } else if(passSi == Passenger.SituationPassenger.FDT) {
+        } else if(passSi == Passenger.SiPass.FDT) {
             finalPassTotal += 1;
         }
     }
@@ -445,7 +434,7 @@ public class GenReposInfo {
      */
 
     public synchronized void getPassSi(int id, String si){
-        passengerSituation[id] = si;
+        passSituation[id] = si;
     }
 
     /**
@@ -476,7 +465,7 @@ public class GenReposInfo {
      */
 
     public synchronized void passengerExit(int id){
-        this.passengerSituation[id] = null;
+        this.passSituation[id] = null;
         this.passState[passengerStates[id].ordinal()] = null;
         this.totalLuggage[id] = 0;
         this.collectedLuggage[id] = 0;
