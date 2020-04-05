@@ -38,8 +38,7 @@ public class ArrivalTermTransfQuay {
     private Counter nPassOnTheBus;
 
     /**
-     *   True, if the bus driver is waiting in announcingBusBoarding();
-     *   If false, when the passengers are waken up in takeABus() they go back to sleep.
+     *   Signals the bus driver's will to let the passengers enter the bus.
      */
 
     private boolean allowBoardBus;
@@ -212,17 +211,11 @@ public class ArrivalTermTransfQuay {
 
     /**
      *   Operation of announcing the bus boarding to the passengers in the waiting line (raised by the BusDriver).
-     *   
+     *   The bus driver signals the bus driver's will to let the passengers enter the bus and waits for the last
+     *   passenger to notify him after he enters.
      */
 
     public synchronized void announcingBusBoarding(){
-        /*
-         *   Blocked Entity: Driver
-         *   Freeing Entity: Passenger
-         *   Freeing Method: enterTheBus()
-         *   Freeing Condition: Last passenger in queue
-         *   Blocked Entity Reaction: goToDepartureTerminal()
-        */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
@@ -232,14 +225,13 @@ public class ArrivalTermTransfQuay {
         // wake up Passengers in takeABus()
         notifyAll();
 
-        while(!(this.nPassOnTheBus.getValue() == SimulPar.BUS_CAP || this.waitingLine.isEmpty())){ //this.nWaitingPass == 0)) {
+        while(!(this.nPassOnTheBus.getValue() == SimulPar.BUS_CAP || this.waitingLine.isEmpty())){
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
         this.allowBoardBus = false;
         this.nPassAllowedToEnter.reset();
         busDriver.setNPassOnTheBus(this.nPassOnTheBus.getValue());
@@ -248,7 +240,7 @@ public class ArrivalTermTransfQuay {
     }
 
     /**
-     *
+     *   Resets that need to be done after the passengers leave the airport.
      */
 
     public synchronized void resetArrivalTermTransfQuay() throws MemException {
@@ -259,6 +251,10 @@ public class ArrivalTermTransfQuay {
     }
 
     /* ************************************************* Setters ******************************************************/
+
+    /**
+     *   Sets the signal of the end of the day and wakes up the bus driver.
+     */
 
     public synchronized void setEndDay(){
         this.endDay = true;

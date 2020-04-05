@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *   ...
+ *   Arrival Lounge.
  *
  *   @author Inês Justo
  *   @author Miguel Lopes
@@ -47,7 +47,7 @@ public class ArrivalLounge {
     private Counter nPassAtArrivL;
 
     /*
-     *
+     *   Signals the end of the day.
      */
 
     private boolean endDay;
@@ -59,8 +59,9 @@ public class ArrivalLounge {
     private int currentFlight;
 
     /**
-     *
+     *   Signals the plane's hold with no bags.
      */
+
     private boolean pHEmpty;
 
     /*
@@ -158,23 +159,13 @@ public class ArrivalLounge {
     /**
      *   Operation of taking a rest (raised by the Porter).
      *   The porter is waken up by the operation whatShouldIDo of the last of the passengers to reach the arrival
-     *   lounge.
+     *   lounge or when the day is over.
      *
      *     @return <li> 'E', if end of state </li>
      *             <li> 'R', otherwise </li>
      */
 
     public synchronized char takeARest(){
-        /*
-         *   Blocked Entity: Porter
-         *   Freeing Entity: Passenger
-         *   Freeing Method: whatShouldIDo()
-         *   Freeing Condition: Last passenger to reach the arrival lounge
-         *   Blocked Entity Reaction: tryToCollectABag()
-         *
-         *   Freeing Condition: No more passengers in the airport
-         *   Blocked Entity Reaction: finish the thread
-         */
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
@@ -212,19 +203,14 @@ public class ArrivalLounge {
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
 
-        // update logger
         repos.updatePorterStat(PorterStates.AT_THE_PLANES_HOLD);
 
         try {
             Bag tmpBag = pHoldBagStack.read();
-
-            // update logger
             repos.removeBagFromCargoHold();
-
             repos.printLog();
             return tmpBag;
         } catch (MemException e) {
-
             repos.printLog();
             return null;
         }
@@ -232,8 +218,9 @@ public class ArrivalLounge {
     }
 
     /**
-     *   ... (raised by the Porter).
-     *
+     *   Operation of waking up the passengers that are waiting for their bag at the baggage collection point or the
+     *   passengers that want to prepare the next leg and are waiting for all the bags to be collected (raised by the
+     *   Porter).
      */
 
     public synchronized void noMoreBagsToCollect(){
@@ -241,18 +228,14 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-
-        // update logger
         repos.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
         this.pHEmpty = true;
+        // notify passenger in prepareNextLeg()
         depTerm.noMoreBags();
-
-        // change allBagsCollected so the passengers know there are no more bags arriving the bcColPoint
         bagColPoint.setPHoldEmpty(true);
         // notify passenger in goCollectABag()
         bagColPoint.noMoreBags();
-
         repos.printLog();
     }
 
