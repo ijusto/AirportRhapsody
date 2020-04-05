@@ -77,37 +77,25 @@ public class ArrivalTermTransfQuay {
 
     /**
      *   Operation of taking a Bus (raised by the Passenger).
-     *   Before blocking, the passenger wakes up the bus driver, if the passenger's place in the waiting queue equals
+     *   Before blocking, the passenger wakes up the bus driver, if the passenger's place in the waiting line equals
      *   the bus capacity, and is waken up by the operation announcingBusBoarding of the driver to mimic her entry
      *   in the bus.
      */
 
     public synchronized void takeABus() {
 
-        /*
-         *   Blocked Entity: Passenger
-         *   Freeing Entity: Driver
-         *   Freeing Method: announcingBusBoarding()
-         *   Blocked Entity Reactions: enterTheBus()
-         */
-
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-
-        // update logger
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
 
         try {
             waitingLine.write(passenger);
-
-            // update logger
             repos.pJoinWaitingQueue(passenger.getPassengerID());
         } catch (MemException e) {
             e.printStackTrace();
         }
 
-        // the place of this passenger in the waiting queue = bus capacity
         if(waitingLine.getNObjects() == SimulPar.BUS_CAP){
             // wake up Bus Driver in parkTheBus()
             notifyAll();
@@ -120,14 +108,15 @@ public class ArrivalTermTransfQuay {
                 e.printStackTrace();
             }
         }
-
         this.nPassAllowedToEnter.incDecCounter();
 
         repos.printLog();
     }
 
     /**
-     *   ... (raised by the Passenger).
+     *   Operation of entering the bus (raised by the Passenger).
+     *   If the passenger that raises this operation is the last passenger to enter the bus, he notifies the bus driver
+     *   in announcingBusBoarding, who is waiting for all the passenger to enter.
      */
 
     public synchronized void enterTheBus(){
@@ -137,21 +126,16 @@ public class ArrivalTermTransfQuay {
         assert(this.nPassOnTheBus.getValue() < SimulPar.BUS_CAP);
 
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
-
-        // update logger
         repos.updatePassSt(passenger.getPassengerID(),PassengerStates.TERMINAL_TRANSFER);
 
         try{
             this.waitingLine.read();
-
-            // update logger
             repos.pLeftWaitingQueue(passenger.getPassengerID());
 
             boolean last = this.nPassOnTheBus.incDecCounter();
 
             // last passenger to enter the bus wakes up the bus driver
-            if(last || this.waitingLine.isEmpty()){ //this.nWaitingPass == 0){
-
+            if(last || this.waitingLine.isEmpty()){
                 // wake up Bus driver in announcingBusBoarding()
                 notifyAll();
             }
@@ -188,30 +172,18 @@ public class ArrivalTermTransfQuay {
     }
 
     /**
-     *   ... (raised by the BusDriver).
-     *   The Bus Driver is blocked until
+     *   Operation of parking the bus (raised by the BusDriver).
+     *   The Bus Driver is waits for a notification of the third (bus capacity) passenger to join the waiting line
+     *   or for the parking time to come to an end. If the time has come to start driving and there is a passenger in
+     *   the line or he was notified by the third passenger in the line, he wakes up. Otherwise, he keeps waiting.
      */
 
     public synchronized void parkTheBus(){
-
-        /*
-         *   Blocked Entity: Driver
-         *   1) Freeing Entity: Passenger
-         *   1) Freeing Method: takeABus()
-         *   1) Freeing Condition: place in waiting queue = bus capacity
-         *   1) Blocked Entity Reactions: announcingBusBoarding()
-         *
-         *   2) Freeing Entity: Driver
-         *   2) Freeing Method: time
-         *   2) Freeing Condition: at least 1 passenger in queue
-         *   2) Blocked Entity Reaction: announcingBusBoarding()
-         */
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        // update logger
         repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         this.nPassOnTheBus.reset();
@@ -236,11 +208,11 @@ public class ArrivalTermTransfQuay {
         }
 
         repos.printLog();
-
     }
 
     /**
-     *   ... (raised by the BusDriver).
+     *   Operation of announcing the bus boarding to the passengers in the waiting line (raised by the BusDriver).
+     *   
      */
 
     public synchronized void announcingBusBoarding(){
