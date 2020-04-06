@@ -1,6 +1,5 @@
 package sharedRegions;
 
-import commonInfrastructures.Counter;
 import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
 import entities.BusDriver;
@@ -35,7 +34,13 @@ public class ArrivalTermTransfQuay {
      *   Counter of passengers on the bus.
      */
 
-    private Counter nPassOnTheBus;
+    private int nPassOnTheBus;
+
+    /**
+     *   Object used for synchronization.
+     */
+
+    private static final Object lockNPassOnTheBusCounter = new Object();
 
     /**
      *   Signals the bus driver's will to let the passengers enter the bus.
@@ -49,7 +54,13 @@ public class ArrivalTermTransfQuay {
      *   seat capacity.
      */
 
-    private Counter nPassAllowedToEnter;
+    private int nPassAllowedToEnter;
+
+    /**
+     *   Object used for synchronization.
+     */
+
+    private static final Object lockNPassAllowedToEnterCounter = new Object();
 
     /**
      *   Signals the end of the day.
@@ -66,9 +77,9 @@ public class ArrivalTermTransfQuay {
     public ArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
         this.repos = repos;
         this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
-        this.nPassAllowedToEnter = new Counter(SimulPar.N_PASS_PER_FLIGHT, true);
+        this.resetNPassAllowedToEnter();
         this.allowBoardBus = false;
-        this.nPassOnTheBus = new Counter(SimulPar.BUS_CAP, true);
+        this.resetNPassOnTheBus();
         this.endDay = false;
     }
 
@@ -87,6 +98,7 @@ public class ArrivalTermTransfQuay {
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         repos.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        repos.printLog();
 
         try {
             waitingLine.write(passenger);
@@ -100,14 +112,15 @@ public class ArrivalTermTransfQuay {
             notifyAll();
         }
 
-        while(!this.allowBoardBus || this.nPassAllowedToEnter.getValue() >= SimulPar.BUS_CAP){
+        while(!this.allowBoardBus || this.getNPassAllowedToEnterValue() >= SimulPar.BUS_CAP){
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        this.nPassAllowedToEnter.incDecCounter();
+
+        this.incDecNPassAllowedToEnterCounter(true);
 
         repos.printLog();
     }
@@ -122,7 +135,7 @@ public class ArrivalTermTransfQuay {
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        assert(this.nPassOnTheBus.getValue() < SimulPar.BUS_CAP);
+        assert(this.getNPassOnTheBusValue() < SimulPar.BUS_CAP);
 
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
         repos.updatePassSt(passenger.getPassengerID(),PassengerStates.TERMINAL_TRANSFER);
@@ -131,7 +144,7 @@ public class ArrivalTermTransfQuay {
             this.waitingLine.read();
             repos.pLeftWaitingQueue(passenger.getPassengerID());
 
-            boolean last = this.nPassOnTheBus.incDecCounter();
+            boolean last = this.incDecNPassOnTheBusCounter(true);
 
             // last passenger to enter the bus wakes up the bus driver
             if(last || this.waitingLine.isEmpty()){
@@ -185,7 +198,8 @@ public class ArrivalTermTransfQuay {
 
         repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        this.nPassOnTheBus.reset();
+        repos.printLog();
+        this.resetNPassOnTheBus();
 
         while(waitingLine.getNObjects() != SimulPar.BUS_CAP){ // if false waken up by takeABus()
             try {
@@ -206,7 +220,6 @@ public class ArrivalTermTransfQuay {
             }
         }
 
-        repos.printLog();
     }
 
     /**
@@ -225,7 +238,7 @@ public class ArrivalTermTransfQuay {
         // wake up Passengers in takeABus()
         notifyAll();
 
-        while(!(this.nPassOnTheBus.getValue() == SimulPar.BUS_CAP || this.waitingLine.isEmpty())){
+        while(!(this.getNPassOnTheBusValue() == SimulPar.BUS_CAP || this.waitingLine.isEmpty())){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -233,10 +246,65 @@ public class ArrivalTermTransfQuay {
             }
         }
         this.allowBoardBus = false;
-        this.nPassAllowedToEnter.reset();
-        busDriver.setNPassOnTheBus(this.nPassOnTheBus.getValue());
+        this.resetNPassAllowedToEnter();
+        busDriver.setNPassOnTheBus(this.getNPassOnTheBusValue());
 
-        repos.printLog();
+    }
+
+    /**
+     *   Sets the value of the counter to zero.
+     */
+
+    public void resetNPassAllowedToEnter(){
+        synchronized (lockNPassAllowedToEnterCounter) { // Locks on the private Object
+            nPassAllowedToEnter = 0;
+        }
+    }
+
+    /**
+     *   Operation of incrementing/decrementing the counter.
+     *
+     *    @return <li>true, if the value of the counter after the operation is the limit.</li>
+     *            <li>false, otherwise.</li>
+     */
+
+    public boolean incDecNPassAllowedToEnterCounter(boolean inc) {
+        synchronized (lockNPassAllowedToEnterCounter) {
+            if(inc) {
+                nPassAllowedToEnter++;
+            } else {
+                nPassAllowedToEnter--;
+            }
+            return nPassAllowedToEnter == SimulPar.N_PASS_PER_FLIGHT;
+        }
+    }
+
+    /**
+     *   Sets the value of the counter to zero.
+     */
+
+    public void resetNPassOnTheBus(){
+        synchronized (lockNPassOnTheBusCounter) { // Locks on the private Object
+            nPassOnTheBus = 0;
+        }
+    }
+
+    /**
+     *   Operation of incrementing/decrementing the counter.
+     *
+     *    @return <li>true, if the value of the counter after the operation is the limit.</li>
+     *            <li>false, otherwise.</li>
+     */
+
+    public boolean incDecNPassOnTheBusCounter(boolean inc) {
+        synchronized (lockNPassOnTheBusCounter) {
+            if(inc) {
+                nPassOnTheBus++;
+            } else {
+                nPassOnTheBus--;
+            }
+            return nPassOnTheBus == SimulPar.BUS_CAP;
+        }
     }
 
     /**
@@ -245,9 +313,35 @@ public class ArrivalTermTransfQuay {
 
     public synchronized void resetArrivalTermTransfQuay() throws MemException {
         this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
-        this.nPassAllowedToEnter.reset();
-        this.nPassOnTheBus.reset();
+        this.resetNPassOnTheBus();
+        this.resetNPassAllowedToEnter();
         this.allowBoardBus = false;
+    }
+
+    /* ************************************************* Getters ******************************************************/
+
+    /**
+     *   Gets the value of the counter of passengers that were allowed to enter the bus.
+     *
+     *    @return Value of passengers that were allowed to enter the bus.
+     */
+
+    public int getNPassAllowedToEnterValue(){
+        synchronized (lockNPassAllowedToEnterCounter) {
+            return nPassAllowedToEnter;
+        }
+    }
+
+    /**
+     *   Gets the value of the counter of passengers on the bus.
+     *
+     *    @return Value of passengers on the bus.
+     */
+
+    public int getNPassOnTheBusValue(){
+        synchronized (lockNPassOnTheBusCounter) {
+            return nPassOnTheBus;
+        }
     }
 
     /* ************************************************* Setters ******************************************************/
@@ -260,4 +354,5 @@ public class ArrivalTermTransfQuay {
         this.endDay = true;
         notifyAll();
     }
+
 }

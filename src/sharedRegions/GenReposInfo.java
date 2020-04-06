@@ -228,7 +228,7 @@ public class GenReposInfo {
 
         for (int i = 0; i< SimulPar.N_PASS_PER_FLIGHT; i++){
             String psi = (passSituation[i] != null) ? passSituation[i] :  "---";
-            String pst = (passState[passengerStates[i].ordinal()] != null) ? passState[passengerStates[i].ordinal()] : "---";
+            String pst = (passengerStates[i] != null) ? passState[passengerStates[i].ordinal()] : "---";
 
             log.append(String.format("|%3s|%3s|%3d|%3d", pst, psi, totalLuggage[i], collectedLuggage[i]));
         }
@@ -452,7 +452,6 @@ public class GenReposInfo {
 
     public synchronized void passengerExit(int id){
         this.passSituation[id] = null;
-        this.passState[passengerStates[id].ordinal()] = null;
         this.totalLuggage[id] = 0;
         this.collectedLuggage[id] = 0;
     }

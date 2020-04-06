@@ -44,7 +44,7 @@ public class ArrivalLounge {
      *   Counter of passengers that already arrived.
      */
 
-    private Counter nPassAtArrivL;
+    private int nPassAtArrivL;
 
     /*
      *   Signals the end of the day.
@@ -65,7 +65,7 @@ public class ArrivalLounge {
     private boolean pHEmpty;
 
     /**
-     *   Signals the porter is in takearest.
+     *   Signals the porter is in takeARest.
      */
 
     private volatile boolean porterSleep;
@@ -75,6 +75,12 @@ public class ArrivalLounge {
      */
 
     private DepartureTerminalEntrance depTerm;
+
+    /**
+     *   Object used for synchronization.
+     */
+
+    private static final Object lockNnPassAtArrivLCounter = new Object();
 
     /**
      *   Instantiation of the Arrival Lounge.
@@ -92,18 +98,18 @@ public class ArrivalLounge {
         this.repos = repos;
 
         this.currentFlight = 0;
-        repos.updateFlightNumber(this.currentFlight);
+        this.repos.updateFlightNumber(this.currentFlight);
         this.arrQuay = arrQuay;
 
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
         int nTotalBags = 0;
         for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
-            repos.passengerExit(nPass);
+            this.repos.passengerExit(nPass);
             nTotalBags += nBagsPHold[nPass][this.currentFlight];
             nBagsPerPass.put(nPass, nBagsPHold[nPass][this.currentFlight]);
         }
-        repos.initializeCargoHold(nTotalBags);
+        this.repos.initializeCargoHold(nTotalBags);
         this.pHoldBagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
         for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
             for(int bag = 0; bag < nBagsPHold[nPass][this.currentFlight]; bag++){
@@ -117,7 +123,7 @@ public class ArrivalLounge {
         this.bagColPoint.setPHoldEmpty(false);
         this.bagColPoint.setTreadmill(treadmill);
 
-        this.nPassAtArrivL = new Counter(SimulPar.N_PASS_PER_FLIGHT, true);
+        resetNPassAtArrivL();
 
         this.pHEmpty = false;
         endDay = false;
@@ -141,15 +147,18 @@ public class ArrivalLounge {
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
 
-        // increment passengers that arrive so the porter knows when to wake up in takeARest()
-        boolean last = this.nPassAtArrivL.incDecCounter();
-
         // update logger
         this.repos.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
         this.repos.numberNRTotal(currentPassenger.getNR());
         this.repos.newPass(currentPassenger.getSi());
+        this.repos.updatePassSt(currentPassenger.getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        this.repos.printLog();
 
-        if(this.nPassAtArrivL.getValue() == 1) {
+        // increment passengers that arrive so the porter knows when to wake up in takeARest()
+        boolean last = this.incDecNPassAtArrivLCounter(true);
+
+
+        if(this.getNPassAtArrivLValue() == 1) {
             this.depTerm.resetDepartureTerminalExit();
         }
 
@@ -157,7 +166,6 @@ public class ArrivalLounge {
             // wake up Porter in takeARest()
             notifyAll();
         }
-        repos.printLog();
         return currentPassenger.getSi() == Passenger.SiPass.FDT;
     }
 
@@ -185,7 +193,7 @@ public class ArrivalLounge {
             porterSleep = false;
             return 'E';
         } else {
-            while (this.nPassAtArrivL.getValue() < SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
+            while (this.getNPassAtArrivLValue() < SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -319,11 +327,53 @@ public class ArrivalLounge {
             this.bagColPoint.setTreadmill(treadmill);
 
             // reset the number of passengers that arrived the airport
-            this.nPassAtArrivL.reset();
+            this.resetNPassAtArrivL();
 
             this.pHEmpty = false;
         }
         repos.printLog();
+    }
+
+    /**
+     *   Operation of incrementing/decrementing the counter.
+     *
+     *    @return <li>true, if the value of the counter after the operation is the limit.</li>
+     *            <li>false, otherwise.</li>
+     */
+
+    public boolean incDecNPassAtArrivLCounter(boolean inc) {
+        synchronized (lockNnPassAtArrivLCounter) {
+            if(inc) {
+                nPassAtArrivL++;
+            } else {
+                nPassAtArrivL--;
+            }
+            return nPassAtArrivL == SimulPar.N_PASS_PER_FLIGHT;
+        }
+    }
+
+    /**
+     *   Sets the value of the counter to zero.
+     */
+
+    public void resetNPassAtArrivL(){
+        synchronized (lockNnPassAtArrivLCounter) { // Locks on the private Object
+            nPassAtArrivL = 0;
+        }
+    }
+
+    /* ************************************************* Getters ******************************************************/
+
+    /**
+     *   Getter for the value of the of passengers that are currently ate the Arrival Lounge.
+     *
+     *    @return the value of the counter.
+     */
+
+    public int getNPassAtArrivLValue(){
+        synchronized (lockNnPassAtArrivLCounter) {
+            return nPassAtArrivL;
+        }
     }
 
     /* ************************************************* Setters ******************************************************/

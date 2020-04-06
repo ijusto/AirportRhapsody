@@ -110,6 +110,7 @@ public class BusDriver extends Thread {
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_FORWARD);
         repos.updateBDriverStat(BusDriverStates.DRIVING_FORWARD);
+        repos.printLog();
 
         // simulates the bus going from the departure arrival to the departure terminal
         try {

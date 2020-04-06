@@ -1,6 +1,5 @@
 package sharedRegions;
 
-import commonInfrastructures.Counter;
 import entities.Passenger;
 import entities.PassengerStates;
 import main.SimulPar;
@@ -31,12 +30,6 @@ public class DepartureTerminalEntrance {
      */
 
     private ArrivalTermTransfQuay arrivalQuay;
-
-    /**
-     *   Counter of passengers that are at the entrance of the departure terminal or at the exit of the arrival terminal.
-     */
-
-    private Counter dpc;
 
     /*
      *   Arrival Terminal Exit.
@@ -81,7 +74,7 @@ public class DepartureTerminalEntrance {
         repos.printLog();
 
         // increment the number of passengers that wants to leave the airport
-        boolean isLastPass = this.dpc.incDecCounter();
+        boolean isLastPass = this.arrivalTerm.incDecCounter(true);
 
         if(isLastPass) {
 
@@ -103,7 +96,7 @@ public class DepartureTerminalEntrance {
             // the passengers that are not the last ones to want to leave the airport, need to wait for the last one to
             // notify them so they can leave or for the notification of the porter (if the last passenger is at the
             // arrival terminal exit) and the plane's hold is not empty.
-            while (this.dpc.getValue() < SimulPar.N_PASS_PER_FLIGHT || !this.phEmpty) {
+            while (this.arrivalTerm.getDeadPassValue() < SimulPar.N_PASS_PER_FLIGHT || !this.phEmpty) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -163,7 +156,6 @@ public class DepartureTerminalEntrance {
 
     public synchronized void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
         this.arrivalTerm = arrivalTerm;
-        this.dpc = this.arrivalTerm.getDeadPassCounter();
     }
 
 }

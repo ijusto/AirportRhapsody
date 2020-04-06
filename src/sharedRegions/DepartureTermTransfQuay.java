@@ -1,6 +1,5 @@
 package sharedRegions;
 
-import commonInfrastructures.Counter;
 import entities.BusDriver;
 import entities.BusDriverStates;
 import entities.Passenger;
@@ -30,7 +29,14 @@ public class DepartureTermTransfQuay {
      *   Counter of passengers on the bus.
      */
 
-    private Counter nPassOnTheBus;
+    private int nPassOnTheBus;
+
+    /**
+     *   Object used for synchronization.
+     */
+
+    private static final Object lockNPassOnTheBus = new Object();
+
 
     /**
      *   Instantiation of the Departure Terminal Transfer Quay.
@@ -41,7 +47,7 @@ public class DepartureTermTransfQuay {
     public DepartureTermTransfQuay(GenReposInfo repos){
         this.repos = repos;
         this.busDoorsOpen = false;
-        this.nPassOnTheBus = new Counter(0, false);
+        this.resetNPassOnTheBusValue();
     }
 
     /* ************************************************Passenger***************************************************** */
@@ -65,7 +71,7 @@ public class DepartureTermTransfQuay {
             }
         }
 
-        boolean last = this.nPassOnTheBus.incDecCounter();
+        boolean last = this.incDecCounter(false);
 
         repos.freeBusSeat(passenger.getPassengerID());
         repos.printLog();
@@ -92,12 +98,12 @@ public class DepartureTermTransfQuay {
         repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         repos.printLog();
 
-        this.nPassOnTheBus.setValue(busDriver.getNPassOnTheBus());
+        this.setNPassOnTheBusValue(busDriver.getNPassOnTheBus());
 
         this.pleaseLeaveTheBus();
         notifyAll();  // wake up Passengers in leaveTheBus()
 
-        while(this.nPassOnTheBus.getValue() != 0) {
+        while(this.getNPassOnTheBusValue() != 0) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -105,8 +111,36 @@ public class DepartureTermTransfQuay {
             }
         }
 
-        busDriver.setNPassOnTheBus(this.nPassOnTheBus.getValue());
+        busDriver.setNPassOnTheBus(this.getNPassOnTheBusValue());
         this.busDoorsOpen = false;
+    }
+
+    /**
+     *   Operation of incrementing/decrementing the counter.
+     *
+     *    @return <li>true, if the value of the counter after the operation is the limit.</li>
+     *            <li>false, otherwise.</li>
+     */
+
+    public boolean incDecCounter(boolean inc) {
+        synchronized (lockNPassOnTheBus) {
+            if(inc) {
+                nPassOnTheBus++;
+            } else {
+                nPassOnTheBus--;
+            }
+            return nPassOnTheBus == 0;
+        }
+    }
+
+    /**
+     *   Sets the value of the counter to zero.
+     */
+
+    public void resetNPassOnTheBusValue(){
+        synchronized (lockNPassOnTheBus) { // Locks on the private Object
+            nPassOnTheBus = 0;
+        }
     }
 
     /**
@@ -114,7 +148,7 @@ public class DepartureTermTransfQuay {
      */
 
     public synchronized void resetDepartureTermTransfQuay(){
-        this.nPassOnTheBus.reset();
+        this.resetNPassOnTheBusValue();
     }
 
     /* ************************************************* Getters ******************************************************/
@@ -130,6 +164,18 @@ public class DepartureTermTransfQuay {
         return this.busDoorsOpen;
     }
 
+    /**
+     *   Getter for the value of the of ths counter of passengers on the bus.
+     *
+     *    @return the value of the counter.
+     */
+
+    public int getNPassOnTheBusValue(){
+        synchronized (lockNPassOnTheBus) {
+            return nPassOnTheBus;
+        }
+    }
+
     /* ************************************************* Setters ******************************************************/
 
     /**
@@ -138,6 +184,18 @@ public class DepartureTermTransfQuay {
 
     public void pleaseLeaveTheBus() {
         this.busDoorsOpen = true;
+    }
+
+    /**
+     *   Sets the number of passengers on the bus.
+     *
+     *   @param nPassOnTheBus Counter of passengers on the bus.
+     */
+
+    public void setNPassOnTheBusValue(int nPassOnTheBus){
+        synchronized (lockNPassOnTheBus) {
+            this.nPassOnTheBus = nPassOnTheBus;
+        }
     }
 
 }
