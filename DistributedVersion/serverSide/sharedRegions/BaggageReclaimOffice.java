@@ -1,6 +1,6 @@
-package serverSide;
+package serverSide.sharedRegions;
 
-import clientSide.Passenger;
+import clientSide.entities.Passenger;
 import clientSide.PassengerStates;
 
 /**
