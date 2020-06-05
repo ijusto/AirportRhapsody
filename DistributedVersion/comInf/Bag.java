@@ -1,4 +1,4 @@
-package commonInfrastructures;
+package comInf;
 
 /**
  *   Bag belonging to a passenger.

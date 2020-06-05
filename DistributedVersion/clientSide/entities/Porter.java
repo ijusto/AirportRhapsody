@@ -3,7 +3,7 @@ import clientSide.PorterStates;
 import clientSide.stubs.ArrivalLoungeStub;
 import clientSide.stubs.BaggageColPointStub;
 import clientSide.stubs.TemporaryStorageAreaStub;
-import commonInfrastructures.Bag;
+import comInf.Bag;
 
 /**
  * ...

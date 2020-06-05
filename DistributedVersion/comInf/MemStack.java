@@ -1,4 +1,4 @@
-package commonInfrastructures;
+package comInf;
 
 /**
  *    Parametric stack derived from a parametric memory.

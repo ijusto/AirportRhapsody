@@ -1,4 +1,4 @@
-package commonInfrastructures;
+package comInf;
 
 /**
  *    Memory exception.

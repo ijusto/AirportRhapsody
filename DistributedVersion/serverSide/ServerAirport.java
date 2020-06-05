@@ -1,8 +1,8 @@
 package serverSide;
 
 import serverSide.interfaces.*;
-import commonInfrastructures.Bag;
-import commonInfrastructures.MemException;
+import comInf.Bag;
+import comInf.MemException;
 import serverSide.sharedRegions.*;
 
 import java.io.BufferedReader;

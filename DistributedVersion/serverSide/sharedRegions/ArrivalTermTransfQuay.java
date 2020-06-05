@@ -1,7 +1,7 @@
 package serverSide.sharedRegions;
 
-import commonInfrastructures.MemException;
-import commonInfrastructures.MemFIFO;
+import comInf.MemException;
+import comInf.MemFIFO;
 import clientSide.entities.BusDriver;
 import clientSide.BusDriverStates;
 import clientSide.entities.Passenger;

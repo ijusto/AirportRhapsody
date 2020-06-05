@@ -1,8 +1,8 @@
 package serverSide.sharedRegions;
 
-import commonInfrastructures.Bag;
-import commonInfrastructures.MemException;
-import commonInfrastructures.MemFIFO;
+import comInf.Bag;
+import comInf.MemException;
+import comInf.MemFIFO;
 import clientSide.entities.*;
 
 import java.util.Map;

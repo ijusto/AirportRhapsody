@@ -1,7 +1,7 @@
 package main;
 
-import commonInfrastructures.Bag;
-import commonInfrastructures.MemException;
+import comInf.Bag;
+import comInf.MemException;
 import entities.*;
 import sharedRegions.*;
 
