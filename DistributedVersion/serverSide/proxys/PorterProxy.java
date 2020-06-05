@@ -1,7 +1,14 @@
-package serverSide;
+package serverSide.proxys;
 
+import clientSide.stubs.ArrivalLoungeStub;
+import clientSide.stubs.BaggageColPointStub;
+import clientSide.stubs.TemporaryStorageAreaStub;
 import comInf.Message;
 import comInf.MessageException;
+import serverSide.ServerCom;
+import serverSide.interfaces.ArrivalLoungeInterface;
+import serverSide.interfaces.BaggageColPointInterface;
+import serverSide.interfaces.TemporaryStorageAreaInterface;
 
 /**
  *   Este tipo de dados define o thread agente prestador de serviço para uma solução do Problema dos Barbeiros
@@ -10,7 +17,7 @@ import comInf.MessageException;
  *   A comunicação baseia-se em passagem de mensagens sobre sockets usando o protocolo TCP.
  */
 
-public class ClientProxy extends Thread
+public class PorterProxy extends Thread
 {
     /**
      *  Contador de threads lançados
@@ -29,26 +36,49 @@ public class ClientProxy extends Thread
     private ServerCom sconi;
 
     /**
-     *  Interface à barbearia
+     *  ...
      *
-     *    @serialField bShopInter
+     *    @serialField arrivalLoungeInterface
      */
 
-    private BarberShopInterface bShopInter;
+    ArrivalLoungeInterface arrivalLoungeInterface;
+
+    /**
+     *  ...
+     *
+     *    @serialField tempStoreInterface
+     */
+
+    TemporaryStorageAreaInterface tempStoreInterface;
+
+    /**
+     *  ...
+     *
+     *    @serialField bColPntInterface
+     */
+
+    BaggageColPointInterface bColPntInterface;
 
     /**
      *  Instanciação do interface à barbearia.
      *
      *    @param sconi canal de comunicação
-     *    @param bShopInter interface à barbearia
+     *    @param arrivalLoungeInterface  ...
+     *    @param tempStoreInterface ...
+     *    @param bColPntInterface ....
      */
 
-    public ClientProxy (ServerCom sconi, BarberShopInterface bShopInter)
+    public PorterProxy (ServerCom sconi, /*BarberShopInterface bShopInter*/
+                        ArrivalLoungeInterface arrivalLoungeInterface, TemporaryStorageAreaInterface tempStoreInterface,
+                        BaggageColPointInterface bColPntInterface)
     {
-        super ("Proxy_" + ClientProxy.getProxyId ());
+        super ("Proxy_" + PorterProxy.getProxyId ());
 
         this.sconi = sconi;
-        this.bShopInter = bShopInter;
+        /*this.bShopInter = bShopInter;*/
+        this.arrivalLoungeInterface = arrivalLoungeInterface;
+        this.tempStoreInterface = tempStoreInterface;
+        this.bColPntInterface = bColPntInterface;
     }
 
     /**
