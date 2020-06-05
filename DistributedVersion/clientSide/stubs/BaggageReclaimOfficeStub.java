@@ -1,7 +1,6 @@
 package clientSide.stubs;
 
 public class BaggageReclaimOfficeStub {
-
     /**
      *  Nome do sistema computacional onde está localizado o servidor
      *    @serialField serverHostName
@@ -28,4 +27,32 @@ public class BaggageReclaimOfficeStub {
         serverHostName = hostName;
         serverPortNumb = port;
     }
+
+    public boolean reportMissingBags(int passengerID){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()) {
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message (Message.REQCUTH, passengerId);  //pede report missing bags
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if (inMessage.getType() != Message.NFICDONE)
+        { System.out.println ("Arranque da simulação: Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+
+        if (inMessage.getType () == Message.CUTHDONE)
+            return true;                                                // operação bem sucedida
+        else return false;
+
+    }
+
 }

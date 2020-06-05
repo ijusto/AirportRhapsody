@@ -28,4 +28,113 @@ public class DepartureTermTransfQuayStub {
         serverHostName = hostName;
         serverPortNumb = port;
     }
+    //TODO: Change messages
+    public synchronized void leaveTheBus(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()) {
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message (Message.REQCUTH, passengerId);  //pede report missing bags
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if (inMessage.getType() != Message.NFICDONE)
+        { System.out.println ("Arranque da simulação: Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+
+        if (inMessage.getType () == Message.CUTHDONE)
+            return true;                                                // operação bem sucedida
+        else return false;
+    }
+
+    /* *************************************************Bus Driver*************************************************** */
+
+    /**
+     *   BusDriver informs the passengers they can leave the bus (raised by the BusDriver).
+     *   Then he waits for a notification of the last passenger to leave the bus.
+     */
+    //TODO: Change messages
+    public synchronized void parkTheBusAndLetPassOff() {
+
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()) {
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+
+        outMessage = new Message (Message.REQCUTH, passengerId);  //pede report missing bags
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if (inMessage.getType() != Message.NFICDONE)
+        { System.out.println ("Arranque da simulação: Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+
+        if (inMessage.getType () == Message.CUTHDONE)
+            return true;                                                // operação bem sucedida
+        else return false;
+    }
+
+
+    /* ************************************************* Getters ******************************************************/
+
+    /**
+     *   Signaling the bus driver will to let the passengers enter the bus.
+     *
+     *    @return <li>true, if the bus driver wants the passengers to leave the bus</li>
+     *            <li>false, otherwise</li>
+     */
+
+    public boolean canPassLeaveTheBus() {
+        return this.busDoorsOpen;
+    }
+
+    /**
+     *   Getter for the value of the of ths counter of passengers on the bus.
+     *
+     *    @return the value of the counter.
+     */
+
+    public int getNPassOnTheBusValue(){
+        synchronized (lockNPassOnTheBus) {
+            return nPassOnTheBus;
+        }
+    }
+
+    /* ************************************************* Setters ******************************************************/
+
+    /**
+     *   Sets the bus driver will to let the passengers enter the bus to true.
+     */
+
+    public void pleaseLeaveTheBus() {
+        this.busDoorsOpen = true;
+    }
+
+    /**
+     *   Sets the number of passengers on the bus.
+     *
+     *   @param nPassOnTheBus Counter of passengers on the bus.
+     */
+
+    public void setNPassOnTheBusValue(int nPassOnTheBus){
+        synchronized (lockNPassOnTheBus) {
+            this.nPassOnTheBus = nPassOnTheBus;
+        }
+    }
+
 }
