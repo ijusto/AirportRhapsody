@@ -2,7 +2,7 @@ package serverSide.interfaces;
 
 import comInf.Message;
 import comInf.MessageException;
-import serverSide.ArrivalLounge;
+import serverSide.sharedRegions.ArrivalLounge;
 
 public class ArrivalLoungeInterface {
 
