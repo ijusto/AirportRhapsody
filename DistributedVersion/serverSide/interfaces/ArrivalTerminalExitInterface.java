@@ -2,7 +2,7 @@ package serverSide.interfaces;
 
 import comInf.Message;
 import comInf.MessageException;
-import serverSide.ArrivalTerminalExit;
+import serverSide.sharedRegions.ArrivalTerminalExit;
 
 public class ArrivalTerminalExitInterface {
 
@@ -36,5 +36,19 @@ public class ArrivalTerminalExitInterface {
                 throw new MessageException ("Nome do ficheiro inexistente!", inMessage);
                 break;
             default:
-
+                throw new MessageException ("Tipo inválido!", inMessage);
         }
+
+        /* seu processamento */
+
+        switch (inMessage.getType ()) {
+            // TODO: Change cases
+            case Message.SETNFIC:                                                     // inicializar ficheiro de logging
+                bShop.setFileName (inMessage.getFName (), inMessage.getNIter ());
+                outMessage = new Message (Message.NFICDONE);       // gerar resposta
+                break;
+        }
+
+        return (outMessage);
+    }
+}

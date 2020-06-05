@@ -2,25 +2,23 @@ package serverSide.interfaces;
 
 import comInf.Message;
 import comInf.MessageException;
-import serverSide.BaggageReclaimOffice;
+import serverSide.sharedRegions.BaggageReclaimOffice;
 
 public class BaggageReclaimOfficeInterface {
 
     private BaggageReclaimOffice baggageReclaimOffice;
 
-    public BaggageReclaimOfficeInterface(BaggageReclaimOffice baggageReclaimOffice){
+    public BaggageReclaimOfficeInterface(BaggageReclaimOffice baggageReclaimOffice) {
         this.baggageReclaimOffice = baggageReclaimOffice;
     }
 
     /**
-     *  Processamento das mensagens através da execução da tarefa correspondente.
-     *  Geração de uma mensagem de resposta.
+     * Processamento das mensagens através da execução da tarefa correspondente.
+     * Geração de uma mensagem de resposta.
      *
-     *    @param inMessage mensagem com o pedido
-     *
-     *    @return mensagem de resposta
-     *
-     *    @throws MessageException se a mensagem com o pedido for considerada inválida
+     * @param inMessage mensagem com o pedido
+     * @return mensagem de resposta
+     * @throws MessageException se a mensagem com o pedido for considerada inválida
      */
 
     public Message processAndReply (Message inMessage) throws MessageException
@@ -35,5 +33,19 @@ public class BaggageReclaimOfficeInterface {
                 throw new MessageException ("Nome do ficheiro inexistente!", inMessage);
                 break;
             default:
-
+                throw new MessageException ("Tipo inválido!", inMessage);
         }
+
+        /* seu processamento */
+
+        switch (inMessage.getType ()) {
+            // TODO: Change cases
+            case Message.SETNFIC:                                                     // inicializar ficheiro de logging
+                bShop.setFileName (inMessage.getFName (), inMessage.getNIter ());
+                outMessage = new Message (Message.NFICDONE);       // gerar resposta
+                break;
+        }
+
+        return (outMessage);
+    }
+}
