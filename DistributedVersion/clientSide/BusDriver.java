@@ -1,6 +1,6 @@
-package entities;
-import sharedRegions.ArrivalTermTransfQuay;
-import sharedRegions.DepartureTermTransfQuay;
+package clientSide;
+import serverSide.ArrivalTermTransfQuay;
+import serverSide.DepartureTermTransfQuay;
 import sharedRegions.GenReposInfo;
 
 /**

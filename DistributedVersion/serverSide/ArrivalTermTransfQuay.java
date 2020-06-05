@@ -1,11 +1,11 @@
-package sharedRegions;
+package serverSide;
 
 import commonInfrastructures.MemException;
 import commonInfrastructures.MemFIFO;
-import entities.BusDriver;
-import entities.BusDriverStates;
-import entities.Passenger;
-import entities.PassengerStates;
+import clientSide.BusDriver;
+import clientSide.BusDriverStates;
+import clientSide.Passenger;
+import clientSide.PassengerStates;
 import main.SimulPar;
 
 /**

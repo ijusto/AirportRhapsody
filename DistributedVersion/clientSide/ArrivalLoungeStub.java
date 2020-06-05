@@ -1,149 +1,81 @@
-package sharedRegions;
+package clientSide;
 
-import commonInfrastructures.*;
-import entities.*;
-import main.SimulPar;
+import comInf.Message;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *   Arrival Lounge.
- *
- *   @author Inês Justo
- *   @author Miguel Lopes
- */
-
-public class ArrivalLounge {
+public class ArrivalLoungeStub {
 
     /**
-     *   General repository of information.
+     *  Nome do sistema computacional onde está localizado o servidor
+     *    @serialField serverHostName
      */
 
-    private GenReposInfo repos;
+    private String serverHostName = null;
 
     /**
-     *   Baggage Collection Point.
+     *  Número do port de escuta do servidor
+     *    @serialField serverPortNumb
      */
 
-    private BaggageColPoint bagColPoint;
+    private int serverPortNumb;
 
     /**
-     *   Arrival Terminal Transfer Quay.
-     */
-
-    private ArrivalTermTransfQuay arrQuay;
-
-    /**
-     *   Stack of bags on the plane's hold.
-     */
-
-    private MemStack<Bag> pHoldBagStack;
-
-    /*
-     *   Counter of passengers that already arrived.
-     */
-
-    private int nPassAtArrivL;
-
-    /*
-     *   Signals the end of the day.
-     */
-
-    private boolean endDay;
-
-    /*
-     *   Number of the current flight.
-     */
-
-    private int currentFlight;
-
-    /**
-     *   Signals the plane's hold with no bags.
-     */
-
-    private boolean pHEmpty;
-
-    /**
-     *   Signals the porter is in takeARest.
-     */
-
-    private volatile boolean porterSleep;
-
-    /**
-     *   Departure Terminal Entrance.
-     */
-
-    private DepartureTerminalEntrance depTerm;
-
-    /**
-     *   Object used for synchronization.
-     */
-
-    private static final Object lockNnPassAtArrivLCounter = new Object();
-
-    /**
-     *   Instantiation of the Arrival Lounge.
+     *  Instanciação do stub à barbearia.
      *
-     *     @param repos general repository of information.
-     *     @param bagColPoint baggage collection point.
-     *     @param destStat destination state of the bags.
-     *     @param nBagsPHold number of bags per passenger and flight.
+     *    @param hostName nome do sistema computacional onde está localizado o servidor
+     *    @param port número do port de escuta do servidor
      */
 
-    public ArrivalLounge(GenReposInfo repos, BaggageColPoint bagColPoint, ArrivalTermTransfQuay arrQuay,
-                         Bag.DestStat[][] destStat, int[][] nBagsPHold)
-            throws MemException {
-
-        this.repos = repos;
-
-        this.currentFlight = 0;
-        this.repos.updateFlightNumber(this.currentFlight);
-        this.arrQuay = arrQuay;
-
-        Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
-        Map<Integer, Integer> nBagsPerPass = new HashMap<>();
-        int nTotalBags = 0;
-        for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
-            this.repos.passengerExit(nPass);
-            nTotalBags += nBagsPHold[nPass][this.currentFlight];
-            nBagsPerPass.put(nPass, nBagsPHold[nPass][this.currentFlight]);
-        }
-        this.repos.initializeCargoHold(nTotalBags);
-        this.pHoldBagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
-        for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
-            for(int bag = 0; bag < nBagsPHold[nPass][this.currentFlight]; bag++){
-                this.pHoldBagStack.write(new Bag(destStat[nPass][this.currentFlight], nPass));
-            }
-            MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);        // FIFO instantiation
-            treadmill.put(nPass, bagPassFIFO);
-        }
-
-        this.bagColPoint = bagColPoint;
-        this.bagColPoint.setPHoldEmpty(false);
-        this.bagColPoint.setTreadmill(treadmill);
-
-        resetNPassAtArrivL();
-
-        this.pHEmpty = false;
-        endDay = false;
-        this.repos.printLog();
-        porterSleep = false;
+    public ArrivalLoungeStub (String hostName, int port)
+    {
+        serverHostName = hostName;
+        serverPortNumb = port;
     }
 
     /* **************************************************Passenger*************************************************** */
 
     /**
-     *   Operation of deciding what to do next (raised by the Passenger).
+     *   Deciding what to do next - raised by the Passenger (service solicitation).
      *   <p> Head start delay, that represents the time before the passenger chooses between what to do when arriving to
      *   the airport.
      *
+     *     @param  passengerId passenger id
      *     @return <li> true, if final destination
      *             <li> false, otherwise
      */
 
-    public synchronized boolean whatShouldIDo(){
+    public boolean whatShouldIDo(int passengerId){
 
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()) {                                 // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+
+        // TODO: change REQCUTH
+        outMessage = new Message (Message.REQCUTH, passengerId);        // pede a realização do serviço
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        // TODO: change if
+        if ((inMessage.getType () != Message.CUTHDONE) && (inMessage.getType () != Message.BSHOPF)) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+
+        // TODO: change if
+        if (inMessage.getType () == Message.CUTHDONE)
+            return true;                                                // operação bem sucedida - corte efectuado
+        else return false;                                          // operação falhou - barbearia cheia
+
+        /*
         Passenger currentPassenger = (Passenger) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
 
@@ -167,6 +99,7 @@ public class ArrivalLounge {
             notifyAll();
         }
         return currentPassenger.getSi() == Passenger.SiPass.FDT;
+         */
     }
 
     /* **************************************************Porter****************************************************** */
@@ -193,7 +126,7 @@ public class ArrivalLounge {
             porterSleep = false;
             return 'E';
         } else {
-            while (this.getNPassAtArrivLValue() < SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
+            while (this.getNPassAtArrivLValue() < main.SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -280,7 +213,7 @@ public class ArrivalLounge {
 
         this.currentFlight += 1;
 
-        if(this.currentFlight == SimulPar.N_FLIGHTS){
+        if(this.currentFlight == main.SimulPar.N_FLIGHTS){
             this.setEndDay();
             this.arrQuay.setEndDay();
         } else {
@@ -291,7 +224,7 @@ public class ArrivalLounge {
 
             // int nSRprev = this.pHoldBagStack.getPointer();
             int nTotalBags = 0; //nSRprev;
-            for (int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++) {
+            for (int nPass = 0; nPass < main.SimulPar.N_PASS_PER_FLIGHT; nPass++) {
                 nTotalBags += nBagsNA[nPass][this.currentFlight];
                 nBagsPerPass.put(nPass, nBagsNA[nPass][this.currentFlight]);
             }
@@ -313,7 +246,7 @@ public class ArrivalLounge {
             //    }
             //}
 
-            for (int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++) {
+            for (int nPass = 0; nPass < main.SimulPar.N_PASS_PER_FLIGHT; nPass++) {
                 for (int bag = 0; bag < nBagsNA[nPass][this.currentFlight]; bag++) {
                     this.pHoldBagStack.write(new Bag(bagAndPassDest[nPass][this.currentFlight], nPass));
                 }
@@ -348,7 +281,7 @@ public class ArrivalLounge {
             } else {
                 nPassAtArrivL--;
             }
-            return nPassAtArrivL == SimulPar.N_PASS_PER_FLIGHT;
+            return nPassAtArrivL == main.SimulPar.N_PASS_PER_FLIGHT;
         }
     }
 

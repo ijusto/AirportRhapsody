@@ -1,9 +1,9 @@
-package sharedRegions;
+package serverSide;
 import commonInfrastructures.MemException;
 import commonInfrastructures.MemStack;
 import commonInfrastructures.Bag;
-import entities.PorterStates;
-import entities.Porter;
+import clientSide.PorterStates;
+import clientSide.Porter;
 import main.SimulPar;
 
 /**

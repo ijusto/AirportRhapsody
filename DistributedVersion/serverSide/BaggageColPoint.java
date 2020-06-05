@@ -1,4 +1,4 @@
-package sharedRegions;
+package serverSide;
 
 import commonInfrastructures.Bag;
 import commonInfrastructures.MemException;

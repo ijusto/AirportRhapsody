@@ -1,8 +1,8 @@
-package entities;
+package clientSide;
 import commonInfrastructures.Bag;
-import sharedRegions.ArrivalLounge;
-import sharedRegions.BaggageColPoint;
-import sharedRegions.TemporaryStorageArea;
+import serverSide.ArrivalLounge;
+import serverSide.BaggageColPoint;
+import serverSide.TemporaryStorageArea;
 
 /**
  * ...

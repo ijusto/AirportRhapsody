@@ -1,7 +1,7 @@
-package sharedRegions;
+package serverSide;
 
-import entities.Passenger;
-import entities.PassengerStates;
+import clientSide.Passenger;
+import clientSide.PassengerStates;
 
 /**
  *   Baggage Reclaim Office.
