@@ -1,8 +1,9 @@
-package clientSide;
+package clientSide.entities;
+import clientSide.PorterStates;
+import clientSide.stubs.ArrivalLoungeStub;
+import clientSide.stubs.BaggageColPointStub;
+import clientSide.stubs.TemporaryStorageAreaStub;
 import commonInfrastructures.Bag;
-import serverSide.ArrivalLounge;
-import serverSide.BaggageColPoint;
-import serverSide.TemporaryStorageArea;
 
 /**
  * ...
@@ -24,42 +25,42 @@ public class Porter extends Thread {
     /**
      *  ...
      *
-     *    @serialField arrivalLounge
+     *    @serialField arrivalLoungeStub
      */
 
-    ArrivalLounge arrivalLounge;
+    ArrivalLoungeStub arrivalLoungeStub;
 
     /**
      *  ...
      *
-     *    @serialField tempStore
+     *    @serialField tempStoreStub
      */
 
-    TemporaryStorageArea tempStore;
+    TemporaryStorageAreaStub tempStoreStub;
 
     /**
      *  ...
      *
-     *    @serialField bColPnt
+     *    @serialField bColPntStub
      */
 
-    BaggageColPoint bColPnt;
+    BaggageColPointStub bColPntStub;
 
     /**
      *  Instantiation of the thread Porter.
      *
      *    @param Stat state of the porter
-     *    @param arrivalLounge  ...
-     *    @param tempStore ...
-     *    @param bColPnt ....
+     *    @param arrivalLoungeStub  ...
+     *    @param tempStoreStub ...
+     *    @param bColPntStub ....
      */
 
-    public Porter(PorterStates Stat, ArrivalLounge arrivalLounge, TemporaryStorageArea tempStore,
-                  BaggageColPoint bColPnt){
+    public Porter(PorterStates Stat, ArrivalLoungeStub arrivalLoungeStub, TemporaryStorageAreaStub tempStoreStub,
+                  BaggageColPointStub bColPntStub){
         this.Stat = Stat;
-        this.arrivalLounge = arrivalLounge;
-        this.tempStore = tempStore;
-        this.bColPnt = bColPnt;
+        this.arrivalLoungeStub = arrivalLoungeStub;
+        this.tempStoreStub = tempStoreStub;
+        this.bColPntStub = bColPntStub;
     }
 
     /**
@@ -71,19 +72,19 @@ public class Porter extends Thread {
         Bag bag;
         boolean planeHoldEmpty;
 
-        while ( arrivalLounge.takeARest() != 'E' ){	// 'E' character return means end of state
+        while ( arrivalLoungeStub.takeARest() != 'E' ){	// 'E' character return means end of state
             planeHoldEmpty = false;
             while (!planeHoldEmpty) {
-                bag = arrivalLounge.tryToCollectABag();
+                bag = arrivalLoungeStub.tryToCollectABag();
                 if (bag == null) {
                     planeHoldEmpty = true;
                 } else if (bag.getDestStat() == Bag.DestStat.TRANSIT){
-                    tempStore.carryItToAppropriateStore(bag);
+                    tempStoreStub.carryItToAppropriateStore(bag);
                 } else {
-                    bColPnt.carryItToAppropriateStore(bag);
+                    bColPntStub.carryItToAppropriateStore(bag);
                 }
             }
-            arrivalLounge.noMoreBagsToCollect();
+            arrivalLoungeStub.noMoreBagsToCollect();
         }
     }
 

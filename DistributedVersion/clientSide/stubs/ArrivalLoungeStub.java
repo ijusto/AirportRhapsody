@@ -1,5 +1,8 @@
-package clientSide;
+package clientSide.stubs;
 
+import clientSide.ClientCom;
+import clientSide.Porter;
+import clientSide.PorterStates;
 import comInf.Message;
 
 import java.util.HashMap;

@@ -1,5 +1,7 @@
-package clientSide;
-import sharedRegions.*;
+package clientSide.entities;
+
+import clientSide.PassengerStates;
+import clientSide.stubs.*;
 
 /**
  *   Passenger thread.
@@ -58,60 +60,60 @@ public class Passenger extends Thread {
     private int id;
 
     /**
-     *   Arrival Lounge.
+     *   Arrival Lounge Stub.
      *
-     *    @serialField arrivalLounge
+     *    @serialField arrivalLoungeStub
      */
 
-    private ArrivalLounge arrivalLounge;
+    private ArrivalLoungeStub arrivalLoungeStub;
 
     /**
-     *   Arrival Terminal Transfer Quay.
+     *   Arrival Terminal Transfer Quay Stub.
      *
-     *    @serialField transferQuay
+     *    @serialField transferQuayStub
      */
 
-    private ArrivalTermTransfQuay arrivTransferQuay;
-
-    /**
-     *  ...
-     *
-     *    @serialField departureTransferQuay
-     */
-
-    private DepartureTermTransfQuay departureTransferQuay;
+    private ArrivalTermTransfQuayStub arrivTransferQuayStub;
 
     /**
      *  ...
      *
-     *    @serialField departureEntrance
+     *    @serialField departureTransferQuayStub
      */
 
-    private DepartureTerminalEntrance departureEntrance;
+    private DepartureTermTransfQuayStub departureTransferQuayStub;
 
     /**
      *  ...
      *
-     *    @serialField arrivalTerminalExit
+     *    @serialField departureEntranceStub
      */
 
-    private ArrivalTerminalExit arrivalTerminalExit;
+    private DepartureTerminalEntranceStub departureEntranceStub;
 
     /**
      *  ...
      *
-     *    @serialField baggageColPoint
+     *    @serialField arrivalTerminalExitStub
      */
 
-    private BaggageColPoint baggageColPoint;
+    private ArrivalTerminalExitStub arrivalTerminalExitStub;
 
     /**
      *  ...
      *
-     *    @serialField baggageReclaimOffice
+     *    @serialField baggageColPointStub
      */
 
-    private BaggageReclaimOffice baggageReclaimOffice;
+    private BaggageColPointStub baggageColPointStub;
+
+    /**
+     *  ...
+     *
+     *    @serialField baggageReclaimOfficeStub
+     */
+
+    private BaggageReclaimOfficeStub baggageReclaimOfficeStub;
 
     /**
      *  Instantiation of the thread Passenger.
@@ -121,32 +123,32 @@ public class Passenger extends Thread {
      *    @param NR Number of pieces of luggage the passenger carried at the start of her journey.
      *    @param NA Number of pieces of luggage the passenger she has presently collected.
      *    @param id passenger's id.
-     *    @param arrivalLounge Arrival Lounge.
-     *    @param arrivalTermTransfQuay Arrival Terminal Transfer Quay.
-     *    @param departureTransferQuay Departure Transfer Quay.
-     *    @param departureEntrance Departure Entrance.
-     *    @param arrivalTerminalExit Arrival Terminal Exit.
-     *    @param baggageColPoint Baggage Collection Point.
-     *    @param baggageReclaimOffice Baggage Reclaim Office.
+     *    @param arrivalLoungeStub Arrival Lounge Stub.
+     *    @param arrivalTermTransfQuayStub Arrival Terminal Transfer Quay Stub.
+     *    @param departureTransferQuayStub Departure Transfer Quay Stub.
+     *    @param departureEntranceStub Departure Entrance Stub.
+     *    @param arrivalTerminalExitStub Arrival Terminal Exit Stub.
+     *    @param baggageColPointStub Baggage Collection Point Stub.
+     *    @param baggageReclaimOfficeStub Baggage Reclaim Office Stub.
      */
 
-    public Passenger(PassengerStates St, SiPass Si, int NR, int NA, int id, ArrivalLounge arrivalLounge,
-                     ArrivalTermTransfQuay arrivalTermTransfQuay, DepartureTermTransfQuay departureTransferQuay,
-                     DepartureTerminalEntrance departureEntrance, ArrivalTerminalExit arrivalTerminalExit,
-                     BaggageColPoint baggageColPoint, BaggageReclaimOffice baggageReclaimOffice){
+    public Passenger(PassengerStates St, SiPass Si, int NR, int NA, int id, ArrivalLoungeStub arrivalLoungeStub,
+                     ArrivalTermTransfQuayStub arrivalTermTransfQuayStub, DepartureTermTransfQuayStub departureTransferQuayStub,
+                     DepartureTerminalEntranceStub departureEntranceStub, ArrivalTerminalExitStub arrivalTerminalExitStub,
+                     BaggageColPointStub baggageColPointStub, BaggageReclaimOfficeStub baggageReclaimOfficeStub){
         this.St = St;
         this.Si = Si;
         this.NR = NR;
         this.NA = NA;
         this.id = id;
 
-        this.arrivalLounge = arrivalLounge;
-        this.arrivTransferQuay = arrivalTermTransfQuay;
-        this.departureTransferQuay = departureTransferQuay;
-        this.departureEntrance = departureEntrance;
-        this.arrivalTerminalExit = arrivalTerminalExit;
-        this.baggageColPoint = baggageColPoint;
-        this.baggageReclaimOffice = baggageReclaimOffice;
+        this.arrivalLoungeStub = arrivalLoungeStub;
+        this.arrivTransferQuayStub = arrivalTermTransfQuayStub;
+        this.departureTransferQuayStub = departureTransferQuayStub;
+        this.departureEntranceStub = departureEntranceStub;
+        this.arrivalTerminalExitStub = arrivalTerminalExitStub;
+        this.baggageColPointStub = baggageColPointStub;
+        this.baggageReclaimOfficeStub = baggageReclaimOfficeStub;
     }
 
     /**
@@ -156,26 +158,26 @@ public class Passenger extends Thread {
     @Override
     public void run() {
 
-        boolean isFinal = arrivalLounge.whatShouldIDo();
+        boolean isFinal = arrivalLoungeStub.whatShouldIDo();
         boolean success = false;
         if (isFinal) {
             if (this.getNR() != 0) {
                 for (int i = 0; i < this.getNR(); i++) {
-                    success = baggageColPoint.goCollectABag();
+                    success = baggageColPointStub.goCollectABag();
                     if (!success) {
                         break;
                     }
                 }
                 if (!success) {
-                    baggageReclaimOffice.reportMissingBags();
+                    baggageReclaimOfficeStub.reportMissingBags();
                 }
             }
-            arrivalTerminalExit.goHome();
+            arrivalTerminalExitStub.goHome();
         } else {
-            arrivTransferQuay.takeABus();
-            arrivTransferQuay.enterTheBus();
-            departureTransferQuay.leaveTheBus();
-            departureEntrance.prepareNextLeg();
+            arrivTransferQuayStub.takeABus();
+            arrivTransferQuayStub.enterTheBus();
+            departureTransferQuayStub.leaveTheBus();
+            departureEntranceStub.prepareNextLeg();
         }
     }
 

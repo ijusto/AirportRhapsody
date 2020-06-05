@@ -1,6 +1,7 @@
-package clientSide;
-import serverSide.ArrivalTermTransfQuay;
-import serverSide.DepartureTermTransfQuay;
+package clientSide.entities;
+import clientSide.BusDriverStates;
+import clientSide.stubs.ArrivalTermTransfQuayStub;
+import clientSide.stubs.DepartureTermTransfQuayStub;
 import sharedRegions.GenReposInfo;
 
 /**
@@ -21,20 +22,20 @@ public class BusDriver extends Thread {
     GenReposInfo repos;
 
     /**
-     *   Arrival Terminal Transfer Quay.
+     *   Arrival Terminal Transfer Quay Stub.
      *
-     *    @serialField arrivalTerminalQuay
+     *    @serialField arrivalTerminalQuayStub
      */
 
-    ArrivalTermTransfQuay arrivalTerminalQuay;
+    ArrivalTermTransfQuayStub arrivalTerminalQuayStub;
 
     /**
-     *   Departure Terminal Transfer Quay.
+     *   Departure Terminal Transfer Quay Stub.
      *
-     *    @serialField departureTransferQuay
+     *    @serialField departureTransferQuayStub
      */
 
-    DepartureTermTransfQuay departureTransferQuay;
+    DepartureTermTransfQuayStub departureTransferQuayStub;
 
     /**
      *   State of the driver.
@@ -56,16 +57,16 @@ public class BusDriver extends Thread {
      *   Instantiation of the thread BusDriver.
      *
      *    @param Stat State of the driver.
-     *    @param arrivalTerminalQuay Arrival Terminal Transfer Quay.
-     *    @param departureTransferQuay Departure Terminal Transfer Quay.
+     *    @param arrivalTerminalQuayStub Arrival Terminal Transfer Quay Stub.
+     *    @param departureTransferQuayStub Departure Terminal Transfer Quay Stub.
      *    @param repos General Repository of Information.
      */
 
-    public BusDriver(BusDriverStates Stat, ArrivalTermTransfQuay arrivalTerminalQuay,
-                     DepartureTermTransfQuay departureTransferQuay, GenReposInfo repos){
+    public BusDriver(BusDriverStates Stat, ArrivalTermTransfQuayStub arrivalTerminalQuayStub,
+                     DepartureTermTransfQuayStub departureTransferQuayStub, GenReposInfo repos){
         this.Stat = Stat;
-        this.arrivalTerminalQuay = arrivalTerminalQuay;
-        this.departureTransferQuay = departureTransferQuay;
+        this.arrivalTerminalQuayStub = arrivalTerminalQuayStub;
+        this.departureTransferQuayStub = departureTransferQuayStub;
         this.repos = repos;
         this.nPassOnTheBus = 0;
     }
@@ -76,12 +77,12 @@ public class BusDriver extends Thread {
 
     @Override
     public void run() {
-        while(arrivalTerminalQuay.hasDaysWorkEnded() != 'F'){
-            arrivalTerminalQuay.announcingBusBoarding();
+        while(arrivalTerminalQuayStub.hasDaysWorkEnded() != 'F'){
+            arrivalTerminalQuayStub.announcingBusBoarding();
             goToDepartureTerminal();
-            departureTransferQuay.parkTheBusAndLetPassOff();
+            departureTransferQuayStub.parkTheBusAndLetPassOff();
             goToArrivalTerminal();
-            arrivalTerminalQuay.parkTheBus();
+            arrivalTerminalQuayStub.parkTheBus();
         }
     }
 
