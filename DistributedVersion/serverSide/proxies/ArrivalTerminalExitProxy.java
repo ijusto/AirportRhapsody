@@ -103,7 +103,7 @@ public class ArrivalTerminalExitProxy extends Thread {
      *    @return canal de comunicação
      */
 
-    public ServerArrivalTerminalExit getScon ()
+    public ServerCom getScon ()
     {
         return sconi;
     }

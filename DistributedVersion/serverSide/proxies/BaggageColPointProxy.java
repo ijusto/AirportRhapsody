@@ -103,7 +103,7 @@ public class BaggageColPointProxy extends Thread
      *    @return canal de comunicação
      */
 
-    public ServerBaggageColPoint getScon ()
+    public ServerCom getScon ()
     {
         return sconi;
     }

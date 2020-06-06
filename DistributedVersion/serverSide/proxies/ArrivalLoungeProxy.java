@@ -103,7 +103,7 @@ public class ArrivalLoungeProxy extends Thread {
      *    @return canal de comunicação
      */
 
-    public ServerArrivalLounge getScon ()
+    public ServerCom getScon ()
     {
         return sconi;
     }

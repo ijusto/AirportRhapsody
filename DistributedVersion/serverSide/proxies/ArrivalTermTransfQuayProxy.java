@@ -103,7 +103,7 @@ public class ArrivalTermTransfQuayProxy extends Thread {
      *    @return canal de comunicação
      */
 
-    public ServerArrivalTermTransfQuay getScon ()
+    public ServerCom getScon ()
     {
         return sconi;
     }
