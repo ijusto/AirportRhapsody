@@ -3,7 +3,7 @@ package clientSide.clients;
 import java.io.*;
 import java.net.*;
 
-public class ClientBusDriverCom {
+public class ClientBusDriver {
 
     /**
      *  Socket de comunicação
@@ -47,7 +47,7 @@ public class ClientBusDriverCom {
      *    @param portNumb número do port de escuta do servidor
      */
 
-    public ClientBusDriverCom (String hostName, int portNumb) {
+    public ClientBusDriver(String hostName, int portNumb) {
         serverHostName = hostName;
         serverPortNumb = portNumb;
     }

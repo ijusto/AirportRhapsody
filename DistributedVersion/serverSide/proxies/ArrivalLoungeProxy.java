@@ -3,7 +3,7 @@ package serverSide.proxies;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.interfaces.ArrivalLoungeInterface;
-import serverSide.servers.ServerArrivalLoungeCom;
+import serverSide.servers.ServerArrivalLounge;
 
 public class ArrivalLoungeProxy extends Thread {
 
@@ -21,7 +21,7 @@ public class ArrivalLoungeProxy extends Thread {
      *    @serialField sconi
      */
 
-    private ServerArrivalLoungeCom sconi;
+    private ServerArrivalLounge sconi;
 
     /**
      *
@@ -38,7 +38,7 @@ public class ArrivalLoungeProxy extends Thread {
      *    @param arrivalLoungeInterface
      */
 
-    public ArrivalLoungeProxy(ServerArrivalLoungeCom sconi, ArrivalLoungeInterface arrivalLoungeInterface)
+    public ArrivalLoungeProxy(ServerArrivalLounge sconi, ArrivalLoungeInterface arrivalLoungeInterface)
     {
         super ("Proxy_" + ArrivalLoungeProxy.getProxyId ());
 
@@ -102,7 +102,7 @@ public class ArrivalLoungeProxy extends Thread {
      *    @return canal de comunicação
      */
 
-    public ServerArrivalLoungeCom getScon ()
+    public ServerArrivalLounge getScon ()
     {
         return sconi;
     }

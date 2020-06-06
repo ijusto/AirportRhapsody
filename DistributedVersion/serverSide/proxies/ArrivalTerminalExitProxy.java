@@ -3,7 +3,7 @@ package serverSide.proxies;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.interfaces.ArrivalTerminalExitInterface;
-import serverSide.servers.ServerArrivalTerminalExitCom;
+import serverSide.servers.ServerArrivalTerminalExit;
 
 public class ArrivalTerminalExitProxy extends Thread {
 
@@ -21,7 +21,7 @@ public class ArrivalTerminalExitProxy extends Thread {
      *    @serialField sconi
      */
 
-    private ServerArrivalTerminalExitCom sconi;
+    private ServerArrivalTerminalExit sconi;
 
     /**
      *
@@ -38,7 +38,7 @@ public class ArrivalTerminalExitProxy extends Thread {
      *    @param arrivalTerminalExitInterface
      */
 
-    public ArrivalTerminalExitProxy(ServerArrivalTerminalExitCom sconi, ArrivalTerminalExitInterface arrivalTerminalExitInterface)
+    public ArrivalTerminalExitProxy(ServerArrivalTerminalExit sconi, ArrivalTerminalExitInterface arrivalTerminalExitInterface)
     {
         super ("Proxy_" + ArrivalTerminalExitProxy.getProxyId ());
 
@@ -102,7 +102,7 @@ public class ArrivalTerminalExitProxy extends Thread {
      *    @return canal de comunicação
      */
 
-    public ServerArrivalTerminalExitCom getScon ()
+    public ServerArrivalTerminalExit getScon ()
     {
         return sconi;
     }
