@@ -40,10 +40,26 @@ public class ArrivalTermTransfQuayInterface {
 
         switch (inMessage.getType ()) {
 
+            // takeABus (Passenger)
             case Message.TAKEABUS:
                 arrivalTermTransfQuay.takeABus(inMessage.getPassId());
                 outMessage = new Message(Message.TAKERSTDONE);
                 break;
+
+            // enterTheBus (Passenger)
+            case Message.ENTERBUS:
+                arrivalTermTransfQuay.enterTheBus(inMessage.getPassId());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // hasDaysWorkEnded (BusDriver)
+            case Message.TAKEARST:
+                if (arrivalTermTransfQuay.hasDaysWorkEnded() == 'R')
+                    outMessage = new Message (Message.CONTDAYS);    // gerar resposta positiva
+                else
+                    outMessage = new Message (Message.ENDBUSDRIVER); // gerar resposta negativa
+                break;
+
         }
 
         return (outMessage);

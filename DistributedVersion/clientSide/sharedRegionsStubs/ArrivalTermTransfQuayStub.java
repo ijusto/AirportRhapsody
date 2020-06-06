@@ -135,29 +135,23 @@ public class ArrivalTermTransfQuayStub {
 
     public void enterTheBus(int passengerId){
 
-        Passenger passenger = (Passenger) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        assert(this.getNPassOnTheBusValue() < SimulPar.BUS_CAP);
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
-        repos.updatePassSt(passenger.getPassengerID(),PassengerStates.TERMINAL_TRANSFER);
-
-        try{
-            this.waitingLine.read();
-            repos.pLeftWaitingQueue(passenger.getPassengerID());
-
-            boolean last = this.incDecNPassOnTheBusCounter(true);
-
-            // last passenger to enter the bus wakes up the bus driver
-            if(last || this.waitingLine.isEmpty()){
-                // wake up Bus driver in announcingBusBoarding()
-                notifyAll();
-            }
-        } catch (MemException e) {
-            e.printStackTrace();
+        while(!con.open()){                                    // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
-
-        repos.printLog();
+        outMessage = new Message(Message.ENTERBUS, passengerId);     // o barbeiro vai dormir
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /* ************************************************Bus Driver**************************************************** */
@@ -170,27 +164,30 @@ public class ArrivalTermTransfQuayStub {
      */
 
     public char hasDaysWorkEnded(){
+
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while (!con.open ()) {                                    // aguarda ligação
             try {
-                Thread.currentThread().sleep ((long) (10));
+                Thread.currentThread ().sleep ((long) (10));
             } catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (Message.HASDAYSEND, busDriverId);
+        outMessage = new Message (Message.WORKENDED);     // o barbeiro vai dormir
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 
-        if (inMessage.getType () != Message.ACK){
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+        if ((inMessage.getType () != Message.CONTDAYS/*CONTPORTER*/) && (inMessage.getType () != Message.ENDBUSDRIVER)) {
+            System.out.println("Thread " + Thread.currentThread ().getName ()+ ": Tipo inválido!");
             System.out.println(inMessage.toString ());
             System.exit (1);
         }
         con.close ();
 
-        return inMessage.hasDaysWorkEnded();
+        if (inMessage.getType () == Message.ENDBUSDRIVER)
+            return 'E';                                          // fim de operações
+        else return 'R';
     }
 
     /**

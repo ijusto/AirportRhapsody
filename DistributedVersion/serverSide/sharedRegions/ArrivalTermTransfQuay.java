@@ -132,7 +132,7 @@ public class ArrivalTermTransfQuay {
      *   in announcingBusBoarding, who is waiting for all the passenger to enter.
      */
 
-    public synchronized void enterTheBus(){
+    public synchronized void enterTheBus(int passengerId){
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);

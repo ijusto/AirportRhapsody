@@ -95,6 +95,8 @@ public class Message implements Serializable
     /*hasDaysWorkEnded*/
     public static final int WORKENDED = 19;
 
+    public static final int CONTDAYS = 20;
+
     /*parkTheBus*/
     public static final int PARKBUS = 20;
 
