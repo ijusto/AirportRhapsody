@@ -1,10 +1,13 @@
 package clientSide.sharedRegionsStubs;
 
+import clientSide.clients.ClientCom;
 import clientSide.entities.Passenger;
 import clientSide.entities.Porter;
 import comInf.Bag;
 import comInf.MemException;
 import comInf.MemFIFO;
+import comInf.Message;
+import old.GenReposInfo;
 
 import java.util.Map;
 
@@ -31,11 +34,66 @@ public class BaggageColPointStub {
      *    @param port número do port de escuta do servidor
      */
 
-    public BaggageColPointStub (String hostName, int port)
-    {
+    public BaggageColPointStub (String hostName, int port) {
         serverHostName = hostName;
         serverPortNumb = port;
     }
+
+    /**
+     *  Fornecer parâmetros do problema (solicitação do serviço).
+     *
+     */
+
+    public void probPar (GenReposInfo repos)//(String fName, int nIter)
+    {
+
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        /*
+        outMessage = new Message (Message.SETNFIC, fName, nIter);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.NFICDONE) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+         */
+        con.close ();
+    }
+
+    /**
+     *  Fazer o shutdown do servidor (solicitação do serviço).
+     */
+
+    public void shutdown ()
+    {
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.SHUT);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+    }
+
 
     /* ************************************************Passenger***************************************************** */
 

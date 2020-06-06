@@ -6,6 +6,9 @@ import clientSide.PorterStates;
 import clientSide.SimulPar;
 import comInf.Bag;
 import comInf.Message;
+import old.GenReposInfo;
+import serverSide.sharedRegions.ArrivalTermTransfQuay;
+import serverSide.sharedRegions.BaggageColPoint;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,11 +36,67 @@ public class ArrivalLoungeStub {
      *    @param port número do port de escuta do servidor
      */
 
-    public ArrivalLoungeStub (String hostName, int port)
-    {
+    public ArrivalLoungeStub (String hostName, int port) {
         serverHostName = hostName;
         serverPortNumb = port;
     }
+
+    /**
+     *  Fornecer parâmetros do problema (solicitação do serviço).
+     *
+     */
+
+    public void probPar (GenReposInfo repos, BaggageColPointStub bagColPointStub, ArrivalTermTransfQuayStub arrQuayStub,
+                         Bag.DestStat[][] destStat, int[][] nBagsPHold)//(String fName, int nIter)
+    {
+
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        /*
+        outMessage = new Message (Message.SETNFIC, fName, nIter);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.NFICDONE) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+         */
+        con.close ();
+    }
+
+    /**
+     *  Fazer o shutdown do servidor (solicitação do serviço).
+     */
+
+    public void shutdown ()
+    {
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.SHUT);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+    }
+
 
     /* **************************************************Passenger*************************************************** */
 

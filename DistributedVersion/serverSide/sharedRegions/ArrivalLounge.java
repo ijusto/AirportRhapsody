@@ -90,8 +90,8 @@ public class ArrivalLounge {
      *     @param nBagsPHold number of bags per passenger and flight.
      */
 
-    public ArrivalLounge(GenReposInfo repos, BaggageColPoint bagColPoint, ArrivalTermTransfQuay arrQuay,
-                         Bag.DestStat[][] destStat, int[][] nBagsPHold)
+    public ArrivalLounge(/*GenReposInfo repos, BaggageColPoint bagColPoint, ArrivalTermTransfQuay arrQuay,
+                         Bag.DestStat[][] destStat, int[][] nBagsPHold*/)
             throws MemException {
 
         this.repos = repos;
