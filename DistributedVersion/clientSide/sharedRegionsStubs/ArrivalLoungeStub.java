@@ -1,4 +1,4 @@
-package clientSide.stubs;
+package clientSide.sharedRegionsStubs;
 
 import clientSide.ClientCom;
 import clientSide.Porter;

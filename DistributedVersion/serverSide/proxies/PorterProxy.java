@@ -1,8 +1,5 @@
-package serverSide.proxys;
+package serverSide.proxies;
 
-import clientSide.stubs.ArrivalLoungeStub;
-import clientSide.stubs.BaggageColPointStub;
-import clientSide.stubs.TemporaryStorageAreaStub;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.ServerCom;

@@ -1,6 +1,6 @@
-package clientSide.stubs;
+package clientSide.sharedRegionsStubs;
 
-public class TemporaryStorageAreaStub {
+public class BaggageColPointStub {
 
     /**
      *  Nome do sistema computacional onde está localizado o servidor
@@ -23,7 +23,7 @@ public class TemporaryStorageAreaStub {
      *    @param port número do port de escuta do servidor
      */
 
-    public TemporaryStorageAreaStub (String hostName, int port)
+    public BaggageColPointStub (String hostName, int port)
     {
         serverHostName = hostName;
         serverPortNumb = port;

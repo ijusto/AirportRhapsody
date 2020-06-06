@@ -1,12 +1,9 @@
-package serverSide.proxys;
+package serverSide.proxies;
 
-import clientSide.stubs.ArrivalTermTransfQuayStub;
-import clientSide.stubs.DepartureTermTransfQuayStub;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.ServerCom;
-import serverSide.interfaces.ArrivalTermTransfQuayInterface;
-import serverSide.interfaces.DepartureTermTransfQuayInterface;
+import serverSide.interfaces.*;
 
 /**
  *   Este tipo de dados define o thread agente prestador de serviço para uma solução do Problema dos Barbeiros
@@ -15,7 +12,7 @@ import serverSide.interfaces.DepartureTermTransfQuayInterface;
  *   A comunicação baseia-se em passagem de mensagens sobre sockets usando o protocolo TCP.
  */
 
-public class BusDriverProxy extends Thread
+public class PassengerProxy extends Thread
 {
     /**
      *  Contador de threads lançados
@@ -34,39 +31,90 @@ public class BusDriverProxy extends Thread
     private ServerCom sconi;
 
     /**
-     *   Arrival Terminal Transfer Quay Interface.
+     *   Arrival Lounge Interface.
      *
-     *    @serialField arrivalTerminalQuayInterface
+     *    @serialField arrivalLoungeInterface
      */
 
-    ArrivalTermTransfQuayInterface arrivalTerminalQuayInterface;
+    private ArrivalLoungeInterface arrivalLoungeInterface;
 
     /**
-     *   Departure Terminal Transfer Quay Interface.
+     *   Arrival Terminal Transfer Quay Interface.
+     *
+     *    @serialField transferQuayInterface
+     */
+
+    private ArrivalTermTransfQuayInterface arrivTransferQuayInterface;
+
+    /**
+     *  ...
      *
      *    @serialField departureTransferQuayInterface
      */
 
-    DepartureTermTransfQuayInterface departureTransferQuayInterface;
+    private DepartureTermTransfQuayInterface departureTransferQuayInterface;
+
+    /**
+     *  ...
+     *
+     *    @serialField departureEntranceInterface
+     */
+
+    private DepartureTerminalEntranceInterface departureEntranceInterface;
+
+    /**
+     *  ...
+     *
+     *    @serialField arrivalTerminalExitInterface
+     */
+
+    private ArrivalTerminalExitInterface arrivalTerminalExitInterface;
+
+    /**
+     *  ...
+     *
+     *    @serialField baggageColPointInterface
+     */
+
+    private BaggageColPointInterface baggageColPointInterface;
+
+    /**
+     *  ...
+     *
+     *    @serialField baggageReclaimOfficeInterface
+     */
+
+    private BaggageReclaimOfficeInterface baggageReclaimOfficeInterface;
 
     /**
      *  Instanciação do interface à barbearia.
      *
      *    @param sconi canal de comunicação
-     *    @param arrivalTerminalQuayInterface Departure Terminal Transfer Quay Interface.
-     *    @param departureTransferQuayInterface Arrival Terminal Transfer Quay Interface.
+     *    @param arrivalLoungeInterface Arrival Lounge Interface.
+     *    @param arrivalTermTransfQuayInterface Arrival Terminal Transfer Quay Interface.
+     *    @param departureTransferQuayInterface Departure Transfer Quay Interface.
+     *    @param departureEntranceInterface Departure Entrance Interface.
+     *    @param arrivalTerminalExitInterface Arrival Terminal Exit Interface.
+     *    @param baggageColPointInterface Baggage Collection Point Interface.
+     *    @param baggageReclaimOfficeInterface Baggage Reclaim Office Interface.
      */
 
-    public BusDriverProxy (ServerCom sconi, /*BarberShopInterface bShopInter,*/
-                        ArrivalTermTransfQuayInterface arrivalTerminalQuayInterface,
-                        DepartureTermTransfQuayInterface departureTransferQuayInterface)
+    public PassengerProxy (ServerCom sconi, /*BarberShopInterface bShopInter,*/ ArrivalLoungeInterface arrivalLoungeInterface,
+                        ArrivalTermTransfQuayInterface arrivalTermTransfQuayInterface, DepartureTermTransfQuayInterface departureTransferQuayInterface,
+                        DepartureTerminalEntranceInterface departureEntranceInterface, ArrivalTerminalExitInterface arrivalTerminalExitInterface,
+                        BaggageColPointInterface baggageColPointInterface, BaggageReclaimOfficeInterface baggageReclaimOfficeInterface)
     {
-        super ("Proxy_" + BusDriverProxy.getProxyId ());
+        super ("Proxy_" + PassengerProxy.getProxyId ());
 
         this.sconi = sconi;
         /*this.bShopInter = bShopInter;*/
-        this.arrivalTerminalQuayInterface = arrivalTerminalQuayInterface;
+        this.arrivalLoungeInterface = arrivalLoungeInterface;
+        this.arrivTransferQuayInterface = arrivalTermTransfQuayInterface;
         this.departureTransferQuayInterface = departureTransferQuayInterface;
+        this.departureEntranceInterface = departureEntranceInterface;
+        this.arrivalTerminalExitInterface = arrivalTerminalExitInterface;
+        this.baggageColPointInterface = baggageColPointInterface;
+        this.baggageReclaimOfficeInterface = baggageReclaimOfficeInterface;
     }
 
     /**
@@ -131,4 +179,3 @@ public class BusDriverProxy extends Thread
         return sconi;
     }
 }
-

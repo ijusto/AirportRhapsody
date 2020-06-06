@@ -1,4 +1,4 @@
-package clientSide.stubs;
+package clientSide.sharedRegionsStubs;
 
 import clientSide.BusDriverStates;
 import clientSide.ClientCom;

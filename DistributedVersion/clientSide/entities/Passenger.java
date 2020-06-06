@@ -1,7 +1,7 @@
 package clientSide.entities;
 
 import clientSide.PassengerStates;
-import clientSide.stubs.*;
+import clientSide.sharedRegionsStubs.*;
 
 /**
  *   Passenger thread.

@@ -1,6 +1,6 @@
-package clientSide.stubs;
+package clientSide.sharedRegionsStubs;
 
-public class BaggageColPointStub {
+public class ArrivalTerminalExitStub {
 
     /**
      *  Nome do sistema computacional onde está localizado o servidor
@@ -23,7 +23,7 @@ public class BaggageColPointStub {
      *    @param port número do port de escuta do servidor
      */
 
-    public BaggageColPointStub (String hostName, int port)
+    public ArrivalTerminalExitStub (String hostName, int port)
     {
         serverHostName = hostName;
         serverPortNumb = port;

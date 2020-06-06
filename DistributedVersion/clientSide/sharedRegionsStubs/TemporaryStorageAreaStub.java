@@ -1,6 +1,6 @@
-package clientSide.stubs;
+package clientSide.sharedRegionsStubs;
 
-public class ArrivalTerminalExitStub {
+public class TemporaryStorageAreaStub {
 
     /**
      *  Nome do sistema computacional onde está localizado o servidor
@@ -23,7 +23,7 @@ public class ArrivalTerminalExitStub {
      *    @param port número do port de escuta do servidor
      */
 
-    public ArrivalTerminalExitStub (String hostName, int port)
+    public TemporaryStorageAreaStub (String hostName, int port)
     {
         serverHostName = hostName;
         serverPortNumb = port;

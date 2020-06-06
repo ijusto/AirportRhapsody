@@ -1,7 +1,7 @@
 package clientSide.entities;
 import clientSide.BusDriverStates;
-import clientSide.stubs.ArrivalTermTransfQuayStub;
-import clientSide.stubs.DepartureTermTransfQuayStub;
+import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
+import clientSide.sharedRegionsStubs.DepartureTermTransfQuayStub;
 import sharedRegions.GenReposInfo;
 
 /**

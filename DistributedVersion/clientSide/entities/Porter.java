@@ -1,8 +1,8 @@
 package clientSide.entities;
 import clientSide.PorterStates;
-import clientSide.stubs.ArrivalLoungeStub;
-import clientSide.stubs.BaggageColPointStub;
-import clientSide.stubs.TemporaryStorageAreaStub;
+import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
+import clientSide.sharedRegionsStubs.BaggageColPointStub;
+import clientSide.sharedRegionsStubs.TemporaryStorageAreaStub;
 import comInf.Bag;
 
 /**
