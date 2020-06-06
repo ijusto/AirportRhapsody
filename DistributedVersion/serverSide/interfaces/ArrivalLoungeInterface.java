@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import comInf.Bag;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.sharedRegions.ArrivalLounge;
@@ -43,12 +44,29 @@ public class ArrivalLoungeInterface {
 
         switch (inMessage.getType ()) {
 
-            // WhatShouldIDo (operação pedida pelo passenger)
+            // WhatShouldIDo (Passenger)
             case Message.WSID:
                 if (arrivalLounge.whatShouldIDo())
                     outMessage = new Message (Message.FNDST);    // gerar resposta positiva
                 else
                     outMessage = new Message (Message.TRDST); // gerar resposta negativa
+                break;
+
+            // takeARest (Porter)
+            case Message.TAKEARST:
+                if (arrivalLounge.takeARest() == 'R')
+                    outMessage = new Message (Message.TAKERSTDONE);    // gerar resposta positiva
+                else
+                    outMessage = new Message (Message.ENDPORTER); // gerar resposta negativa
+                break;
+
+            // tryToCollectABag (Porter)
+            case Message.TRYTOCOL:
+                Bag msgBag = arrivalLounge.tryToCollectABag();
+                if (msgBag != null)
+                    outMessage = new Message (Message.BAG, msgBag.getIntDestStat(), msgBag.getIdOwner());    // gerar resposta positiva
+                else
+                    outMessage = new Message (Message.NULLBAG); // gerar resposta negativa
                 break;
         }
 

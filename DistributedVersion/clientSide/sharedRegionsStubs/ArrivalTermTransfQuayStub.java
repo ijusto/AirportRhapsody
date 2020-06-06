@@ -48,7 +48,7 @@ public class ArrivalTermTransfQuayStub {
      *   in the bus.
      */
 
-    public synchronized void takeABus() {
+    public void takeABus() {
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
@@ -87,7 +87,7 @@ public class ArrivalTermTransfQuayStub {
      *   in announcingBusBoarding, who is waiting for all the passenger to enter.
      */
 
-    public synchronized void enterTheBus(){
+    public void enterTheBus(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
@@ -154,7 +154,7 @@ public class ArrivalTermTransfQuayStub {
      *   the line or he was notified by the third passenger in the line, he wakes up. Otherwise, he keeps waiting.
      */
 
-    public synchronized void parkTheBus(){
+    public void parkTheBus(){
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
@@ -192,7 +192,7 @@ public class ArrivalTermTransfQuayStub {
      *   passenger to notify him after he enters.
      */
 
-    public synchronized void announcingBusBoarding(){
+    public void announcingBusBoarding(){
 
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);

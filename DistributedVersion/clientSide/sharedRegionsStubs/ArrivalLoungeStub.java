@@ -1,9 +1,10 @@
 package clientSide.sharedRegionsStubs;
 
 import clientSide.clients.ClientCom;
-import clientSide.Porter;
+import clientSide.entities.Porter;
 import clientSide.PorterStates;
 import clientSide.SimulPar;
+import comInf.Bag;
 import comInf.Message;
 
 import java.util.HashMap;
@@ -89,35 +90,31 @@ public class ArrivalLoungeStub {
      *             <li> 'R', otherwise </li>
      */
 
-    public synchronized char takeARest(){
+    public char takeARest(int porterId){
 
-        porterSleep = true;
-        notifyAll(); // notify Reset (avoid deadlock of passengers entering and notifying before the porter sleeps)
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        Porter porter = (Porter) Thread.currentThread();
-        assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-        repos.printLog();
-
-        if(this.endDay){
-            porterSleep = false;
-            return 'E';
-        } else {
-            while (this.getNPassAtArrivLValue() < SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                if (this.endDay) {
-                    porterSleep = false;
-                    return 'E';
-                }
-            }
+        while (!con.open ()) {                                    // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
 
-        porterSleep = false;
-        return 'R';
+        outMessage = new Message (Message.TAKEARST, porterId);     // o barbeiro vai dormir
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if ((inMessage.getType () != Message.TAKERSTDONE/*CONTPORTER*/) && (inMessage.getType () != Message.ENDPORTER)) {
+            System.out.println("Thread " + Thread.currentThread ().getName ()+ ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+
+        if (inMessage.getType () == Message.ENDPORTER)
+            return 'E';                                          // fim de operações
+        else return 'R';
     }
 
     /**
@@ -127,22 +124,33 @@ public class ArrivalLoungeStub {
      *             <li> null, otherwise. </li>
      */
 
-    public synchronized Bag tryToCollectABag(){
+    public Bag tryToCollectABag(int porterId){
 
-        Porter porter = (Porter) Thread.currentThread();
-        assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-        porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        repos.updatePorterStat(PorterStates.AT_THE_PLANES_HOLD);
+        while (!con.open ()) {                                    // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
 
-        try {
-            Bag tmpBag = pHoldBagStack.read();
-            repos.removeBagFromCargoHold();
-            repos.printLog();
-            return tmpBag;
-        } catch (MemException e) {
-            repos.printLog();
+        outMessage = new Message (Message.TRYTOCOL, porterId);     // o barbeiro vai dormir
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if ((inMessage.getType () != Message.BAG) && (inMessage.getType () != Message.NULLBAG)) {
+            System.out.println("Thread " + Thread.currentThread ().getName ()+ ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+
+        if (inMessage.getType () == Message.NULLBAG)
             return null;
+        else {
+            Bag msgBag = new Bag(inMessage.getMsgBagDestStat(), inMessage.getMsgBagIdOwner());
+            return msgBag;
         }
     }
 
@@ -152,7 +160,7 @@ public class ArrivalLoungeStub {
      *   Porter).
      */
 
-    public synchronized void noMoreBagsToCollect(){
+    public void noMoreBagsToCollect(){
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
@@ -176,7 +184,7 @@ public class ArrivalLoungeStub {
      *    @throws MemException Exception.
      */
 
-    public synchronized void resetArrivalLounge(Bag.DestStat[][] bagAndPassDest, int[][] nBagsNA)
+    public void resetArrivalLounge(Bag.DestStat[][] bagAndPassDest, int[][] nBagsNA)
             throws MemException {
 
         while(!porterSleep){

@@ -44,95 +44,99 @@ public class Message implements Serializable
 
     public static final int TRYTOCOL = 8;
 
-    public static final int NOBAGS2COL = 9;
+    public static final int BAG = 9;
+
+    public static final int NULLBAG = 10;
+
+    public static final int NOBAGS2COL = 11;
 
 
     /** ARRIVAL TERMINAL EXIT */
-    public static final int GOHOME = 10;
+    public static final int GOHOME = 12;
 
-    public static final int GODONE = 11;
+    public static final int GODONE = 13;
 
-    public static final int INCDECCOUNTER = 12;
+    public static final int INCDECCOUNTER = 14;
 
 
     /**ARRIVAL TERMINAL TRANSFER QUAY */
-    public static final int TAKEABUS = 13;
+    public static final int TAKEABUS = 15;
 
-    public static final int TAKEABUSDONE = 14;
+    public static final int TAKEABUSDONE = 16;
 
-    public static final int ENTERBUS = 15;
+    public static final int ENTERBUS = 17;
 
-    public static final int WORKENDED = 16;
+    public static final int WORKENDED = 18;
 
-    public static final int PARKBUS = 17;
+    public static final int PARKBUS = 19;
 
-    public static final int PBDONE = 18;
+    public static final int PBDONE = 20;
 
-    public static final int ANNOUCEBUSBORADING = 19;
+    public static final int ANNOUCEBUSBORADING = 21;
 
-    public static final int ABBDONE = 20;
+    public static final int ABBDONE = 22;
     //VERIFICA APENAS AS OCORRENCIAS DAS FUNÇOES AUXILIARES AQUI, PARA MIM NAO APARECEU NADA FORA DA SHARED REGION
 
 
     /** BAGGAGE COLLECTION POINT */
 
-    public static final int GOCOLLECTBAG = 21;
+    public static final int GOCOLLECTBAG = 23;
 
-    public static final int GCBDONE = 22;
+    public static final int GCBDONE = 24;
 
-    public static final int CARRYAPPSTORE = 23;
+    public static final int CARRYAPPSTORE = 25;
     //NOVAMENTE VERIFICAR AUXILIARES
 
 
     /** BAGGAGE RECLAIM OFFICE */
 
-    public static final int REPORTMISSBAG = 24;
+    public static final int REPORTMISSBAG = 26;
 
     /**DEPARTURE TERMINAL ENTRACE */
 
-    public static final int PREPARENEXTLEG = 25;
+    public static final int PREPARENEXTLEG = 27;
 
-    public static final int PNLDONE = 26;
+    public static final int PNLDONE = 28;
     //PLEASE CHECK AUXILIARY xD
 
     /**DEPARTURE TERMINAL TRANSFER QUAY */
 
-    public static final int LEAVEBUS = 27;
+    public static final int LEAVEBUS = 29;
 
-    public static final int LBDONE = 28;
+    public static final int LBDONE = 30;
 
-    public static final int PBLPO = 29;
+    public static final int PBLPO = 31;
 
-    public static final int PBLPODONE = 30;
+    public static final int PBLPODONE = 32;
     //IM SORRY INTELLIJ IS DUMD
 
     /** TEMPORARY STORAGE AREA */
 
-    public static final int CARRYTOAPPSTORE_TSA = 31;
+    public static final int CARRYTOAPPSTORE_TSA = 33;
 
 
     /**GENERAL MESSAGES */
 
-    public static final int ACK      =  32; // TODO: Change value
+    public static final int ACK      =  34; // TODO: Change value
 
-    public static final int ENDPASSENGER      = 33;
+    public static final int ENDPASSENGER      = 35;
 
-    public static final int ENDPORTER      = 34;
+    public static final int ENDPORTER      = 36;
 
-    public static final int ENDBUSDRIVER     = 35;
+    public static final int ENDBUSDRIVER     = 37;
 
 
     /**
      *  Enviar a identificação do cliente (resposta enviada pelo servidor)
      */
 
-    public static final int PASSID   = 36;
+    public static final int PASSID   = 38;
 
     /**
      *  Shutdown do servidor (operação pedida pelo cliente)
      */
 
-    public static final int SHUT   = 37;
+    public static final int SHUT   = 39;
 
     /* Campos das mensagens */
 
@@ -166,6 +170,10 @@ public class Message implements Serializable
 
     private int nIter = -1;
 
+    private int msgBagDestStat = -1;
+
+    private int msgBagIdOwner = -1;
+
     /**
      *  Instanciação de uma mensagem (forma 1).
      *
@@ -197,15 +205,17 @@ public class Message implements Serializable
      *  Instanciação de uma mensagem (forma 3).
      *
      *    @param type tipo da mensagem
-     *    @param barbId identificação do barbeiro
-     *    @param custId identificação do cliente
+     *    @param firstInt
+     *    @param secondInt
      */
 
-    public Message (int type, int barbId, int custId)
+    public Message (int type, int firstInt, int secondInt)
     {
         msgType = type;
-        this.barbId= barbId;
-        this.custId= custId;
+        if (msgType == BAG){
+            msgBagDestStat = firstInt;
+            msgBagIdOwner = secondInt;
+        }
     }
 
     /**
@@ -221,6 +231,14 @@ public class Message implements Serializable
         msgType = type;
         fName= name;
         this.nIter = nIter;
+    }
+
+    public int getMsgBagDestStat(){
+        return msgBagDestStat;
+    }
+
+    public int getMsgBagIdOwner(){
+        return msgBagIdOwner;
     }
 
     /**

@@ -32,7 +32,7 @@ public class BaggageReclaimOffice {
      *   Operation of reporting a bag missing. (raised by the Passenger).
      */
 
-    public synchronized void reportMissingBags(){
+    public synchronized void (){
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
