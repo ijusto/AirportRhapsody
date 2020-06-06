@@ -4,6 +4,7 @@ import comInf.Message;
 import comInf.MessageException;
 import serverSide.interfaces.ArrivalLoungeInterface;
 import serverSide.servers.ServerArrivalLounge;
+import serverSide.servers.ServerCom;
 
 public class ArrivalLoungeProxy extends Thread {
 
@@ -21,7 +22,7 @@ public class ArrivalLoungeProxy extends Thread {
      *    @serialField sconi
      */
 
-    private ServerArrivalLounge sconi;
+    private ServerCom sconi;
 
     /**
      *
@@ -38,7 +39,7 @@ public class ArrivalLoungeProxy extends Thread {
      *    @param arrivalLoungeInterface
      */
 
-    public ArrivalLoungeProxy(ServerArrivalLounge sconi, ArrivalLoungeInterface arrivalLoungeInterface)
+    public ArrivalLoungeProxy(ServerCom sconi, ArrivalLoungeInterface arrivalLoungeInterface)
     {
         super ("Proxy_" + ArrivalLoungeProxy.getProxyId ());
 

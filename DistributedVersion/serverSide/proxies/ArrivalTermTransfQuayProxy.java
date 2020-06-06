@@ -3,7 +3,8 @@ package serverSide.proxies;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.interfaces.ArrivalTermTransfQuayInterface;
-import serverSide.servers.ServerArrivalTermTransfQuayCom;
+import serverSide.servers.ServerArrivalTermTransfQuay;
+import serverSide.servers.ServerCom;
 
 public class ArrivalTermTransfQuayProxy extends Thread {
 
@@ -21,7 +22,7 @@ public class ArrivalTermTransfQuayProxy extends Thread {
      *    @serialField sconi
      */
 
-    private ServerArrivalTermTransfQuayCom sconi;
+    private ServerCom sconi;
 
     /**
      *
@@ -38,7 +39,7 @@ public class ArrivalTermTransfQuayProxy extends Thread {
      *    @param arrivalTermTransfQuayInterface
      */
 
-    public ArrivalTermTransfQuayProxy(ServerArrivalTermTransfQuayCom sconi, ArrivalTermTransfQuayInterface arrivalTermTransfQuayInterface)
+    public ArrivalTermTransfQuayProxy(ServerCom sconi, ArrivalTermTransfQuayInterface arrivalTermTransfQuayInterface)
     {
         super ("Proxy_" + ArrivalTermTransfQuayProxy.getProxyId ());
 
@@ -102,7 +103,7 @@ public class ArrivalTermTransfQuayProxy extends Thread {
      *    @return canal de comunicação
      */
 
-    public ServerArrivalTermTransfQuayCom getScon ()
+    public ServerArrivalTermTransfQuay getScon ()
     {
         return sconi;
     }

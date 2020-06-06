@@ -1,14 +1,13 @@
 package serverSide.servers;
 
-import serverSide.interfaces.ArrivalLoungeInterface;
-import serverSide.proxies.ArrivalLoungeProxy;
-import serverSide.sharedRegions.ArrivalLounge;
+import serverSide.interfaces.BaggageColPointInterface;
+import serverSide.proxies.BaggageColPointProxy;
+import serverSide.sharedRegions.BaggageColPoint;
 
 import java.io.*;
 import java.net.*;
 
-public class ServerArrivalLounge {
-
+public class ServerBaggageColPoint {
     /**
      *  Número do port de escuta do serviço a ser prestado (4000, por defeito)
      *
@@ -24,17 +23,17 @@ public class ServerArrivalLounge {
 
     public static void main (String [] args)
     {
-        ArrivalLounge arrivalLounge;                                    // barbearia (representa o serviço a ser prestado)
-        ArrivalLoungeInterface arrivalLoungeInter;                      // interface à barbearia
+        BaggageColPoint baggageColPoint;                                    // barbearia (representa o serviço a ser prestado)
+        BaggageColPointInterface baggageColPointInter;                      // interface à barbearia
         ServerCom scon, sconi;                               // canais de comunicação
-        ArrivalLoungeProxy cliProxy;                                // thread agente prestador do serviço
+        BaggageColPointProxy cliProxy;                                // thread agente prestador do serviço
 
         /* estabelecimento do servico */
 
         scon = new ServerCom(portNumb);                     // criação do canal de escuta e sua associação
         scon.start ();                                       // com o endereço público
-        arrivalLounge = new ArrivalLounge();                           // activação do serviço
-        arrivalLoungeInter = new ArrivalLoungeInterface(arrivalLounge);        // activação do interface com o serviço
+        baggageColPoint = new BaggageColPoint();                           // activação do serviço
+        baggageColPointInter = new BaggageColPointInterface(baggageColPoint);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");
 
@@ -44,7 +43,7 @@ public class ServerArrivalLounge {
         while (waitConnection)
             try
             { sconi = scon.accept ();                          // entrada em processo de escuta
-                cliProxy = new ArrivalLoungeProxy(sconi, arrivalLoungeInter);  // lançamento do agente prestador do serviço
+                cliProxy = new BaggageColPointProxy(sconi, baggageColPointInter);  // lançamento do agente prestador do serviço
                 cliProxy.start ();
             }
             catch (SocketTimeoutException e)

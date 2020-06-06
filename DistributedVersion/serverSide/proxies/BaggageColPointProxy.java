@@ -3,7 +3,8 @@ package serverSide.proxies;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.interfaces.BaggageColPointInterface;
-import serverSide.servers.ServerBaggageColPointCom;
+import serverSide.servers.ServerBaggageColPoint;
+import serverSide.servers.ServerCom;
 
 public class BaggageColPointProxy extends Thread
 {
@@ -21,7 +22,7 @@ public class BaggageColPointProxy extends Thread
      *    @serialField sconi
      */
 
-    private ServerBaggageColPointCom sconi;
+    private ServerCom sconi;
 
     /**
      *
@@ -38,7 +39,7 @@ public class BaggageColPointProxy extends Thread
      *    @param baggageColPointInterface
      */
 
-    public BaggageColPointProxy(ServerBaggageColPointCom sconi, BaggageColPointInterface baggageColPointInterface)
+    public BaggageColPointProxy(ServerCom sconi, BaggageColPointInterface baggageColPointInterface)
     {
         super ("Proxy_" + BaggageColPointProxy.getProxyId ());
 
@@ -102,7 +103,7 @@ public class BaggageColPointProxy extends Thread
      *    @return canal de comunicação
      */
 
-    public ServerBaggageColPointCom getScon ()
+    public ServerBaggageColPoint getScon ()
     {
         return sconi;
     }

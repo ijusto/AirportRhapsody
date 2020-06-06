@@ -4,6 +4,7 @@ import comInf.Message;
 import comInf.MessageException;
 import serverSide.interfaces.ArrivalTerminalExitInterface;
 import serverSide.servers.ServerArrivalTerminalExit;
+import serverSide.servers.ServerCom;
 
 public class ArrivalTerminalExitProxy extends Thread {
 
@@ -21,7 +22,7 @@ public class ArrivalTerminalExitProxy extends Thread {
      *    @serialField sconi
      */
 
-    private ServerArrivalTerminalExit sconi;
+    private ServerCom sconi;
 
     /**
      *
@@ -38,7 +39,7 @@ public class ArrivalTerminalExitProxy extends Thread {
      *    @param arrivalTerminalExitInterface
      */
 
-    public ArrivalTerminalExitProxy(ServerArrivalTerminalExit sconi, ArrivalTerminalExitInterface arrivalTerminalExitInterface)
+    public ArrivalTerminalExitProxy(ServerCom sconi, ArrivalTerminalExitInterface arrivalTerminalExitInterface)
     {
         super ("Proxy_" + ArrivalTerminalExitProxy.getProxyId ());
 
