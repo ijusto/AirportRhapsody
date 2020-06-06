@@ -1,13 +1,12 @@
 package serverSide.servers;
 
-import serverSide.interfaces.BaggageColPointInterface;
-import serverSide.proxies.BaggageColPointProxy;
-import serverSide.sharedRegions.BaggageColPoint;
+import serverSide.interfaces.DepartureTermTransfQuayInterface;
+import serverSide.proxies.DepartureTermTransfQuayProxy;
+import serverSide.sharedRegions.DepartureTermTransfQuay;
 
-import java.io.*;
-import java.net.*;
+import java.net.SocketTimeoutException;
 
-public class ServerBaggageColPoint {
+public class ServerDepartureTermTransfQuay {
 
     /**
      *  Número do port de escuta do serviço a ser prestado (4000, por defeito)
@@ -24,17 +23,17 @@ public class ServerBaggageColPoint {
 
     public static void main (String [] args)
     {
-        BaggageColPoint baggageColPoint;                                    // barbearia (representa o serviço a ser prestado)
-        BaggageColPointInterface baggageColPointInter;                      // interface à barbearia
+        DepartureTermTransfQuay departureTermTransfQuay;                                    // barbearia (representa o serviço a ser prestado)
+        DepartureTermTransfQuayInterface departureTermTransfQuayInter;                      // interface à barbearia
         ServerCom scon, sconi;                               // canais de comunicação
-        BaggageColPointProxy cliProxy;                                // thread agente prestador do serviço
+        DepartureTermTransfQuayProxy cliProxy;                                // thread agente prestador do serviço
 
         /* estabelecimento do servico */
 
         scon = new ServerCom(portNumb);                     // criação do canal de escuta e sua associação
         scon.start ();                                       // com o endereço público
-        baggageColPoint = new BaggageColPoint();                           // activação do serviço
-        baggageColPointInter = new BaggageColPointInterface(baggageColPoint);        // activação do interface com o serviço
+        departureTermTransfQuay = new DepartureTermTransfQuay();                           // activação do serviço
+        departureTermTransfQuayInter = new DepartureTermTransfQuayInterface(departureTermTransfQuay);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");
 
@@ -44,7 +43,7 @@ public class ServerBaggageColPoint {
         while (waitConnection)
             try {
                 sconi = scon.accept ();                          // entrada em processo de escuta
-                cliProxy = new BaggageColPointProxy(sconi, baggageColPointInter);  // lançamento do agente prestador do serviço
+                cliProxy = new DepartureTermTransfQuayProxy(sconi, departureTermTransfQuayInter);  // lançamento do agente prestador do serviço
                 cliProxy.start ();
             } catch (SocketTimeoutException e) {}
         scon.end ();                                         // terminação de operações

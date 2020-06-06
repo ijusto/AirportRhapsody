@@ -1,13 +1,12 @@
 package serverSide.servers;
 
-import serverSide.interfaces.BaggageColPointInterface;
-import serverSide.proxies.BaggageColPointProxy;
-import serverSide.sharedRegions.BaggageColPoint;
+import serverSide.interfaces.TemporaryStorageAreaInterface;
+import serverSide.proxies.TemporaryStorageAreaProxy;
+import serverSide.sharedRegions.TemporaryStorageArea;
 
-import java.io.*;
-import java.net.*;
+import java.net.SocketTimeoutException;
 
-public class ServerBaggageColPoint {
+public class ServerTemporaryStorageArea  {
 
     /**
      *  Número do port de escuta do serviço a ser prestado (4000, por defeito)
@@ -24,17 +23,17 @@ public class ServerBaggageColPoint {
 
     public static void main (String [] args)
     {
-        BaggageColPoint baggageColPoint;                                    // barbearia (representa o serviço a ser prestado)
-        BaggageColPointInterface baggageColPointInter;                      // interface à barbearia
+        TemporaryStorageArea temporaryStorageArea;                                    // barbearia (representa o serviço a ser prestado)
+        TemporaryStorageAreaInterface temporaryStorageAreaInter;                      // interface à barbearia
         ServerCom scon, sconi;                               // canais de comunicação
-        BaggageColPointProxy cliProxy;                                // thread agente prestador do serviço
+        TemporaryStorageAreaProxy cliProxy;                                // thread agente prestador do serviço
 
         /* estabelecimento do servico */
 
         scon = new ServerCom(portNumb);                     // criação do canal de escuta e sua associação
         scon.start ();                                       // com o endereço público
-        baggageColPoint = new BaggageColPoint();                           // activação do serviço
-        baggageColPointInter = new BaggageColPointInterface(baggageColPoint);        // activação do interface com o serviço
+        temporaryStorageArea = new TemporaryStorageArea();                           // activação do serviço
+        temporaryStorageAreaInter = new TemporaryStorageAreaInterface(temporaryStorageArea);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");
 
@@ -44,7 +43,7 @@ public class ServerBaggageColPoint {
         while (waitConnection)
             try {
                 sconi = scon.accept ();                          // entrada em processo de escuta
-                cliProxy = new BaggageColPointProxy(sconi, baggageColPointInter);  // lançamento do agente prestador do serviço
+                cliProxy = new TemporaryStorageAreaProxy(sconi, temporaryStorageAreaInter);  // lançamento do agente prestador do serviço
                 cliProxy.start ();
             } catch (SocketTimeoutException e) {}
         scon.end ();                                         // terminação de operações

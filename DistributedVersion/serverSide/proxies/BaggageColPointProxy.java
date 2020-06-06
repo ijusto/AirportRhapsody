@@ -6,8 +6,7 @@ import serverSide.interfaces.BaggageColPointInterface;
 import serverSide.servers.ServerBaggageColPoint;
 import serverSide.servers.ServerCom;
 
-public class BaggageColPointProxy extends Thread
-{
+public class BaggageColPointProxy extends Thread {
     /**
      *  Contador de threads lançados
      *
@@ -39,8 +38,7 @@ public class BaggageColPointProxy extends Thread
      *    @param baggageColPointInterface
      */
 
-    public BaggageColPointProxy(ServerCom sconi, BaggageColPointInterface baggageColPointInterface)
-    {
+    public BaggageColPointProxy(ServerCom sconi, BaggageColPointInterface baggageColPointInterface) {
         super ("Proxy_" + BaggageColPointProxy.getProxyId ());
 
         this.sconi = sconi;
@@ -52,8 +50,7 @@ public class BaggageColPointProxy extends Thread
      */
 
     @Override
-    public void run ()
-    {
+    public void run () {
         Message inMessage = null,                                      // mensagem de entrada
                 outMessage = null;                      // mensagem de saída
 
@@ -75,8 +72,7 @@ public class BaggageColPointProxy extends Thread
      *    @return identificador da instanciação
      */
 
-    private static int getProxyId ()
-    {
+    private static int getProxyId () {
         Class<?> cl = null;                                  // representação do tipo de dados ClientProxy na máquina
         //   virtual de Java
         int proxyId;                                         // identificador da instanciação

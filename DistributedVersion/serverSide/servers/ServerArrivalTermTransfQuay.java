@@ -7,6 +7,7 @@ import serverSide.sharedRegions.ArrivalTermTransfQuay;
 import java.net.SocketTimeoutException;
 
 public class ServerArrivalTermTransfQuay {
+
     /**
      *  Número do port de escuta do serviço a ser prestado (4000, por defeito)
      *
@@ -40,14 +41,11 @@ public class ServerArrivalTermTransfQuay {
 
         waitConnection = true;
         while (waitConnection)
-            try
-            { sconi = scon.accept ();                          // entrada em processo de escuta
+            try {
+                sconi = scon.accept ();                          // entrada em processo de escuta
                 cliProxy = new ArrivalTermTransfQuayProxy(sconi, arrivalTermTransfQuayInter);  // lançamento do agente prestador do serviço
                 cliProxy.start ();
-            }
-            catch (SocketTimeoutException e)
-            {
-            }
+            } catch (SocketTimeoutException e) {}
         scon.end ();                                         // terminação de operações
         System.out.println("O servidor foi desactivado.");
     }

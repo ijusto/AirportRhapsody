@@ -2,12 +2,10 @@ package serverSide.proxies;
 
 import comInf.Message;
 import comInf.MessageException;
-import serverSide.interfaces.ArrivalTerminalExitInterface;
-import serverSide.servers.ServerArrivalTerminalExit;
+import serverSide.interfaces.TemporaryStorageAreaInterface;
 import serverSide.servers.ServerCom;
 
-public class ArrivalTerminalExitProxy extends Thread {
-
+public class TemporaryStorageAreaProxy  extends Thread {
     /**
      *  Contador de threads lançados
      *
@@ -27,23 +25,23 @@ public class ArrivalTerminalExitProxy extends Thread {
     /**
      *
      *
-     *    @serialField arrivalTerminalExitInterface
+     *    @serialField temporaryStorageAreaInterface
      */
 
-    private ArrivalTerminalExitInterface arrivalTerminalExitInterface;
+    private TemporaryStorageAreaInterface temporaryStorageAreaInterface;
 
     /**
      *  Instanciação do interface
      *
      *    @param sconi canal de comunicação
-     *    @param arrivalTerminalExitInterface
+     *    @param temporaryStorageAreaInterface
      */
 
-    public ArrivalTerminalExitProxy(ServerCom sconi, ArrivalTerminalExitInterface arrivalTerminalExitInterface) {
-        super ("Proxy_" + ArrivalTerminalExitProxy.getProxyId ());
+    public TemporaryStorageAreaProxy(ServerCom sconi, TemporaryStorageAreaInterface temporaryStorageAreaInterface) {
+        super ("Proxy_" + TemporaryStorageAreaProxy.getProxyId ());
 
         this.sconi = sconi;
-        this.arrivalTerminalExitInterface = arrivalTerminalExitInterface;
+        this.temporaryStorageAreaInterface = temporaryStorageAreaInterface;
     }
 
     /**
@@ -57,7 +55,7 @@ public class ArrivalTerminalExitProxy extends Thread {
 
         inMessage = (Message) sconi.readObject ();                     // ler pedido do cliente
         try {
-            outMessage = ArrivalTerminalExitInterface.processAndReply (inMessage);         // processá-lo
+            outMessage = TemporaryStorageAreaInterface.processAndReply (inMessage);         // processá-lo
         } catch (MessageException e) {
             System.out.println("Thread " + getName () + ": " + e.getMessage () + "!");
             System.out.println(e.getMessageVal ().toString ());
@@ -79,9 +77,9 @@ public class ArrivalTerminalExitProxy extends Thread {
         int proxyId;                                         // identificador da instanciação
 
         try {
-            cl = Class.forName ("serverSide.proxies.ArrivalTerminalExitProxy");
+            cl = Class.forName ("serverSide.proxies.TemporaryStorageAreaProxy");
         } catch (ClassNotFoundException e) {
-            System.out.println("O tipo de dados ArrivalTerminalExitProxy não foi encontrado!");
+            System.out.println("O tipo de dados TemporaryStorageAreaProxy não foi encontrado!");
             e.printStackTrace ();
             System.exit (1);
         }

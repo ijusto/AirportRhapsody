@@ -68,6 +68,12 @@ public class ArrivalLoungeInterface {
                 else
                     outMessage = new Message (Message.NULLBAG); // gerar resposta negativa
                 break;
+
+            // noMoreBagsToCollect (Porter)
+            case Message.NOBAGS2COL:                                                      // receber pagamento
+                arrivalLounge.noMoreBagsToCollect();
+                outMessage = new Message (Message.ACK);            // gerar confirmação
+                break;
         }
 
         return (outMessage);

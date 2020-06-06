@@ -208,8 +208,7 @@ public class ArrivalLoungeStub {
         if (inMessage.getType () == Message.NULLBAG)
             return null;
         else {
-            Bag msgBag = new Bag(inMessage.getMsgBagDestStat(), inMessage.getMsgBagIdOwner());
-            return msgBag;
+            return new Bag(inMessage.getMsgBagDestStat(), inMessage.getMsgBagIdOwner());
         }
     }
 
@@ -221,18 +220,23 @@ public class ArrivalLoungeStub {
 
     public void noMoreBagsToCollect(){
 
-        Porter porter = (Porter) Thread.currentThread();
-        assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
-        porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-        repos.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        this.pHEmpty = true;
-        // notify passenger in prepareNextLeg()
-        depTerm.noMoreBags();
-        bagColPoint.setPHoldEmpty(true);
-        // notify passenger in goCollectABag()
-        bagColPoint.noMoreBags();
-        repos.printLog();
+        while (!con.open ()) {                                               // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.NOBAGS2COL);    // o barbeiro recebe o pagamento
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**

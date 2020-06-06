@@ -39,8 +39,7 @@ public class ArrivalTermTransfQuayProxy extends Thread {
      *    @param arrivalTermTransfQuayInterface
      */
 
-    public ArrivalTermTransfQuayProxy(ServerCom sconi, ArrivalTermTransfQuayInterface arrivalTermTransfQuayInterface)
-    {
+    public ArrivalTermTransfQuayProxy(ServerCom sconi, ArrivalTermTransfQuayInterface arrivalTermTransfQuayInterface) {
         super ("Proxy_" + ArrivalTermTransfQuayProxy.getProxyId ());
 
         this.sconi = sconi;
@@ -52,8 +51,7 @@ public class ArrivalTermTransfQuayProxy extends Thread {
      */
 
     @Override
-    public void run ()
-    {
+    public void run () {
         Message inMessage = null,                                      // mensagem de entrada
                 outMessage = null;                      // mensagem de saída
 
@@ -75,8 +73,7 @@ public class ArrivalTermTransfQuayProxy extends Thread {
      *    @return identificador da instanciação
      */
 
-    private static int getProxyId ()
-    {
+    private static int getProxyId () {
         Class<?> cl = null;                                  // representação do tipo de dados ClientProxy na máquina
         //   virtual de Java
         int proxyId;                                         // identificador da instanciação

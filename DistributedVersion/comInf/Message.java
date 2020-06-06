@@ -150,7 +150,7 @@ public class Message implements Serializable
 
 
     /* ******************************************** DepartureTermTransfQuay ***************************************** */
-    
+
     /*leaveTheBus*/
     public static final int LEAVEBUS = 29;
 
