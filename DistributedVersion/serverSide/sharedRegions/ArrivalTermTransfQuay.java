@@ -17,6 +17,8 @@ import clientSide.SimulPar;
 
 public class ArrivalTermTransfQuay {
 
+    private PassengerStates[] statePassengers;
+
     /*
      *   General Repository of Information.
      */
@@ -92,17 +94,16 @@ public class ArrivalTermTransfQuay {
      *   in the bus.
      */
 
-    public synchronized void takeABus() {
+    public synchronized void takeABus(int passengerId) {
 
-        Passenger passenger = (Passenger) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        assert(statePassengers[passengerId] == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        statePassengers[passengerId] = PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL;
+        repos.updatePassSt(passengerId, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         repos.printLog();
 
         try {
             waitingLine.write(passenger);
-            repos.pJoinWaitingQueue(passenger.getPassengerID());
+            repos.pJoinWaitingQueue(passengerId);
         } catch (MemException e) {
             e.printStackTrace();
         }

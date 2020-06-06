@@ -39,10 +39,10 @@ public class ArrivalTermTransfQuayInterface {
         /* seu processamento */
 
         switch (inMessage.getType ()) {
-            // TODO: Change cases
-            case Message.SETNFIC:                                                     // inicializar ficheiro de logging
-                bShop.setFileName (inMessage.getFName (), inMessage.getNIter ());
-                outMessage = new Message (Message.NFICDONE);       // gerar resposta
+
+            case Message.TAKEABUS:
+                arrivalTermTransfQuay.takeABus(inMessage.getPassId());
+                outMessage = new Message(Message.TAKERSTDONE);
                 break;
         }
 

@@ -107,35 +107,24 @@ public class ArrivalTermTransfQuayStub {
 
     public void takeABus(int passengerId) {
 
-        Passenger passenger = (Passenger) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        repos.printLog();
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        try {
-            waitingLine.write(passenger);
-            repos.pJoinWaitingQueue(passenger.getPassengerID());
-        } catch (MemException e) {
-            e.printStackTrace();
-        }
-
-        if(waitingLine.getNObjects() == SimulPar.BUS_CAP){
-            // wake up Bus Driver in parkTheBus()
-            notifyAll();
-        }
-
-        while(!this.allowBoardBus || this.getNPassAllowedToEnterValue() >= SimulPar.BUS_CAP){
+        while(!con.open()){                                    // aguarda ligação
             try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
+        outMessage = new Message(Message.TAKEABUS, passengerId);     // o barbeiro vai dormir
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.TAKEABUSDONE) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
 
-        this.incDecNPassAllowedToEnterCounter(true);
-
-        repos.printLog();
     }
 
     /**
