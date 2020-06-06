@@ -1,11 +1,13 @@
 package clientSide.stubs;
 
 import clientSide.BusDriverStates;
+import clientSide.ClientCom;
 import clientSide.PassengerStates;
 import clientSide.entities.BusDriver;
 import clientSide.entities.Passenger;
 import comInf.MemException;
 import comInf.MemFIFO;
+import comInf.Message;
 
 public class ArrivalTermTransfQuayStub {
 
@@ -120,20 +122,28 @@ public class ArrivalTermTransfQuayStub {
      *             <li> 'R', otherwise </li>
      */
 
-    public synchronized char hasDaysWorkEnded(){
+    public char hasDaysWorkEnded(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
-        assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
-
-        // if the last flight arrived and all passengers left the airport, end the bus driver life cycle
-        if(this.endDay){
-
-            repos.printLog();
-            return 'F';
+        while (!con.open ()) {                                    // aguarda ligação
+            try {
+                Thread.currentThread().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
 
-        repos.printLog();
-        return 'R';
+        outMessage = new Message (Message.HASDAYSEND, busDriverId);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if (inMessage.getType () != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+
+        return inMessage.hasDaysWorkEnded();
     }
 
     /**
