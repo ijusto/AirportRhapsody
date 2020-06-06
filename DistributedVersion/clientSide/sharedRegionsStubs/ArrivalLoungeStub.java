@@ -149,7 +149,7 @@ public class ArrivalLoungeStub {
      *             <li> 'R', otherwise </li>
      */
 
-    public char takeARest(int porterId){
+    public char takeARest(){
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -160,7 +160,7 @@ public class ArrivalLoungeStub {
             } catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (Message.TAKEARST, porterId);     // o barbeiro vai dormir
+        outMessage = new Message (Message.TAKEARST);     // o barbeiro vai dormir
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 
@@ -183,7 +183,7 @@ public class ArrivalLoungeStub {
      *             <li> null, otherwise. </li>
      */
 
-    public Bag tryToCollectABag(int porterId){
+    public Bag tryToCollectABag(){
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -194,7 +194,7 @@ public class ArrivalLoungeStub {
             } catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (Message.TRYTOCOL, porterId);     // o barbeiro vai dormir
+        outMessage = new Message (Message.TRYTOCOL);     // o barbeiro vai dormir
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 

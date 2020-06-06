@@ -70,9 +70,10 @@ public class Message implements Serializable
     public static final int GODONE = 13;
 
     /*notifyFromPrepareNextLeg*/
+    public static final int NOTFNEXTL = 14;
 
     /*incDecCounter*/
-    public static final int INCDECCOUNTER = 14;
+    public static final int INCDECCOUNTER = 15;
 
     /*resetArrivalTerminalExit*/
 
@@ -84,25 +85,25 @@ public class Message implements Serializable
     /* ****************************************** ArrivalTermTransfQuay ********************************************* */
 
     /*takeABus*/
-    public static final int TAKEABUS = 15;
+    public static final int TAKEABUS = 16;
 
-    public static final int TAKEABUSDONE = 16;
+    public static final int TAKEABUSDONE = 17;
 
     /*enterTheBus*/
-    public static final int ENTERBUS = 17;
+    public static final int ENTERBUS = 18;
 
     /*hasDaysWorkEnded*/
-    public static final int WORKENDED = 18;
+    public static final int WORKENDED = 19;
 
     /*parkTheBus*/
-    public static final int PARKBUS = 19;
+    public static final int PARKBUS = 20;
 
-    public static final int PBDONE = 20;
+    public static final int PBDONE = 21;
 
     /*announcingBusBoarding*/
-    public static final int ANNOUCEBUSBORADING = 21;
+    public static final int ANNOUCEBUSBORADING = 22;
 
-    public static final int ABBDONE = 22;
+    public static final int ABBDONE = 23;
 
     /*resetArrivalTermTransfQuay*/
 
@@ -112,12 +113,12 @@ public class Message implements Serializable
     /* *********************************************** BaggageColPoint ********************************************** */
 
     /*goCollectABag*/
-    public static final int GOCOLLECTBAG = 23;
+    public static final int GOCOLLECTBAG = 24;
 
-    public static final int GCBDONE = 24;
+    public static final int GCBDONE = 25;
 
     /*carryItToAppropriateStore*/
-    public static final int CARRYAPPSTORE = 25;
+    public static final int CARRYAPPSTORE = 26;
 
     /*resetBaggageColPoint*/
 
@@ -131,14 +132,14 @@ public class Message implements Serializable
     /* ******************************************** BaggageReclaimOffice ******************************************** */
 
     /*reportMissingBags*/
-    public static final int REPORTMISSBAG = 26;
+    public static final int REPORTMISSBAG = 27;
 
     /* ****************************************** DepartureTerminalEntrance ***************************************** */
 
     /*prepareNextLeg*/
-    public static final int PREPARENEXTLEG = 27;
+    public static final int PREPARENEXTLEG = 28;
 
-    public static final int PNLDONE = 28;
+    public static final int PNLDONE = 29;
 
     /*resetDepartureTerminalExit*/
 
@@ -152,14 +153,14 @@ public class Message implements Serializable
     /* ******************************************** DepartureTermTransfQuay ***************************************** */
 
     /*leaveTheBus*/
-    public static final int LEAVEBUS = 29;
+    public static final int LEAVEBUS = 30;
 
-    public static final int LBDONE = 30;
+    public static final int LBDONE = 31;
 
     /*parkTheBusAndLetPassOff*/
-    public static final int PBLPO = 31;
+    public static final int PBLPO = 32;
 
-    public static final int PBLPODONE = 32;
+    public static final int PBLPODONE = 33;
 
     /*resetDepartureTermTransfQuay*/
 
@@ -167,33 +168,33 @@ public class Message implements Serializable
     /* *********************************************** TemporaryStorageArea ***************************************** */
 
     /*carryItToAppropriateStore*/
-    public static final int CARRYTOAPPSTORE_TSA = 33;
+    public static final int CARRYTOAPPSTORE_TSA = 34;
 
     /*resetTemporaryStorageArea*/
 
 
     /* ******************************************** GENERAL MESSAGES ************************************************ */
 
-    public static final int ACK      =  34; // TODO: Change value
+    public static final int ACK      =  35; // TODO: Change value
 
-    public static final int ENDPASSENGER      = 35;
+    public static final int ENDPASSENGER      = 36;
 
-    public static final int ENDPORTER      = 36;
+    public static final int ENDPORTER      = 37;
 
-    public static final int ENDBUSDRIVER     = 37;
+    public static final int ENDBUSDRIVER     = 38;
 
 
     /**
      *  Enviar a identificação do cliente (resposta enviada pelo servidor)
      */
 
-    public static final int PASSID   = 38;
+    public static final int PASSID   = 39;
 
     /**
      *  Shutdown do servidor (operação pedida pelo cliente)
      */
 
-    public static final int SHUT   = 39;
+    public static final int SHUT   = 40;
 
     /* Campos das mensagens */
 
@@ -208,6 +209,12 @@ public class Message implements Serializable
      */
 
     private int custId = -1;
+
+    /**
+     *
+     */
+
+    private int passId = -1;
 
     /**
      *  Identificação do barbeiro
@@ -250,12 +257,13 @@ public class Message implements Serializable
      */
 
 
-    public Message (int type, int id)
-    {
+    public Message (int type, int id) {
         msgType = type;
-        if ((msgType == REQCUTH) || (msgType == CUSTID))
-            custId= id;
-        else barbId = id;
+        if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
+                || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
+                || (msgType == PREPARENEXTLEG)){
+            passId = id;
+        }
     }
 
     /**
@@ -318,6 +326,11 @@ public class Message implements Serializable
     public int getCustId ()
     {
         return (custId);
+    }
+
+
+    public int getPassId() {
+        return passId;
     }
 
     /**

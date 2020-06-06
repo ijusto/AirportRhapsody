@@ -13,6 +13,8 @@ import clientSide.SimulPar;
 
 public class ArrivalTerminalExit {
 
+    private PassengerStates[] statePassengers;
+
     /**
      *   General Repository of Information.
      */
@@ -70,14 +72,13 @@ public class ArrivalTerminalExit {
      *   Departure Terminal Entrance or, if the last, to notify all the others.
      */
 
-    public synchronized void goHome(){
-        Passenger passenger = (Passenger) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
-                passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
-                passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
-        passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+    public synchronized void goHome(int passengerId){
+        assert(statePassengers[passengerId] == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
+                statePassengers[passengerId] == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
+                statePassengers[passengerId] == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+        statePassengers[passengerId] = PassengerStates.EXITING_THE_ARRIVAL_TERMINAL;
 
-        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+        repos.updatePassSt(passengerId, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
         repos.printLog();
 
         // increment the number of passengers that wants to leave the airport
@@ -101,7 +102,7 @@ public class ArrivalTerminalExit {
             }
         }
 
-        repos.passengerExit(passenger.getPassengerID());
+        repos.passengerExit(passengerId);
         repos.printLog();
     }
 

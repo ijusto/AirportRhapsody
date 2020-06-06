@@ -91,7 +91,7 @@ public class DepartureTerminalEntranceStub {
 
 
     //TODO: Change messages
-    public boolean prepareNextLeg(){
+    public boolean prepareNextLeg(int passengerId){
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;

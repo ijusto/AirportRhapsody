@@ -158,26 +158,26 @@ public class Passenger extends Thread {
     @Override
     public void run() {
 
-        boolean isFinal = arrivalLoungeStub.whatShouldIDo();
+        boolean isFinal = arrivalLoungeStub.whatShouldIDo(id);
         boolean success = false;
         if (isFinal) {
             if (this.getNR() != 0) {
                 for (int i = 0; i < this.getNR(); i++) {
-                    success = baggageColPointStub.goCollectABag();
+                    success = baggageColPointStub.goCollectABag(id);
                     if (!success) {
                         break;
                     }
                 }
                 if (!success) {
-                    baggageReclaimOfficeStub.reportMissingBags();
+                    baggageReclaimOfficeStub.reportMissingBags(id);
                 }
             }
-            arrivalTerminalExitStub.goHome();
+            arrivalTerminalExitStub.goHome(id);
         } else {
-            arrivTransferQuayStub.takeABus();
-            arrivTransferQuayStub.enterTheBus();
-            departureTransferQuayStub.leaveTheBus();
-            departureEntranceStub.prepareNextLeg();
+            arrivTransferQuayStub.takeABus(id);
+            arrivTransferQuayStub.enterTheBus(id);
+            departureTransferQuayStub.leaveTheBus(id);
+            departureEntranceStub.prepareNextLeg(id);
         }
     }
 

@@ -105,7 +105,7 @@ public class ArrivalTermTransfQuayStub {
      *   in the bus.
      */
 
-    public void takeABus() {
+    public void takeABus(int passengerId) {
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
@@ -144,7 +144,7 @@ public class ArrivalTermTransfQuayStub {
      *   in announcingBusBoarding, who is waiting for all the passenger to enter.
      */
 
-    public void enterTheBus(){
+    public void enterTheBus(int passengerId){
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);

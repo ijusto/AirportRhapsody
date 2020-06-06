@@ -12,7 +12,6 @@ public class ArrivalTerminalExitInterface {
         this.arrivalTerminalExit = arrivalTerminalExit;
     }
 
-
     /**
      *  Processamento das mensagens através da execução da tarefa correspondente.
      *  Geração de uma mensagem de resposta.
@@ -42,10 +41,15 @@ public class ArrivalTerminalExitInterface {
         /* seu processamento */
 
         switch (inMessage.getType ()) {
-            // TODO: Change cases
-            case Message.SETNFIC:                                                     // inicializar ficheiro de logging
-                bShop.setFileName (inMessage.getFName (), inMessage.getNIter ());
-                outMessage = new Message (Message.NFICDONE);       // gerar resposta
+
+            case Message.GOHOME:
+                arrivalTerminalExit.goHome(inMessage.getPassId());
+                outMessage = new Message(Message.GODONE);
+                break;
+
+            case Message.NOTFNEXTL:
+                arrivalTerminalExit.notifyFromPrepareNextLeg();
+                outMessage = new Message (Message.ACK);
                 break;
         }
 

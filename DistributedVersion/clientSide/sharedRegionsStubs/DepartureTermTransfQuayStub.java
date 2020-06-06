@@ -90,7 +90,7 @@ public class DepartureTermTransfQuayStub {
 
 
     //TODO: Change messages
-    public synchronized void leaveTheBus(){
+    public synchronized void leaveTheBus(int passengerId){
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 

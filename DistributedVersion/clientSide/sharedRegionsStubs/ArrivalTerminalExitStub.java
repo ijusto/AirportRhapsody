@@ -99,39 +99,25 @@ public class ArrivalTerminalExitStub {
      *   Departure Terminal Entrance or, if the last, to notify all the others.
      */
 
-    public void goHome(){
-        Passenger passenger = (Passenger) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
-                passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
-                passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
-        passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+    public void goHome(int passengerId){
 
-        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
-        repos.printLog();
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        // increment the number of passengers that wants to leave the airport
-        boolean isLastPass = this.incDecCounter(true);
-
-        if(isLastPass) {
-            // wakes up all the passengers
-            wakeAllPassengers();
-            //arrivLounge.notifyAllPassExited();
-
-        } else {
-
-            // the passengers that are not the last ones to want to leave the airport, need to wait for the last one to
-            // notify them so they can leave
-            while (this.getDeadPassValue() < SimulPar.N_PASS_PER_FLIGHT) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+        while(!con.open()){                                    // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
-
-        repos.passengerExit(passenger.getPassengerID());
-        repos.printLog();
+        outMessage = new Message(Message.GOHOME, passengerId);     // o barbeiro vai dormir
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.GODONE) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -139,7 +125,24 @@ public class ArrivalTerminalExitStub {
      */
 
     public synchronized void notifyFromPrepareNextLeg(){
-        notifyAll();
+
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while(!con.open()){                                    // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.NOTFNEXTL);     // o barbeiro vai dormir
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**

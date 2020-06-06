@@ -106,7 +106,7 @@ public class BaggageColPointStub {
      *
      */
 
-    public boolean goCollectABag(){
+    public boolean goCollectABag(int passengerId){
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
