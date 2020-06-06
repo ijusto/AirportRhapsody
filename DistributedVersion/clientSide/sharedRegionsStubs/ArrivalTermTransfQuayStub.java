@@ -198,35 +198,23 @@ public class ArrivalTermTransfQuayStub {
      */
 
     public void parkTheBus(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
-        assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
-        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
-
-        repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
-
-        repos.printLog();
-        this.resetNPassOnTheBus();
-
-        while(waitingLine.getNObjects() != SimulPar.BUS_CAP){ // if false waken up by takeABus()
+        while(!con.open()){                                    // aguarda ligação
             try {
-                // wait until the departure time has been reached and verify again if there are passengers waiting
-                wait(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            // if the last flight arrived and all passengers left the airport, stop waiting
-            if(this.endDay){
-                break;
-            }
-
-            // if there are passengers waiting
-            if(!this.waitingLine.isEmpty()){
-                break;
-            }
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
-
+        outMessage = new Message(Message.PARKBUS);     // o barbeiro vai dormir
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.PBDONE) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**

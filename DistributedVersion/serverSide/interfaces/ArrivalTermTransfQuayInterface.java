@@ -53,13 +53,18 @@ public class ArrivalTermTransfQuayInterface {
                 break;
 
             // hasDaysWorkEnded (BusDriver)
-            case Message.TAKEARST:
+            case Message.WORKENDED:
                 if (arrivalTermTransfQuay.hasDaysWorkEnded() == 'R')
                     outMessage = new Message (Message.CONTDAYS);    // gerar resposta positiva
                 else
                     outMessage = new Message (Message.ENDBUSDRIVER); // gerar resposta negativa
                 break;
 
+            // parkTheBus (BusDriver)
+            case Message.PARKBUS:
+                arrivalTermTransfQuay.parkTheBus();
+                outMessage = new Message(Message.PBDONE);
+                break;
         }
 
         return (outMessage);
