@@ -22,87 +22,113 @@ public class Message implements Serializable
     /**
      *  Inicialização do ficheiro de logging (operação pedida pelo cliente)
      */
-
     public static final int SETNFIC  =  1;
 
     /**
      *  Ficheiro de logging foi inicializado (resposta enviada pelo servidor)
      */
-
     public static final int NFICDONE =  2;
 
-    /**
-     *  Corte de cabelo (operação pedida pelo cliente)
-     */
 
-    public static final int REQCUTH  =  3;
 
-    /**
-     *  Cabelo cortado (resposta enviada pelo servidor)
-     */
+    /** ARRIVAL LOUGE */
+    public static final int WSID = 3;
 
-    public static final int CUTHDONE =  4;
+    public static final int TAKEARST = 4;
 
-    /**
-     *  Barbearia cheia (resposta enviada pelo servidor)
-     */
+    public static final int TAKERSTDONE = 5;
 
-    public static final int BSHOPF   =  5;
+    public static final int TRYTOCOL = 5;
 
-    /**
-     *  Alertar o thread barbeiro do fim de operações (operação pedida pelo cliente)
-     */
+    public static final int NOBAGS2COL = 6;
 
-    public static final int ENDOP    =  6;
 
-    /**
-     *  Operação realizada com sucesso (resposta enviada pelo servidor)
-     */
+    /** ARRIVAL TERMINAL EXIT */
+    public static final int GOHOME = 7;
 
-    public static final int ACK      =  7;
+    public static final int GODONE = 8;
 
-    /**
-     *  Mandar o barbeiro dormir (operação pedida pelo cliente)
-     */
+    public static final int INCDECCOUNTER = 9;
 
-    public static final int GOTOSLP  =  8;
 
-    /**
-     *  Continuação do ciclo de vida do barbeiro (resposta enviada pelo servidor)
-     */
+    /**ARRIVAL TERMINAL TRANSFER QUAY */
+    public static final int TAKEABUS = 10;
 
-    public static final int CONT     =  9;
+    public static final int TAKEABUSDONE = 11;
 
-    /**
-     *  Terminação do ciclo de vida do barbeiro (resposta enviada pelo servidor)
-     */
+    public static final int ENTERBUS = 12;
 
-    public static final int END      = 10;
+    public static final int WORKENDED = 13;
 
-    /**
-     *  Chamar um cliente pelo barbeiro (operação pedida pelo cliente)
-     */
+    public static final int PARKBUS = 14;
 
-    public static final int CALLCUST = 11;
+    public static final int PBDONE = 15;
+
+    public static final int ANNOUCEBUSBORADING = 16;
+
+    public static final int ABBDONE = 17;
+    //VERIFICA APENAS AS OCORRENCIAS DAS FUNÇOES AUXILIARES AQUI, PARA MIM NAO APARECEU NADA FORA DA SHARED REGION
+
+
+    /** BAGGAGE COLLECTION POINT */
+
+    public static final int GOCOLLECTBAG = 18;
+
+    public static final int GCBDONE = 19;
+
+    public static final int CARRYAPPSTORE = 20;
+    //NOVAMENTE VERIFICAR AUXILIARES
+
+
+    /** BAGGAGE RECLAIM OFFICE */
+
+    public static final int REPORTMISSBAG = 21;
+
+    /**DEPARTURE TERMINAL ENTRACE */
+
+    public static final int PREPARENEXTLEG = 22;
+
+    public static final int PNLDONE = 23;
+    //PLEASE CHECK AUXILIARY xD
+
+    /**DEPARTURE TERMINAL TRANSFER QUAY */
+
+    public static final int LEAVEBUS = 24;
+
+    public static final int LBDONE = 25;
+
+    public static final int PBLPO = 27;
+
+    public static final int PBLPODONE = 28;
+    //IM SORRY INTELLIJ IS DUMD
+
+    /** TEMPORARY STORAGE AREA */
+
+    public static final int CARRYTOAPPSTORE_TSA = 29;
+
+
+    /**GENERAL MESSAGES */
+
+    public static final int ACK      =  30; // TODO: Change value
+
+    public static final int ENDPASSENGER      = 31;
+
+    public static final int ENDPORTER      = 32;
+
+    public static final int ENDBUSDRIVER     = 33;
+
 
     /**
      *  Enviar a identificação do cliente (resposta enviada pelo servidor)
      */
 
-    public static final int CUSTID   = 12;
-
-    /**
-     *  Receber pagamento pelo barbeiro (operação pedida pelo cliente)
-     */
-
-    public static final int GETPAY   = 13;
+    public static final int PASSID   = 34;
 
     /**
      *  Shutdown do servidor (operação pedida pelo cliente)
      */
 
-    public static final int SHUT   = 14;
-
+    public static final int SHUT   = 35;
 
     /* Campos das mensagens */
 
