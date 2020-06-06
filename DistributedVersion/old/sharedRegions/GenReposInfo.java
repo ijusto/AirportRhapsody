@@ -4,7 +4,7 @@ import clientSide.BusDriverStates;
 import clientSide.Passenger;
 import clientSide.PassengerStates;
 import clientSide.PorterStates;
-import main.SimulPar;
+import clientSide.SimulPar;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

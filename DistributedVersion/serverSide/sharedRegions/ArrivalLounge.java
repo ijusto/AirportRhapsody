@@ -1,6 +1,6 @@
 package serverSide.sharedRegions;
 
-import main.SimulPar;
+import clientSide.SimulPar;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -6,7 +6,7 @@ import clientSide.entities.BusDriver;
 import clientSide.BusDriverStates;
 import clientSide.entities.Passenger;
 import clientSide.PassengerStates;
-import main.SimulPar;
+import clientSide.SimulPar;
 
 /**
  *   Arrival Terminal Transfer Quay.

@@ -1,8 +1,9 @@
 package clientSide.sharedRegionsStubs;
 
-import clientSide.ClientCom;
+import clientSide.clients.ClientCom;
 import clientSide.Porter;
 import clientSide.PorterStates;
+import clientSide.SimulPar;
 import comInf.Message;
 
 import java.util.HashMap;
@@ -60,49 +61,21 @@ public class ArrivalLoungeStub {
             } catch (InterruptedException e) {}
         }
 
-        // TODO: change REQCUTH
-        outMessage = new Message (Message.REQCUTH, passengerId);        // pede a realização do serviço
+        outMessage = new Message (Message.WSID, passengerId);        // pede a realização do serviço
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 
-        // TODO: change if
-        if ((inMessage.getType () != Message.CUTHDONE) && (inMessage.getType () != Message.BSHOPF)) {
+        if ((inMessage.getType () != Message.FNDST) && (inMessage.getType () != Message.TRDST)) {
             System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
             System.out.println(inMessage.toString ());
             System.exit (1);
         }
         con.close ();
 
-        // TODO: change if
-        if (inMessage.getType () == Message.CUTHDONE)
-            return true;                                                // operação bem sucedida - corte efectuado
-        else return false;                                          // operação falhou - barbearia cheia
+        if (inMessage.getType () == Message.FNDST)
+            return true;                                                // operação bem sucedida - final destination
+        else return false;                                          // operação falhou - otherwise
 
-        /*
-        Passenger currentPassenger = (Passenger) Thread.currentThread();
-        assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-
-        // update logger
-        this.repos.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
-        this.repos.numberNRTotal(currentPassenger.getNR());
-        this.repos.newPass(currentPassenger.getSi());
-        this.repos.updatePassSt(currentPassenger.getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        this.repos.printLog();
-
-        // increment passengers that arrive so the porter knows when to wake up in takeARest()
-        boolean last = this.incDecNPassAtArrivLCounter(true);
-
-
-        if(this.getNPassAtArrivLValue() == 1) {
-            this.depTerm.resetDepartureTerminalExit();
-        }
-
-        if(last) {
-            // wake up Porter in takeARest()
-            notifyAll();
-        }
-        return currentPassenger.getSi() == Passenger.SiPass.FDT;
-         */
     }
 
     /* **************************************************Porter****************************************************** */
@@ -129,7 +102,7 @@ public class ArrivalLoungeStub {
             porterSleep = false;
             return 'E';
         } else {
-            while (this.getNPassAtArrivLValue() < main.SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
+            while (this.getNPassAtArrivLValue() < SimulPar.N_PASS_PER_FLIGHT || this.pHEmpty) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -216,7 +189,7 @@ public class ArrivalLoungeStub {
 
         this.currentFlight += 1;
 
-        if(this.currentFlight == main.SimulPar.N_FLIGHTS){
+        if(this.currentFlight == SimulPar.N_FLIGHTS){
             this.setEndDay();
             this.arrQuay.setEndDay();
         } else {
@@ -227,7 +200,7 @@ public class ArrivalLoungeStub {
 
             // int nSRprev = this.pHoldBagStack.getPointer();
             int nTotalBags = 0; //nSRprev;
-            for (int nPass = 0; nPass < main.SimulPar.N_PASS_PER_FLIGHT; nPass++) {
+            for (int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++) {
                 nTotalBags += nBagsNA[nPass][this.currentFlight];
                 nBagsPerPass.put(nPass, nBagsNA[nPass][this.currentFlight]);
             }
@@ -249,7 +222,7 @@ public class ArrivalLoungeStub {
             //    }
             //}
 
-            for (int nPass = 0; nPass < main.SimulPar.N_PASS_PER_FLIGHT; nPass++) {
+            for (int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++) {
                 for (int bag = 0; bag < nBagsNA[nPass][this.currentFlight]; bag++) {
                     this.pHoldBagStack.write(new Bag(bagAndPassDest[nPass][this.currentFlight], nPass));
                 }
@@ -284,7 +257,7 @@ public class ArrivalLoungeStub {
             } else {
                 nPassAtArrivL--;
             }
-            return nPassAtArrivL == main.SimulPar.N_PASS_PER_FLIGHT;
+            return nPassAtArrivL == SimulPar.N_PASS_PER_FLIGHT;
         }
     }
 

@@ -34,101 +34,105 @@ public class Message implements Serializable
     /** ARRIVAL LOUGE */
     public static final int WSID = 3;
 
-    public static final int TAKEARST = 4;
+    public static final int FNDST = 4;
 
-    public static final int TAKERSTDONE = 5;
+    public static final int TRDST = 5;
 
-    public static final int TRYTOCOL = 5;
+    public static final int TAKEARST = 6;
 
-    public static final int NOBAGS2COL = 6;
+    public static final int TAKERSTDONE = 7;
+
+    public static final int TRYTOCOL = 8;
+
+    public static final int NOBAGS2COL = 9;
 
 
     /** ARRIVAL TERMINAL EXIT */
-    public static final int GOHOME = 7;
+    public static final int GOHOME = 10;
 
-    public static final int GODONE = 8;
+    public static final int GODONE = 11;
 
-    public static final int INCDECCOUNTER = 9;
+    public static final int INCDECCOUNTER = 12;
 
 
     /**ARRIVAL TERMINAL TRANSFER QUAY */
-    public static final int TAKEABUS = 10;
+    public static final int TAKEABUS = 13;
 
-    public static final int TAKEABUSDONE = 11;
+    public static final int TAKEABUSDONE = 14;
 
-    public static final int ENTERBUS = 12;
+    public static final int ENTERBUS = 15;
 
-    public static final int WORKENDED = 13;
+    public static final int WORKENDED = 16;
 
-    public static final int PARKBUS = 14;
+    public static final int PARKBUS = 17;
 
-    public static final int PBDONE = 15;
+    public static final int PBDONE = 18;
 
-    public static final int ANNOUCEBUSBORADING = 16;
+    public static final int ANNOUCEBUSBORADING = 19;
 
-    public static final int ABBDONE = 17;
+    public static final int ABBDONE = 20;
     //VERIFICA APENAS AS OCORRENCIAS DAS FUNÇOES AUXILIARES AQUI, PARA MIM NAO APARECEU NADA FORA DA SHARED REGION
 
 
     /** BAGGAGE COLLECTION POINT */
 
-    public static final int GOCOLLECTBAG = 18;
+    public static final int GOCOLLECTBAG = 21;
 
-    public static final int GCBDONE = 19;
+    public static final int GCBDONE = 22;
 
-    public static final int CARRYAPPSTORE = 20;
+    public static final int CARRYAPPSTORE = 23;
     //NOVAMENTE VERIFICAR AUXILIARES
 
 
     /** BAGGAGE RECLAIM OFFICE */
 
-    public static final int REPORTMISSBAG = 21;
+    public static final int REPORTMISSBAG = 24;
 
     /**DEPARTURE TERMINAL ENTRACE */
 
-    public static final int PREPARENEXTLEG = 22;
+    public static final int PREPARENEXTLEG = 25;
 
-    public static final int PNLDONE = 23;
+    public static final int PNLDONE = 26;
     //PLEASE CHECK AUXILIARY xD
 
     /**DEPARTURE TERMINAL TRANSFER QUAY */
 
-    public static final int LEAVEBUS = 24;
+    public static final int LEAVEBUS = 27;
 
-    public static final int LBDONE = 25;
+    public static final int LBDONE = 28;
 
-    public static final int PBLPO = 27;
+    public static final int PBLPO = 29;
 
-    public static final int PBLPODONE = 28;
+    public static final int PBLPODONE = 30;
     //IM SORRY INTELLIJ IS DUMD
 
     /** TEMPORARY STORAGE AREA */
 
-    public static final int CARRYTOAPPSTORE_TSA = 29;
+    public static final int CARRYTOAPPSTORE_TSA = 31;
 
 
     /**GENERAL MESSAGES */
 
-    public static final int ACK      =  30; // TODO: Change value
+    public static final int ACK      =  32; // TODO: Change value
 
-    public static final int ENDPASSENGER      = 31;
+    public static final int ENDPASSENGER      = 33;
 
-    public static final int ENDPORTER      = 32;
+    public static final int ENDPORTER      = 34;
 
-    public static final int ENDBUSDRIVER     = 33;
+    public static final int ENDBUSDRIVER     = 35;
 
 
     /**
      *  Enviar a identificação do cliente (resposta enviada pelo servidor)
      */
 
-    public static final int PASSID   = 34;
+    public static final int PASSID   = 36;
 
     /**
      *  Shutdown do servidor (operação pedida pelo cliente)
      */
 
-    public static final int SHUT   = 35;
+    public static final int SHUT   = 37;
 
     /* Campos das mensagens */
 

@@ -1,4 +1,4 @@
 package clientSide.clients;
 
-public class PorterCom {
+public class ClientPorterCom {
 }

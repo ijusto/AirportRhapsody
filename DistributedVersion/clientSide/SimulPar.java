@@ -1,4 +1,4 @@
-package main;
+package clientSide;
 
 /**
  *   Constant parameters for simulation purposes.

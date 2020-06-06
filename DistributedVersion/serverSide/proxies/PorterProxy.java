@@ -2,7 +2,6 @@ package serverSide.proxies;
 
 import comInf.Message;
 import comInf.MessageException;
-import serverSide.ServerCom;
 import serverSide.interfaces.ArrivalLoungeInterface;
 import serverSide.interfaces.BaggageColPointInterface;
 import serverSide.interfaces.TemporaryStorageAreaInterface;

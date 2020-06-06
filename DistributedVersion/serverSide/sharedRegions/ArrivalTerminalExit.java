@@ -2,7 +2,7 @@ package serverSide.sharedRegions;
 
 import clientSide.entities.Passenger;
 import clientSide.PassengerStates;
-import main.SimulPar;
+import clientSide.SimulPar;
 
 /**
  *   Arrival Terminal Exit.

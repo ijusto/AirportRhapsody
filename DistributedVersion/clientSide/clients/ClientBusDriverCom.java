@@ -1,16 +1,10 @@
-package clientSide;
+package clientSide.clients;
 
 import java.io.*;
 import java.net.*;
 
-/**
- *   Este tipo de dados implementa o canal de comunicação, lado do cliente, para uma comunicação baseada em passagem de
- *   mensagens sobre sockets usando o protocolo TCP.
- *   A transferência de dados é baseada em objectos, um objecto de cada vez.
- */
+public class ClientBusDriverCom {
 
-public class ClientCom
-{
     /**
      *  Socket de comunicação
      *    @serialField commSocket
@@ -53,8 +47,7 @@ public class ClientCom
      *    @param portNumb número do port de escuta do servidor
      */
 
-    public ClientCom (String hostName, int portNumb)
-    {
+    public ClientBusDriverCom (String hostName, int portNumb) {
         serverHostName = hostName;
         serverPortNumb = portNumb;
     }
@@ -68,10 +61,9 @@ public class ClientCom
      *            <li>false, em caso contrário
      */
 
-    public boolean open ()
-    {
+    public boolean open () {
         boolean success = true;
-        SocketAddress serverAddress = new InetSocketAddress (serverHostName, serverPortNumb);
+        SocketAddress serverAddress = new InetSocketAddress(serverHostName, serverPortNumb);
 
         try {
             commSocket = new Socket();
@@ -139,8 +131,7 @@ public class ClientCom
      *  Fecho do socket de comunicação.
      */
 
-    public void close ()
-    {
+    public void close () {
         try {
             in.close();
         } catch (IOException e) {
@@ -175,8 +166,7 @@ public class ClientCom
      *    @return objecto lido
      */
 
-    public Object readObject ()
-    {
+    public Object readObject () {
         Object fromServer = null;                            // objecto
 
         try {
@@ -207,8 +197,7 @@ public class ClientCom
      *    @param toServer objecto a ser escrito
      */
 
-    public void writeObject (Object toServer)
-    {
+    public void writeObject (Object toServer) {
         try {
             out.writeObject (toServer);
         } catch (InvalidClassException e) {
@@ -221,7 +210,8 @@ public class ClientCom
                 " - o objecto a ser escrito pertence a um tipo de dados não serializável!");
             e.printStackTrace ();
             System.exit (1);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.out.println(Thread.currentThread ().getName () +
                 " - erro na escrita de um objecto do canal de saída do socket de comunicação!");
             e.printStackTrace ();
