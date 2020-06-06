@@ -31,91 +31,148 @@ public class Message implements Serializable
 
 
 
-    /** ARRIVAL LOUGE */
+    /* *********************************************** ArrivalLounge ************************************************ */
+
+    /* ************* whatShouldIDo ************* */
     public static final int WSID = 3;
 
     public static final int FNDST = 4;
 
     public static final int TRDST = 5;
 
+    /* ************* takeARest ************* */
     public static final int TAKEARST = 6;
 
     public static final int TAKERSTDONE = 7;
 
+    /* ************* tryToCollectABag ************* */
     public static final int TRYTOCOL = 8;
 
     public static final int BAG = 9;
 
     public static final int NULLBAG = 10;
 
+    /* ************* noMoreBagsToCollec ************* */
     public static final int NOBAGS2COL = 11;
 
+    /* ************* resetArrivalLounge ************* */
 
-    /** ARRIVAL TERMINAL EXIT */
+    /* ************* setDepartureTerminalRef ************* */
+
+    /* ************* setEndDay ************* */
+
+
+    /* ******************************************** ArrivalTerminalExit ********************************************* */
+
+    /*goHome*/
     public static final int GOHOME = 12;
 
     public static final int GODONE = 13;
 
+    /*notifyFromPrepareNextLeg*/
+
+    /*incDecCounter*/
     public static final int INCDECCOUNTER = 14;
 
+    /*resetArrivalTerminalExit*/
 
-    /**ARRIVAL TERMINAL TRANSFER QUAY */
+    /*getDeadPassValue*/
+
+    /*setDepartureTerminalRef*/
+
+
+    /* ****************************************** ArrivalTermTransfQuay ********************************************* */
+
+    /*takeABus*/
     public static final int TAKEABUS = 15;
 
     public static final int TAKEABUSDONE = 16;
 
+    /*enterTheBus*/
     public static final int ENTERBUS = 17;
 
+    /*hasDaysWorkEnded*/
     public static final int WORKENDED = 18;
 
+    /*parkTheBus*/
     public static final int PARKBUS = 19;
 
     public static final int PBDONE = 20;
 
+    /*announcingBusBoarding*/
     public static final int ANNOUCEBUSBORADING = 21;
 
     public static final int ABBDONE = 22;
-    //VERIFICA APENAS AS OCORRENCIAS DAS FUNÇOES AUXILIARES AQUI, PARA MIM NAO APARECEU NADA FORA DA SHARED REGION
+
+    /*resetArrivalTermTransfQuay*/
+
+    /*setEndDay*/
 
 
-    /** BAGGAGE COLLECTION POINT */
+    /* *********************************************** BaggageColPoint ********************************************** */
 
+    /*goCollectABag*/
     public static final int GOCOLLECTBAG = 23;
 
     public static final int GCBDONE = 24;
 
+    /*carryItToAppropriateStore*/
     public static final int CARRYAPPSTORE = 25;
-    //NOVAMENTE VERIFICAR AUXILIARES
+
+    /*resetBaggageColPoint*/
+
+    /*noMoreBags*/
+
+    /*setTreadmill*/
+
+    /*setPHoldEmpty*/
 
 
-    /** BAGGAGE RECLAIM OFFICE */
+    /* ******************************************** BaggageReclaimOffice ******************************************** */
 
+    /*reportMissingBags*/
     public static final int REPORTMISSBAG = 26;
 
-    /**DEPARTURE TERMINAL ENTRACE */
+    /* ****************************************** DepartureTerminalEntrance ***************************************** */
 
+    /*prepareNextLeg*/
     public static final int PREPARENEXTLEG = 27;
 
     public static final int PNLDONE = 28;
-    //PLEASE CHECK AUXILIARY xD
 
-    /**DEPARTURE TERMINAL TRANSFER QUAY */
+    /*resetDepartureTerminalExit*/
 
+    /*notifyFromGoHome*/
+
+    /*noMoreBags*/
+
+    /*setArrivalTerminalRef*/
+
+
+    /* ******************************************** DepartureTermTransfQuay ***************************************** */
+    
+    /*leaveTheBus*/
     public static final int LEAVEBUS = 29;
 
     public static final int LBDONE = 30;
 
+    /*parkTheBusAndLetPassOff*/
     public static final int PBLPO = 31;
 
     public static final int PBLPODONE = 32;
-    //IM SORRY INTELLIJ IS DUMD
 
-    /** TEMPORARY STORAGE AREA */
+    /*resetDepartureTermTransfQuay*/
 
+
+    /* *********************************************** TemporaryStorageArea ***************************************** */
+
+    /*carryItToAppropriateStore*/
     public static final int CARRYTOAPPSTORE_TSA = 33;
 
+    /*resetTemporaryStorageArea*/
 
-    /**GENERAL MESSAGES */
+
+    /* ******************************************** GENERAL MESSAGES ************************************************ */
 
     public static final int ACK      =  34; // TODO: Change value
 
