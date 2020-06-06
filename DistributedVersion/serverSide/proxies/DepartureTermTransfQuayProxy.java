@@ -55,7 +55,7 @@ public class DepartureTermTransfQuayProxy  extends Thread {
 
         inMessage = (Message) sconi.readObject ();                     // ler pedido do cliente
         try {
-            outMessage = DepartureTermTransfQuayInterface.processAndReply (inMessage);         // processá-lo
+            outMessage = departureTermTransfQuayInterface.processAndReply(inMessage);         // processá-lo
         } catch (MessageException e) {
             System.out.println("Thread " + getName () + ": " + e.getMessage () + "!");
             System.out.println(e.getMessageVal ().toString ());

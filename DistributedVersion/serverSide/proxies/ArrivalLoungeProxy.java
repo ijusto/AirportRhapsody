@@ -57,7 +57,7 @@ public class ArrivalLoungeProxy extends Thread {
 
         inMessage = (Message) sconi.readObject ();                     // ler pedido do cliente
         try {
-            outMessage = arrivalLoungeInterface.processAndReply (inMessage);         // processá-lo
+            outMessage = arrivalLoungeInterface.processAndReply(inMessage);         // processá-lo
         } catch (MessageException e) {
             System.out.println("Thread " + getName () + ": " + e.getMessage () + "!");
             System.out.println(e.getMessageVal ().toString ());

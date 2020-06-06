@@ -57,7 +57,7 @@ public class ArrivalTerminalExitProxy extends Thread {
 
         inMessage = (Message) sconi.readObject ();                     // ler pedido do cliente
         try {
-            outMessage = ArrivalTerminalExitInterface.processAndReply (inMessage);         // processá-lo
+            outMessage = arrivalTerminalExitInterface.processAndReply(inMessage);         // processá-lo
         } catch (MessageException e) {
             System.out.println("Thread " + getName () + ": " + e.getMessage () + "!");
             System.out.println(e.getMessageVal ().toString ());

@@ -55,7 +55,7 @@ public class TemporaryStorageAreaProxy  extends Thread {
 
         inMessage = (Message) sconi.readObject ();                     // ler pedido do cliente
         try {
-            outMessage = TemporaryStorageAreaInterface.processAndReply (inMessage);         // processá-lo
+            outMessage = temporaryStorageAreaInterface.processAndReply(inMessage);         // processá-lo
         } catch (MessageException e) {
             System.out.println("Thread " + getName () + ": " + e.getMessage () + "!");
             System.out.println(e.getMessageVal ().toString ());

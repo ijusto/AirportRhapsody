@@ -56,7 +56,7 @@ public class BaggageColPointProxy extends Thread {
 
         inMessage = (Message) sconi.readObject ();                     // ler pedido do cliente
         try {
-            outMessage = BaggageColPointInterface.processAndReply (inMessage);         // processá-lo
+            outMessage = baggageColPointInterface.processAndReply(inMessage);         // processá-lo
         } catch (MessageException e) {
             System.out.println("Thread " + getName () + ": " + e.getMessage () + "!");
             System.out.println(e.getMessageVal ().toString ());

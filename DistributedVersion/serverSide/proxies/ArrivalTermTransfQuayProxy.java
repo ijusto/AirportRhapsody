@@ -57,7 +57,7 @@ public class ArrivalTermTransfQuayProxy extends Thread {
 
         inMessage = (Message) sconi.readObject ();                     // ler pedido do cliente
         try {
-            outMessage = ArrivalTermTransfQuayInterface.processAndReply (inMessage);         // processá-lo
+            outMessage = arrivalTermTransfQuayInterface.processAndReply(inMessage);         // processá-lo
         } catch (MessageException e) {
             System.out.println("Thread " + getName () + ": " + e.getMessage () + "!");
             System.out.println(e.getMessageVal ().toString ());
