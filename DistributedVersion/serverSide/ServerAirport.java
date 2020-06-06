@@ -1,5 +1,6 @@
 package serverSide;
 
+import old.GenReposInfo;
 import serverSide.interfaces.*;
 import comInf.Bag;
 import comInf.MemException;
@@ -34,7 +35,7 @@ public class ServerAirport {
 
     public static void main(final String[] args) throws MemException {
 
-        sharedRegions.GenReposInfo repos;
+        GenReposInfo repos;
         BaggageColPoint bagColPoint;
         BaggageColPointInterface bagColPointInterface;
         BaggageReclaimOffice bagRecOffice;

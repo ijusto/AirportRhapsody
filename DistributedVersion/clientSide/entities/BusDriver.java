@@ -2,7 +2,7 @@ package clientSide.entities;
 import clientSide.BusDriverStates;
 import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.DepartureTermTransfQuayStub;
-import sharedRegions.GenReposInfo;
+import old.GenReposInfo;
 
 /**
  *   Bus driver thread.
