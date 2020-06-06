@@ -74,7 +74,7 @@ public class ArrivalTermTransfQuay {
      *     @param repos general repository of information
      */
 
-    public ArrivalTermTransfQuay(GenReposInfo repos) throws MemException {
+    public ArrivalTermTransfQuay(/*GenReposInfo repos*/) throws MemException {
         this.repos = repos;
         this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.resetNPassAllowedToEnter();

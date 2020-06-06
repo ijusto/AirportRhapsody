@@ -40,7 +40,7 @@ public class BaggageColPoint {
      *     @param repos general repository of information
      */
 
-    public BaggageColPoint(GenReposInfo repos){
+    public BaggageColPoint(/*GenReposInfo repos*/){
         this.repos = repos;
         this.pHoldEmpty = true;
     }

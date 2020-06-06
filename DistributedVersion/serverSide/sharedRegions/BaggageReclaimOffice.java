@@ -24,7 +24,7 @@ public class BaggageReclaimOffice {
      *     @param repos general repository of information
      */
 
-    public BaggageReclaimOffice(GenReposInfo repos){
+    public BaggageReclaimOffice(/*GenReposInfo repos*/){
         this.repos = repos;
     }
 

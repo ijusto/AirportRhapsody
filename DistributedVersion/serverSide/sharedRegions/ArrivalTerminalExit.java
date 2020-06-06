@@ -58,7 +58,7 @@ public class ArrivalTerminalExit {
      *     @param arrivalQuay Arrival Terminal Transfer Quay.
      */
 
-    public ArrivalTerminalExit(GenReposInfo repos, ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay){
+    public ArrivalTerminalExit(/*GenReposInfo repos, ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay*/){
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
         this.repos = repos;

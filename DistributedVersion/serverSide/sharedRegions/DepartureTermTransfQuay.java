@@ -44,7 +44,7 @@ public class DepartureTermTransfQuay {
      *     @param repos general repository of information.
      */
 
-    public DepartureTermTransfQuay(GenReposInfo repos){
+    public DepartureTermTransfQuay(/*GenReposInfo repos*/){
         this.repos = repos;
         this.busDoorsOpen = false;
         this.resetNPassOnTheBusValue();

@@ -33,7 +33,7 @@ public class TemporaryStorageArea {
      *     @param repos general repository of information
      */
 
-    public TemporaryStorageArea(GenReposInfo repos) throws MemException {
+    public TemporaryStorageArea(/*GenReposInfo repos*/) throws MemException {
         this.repos = repos;
         // stack of the store room instantiation
         tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT * SimulPar.N_BAGS_PER_PASS]);
