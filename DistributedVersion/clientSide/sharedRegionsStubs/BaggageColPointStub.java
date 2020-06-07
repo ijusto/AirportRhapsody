@@ -1,10 +1,7 @@
 package clientSide.sharedRegionsStubs;
 
-import clientSide.clients.ClientCom;
-import clientSide.entities.Passenger;
-import clientSide.entities.Porter;
+import clientSide.ClientCom;
 import comInf.Bag;
-import comInf.MemException;
 import comInf.MemFIFO;
 import comInf.Message;
 

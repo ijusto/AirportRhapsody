@@ -3,7 +3,7 @@ package clientSide.sharedRegionsStubs;
 import clientSide.BusDriverStates;
 import clientSide.PassengerStates;
 import clientSide.PorterStates;
-import clientSide.clients.ClientCom;
+import clientSide.ClientCom;
 import comInf.Message;
 
 public class GenReposInfoStub {

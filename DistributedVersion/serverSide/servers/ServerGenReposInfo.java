@@ -1,5 +1,6 @@
 package serverSide.servers;
 
+import serverSide.ServerCom;
 import serverSide.interfaces.GenReposInfoInterface;
 import serverSide.proxies.GenReposInfoProxy;
 import serverSide.sharedRegions.GenReposInfo;

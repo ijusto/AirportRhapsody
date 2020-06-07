@@ -3,7 +3,7 @@ package serverSide.proxies;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.interfaces.BaggageReclaimOfficeInterface;
-import serverSide.servers.ServerCom;
+import serverSide.ServerCom;
 
 public class BaggageReclaimOfficeProxy  extends Thread {
     /**

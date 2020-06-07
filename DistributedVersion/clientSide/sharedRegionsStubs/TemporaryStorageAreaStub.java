@@ -1,12 +1,7 @@
 package clientSide.sharedRegionsStubs;
 
-import clientSide.PorterStates;
-import clientSide.SimulPar;
-import clientSide.clients.ClientCom;
-import clientSide.entities.Porter;
+import clientSide.ClientCom;
 import comInf.Bag;
-import comInf.MemException;
-import comInf.MemStack;
 import comInf.Message;
 
 public class TemporaryStorageAreaStub {

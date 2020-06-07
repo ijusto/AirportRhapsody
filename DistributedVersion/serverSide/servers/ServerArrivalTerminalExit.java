@@ -1,5 +1,6 @@
 package serverSide.servers;
 
+import serverSide.ServerCom;
 import serverSide.interfaces.ArrivalTerminalExitInterface;
 import serverSide.proxies.ArrivalTerminalExitProxy;
 import serverSide.sharedRegions.ArrivalTerminalExit;

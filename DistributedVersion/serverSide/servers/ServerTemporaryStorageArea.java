@@ -1,5 +1,6 @@
 package serverSide.servers;
 
+import serverSide.ServerCom;
 import serverSide.interfaces.TemporaryStorageAreaInterface;
 import serverSide.proxies.TemporaryStorageAreaProxy;
 import serverSide.sharedRegions.TemporaryStorageArea;

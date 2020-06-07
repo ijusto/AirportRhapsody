@@ -1,17 +1,9 @@
 package serverSide.interfaces;
 
-import clientSide.BusDriverStates;
-import clientSide.PassengerStates;
-import clientSide.PorterStates;
-import clientSide.clients.ClientCom;
-import comInf.Bag;
 import comInf.Message;
 import comInf.MessageException;
-import serverSide.proxies.ArrivalLoungeProxy;
 import serverSide.proxies.GenReposInfoProxy;
-import serverSide.servers.ServerArrivalLounge;
 import serverSide.servers.ServerGenReposInfo;
-import serverSide.sharedRegions.ArrivalLounge;
 import serverSide.sharedRegions.GenReposInfo;
 
 public class GenReposInfoInterface {

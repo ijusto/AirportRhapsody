@@ -3,7 +3,7 @@ package serverSide.proxies;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.interfaces.DepartureTerminalEntranceInterface;
-import serverSide.servers.ServerCom;
+import serverSide.ServerCom;
 
 public class DepartureTerminalEntranceProxy  extends Thread {
     /**

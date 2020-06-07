@@ -1,10 +1,10 @@
 package serverSide.servers;
 
+import serverSide.ServerCom;
 import serverSide.interfaces.ArrivalLoungeInterface;
 import serverSide.proxies.ArrivalLoungeProxy;
 import serverSide.sharedRegions.ArrivalLounge;
 
-import java.io.*;
 import java.net.*;
 
 public class ServerArrivalLounge {

@@ -3,8 +3,7 @@ package serverSide.proxies;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.interfaces.BaggageColPointInterface;
-import serverSide.servers.ServerBaggageColPoint;
-import serverSide.servers.ServerCom;
+import serverSide.ServerCom;
 
 public class BaggageColPointProxy extends Thread {
     /**

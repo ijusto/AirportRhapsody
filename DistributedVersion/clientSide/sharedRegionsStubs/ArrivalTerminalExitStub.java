@@ -1,6 +1,6 @@
 package clientSide.sharedRegionsStubs;
 
-import clientSide.clients.ClientCom;
+import clientSide.ClientCom;
 import comInf.Message;
 
 public class ArrivalTerminalExitStub {

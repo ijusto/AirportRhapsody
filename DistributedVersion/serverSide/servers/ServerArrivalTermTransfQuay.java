@@ -1,5 +1,6 @@
 package serverSide.servers;
 
+import serverSide.ServerCom;
 import serverSide.interfaces.ArrivalTermTransfQuayInterface;
 import serverSide.proxies.ArrivalTermTransfQuayProxy;
 import serverSide.sharedRegions.ArrivalTermTransfQuay;

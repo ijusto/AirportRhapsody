@@ -1,10 +1,10 @@
 package serverSide.servers;
 
+import serverSide.ServerCom;
 import serverSide.interfaces.BaggageColPointInterface;
 import serverSide.proxies.BaggageColPointProxy;
 import serverSide.sharedRegions.BaggageColPoint;
 
-import java.io.*;
 import java.net.*;
 
 public class ServerBaggageColPoint {

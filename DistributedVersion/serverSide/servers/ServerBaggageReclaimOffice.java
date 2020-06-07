@@ -1,5 +1,6 @@
 package serverSide.servers;
 
+import serverSide.ServerCom;
 import serverSide.interfaces.BaggageReclaimOfficeInterface;
 import serverSide.proxies.BaggageReclaimOfficeProxy;
 import serverSide.sharedRegions.BaggageReclaimOffice;

@@ -3,8 +3,7 @@ package serverSide.proxies;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.interfaces.ArrivalLoungeInterface;
-import serverSide.servers.ServerArrivalLounge;
-import serverSide.servers.ServerCom;
+import serverSide.ServerCom;
 
 public class ArrivalLoungeProxy extends Thread {
 
