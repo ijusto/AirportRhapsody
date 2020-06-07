@@ -3,6 +3,7 @@ package serverSide.sharedRegions;
 import clientSide.entities.Passenger;
 import clientSide.PassengerStates;
 import clientSide.SimulPar;
+import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 
 /**
  *   Arrival Terminal Exit.
@@ -34,10 +35,10 @@ public class ArrivalTerminalExit {
     private ArrivalTermTransfQuay arrivalQuay;
 
     /**
-     *   Departure Terminal Entrance
+     *   Departure Terminal Entrance Stub
      */
 
-    private DepartureTerminalEntrance departureTerm;
+    private DepartureTerminalEntranceStub departureTermStub;
 
     /**
      *   Counter of passengers of the current flight that are at the exit od the Arrival Terminal or at the entrance of
@@ -186,13 +187,13 @@ public class ArrivalTerminalExit {
     /* ************************************************* Setters ******************************************************/
 
     /**
-     *   Sets the Departure Terminal Entrance Reference.
+     *   Sets the Departure Terminal Entrance Stub Reference.
      *
-     *    @param departureTerm Departure Terminal Entrance.
+     *    @param departureTermStub Departure Terminal Entrance Stub.
      */
 
-    public synchronized void setDepartureTerminalRef(DepartureTerminalEntrance departureTerm){
-        this.departureTerm = departureTerm;
+    public synchronized void setDepartureTerminalRef(DepartureTerminalEntranceStub departureTermStub){
+        this.departureTermStub = departureTermStub;
     }
 
 }

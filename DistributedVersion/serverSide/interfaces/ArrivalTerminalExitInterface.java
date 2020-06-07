@@ -64,6 +64,12 @@ public class ArrivalTerminalExitInterface {
                     outMessage = new Message (Message.LIMITCOUNTER); // gerar resposta negativa
                 break;
 
+            // setDepartureTerminalRef (main)
+            case Message.SETDEPTERNREF:                                                      
+                arrivalTerminalExit.setDepartureTerminalRef(inMessage.getMsgDepTermEntStub());
+                outMessage = new Message (Message.ACK);
+                break;
+
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerArrivalTerminalExit.waitConnection = false;
                 (((ArrivalTerminalExitProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);

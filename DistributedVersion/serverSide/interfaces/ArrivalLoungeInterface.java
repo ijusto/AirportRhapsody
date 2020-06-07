@@ -84,9 +84,9 @@ public class ArrivalLoungeInterface {
                 break;
 
             // setDepartureTerminalRef (main)
-            case Message.SETDEPTERNREF:                                                      // receber pagamento
-                arrivalLounge.setDepartureTerminalRef(inMessage.getMsgDepTermEntStub()); /* TODO: FIX THIS*/
-                outMessage = new Message (Message.ACK);            // gerar confirmação
+            case Message.SETDEPTERNREF:
+                arrivalLounge.setDepartureTerminalRef(inMessage.getMsgDepTermEntStub());
+                outMessage = new Message (Message.ACK);
                 break;
 
             case Message.SHUT:                                                        // shutdown do servidor
