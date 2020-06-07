@@ -1,9 +1,7 @@
 package comInf;
 
-import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
-import clientSide.sharedRegionsStubs.BaggageColPointStub;
-import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
-import clientSide.sharedRegionsStubs.GenReposInfoStub;
+import clientSide.sharedRegionsStubs.*;
+import serverSide.sharedRegions.ArrivalLounge;
 import serverSide.sharedRegions.DepartureTerminalEntrance;
 
 import java.io.*;
@@ -203,6 +201,11 @@ public class Message implements Serializable
     /* ******* resetTemporaryStorageArea ************** */
 
 
+    /* *********************************************** GenReposInfo ************************************************* */
+
+    /* ************* probPar ************************** */
+    public static final int PARAMSREPOS = 67;
+
     /* ******************************************** GENERAL MESSAGES ************************************************ */
 
     public static final int ACK      =  66; // TODO: Change value
@@ -286,6 +289,10 @@ public class Message implements Serializable
 
     private ArrivalTermTransfQuayStub msgArrQuayStub = null;
 
+    private ArrivalLoungeStub msgArrLoungeStub = null;
+
+    private String msgReposFile = null;
+
     private boolean msgIncOrDec;
 
     private int msgDeadPassValue = -1;
@@ -305,7 +312,7 @@ public class Message implements Serializable
      *  Instanciação de uma mensagem (forma 2).
      *
      *    @param type tipo da mensagem
-     *    @param id identificação do cliente/barbeiro
+     *    @param value
      */
 
 
@@ -329,6 +336,31 @@ public class Message implements Serializable
             msgArrQuayStub = arrQuayStub;
             msgBagAndPassDest = destStat;
             msgNBagsPHold = nBagsPHold;
+        }
+    }
+
+    public Message (int type, GenReposInfoStub reposStub) {
+        msgType = type;
+        if (msgType ==  PARAMSATTQUAY || msgType == PARAMSBAGCOLPNT || msgType == PARAMSBAGRECOFF
+                || msgType == PARAMSDEPTTQUAY || msgType == PARAMSTEMPSTORAREA){
+            msgReposStub = reposStub;
+        }
+    }
+
+    public Message (int type, GenReposInfoStub reposStub, ArrivalLoungeStub arrivalLoungeStub,
+                    ArrivalTermTransfQuayStub arrivalTermTransfQuayStub) {
+        msgType = type;
+        if (msgType ==  PARAMSATEXIT){
+            msgReposStub = reposStub;
+            msgArrLoungeStub = arrivalLoungeStub;
+            msgArrQuayStub = arrivalTermTransfQuayStub;
+        }
+    }
+
+    public Message (int type, String filename) {
+        msgType = type;
+        if (msgType ==  PARAMSREPOS){
+            msgReposFile = filename;
         }
     }
 
@@ -411,6 +443,10 @@ public class Message implements Serializable
     public BaggageColPointStub getMsgBagColPointStub(){ return msgBagColPointStub; }
 
     public ArrivalTermTransfQuayStub getMsgArrQuayStub(){ return msgArrQuayStub; }
+
+    public ArrivalLoungeStub getMsgArrLoungeStub(){ return msgArrLoungeStub; }
+
+    public String getMsgReposFile(){ return msgReposFile; }
 
     /**
      *  Obtenção do valor do campo tipo da mensagem.

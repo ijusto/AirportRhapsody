@@ -42,6 +42,12 @@ public class BaggageReclaimOfficeInterface {
         /* seu processamento */
 
         switch (inMessage.getType ()) {
+            // probPar
+            case Message.PARAMSBAGRECOFF:
+                baggageReclaimOffice.probPar(inMessage.getMsgReposStub());
+                outMessage = new Message (Message.ACK);
+                break;
+
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerBaggageReclaimOffice.waitConnection = false;
                 (((BaggageReclaimOfficeProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);

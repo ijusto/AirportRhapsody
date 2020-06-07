@@ -48,11 +48,16 @@ public class GenReposInfoInterface {
         /* seu processamento */
 
         switch (inMessage.getType ()) {
+            // probPar
+            case Message.PARAMSREPOS:
+                repos.probPar(inMessage.getMsgReposFile());
+                outMessage = new Message(Message.ACK);
+                break;
 
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerGenReposInfo.waitConnection = false;
                 (((GenReposInfoProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
-                outMessage = new Message (Message.ACK);            // gerar confirmação
+                outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
         }
 

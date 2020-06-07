@@ -32,6 +32,27 @@ public class GenReposInfoStub {
     }
 
 
+    public void probPar(String filename){
+
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.PARAMSREPOS, filename);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+    }
 
     /**
      *  Fazer o shutdown do servidor (solicitação do serviço).

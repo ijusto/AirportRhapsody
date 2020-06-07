@@ -44,6 +44,16 @@ public class ArrivalTermTransfQuayInterface {
 
         switch (inMessage.getType ()) {
 
+            // probPar
+            case Message.PARAMSATTQUAY:
+                try {
+                    arrivalTermTransfQuay.probPar(inMessage.getMsgReposStub());
+                } catch (MemException e) {
+                    e.printStackTrace();
+                }
+                outMessage = new Message (Message.ACK);
+                break;
+
             // takeABus (Passenger)
             case Message.TAKEABUS:
                 arrivalTermTransfQuay.takeABus(inMessage.getPassId());

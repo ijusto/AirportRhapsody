@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.ArrivalTermTransfQuayProxy;
@@ -42,6 +43,12 @@ public class BaggageColPointInterface {
         /* seu processamento */
 
         switch (inMessage.getType ()) {
+            // probPar
+            case Message.PARAMSBAGCOLPNT:
+                baggageColPoint.probPar(inMessage.getMsgReposStub());
+                outMessage = new Message (Message.ACK);
+                break;
+
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerBaggageColPoint.waitConnection = false;
                 (((BaggageColPointProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);

@@ -42,6 +42,13 @@ public class DepartureTerminalEntranceInterface {
         /* seu processamento */
 
         switch (inMessage.getType ()) {
+            // probPar
+            case Message.PARAMSDEPTENT:
+                departureTerminalEntrance.probPar(inMessage.getMsgReposStub(), inMessage.getMsgArrLoungeStub(),
+                        inMessage.getMsgArrQuayStub());
+                outMessage = new Message (Message.ACK);
+                break;
+
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerDepartureTerminalEntrance.waitConnection = false;
                 (((DepartureTerminalEntranceProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);

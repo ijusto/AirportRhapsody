@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.ArrivalLoungeProxy;
@@ -45,6 +46,13 @@ public class ArrivalTerminalExitInterface {
         /* seu processamento */
 
         switch (inMessage.getType ()) {
+
+            // probPar
+            case Message.PARAMSATEXIT:
+                arrivalTerminalExit.probPar(inMessage.getMsgReposStub(), inMessage.getMsgArrLoungeStub(),
+                            inMessage.getMsgArrQuayStub());
+                outMessage = new Message (Message.ACK);
+                break;
 
             case Message.GOHOME:
                 arrivalTerminalExit.goHome(inMessage.getPassId());

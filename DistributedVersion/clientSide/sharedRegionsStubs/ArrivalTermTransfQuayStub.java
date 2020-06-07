@@ -41,8 +41,7 @@ public class ArrivalTermTransfQuayStub {
      *
      */
 
-    public void probPar (GenReposInfo repos)//(String fName, int nIter)
-    {
+    public void probPar (GenReposInfoStub reposStub){
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -53,16 +52,14 @@ public class ArrivalTermTransfQuayStub {
             }
             catch (InterruptedException e) {}
         }
-        /*
-        outMessage = new Message (Message.SETNFIC, fName, nIter);
+        outMessage = new Message (Message.PARAMSATTQUAY, reposStub);
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
-        if (inMessage.getType() != Message.NFICDONE) {
+        if (inMessage.getType() != Message.ACK) {
             System.out.println("Arranque da simulação: Tipo inválido!");
             System.out.println(inMessage.toString ());
             System.exit (1);
         }
-         */
         con.close ();
     }
 

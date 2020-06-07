@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.DepartureTermTransfQuayProxy;
@@ -42,6 +43,16 @@ public class TemporaryStorageAreaInterface {
         /* seu processamento */
 
         switch (inMessage.getType ()) {
+            // probPar
+            case Message.PARAMSTEMPSTORAREA:
+                try {
+                    temporaryStorageArea.probPar(inMessage.getMsgReposStub());
+                } catch (MemException e) {
+                    e.printStackTrace();
+                }
+                outMessage = new Message(Message.ACK);
+                break;
+
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerTemporaryStorageArea.waitConnection = false;
                 (((TemporaryStorageAreaProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
