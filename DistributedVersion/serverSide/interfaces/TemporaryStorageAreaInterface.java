@@ -34,9 +34,9 @@ public class TemporaryStorageAreaInterface {
         /* validação da mensagem recebida */
 
         switch (inMessage.getType ()) {
-            case Message.PARAMSTEMPSTORAREA: /* TODO: Validation if necessary */
-            case Message.CARRYTOAPPSTORE_TSA: /* TODO: Validation if necessary */
-            case Message.RESETTSA: /* TODO: Validation if necessary */
+            case Message.PARAMSTEMPSTORAREA: /* TODO: Validation */
+            case Message.CARRYTOAPPSTORE_TSA: /* TODO: Validation */
+            case Message.RESETTSA:
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:
                 break;

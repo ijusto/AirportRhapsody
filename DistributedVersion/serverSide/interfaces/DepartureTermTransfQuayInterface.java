@@ -33,10 +33,10 @@ public class DepartureTermTransfQuayInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSDEPTTQUAY:/* TODO: Validation if necessary */
-            case Message.LEAVEBUS:/* TODO: Validation if necessary */
-            case Message.PBLPO:/* TODO: Validation if necessary */
-            case Message.RESETDTTQ:/* TODO: Validation if necessary */
+            case Message.PARAMSDEPTTQUAY:/* TODO: Validation */
+            case Message.LEAVEBUS:/* TODO: Validation */
+            case Message.PBLPO:
+            case Message.RESETDTTQ:
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:

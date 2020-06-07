@@ -36,13 +36,13 @@ public class ArrivalTerminalExitInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSATEXIT:/* TODO: Validation if necessary */
-            case Message.GOHOME:/* TODO: Validation if necessary */
-            case Message.NOTFNEXTL:/* TODO: Validation if necessary */
-            case Message.INCDECCOUNTER:/* TODO: Validation if necessary */
-            case Message.SETDEPTERNREF:/* TODO: Validation if necessary */
-            case Message.RESETATE:/* TODO: Validation if necessary */
-            case Message.GETDEADPASSVAL:/* TODO: Validation if necessary */
+            case Message.PARAMSATEXIT:/* TODO: Validation */
+            case Message.GOHOME:/* TODO: Validation */
+            case Message.NOTFNEXTL:
+            case Message.INCDECCOUNTER:/* TODO: Validation */
+            case Message.SETDEPTERNREF:/* TODO: Validation */
+            case Message.RESETATE:
+            case Message.GETDEADPASSVAL:/* TODO: Validation */
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:

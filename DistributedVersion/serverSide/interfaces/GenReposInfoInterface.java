@@ -34,24 +34,24 @@ public class GenReposInfoInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSREPOS: /* TODO: Validation if necessary */
-            case Message.PRINTLOG: /* TODO: Validation if necessary */
-            case Message.FINALREPORT: /* TODO: Validation if necessary */
-            case Message.UPDATEFN: /* TODO: Validation if necessary */
-            case Message.INITCHOLD: /* TODO: Validation if necessary */
-            case Message.REMBAGCHOLD: /* TODO: Validation if necessary */
-            case Message.INCBAGCB: /* TODO: Validation if necessary */
-            case Message.PGETSABAG: /* TODO: Validation if necessary */
-            case Message.SAVEBAGSR: /* TODO: Validation if necessary */
-            case Message.PJOINWQ: /* TODO: Validation if necessary */
-            case Message.PLEFTWQ: /* TODO: Validation if necessary */
-            case Message.FREEBS: /* TODO: Validation if necessary */
-            case Message.GETPASSSI: /* TODO: Validation if necessary */
-            case Message.UDTEPASSNR: /* TODO: Validation if necessary */
-            case Message.UDTEPASSNA: /* TODO: Validation if necessary */
-            case Message.PASSEXIT: /* TODO: Validation if necessary */
-            case Message.MISSBAGREP: /* TODO: Validation if necessary */
-            case Message.NUMNRTOTAL: /* TODO: Validation if necessary */
+            case Message.PARAMSREPOS: /* TODO: Validation */
+            case Message.PRINTLOG:
+            case Message.FINALREPORT:
+            case Message.UPDATEFN: /* TODO: Validation */
+            case Message.INITCHOLD: /* TODO: Validation */
+            case Message.REMBAGCHOLD:
+            case Message.INCBAGCB:
+            case Message.PGETSABAG:
+            case Message.SAVEBAGSR:
+            case Message.PJOINWQ: /* TODO: Validation */
+            case Message.PLEFTWQ: /* TODO: Validation */
+            case Message.FREEBS: /* TODO: Validation */
+            case Message.GETPASSSI: /* TODO: Validation */
+            case Message.UDTEPASSNR: /* TODO: Validation */
+            case Message.UDTEPASSNA: /* TODO: Validation */
+            case Message.PASSEXIT: /* TODO: Validation */
+            case Message.MISSBAGREP:
+            case Message.NUMNRTOTAL: /* TODO: Validation */
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:

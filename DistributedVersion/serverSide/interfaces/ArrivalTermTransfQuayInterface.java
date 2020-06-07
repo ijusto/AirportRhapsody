@@ -34,14 +34,14 @@ public class ArrivalTermTransfQuayInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSATTQUAY:/* TODO: Validation if necessary */
-            case Message.TAKEABUS:/* TODO: Validation if necessary */
-            case Message.ENTERBUS:/* TODO: Validation if necessary */
-            case Message.WORKENDED:/* TODO: Validation if necessary */
-            case Message.PARKBUS:/* TODO: Validation if necessary */
-            case Message.ANNOUCEBUSBORADING:/* TODO: Validation if necessary */
-            case Message.RESETATQ:/* TODO: Validation if necessary */
-            case Message.SETENDDAY:/* TODO: Validation if necessary */
+            case Message.PARAMSATTQUAY:/* TODO: Validation */
+            case Message.TAKEABUS:/* TODO: Validation */
+            case Message.ENTERBUS:/* TODO: Validation*/
+            case Message.WORKENDED:
+            case Message.PARKBUS:
+            case Message.ANNOUCEBUSBORADING:
+            case Message.RESETATQ:
+            case Message.SETENDDAY:
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:

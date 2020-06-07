@@ -35,12 +35,12 @@ public class BaggageColPointInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSBAGCOLPNT:/* TODO: Validation if necessary */
-            case Message.GOCOLLECTBAG:/* TODO: Validation if necessary */
-            case Message.CARRYAPPSTORE:/* TODO: Validation if necessary */
-            case Message.RESETBCP:/* TODO: Validation if necessary */
-            case Message.NOMOREBAGS:/* TODO: Validation if necessary */
-            case Message.SETPHEMPTY:/* TODO: Validation if necessary */
+            case Message.PARAMSBAGCOLPNT:/* TODO: Validation */
+            case Message.GOCOLLECTBAG:/* TODO: Validation */
+            case Message.CARRYAPPSTORE:/* TODO: Validation */
+            case Message.RESETBCP:
+            case Message.NOMOREBAGS:
+            case Message.SETPHEMPTY:/* TODO: Validation */
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:
