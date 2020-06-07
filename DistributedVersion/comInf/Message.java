@@ -62,73 +62,81 @@ public class Message implements Serializable
 
     /* ******************************************** ArrivalTerminalExit ********************************************* */
 
-    /* ******** goHome ******************************** */
-    public static final int GOHOME = 14;
+    /* ************* probPar ************************** */
+    public static final int PARAMSATEXIT = 14;
 
-    public static final int GODONE = 15;
+    /* ******** goHome ******************************** */
+    public static final int GOHOME = 15;
+
+    public static final int GODONE = 16;
 
     /* ***** notifyFromPrepareNextLeg ***************** */
-    public static final int NOTFNEXTL = 16;
+    public static final int NOTFNEXTL = 17;
 
     /* ********* incDecCounter ************************ */
-    public static final int INCDECCOUNTER = 17;
+    public static final int INCDECCOUNTER = 18;
 
-    public static final int CONTCOUNTER = 18;
+    public static final int CONTCOUNTER = 19;
 
-    public static final int LIMITCOUNTER = 19;
+    public static final int LIMITCOUNTER = 20;
 
     /* ******* resetArrivalTerminalExit *************** */
-    public static final int RESETATE = 20;
+    public static final int RESETATE = 21;
 
     /* ******* getDeadPassValue *********************** */
-    public static final int GETDEADPASSVAL = 21;
+    public static final int GETDEADPASSVAL = 22;
 
-    public static final int DEADPASSVAL = 22;
+    public static final int DEADPASSVAL = 23;
 
     /* ****** setDepartureTerminalRef ***************** */
     // same as for ArrivalLounge
 
     /* ****************************************** ArrivalTermTransfQuay ********************************************* */
 
-    /* ******* takeABus ******************************* */
-    public static final int TAKEABUS = 23;
+    /* ************* probPar ************************** */
+    public static final int PARAMSATTQUAY = 24;
 
-    public static final int TAKEABUSDONE = 24;
+    /* ******* takeABus ******************************* */
+    public static final int TAKEABUS = 25;
+
+    public static final int TAKEABUSDONE = 26;
 
     /* ******* enterTheBus **************************** */
-    public static final int ENTERBUS = 25;
+    public static final int ENTERBUS = 27;
 
     /* ******* hasDaysWorkEnded  ********************** */
-    public static final int WORKENDED = 26;
+    public static final int WORKENDED = 28;
 
-    public static final int CONTDAYS = 27;
+    public static final int CONTDAYS = 29;
 
     /* ******* parkTheBus ***************************** */
-    public static final int PARKBUS = 28;
+    public static final int PARKBUS = 30;
 
-    public static final int PBDONE = 29;
+    public static final int PBDONE = 31;
 
     /* ******* announcingBusBoarding ****************** */
-    public static final int ANNOUCEBUSBORADING = 30;
+    public static final int ANNOUCEBUSBORADING = 32;
 
-    public static final int ABBDONE = 31;
+    public static final int ABBDONE = 33;
 
     /* ******* resetArrivalTermTransfQuay ************* */
-    public static final int RESETATQ = 32;
+    public static final int RESETATQ = 34;
 
     /* ********* setEndDay **************************** */
-    public static final int SETENDDAY = 33;
-
+    public static final int SETENDDAY = 35;
 
     /* *********************************************** BaggageColPoint ********************************************** */
 
-    /* ******* goCollectABag ************************** */
-    public static final int GOCOLLECTBAG = 34;
+    /* ************* probPar ************************** */
+    public static final int PARAMSBAGCOLPNT = 36;
 
-    public static final int GCBDONE = 35;
+    /* ******* goCollectABag ************************** */
+    public static final int GOCOLLECTBAG = 37;
+
+    public static final int GCBDONE = 38;
 
     /* ******* carryItToAppropriateStore ************** */
-    public static final int CARRYAPPSTORE = 36;
+    public static final int CARRYAPPSTORE = 39;
 
     /* ******* resetBaggageColPoint ******************* */
 
@@ -141,15 +149,21 @@ public class Message implements Serializable
 
     /* ******************************************** BaggageReclaimOffice ******************************************** */
 
+    /* ************* probPar ************************** */
+    public static final int PARAMSBAGRECOFF = 46;
+
     /* ******* reportMissingBags ********************** */
-    public static final int REPORTMISSBAG = 43;
+    public static final int REPORTMISSBAG = 47;
 
     /* ****************************************** DepartureTerminalEntrance ***************************************** */
 
-    /* ******* prepareNextLeg ************************* */
-    public static final int PREPARENEXTLEG = 44;
+    /* ************* probPar ************************** */
+    public static final int PARAMSDEPTENT = 48;
 
-    public static final int PNLDONE = 45;
+    /* ******* prepareNextLeg ************************* */
+    public static final int PREPARENEXTLEG = 49;
+
+    public static final int PNLDONE = 50;
 
     /* ******* resetDepartureTerminalExit ************* */
 
@@ -162,53 +176,59 @@ public class Message implements Serializable
 
     /* ******************************************** DepartureTermTransfQuay ***************************************** */
 
-    /* ******* leaveTheBus **************************** */
-    public static final int LEAVEBUS = 33;
+    /* ************* probPar ************************** */
+    public static final int PARAMSDEPTTQUAY = 57;
 
-    public static final int LBDONE = 34;
+    /* ******* leaveTheBus **************************** */
+    public static final int LEAVEBUS = 58;
+
+    public static final int LBDONE = 59;
 
     /* ******* parkTheBusAndLetPassOff **************** */
-    public static final int PBLPO = 35;
+    public static final int PBLPO = 60;
 
-    public static final int PBLPODONE = 36;
+    public static final int PBLPODONE = 61;
 
     /* ******* resetDepartureTermTransfQuay *********** */
 
 
     /* *********************************************** TemporaryStorageArea ***************************************** */
 
+    /* ************* probPar ************************** */
+    public static final int PARAMSTEMPSTORAREA = 63;
+
     /* ******* carryItToAppropriateStore ************** */
-    public static final int CARRYTOAPPSTORE_TSA = 37;
+    public static final int CARRYTOAPPSTORE_TSA = 64;
 
     /* ******* resetTemporaryStorageArea ************** */
 
 
     /* ******************************************** GENERAL MESSAGES ************************************************ */
 
-    public static final int ACK      =  38; // TODO: Change value
+    public static final int ACK      =  66; // TODO: Change value
 
-    public static final int ENDPASSENGER      = 39;
+    public static final int ENDPASSENGER      = 67;
 
-    public static final int ENDPORTER      = 40;
+    public static final int ENDPORTER      = 68;
 
-    public static final int ENDBUSDRIVER     = 41;
+    public static final int ENDBUSDRIVER     = 69;
 
 
     /**
      *  Inicialização do ficheiro de logging (operação pedida pelo cliente)
      */
-    public static final int SETNFIC  =  42;
+    public static final int SETNFIC  =  70;
 
     /**
      *  Ficheiro de logging foi inicializado (resposta enviada pelo servidor)
      */
-    public static final int NFICDONE =  43;
+    public static final int NFICDONE =  71;
 
     /**
      *  Shutdown do servidor (operação pedida pelo cliente)
      */
 
-    public static final int SHUT   = 44;
+    public static final int SHUT   = 72;
 
     /* Campos das mensagens */
 

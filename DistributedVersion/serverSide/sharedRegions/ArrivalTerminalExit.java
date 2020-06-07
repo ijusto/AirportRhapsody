@@ -3,6 +3,8 @@ package serverSide.sharedRegions;
 import clientSide.entities.Passenger;
 import clientSide.PassengerStates;
 import clientSide.SimulPar;
+import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
+import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 
@@ -24,16 +26,16 @@ public class ArrivalTerminalExit {
     private GenReposInfoStub reposStub;
 
     /**
-     *   Arrival Lounge.
+     *   Arrival Lounge Stub.
      */
 
-    private ArrivalLounge arrivLounge;
+    private ArrivalLoungeStub arrivLoungeStub;
 
     /**
-     *   Arrival Terminal Transfer Quay.
+     *   Arrival Terminal Transfer Quay Stub.
      */
 
-    private ArrivalTermTransfQuay arrivalQuay;
+    private ArrivalTermTransfQuayStub arrivalQuayStub;
 
     /**
      *   Departure Terminal Entrance Stub
@@ -54,17 +56,20 @@ public class ArrivalTerminalExit {
 
     private static final Object lockDeadPassCounter = new Object();
 
+    public ArrivalTerminalExit(){}
+
     /**
      *   Instantiation of the Arrival Terminal Exit.
      *
      *     @param reposStub General Repository of Information Stub.
-     *     @param arrivLounge Arrival Lounge.
-     *     @param arrivalQuay Arrival Terminal Transfer Quay.
+     *     @param arrivLoungeStub Arrival Lounge Stub.
+     *     @param arrivalQuayStub Arrival Terminal Transfer Quay Stub.
      */
 
-    public ArrivalTerminalExit(/*GenReposStubInfo reposStub, ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay*/){
-        this.arrivLounge = arrivLounge;
-        this.arrivalQuay = arrivalQuay;
+    public void probPar(GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
+                               ArrivalTermTransfQuayStub arrivalQuayStub){
+        this.arrivLoungeStub = arrivLoungeStub;
+        this.arrivalQuayStub = arrivalQuayStub;
         this.reposStub = reposStub;
         this.resetDeadPassCounter();
     }

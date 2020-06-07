@@ -3,6 +3,8 @@ package serverSide.sharedRegions;
 import clientSide.entities.Passenger;
 import clientSide.PassengerStates;
 import clientSide.SimulPar;
+import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
+import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.ArrivalTerminalExitStub;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 
@@ -22,16 +24,16 @@ public class DepartureTerminalEntrance {
     private GenReposInfoStub reposStub;
 
     /*
-     *   Arrival Lounge.
+     *   Arrival Lounge Stub.
      */
 
-    private ArrivalLounge arrivLounge;
+    private ArrivalLoungeStub arrivLoungeStub;
 
     /*
-     *   Arrival Terminal Transfer Quay.
+     *   Arrival Terminal Transfer Quay Stub.
      */
 
-    private ArrivalTermTransfQuay arrivalQuay;
+    private ArrivalTermTransfQuayStub arrivalQuayStub;
 
     /*
      *   Arrival Terminal Exit Stub.
@@ -45,17 +47,20 @@ public class DepartureTerminalEntrance {
 
     private boolean phEmpty;
 
+    public DepartureTerminalEntrance(){}
+
     /**
      *   Instantiation of the Departure Terminal Entrance.
      *
-     *     @param reposStub General Repository of Information.
-     *     @param arrivLounge Arrival Lounge.
-     *     @param arrivalQuay Arrival Terminal Transfer Quay.
+     *     @param reposStub General Repository of Information Stub.
+     *     @param arrivLoungeStub Arrival Lounge Stub.
+     *     @param arrivalQuayStub Arrival Terminal Transfer Quay Stub.
      */
 
-    public DepartureTerminalEntrance(/*GenReposInfo reposStub, ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay*/){
-        this.arrivLounge = arrivLounge;
-        this.arrivalQuay = arrivalQuay;
+    public void probPar(GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
+                        ArrivalTermTransfQuayStub arrivalQuayStub){
+        this.arrivLoungeStub = arrivLoungeStub;
+        this.arrivalQuayStub = arrivalQuayStub;
         this.reposStub = reposStub;
         this.phEmpty = false;
     }

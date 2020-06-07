@@ -1,6 +1,7 @@
 package serverSide.interfaces;
 
 import comInf.Bag;
+import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.ArrivalLoungeProxy;
@@ -46,13 +47,15 @@ public class ArrivalLoungeInterface {
 
         switch (inMessage.getType ()) {
 
-            // WhatShouldIDo (Passenger)
+            // probPar
             case Message.PARAMSARRLNG:
-                if (arrivalLounge.probPar(inMessage.getMsgReposStub(), inMessage.getMsgBagColPointStub(),
-                        inMessage.getMsgArrQuayStub(), inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsPHold()))
-                    outMessage = new Message (Message.FNDST);    // gerar resposta positiva
-                else
-                    outMessage = new Message (Message.TRDST); // gerar resposta negativa
+                try {
+                    arrivalLounge.probPar(inMessage.getMsgReposStub(), inMessage.getMsgBagColPointStub(),
+                            inMessage.getMsgArrQuayStub(), inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsPHold());
+                } catch (MemException e) {
+                    e.printStackTrace();
+                }
+                outMessage = new Message (Message.ACK);
                 break;
 
             // WhatShouldIDo (Passenger)

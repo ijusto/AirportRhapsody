@@ -157,13 +157,15 @@ public class GenReposInfo {
 
     private StringBuilder log;
 
+    public GenReposInfo(){}
+
     /**
      *   Instantiation of the General Repository of Information.
      *
      *    @param fileName Name of the log file.
      */
 
-    public GenReposInfo(String fileName) {
+    public void probPar(String fileName) {
 
         try {
             this.fw = new FileWriter(fileName, true);

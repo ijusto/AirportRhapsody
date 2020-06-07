@@ -71,13 +71,15 @@ public class ArrivalTermTransfQuay {
 
     private boolean endDay;
 
+    public ArrivalTermTransfQuay(){}
+
     /**
      *   Instantiation of the Arrival Terminal Transfer Quay.
      *
-     *     @param reposStub general repository of information
+     *     @param reposStub general repository of  Stub
      */
 
-    public ArrivalTermTransfQuay(/*GenReposStubInfo reposStub*/) throws MemException {
+    public void probPar(GenReposInfoStub reposStub) throws MemException {
         this.reposStub = reposStub;
         this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.resetNPassAllowedToEnter();

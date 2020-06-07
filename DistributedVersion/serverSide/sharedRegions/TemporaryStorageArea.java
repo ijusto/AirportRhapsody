@@ -28,13 +28,15 @@ public class TemporaryStorageArea {
 
     private GenReposInfoStub reposStub;
 
+    public TemporaryStorageArea(){}
+
     /**
      *   Instantiation of the Temporary Storage Area.
      *
-     *     @param reposStub general repository of information
+     *     @param reposStub general repository of information Stub
      */
 
-    public TemporaryStorageArea(/*GenReposInfo reposStub*/) throws MemException {
+    public void probPar(GenReposInfoStub reposStub) throws MemException {
         this.reposStub = reposStub;
         // stack of the store room instantiation
         tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT * SimulPar.N_BAGS_PER_PASS]);
