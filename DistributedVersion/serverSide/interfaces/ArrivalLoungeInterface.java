@@ -3,6 +3,8 @@ package serverSide.interfaces;
 import comInf.Bag;
 import comInf.Message;
 import comInf.MessageException;
+import serverSide.proxies.ArrivalLoungeProxy;
+import serverSide.servers.ServerArrivalLounge;
 import serverSide.sharedRegions.ArrivalLounge;
 
 public class ArrivalLoungeInterface {
@@ -79,6 +81,18 @@ public class ArrivalLoungeInterface {
             case Message.RESETAL:                                                      // receber pagamento
                 arrivalLounge.resetArrivalLounge(inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsNA());
                 outMessage = new Message (Message.RESETALDONE);            // gerar confirmação
+                break;
+
+            // setDepartureTerminalRef (main)
+            case Message.SETDEPTERNREF:                                                      // receber pagamento
+                arrivalLounge.setDepartureTerminalRef(inMessage.getMsgDepTermEntStub()); /* TODO: FIX THIS*/
+                outMessage = new Message (Message.ACK);            // gerar confirmação
+                break;
+
+            case Message.SHUT:                                                        // shutdown do servidor
+                ServerArrivalLounge.waitConnection = false;
+                (((ArrivalLoungeProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
+                outMessage = new Message (Message.ACK);            // gerar confirmação
                 break;
         }
 

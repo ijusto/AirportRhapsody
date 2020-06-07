@@ -1,5 +1,8 @@
 package comInf;
 
+import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
+import serverSide.sharedRegions.DepartureTerminalEntrance;
+
 import java.io.*;
 
 /**
@@ -49,6 +52,7 @@ public class Message implements Serializable
     public static final int RESETALDONE = 11;
 
     /* ************* setDepartureTerminalRef ************* */
+    public static final int SETDEPTERNREF = 12;
 
     /* ************* setEndDay ************* */
 
@@ -245,6 +249,8 @@ public class Message implements Serializable
 
     private int[][] msgNBagsNA;
 
+    private DepartureTerminalEntranceStub msgDepTermEntStub;
+
     /**
      *  Instanciação de uma mensagem (forma 1).
      *
@@ -278,6 +284,13 @@ public class Message implements Serializable
         if (msgType ==  RESETAL){
             msgBagAndPassDest = bagAndPassDest;
             msgNBagsNA = nBagsNA;
+        }
+    }
+
+    public Message (int type, DepartureTerminalEntranceStub departureTerminalEntranceStub) {
+        msgType = type;
+        if (msgType ==  SETDEPTERNREF){
+            msgDepTermEntStub = departureTerminalEntranceStub;
         }
     }
 
@@ -324,6 +337,8 @@ public class Message implements Serializable
     }
 
     public int[][] getMsgNBagsNA(){ return msgNBagsNA; }
+    public DepartureTerminalEntranceStub getMsgDepTermEntStub(){ return msgDepTermEntStub; }
+
 
     /**
      *  Obtenção do valor do campo tipo da mensagem.

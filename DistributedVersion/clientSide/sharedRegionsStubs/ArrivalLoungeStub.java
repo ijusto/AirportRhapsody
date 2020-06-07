@@ -9,6 +9,7 @@ import comInf.Message;
 import old.GenReposInfo;
 import serverSide.sharedRegions.ArrivalTermTransfQuay;
 import serverSide.sharedRegions.BaggageColPoint;
+import serverSide.sharedRegions.DepartureTerminalEntrance;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +48,7 @@ public class ArrivalLoungeStub {
      */
 
     public void probPar (GenReposInfo repos, BaggageColPointStub bagColPointStub, ArrivalTermTransfQuayStub arrQuayStub,
-                         Bag.DestStat[][] destStat, int[][] nBagsPHold)//(String fName, int nIter)
+                         int[][] destStat, int[][] nBagsPHold)
     {
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
@@ -59,7 +60,7 @@ public class ArrivalLoungeStub {
             }
             catch (InterruptedException e) {}
         }
-        /*
+
         outMessage = new Message (Message.SETNFIC, fName, nIter);
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
@@ -68,35 +69,9 @@ public class ArrivalLoungeStub {
             System.out.println(inMessage.toString ());
             System.exit (1);
         }
-         */
+
         con.close ();
     }
-
-    /**
-     *  Fazer o shutdown do servidor (solicitação do serviço).
-     */
-
-    public void shutdown ()
-    {
-        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
-        Message inMessage, outMessage;
-
-        while (!con.open ()){                                                // aguarda ligação
-            try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
-        }
-        outMessage = new Message (Message.SHUT);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
-        }
-        con.close ();
-    }
-
 
     /* **************************************************Passenger*************************************************** */
 
@@ -244,10 +219,9 @@ public class ArrivalLoungeStub {
      *   Notifies the porter and bus driver of the end of the day.
      *    @param bagAndPassDest Destination states of the bags of the passengers.
      *    @param nBagsNA Numbers of bags per passenger that arrive the plane's hold.
-     *    @throws MemException Exception.
      */
 
-    public void resetArrivalLounge(){
+    public void resetArrivalLounge(int[][] bagAndPassDest, int[][] nBagsNA){
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -257,7 +231,7 @@ public class ArrivalLoungeStub {
                 Thread.currentThread().sleep ((long) (10));
             } catch (InterruptedException e) {}
         }
-        outMessage = new Message(Message.RESETAL);    // o barbeiro recebe o pagamento
+        outMessage = new Message(Message.RESETAL, bagAndPassDest, nBagsNA);    // o barbeiro recebe o pagamento
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
         if (inMessage.getType () != Message.RESETALDONE) {
@@ -268,66 +242,58 @@ public class ArrivalLoungeStub {
         con.close ();
     }
 
-    /**
-     *   Operation of incrementing/decrementing the counter.
-     *
-     *    @return <li>true, if the value of the counter after the operation is the limit.</li>
-     *            <li>false, otherwise.</li>
-     */
-
-    public boolean incDecNPassAtArrivLCounter(boolean inc) {
-        synchronized (lockNnPassAtArrivLCounter) {
-            if(inc) {
-                nPassAtArrivL++;
-            } else {
-                nPassAtArrivL--;
-            }
-            return nPassAtArrivL == SimulPar.N_PASS_PER_FLIGHT;
-        }
-    }
-
-    /**
-     *   Sets the value of the counter to zero.
-     */
-
-    public void resetNPassAtArrivL(){
-        synchronized (lockNnPassAtArrivLCounter) { // Locks on the private Object
-            nPassAtArrivL = 0;
-        }
-    }
-
-    /* ************************************************* Getters ******************************************************/
-
-    /**
-     *   Getter for the value of the of passengers that are currently ate the Arrival Lounge.
-     *
-     *    @return the value of the counter.
-     */
-
-    public int getNPassAtArrivLValue(){
-        synchronized (lockNnPassAtArrivLCounter) {
-            return nPassAtArrivL;
-        }
-    }
-
     /* ************************************************* Setters ******************************************************/
 
     /**
-     *   Sets the Departure Terminal Entrance Reference.
+     *   Sets the Departure Terminal Entrance Reference Stub.
      *
-     *    @param departureTerm Departure Terminal Entrance.
+     *    @param departureTermStub Departure Terminal Entrance Stub.
      */
 
-    public synchronized void setDepartureTerminalRef(DepartureTerminalEntrance departureTerm){
-        this.depTerm = departureTerm;
+    public synchronized void setDepartureTerminalRef(DepartureTerminalEntranceStub departureTermStub){
+
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()) {                                               // aguarda ligação
+            try {
+                Thread.currentThread().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.SETDEPTERNREF, departureTermStub);    // o barbeiro recebe o pagamento
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
+
     /**
-     *   Signals the end of the day and notifies the Porter if he is waiting in takeARest().
+     *  Fazer o shutdown do servidor (solicitação do serviço).
      */
 
-    public synchronized void setEndDay(){
-        this.endDay = true;
-        notifyAll();
+    public void shutdown ()
+    {
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.SHUT);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 }
