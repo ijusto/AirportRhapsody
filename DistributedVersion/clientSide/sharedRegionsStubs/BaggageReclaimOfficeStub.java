@@ -4,34 +4,35 @@ import clientSide.ClientCom;
 import comInf.Message;
 
 public class BaggageReclaimOfficeStub {
+
     /**
-     *  Nome do sistema computacional onde está localizado o servidor
+     *  Name of the computer system where the server is located
      *    @serialField serverHostName
      */
 
     private String serverHostName = null;
 
     /**
-     *  Número do port de escuta do servidor
+     *  Server listening port number
      *    @serialField serverPortNumb
      */
 
     private int serverPortNumb;
 
     /**
-     *  Instanciação do stub à barbearia.
+     *  Baggage Reclaim Office Stub Instantiation.
      *
-     *    @param hostName nome do sistema computacional onde está localizado o servidor
-     *    @param port número do port de escuta do servidor
+     *    @param hostName name of the computational system where the server is located
+     *    @param port server listening port size
      */
 
-    public BaggageReclaimOfficeStub(String hostName, int port) {
+    public BaggageReclaimOfficeStub(String hostName, int port){
         serverHostName = hostName;
         serverPortNumb = port;
     }
 
     /**
-     *  Fornecer parâmetros do problema (solicitação do serviço).
+     *  Provide parameters of the problem (service request).
      *
      */
 
@@ -45,8 +46,11 @@ public class BaggageReclaimOfficeStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.PARAMSBAGRECOFF, reposStub);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -66,10 +70,11 @@ public class BaggageReclaimOfficeStub {
             } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message(Message.REPORTMISSBAG, passengerId);  //pede report missing bags
+        // asks for the service to be done
+        outMessage = new Message(Message.REPORTMISSBAG, passengerId);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -80,7 +85,7 @@ public class BaggageReclaimOfficeStub {
 
 
     /**
-     *  Fazer o shutdown do servidor (solicitação do serviço).
+     *  Shut down the server (service request).
      */
 
     public void shutdown(){
@@ -92,8 +97,11 @@ public class BaggageReclaimOfficeStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.SHUT);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -102,6 +110,4 @@ public class BaggageReclaimOfficeStub {
         }
         con.close();
     }
-
-
 }

@@ -6,33 +6,33 @@ import comInf.Message;
 public class ArrivalTerminalExitStub {
 
     /**
-     *  Nome do sistema computacional onde está localizado o servidor
+     *  Name of the computer system where the server is located
      *    @serialField serverHostName
      */
 
     private String serverHostName = null;
 
     /**
-     *  Número do port de escuta do servidor
+     *  Server listening port number
      *    @serialField serverPortNumb
      */
 
     private int serverPortNumb;
 
     /**
-     *  Instanciação do stub à barbearia.
+     *  Arrival Terminal Exit Stub Instantiation.
      *
-     *    @param hostName nome do sistema computacional onde está localizado o servidor
-     *    @param port número do port de escuta do servidor
+     *    @param hostName name of the computational system where the server is located
+     *    @param port server listening port size
      */
 
-    public ArrivalTerminalExitStub (String hostName, int port) {
+    public ArrivalTerminalExitStub(String hostName, int port){
         serverHostName = hostName;
         serverPortNumb = port;
     }
 
     /**
-     *  Fornecer parâmetros do problema (solicitação do serviço).
+     *  Provide parameters of the problem (service request).
      *
      */
 
@@ -48,8 +48,10 @@ public class ArrivalTerminalExitStub {
             } catch (InterruptedException ignored){}
         }
 
+        // asks for the service to be done
         outMessage = new Message(Message.PARAMSATEXIT, reposStub, arrivLoungeStub, arrivalQuayStub);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -74,8 +76,11 @@ public class ArrivalTerminalExitStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
-        outMessage = new Message(Message.GOHOME, passengerId);     // o barbeiro vai dormir
+
+        // asks for the service to be done
+        outMessage = new Message(Message.GOHOME, passengerId);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.GODONE){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -99,8 +104,11 @@ public class ArrivalTerminalExitStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored) {}
         }
-        outMessage = new Message(Message.NOTFNEXTL);     // o barbeiro vai dormir
+
+        // asks for the service to be done
+        outMessage = new Message(Message.NOTFNEXTL);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -127,10 +135,12 @@ public class ArrivalTerminalExitStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored) {}
         }
-        outMessage = new Message(Message.INCDECCOUNTER, inc);        // pede a realização do serviço
-        con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        // asks for the service to be done
+        outMessage = new Message(Message.INCDECCOUNTER, inc);
+        con.writeObject(outMessage);
+
+        inMessage = (Message) con.readObject();
         if ((inMessage.getType() != Message.LIMITCOUNTER) && (inMessage.getType() != Message.CONTCOUNTER)){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -155,8 +165,11 @@ public class ArrivalTerminalExitStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
-        outMessage = new Message(Message.RESETATE);    // o barbeiro recebe o pagamento
+
+        // asks for the service to be done
+        outMessage = new Message(Message.RESETATE);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -184,10 +197,12 @@ public class ArrivalTerminalExitStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
-        outMessage = new Message(Message.GETDEADPASSVAL);        // pede a realização do serviço
-        con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        // asks for the service to be done
+        outMessage = new Message(Message.GETDEADPASSVAL);
+        con.writeObject(outMessage);
+
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.DEADPASSVAL){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -216,8 +231,11 @@ public class ArrivalTerminalExitStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
-        outMessage = new Message(Message.SETDEPTERNREF, departureTermStub);    // o barbeiro recebe o pagamento
+
+        // asks for the service to be done
+        outMessage = new Message(Message.SETDEPTERNREF, departureTermStub);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -229,7 +247,7 @@ public class ArrivalTerminalExitStub {
 
 
     /**
-     *  Fazer o shutdown do servidor (solicitação do serviço).
+     *  Shut down the server (service request).
      */
 
     public void shutdown(){
@@ -241,8 +259,11 @@ public class ArrivalTerminalExitStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.SHUT);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");

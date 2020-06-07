@@ -6,24 +6,24 @@ import comInf.Message;
 public class ArrivalTermTransfQuayStub {
 
     /**
-     *  Nome do sistema computacional onde está localizado o servidor
+     *  Name of the computer system where the server is located
      *    @serialField serverHostName
      */
 
     private String serverHostName = null;
 
     /**
-     *  Número do port de escuta do servidor
+     *  Server listening port number
      *    @serialField serverPortNumb
      */
 
     private int serverPortNumb;
 
     /**
-     *  Instanciação do stub à barbearia.
+     *  Arrival Terminal Transfer Quay Stub Instantiation.
      *
-     *    @param hostName nome do sistema computacional onde está localizado o servidor
-     *    @param port número do port de escuta do servidor
+     *    @param hostName name of the computational system where the server is located
+     *    @param port server listening port size
      */
 
     public ArrivalTermTransfQuayStub (String hostName, int port) {
@@ -32,11 +32,11 @@ public class ArrivalTermTransfQuayStub {
     }
 
     /**
-     *  Fornecer parâmetros do problema (solicitação do serviço).
+     *  Provide parameters of the problem (service request).
      *
      */
 
-    public void probPar (GenReposInfoStub reposStub){
+    public void probPar(GenReposInfoStub reposStub){
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -46,8 +46,11 @@ public class ArrivalTermTransfQuayStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.PARAMSATTQUAY, reposStub);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -76,8 +79,11 @@ public class ArrivalTermTransfQuayStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
-        outMessage = new Message(Message.TAKEABUS, passengerId);     // o barbeiro vai dormir
+
+        // asks for the service to be done
+        outMessage = new Message(Message.TAKEABUS, passengerId);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.TAKEABUSDONE){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -104,8 +110,11 @@ public class ArrivalTermTransfQuayStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
-        outMessage = new Message(Message.ENTERBUS, passengerId);     // o barbeiro vai dormir
+
+        // asks for the service to be done
+        outMessage = new Message(Message.ENTERBUS, passengerId);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK) {
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -135,10 +144,11 @@ public class ArrivalTermTransfQuayStub {
             } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message(Message.WORKENDED);     // o barbeiro vai dormir
+        // asks for the service to be done
+        outMessage = new Message(Message.WORKENDED);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if ((inMessage.getType() != Message.CONTDAYS) && (inMessage.getType() != Message.ENDBUSDRIVER)) {
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -165,8 +175,11 @@ public class ArrivalTermTransfQuayStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
-        outMessage = new Message(Message.PARKBUS);     // o barbeiro vai dormir
+
+        // asks for the service to be done
+        outMessage = new Message(Message.PARKBUS);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.PBDONE){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -191,8 +204,11 @@ public class ArrivalTermTransfQuayStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
-        outMessage = new Message(Message.ANNOUCEBUSBORADING);     // o barbeiro vai dormir
+
+        // asks for the service to be done
+        outMessage = new Message(Message.ANNOUCEBUSBORADING);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ABBDONE){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -215,8 +231,11 @@ public class ArrivalTermTransfQuayStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.RESETATQ);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -242,8 +261,11 @@ public class ArrivalTermTransfQuayStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.SETENDDAY);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -253,9 +275,8 @@ public class ArrivalTermTransfQuayStub {
         con.close();
     }
 
-
     /**
-     *  Fazer o shutdown do servidor (solicitação do serviço).
+     *  Shut down the server (service request).
      */
 
     public void shutdown(){
@@ -267,8 +288,11 @@ public class ArrivalTermTransfQuayStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.SHUT);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");

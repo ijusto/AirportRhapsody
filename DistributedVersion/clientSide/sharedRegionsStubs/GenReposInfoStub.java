@@ -9,24 +9,24 @@ import comInf.Message;
 public class GenReposInfoStub {
 
     /**
-     *  Nome do sistema computacional onde está localizado o servidor
+     *  Name of the computer system where the server is located
      *    @serialField serverHostName
      */
 
     private String serverHostName = null;
 
     /**
-     *  Número do port de escuta do servidor
+     *  Server listening port number
      *    @serialField serverPortNumb
      */
 
     private int serverPortNumb;
 
     /**
-     *  Instanciação do stub à barbearia.
+     *  General Repository of Information Stub Instantiation.
      *
-     *    @param hostName nome do sistema computacional onde está localizado o servidor
-     *    @param port número do port de escuta do servidor
+     *    @param hostName name of the computational system where the server is located
+     *    @param port server listening port size
      */
 
     public GenReposInfoStub(String hostName, int port){
@@ -34,6 +34,10 @@ public class GenReposInfoStub {
         serverPortNumb = port;
     }
 
+    /**
+     *  Provide parameters of the problem (service request).
+     *
+     */
 
     public void probPar(String filename){
 
@@ -45,32 +49,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.PARAMSREPOS, filename);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
-        if (inMessage.getType() != Message.ACK){
-            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
-            System.out.println(inMessage.toString());
-            System.exit(1);
-        }
-        con.close();
-    }
 
-    /**
-     *  Fazer o shutdown do servidor (solicitação do serviço).
-     */
-
-    public void shutdown() {
-        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
-        Message inMessage, outMessage;
-
-        while(!con.open()){  // waiting for the connection to be established
-            try {
-                Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored){}
-        }
-        outMessage = new Message(Message.SHUT);
-        con.writeObject(outMessage);
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -93,8 +76,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.PRINTLOG);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -117,8 +103,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.FINALREPORT);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -145,8 +134,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.UPDATEFN, flight);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -171,8 +163,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.INITCHOLD, bn);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -195,8 +190,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.REMBAGCHOLD);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -221,8 +219,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.INCBAGCB);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -245,8 +246,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message (Message.PGETSABAG);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -269,8 +273,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.SAVEBAGSR);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -315,8 +322,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.PJOINWQ, id);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -341,8 +351,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.PLEFTWQ, id);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -367,8 +380,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.FREEBS, id);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK) {
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -415,8 +431,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.GETPASSSI, id, si);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -442,8 +461,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.UDTEPASSNR, id, nr);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -469,8 +491,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.UDTEPASSNA, id, na);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -495,8 +520,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.PASSEXIT, id);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -521,8 +549,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.MISSBAGREP);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -548,8 +579,11 @@ public class GenReposInfoStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.NUMNRTOTAL, nr);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -559,4 +593,30 @@ public class GenReposInfoStub {
         con.close();
     }
 
+    /**
+     *  Shut down the server (service request).
+     */
+
+    public void shutdown(){
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while(!con.open()){  // waiting for the connection to be established
+            try {
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored){}
+        }
+
+        // asks for the service to be done
+        outMessage = new Message(Message.SHUT);
+        con.writeObject(outMessage);
+
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+        con.close();
+    }
 }

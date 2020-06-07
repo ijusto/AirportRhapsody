@@ -7,24 +7,24 @@ import comInf.Message;
 public class TemporaryStorageAreaStub {
 
     /**
-     *  Nome do sistema computacional onde está localizado o servidor
+     *  Name of the computer system where the server is located
      *    @serialField serverHostName
      */
 
     private String serverHostName = null;
 
     /**
-     *  Número do port de escuta do servidor
+     *  Server listening port number
      *    @serialField serverPortNumb
      */
 
     private int serverPortNumb;
 
     /**
-     *  Instanciação do stub à barbearia.
+     *  Temporary Storage Area Stub Instantiation.
      *
-     *    @param hostName nome do sistema computacional onde está localizado o servidor
-     *    @param port número do port de escuta do servidor
+     *    @param hostName name of the computational system where the server is located
+     *    @param port server listening port size
      */
 
     public TemporaryStorageAreaStub(String hostName, int port){
@@ -33,7 +33,7 @@ public class TemporaryStorageAreaStub {
     }
 
     /**
-     *  Fornecer parâmetros do problema (solicitação do serviço).
+     *  Provide parameters of the problem (service request).
      *
      */
 
@@ -47,8 +47,11 @@ public class TemporaryStorageAreaStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.PARAMSTEMPSTORAREA, reposStub);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -72,10 +75,11 @@ public class TemporaryStorageAreaStub {
             } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message(Message.CARRYTOAPPSTORE_TSA, bag.getIntDestStat(), bag.getIdOwner());        // pede a realização do serviço
+        // asks for the service to be done
+        outMessage = new Message(Message.CARRYTOAPPSTORE_TSA, bag.getIntDestStat(), bag.getIdOwner());
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -98,10 +102,11 @@ public class TemporaryStorageAreaStub {
             } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message(Message.RESETTSA);  //pede report missing bags
+        // asks for the service to be done
+        outMessage = new Message(Message.RESETTSA);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -112,7 +117,7 @@ public class TemporaryStorageAreaStub {
 
 
     /**
-     *  Fazer o shutdown do servidor (solicitação do serviço).
+     *  Shut down the server (service request).
      */
 
     public void shutdown(){
@@ -124,8 +129,11 @@ public class TemporaryStorageAreaStub {
                 Thread.currentThread().sleep((long) 10);
             } catch(InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.SHUT);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if(inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");

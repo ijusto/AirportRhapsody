@@ -21,7 +21,7 @@ public class ArrivalLoungeStub {
     private int serverPortNumb;
 
     /**
-     *  Arrival Lounge Stub Instantiation
+     *  Arrival Lounge Stub Instantiation.
      *
      *    @param hostName name of the computational system where the server is located
      *    @param port server listening port size
@@ -49,8 +49,10 @@ public class ArrivalLoungeStub {
             } catch (InterruptedException ignored) {}
         }
 
+        // asks for the service to be done
         outMessage = new Message(Message.PARAMSARRLNG, reposStub, bagColPointStub, arrQuayStub, destStat, nBagsPHold);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK) {
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -83,10 +85,11 @@ public class ArrivalLoungeStub {
             } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message(Message.WSID, passengerId);        // pede a realização do serviço
+        // asks for the service to be done
+        outMessage = new Message(Message.WSID, passengerId);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if ((inMessage.getType() != Message.FNDST) && (inMessage.getType() != Message.TRDST)){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -119,10 +122,11 @@ public class ArrivalLoungeStub {
             } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message(Message.TAKEARST);     // o barbeiro vai dormir
+        // asks for the service to be done
+        outMessage = new Message(Message.TAKEARST);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if ((inMessage.getType() != Message.TAKERSTDONE/*CONTPORTER*/) && (inMessage.getType() != Message.ENDPORTER)) {
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -151,10 +155,11 @@ public class ArrivalLoungeStub {
             } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message(Message.TRYTOCOL);     // o barbeiro vai dormir
+        // asks for the service to be done
+        outMessage = new Message(Message.TRYTOCOL);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if ((inMessage.getType() != Message.BAG) && (inMessage.getType() != Message.NULLBAG)){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -183,8 +188,11 @@ public class ArrivalLoungeStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
-        outMessage = new Message(Message.NOBAGS2COL);    // o barbeiro recebe o pagamento
+
+        // asks for the service to be done
+        outMessage = new Message(Message.NOBAGS2COL);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK) {
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -211,8 +219,11 @@ public class ArrivalLoungeStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
-        outMessage = new Message(Message.RESETAL, bagAndPassDest, nBagsNA);    // o barbeiro recebe o pagamento
+
+        // asks for the service to be done
+        outMessage = new Message(Message.RESETAL, bagAndPassDest, nBagsNA);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.RESETALDONE) {
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -240,8 +251,11 @@ public class ArrivalLoungeStub {
                 Thread.currentThread().sleep((long) 10);
             } catch(InterruptedException ignored){}
         }
-        outMessage = new Message(Message.SETDEPTERNREF, departureTermStub);    // o barbeiro recebe o pagamento
+
+        // asks for the service to be done
+        outMessage = new Message(Message.SETDEPTERNREF, departureTermStub);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -265,8 +279,11 @@ public class ArrivalLoungeStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored) {}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.SHUT);
         con.writeObject(outMessage);
+        
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");

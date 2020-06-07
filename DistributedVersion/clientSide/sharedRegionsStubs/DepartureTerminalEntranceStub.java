@@ -6,24 +6,24 @@ import comInf.Message;
 public class DepartureTerminalEntranceStub {
 
     /**
-     *  Nome do sistema computacional onde está localizado o servidor
+     *  Name of the computer system where the server is located
      *    @serialField serverHostName
      */
 
     private String serverHostName = null;
 
     /**
-     *  Número do port de escuta do servidor
+     *  Server listening port number
      *    @serialField serverPortNumb
      */
 
     private int serverPortNumb;
 
     /**
-     *  Instanciação do stub à barbearia.
+     *  Departure Terminal Entrance Stub Instantiation.
      *
-     *    @param hostName nome do sistema computacional onde está localizado o servidor
-     *    @param port número do port de escuta do servidor
+     *    @param hostName name of the computational system where the server is located
+     *    @param port server listening port size
      */
 
     public DepartureTerminalEntranceStub(String hostName, int port){
@@ -32,7 +32,7 @@ public class DepartureTerminalEntranceStub {
     }
 
     /**
-     *  Fornecer parâmetros do problema (solicitação do serviço).
+     *  Provide parameters of the problem (service request).
      *
      */
 
@@ -47,8 +47,11 @@ public class DepartureTerminalEntranceStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.PARAMSDEPTENT, reposStub, arrivLoungeStub, arrivalQuayStub);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -69,10 +72,11 @@ public class DepartureTerminalEntranceStub {
             } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message(Message.PREPARENEXTLEG, passengerId);  //pede report missing bags
+        // asks for the service to be done
+        outMessage = new Message(Message.PREPARENEXTLEG, passengerId);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.PNLDONE){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -95,10 +99,11 @@ public class DepartureTerminalEntranceStub {
             } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message(Message.RESETDTE);  //pede report missing bags
+        // asks for the service to be done
+        outMessage = new Message(Message.RESETDTE);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -122,10 +127,11 @@ public class DepartureTerminalEntranceStub {
             } catch (InterruptedException ignored) {}
         }
 
-        outMessage = new Message(Message.NOTFGOHOME);  //pede report missing bags
+        // asks for the service to be done
+        outMessage = new Message(Message.NOTFGOHOME);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -150,10 +156,11 @@ public class DepartureTerminalEntranceStub {
             } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message(Message.NOMOREBAGS);  //pede report missing bags
+        // asks for the service to be done
+        outMessage = new Message(Message.NOMOREBAGS);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -180,10 +187,11 @@ public class DepartureTerminalEntranceStub {
             } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message(Message.SETARRTERREF, arrivalTermStub);  //pede report missing bags
+        // asks for the service to be done
+        outMessage = new Message(Message.SETARRTERREF, arrivalTermStub);
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -194,7 +202,7 @@ public class DepartureTerminalEntranceStub {
 
 
     /**
-     *  Fazer o shutdown do servidor (solicitação do serviço).
+     *  Shut down the server (service request).
      */
 
     public void shutdown(){
@@ -206,8 +214,11 @@ public class DepartureTerminalEntranceStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.SHUT);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -216,6 +227,4 @@ public class DepartureTerminalEntranceStub {
         }
         con.close();
     }
-
-
 }

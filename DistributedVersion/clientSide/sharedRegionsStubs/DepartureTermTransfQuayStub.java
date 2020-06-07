@@ -6,24 +6,24 @@ import comInf.Message;
 public class DepartureTermTransfQuayStub {
 
     /**
-     *  Nome do sistema computacional onde está localizado o servidor
+     *  Name of the computer system where the server is located
      *    @serialField serverHostName
      */
 
     private String serverHostName = null;
 
     /**
-     *  Número do port de escuta do servidor
+     *  Server listening port number
      *    @serialField serverPortNumb
      */
 
     private int serverPortNumb;
 
     /**
-     *  Instanciação do stub à barbearia.
+     *  Departure Terminal Transfer Quay Stub Instantiation.
      *
-     *    @param hostName nome do sistema computacional onde está localizado o servidor
-     *    @param port número do port de escuta do servidor
+     *    @param hostName name of the computational system where the server is located
+     *    @param port server listening port size
      */
 
     public DepartureTermTransfQuayStub(String hostName, int port){
@@ -32,7 +32,7 @@ public class DepartureTermTransfQuayStub {
     }
 
     /**
-     *  Fornecer parâmetros do problema (solicitação do serviço).
+     *  Provide parameters of the problem (service request).
      *
      */
 
@@ -46,8 +46,11 @@ public class DepartureTermTransfQuayStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
+
+        // asks for the service to be done
         outMessage = new Message(Message.PARAMSDEPTTQUAY, reposStub);
         con.writeObject(outMessage);
+
         inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -67,10 +70,11 @@ public class DepartureTermTransfQuayStub {
             } catch (InterruptedException ignored){}
         }
 
+        // asks for the service to be done
         outMessage = new Message(Message.LEAVEBUS, passengerId);  //pede report missing bags
         con.writeObject(outMessage);
-        inMessage = (Message) con.readObject();
 
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.LBDONE){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -86,19 +90,20 @@ public class DepartureTermTransfQuayStub {
      *   Then he waits for a notification of the last passenger to leave the bus.
      */
     public void parkTheBusAndLetPassOff() {
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message (Message.PBLPO);  //pede report missing bags
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        // asks for the service to be done
+        outMessage = new Message(Message.PBLPO);  //pede report missing bags
+        con.writeObject(outMessage);
 
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.PBLPODONE){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -112,19 +117,20 @@ public class DepartureTermTransfQuayStub {
      */
 
     public synchronized void resetDepartureTermTransfQuay(){
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message (Message.RESETDTTQ);  //pede report missing bags
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        // asks for the service to be done
+        outMessage = new Message(Message.RESETDTTQ);
+        con.writeObject(outMessage);
 
+        inMessage = (Message) con.readObject();
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -134,7 +140,7 @@ public class DepartureTermTransfQuayStub {
     }
 
     /**
-     *  Fazer o shutdown do servidor (solicitação do serviço).
+     *  Shut down the server (service request).
      */
 
     public void shutdown ()
@@ -145,18 +151,19 @@ public class DepartureTermTransfQuayStub {
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
-        outMessage = new Message (Message.SHUT);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK){
+
+        // asks for the service to be done
+        outMessage = new Message(Message.SHUT);
+        con.writeObject(outMessage);
+
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
         }
         con.close();
     }
-
-
 }
