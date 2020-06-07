@@ -24,184 +24,180 @@ public class Message implements Serializable
 
     /* *********************************************** ArrivalLounge ************************************************ */
 
-    /* ************* whatShouldIDo ************* */
-    public static final int WSID = 1;
+    /* ************* probPar ************************** */
+    public static final int PARAMSARRLNG = 1;
 
-    public static final int FNDST = 2;
+    /* ************* whatShouldIDo ******************** */
+    public static final int WSID = 2;
 
-    public static final int TRDST = 3;
+    public static final int FNDST = 3;
 
-    /* ************* takeARest ************* */
-    public static final int TAKEARST = 4;
+    public static final int TRDST = 4;
 
-    public static final int TAKERSTDONE = 5;
+    /* ************* takeARest ************************ */
+    public static final int TAKEARST = 5;
 
-    /* ************* tryToCollectABag ************* */
-    public static final int TRYTOCOL = 6;
+    public static final int TAKERSTDONE = 6;
 
-    public static final int BAG = 7;
+    /* ************* tryToCollectABag ***************** */
+    public static final int TRYTOCOL = 7;
 
-    public static final int NULLBAG = 8;
+    public static final int BAG = 8;
 
-    /* ************* noMoreBagsToCollec ************* */
-    public static final int NOBAGS2COL = 9;
+    public static final int NULLBAG = 9;
 
-    /* ************* resetArrivalLounge ************* */
-    public static final int RESETAL = 10;
+    /* ************* noMoreBagsToCollec *************** */
+    public static final int NOBAGS2COL = 10;
 
-    public static final int RESETALDONE = 11;
+    /* ************* resetArrivalLounge *************** */
+    public static final int RESETAL = 11;
 
-    /* ************* setDepartureTerminalRef ************* */
-    public static final int SETDEPTERNREF = 12;
+    public static final int RESETALDONE = 12;
 
-    /* ************* setEndDay ************* */
-
+    /* ************* setDepartureTerminalRef ********** */
+    public static final int SETDEPTERNREF = 13;
 
     /* ******************************************** ArrivalTerminalExit ********************************************* */
 
-    /*goHome*/
-    public static final int GOHOME = 12;
+    /* ******** goHome ******************************** */
+    public static final int GOHOME = 14;
 
-    public static final int GODONE = 13;
+    public static final int GODONE = 15;
 
-    /*notifyFromPrepareNextLeg*/
-    public static final int NOTFNEXTL = 14;
+    /* ***** notifyFromPrepareNextLeg ***************** */
+    public static final int NOTFNEXTL = 16;
 
-    /*incDecCounter*/
-    public static final int INCDECCOUNTER = 15;
+    /* ********* incDecCounter ************************ */
+    public static final int INCDECCOUNTER = 17;
+    public static final int CONTCOUNTER = 18;
+    public static final int LIMITCOUNTER = 19;
 
-    /*resetArrivalTerminalExit*/
+    /* ******* resetArrivalTerminalExit *************** */
 
-    /*getDeadPassValue*/
+    /* ******* getDeadPassValue *********************** */
 
-    /*setDepartureTerminalRef*/
+    /* ****** setDepartureTerminalRef ***************** */
 
 
     /* ****************************************** ArrivalTermTransfQuay ********************************************* */
 
-    /*takeABus*/
-    public static final int TAKEABUS = 16;
+    /* ******* takeABus ******************************* */
+    public static final int TAKEABUS = 18;
 
-    public static final int TAKEABUSDONE = 17;
+    public static final int TAKEABUSDONE = 19;
 
-    /*enterTheBus*/
-    public static final int ENTERBUS = 18;
+    /* ******* enterTheBus **************************** */
+    public static final int ENTERBUS = 20;
 
-    /*hasDaysWorkEnded*/
-    public static final int WORKENDED = 19;
+    /* ******* hasDaysWorkEnded  ********************** */
+    public static final int WORKENDED = 21;
 
-    public static final int CONTDAYS = 20;
+    public static final int CONTDAYS = 22;
 
-    /*parkTheBus*/
-    public static final int PARKBUS = 20;
+    /* ******* parkTheBus ***************************** */
+    public static final int PARKBUS = 23;
 
-    public static final int PBDONE = 21;
+    public static final int PBDONE = 24;
 
-    /*announcingBusBoarding*/
-    public static final int ANNOUCEBUSBORADING = 22;
+    /* ******* announcingBusBoarding ****************** */
+    public static final int ANNOUCEBUSBORADING = 25;
 
-    public static final int ABBDONE = 23;
+    public static final int ABBDONE = 26;
 
-    /*resetArrivalTermTransfQuay*/
+    /* ******* resetArrivalTermTransfQuay ************* */
 
-    /*setEndDay*/
+    /* ********* setEndDay **************************** */
 
 
     /* *********************************************** BaggageColPoint ********************************************** */
 
-    /*goCollectABag*/
-    public static final int GOCOLLECTBAG = 24;
+    /* ******* goCollectABag ************************** */
+    public static final int GOCOLLECTBAG = 27;
 
-    public static final int GCBDONE = 25;
+    public static final int GCBDONE = 28;
 
-    /*carryItToAppropriateStore*/
-    public static final int CARRYAPPSTORE = 26;
+    /* ******* carryItToAppropriateStore ************** */
+    public static final int CARRYAPPSTORE = 29;
 
-    /*resetBaggageColPoint*/
+    /* ******* resetBaggageColPoint ******************* */
 
-    /*noMoreBags*/
+    /* ******* noMoreBags ***************************** */
 
-    /*setTreadmill*/
+    /* ******* setTreadmill *************************** */
 
-    /*setPHoldEmpty*/
+    /* ******* setPHoldEmpty ************************** */
 
 
     /* ******************************************** BaggageReclaimOffice ******************************************** */
 
-    /*reportMissingBags*/
-    public static final int REPORTMISSBAG = 27;
+    /* ******* reportMissingBags ********************** */
+    public static final int REPORTMISSBAG = 30;
 
     /* ****************************************** DepartureTerminalEntrance ***************************************** */
 
-    /*prepareNextLeg*/
-    public static final int PREPARENEXTLEG = 28;
+    /* ******* prepareNextLeg ************************* */
+    public static final int PREPARENEXTLEG = 31;
 
-    public static final int PNLDONE = 29;
+    public static final int PNLDONE = 32;
 
-    /*resetDepartureTerminalExit*/
+    /* ******* resetDepartureTerminalExit ************* */
 
-    /*notifyFromGoHome*/
+    /* ******* notifyFromGoHome *********************** */
 
-    /*noMoreBags*/
+    /* ******* noMoreBags ***************************** */
 
-    /*setArrivalTerminalRef*/
+    /* ******* setArrivalTerminalRef ****************** */
 
 
     /* ******************************************** DepartureTermTransfQuay ***************************************** */
 
-    /*leaveTheBus*/
-    public static final int LEAVEBUS = 30;
+    /* ******* leaveTheBus **************************** */
+    public static final int LEAVEBUS = 33;
 
-    public static final int LBDONE = 31;
+    public static final int LBDONE = 34;
 
-    /*parkTheBusAndLetPassOff*/
-    public static final int PBLPO = 32;
+    /* ******* parkTheBusAndLetPassOff **************** */
+    public static final int PBLPO = 35;
 
-    public static final int PBLPODONE = 33;
+    public static final int PBLPODONE = 36;
 
-    /*resetDepartureTermTransfQuay*/
+    /* ******* resetDepartureTermTransfQuay *********** */
 
 
     /* *********************************************** TemporaryStorageArea ***************************************** */
 
-    /*carryItToAppropriateStore*/
-    public static final int CARRYTOAPPSTORE_TSA = 34;
+    /* ******* carryItToAppropriateStore ************** */
+    public static final int CARRYTOAPPSTORE_TSA = 37;
 
-    /*resetTemporaryStorageArea*/
+    /* ******* resetTemporaryStorageArea ************** */
 
 
     /* ******************************************** GENERAL MESSAGES ************************************************ */
 
-    public static final int ACK      =  35; // TODO: Change value
+    public static final int ACK      =  38; // TODO: Change value
 
-    public static final int ENDPASSENGER      = 36;
+    public static final int ENDPASSENGER      = 39;
 
-    public static final int ENDPORTER      = 37;
+    public static final int ENDPORTER      = 40;
 
-    public static final int ENDBUSDRIVER     = 38;
+    public static final int ENDBUSDRIVER     = 41;
 
 
     /**
      *  Inicialização do ficheiro de logging (operação pedida pelo cliente)
      */
-    public static final int SETNFIC  =  1;
+    public static final int SETNFIC  =  42;
 
     /**
      *  Ficheiro de logging foi inicializado (resposta enviada pelo servidor)
      */
-    public static final int NFICDONE =  2;
-
-    /**
-     *  Enviar a identificação do cliente (resposta enviada pelo servidor)
-     */
-
-    public static final int PASSID   = 39;
+    public static final int NFICDONE =  43;
 
     /**
      *  Shutdown do servidor (operação pedida pelo cliente)
      */
 
-    public static final int SHUT   = 40;
+    public static final int SHUT   = 44;
 
     /* Campos das mensagens */
 
@@ -251,6 +247,8 @@ public class Message implements Serializable
 
     private DepartureTerminalEntranceStub msgDepTermEntStub;
 
+    private boolean msgIncOrDec;
+
     /**
      *  Instanciação de uma mensagem (forma 1).
      *
@@ -284,6 +282,13 @@ public class Message implements Serializable
         if (msgType ==  RESETAL){
             msgBagAndPassDest = bagAndPassDest;
             msgNBagsNA = nBagsNA;
+        }
+    }
+
+    public Message (int type, boolean incOrDec) {
+        msgType = type;
+        if (msgType ==  INCDECCOUNTER){
+            msgIncOrDec = incOrDec;
         }
     }
 
@@ -337,8 +342,10 @@ public class Message implements Serializable
     }
 
     public int[][] getMsgNBagsNA(){ return msgNBagsNA; }
+
     public DepartureTerminalEntranceStub getMsgDepTermEntStub(){ return msgDepTermEntStub; }
 
+    public boolean getIncOrDec(){ return msgIncOrDec; }
 
     /**
      *  Obtenção do valor do campo tipo da mensagem.

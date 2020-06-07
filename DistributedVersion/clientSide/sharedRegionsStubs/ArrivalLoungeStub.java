@@ -47,7 +47,7 @@ public class ArrivalLoungeStub {
      *
      */
 
-    public void probPar (GenReposInfo repos, BaggageColPointStub bagColPointStub, ArrivalTermTransfQuayStub arrQuayStub,
+    public void probPar(GenReposInfo repos, BaggageColPointStub bagColPointStub, ArrivalTermTransfQuayStub arrQuayStub,
                          int[][] destStat, int[][] nBagsPHold)
     {
 
@@ -61,7 +61,7 @@ public class ArrivalLoungeStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (Message.SETNFIC, fName, nIter);
+        outMessage = new Message (Message.PARAMSARRLNG, fName, nIter);
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
         if (inMessage.getType() != Message.NFICDONE) {

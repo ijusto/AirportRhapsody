@@ -70,31 +70,6 @@ public class ArrivalTerminalExitStub {
     }
 
     /**
-     *  Fazer o shutdown do servidor (solicitação do serviço).
-     */
-
-    public void shutdown ()
-    {
-        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
-        Message inMessage, outMessage;
-
-        while (!con.open ()){                                                // aguarda ligação
-            try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
-        }
-        outMessage = new Message (Message.SHUT);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
-        }
-        con.close ();
-    }
-
-    /**
      *   Operation of the passenger of waiting for the last passenger to arrive the Arrival Terminal Exit or the
      *   Departure Terminal Entrance or, if the last, to notify all the others.
      */
@@ -146,23 +121,6 @@ public class ArrivalTerminalExitStub {
     }
 
     /**
-     *   Wakes up all the passengers at the Arrival Terminal Exit and at the Departure Terminal Entrance.
-     */
-
-    public synchronized void wakeAllPassengers(){
-        notifyAll();
-        wakeDepPass();
-    }
-
-    /**
-     *   Wakes up the passengers waiting in the Departure Terminal Entrance.
-     */
-
-    public synchronized void wakeDepPass(){
-        departureTerm.notifyFromGoHome();
-    }
-
-    /**
      *   Operation of incrementing/decrementing the counter.
      *
      *    @return <li>true, if the value of the counter after the operation is the limit.</li>
@@ -170,24 +128,29 @@ public class ArrivalTerminalExitStub {
      */
 
     public boolean incDecCounter(boolean inc) {
-        synchronized (lockDeadPassCounter) {
-            if(inc) {
-                deadPassCounter++;
-            } else {
-                deadPassCounter--;
-            }
-            return deadPassCounter == SimulPar.N_PASS_PER_FLIGHT;
-        }
-    }
 
-    /**
-     *   Sets the value of the counter to zero.
-     */
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-    public void resetDeadPassCounter(){
-        synchronized (lockDeadPassCounter) { // Locks on the private Object
-            deadPassCounter = 0;
+        while(!con.open()){                                    // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
+        outMessage = new Message (Message.INCDECCOUNTER, inc);        // pede a realização do serviço
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if ((inMessage.getType () != Message.LIMITCOUNTER) && (inMessage.getType () != Message.CONTCOUNTER)) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+
+        if (inMessage.getType () == Message.CONTCOUNTER)
+            return true;                                                // operação bem sucedida - final destination
+        else return false;                                          // operação falhou - otherwise
     }
 
     /**
@@ -225,4 +188,31 @@ public class ArrivalTerminalExitStub {
     public synchronized void setDepartureTerminalRef(DepartureTerminalEntrance departureTerm){
         this.departureTerm = departureTerm;
     }
+
+
+    /**
+     *  Fazer o shutdown do servidor (solicitação do serviço).
+     */
+
+    public void shutdown ()
+    {
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.SHUT);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+    }
+
 }
