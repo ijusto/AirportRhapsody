@@ -38,23 +38,23 @@ public class ArrivalTermTransfQuayStub {
 
     public void probPar (GenReposInfoStub reposStub){
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
-        outMessage = new Message (Message.PARAMSATTQUAY, reposStub);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType() != Message.ACK) {
-            System.out.println("Arranque da simulação: Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        outMessage = new Message(Message.PARAMSATTQUAY, reposStub);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /* ************************************************Passenger***************************************************** */
@@ -68,23 +68,23 @@ public class ArrivalTermTransfQuayStub {
 
     public void takeABus(int passengerId) {
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
         outMessage = new Message(Message.TAKEABUS, passengerId);     // o barbeiro vai dormir
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.TAKEABUSDONE) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.TAKEABUSDONE){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
 
     }
 
@@ -96,23 +96,23 @@ public class ArrivalTermTransfQuayStub {
 
     public void enterTheBus(int passengerId){
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
         outMessage = new Message(Message.ENTERBUS, passengerId);     // o barbeiro vai dormir
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /* ************************************************Bus Driver**************************************************** */
@@ -132,23 +132,21 @@ public class ArrivalTermTransfQuayStub {
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message (Message.WORKENDED);     // o barbeiro vai dormir
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        outMessage = new Message(Message.WORKENDED);     // o barbeiro vai dormir
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
 
-        if ((inMessage.getType () != Message.CONTDAYS/*CONTPORTER*/) && (inMessage.getType () != Message.ENDBUSDRIVER)) {
-            System.out.println("Thread " + Thread.currentThread ().getName ()+ ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        if ((inMessage.getType() != Message.CONTDAYS) && (inMessage.getType() != Message.ENDBUSDRIVER)) {
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
 
-        if (inMessage.getType () == Message.ENDBUSDRIVER)
-            return 'E';                                          // fim de operações
-        else return 'R';
+        return (inMessage.getType() == Message.ENDBUSDRIVER) ? 'E' : 'R';
     }
 
     /**
@@ -159,23 +157,23 @@ public class ArrivalTermTransfQuayStub {
      */
 
     public void parkTheBus(){
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
         outMessage = new Message(Message.PARKBUS);     // o barbeiro vai dormir
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.PBDONE) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.PBDONE){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /**
@@ -185,23 +183,23 @@ public class ArrivalTermTransfQuayStub {
      */
 
     public void announcingBusBoarding(){
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
         outMessage = new Message(Message.ANNOUCEBUSBORADING);     // o barbeiro vai dormir
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ABBDONE) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ABBDONE){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /**
@@ -209,24 +207,23 @@ public class ArrivalTermTransfQuayStub {
      */
 
     public void resetArrivalTermTransfQuay() {
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
         outMessage = new Message(Message.RESETATQ);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-
-        con.close ();
+        con.close();
     }
 
 
@@ -237,24 +234,23 @@ public class ArrivalTermTransfQuayStub {
      */
 
     public void setEndDay(){
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
         outMessage = new Message(Message.SETENDDAY);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-
-        con.close ();
+        con.close();
     }
 
 
@@ -262,24 +258,23 @@ public class ArrivalTermTransfQuayStub {
      *  Fazer o shutdown do servidor (solicitação do serviço).
      */
 
-    public void shutdown ()
-    {
+    public void shutdown(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
-        outMessage = new Message (Message.SHUT);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        outMessage = new Message(Message.SHUT);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 }

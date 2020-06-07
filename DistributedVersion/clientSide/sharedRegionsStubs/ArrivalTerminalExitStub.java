@@ -39,24 +39,24 @@ public class ArrivalTerminalExitStub {
     public void probPar(GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
                         ArrivalTermTransfQuayStub arrivalQuayStub){
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message (Message.PARAMSATEXIT, reposStub, arrivLoungeStub, arrivalQuayStub);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType() != Message.ACK) {
-            System.out.println("Arranque da simulação: Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        outMessage = new Message(Message.PARAMSATEXIT, reposStub, arrivLoungeStub, arrivalQuayStub);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /**
@@ -66,23 +66,23 @@ public class ArrivalTerminalExitStub {
 
     public void goHome(int passengerId){
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
         outMessage = new Message(Message.GOHOME, passengerId);     // o barbeiro vai dormir
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.GODONE) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.GODONE){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /**
@@ -91,7 +91,7 @@ public class ArrivalTerminalExitStub {
 
     public void notifyFromPrepareNextLeg(){
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
@@ -99,15 +99,15 @@ public class ArrivalTerminalExitStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored) {}
         }
-        outMessage = new Message (Message.NOTFNEXTL);     // o barbeiro vai dormir
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        outMessage = new Message(Message.NOTFNEXTL);     // o barbeiro vai dormir
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /**
@@ -127,20 +127,18 @@ public class ArrivalTerminalExitStub {
                 Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored) {}
         }
-        outMessage = new Message (Message.INCDECCOUNTER, inc);        // pede a realização do serviço
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        outMessage = new Message(Message.INCDECCOUNTER, inc);        // pede a realização do serviço
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
 
-        if ((inMessage.getType () != Message.LIMITCOUNTER) && (inMessage.getType () != Message.CONTCOUNTER)) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        if ((inMessage.getType() != Message.LIMITCOUNTER) && (inMessage.getType() != Message.CONTCOUNTER)){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
 
-        if (inMessage.getType () == Message.CONTCOUNTER)
-            return true;                                                // operação bem sucedida - final destination
-        else return false;                                          // operação falhou - otherwise
+        return inMessage.getType() == Message.CONTCOUNTER;
     }
 
     /**
@@ -149,24 +147,23 @@ public class ArrivalTerminalExitStub {
      */
 
     public void resetArrivalTerminalExit(){
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
         outMessage = new Message(Message.RESETATE);    // o barbeiro recebe o pagamento
-            con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-
-        con.close ();
+        con.close();
     }
 
     /* ************************************************* Getters ******************************************************/
@@ -185,18 +182,18 @@ public class ArrivalTerminalExitStub {
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
-        outMessage = new Message (Message.GETDEADPASSVAL);        // pede a realização do serviço
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        outMessage = new Message(Message.GETDEADPASSVAL);        // pede a realização do serviço
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
 
-        if (inMessage.getType () != Message.DEADPASSVAL) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        if (inMessage.getType() != Message.DEADPASSVAL){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
 
         return inMessage.getMsgDeadPassVal();
     }
@@ -217,17 +214,17 @@ public class ArrivalTerminalExitStub {
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
         outMessage = new Message(Message.SETDEPTERNREF, departureTermStub);    // o barbeiro recebe o pagamento
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
 
@@ -235,25 +232,23 @@ public class ArrivalTerminalExitStub {
      *  Fazer o shutdown do servidor (solicitação do serviço).
      */
 
-    public void shutdown ()
-    {
+    public void shutdown(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
-        outMessage = new Message (Message.SHUT);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        outMessage = new Message(Message.SHUT);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
-
 }

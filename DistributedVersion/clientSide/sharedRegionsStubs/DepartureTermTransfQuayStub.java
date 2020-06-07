@@ -26,7 +26,7 @@ public class DepartureTermTransfQuayStub {
      *    @param port número do port de escuta do servidor
      */
 
-    public DepartureTermTransfQuayStub (String hostName, int port) {
+    public DepartureTermTransfQuayStub(String hostName, int port){
         serverHostName = hostName;
         serverPortNumb = port;
     }
@@ -36,47 +36,47 @@ public class DepartureTermTransfQuayStub {
      *
      */
 
-    public void probPar (GenReposInfoStub reposStub){
+    public void probPar(GenReposInfoStub reposStub){
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
-        outMessage = new Message (Message.PARAMSDEPTTQUAY, reposStub);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType() != Message.ACK) {
-            System.out.println("Arranque da simulação: Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        outMessage = new Message(Message.PARAMSDEPTTQUAY, reposStub);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     public void leaveTheBus(int passengerId){
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message (Message.LEAVEBUS, passengerId);  //pede report missing bags
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        outMessage = new Message(Message.LEAVEBUS, passengerId);  //pede report missing bags
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
 
-        if (inMessage.getType() != Message.LBDONE)
-        { System.out.println ("Arranque da simulação: Tipo inválido!");
-            System.out.println (inMessage.toString ());
-            System.exit (1);
+        if (inMessage.getType() != Message.LBDONE){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /* *************************************************Bus Driver*************************************************** */
@@ -99,12 +99,12 @@ public class DepartureTermTransfQuayStub {
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 
-        if (inMessage.getType() != Message.PBLPODONE)
-        { System.out.println ("Arranque da simulação: Tipo inválido!");
-            System.out.println (inMessage.toString ());
-            System.exit (1);
+        if (inMessage.getType() != Message.PBLPODONE){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /**
@@ -125,12 +125,12 @@ public class DepartureTermTransfQuayStub {
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 
-        if (inMessage.getType() != Message.ACK)
-        { System.out.println ("Arranque da simulação: Tipo inválido!");
-            System.out.println (inMessage.toString ());
-            System.exit (1);
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /**
@@ -150,12 +150,12 @@ public class DepartureTermTransfQuayStub {
         outMessage = new Message (Message.SHUT);
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        if (inMessage.getType () != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
 

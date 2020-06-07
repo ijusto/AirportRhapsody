@@ -26,7 +26,7 @@ public class DepartureTerminalEntranceStub {
      *    @param port número do port de escuta do servidor
      */
 
-    public DepartureTerminalEntranceStub (String hostName, int port) {
+    public DepartureTerminalEntranceStub(String hostName, int port){
         serverHostName = hostName;
         serverPortNumb = port;
     }
@@ -36,49 +36,49 @@ public class DepartureTerminalEntranceStub {
      *
      */
 
-    public void probPar (GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
-                         ArrivalTermTransfQuayStub arrivalQuayStub) {
+    public void probPar(GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
+                         ArrivalTermTransfQuayStub arrivalQuayStub){
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
-        outMessage = new Message (Message.PARAMSDEPTENT, reposStub, arrivLoungeStub, arrivalQuayStub);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType() != Message.ACK) {
-            System.out.println("Arranque da simulação: Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        outMessage = new Message(Message.PARAMSDEPTENT, reposStub, arrivLoungeStub, arrivalQuayStub);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     public void prepareNextLeg(int passengerId){
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message (Message.PREPARENEXTLEG, passengerId);  //pede report missing bags
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        outMessage = new Message(Message.PREPARENEXTLEG, passengerId);  //pede report missing bags
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
 
-        if (inMessage.getType() != Message.PNLDONE)
-        { System.out.println ("Arranque da simulação: Tipo inválido!");
-            System.out.println (inMessage.toString ());
-            System.exit (1);
+        if (inMessage.getType() != Message.PNLDONE){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /**
@@ -86,25 +86,25 @@ public class DepartureTerminalEntranceStub {
      */
     public void resetDepartureTerminalExit(){
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message (Message.RESETDTE);  //pede report missing bags
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        outMessage = new Message(Message.RESETDTE);  //pede report missing bags
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
 
-        if (inMessage.getType() != Message.ACK)
-        { System.out.println ("Arranque da simulação: Tipo inválido!");
-            System.out.println (inMessage.toString ());
-            System.exit (1);
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
 
     }
 
@@ -113,7 +113,7 @@ public class DepartureTerminalEntranceStub {
      */
     public void notifyFromGoHome(){
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
@@ -122,16 +122,16 @@ public class DepartureTerminalEntranceStub {
             } catch (InterruptedException ignored) {}
         }
 
-        outMessage = new Message (Message.NOTFGOHOME);  //pede report missing bags
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        outMessage = new Message(Message.NOTFGOHOME);  //pede report missing bags
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
 
-        if (inMessage.getType() != Message.ACK)
-        { System.out.println ("Arranque da simulação: Tipo inválido!");
-            System.out.println (inMessage.toString ());
-            System.exit (1);
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /**
@@ -139,27 +139,27 @@ public class DepartureTerminalEntranceStub {
      *   be out of bags.
      */
 
-    public void noMoreBags() {
+    public void noMoreBags(){
 
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message (Message.NOMOREBAGS);  //pede report missing bags
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        outMessage = new Message(Message.NOMOREBAGS);  //pede report missing bags
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
 
-        if (inMessage.getType() != Message.ACK)
-        { System.out.println ("Arranque da simulação: Tipo inválido!");
-            System.out.println (inMessage.toString ());
-            System.exit (1);
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
     /* ************************************************* Setters ******************************************************/
@@ -171,25 +171,25 @@ public class DepartureTerminalEntranceStub {
      */
 
     public void setArrivalTerminalRef(ArrivalTerminalExitStub arrivalTermStub){
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
 
-        outMessage = new Message (Message.SETARRTERREF, arrivalTermStub);  //pede report missing bags
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
+        outMessage = new Message(Message.SETARRTERREF, arrivalTermStub);  //pede report missing bags
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
 
-        if (inMessage.getType() != Message.ACK)
-        { System.out.println ("Arranque da simulação: Tipo inválido!");
-            System.out.println (inMessage.toString ());
-            System.exit (1);
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
 
@@ -197,25 +197,24 @@ public class DepartureTerminalEntranceStub {
      *  Fazer o shutdown do servidor (solicitação do serviço).
      */
 
-    public void shutdown ()
-    {
+    public void shutdown(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
+            } catch (InterruptedException ignored){}
         }
-        outMessage = new Message (Message.SHUT);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
+        outMessage = new Message(Message.SHUT);
+        con.writeObject(outMessage);
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
         }
-        con.close ();
+        con.close();
     }
 
 
