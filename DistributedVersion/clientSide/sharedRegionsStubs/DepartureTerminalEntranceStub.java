@@ -59,8 +59,7 @@ public class DepartureTerminalEntranceStub {
         con.close ();
     }
 
-    //TODO: Change messages
-    public boolean prepareNextLeg(int passengerId){
+    public void prepareNextLeg(int passengerId){
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -71,27 +70,22 @@ public class DepartureTerminalEntranceStub {
             } catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (Message.REQCUTH, passengerId);  //pede report missing bags
+        outMessage = new Message (Message.PREPARENEXTLEG, passengerId);  //pede report missing bags
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 
-        if (inMessage.getType() != Message.NFICDONE)
+        if (inMessage.getType() != Message.PNLDONE)
         { System.out.println ("Arranque da simulação: Tipo inválido!");
             System.out.println (inMessage.toString ());
             System.exit (1);
         }
         con.close ();
-
-        if (inMessage.getType () == Message.CUTHDONE)
-            return true;                                                // operação bem sucedida
-        else return false;
     }
 
     /**
      *   Resets the signal of the porter of the plane's hold empty state.
      */
-    //TODO: Change messages
-    public boolean resetDepartureTerminalExit(){
+    public void resetDepartureTerminalExit(){
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -102,59 +96,23 @@ public class DepartureTerminalEntranceStub {
             } catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (Message.REQCUTH, passengerId);  //pede report missing bags
+        outMessage = new Message (Message.RESETDTE);  //pede report missing bags
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 
-        if (inMessage.getType() != Message.NFICDONE)
+        if (inMessage.getType() != Message.ACK)
         { System.out.println ("Arranque da simulação: Tipo inválido!");
             System.out.println (inMessage.toString ());
             System.exit (1);
         }
         con.close ();
 
-        if (inMessage.getType () == Message.CUTHDONE)
-            return true;                                                // operação bem sucedida
-        else return false;
-
-    }
-
-    /**
-     *   Wakes up all the passengers at the Arrival Terminal Exit and at the Departure Terminal Entrance.
-     */
-
-    //TODO: Change messages
-    public boolean wakeAllPassengers(){
-        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
-        Message inMessage, outMessage;
-
-        while (!con.open ()) {
-            try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
-        }
-
-        outMessage = new Message (Message.REQCUTH, passengerId);  //pede report missing bags
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-
-        if (inMessage.getType() != Message.NFICDONE)
-        { System.out.println ("Arranque da simulação: Tipo inválido!");
-            System.out.println (inMessage.toString ());
-            System.exit (1);
-        }
-        con.close ();
-
-        if (inMessage.getType () == Message.CUTHDONE)
-            return true;                                                // operação bem sucedida
-        else return false;
     }
 
     /**
      *   Wakes up all the passengers at the Departure Terminal Entrance.
      */
-    //TODO: Change messages
-    public boolean notifyFromGoHome(){
+    public void notifyFromGoHome(){
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -165,28 +123,25 @@ public class DepartureTerminalEntranceStub {
             } catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (Message.REQCUTH, passengerId);  //pede report missing bags
+        outMessage = new Message (Message.NOTFGOHOME);  //pede report missing bags
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 
-        if (inMessage.getType() != Message.NFICDONE)
+        if (inMessage.getType() != Message.ACK)
         { System.out.println ("Arranque da simulação: Tipo inválido!");
             System.out.println (inMessage.toString ());
             System.exit (1);
         }
         con.close ();
-
-        if (inMessage.getType () == Message.CUTHDONE)
-            return true;                                                // operação bem sucedida
-        else return false;
     }
 
     /**
      *   Called by Porter in noMoreBagsToCollect to wake up all the passengers that are waiting for the plane's hold to
      *   be out of bags.
      */
-    //TODO: Change messages
-    public boolean noMoreBags() {
+
+    public void noMoreBags() {
+
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
@@ -196,20 +151,16 @@ public class DepartureTerminalEntranceStub {
             } catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (Message.REQCUTH, passengerId);  //pede report missing bags
+        outMessage = new Message (Message.NOMOREBAGS);  //pede report missing bags
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 
-        if (inMessage.getType() != Message.NFICDONE)
+        if (inMessage.getType() != Message.ACK)
         { System.out.println ("Arranque da simulação: Tipo inválido!");
             System.out.println (inMessage.toString ());
             System.exit (1);
         }
         con.close ();
-
-        if (inMessage.getType () == Message.CUTHDONE)
-            return true;                                                // operação bem sucedida
-        else return false;
     }
 
     /* ************************************************* Setters ******************************************************/

@@ -57,7 +57,7 @@ public class BaggageReclaimOfficeStub {
         con.close ();
     }
 
-    public boolean reportMissingBags(int passengerID){
+    public void reportMissingBags(int passengerId){
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
@@ -67,21 +67,16 @@ public class BaggageReclaimOfficeStub {
             } catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (Message.REQCUTH, passengerId);  //pede report missing bags
+        outMessage = new Message (Message.REPORTMISSBAG, passengerId);  //pede report missing bags
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 
-        if (inMessage.getType() != Message.NFICDONE)
+        if (inMessage.getType() != Message.ACK)
         { System.out.println ("Arranque da simulação: Tipo inválido!");
             System.out.println (inMessage.toString ());
             System.exit (1);
         }
         con.close ();
-
-        if (inMessage.getType () == Message.CUTHDONE)
-            return true;                                                // operação bem sucedida
-        else return false;
-
     }
 
 

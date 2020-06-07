@@ -49,6 +49,30 @@ public class DepartureTerminalEntranceInterface {
                 outMessage = new Message (Message.ACK);
                 break;
 
+            // prepareNextLeg
+            case Message.PREPARENEXTLEG:
+                departureTerminalEntrance.prepareNextLeg(inMessage.getPassId());
+                outMessage = new Message (Message.PNLDONE);
+                break;
+
+            // resetDepartureTerminalExit
+            case Message.RESETDTE:
+                departureTerminalEntrance.resetDepartureTerminalExit();
+                outMessage = new Message (Message.ACK);
+                break;
+
+            // notifyFromGoHome
+            case Message.NOTFGOHOME:
+                departureTerminalEntrance.notifyFromGoHome();
+                outMessage = new Message (Message.ACK);
+                break;
+
+            // noMoreBags
+            case Message.NOMOREBAGS:
+                departureTerminalEntrance.noMoreBags();
+                outMessage = new Message (Message.ACK);
+                break;
+
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerDepartureTerminalEntrance.waitConnection = false;
                 (((DepartureTerminalEntranceProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);

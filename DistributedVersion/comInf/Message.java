@@ -171,10 +171,13 @@ public class Message implements Serializable
     public static final int PNLDONE = 48;
 
     /* ******* resetDepartureTerminalExit ************* */
+    public static final int RESETDTE = 49;
 
     /* ******* notifyFromGoHome *********************** */
+    public static final int NOTFGOHOME = 50;
 
     /* ******* noMoreBags ***************************** */
+    // same as for BaggageColPoint
 
     /* ******* setArrivalTerminalRef ****************** */
 

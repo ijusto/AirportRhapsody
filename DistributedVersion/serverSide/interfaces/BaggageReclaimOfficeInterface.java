@@ -48,6 +48,12 @@ public class BaggageReclaimOfficeInterface {
                 outMessage = new Message (Message.ACK);
                 break;
 
+            // reportMissingBags
+            case Message.REPORTMISSBAG:
+                baggageReclaimOffice.reportMissingBags(inMessage.getPassId());
+                outMessage = new Message (Message.ACK);
+                break;
+
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerBaggageReclaimOffice.waitConnection = false;
                 (((BaggageReclaimOfficeProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
