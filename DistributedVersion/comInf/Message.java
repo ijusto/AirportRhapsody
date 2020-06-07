@@ -209,7 +209,7 @@ public class Message implements Serializable
     public static final int CARRYTOAPPSTORE_TSA = 59;
 
     /* ******* resetTemporaryStorageArea ************** */
-
+    public static final int RESETTSA = 60;
 
     /* *********************************************** GenReposInfo ************************************************* */
 
@@ -515,7 +515,7 @@ public class Message implements Serializable
     public Message (int type, int firstInt, int secondInt)
     {
         msgType = type;
-        if (msgType == BAG || msgType == CARRYAPPSTORE){
+        if ((msgType == BAG) || (msgType == CARRYAPPSTORE) || (msgType == CARRYTOAPPSTORE_TSA)){
             msgBagDestStat = firstInt;
             msgBagIdOwner = secondInt;
         } else if(msgType == UDTEPASSNR){

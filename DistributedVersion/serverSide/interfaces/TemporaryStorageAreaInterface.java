@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import comInf.Bag;
 import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
@@ -50,6 +51,19 @@ public class TemporaryStorageAreaInterface {
                 } catch (MemException e) {
                     e.printStackTrace();
                 }
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // carryItToAppropriateStore (porter)
+            case Message.CARRYTOAPPSTORE_TSA:
+                Bag bag = new Bag(inMessage.getMsgBagDestStat(), inMessage.getMsgBagIdOwner());
+                temporaryStorageArea.carryItToAppropriateStore(bag);
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // resetTemporaryStorageArea
+            case Message.RESETTSA:
+                temporaryStorageArea.resetTemporaryStorageArea();
                 outMessage = new Message(Message.ACK);
                 break;
 

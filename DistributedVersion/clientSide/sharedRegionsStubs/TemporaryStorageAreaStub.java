@@ -69,20 +69,25 @@ public class TemporaryStorageAreaStub {
      */
 
     public void carryItToAppropriateStore(Bag bag){
-        Porter porter = (Porter) Thread.currentThread();
-        assert porter.getStat() == PorterStates.AT_THE_PLANES_HOLD;
-        assert bag != null;
-        porter.setStat(PorterStates.AT_THE_STOREROOM);
-        repos.updatePorterStat(PorterStates.AT_THE_STOREROOM);
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        try {
-            tmpStorageStack.write(bag);
-            repos.saveBagInSR();
-        } catch (MemException e) {
-            e.printStackTrace();
+        while (!con.open ()) {                                 // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
 
-        repos.printLog();
+        outMessage = new Message(Message.CARRYTOAPPSTORE_TSA, bag.getIntDestStat(), bag.getIdOwner());        // pede a realização do serviço
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if ((inMessage.getType () != Message.ACK)) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -90,12 +95,25 @@ public class TemporaryStorageAreaStub {
      */
 
     public void resetTemporaryStorageArea() {
-        // stack of the store room instantiation
-        try {
-            tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT * SimulPar.N_BAGS_PER_PASS]);
-        } catch (MemException e) {
-            e.printStackTrace();
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()) {
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
+
+        outMessage = new Message (Message.RESETTSA);  //pede report missing bags
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if (inMessage.getType() != Message.ACK)
+        { System.out.println ("Arranque da simulação: Tipo inválido!");
+            System.out.println (inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
 
