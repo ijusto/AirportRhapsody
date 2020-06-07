@@ -56,7 +56,7 @@ public class TemporaryStorageAreaInterface {
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerTemporaryStorageArea.waitConnection = false;
                 (((TemporaryStorageAreaProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
-                outMessage = new Message (Message.ACK);            // gerar confirmação
+                outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
         }
 

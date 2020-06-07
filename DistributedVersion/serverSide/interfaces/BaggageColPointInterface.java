@@ -47,7 +47,7 @@ public class BaggageColPointInterface {
             // probPar
             case Message.PARAMSBAGCOLPNT:
                 baggageColPoint.probPar(inMessage.getMsgReposStub());
-                outMessage = new Message (Message.ACK);
+                outMessage = new Message(Message.ACK);
                 break;
 
             // goCollectABag (passenger)
@@ -84,7 +84,7 @@ public class BaggageColPointInterface {
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerBaggageColPoint.waitConnection = false;
                 (((BaggageColPointProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
-                outMessage = new Message (Message.ACK);            // gerar confirmação
+                outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
         }
 

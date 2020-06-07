@@ -55,56 +55,60 @@ public class ArrivalLoungeInterface {
                 } catch (MemException e) {
                     e.printStackTrace();
                 }
-                outMessage = new Message (Message.ACK);
+                outMessage = new Message(Message.ACK);
                 break;
 
             // WhatShouldIDo (Passenger)
             case Message.WSID:
                 if (arrivalLounge.whatShouldIDo())
-                    outMessage = new Message (Message.FNDST);    // gerar resposta positiva
+                    outMessage = new Message(Message.FNDST);    // gerar resposta positiva
                 else
-                    outMessage = new Message (Message.TRDST); // gerar resposta negativa
+                    outMessage = new Message(Message.TRDST); // gerar resposta negativa
                 break;
 
             // takeARest (Porter)
             case Message.TAKEARST:
                 if (arrivalLounge.takeARest() == 'R')
-                    outMessage = new Message (Message.TAKERSTDONE);    // gerar resposta positiva
+                    outMessage = new Message(Message.TAKERSTDONE);    // gerar resposta positiva
                 else
-                    outMessage = new Message (Message.ENDPORTER); // gerar resposta negativa
+                    outMessage = new Message(Message.ENDPORTER); // gerar resposta negativa
                 break;
 
             // tryToCollectABag (Porter)
             case Message.TRYTOCOL:
                 Bag msgBag = arrivalLounge.tryToCollectABag();
                 if (msgBag != null)
-                    outMessage = new Message (Message.BAG, msgBag.getIntDestStat(), msgBag.getIdOwner());    // gerar resposta positiva
+                    outMessage = new Message(Message.BAG, msgBag.getIntDestStat(), msgBag.getIdOwner());    // gerar resposta positiva
                 else
-                    outMessage = new Message (Message.NULLBAG); // gerar resposta negativa
+                    outMessage = new Message(Message.NULLBAG); // gerar resposta negativa
                 break;
 
             // noMoreBagsToCollect (Porter)
             case Message.NOBAGS2COL:                                                      // receber pagamento
                 arrivalLounge.noMoreBagsToCollect();
-                outMessage = new Message (Message.ACK);            // gerar confirmação
+                outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
 
             // resetArrivalLounge (main)
             case Message.RESETAL:                                                      // receber pagamento
-                arrivalLounge.resetArrivalLounge(inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsNA());
-                outMessage = new Message (Message.RESETALDONE);            // gerar confirmação
+                try {
+                    arrivalLounge.resetArrivalLounge(inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsNA());
+                } catch (MemException e) {
+                    e.printStackTrace();
+                }
+                outMessage = new Message(Message.RESETALDONE);            // gerar confirmação
                 break;
 
             // setDepartureTerminalRef (main)
             case Message.SETDEPTERNREF:
                 arrivalLounge.setDepartureTerminalRef(inMessage.getMsgDepTermEntStub());
-                outMessage = new Message (Message.ACK);
+                outMessage = new Message(Message.ACK);
                 break;
 
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerArrivalLounge.waitConnection = false;
                 (((ArrivalLoungeProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
-                outMessage = new Message (Message.ACK);            // gerar confirmação
+                outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
         }
 

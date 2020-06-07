@@ -166,12 +166,12 @@ public class DepartureTerminalEntranceStub {
     /* ************************************************* Setters ******************************************************/
 
     /**
-     *   Sets the Arrival Terminal Exit Reference.
+     *   Sets the Arrival Terminal Exit Stub Reference.
      *
-     *    @param arrivalTerm Arrival Terminal Exit.
+     *    @param arrivalTermStub Arrival Terminal Exit Stub.
      */
-    //TODO: Change messages
-    public boolean setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
+
+    public void setArrivalTerminalRef(ArrivalTerminalExitStub arrivalTermStub){
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
@@ -181,20 +181,16 @@ public class DepartureTerminalEntranceStub {
             } catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (Message.REQCUTH, passengerId);  //pede report missing bags
+        outMessage = new Message (Message.SETARRTERREF, arrivalTermStub);  //pede report missing bags
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
 
-        if (inMessage.getType() != Message.NFICDONE)
+        if (inMessage.getType() != Message.ACK)
         { System.out.println ("Arranque da simulação: Tipo inválido!");
             System.out.println (inMessage.toString ());
             System.exit (1);
         }
         con.close ();
-
-        if (inMessage.getType () == Message.CUTHDONE)
-            return true;                                                // operação bem sucedida
-        else return false;
     }
 
 

@@ -180,22 +180,22 @@ public class Message implements Serializable
     // same as for BaggageColPoint
 
     /* ******* setArrivalTerminalRef ****************** */
-
+    public static final int SETARRTERREF = 51;
 
     /* ******************************************** DepartureTermTransfQuay ***************************************** */
 
     /* ************* probPar ************************** */
-    public static final int PARAMSDEPTTQUAY = 57;
+    public static final int PARAMSDEPTTQUAY = 52;
 
     /* ******* leaveTheBus **************************** */
-    public static final int LEAVEBUS = 58;
+    public static final int LEAVEBUS = 53;
 
-    public static final int LBDONE = 59;
+    public static final int LBDONE = 54;
 
     /* ******* parkTheBusAndLetPassOff **************** */
-    public static final int PBLPO = 60;
+    public static final int PBLPO = 55;
 
-    public static final int PBLPODONE = 61;
+    public static final int PBLPODONE = 56;
 
     /* ******* resetDepartureTermTransfQuay *********** */
 
@@ -365,6 +365,8 @@ public class Message implements Serializable
 
     private ArrivalLoungeStub msgArrLoungeStub = null;
 
+    private ArrivalTerminalExitStub msgArrTermExitStub = null;
+
     private String msgReposFile = null;
 
     private boolean msgIncOrDec;
@@ -433,6 +435,13 @@ public class Message implements Serializable
             msgArrQuayStub = arrQuayStub;
             msgBagAndPassDest = destStat;
             msgNBagsPHold = nBagsPHold;
+        }
+    }
+
+    public Message (int type, ArrivalTerminalExitStub arrivalTerminalExitStub) {
+        msgType = type;
+        if (msgType ==  SETARRTERREF){
+            msgArrTermExitStub = arrivalTerminalExitStub;
         }
     }
 
@@ -560,6 +569,8 @@ public class Message implements Serializable
     public ArrivalTermTransfQuayStub getMsgArrQuayStub(){ return msgArrQuayStub; }
 
     public ArrivalLoungeStub getMsgArrLoungeStub(){ return msgArrLoungeStub; }
+
+    public ArrivalTerminalExitStub getMsgArrTermExitStub(){ return msgArrTermExitStub; }
 
     public String getMsgReposFile(){ return msgReposFile; }
 

@@ -51,7 +51,7 @@ public class ArrivalTerminalExitInterface {
             case Message.PARAMSATEXIT:
                 arrivalTerminalExit.probPar(inMessage.getMsgReposStub(), inMessage.getMsgArrLoungeStub(),
                             inMessage.getMsgArrQuayStub());
-                outMessage = new Message (Message.ACK);
+                outMessage = new Message(Message.ACK);
                 break;
 
             case Message.GOHOME:
@@ -61,37 +61,37 @@ public class ArrivalTerminalExitInterface {
 
             case Message.NOTFNEXTL:
                 arrivalTerminalExit.notifyFromPrepareNextLeg();
-                outMessage = new Message (Message.ACK);
+                outMessage = new Message(Message.ACK);
                 break;
 
             // incDecCounter
             case Message.INCDECCOUNTER:
                 if (arrivalTerminalExit.incDecCounter(inMessage.getIncOrDec()))
-                    outMessage = new Message (Message.CONTCOUNTER);    // gerar resposta positiva
+                    outMessage = new Message(Message.CONTCOUNTER);    // gerar resposta positiva
                 else
-                    outMessage = new Message (Message.LIMITCOUNTER); // gerar resposta negativa
+                    outMessage = new Message(Message.LIMITCOUNTER); // gerar resposta negativa
                 break;
 
             // setDepartureTerminalRef (main)
             case Message.SETDEPTERNREF:                                                      
                 arrivalTerminalExit.setDepartureTerminalRef(inMessage.getMsgDepTermEntStub());
-                outMessage = new Message (Message.ACK);
+                outMessage = new Message(Message.ACK);
                 break;
 
             case Message.RESETATE:
                 arrivalTerminalExit.resetArrivalTerminalExit();
-                outMessage = new Message (Message.ACK);
+                outMessage = new Message(Message.ACK);
                 break;
 
             case Message.GETDEADPASSVAL:
                 int deadPassValue = arrivalTerminalExit.getDeadPassValue();
-                outMessage = new Message (Message.DEADPASSVAL, deadPassValue);
+                outMessage = new Message(Message.DEADPASSVAL, deadPassValue);
                 break;
 
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerArrivalTerminalExit.waitConnection = false;
                 (((ArrivalTerminalExitProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
-                outMessage = new Message (Message.ACK);            // gerar confirmação
+                outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
         }
 

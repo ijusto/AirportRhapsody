@@ -51,7 +51,7 @@ public class ArrivalTermTransfQuayInterface {
                 } catch (MemException e) {
                     e.printStackTrace();
                 }
-                outMessage = new Message (Message.ACK);
+                outMessage = new Message(Message.ACK);
                 break;
 
             // takeABus (Passenger)
@@ -69,9 +69,9 @@ public class ArrivalTermTransfQuayInterface {
             // hasDaysWorkEnded (BusDriver)
             case Message.WORKENDED:
                 if (arrivalTermTransfQuay.hasDaysWorkEnded() == 'R')
-                    outMessage = new Message (Message.CONTDAYS);    // gerar resposta positiva
+                    outMessage = new Message(Message.CONTDAYS);    // gerar resposta positiva
                 else
-                    outMessage = new Message (Message.ENDBUSDRIVER); // gerar resposta negativa
+                    outMessage = new Message(Message.ENDBUSDRIVER); // gerar resposta negativa
                 break;
 
             // parkTheBus (BusDriver)
@@ -105,7 +105,7 @@ public class ArrivalTermTransfQuayInterface {
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerArrivalTermTransfQuay.waitConnection = false;
                 (((ArrivalTermTransfQuayProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
-                outMessage = new Message (Message.ACK);            // gerar confirmação
+                outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
         }
 

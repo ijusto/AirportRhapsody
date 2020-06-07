@@ -45,13 +45,13 @@ public class DepartureTermTransfQuayInterface {
             // probPar
             case Message.PARAMSDEPTTQUAY:
                 departureTermTransfQuay.probPar(inMessage.getMsgReposStub());
-                outMessage = new Message (Message.ACK);
+                outMessage = new Message(Message.ACK);
                 break;
 
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerDepartureTermTransfQuay.waitConnection = false;
                 (((DepartureTermTransfQuayProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
-                outMessage = new Message (Message.ACK);            // gerar confirmação
+                outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
         }
 
