@@ -2,6 +2,10 @@ package serverSide.interfaces;
 
 import comInf.Message;
 import comInf.MessageException;
+import serverSide.proxies.DepartureTermTransfQuayProxy;
+import serverSide.proxies.TemporaryStorageAreaProxy;
+import serverSide.servers.ServerDepartureTermTransfQuay;
+import serverSide.servers.ServerTemporaryStorageArea;
 import serverSide.sharedRegions.TemporaryStorageArea;
 
 public class TemporaryStorageAreaInterface {
@@ -28,9 +32,8 @@ public class TemporaryStorageAreaInterface {
         /* validação da mensagem recebida */
 
         switch (inMessage.getType ()) {
-            // TODO: Change cases
-            case Message.SETNFIC:  if ((inMessage.getFName () == null) || (inMessage.getFName ().equals ("")))
-                throw new MessageException ("Nome do ficheiro inexistente!", inMessage);
+            // Shutdown do servidor (operação pedida pelo cliente)
+            case Message.SHUT:
                 break;
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
@@ -39,10 +42,10 @@ public class TemporaryStorageAreaInterface {
         /* seu processamento */
 
         switch (inMessage.getType ()) {
-            // TODO: Change cases
-            case Message.SETNFIC:                                                     // inicializar ficheiro de logging
-                bShop.setFileName (inMessage.getFName (), inMessage.getNIter ());
-                outMessage = new Message (Message.NFICDONE);       // gerar resposta
+            case Message.SHUT:                                                        // shutdown do servidor
+                ServerTemporaryStorageArea.waitConnection = false;
+                (((TemporaryStorageAreaProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
+                outMessage = new Message (Message.ACK);            // gerar confirmação
                 break;
         }
 

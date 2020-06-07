@@ -69,33 +69,6 @@ public class TemporaryStorageAreaStub {
     }
 
     /**
-     *  Fazer o shutdown do servidor (solicitação do serviço).
-     */
-
-    public void shutdown ()
-    {
-        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
-        Message inMessage, outMessage;
-
-        while (!con.open ()){                                                // aguarda ligação
-            try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
-        }
-        outMessage = new Message (Message.SHUT);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
-        }
-        con.close ();
-    }
-
-
-
-    /**
      *   Operation of carrying a bag from the plane's hold to the temporary storage area (raised by the Porter).
      */
 
@@ -128,4 +101,32 @@ public class TemporaryStorageAreaStub {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     *  Fazer o shutdown do servidor (solicitação do serviço).
+     */
+
+    public void shutdown ()
+    {
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.SHUT);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+    }
+
+
 }

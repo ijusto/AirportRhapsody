@@ -2,6 +2,10 @@ package serverSide.interfaces;
 
 import comInf.Message;
 import comInf.MessageException;
+import serverSide.proxies.DepartureTermTransfQuayProxy;
+import serverSide.proxies.DepartureTerminalEntranceProxy;
+import serverSide.servers.ServerDepartureTermTransfQuay;
+import serverSide.servers.ServerDepartureTerminalEntrance;
 import serverSide.sharedRegions.DepartureTermTransfQuay;
 
 public class DepartureTermTransfQuayInterface {
@@ -28,9 +32,8 @@ public class DepartureTermTransfQuayInterface {
         /* validação da mensagem recebida */
 
         switch (inMessage.getType ()) {
-            // TODO: Change cases
-            case Message.SETNFIC:  if ((inMessage.getFName () == null) || (inMessage.getFName ().equals ("")))
-                throw new MessageException ("Nome do ficheiro inexistente!", inMessage);
+            // Shutdown do servidor (operação pedida pelo cliente)
+            case Message.SHUT:
                 break;
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
@@ -39,10 +42,10 @@ public class DepartureTermTransfQuayInterface {
         /* seu processamento */
 
         switch (inMessage.getType ()) {
-            // TODO: Change cases
-            case Message.SETNFIC:                                                     // inicializar ficheiro de logging
-                bShop.setFileName (inMessage.getFName (), inMessage.getNIter ());
-                outMessage = new Message (Message.NFICDONE);       // gerar resposta
+            case Message.SHUT:                                                        // shutdown do servidor
+                ServerDepartureTermTransfQuay.waitConnection = false;
+                (((DepartureTermTransfQuayProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
+                outMessage = new Message (Message.ACK);            // gerar confirmação
                 break;
         }
 
