@@ -62,32 +62,6 @@ public class DepartureTerminalEntranceStub {
         con.close ();
     }
 
-    /**
-     *  Fazer o shutdown do servidor (solicitação do serviço).
-     */
-
-    public void shutdown ()
-    {
-        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
-        Message inMessage, outMessage;
-
-        while (!con.open ()){                                                // aguarda ligação
-            try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
-        }
-        outMessage = new Message (Message.SHUT);
-        con.writeObject (outMessage);
-        inMessage = (Message) con.readObject ();
-        if (inMessage.getType () != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
-            System.out.println(inMessage.toString ());
-            System.exit (1);
-        }
-        con.close ();
-    }
-
-
     //TODO: Change messages
     public boolean prepareNextLeg(int passengerId){
 
@@ -274,4 +248,32 @@ public class DepartureTerminalEntranceStub {
             return true;                                                // operação bem sucedida
         else return false;
     }
+
+
+    /**
+     *  Fazer o shutdown do servidor (solicitação do serviço).
+     */
+
+    public void shutdown ()
+    {
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.SHUT);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+    }
+
+
 }

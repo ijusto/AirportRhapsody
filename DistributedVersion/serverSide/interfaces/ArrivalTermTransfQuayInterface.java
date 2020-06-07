@@ -2,6 +2,10 @@ package serverSide.interfaces;
 
 import comInf.Message;
 import comInf.MessageException;
+import serverSide.proxies.ArrivalTermTransfQuayProxy;
+import serverSide.proxies.ArrivalTerminalExitProxy;
+import serverSide.servers.ServerArrivalTermTransfQuay;
+import serverSide.servers.ServerArrivalTerminalExit;
 import serverSide.sharedRegions.ArrivalTermTransfQuay;
 
 public class ArrivalTermTransfQuayInterface {
@@ -28,9 +32,8 @@ public class ArrivalTermTransfQuayInterface {
         /* validação da mensagem recebida */
 
         switch (inMessage.getType ()) {
-            // TODO: Change cases
-            case Message.SETNFIC:  if ((inMessage.getFName () == null) || (inMessage.getFName ().equals ("")))
-                throw new MessageException ("Nome do ficheiro inexistente!", inMessage);
+            // Shutdown do servidor (operação pedida pelo cliente)
+            case Message.SHUT:
                 break;
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
@@ -70,6 +73,12 @@ public class ArrivalTermTransfQuayInterface {
             case Message.ANNOUCEBUSBORADING:
                 arrivalTermTransfQuay.announcingBusBoarding();
                 outMessage = new Message(Message.ABBDONE);
+                break;
+
+            case Message.SHUT:                                                        // shutdown do servidor
+                ServerArrivalTermTransfQuay.waitConnection = false;
+                (((ArrivalTermTransfQuayProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
+                outMessage = new Message (Message.ACK);            // gerar confirmação
                 break;
         }
 
