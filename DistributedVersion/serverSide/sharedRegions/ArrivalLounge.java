@@ -1,6 +1,7 @@
 package serverSide.sharedRegions;
 
 import clientSide.SimulPar;
+import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 import comInf.Bag;
 
 import java.util.HashMap;
@@ -70,10 +71,10 @@ public class ArrivalLounge {
     private volatile boolean porterSleep;
 
     /**
-     *   Departure Terminal Entrance.
+     *   Departure Terminal Entrance Stub.
      */
 
-    private DepartureTerminalEntrance depTerm;
+    private DepartureTerminalEntranceStub depTermStub;
 
     /**
      *   Object used for synchronization.
@@ -378,13 +379,13 @@ public class ArrivalLounge {
     /* ************************************************* Setters ******************************************************/
 
     /**
-     *   Sets the Departure Terminal Entrance Reference.
+     *   Sets the Departure Terminal Entrance Stub Reference.
      *
-     *    @param departureTerm Departure Terminal Entrance.
+     *    @param departureTermStub Departure Terminal Entrance Stub.
      */
 
-    public synchronized void setDepartureTerminalRef(DepartureTerminalEntrance departureTerm){
-        this.depTerm = departureTerm;
+    public synchronized void setDepartureTerminalRef(DepartureTerminalEntranceStub departureTermStub){
+        this.depTermStub = departureTermStub;
     }
 
     /**

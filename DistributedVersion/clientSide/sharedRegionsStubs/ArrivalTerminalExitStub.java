@@ -99,7 +99,7 @@ public class ArrivalTerminalExitStub {
      *   Wakes up the passengers waiting in the Arrival Terminal Entrance.
      */
 
-    public synchronized void notifyFromPrepareNextLeg(){
+    public void notifyFromPrepareNextLeg(){
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -158,7 +158,7 @@ public class ArrivalTerminalExitStub {
      *   Departure Terminal.
      */
 
-    public synchronized void resetArrivalTerminalExit(){
+    public void resetArrivalTerminalExit(){
         this.resetDeadPassCounter();
     }
 
@@ -185,7 +185,7 @@ public class ArrivalTerminalExitStub {
      *    @param departureTerm Departure Terminal Entrance.
      */
 
-    public synchronized void setDepartureTerminalRef(DepartureTerminalEntrance departureTerm){
+    public void setDepartureTerminalRef(DepartureTerminalEntrance departureTerm){
         this.departureTerm = departureTerm;
     }
 
