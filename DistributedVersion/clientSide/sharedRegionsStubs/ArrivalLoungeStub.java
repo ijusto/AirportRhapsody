@@ -247,71 +247,25 @@ public class ArrivalLoungeStub {
      *    @throws MemException Exception.
      */
 
-    public void resetArrivalLounge(Bag.DestStat[][] bagAndPassDest, int[][] nBagsNA)
-            throws MemException {
+    public void resetArrivalLounge(){
 
-        while(!porterSleep){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()) {                                               // aguarda ligação
             try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                Thread.currentThread().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
-
-        this.currentFlight += 1;
-
-        if(this.currentFlight == SimulPar.N_FLIGHTS){
-            this.setEndDay();
-            this.arrQuay.setEndDay();
-        } else {
-            repos.updateFlightNumber(this.currentFlight);
-
-            Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
-            Map<Integer, Integer> nBagsPerPass = new HashMap<>();
-
-            // int nSRprev = this.pHoldBagStack.getPointer();
-            int nTotalBags = 0; //nSRprev;
-            for (int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++) {
-                nTotalBags += nBagsNA[nPass][this.currentFlight];
-                nBagsPerPass.put(nPass, nBagsNA[nPass][this.currentFlight]);
-            }
-
-            repos.initializeCargoHold(nTotalBags);
-            //MemStack<Bag> tempStack = null;
-            //if (nSRprev != 0) {
-            //    tempStack = new MemStack<>(new Bag[nSRprev]);
-            //    for (int nSRbag = 0; nSRbag < nSRprev; nSRbag++) {
-            //        tempStack.write(this.pHoldBagStack.read());
-            //    }
-            //}
-
-            // plane's hold baggage stack instantiation
-            this.pHoldBagStack = new MemStack<>(new Bag[nTotalBags]);
-            //if (nSRprev != 0) {
-            //    for (int nSRbag = 0; nSRbag < nSRprev; nSRbag++) {
-            //        this.pHoldBagStack.write(tempStack.read());
-            //    }
-            //}
-
-            for (int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++) {
-                for (int bag = 0; bag < nBagsNA[nPass][this.currentFlight]; bag++) {
-                    this.pHoldBagStack.write(new Bag(bagAndPassDest[nPass][this.currentFlight], nPass));
-                }
-
-                // instantiation of the passenger's bag FIFO for the treadmill in the baggage collection point
-                MemFIFO<Bag> bagPassFIFO = new MemFIFO<>(new Bag[nBagsPerPass.get(nPass)]);
-                treadmill.put(nPass, bagPassFIFO);
-            }
-
-            this.bagColPoint.setPHoldEmpty(false);
-            this.bagColPoint.setTreadmill(treadmill);
-
-            // reset the number of passengers that arrived the airport
-            this.resetNPassAtArrivL();
-
-            this.pHEmpty = false;
+        outMessage = new Message(Message.RESETAL);    // o barbeiro recebe o pagamento
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.RESETALDONE) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
         }
-        repos.printLog();
+        con.close ();
     }
 
     /**

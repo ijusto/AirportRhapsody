@@ -74,6 +74,12 @@ public class ArrivalLoungeInterface {
                 arrivalLounge.noMoreBagsToCollect();
                 outMessage = new Message (Message.ACK);            // gerar confirmação
                 break;
+
+            // resetArrivalLounge (main)
+            case Message.RESETAL:                                                      // receber pagamento
+                arrivalLounge.resetArrivalLounge(inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsNA());
+                outMessage = new Message (Message.RESETALDONE);            // gerar confirmação
+                break;
         }
 
         return (outMessage);

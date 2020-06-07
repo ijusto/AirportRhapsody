@@ -266,7 +266,7 @@ public class ArrivalLounge {
      *    @throws MemException Exception.
      */
 
-    public synchronized void resetArrivalLounge(Bag.DestStat[][] bagAndPassDest, int[][] nBagsNA)
+    public synchronized void resetArrivalLounge(int[][] bagAndPassDest, int[][] nBagsNA)
             throws MemException {
 
         while(!porterSleep){

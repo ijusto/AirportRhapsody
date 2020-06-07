@@ -19,43 +19,34 @@ public class Message implements Serializable
 
     /* Tipos das mensagens */
 
-    /**
-     *  Inicialização do ficheiro de logging (operação pedida pelo cliente)
-     */
-    public static final int SETNFIC  =  1;
-
-    /**
-     *  Ficheiro de logging foi inicializado (resposta enviada pelo servidor)
-     */
-    public static final int NFICDONE =  2;
-
-
-
     /* *********************************************** ArrivalLounge ************************************************ */
 
     /* ************* whatShouldIDo ************* */
-    public static final int WSID = 3;
+    public static final int WSID = 1;
 
-    public static final int FNDST = 4;
+    public static final int FNDST = 2;
 
-    public static final int TRDST = 5;
+    public static final int TRDST = 3;
 
     /* ************* takeARest ************* */
-    public static final int TAKEARST = 6;
+    public static final int TAKEARST = 4;
 
-    public static final int TAKERSTDONE = 7;
+    public static final int TAKERSTDONE = 5;
 
     /* ************* tryToCollectABag ************* */
-    public static final int TRYTOCOL = 8;
+    public static final int TRYTOCOL = 6;
 
-    public static final int BAG = 9;
+    public static final int BAG = 7;
 
-    public static final int NULLBAG = 10;
+    public static final int NULLBAG = 8;
 
     /* ************* noMoreBagsToCollec ************* */
-    public static final int NOBAGS2COL = 11;
+    public static final int NOBAGS2COL = 9;
 
     /* ************* resetArrivalLounge ************* */
+    public static final int RESETAL = 10;
+
+    public static final int RESETALDONE = 11;
 
     /* ************* setDepartureTerminalRef ************* */
 
@@ -187,6 +178,16 @@ public class Message implements Serializable
 
 
     /**
+     *  Inicialização do ficheiro de logging (operação pedida pelo cliente)
+     */
+    public static final int SETNFIC  =  1;
+
+    /**
+     *  Ficheiro de logging foi inicializado (resposta enviada pelo servidor)
+     */
+    public static final int NFICDONE =  2;
+
+    /**
      *  Enviar a identificação do cliente (resposta enviada pelo servidor)
      */
 
@@ -240,6 +241,10 @@ public class Message implements Serializable
 
     private int msgBagIdOwner = -1;
 
+    private int[][] msgBagAndPassDest;
+
+    private int[][] msgNBagsNA;
+
     /**
      *  Instanciação de uma mensagem (forma 1).
      *
@@ -265,6 +270,14 @@ public class Message implements Serializable
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
                 || (msgType == PREPARENEXTLEG)){
             passId = id;
+        }
+    }
+
+    public Message (int type, int[][] bagAndPassDest, int[][] nBagsNA) {
+        msgType = type;
+        if (msgType ==  RESETAL){
+            msgBagAndPassDest = bagAndPassDest;
+            msgNBagsNA = nBagsNA;
         }
     }
 
@@ -304,9 +317,13 @@ public class Message implements Serializable
         return msgBagDestStat;
     }
 
-    public int getMsgBagIdOwner(){
-        return msgBagIdOwner;
+    public int getMsgBagIdOwner(){ return msgBagIdOwner; }
+
+    public int[][] getMsgBagAndPassDest(){
+        return msgBagAndPassDest;
     }
+
+    public int[][] getMsgNBagsNA(){ return msgNBagsNA; }
 
     /**
      *  Obtenção do valor do campo tipo da mensagem.
