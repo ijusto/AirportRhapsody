@@ -93,7 +93,7 @@ public class TemporaryStorageAreaStub {
      *   Resets the stack of bags when all passengers from a flight leave the airport.
      */
 
-    public synchronized void resetTemporaryStorageArea() {
+    public void resetTemporaryStorageArea() {
         // stack of the store room instantiation
         try {
             tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT * SimulPar.N_BAGS_PER_PASS]);

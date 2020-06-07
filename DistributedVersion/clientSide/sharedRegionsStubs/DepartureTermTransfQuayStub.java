@@ -64,7 +64,7 @@ public class DepartureTermTransfQuayStub {
 
 
     //TODO: Change messages
-    public synchronized void leaveTheBus(int passengerId){
+    public void leaveTheBus(int passengerId){
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
@@ -97,7 +97,7 @@ public class DepartureTermTransfQuayStub {
      *   Then he waits for a notification of the last passenger to leave the bus.
      */
     //TODO: Change messages
-    public synchronized void parkTheBusAndLetPassOff() {
+    public void parkTheBusAndLetPassOff() {
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;

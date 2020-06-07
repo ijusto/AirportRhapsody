@@ -165,7 +165,7 @@ public class BaggageColPointStub {
      *
      */
 
-    public synchronized void resetBaggageColPoint(){
+    public void resetBaggageColPoint(){
         this.pHoldEmpty = true;
         this.treadmill = null;
     }
@@ -174,7 +174,7 @@ public class BaggageColPointStub {
      *   Called by Porter in noMoreBagsToCollect.
      */
 
-    public synchronized void noMoreBags() {
+    public void noMoreBags() {
         // wake up Passengers in goCollectABag()
         notifyAll();
     }
@@ -188,7 +188,7 @@ public class BaggageColPointStub {
      *    @return
      */
 
-    public synchronized boolean pHoldEmpty() {
+    public boolean pHoldEmpty() {
         return pHoldEmpty;
     }
 
@@ -200,7 +200,7 @@ public class BaggageColPointStub {
      *    @param treadmill ...
      */
 
-    public synchronized void setTreadmill(Map<Integer, MemFIFO<Bag>> treadmill) {
+    public void setTreadmill(Map<Integer, MemFIFO<Bag>> treadmill) {
         this.treadmill = treadmill;
     }
 
@@ -208,7 +208,7 @@ public class BaggageColPointStub {
      *
      */
 
-    public synchronized void setPHoldEmpty(boolean pHoldEmpty){
+    public void setPHoldEmpty(boolean pHoldEmpty){
         this.pHoldEmpty = pHoldEmpty;
     }
 

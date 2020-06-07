@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.ArrivalTermTransfQuayProxy;
@@ -73,6 +74,22 @@ public class ArrivalTermTransfQuayInterface {
             case Message.ANNOUCEBUSBORADING:
                 arrivalTermTransfQuay.announcingBusBoarding();
                 outMessage = new Message(Message.ABBDONE);
+                break;
+
+            // resetArrivalTermTransfQuay
+            case Message.RESETATQ:
+                try {
+                    arrivalTermTransfQuay.resetArrivalTermTransfQuay();
+                } catch (MemException e) {
+                    e.printStackTrace();
+                }
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // setEndDay
+            case Message.SETENDDAY:
+                arrivalTermTransfQuay.setEndDay();
+                outMessage = new Message(Message.ACK);
                 break;
 
             case Message.SHUT:                                                        // shutdown do servidor

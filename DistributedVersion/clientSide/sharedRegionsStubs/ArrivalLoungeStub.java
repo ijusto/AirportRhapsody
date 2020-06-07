@@ -38,8 +38,8 @@ public class ArrivalLoungeStub {
      *
      */
 
-    public void probPar(GenReposInfo repos, BaggageColPointStub bagColPointStub, ArrivalTermTransfQuayStub arrQuayStub,
-                         int[][] destStat, int[][] nBagsPHold)
+    public void probPar(GenReposInfoStub reposStub, BaggageColPointStub bagColPointStub,
+                        ArrivalTermTransfQuayStub arrQuayStub, int[][] destStat, int[][] nBagsPHold)
     {
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
@@ -52,10 +52,10 @@ public class ArrivalLoungeStub {
             catch (InterruptedException e) {}
         }
 
-        outMessage = new Message (Message.PARAMSARRLNG, fName, nIter);
+        outMessage = new Message (Message.PARAMSARRLNG, reposStub, bagColPointStub, arrQuayStub, destStat, nBagsPHold);
         con.writeObject (outMessage);
         inMessage = (Message) con.readObject ();
-        if (inMessage.getType() != Message.NFICDONE) {
+        if (inMessage.getType() != Message.ACK) {
             System.out.println("Arranque da simulação: Tipo inválido!");
             System.out.println(inMessage.toString ());
             System.exit (1);
@@ -241,7 +241,7 @@ public class ArrivalLoungeStub {
      *    @param departureTermStub Departure Terminal Entrance Stub.
      */
 
-    public synchronized void setDepartureTerminalRef(DepartureTerminalEntranceStub departureTermStub){
+    public void setDepartureTerminalRef(DepartureTerminalEntranceStub departureTermStub){
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;

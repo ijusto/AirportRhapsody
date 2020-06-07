@@ -214,97 +214,30 @@ public class ArrivalTermTransfQuayStub {
     }
 
     /**
-     *   Sets the value of the counter to zero.
-     */
-
-    public void resetNPassAllowedToEnter(){
-        synchronized (lockNPassAllowedToEnterCounter) { // Locks on the private Object
-            nPassAllowedToEnter = 0;
-        }
-    }
-
-    /**
-     *   Operation of incrementing/decrementing the counter.
-     *
-     *    @return <li>true, if the value of the counter after the operation is the limit.</li>
-     *            <li>false, otherwise.</li>
-     */
-
-    public boolean incDecNPassAllowedToEnterCounter(boolean inc) {
-        synchronized (lockNPassAllowedToEnterCounter) {
-            if(inc) {
-                nPassAllowedToEnter++;
-            } else {
-                nPassAllowedToEnter--;
-            }
-            return nPassAllowedToEnter == SimulPar.N_PASS_PER_FLIGHT;
-        }
-    }
-
-    /**
-     *   Sets the value of the counter to zero.
-     */
-
-    public void resetNPassOnTheBus(){
-        synchronized (lockNPassOnTheBusCounter) { // Locks on the private Object
-            nPassOnTheBus = 0;
-        }
-    }
-
-    /**
-     *   Operation of incrementing/decrementing the counter.
-     *
-     *    @return <li>true, if the value of the counter after the operation is the limit.</li>
-     *            <li>false, otherwise.</li>
-     */
-
-    public boolean incDecNPassOnTheBusCounter(boolean inc) {
-        synchronized (lockNPassOnTheBusCounter) {
-            if(inc) {
-                nPassOnTheBus++;
-            } else {
-                nPassOnTheBus--;
-            }
-            return nPassOnTheBus == SimulPar.BUS_CAP;
-        }
-    }
-
-    /**
      *   Resets that need to be done after the passengers leave the airport.
      */
 
-    public synchronized void resetArrivalTermTransfQuay() throws MemException {
-        this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
-        this.resetNPassOnTheBus();
-        this.resetNPassAllowedToEnter();
-        this.allowBoardBus = false;
-    }
+    public void resetArrivalTermTransfQuay() {
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-    /* ************************************************* Getters ******************************************************/
-
-    /**
-     *   Gets the value of the counter of passengers that were allowed to enter the bus.
-     *
-     *    @return Value of passengers that were allowed to enter the bus.
-     */
-
-    public int getNPassAllowedToEnterValue(){
-        synchronized (lockNPassAllowedToEnterCounter) {
-            return nPassAllowedToEnter;
+        while (!con.open ()) {                                               // aguarda ligação
+            try {
+                Thread.currentThread().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
-    }
-
-    /**
-     *   Gets the value of the counter of passengers on the bus.
-     *
-     *    @return Value of passengers on the bus.
-     */
-
-    public int getNPassOnTheBusValue(){
-        synchronized (lockNPassOnTheBusCounter) {
-            return nPassOnTheBus;
+        outMessage = new Message(Message.RESETATQ);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
         }
+
+        con.close ();
     }
+
 
     /* ************************************************* Setters ******************************************************/
 
@@ -312,9 +245,25 @@ public class ArrivalTermTransfQuayStub {
      *   Sets the signal of the end of the day and wakes up the bus driver.
      */
 
-    public synchronized void setEndDay(){
-        this.endDay = true;
-        notifyAll();
+    public void setEndDay(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()) {                                               // aguarda ligação
+            try {
+                Thread.currentThread().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.SETENDDAY);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+
+        con.close ();
     }
 
 

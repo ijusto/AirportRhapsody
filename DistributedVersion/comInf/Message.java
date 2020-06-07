@@ -1,6 +1,9 @@
 package comInf;
 
+import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
+import clientSide.sharedRegionsStubs.BaggageColPointStub;
 import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import serverSide.sharedRegions.DepartureTerminalEntrance;
 
 import java.io.*;
@@ -69,7 +72,9 @@ public class Message implements Serializable
 
     /* ********* incDecCounter ************************ */
     public static final int INCDECCOUNTER = 17;
+
     public static final int CONTCOUNTER = 18;
+
     public static final int LIMITCOUNTER = 19;
 
     /* ******* resetArrivalTerminalExit *************** */
@@ -77,50 +82,53 @@ public class Message implements Serializable
 
     /* ******* getDeadPassValue *********************** */
     public static final int GETDEADPASSVAL = 21;
+
     public static final int DEADPASSVAL = 22;
 
     /* ****** setDepartureTerminalRef ***************** */
-
+    // same as for ArrivalLounge
 
     /* ****************************************** ArrivalTermTransfQuay ********************************************* */
 
     /* ******* takeABus ******************************* */
-    public static final int TAKEABUS = 18;
+    public static final int TAKEABUS = 23;
 
-    public static final int TAKEABUSDONE = 19;
+    public static final int TAKEABUSDONE = 24;
 
     /* ******* enterTheBus **************************** */
-    public static final int ENTERBUS = 20;
+    public static final int ENTERBUS = 25;
 
     /* ******* hasDaysWorkEnded  ********************** */
-    public static final int WORKENDED = 21;
+    public static final int WORKENDED = 26;
 
-    public static final int CONTDAYS = 22;
+    public static final int CONTDAYS = 27;
 
     /* ******* parkTheBus ***************************** */
-    public static final int PARKBUS = 23;
+    public static final int PARKBUS = 28;
 
-    public static final int PBDONE = 24;
+    public static final int PBDONE = 29;
 
     /* ******* announcingBusBoarding ****************** */
-    public static final int ANNOUCEBUSBORADING = 25;
+    public static final int ANNOUCEBUSBORADING = 30;
 
-    public static final int ABBDONE = 26;
+    public static final int ABBDONE = 31;
 
     /* ******* resetArrivalTermTransfQuay ************* */
+    public static final int RESETATQ = 32;
 
     /* ********* setEndDay **************************** */
+    public static final int SETENDDAY = 33;
 
 
     /* *********************************************** BaggageColPoint ********************************************** */
 
     /* ******* goCollectABag ************************** */
-    public static final int GOCOLLECTBAG = 27;
+    public static final int GOCOLLECTBAG = 34;
 
-    public static final int GCBDONE = 28;
+    public static final int GCBDONE = 35;
 
     /* ******* carryItToAppropriateStore ************** */
-    public static final int CARRYAPPSTORE = 29;
+    public static final int CARRYAPPSTORE = 36;
 
     /* ******* resetBaggageColPoint ******************* */
 
@@ -134,14 +142,14 @@ public class Message implements Serializable
     /* ******************************************** BaggageReclaimOffice ******************************************** */
 
     /* ******* reportMissingBags ********************** */
-    public static final int REPORTMISSBAG = 30;
+    public static final int REPORTMISSBAG = 43;
 
     /* ****************************************** DepartureTerminalEntrance ***************************************** */
 
     /* ******* prepareNextLeg ************************* */
-    public static final int PREPARENEXTLEG = 31;
+    public static final int PREPARENEXTLEG = 44;
 
-    public static final int PNLDONE = 32;
+    public static final int PNLDONE = 45;
 
     /* ******* resetDepartureTerminalExit ************* */
 
@@ -248,7 +256,15 @@ public class Message implements Serializable
 
     private int[][] msgNBagsNA;
 
-    private DepartureTerminalEntranceStub msgDepTermEntStub;
+    private int[][] msgNBagsPHold;
+
+    private DepartureTerminalEntranceStub msgDepTermEntStub = null;
+
+    private GenReposInfoStub msgReposStub = null;
+
+    private BaggageColPointStub msgBagColPointStub = null;
+
+    private ArrivalTermTransfQuayStub msgArrQuayStub = null;
 
     private boolean msgIncOrDec;
 
@@ -281,6 +297,18 @@ public class Message implements Serializable
             passId = value;
         } else if (msgType == DEADPASSVAL){
             msgDeadPassValue = value;
+        }
+    }
+
+    public Message (int type, GenReposInfoStub reposStub, BaggageColPointStub bagColPointStub,
+                    ArrivalTermTransfQuayStub arrQuayStub, int[][] destStat, int[][] nBagsPHold) {
+        msgType = type;
+        if (msgType ==  PARAMSARRLNG){
+            msgReposStub = reposStub;
+            msgBagColPointStub = bagColPointStub;
+            msgArrQuayStub = arrQuayStub;
+            msgBagAndPassDest = destStat;
+            msgNBagsPHold = nBagsPHold;
         }
     }
 
@@ -350,12 +378,19 @@ public class Message implements Serializable
 
     public int[][] getMsgNBagsNA(){ return msgNBagsNA; }
 
+    public int[][] getMsgNBagsPHold(){ return msgNBagsPHold; }
+
     public DepartureTerminalEntranceStub getMsgDepTermEntStub(){ return msgDepTermEntStub; }
 
     public boolean getIncOrDec(){ return msgIncOrDec; }
 
     public int getMsgDeadPassVal(){ return msgDeadPassValue; }
 
+    public GenReposInfoStub getMsgReposStub(){ return msgReposStub; }
+
+    public BaggageColPointStub getMsgBagColPointStub(){ return msgBagColPointStub; }
+
+    public ArrivalTermTransfQuayStub getMsgArrQuayStub(){ return msgArrQuayStub; }
 
     /**
      *  Obtenção do valor do campo tipo da mensagem.

@@ -47,6 +47,15 @@ public class ArrivalLoungeInterface {
         switch (inMessage.getType ()) {
 
             // WhatShouldIDo (Passenger)
+            case Message.PARAMSARRLNG:
+                if (arrivalLounge.probPar(inMessage.getMsgReposStub(), inMessage.getMsgBagColPointStub(),
+                        inMessage.getMsgArrQuayStub(), inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsPHold()))
+                    outMessage = new Message (Message.FNDST);    // gerar resposta positiva
+                else
+                    outMessage = new Message (Message.TRDST); // gerar resposta negativa
+                break;
+
+            // WhatShouldIDo (Passenger)
             case Message.WSID:
                 if (arrivalLounge.whatShouldIDo())
                     outMessage = new Message (Message.FNDST);    // gerar resposta positiva
