@@ -32,6 +32,14 @@ public class DepartureTerminalEntranceInterface {
         /* validação da mensagem recebida */
 
         switch (inMessage.getType ()) {
+
+            case Message.PARAMSDEPTENT:/* TODO: Validation if necessary */
+            case Message.PREPARENEXTLEG:/* TODO: Validation if necessary */
+            case Message.RESETDTE:/* TODO: Validation if necessary */
+            case Message.NOTFGOHOME:/* TODO: Validation if necessary */
+            case Message.NOMOREBAGS:/* TODO: Validation if necessary */
+            case Message.SETARRTERREF:/* TODO: Validation if necessary */
+
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:
                 break;

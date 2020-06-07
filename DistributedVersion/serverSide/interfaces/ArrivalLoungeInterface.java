@@ -36,6 +36,14 @@ public class ArrivalLoungeInterface {
 
         switch (inMessage.getType ()) {
 
+            case Message.PARAMSARRLNG:/* TODO: Validation if necessary */
+            case Message.WSID:/* TODO: Validation if necessary */
+            case Message.TAKEARST:/* TODO: Validation if necessary */
+            case Message.TRYTOCOL:/* TODO: Validation if necessary */
+            case Message.NOBAGS2COL:/* TODO: Validation if necessary */
+            case Message.RESETAL:/* TODO: Validation if necessary */
+            case Message.SETDEPTERNREF:/* TODO: Validation if necessary */
+
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:
                 break;

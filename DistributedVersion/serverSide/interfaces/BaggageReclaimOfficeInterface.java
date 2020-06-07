@@ -32,6 +32,10 @@ public class BaggageReclaimOfficeInterface {
         /* validação da mensagem recebida */
 
         switch (inMessage.getType ()) {
+
+            case Message.PARAMSBAGRECOFF:/* TODO: Validation if necessary */
+            case Message.REPORTMISSBAG:/* TODO: Validation if necessary */
+
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:
                 break;

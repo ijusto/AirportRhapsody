@@ -33,6 +33,16 @@ public class ArrivalTermTransfQuayInterface {
         /* validação da mensagem recebida */
 
         switch (inMessage.getType ()) {
+
+            case Message.PARAMSATTQUAY:/* TODO: Validation if necessary */
+            case Message.TAKEABUS:/* TODO: Validation if necessary */
+            case Message.ENTERBUS:/* TODO: Validation if necessary */
+            case Message.WORKENDED:/* TODO: Validation if necessary */
+            case Message.PARKBUS:/* TODO: Validation if necessary */
+            case Message.ANNOUCEBUSBORADING:/* TODO: Validation if necessary */
+            case Message.RESETATQ:/* TODO: Validation if necessary */
+            case Message.SETENDDAY:/* TODO: Validation if necessary */
+
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:
                 break;
