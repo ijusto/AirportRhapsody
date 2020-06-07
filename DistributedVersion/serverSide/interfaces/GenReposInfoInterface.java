@@ -1,5 +1,9 @@
 package serverSide.interfaces;
 
+import clientSide.BusDriverStates;
+import clientSide.PassengerStates;
+import clientSide.PorterStates;
+import clientSide.clients.ClientCom;
 import comInf.Bag;
 import comInf.Message;
 import comInf.MessageException;
@@ -51,6 +55,108 @@ public class GenReposInfoInterface {
             // probPar
             case Message.PARAMSREPOS:
                 repos.probPar(inMessage.getMsgReposFile());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // printLog
+            case Message.PRINTLOG:
+                repos.printLog();
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // finalReport
+            case Message.FINALREPORT:
+                repos.finalReport();
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // updateFlightNumber
+            case Message.UPDATEFN:
+                repos.updateFlightNumber(inMessage.getMsgFlight());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // initializeCargoHold
+            case Message.INITCHOLD:
+                repos.initializeCargoHold(inMessage.getMsgBN());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // removeBagFromCargoHold
+            case Message.REMBAGCHOLD:
+                repos.removeBagFromCargoHold();
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // incBaggageCB
+            case Message.INCBAGCB:
+                repos.incBaggageCB();
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // pGetsABag
+            case Message.PGETSABAG:
+                repos.pGetsABag();
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // saveBagInSR
+            case Message.SAVEBAGSR:
+                repos.saveBagInSR();
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // pJoinWaitingQueue
+            case Message.PJOINWQ:
+                repos.pJoinWaitingQueue(inMessage.getPassId());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // pLeftWaitingQueue
+            case Message.PLEFTWQ:
+                repos.pLeftWaitingQueue(inMessage.getPassId());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // freeBusSeat
+            case Message.FREEBS:
+                repos.freeBusSeat(inMessage.getPassId());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // getPassSi
+            case Message.GETPASSSI:
+                repos.getPassSi(inMessage.getPassId(), inMessage.getPassSi());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // updatesPassNR
+            case Message.UDTEPASSNR:
+                repos.updatesPassNR(inMessage.getPassId(), inMessage.getPassNR());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // updatesPassNA
+            case Message.UDTEPASSNA:
+                repos.updatesPassNA(inMessage.getPassId(), inMessage.getPassNA());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // updatesPassNA
+            case Message.PASSEXIT:
+                repos.passengerExit(inMessage.getPassId());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // missingBagReported
+            case Message.MISSBAGREP:
+                repos.missingBagReported();
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // numberNRTotal
+            case Message.NUMNRTOTAL:
+                repos.numberNRTotal(inMessage.getMsgNR());
                 outMessage = new Message(Message.ACK);
                 break;
 

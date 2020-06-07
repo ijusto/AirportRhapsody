@@ -63,6 +63,24 @@ public class BaggageColPointInterface {
                 outMessage = new Message(Message.ACK);
                 break;
 
+            // resetBaggageColPoint
+            case Message.RESETBCP:
+                baggageColPoint.resetBaggageColPoint();
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // noMoreBags
+            case Message.NOMOREBAGS:
+                baggageColPoint.noMoreBags();
+                outMessage = new Message(Message.ACK);
+                break;
+
+            // setPHoldEmpty
+            case Message.SETPHEMPTY:
+                baggageColPoint.setPHoldEmpty(inMessage.msgPlaneHoldEmpty());
+                outMessage = new Message(Message.ACK);
+                break;
+
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerBaggageColPoint.waitConnection = false;
                 (((BaggageColPointProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);

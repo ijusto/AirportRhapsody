@@ -87,6 +87,24 @@ public class GenReposInfoStub {
      */
 
     public void printLog(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.PRINTLOG);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -94,6 +112,24 @@ public class GenReposInfoStub {
      */
 
     public void finalReport(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.FINALREPORT);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /* **************************************************Plane******************************************************* */
@@ -105,6 +141,24 @@ public class GenReposInfoStub {
      */
 
     public void updateFlightNumber(int flight){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.UPDATEFN, flight);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -114,6 +168,24 @@ public class GenReposInfoStub {
      */
 
     public void initializeCargoHold(int bn){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.INITCHOLD, bn);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -121,6 +193,24 @@ public class GenReposInfoStub {
      */
 
     public void removeBagFromCargoHold(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.REMBAGCHOLD);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /* **************************************************Porter****************************************************** */
@@ -130,6 +220,24 @@ public class GenReposInfoStub {
      */
 
     public void incBaggageCB(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.INCBAGCB);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -137,6 +245,24 @@ public class GenReposInfoStub {
      */
 
     public void pGetsABag(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.PGETSABAG);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -144,6 +270,24 @@ public class GenReposInfoStub {
      */
 
     public void saveBagInSR(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.SAVEBAGSR);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -173,6 +317,24 @@ public class GenReposInfoStub {
      */
 
     public void pJoinWaitingQueue(int id){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.PJOINWQ, id);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -182,6 +344,24 @@ public class GenReposInfoStub {
      */
 
     public void pLeftWaitingQueue(int id){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.PLEFTWQ, id);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -191,6 +371,24 @@ public class GenReposInfoStub {
      */
 
     public void freeBusSeat(int id){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message (Message.FREEBS, id);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /* **************************************************Passenger*************************************************** */
@@ -222,6 +420,24 @@ public class GenReposInfoStub {
      */
 
     public void getPassSi(int id, String si){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.GETPASSSI, id, si);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -232,6 +448,24 @@ public class GenReposInfoStub {
      */
 
     public void updatesPassNR(int id, int nr){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.UDTEPASSNR, id, nr);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -242,6 +476,24 @@ public class GenReposInfoStub {
      */
 
     public void updatesPassNA(int id, int na){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.UDTEPASSNA, id, na);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**
@@ -251,6 +503,24 @@ public class GenReposInfoStub {
      */
 
     public void passengerExit(int id){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.PASSEXIT, id);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /* ***********************************************Final Report*************************************************** */
@@ -260,7 +530,26 @@ public class GenReposInfoStub {
      */
 
     public void missingBagReported(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.MISSBAGREP);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
+
 
     /**
      *   Updates the number of pieces of luggage all passengers combined had at the start of the journey.
@@ -269,6 +558,24 @@ public class GenReposInfoStub {
      */
 
     public void numberNRTotal(int nr){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()){                                                // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            }
+            catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.NUMNRTOTAL, nr);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Arranque da simulação: Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
 }

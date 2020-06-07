@@ -136,8 +136,24 @@ public class BaggageColPointStub {
      */
 
     public void resetBaggageColPoint(){
-        this.pHoldEmpty = true;
-        this.treadmill = null;
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()) {                                               // aguarda ligação
+            try {
+                Thread.currentThread().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.RESETBCP);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+
+        con.close ();
     }
 
     /**
@@ -145,21 +161,24 @@ public class BaggageColPointStub {
      */
 
     public void noMoreBags() {
-        // wake up Passengers in goCollectABag()
-        notifyAll();
-    }
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-    /* ************************************************* Getters ******************************************************/
+        while (!con.open ()) {                                               // aguarda ligação
+            try {
+                Thread.currentThread().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.NOMOREBAGS);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
 
-
-    /**
-     *   Signaling the empty state of the plane's hold.
-     *
-     *    @return
-     */
-
-    public boolean pHoldEmpty() {
-        return pHoldEmpty;
+        con.close ();
     }
 
     /* ************************************************* Setters ******************************************************/
@@ -179,7 +198,24 @@ public class BaggageColPointStub {
      */
 
     public void setPHoldEmpty(boolean pHoldEmpty){
-        this.pHoldEmpty = pHoldEmpty;
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while (!con.open ()) {                                               // aguarda ligação
+            try {
+                Thread.currentThread().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.SETPHEMPTY, pHoldEmpty);
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+
+        con.close ();
     }
 
 

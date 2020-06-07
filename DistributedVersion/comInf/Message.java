@@ -1,5 +1,9 @@
 package comInf;
 
+import clientSide.BusDriverStates;
+import clientSide.PassengerStates;
+import clientSide.PorterStates;
+import clientSide.SimulPar;
 import clientSide.sharedRegionsStubs.*;
 import serverSide.sharedRegions.ArrivalLounge;
 import serverSide.sharedRegions.DepartureTerminalEntrance;
@@ -137,31 +141,34 @@ public class Message implements Serializable
     public static final int CARRYAPPSTORE = 39;
 
     /* ******* resetBaggageColPoint ******************* */
+    public static final int RESETBCP = 40;
 
     /* ******* noMoreBags ***************************** */
+    public static final int NOMOREBAGS = 41;
 
     /* ******* setTreadmill *************************** */
+    public static final int SETTREADMILL = 42;
 
     /* ******* setPHoldEmpty ************************** */
-
+    public static final int SETPHEMPTY = 43;
 
     /* ******************************************** BaggageReclaimOffice ******************************************** */
 
     /* ************* probPar ************************** */
-    public static final int PARAMSBAGRECOFF = 46;
+    public static final int PARAMSBAGRECOFF = 44;
 
     /* ******* reportMissingBags ********************** */
-    public static final int REPORTMISSBAG = 47;
+    public static final int REPORTMISSBAG = 45;
 
     /* ****************************************** DepartureTerminalEntrance ***************************************** */
 
     /* ************* probPar ************************** */
-    public static final int PARAMSDEPTENT = 48;
+    public static final int PARAMSDEPTENT = 46;
 
     /* ******* prepareNextLeg ************************* */
-    public static final int PREPARENEXTLEG = 49;
+    public static final int PREPARENEXTLEG = 47;
 
-    public static final int PNLDONE = 50;
+    public static final int PNLDONE = 48;
 
     /* ******* resetDepartureTerminalExit ************* */
 
@@ -206,32 +213,96 @@ public class Message implements Serializable
     /* ************* probPar ************************** */
     public static final int PARAMSREPOS = 67;
 
+    /* ************* printLog ************************* */
+    public static final int PRINTLOG = 68;
+
+    /* ************* finalReport ********************** */
+    public static final int FINALREPORT = 69;
+
+    /* ************* updateFlightNumber *************** */
+    public static final int UPDATEFN = 70;
+
+    /* ************* initializeCargoHold ************** */
+    public static final int INITCHOLD = 71;
+
+    /* ************* removeBagFromCargoHold *********** */
+    public static final int REMBAGCHOLD = 72;
+
+    /* ************* incBaggageCB ********************* */
+    public static final int INCBAGCB = 73;
+
+    /* ************* pGetsABag ************************** */
+    public static final int PGETSABAG = 74;
+
+    /* ************* saveBagInSR ************************** */
+    public static final int SAVEBAGSR = 75;
+
+     /* ************* updatePorterStat ************************** */
+     public static final int UDTEPORTSTAT = 76;
+
+     /* ************* updateBDriverStat ************************** */
+     public static final int UDTEBDSTAT = 77;
+
+     /* ************* pJoinWaitingQueue ************************** */
+     public static final int PJOINWQ = 78;
+
+     /* ************* pLeftWaitingQueue ************************** */
+     public static final int PLEFTWQ = 79;
+
+     /* ************* freeBusSeat ************************** */
+     public static final int FREEBS = 80;
+
+     /* ************* newPass ************************** */
+     public static final int NEWPASS = 81;
+
+     /* ************* updatePassSt ************************** */
+     public static final int UDTEPASSSTAT = 82;
+
+     /* ************* getPassSi ************************** */
+     public static final int GETPASSSI = 83;
+
+     /* ************* updatesPassNR ************************** */
+     public static final int UDTEPASSNR = 84;
+
+     /* ************* updatesPassNA ************************** */
+     public static final int UDTEPASSNA = 85;
+
+     /* ************* passengerExit ************************** */
+     public static final int PASSEXIT = 86;
+
+     /* ************* missingBagReported ************************** */
+     public static final int MISSBAGREP = 87;
+
+     /* ************* numberNRTotal ************************** */
+     public static final int NUMNRTOTAL = 88;
+
+
     /* ******************************************** GENERAL MESSAGES ************************************************ */
 
-    public static final int ACK      =  66; // TODO: Change value
+    public static final int ACK      =  89; // TODO: Change value
 
-    public static final int ENDPASSENGER      = 67;
+    public static final int ENDPASSENGER      = 90;
 
-    public static final int ENDPORTER      = 68;
+    public static final int ENDPORTER      = 91;
 
-    public static final int ENDBUSDRIVER     = 69;
+    public static final int ENDBUSDRIVER     = 92;
 
 
     /**
      *  Inicialização do ficheiro de logging (operação pedida pelo cliente)
      */
-    public static final int SETNFIC  =  70;
+    public static final int SETNFIC  =  93;
 
     /**
      *  Ficheiro de logging foi inicializado (resposta enviada pelo servidor)
      */
-    public static final int NFICDONE =  71;
+    public static final int NFICDONE =  94;
 
     /**
      *  Shutdown do servidor (operação pedida pelo cliente)
      */
 
-    public static final int SHUT   = 72;
+    public static final int SHUT   = 95;
 
     /* Campos das mensagens */
 
@@ -297,7 +368,21 @@ public class Message implements Serializable
 
     private boolean msgBagCollected;
 
+    private boolean msgPlaneHoldEmpty;
+
     private int msgDeadPassValue = -1;
+
+    private int msgFlight = -1;
+
+    private int msgBN = -1;
+
+    private int msgNR = -1;
+
+    private String passSi = null;
+
+    private int passNR = -1;
+
+    private int passNA = -1;
 
     /**
      *  Instanciação de uma mensagem (forma 1).
@@ -322,10 +407,17 @@ public class Message implements Serializable
         msgType = type;
         if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
-                || (msgType == PREPARENEXTLEG)){
+                || (msgType == PREPARENEXTLEG) || (msgType == PJOINWQ) || (msgType == PLEFTWQ) || (msgType == FREEBS)
+                || (msgType == PASSEXIT)){
             passId = value;
         } else if (msgType == DEADPASSVAL){
             msgDeadPassValue = value;
+        } else if(msgType == UPDATEFN){
+            msgFlight = value;
+        } else if(msgType == INITCHOLD){
+            msgBN = value;
+        } else if(msgType == NUMNRTOTAL){
+            msgNR = value;
         }
     }
 
@@ -361,8 +453,16 @@ public class Message implements Serializable
 
     public Message (int type, String filename) {
         msgType = type;
-        if (msgType ==  PARAMSREPOS){
+        if (msgType == PARAMSREPOS) {
             msgReposFile = filename;
+        }
+    }
+
+    public Message (int type, int id, String si) {
+        msgType = type;
+        if (msgType ==  GETPASSSI){
+            passId = id;
+            passSi = si;
         }
     }
 
@@ -380,6 +480,8 @@ public class Message implements Serializable
             msgIncOrDec = bool;
         } else if(msgType == GCBDONE){
             msgBagCollected = bool;
+        } else if(msgType == SETPHEMPTY){
+            msgPlaneHoldEmpty = bool;
         }
     }
 
@@ -398,12 +500,18 @@ public class Message implements Serializable
      *    @param secondInt
      */
 
-    public Message (int type, int bagDestStat, int bagIdOwner)
+    public Message (int type, int firstInt, int secondInt)
     {
         msgType = type;
         if (msgType == BAG || msgType == CARRYAPPSTORE){
-            msgBagDestStat = bagDestStat;
-            msgBagIdOwner = bagIdOwner;
+            msgBagDestStat = firstInt;
+            msgBagIdOwner = secondInt;
+        } else if(msgType == UDTEPASSNR){
+            passId = firstInt;
+            passNR = secondInt;
+        } else if(msgType == UDTEPASSNA){
+            passId = firstInt;
+            passNA = secondInt;
         }
     }
 
@@ -453,6 +561,21 @@ public class Message implements Serializable
     public String getMsgReposFile(){ return msgReposFile; }
 
     public boolean msgBagCollected(){ return msgBagCollected; }
+
+    public boolean msgPlaneHoldEmpty(){ return msgPlaneHoldEmpty; }
+
+    public int getMsgFlight(){ return msgFlight; }
+
+    public int getMsgBN(){ return msgBN; }
+
+    public int getMsgNR(){ return msgNR; }
+
+    public String getPassSi(){ return passSi; }
+
+    public int getPassNR(){ return passNR; }
+
+    public int getPassNA(){ return passNA; }
+
 
     /**
      *  Obtenção do valor do campo tipo da mensagem.
