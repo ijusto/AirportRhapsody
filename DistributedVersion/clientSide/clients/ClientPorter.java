@@ -35,12 +35,11 @@ public class ClientPorter {
         int[][] nBagNR = new int[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
         int[][] nBagsNA = new int[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
         char opt;
-        String serverHostName = null;                               // nome do sistema computacional onde está o servidor
-        int serverPortNumb = -1;                                  // número do port de escuta do servidor
+        String serverHostName = null;  // name of the computational system where the server is
+        int serverPortNumb = -1;  // server listening port number
         BufferedReader br;
-        /* Obtenção dos parâmetros do problema */
 
-
+        /* Obtaining the problem parameters */
 
         File loggerFile = new File(fileName);
         try {

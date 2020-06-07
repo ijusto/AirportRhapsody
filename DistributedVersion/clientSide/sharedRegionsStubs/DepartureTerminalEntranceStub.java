@@ -42,11 +42,10 @@ public class DepartureTerminalEntranceStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()){                                                // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            }
-            catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.PARAMSDEPTENT, reposStub, arrivLoungeStub, arrivalQuayStub);
         con.writeObject (outMessage);
@@ -64,10 +63,10 @@ public class DepartureTerminalEntranceStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
 
         outMessage = new Message (Message.PREPARENEXTLEG, passengerId);  //pede report missing bags
@@ -90,10 +89,10 @@ public class DepartureTerminalEntranceStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
 
         outMessage = new Message (Message.RESETDTE);  //pede report missing bags
@@ -117,10 +116,10 @@ public class DepartureTerminalEntranceStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
 
         outMessage = new Message (Message.NOTFGOHOME);  //pede report missing bags
@@ -145,10 +144,10 @@ public class DepartureTerminalEntranceStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
 
         outMessage = new Message (Message.NOMOREBAGS);  //pede report missing bags
@@ -175,10 +174,10 @@ public class DepartureTerminalEntranceStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
 
         outMessage = new Message (Message.SETARRTERREF, arrivalTermStub);  //pede report missing bags
@@ -203,10 +202,10 @@ public class DepartureTerminalEntranceStub {
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()){                                                // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.SHUT);
         con.writeObject (outMessage);

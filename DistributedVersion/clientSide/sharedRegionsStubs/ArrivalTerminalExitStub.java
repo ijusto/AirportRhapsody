@@ -42,11 +42,10 @@ public class ArrivalTerminalExitStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()){                                                // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            }
-            catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
 
         outMessage = new Message (Message.PARAMSATEXIT, reposStub, arrivLoungeStub, arrivalQuayStub);
@@ -70,10 +69,10 @@ public class ArrivalTerminalExitStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while(!con.open()){                                    // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message(Message.GOHOME, passengerId);     // o barbeiro vai dormir
         con.writeObject (outMessage);
@@ -95,10 +94,10 @@ public class ArrivalTerminalExitStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while(!con.open()){                                    // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.NOTFNEXTL);     // o barbeiro vai dormir
         con.writeObject (outMessage);
@@ -123,10 +122,10 @@ public class ArrivalTerminalExitStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while(!con.open()){                                    // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.INCDECCOUNTER, inc);        // pede a realização do serviço
         con.writeObject (outMessage);
@@ -153,10 +152,10 @@ public class ArrivalTerminalExitStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-            while (!con.open ()) {                                               // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message(Message.RESETATE);    // o barbeiro recebe o pagamento
             con.writeObject (outMessage);
@@ -183,10 +182,10 @@ public class ArrivalTerminalExitStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while(!con.open()){                                    // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.GETDEADPASSVAL);        // pede a realização do serviço
         con.writeObject (outMessage);
@@ -215,10 +214,10 @@ public class ArrivalTerminalExitStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {                                               // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message(Message.SETDEPTERNREF, departureTermStub);    // o barbeiro recebe o pagamento
         con.writeObject (outMessage);
@@ -241,10 +240,10 @@ public class ArrivalTerminalExitStub {
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()){                                                // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.SHUT);
         con.writeObject (outMessage);

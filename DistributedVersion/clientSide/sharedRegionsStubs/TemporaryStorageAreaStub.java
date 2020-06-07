@@ -42,11 +42,10 @@ public class TemporaryStorageAreaStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()){                                                // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            }
-            catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.PARAMSTEMPSTORAREA, reposStub);
         con.writeObject (outMessage);
@@ -67,10 +66,10 @@ public class TemporaryStorageAreaStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {                                 // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
 
         outMessage = new Message(Message.CARRYTOAPPSTORE_TSA, bag.getIntDestStat(), bag.getIdOwner());        // pede a realização do serviço
@@ -93,10 +92,10 @@ public class TemporaryStorageAreaStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
 
         outMessage = new Message (Message.RESETTSA);  //pede report missing bags
@@ -121,10 +120,10 @@ public class TemporaryStorageAreaStub {
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()){                                                // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.SHUT);
         con.writeObject (outMessage);

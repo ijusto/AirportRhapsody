@@ -40,11 +40,10 @@ public class BaggageReclaimOfficeStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()){                                                // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            }
-            catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.PARAMSBAGRECOFF, reposStub);
         con.writeObject (outMessage);
@@ -61,10 +60,10 @@ public class BaggageReclaimOfficeStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
 
         outMessage = new Message (Message.REPORTMISSBAG, passengerId);  //pede report missing bags
@@ -89,10 +88,10 @@ public class BaggageReclaimOfficeStub {
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()){                                                // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.SHUT);
         con.writeObject (outMessage);

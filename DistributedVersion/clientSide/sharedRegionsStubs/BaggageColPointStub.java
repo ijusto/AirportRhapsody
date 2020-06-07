@@ -45,11 +45,10 @@ public class BaggageColPointStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()){                                                // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            }
-            catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.PARAMSBAGCOLPNT, reposStub);
         con.writeObject (outMessage);
@@ -79,10 +78,10 @@ public class BaggageColPointStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {                                 // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
 
         outMessage = new Message (Message.GOCOLLECTBAG, passengerId);        // pede a realização do serviço
@@ -110,10 +109,10 @@ public class BaggageColPointStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {                                 // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
 
         outMessage = new Message(Message.CARRYAPPSTORE, bag.getIntDestStat(), bag.getIdOwner());        // pede a realização do serviço
@@ -136,10 +135,10 @@ public class BaggageColPointStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {                                               // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message(Message.RESETBCP);
         con.writeObject (outMessage);
@@ -161,10 +160,10 @@ public class BaggageColPointStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {                                               // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message(Message.NOMOREBAGS);
         con.writeObject (outMessage);
@@ -198,10 +197,10 @@ public class BaggageColPointStub {
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()) {                                               // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message(Message.SETPHEMPTY, pHoldEmpty);
         con.writeObject (outMessage);
@@ -225,10 +224,10 @@ public class BaggageColPointStub {
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        while (!con.open ()){                                                // aguarda ligação
+        while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread ().sleep ((long) (10));
-            } catch (InterruptedException e) {}
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
         }
         outMessage = new Message (Message.SHUT);
         con.writeObject (outMessage);
