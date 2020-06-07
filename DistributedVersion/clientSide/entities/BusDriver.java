@@ -64,7 +64,7 @@ public class BusDriver extends Thread {
      */
 
     public BusDriver(BusDriverStates Stat, ArrivalTermTransfQuayStub arrivalTerminalQuayStub,
-                     DepartureTermTransfQuayStub departureTransferQuayStub, GenReposInfo reposStub){
+                     DepartureTermTransfQuayStub departureTransferQuayStub, GenReposInfoStub reposStub){
         this.Stat = Stat;
         this.arrivalTerminalQuayStub = arrivalTerminalQuayStub;
         this.departureTransferQuayStub = departureTransferQuayStub;
