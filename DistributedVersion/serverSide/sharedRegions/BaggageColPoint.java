@@ -60,7 +60,7 @@ public class BaggageColPoint {
      *
      */
 
-    public synchronized boolean goCollectABag(){
+    public synchronized boolean goCollectABag(int passId){
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);

@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import comInf.Bag;
 import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
@@ -47,6 +48,19 @@ public class BaggageColPointInterface {
             case Message.PARAMSBAGCOLPNT:
                 baggageColPoint.probPar(inMessage.getMsgReposStub());
                 outMessage = new Message (Message.ACK);
+                break;
+
+            // goCollectABag (passenger)
+            case Message.GOCOLLECTBAG:
+                boolean bagCollected = baggageColPoint.goCollectABag(inMessage.getPassId());
+                outMessage = new Message(Message.GCBDONE, bagCollected);
+                break;
+
+            // carryItToAppropriateStore (porter)
+            case Message.CARRYAPPSTORE:
+                Bag bag = new Bag(inMessage.getMsgBagDestStat(), inMessage.getMsgBagIdOwner());
+                baggageColPoint.carryItToAppropriateStore(bag);
+                outMessage = new Message(Message.ACK);
                 break;
 
             case Message.SHUT:                                                        // shutdown do servidor

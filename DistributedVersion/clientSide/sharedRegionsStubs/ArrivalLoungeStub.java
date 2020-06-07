@@ -3,7 +3,6 @@ package clientSide.sharedRegionsStubs;
 import clientSide.clients.ClientCom;
 import comInf.Bag;
 import comInf.Message;
-import serverSide.sharedRegions.GenReposInfo;
 
 public class ArrivalLoungeStub {
 

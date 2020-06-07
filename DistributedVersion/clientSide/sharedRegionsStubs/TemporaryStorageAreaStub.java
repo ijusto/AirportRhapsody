@@ -8,7 +8,6 @@ import comInf.Bag;
 import comInf.MemException;
 import comInf.MemStack;
 import comInf.Message;
-import serverSide.sharedRegions.GenReposInfo;
 
 public class TemporaryStorageAreaStub {
 

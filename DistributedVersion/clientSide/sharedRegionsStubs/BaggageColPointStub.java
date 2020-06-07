@@ -7,7 +7,6 @@ import comInf.Bag;
 import comInf.MemException;
 import comInf.MemFIFO;
 import comInf.Message;
-import serverSide.sharedRegions.GenReposInfo;
 
 import java.util.Map;
 
@@ -80,57 +79,27 @@ public class BaggageColPointStub {
 
     public boolean goCollectABag(int passengerId){
 
-        Passenger passenger = (Passenger) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        // update logger
-        repos.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
-
-        /*
-          Blocked Entity: Passenger
-          Freeing Entity: Porter
-
-          Freeing Method: carryItToAppropriateStore()
-          Freeing Condition: porter bring their bag
-          Blocked Entity Reactions: -> if all bags collected: goHome() else goCollectABag()
-
-          Freeing Method: noMoreBagsToCollect()
-          Freeing Condition: no more pieces of luggage
-          Blocked Entity Reaction: reportMissingBags()
-        */
-        repos.printLog();
-
-        do {
-
-            if(this.pHoldEmpty() && this.treadmill.get(passenger.getPassengerID()).isEmpty()) {
-                return false;
-            }
-
-            if(!this.treadmill.get(passenger.getPassengerID()).isEmpty()){
-                try {
-                    this.treadmill.get(passenger.getPassengerID()).read();
-                    passenger.setNA(passenger.getNA() + 1);
-
-                    repos.updatesPassNA(passenger.getPassengerID(), passenger.getNA());
-                    repos.pGetsABag();
-
-                    return true;
-                } catch (MemException e) {
-                    e.printStackTrace();
-                }
-            } else if(this.pHoldEmpty()){
-                return false;
-            }
-
+        while (!con.open ()) {                                 // aguarda ligação
             try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
 
-        } while(true);
+        outMessage = new Message (Message.GOCOLLECTBAG, passengerId);        // pede a realização do serviço
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
 
+        if ((inMessage.getType () != Message.GCBDONE)) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+
+        return inMessage.msgBagCollected();
     }
 
 
@@ -141,21 +110,25 @@ public class BaggageColPointStub {
      */
 
     public void carryItToAppropriateStore(Bag bag){
-        Porter porter = (Porter) Thread.currentThread();
-        assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
-        assert(this.treadmill.containsKey(bag.getIdOwner()));
-        porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
-        repos.updatePorterStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        try {
-            this.treadmill.get(bag.getIdOwner()).write(bag);
-            repos.incBaggageCB();
-            notifyAll();  // wake up Passengers in goCollectABag()
-        } catch (MemException e) {
-            e.printStackTrace();
+        while (!con.open ()) {                                 // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
 
-        repos.printLog();
+        outMessage = new Message(Message.CARRYAPPSTORE, bag.getIntDestStat(), bag.getIdOwner());        // pede a realização do serviço
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if ((inMessage.getType () != Message.ACK)) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**

@@ -2,7 +2,6 @@ package clientSide.sharedRegionsStubs;
 
 import clientSide.clients.ClientCom;
 import comInf.Message;
-import serverSide.sharedRegions.GenReposInfo;
 
 public class DepartureTermTransfQuayStub {
 

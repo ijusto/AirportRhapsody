@@ -295,6 +295,8 @@ public class Message implements Serializable
 
     private boolean msgIncOrDec;
 
+    private boolean msgBagCollected;
+
     private int msgDeadPassValue = -1;
 
     /**
@@ -372,10 +374,12 @@ public class Message implements Serializable
         }
     }
 
-    public Message (int type, boolean incOrDec) {
+    public Message (int type, boolean bool) {
         msgType = type;
         if (msgType ==  INCDECCOUNTER){
-            msgIncOrDec = incOrDec;
+            msgIncOrDec = bool;
+        } else if(msgType == GCBDONE){
+            msgBagCollected = bool;
         }
     }
 
@@ -394,12 +398,12 @@ public class Message implements Serializable
      *    @param secondInt
      */
 
-    public Message (int type, int firstInt, int secondInt)
+    public Message (int type, int bagDestStat, int bagIdOwner)
     {
         msgType = type;
-        if (msgType == BAG){
-            msgBagDestStat = firstInt;
-            msgBagIdOwner = secondInt;
+        if (msgType == BAG || msgType == CARRYAPPSTORE){
+            msgBagDestStat = bagDestStat;
+            msgBagIdOwner = bagIdOwner;
         }
     }
 
@@ -447,6 +451,8 @@ public class Message implements Serializable
     public ArrivalLoungeStub getMsgArrLoungeStub(){ return msgArrLoungeStub; }
 
     public String getMsgReposFile(){ return msgReposFile; }
+
+    public boolean msgBagCollected(){ return msgBagCollected; }
 
     /**
      *  Obtenção do valor do campo tipo da mensagem.
