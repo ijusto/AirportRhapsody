@@ -1,18 +1,9 @@
 package clientSide.sharedRegionsStubs;
 
 import clientSide.clients.ClientCom;
-import clientSide.entities.Porter;
-import clientSide.PorterStates;
-import clientSide.SimulPar;
 import comInf.Bag;
 import comInf.Message;
-import old.GenReposInfo;
-import serverSide.sharedRegions.ArrivalTermTransfQuay;
-import serverSide.sharedRegions.BaggageColPoint;
-import serverSide.sharedRegions.DepartureTerminalEntrance;
-
-import java.util.HashMap;
-import java.util.Map;
+import serverSide.sharedRegions.GenReposInfo;
 
 public class ArrivalLoungeStub {
 

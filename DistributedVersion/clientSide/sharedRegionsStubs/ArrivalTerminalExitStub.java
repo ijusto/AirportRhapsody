@@ -1,15 +1,8 @@
 package clientSide.sharedRegionsStubs;
 
-import clientSide.PassengerStates;
-import clientSide.SimulPar;
 import clientSide.clients.ClientCom;
-import clientSide.entities.Passenger;
-import comInf.Bag;
 import comInf.Message;
-import old.GenReposInfo;
-import serverSide.sharedRegions.ArrivalLounge;
-import serverSide.sharedRegions.ArrivalTermTransfQuay;
-import serverSide.sharedRegions.DepartureTerminalEntrance;
+import serverSide.sharedRegions.GenReposInfo;
 
 public class ArrivalTerminalExitStub {
 
@@ -180,9 +173,9 @@ public class ArrivalTerminalExitStub {
     /* ************************************************* Setters ******************************************************/
 
     /**
-     *   Sets the Departure Terminal Entrance Reference.
+     *   Sets the Departure Terminal Entrance Stub Reference.
      *
-     *    @param departureTerm Departure Terminal Entrance.
+     *    @param departureTermStub Departure Terminal Entrance Stub.
      */
 
     public void setDepartureTerminalRef(DepartureTerminalEntranceStub departureTermStub){

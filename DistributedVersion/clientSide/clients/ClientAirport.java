@@ -16,7 +16,7 @@ public class ClientAirport {
 
     public static void main(final String[] args) throws MemException {
 
-        GenReposInfo repos;
+        GenReposInfoStub reposStub;
         BaggageColPointStub bagColPointStub;
         BaggageReclaimOfficeStub bagRecOfficeStub;
         TemporaryStorageAreaStub tmpStorageAreaStub;
@@ -76,15 +76,15 @@ public class ClientAirport {
         }
 
         /* instantiation of the shared regions */
-        repos = new GenReposInfo(fileName);
-        bagRecOfficeStub = new BaggageReclaimOfficeStub(repos);
-        tmpStorageAreaStub = new TemporaryStorageAreaStub(repos);
-        departureQuayStub = new DepartureTermTransfQuayStub(repos);
-        bagColPointStub = new BaggageColPointStub(repos);
-        arrivalQuayStub = new ArrivalTermTransfQuayStub(repos);
-        arrivLoungeStub = new ArrivalLoungeStub(repos, bagColPoint, arrivalQuay, bagAndPassDest, nBagsNA);
-        arrivalTermStub = new ArrivalTerminalExitStub(repos, arrivLounge, arrivalQuay);
-        departureTermStub = new DepartureTerminalEntranceStub(repos, arrivLounge, arrivalQuay);
+        reposStub = new GenReposInfo(fileName);
+        bagRecOfficeStub = new BaggageReclaimOfficeStub(reposStub);
+        tmpStorageAreaStub = new TemporaryStorageAreaStub(reposStub);
+        departureQuayStub = new DepartureTermTransfQuayStub(reposStub);
+        bagColPointStub = new BaggageColPointStub(reposStub);
+        arrivalQuayStub = new ArrivalTermTransfQuayStub(reposStub);
+        arrivLoungeStub = new ArrivalLoungeStub(reposStub, bagColPoint, arrivalQuay, bagAndPassDest, nBagsNA);
+        arrivalTermStub = new ArrivalTerminalExitStub(reposStub, arrivLounge, arrivalQuay);
+        departureTermStub = new DepartureTerminalEntranceStub(reposStub, arrivLounge, arrivalQuay);
         arrivalTermStub.setDepartureTerminalRef(departureTerm);
         departureTermStub.setArrivalTerminalRef(arrivalTerm);
         arrivLoungeStub.setDepartureTerminalRef(departureTerm);
@@ -96,11 +96,11 @@ public class ClientAirport {
 
         porter = new Porter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND, arrivLounge, tmpStorageArea, bagColPoint);
 
-        repos.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        reposStub.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
-        busDriver = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuay,departureQuay,repos);
+        busDriver = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuay,departureQuay,reposStub);
 
-        repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        reposStub.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         porter.start();
         busDriver.start();
@@ -113,8 +113,8 @@ public class ClientAirport {
                         nBagNR[nPass][flight], 0, nPass, arrivLounge, arrivalQuay, departureQuay,
                         departureTerm, arrivalTerm, bagColPoint, bagRecOffice);
 
-                repos.updatePassSt(passengers[nPass][flight].getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
-                repos.getPassSi(passengers[nPass][flight].getPassengerID(),passengers[nPass][flight].getSi().toString());
+                reposStub.updatePassSt(passengers[nPass][flight].getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
+                reposStub.getPassSi(passengers[nPass][flight].getPassengerID(),passengers[nPass][flight].getSi().toString());
             }
 
             for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
@@ -149,6 +149,6 @@ public class ClientAirport {
         } catch (InterruptedException e) {
             System.out.print("Main Program - One thread of BusDriver was interrupted.");
         }
-        repos.finalReport();
+        reposStub.finalReport();
     }
 }

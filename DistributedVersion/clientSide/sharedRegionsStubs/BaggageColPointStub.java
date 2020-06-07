@@ -7,7 +7,7 @@ import comInf.Bag;
 import comInf.MemException;
 import comInf.MemFIFO;
 import comInf.Message;
-import old.GenReposInfo;
+import serverSide.sharedRegions.GenReposInfo;
 
 import java.util.Map;
 

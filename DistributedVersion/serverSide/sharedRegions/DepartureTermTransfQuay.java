@@ -4,6 +4,7 @@ import clientSide.entities.BusDriver;
 import clientSide.BusDriverStates;
 import clientSide.entities.Passenger;
 import clientSide.PassengerStates;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 
 /**
  *   Departure Terminal Transfer Quay.
@@ -15,10 +16,10 @@ import clientSide.PassengerStates;
 public class DepartureTermTransfQuay {
 
     /*
-     *   General Repository of Information.
+     *   General Repository of Information Stub.
      */
 
-    private GenReposInfo repos;
+    private GenReposInfoStub reposStub;
 
     /*
      *   Signaling the bus driver will to let the passengers enter the bus.
@@ -41,11 +42,11 @@ public class DepartureTermTransfQuay {
     /**
      *   Instantiation of the Departure Terminal Transfer Quay.
      *
-     *     @param repos general repository of information.
+     *     @param reposStub general repository of information.
      */
 
-    public DepartureTermTransfQuay(/*GenReposInfo repos*/){
-        this.repos = repos;
+    public DepartureTermTransfQuay(/*GenReposInfo reposStub*/){
+        this.reposStub = reposStub;
         this.busDoorsOpen = false;
         this.resetNPassOnTheBusValue();
     }
@@ -61,7 +62,7 @@ public class DepartureTermTransfQuay {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
-        repos.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
+        reposStub.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
 
         while(!this.canPassLeaveTheBus()) {
             try {
@@ -73,8 +74,8 @@ public class DepartureTermTransfQuay {
 
         boolean last = this.incDecCounter(false);
 
-        repos.freeBusSeat(passenger.getPassengerID());
-        repos.printLog();
+        reposStub.freeBusSeat(passenger.getPassengerID());
+        reposStub.printLog();
 
         // if the passenger is the last to exit the bus
         if(last){
@@ -95,8 +96,8 @@ public class DepartureTermTransfQuay {
         BusDriver busDriver = (BusDriver) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.DRIVING_FORWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
-        repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
-        repos.printLog();
+        reposStub.updateBDriverStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
+        reposStub.printLog();
 
         this.setNPassOnTheBusValue(busDriver.getNPassOnTheBus());
 

@@ -1,16 +1,12 @@
 package clientSide.sharedRegionsStubs;
 
-import clientSide.BusDriverStates;
 import clientSide.clients.ClientCom;
-import clientSide.PassengerStates;
 import clientSide.SimulPar;
-import clientSide.entities.BusDriver;
 import clientSide.entities.Passenger;
-import comInf.Bag;
 import comInf.MemException;
 import comInf.MemFIFO;
 import comInf.Message;
-import old.GenReposInfo;
+import serverSide.sharedRegions.GenReposInfo;
 
 public class ArrivalTermTransfQuayStub {
 

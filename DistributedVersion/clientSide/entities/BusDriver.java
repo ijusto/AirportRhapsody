@@ -2,7 +2,8 @@ package clientSide.entities;
 import clientSide.BusDriverStates;
 import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.DepartureTermTransfQuayStub;
-import old.GenReposInfo;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
+import serverSide.sharedRegions.GenReposInfo;
 
 /**
  *   Bus driver thread.
@@ -14,12 +15,12 @@ import old.GenReposInfo;
 public class BusDriver extends Thread {
 
     /**
-     *   General repository of information.
+     *   General Repository of Information Stub.
      *
-     *    @serialField repos
+     *    @serialField reposStub
      */
 
-    GenReposInfo repos;
+    GenReposInfoStub reposStub;
 
     /**
      *   Arrival Terminal Transfer Quay Stub.
@@ -59,15 +60,15 @@ public class BusDriver extends Thread {
      *    @param Stat State of the driver.
      *    @param arrivalTerminalQuayStub Arrival Terminal Transfer Quay Stub.
      *    @param departureTransferQuayStub Departure Terminal Transfer Quay Stub.
-     *    @param repos General Repository of Information.
+     *    @param reposStub General Repository of Information.
      */
 
     public BusDriver(BusDriverStates Stat, ArrivalTermTransfQuayStub arrivalTerminalQuayStub,
-                     DepartureTermTransfQuayStub departureTransferQuayStub, GenReposInfo repos){
+                     DepartureTermTransfQuayStub departureTransferQuayStub, GenReposInfo reposStub){
         this.Stat = Stat;
         this.arrivalTerminalQuayStub = arrivalTerminalQuayStub;
         this.departureTransferQuayStub = departureTransferQuayStub;
-        this.repos = repos;
+        this.reposStub = reposStub;
         this.nPassOnTheBus = 0;
     }
 
@@ -93,7 +94,7 @@ public class BusDriver extends Thread {
     public synchronized void goToArrivalTerminal() {
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_BACKWARD);
-        repos.updateBDriverStat(BusDriverStates.DRIVING_BACKWARD);
+        reposStub.updateBDriverStat(BusDriverStates.DRIVING_BACKWARD);
 
         // simulates the bus going from the departure terminal to the arrival terminal
         try {
@@ -110,8 +111,8 @@ public class BusDriver extends Thread {
     public synchronized void goToDepartureTerminal(){
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_FORWARD);
-        repos.updateBDriverStat(BusDriverStates.DRIVING_FORWARD);
-        repos.printLog();
+        reposStub.updateBDriverStat(BusDriverStates.DRIVING_FORWARD);
+        reposStub.printLog();
 
         // simulates the bus going from the departure arrival to the departure terminal
         try {

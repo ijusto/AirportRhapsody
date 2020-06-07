@@ -2,6 +2,7 @@ package serverSide.sharedRegions;
 
 import clientSide.entities.Passenger;
 import clientSide.PassengerStates;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 
 /**
  *   Baggage Reclaim Office.
@@ -13,19 +14,19 @@ import clientSide.PassengerStates;
 public class BaggageReclaimOffice {
 
     /*
-     *   General Repository of Information.
+     *   General Repository of Information Stub.
      */
 
-    private GenReposInfo repos;
+    private GenReposInfoStub reposStub;
 
     /**
      *   Instantiation of the Baggage Collection Point.
      *
-     *     @param repos general repository of information
+     *     @param reposStub general repository of information
      */
 
-    public BaggageReclaimOffice(/*GenReposInfo repos*/){
-        this.repos = repos;
+    public BaggageReclaimOffice(/*GenReposInfo reposStub*/){
+        this.reposStub = reposStub;
     }
 
     /*
@@ -37,9 +38,9 @@ public class BaggageReclaimOffice {
         assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
 
-        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
-        repos.missingBagReported();
+        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+        reposStub.missingBagReported();
 
-        repos.printLog();
+        reposStub.printLog();
     }
 }

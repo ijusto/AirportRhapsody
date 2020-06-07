@@ -3,6 +3,8 @@ package serverSide.sharedRegions;
 import clientSide.entities.Passenger;
 import clientSide.PassengerStates;
 import clientSide.SimulPar;
+import clientSide.sharedRegionsStubs.ArrivalTerminalExitStub;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 
 /**
  *   Departure Terminal Entrance.
@@ -14,10 +16,10 @@ import clientSide.SimulPar;
 public class DepartureTerminalEntrance {
 
     /*
-     *   General Repository of Information.
+     *   General Repository of Information Stub.
      */
 
-    private GenReposInfo repos;
+    private GenReposInfoStub reposStub;
 
     /*
      *   Arrival Lounge.
@@ -32,10 +34,10 @@ public class DepartureTerminalEntrance {
     private ArrivalTermTransfQuay arrivalQuay;
 
     /*
-     *   Arrival Terminal Exit.
+     *   Arrival Terminal Exit Stub.
      */
 
-    private ArrivalTerminalExit arrivalTerm;
+    private ArrivalTerminalExitStub arrivalTermStub;
 
     /**
      *   Signaling the empty state of the plane's hold.
@@ -46,15 +48,15 @@ public class DepartureTerminalEntrance {
     /**
      *   Instantiation of the Departure Terminal Entrance.
      *
-     *     @param repos General Repository of Information.
+     *     @param reposStub General Repository of Information.
      *     @param arrivLounge Arrival Lounge.
      *     @param arrivalQuay Arrival Terminal Transfer Quay.
      */
 
-    public DepartureTerminalEntrance(/*GenReposInfo repos, ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay*/){
+    public DepartureTerminalEntrance(/*GenReposInfo reposStub, ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay*/){
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
-        this.repos = repos;
+        this.reposStub = reposStub;
         this.phEmpty = false;
     }
 
@@ -70,11 +72,11 @@ public class DepartureTerminalEntrance {
         assert passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL;
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
-        repos.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
-        repos.printLog();
+        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
+        reposStub.printLog();
 
         // increment the number of passengers that wants to leave the airport
-        boolean isLastPass = this.arrivalTerm.incDecCounter(true);
+        boolean isLastPass = this.arrivalTermStub.incDecCounter(true);
 
         if(isLastPass) {
 
@@ -96,7 +98,7 @@ public class DepartureTerminalEntrance {
             // the passengers that are not the last ones to want to leave the airport, need to wait for the last one to
             // notify them so they can leave or for the notification of the porter (if the last passenger is at the
             // arrival terminal exit) and the plane's hold is not empty.
-            while (this.arrivalTerm.getDeadPassValue() < SimulPar.N_PASS_PER_FLIGHT || !this.phEmpty) {
+            while (this.arrivalTermStub.getDeadPassValue() < SimulPar.N_PASS_PER_FLIGHT || !this.phEmpty) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -106,8 +108,8 @@ public class DepartureTerminalEntrance {
 
         }
 
-        repos.passengerExit(passenger.getPassengerID());
-        repos.printLog();
+        reposStub.passengerExit(passenger.getPassengerID());
+        reposStub.printLog();
     }
 
     /**
@@ -124,7 +126,7 @@ public class DepartureTerminalEntrance {
 
     public synchronized void wakeAllPassengers(){
         notifyAll();
-        arrivalTerm.notifyFromPrepareNextLeg();
+        arrivalTermStub.notifyFromPrepareNextLeg();
     }
 
     /**
@@ -149,13 +151,13 @@ public class DepartureTerminalEntrance {
     /* ************************************************* Setters ******************************************************/
 
     /**
-     *   Sets the Arrival Terminal Exit Reference.
+     *   Sets the Arrival Terminal Exit Stub Reference.
      *
-     *    @param arrivalTerm Arrival Terminal Exit.
+     *    @param arrivalTermStub Arrival Terminal Exit Stub.
      */
 
-    public synchronized void setArrivalTerminalRef(ArrivalTerminalExit arrivalTerm){
-        this.arrivalTerm = arrivalTerm;
+    public synchronized void setArrivalTerminalRef(ArrivalTerminalExitStub arrivalTermStub){
+        this.arrivalTermStub = arrivalTermStub;
     }
 
 }

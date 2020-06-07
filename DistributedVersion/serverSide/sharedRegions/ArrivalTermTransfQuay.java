@@ -1,5 +1,6 @@
 package serverSide.sharedRegions;
 
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.MemException;
 import comInf.MemFIFO;
 import clientSide.entities.BusDriver;
@@ -20,10 +21,10 @@ public class ArrivalTermTransfQuay {
     private PassengerStates[] statePassengers;
 
     /*
-     *   General Repository of Information.
+     *   General Repository of Information Stub.
      */
 
-    private GenReposInfo repos;
+    private GenReposInfoStub reposStub;
 
     /*
      *   FIFO of passengers that want to enter the bus.
@@ -73,11 +74,11 @@ public class ArrivalTermTransfQuay {
     /**
      *   Instantiation of the Arrival Terminal Transfer Quay.
      *
-     *     @param repos general repository of information
+     *     @param reposStub general repository of information
      */
 
-    public ArrivalTermTransfQuay(/*GenReposInfo repos*/) throws MemException {
-        this.repos = repos;
+    public ArrivalTermTransfQuay(/*GenReposStubInfo reposStub*/) throws MemException {
+        this.reposStub = reposStub;
         this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.resetNPassAllowedToEnter();
         this.allowBoardBus = false;
@@ -98,12 +99,12 @@ public class ArrivalTermTransfQuay {
 
         assert(statePassengers[passengerId] == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         statePassengers[passengerId] = PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL;
-        repos.updatePassSt(passengerId, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        repos.printLog();
+        reposStub.updatePassSt(passengerId, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        reposStub.printLog();
 
         try {
             waitingLine.write(passenger);
-            repos.pJoinWaitingQueue(passengerId);
+            reposStub.pJoinWaitingQueue(passengerId);
         } catch (MemException e) {
             e.printStackTrace();
         }
@@ -123,7 +124,7 @@ public class ArrivalTermTransfQuay {
 
         this.incDecNPassAllowedToEnterCounter(true);
 
-        repos.printLog();
+        reposStub.printLog();
     }
 
     /**
@@ -139,11 +140,11 @@ public class ArrivalTermTransfQuay {
         assert(this.getNPassOnTheBusValue() < SimulPar.BUS_CAP);
 
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
-        repos.updatePassSt(passenger.getPassengerID(),PassengerStates.TERMINAL_TRANSFER);
+        reposStub.updatePassSt(passenger.getPassengerID(),PassengerStates.TERMINAL_TRANSFER);
 
         try{
             this.waitingLine.read();
-            repos.pLeftWaitingQueue(passenger.getPassengerID());
+            reposStub.pLeftWaitingQueue(passenger.getPassengerID());
 
             boolean last = this.incDecNPassOnTheBusCounter(true);
 
@@ -156,7 +157,7 @@ public class ArrivalTermTransfQuay {
             e.printStackTrace();
         }
 
-        repos.printLog();
+        reposStub.printLog();
     }
 
     /* ************************************************Bus Driver**************************************************** */
@@ -176,11 +177,11 @@ public class ArrivalTermTransfQuay {
         // if the last flight arrived and all passengers left the airport, end the bus driver life cycle
         if(this.endDay){
 
-            repos.printLog();
+            reposStub.printLog();
             return 'F';
         }
 
-        repos.printLog();
+        reposStub.printLog();
         return 'R';
     }
 
@@ -197,9 +198,9 @@ public class ArrivalTermTransfQuay {
         assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        repos.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        reposStub.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        repos.printLog();
+        reposStub.printLog();
         this.resetNPassOnTheBus();
 
         while(waitingLine.getNObjects() != SimulPar.BUS_CAP){ // if false waken up by takeABus()

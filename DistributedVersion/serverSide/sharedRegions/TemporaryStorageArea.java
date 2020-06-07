@@ -1,4 +1,5 @@
 package serverSide.sharedRegions;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.MemException;
 import comInf.MemStack;
 import comInf.Bag;
@@ -22,19 +23,19 @@ public class TemporaryStorageArea {
     private MemStack<Bag> tmpStorageStack;
 
     /*
-     *   General Repository of Information.
+     *   General Repository of Information Stub.
      */
 
-    private GenReposInfo repos;
+    private GenReposInfoStub reposStub;
 
     /**
      *   Instantiation of the Temporary Storage Area.
      *
-     *     @param repos general repository of information
+     *     @param reposStub general repository of information
      */
 
-    public TemporaryStorageArea(/*GenReposInfo repos*/) throws MemException {
-        this.repos = repos;
+    public TemporaryStorageArea(/*GenReposInfo reposStub*/) throws MemException {
+        this.reposStub = reposStub;
         // stack of the store room instantiation
         tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT * SimulPar.N_BAGS_PER_PASS]);
     }
@@ -48,16 +49,16 @@ public class TemporaryStorageArea {
         assert porter.getStat() == PorterStates.AT_THE_PLANES_HOLD;
         assert bag != null;
         porter.setStat(PorterStates.AT_THE_STOREROOM);
-        repos.updatePorterStat(PorterStates.AT_THE_STOREROOM);
+        reposStub.updatePorterStat(PorterStates.AT_THE_STOREROOM);
 
         try {
             tmpStorageStack.write(bag);
-            repos.saveBagInSR();
+            reposStub.saveBagInSR();
         } catch (MemException e) {
             e.printStackTrace();
         }
 
-        repos.printLog();
+        reposStub.printLog();
     }
 
     /**

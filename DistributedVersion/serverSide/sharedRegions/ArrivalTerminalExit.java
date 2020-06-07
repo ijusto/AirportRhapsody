@@ -4,6 +4,7 @@ import clientSide.entities.Passenger;
 import clientSide.PassengerStates;
 import clientSide.SimulPar;
 import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 
 /**
  *   Arrival Terminal Exit.
@@ -17,10 +18,10 @@ public class ArrivalTerminalExit {
     private PassengerStates[] statePassengers;
 
     /**
-     *   General Repository of Information.
+     *   General Repository of Information Stub.
      */
 
-    private GenReposInfo repos;
+    private GenReposInfoStub reposStub;
 
     /**
      *   Arrival Lounge.
@@ -56,15 +57,15 @@ public class ArrivalTerminalExit {
     /**
      *   Instantiation of the Arrival Terminal Exit.
      *
-     *     @param repos General Repository of Information.
+     *     @param reposStub General Repository of Information Stub.
      *     @param arrivLounge Arrival Lounge.
      *     @param arrivalQuay Arrival Terminal Transfer Quay.
      */
 
-    public ArrivalTerminalExit(/*GenReposInfo repos, ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay*/){
+    public ArrivalTerminalExit(/*GenReposStubInfo reposStub, ArrivalLounge arrivLounge, ArrivalTermTransfQuay arrivalQuay*/){
         this.arrivLounge = arrivLounge;
         this.arrivalQuay = arrivalQuay;
-        this.repos = repos;
+        this.reposStub = reposStub;
         this.resetDeadPassCounter();
     }
 
@@ -79,8 +80,8 @@ public class ArrivalTerminalExit {
                 statePassengers[passengerId] == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
         statePassengers[passengerId] = PassengerStates.EXITING_THE_ARRIVAL_TERMINAL;
 
-        repos.updatePassSt(passengerId, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
-        repos.printLog();
+        reposStub.updatePassSt(passengerId, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+        reposStub.printLog();
 
         // increment the number of passengers that wants to leave the airport
         boolean isLastPass = this.incDecCounter(true);
@@ -103,8 +104,8 @@ public class ArrivalTerminalExit {
             }
         }
 
-        repos.passengerExit(passengerId);
-        repos.printLog();
+        reposStub.passengerExit(passengerId);
+        reposStub.printLog();
     }
 
     /**
@@ -129,7 +130,7 @@ public class ArrivalTerminalExit {
      */
 
     public synchronized void wakeDepPass(){
-        departureTerm.notifyFromGoHome();
+        departureTermStub.notifyFromGoHome();
     }
 
     /**

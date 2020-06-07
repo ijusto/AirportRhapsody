@@ -1,7 +1,10 @@
 package serverSide.sharedRegions;
 
 import clientSide.SimulPar;
+import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
+import clientSide.sharedRegionsStubs.BaggageColPointStub;
 import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.Bag;
 
 import java.util.HashMap;
@@ -17,22 +20,22 @@ import java.util.Map;
 public class ArrivalLounge {
 
     /**
-     *   General repository of information.
+     *   General repository of information Stub.
      */
 
-    private GenReposInfo repos;
+    private GenReposInfoStub reposStub;
 
     /**
-     *   Baggage Collection Point.
+     *   Baggage Collection Point Stub.
      */
 
-    private BaggageColPoint bagColPoint;
+    private BaggageColPointStub bagColPointStub;
 
     /**
-     *   Arrival Terminal Transfer Quay.
+     *   Arrival Terminal Transfer Quay Stub.
      */
 
-    private ArrivalTermTransfQuay arrQuay;
+    private ArrivalTermTransfQuayStub arrQuayStub;
 
     /**
      *   Stack of bags on the plane's hold.
@@ -85,31 +88,31 @@ public class ArrivalLounge {
     /**
      *   Instantiation of the Arrival Lounge.
      *
-     *     @param repos general repository of information.
-     *     @param bagColPoint baggage collection point.
+     *     @param reposStub general repository of information Stub.
+     *     @param bagColPointStub baggage collection point.
      *     @param destStat destination state of the bags.
      *     @param nBagsPHold number of bags per passenger and flight.
      */
 
-    public ArrivalLounge(/*GenReposInfo repos, BaggageColPoint bagColPoint, ArrivalTermTransfQuay arrQuay,
+    public ArrivalLounge(/*GenReposInfo repos, BaggageColPoint bagColPointStub, ArrivalTermTransfQuay arrQuayStub,
                          Bag.DestStat[][] destStat, int[][] nBagsPHold*/)
             throws MemException {
 
-        this.repos = repos;
+        this.reposStub = reposStub;
 
         this.currentFlight = 0;
-        this.repos.updateFlightNumber(this.currentFlight);
-        this.arrQuay = arrQuay;
+        this.reposStub.updateFlightNumber(this.currentFlight);
+        this.arrQuayStub = arrQuayStub;
 
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
         int nTotalBags = 0;
         for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
-            this.repos.passengerExit(nPass);
+            this.reposStub.passengerExit(nPass);
             nTotalBags += nBagsPHold[nPass][this.currentFlight];
             nBagsPerPass.put(nPass, nBagsPHold[nPass][this.currentFlight]);
         }
-        this.repos.initializeCargoHold(nTotalBags);
+        this.reposStub.initializeCargoHold(nTotalBags);
         this.pHoldBagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
         for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
             for(int bag = 0; bag < nBagsPHold[nPass][this.currentFlight]; bag++){
@@ -119,15 +122,15 @@ public class ArrivalLounge {
             treadmill.put(nPass, bagPassFIFO);
         }
 
-        this.bagColPoint = bagColPoint;
-        this.bagColPoint.setPHoldEmpty(false);
-        this.bagColPoint.setTreadmill(treadmill);
+        this.bagColPointStub = bagColPointStub;
+        this.bagColPointStub.setPHoldEmpty(false);
+        this.bagColPointStub.setTreadmill(treadmill);
 
         resetNPassAtArrivL();
 
         this.pHEmpty = false;
         endDay = false;
-        this.repos.printLog();
+        this.reposStub.printLog();
         porterSleep = false;
     }
 
@@ -148,18 +151,18 @@ public class ArrivalLounge {
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
 
         // update logger
-        this.repos.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
-        this.repos.numberNRTotal(currentPassenger.getNR());
-        this.repos.newPass(currentPassenger.getSi());
-        this.repos.updatePassSt(currentPassenger.getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        this.repos.printLog();
+        this.reposStub.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
+        this.reposStub.numberNRTotal(currentPassenger.getNR());
+        this.reposStub.newPass(currentPassenger.getSi());
+        this.reposStub.updatePassSt(currentPassenger.getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        this.reposStub.printLog();
 
         // increment passengers that arrive so the porter knows when to wake up in takeARest()
         boolean last = this.incDecNPassAtArrivLCounter(true);
 
 
         if(this.getNPassAtArrivLValue() == 1) {
-            this.depTerm.resetDepartureTerminalExit();
+            this.depTermStub.resetDepartureTerminalExit();
         }
 
         if(last) {
@@ -187,7 +190,7 @@ public class ArrivalLounge {
 
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-        repos.printLog();
+        reposStub.printLog();
 
         if(this.endDay){
             porterSleep = false;
@@ -224,15 +227,15 @@ public class ArrivalLounge {
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
 
-        repos.updatePorterStat(PorterStates.AT_THE_PLANES_HOLD);
+        reposStub.updatePorterStat(PorterStates.AT_THE_PLANES_HOLD);
 
         try {
             Bag tmpBag = pHoldBagStack.read();
-            repos.removeBagFromCargoHold();
-            repos.printLog();
+            reposStub.removeBagFromCargoHold();
+            reposStub.printLog();
             return tmpBag;
         } catch (MemException e) {
-            repos.printLog();
+            reposStub.printLog();
             return null;
         }
     }
@@ -248,15 +251,15 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-        repos.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        reposStub.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
 
         this.pHEmpty = true;
         // notify passenger in prepareNextLeg()
-        depTerm.noMoreBags();
-        bagColPoint.setPHoldEmpty(true);
+        depTermStub.noMoreBags();
+        bagColPointStub.setPHoldEmpty(true);
         // notify passenger in goCollectABag()
-        bagColPoint.noMoreBags();
-        repos.printLog();
+        bagColPointStub.noMoreBags();
+        reposStub.printLog();
     }
 
     /**
@@ -282,9 +285,9 @@ public class ArrivalLounge {
 
         if(this.currentFlight == SimulPar.N_FLIGHTS){
             this.setEndDay();
-            this.arrQuay.setEndDay();
+            this.arrQuayStub.setEndDay();
         } else {
-            repos.updateFlightNumber(this.currentFlight);
+            reposStub.updateFlightNumber(this.currentFlight);
 
             Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
             Map<Integer, Integer> nBagsPerPass = new HashMap<>();
@@ -296,7 +299,7 @@ public class ArrivalLounge {
                 nBagsPerPass.put(nPass, nBagsNA[nPass][this.currentFlight]);
             }
 
-            repos.initializeCargoHold(nTotalBags);
+            reposStub.initializeCargoHold(nTotalBags);
             //MemStack<Bag> tempStack = null;
             //if (nSRprev != 0) {
             //    tempStack = new MemStack<>(new Bag[nSRprev]);
@@ -323,15 +326,15 @@ public class ArrivalLounge {
                 treadmill.put(nPass, bagPassFIFO);
             }
 
-            this.bagColPoint.setPHoldEmpty(false);
-            this.bagColPoint.setTreadmill(treadmill);
+            this.bagColPointStub.setPHoldEmpty(false);
+            this.bagColPointStub.setTreadmill(treadmill);
 
             // reset the number of passengers that arrived the airport
             this.resetNPassAtArrivL();
 
             this.pHEmpty = false;
         }
-        repos.printLog();
+        reposStub.printLog();
     }
 
     /**

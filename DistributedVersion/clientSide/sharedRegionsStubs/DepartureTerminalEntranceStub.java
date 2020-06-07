@@ -2,9 +2,7 @@ package clientSide.sharedRegionsStubs;
 
 import clientSide.clients.ClientCom;
 import comInf.Message;
-import old.GenReposInfo;
-import serverSide.sharedRegions.ArrivalLounge;
-import serverSide.sharedRegions.ArrivalTermTransfQuay;
+import serverSide.sharedRegions.GenReposInfo;
 
 public class DepartureTerminalEntranceStub {
 

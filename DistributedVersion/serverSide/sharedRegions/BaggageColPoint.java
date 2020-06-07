@@ -1,5 +1,6 @@
 package serverSide.sharedRegions;
 
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.Bag;
 import comInf.MemException;
 import comInf.MemFIFO;
@@ -23,10 +24,10 @@ public class BaggageColPoint {
     private Map<Integer, MemFIFO<Bag>> treadmill;
 
     /*
-     *   General Repository of Information.
+     *   General Repository of Information Stub.
      */
 
-    private GenReposInfo repos;
+    private GenReposInfoStub reposStub;
 
     /**
      *   Signaling the empty state of the plane's hold.
@@ -37,11 +38,11 @@ public class BaggageColPoint {
     /**
      *   Instantiation of the Baggage Collection Point.
      *
-     *     @param repos general repository of information
+     *     @param reposStub general repository of information
      */
 
-    public BaggageColPoint(/*GenReposInfo repos*/){
-        this.repos = repos;
+    public BaggageColPoint(/*GenReposInfo reposStub*/){
+        this.reposStub = reposStub;
         this.pHoldEmpty = true;
     }
 
@@ -64,7 +65,7 @@ public class BaggageColPoint {
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         // update logger
-        repos.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        reposStub.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         /*
           Blocked Entity: Passenger
@@ -78,7 +79,7 @@ public class BaggageColPoint {
           Freeing Condition: no more pieces of luggage
           Blocked Entity Reaction: reportMissingBags()
         */
-        repos.printLog();
+        reposStub.printLog();
 
         do {
 
@@ -91,8 +92,8 @@ public class BaggageColPoint {
                     this.treadmill.get(passenger.getPassengerID()).read();
                     passenger.setNA(passenger.getNA() + 1);
 
-                    repos.updatesPassNA(passenger.getPassengerID(), passenger.getNA());
-                    repos.pGetsABag();
+                    reposStub.updatesPassNA(passenger.getPassengerID(), passenger.getNA());
+                    reposStub.pGetsABag();
 
                     return true;
                 } catch (MemException e) {
@@ -124,17 +125,17 @@ public class BaggageColPoint {
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         assert(this.treadmill.containsKey(bag.getIdOwner()));
         porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
-        repos.updatePorterStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
+        reposStub.updatePorterStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
 
         try {
             this.treadmill.get(bag.getIdOwner()).write(bag);
-            repos.incBaggageCB();
+            reposStub.incBaggageCB();
             notifyAll();  // wake up Passengers in goCollectABag()
         } catch (MemException e) {
             e.printStackTrace();
         }
 
-        repos.printLog();
+        reposStub.printLog();
     }
 
     /**

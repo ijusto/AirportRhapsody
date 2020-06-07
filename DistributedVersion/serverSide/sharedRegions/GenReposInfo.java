@@ -1,4 +1,4 @@
-package old;
+package serverSide.sharedRegions;
 
 import clientSide.BusDriverStates;
 import clientSide.Passenger;

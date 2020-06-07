@@ -1,6 +1,6 @@
 package serverSide;
 
-import old.GenReposInfo;
+import serverSide.sharedRegions.GenReposInfo;
 import serverSide.interfaces.*;
 import comInf.Bag;
 import comInf.MemException;

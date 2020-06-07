@@ -3,6 +3,7 @@ package old;
 import comInf.Bag;
 import comInf.MemException;
 import entities.*;
+import serverSide.sharedRegions.GenReposInfo;
 import sharedRegions.*;
 
 import java.io.BufferedReader;
