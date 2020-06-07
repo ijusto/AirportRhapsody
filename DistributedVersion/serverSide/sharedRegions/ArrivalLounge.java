@@ -6,6 +6,7 @@ import clientSide.sharedRegionsStubs.BaggageColPointStub;
 import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.Bag;
+import comInf.MemStack;
 
 import java.util.HashMap;
 import java.util.Map;

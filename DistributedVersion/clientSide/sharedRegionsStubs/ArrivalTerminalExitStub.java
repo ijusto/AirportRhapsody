@@ -152,7 +152,24 @@ public class ArrivalTerminalExitStub {
      */
 
     public void resetArrivalTerminalExit(){
-        this.resetDeadPassCounter();
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+            while (!con.open ()) {                                               // aguarda ligação
+            try {
+                Thread.currentThread().sleep ((long) (10));
+            } catch (InterruptedException e) {}
+        }
+        outMessage = new Message(Message.RESETATE);    // o barbeiro recebe o pagamento
+            con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+
+        con.close ();
     }
 
     /* ************************************************* Getters ******************************************************/
@@ -165,9 +182,26 @@ public class ArrivalTerminalExitStub {
      */
 
     public int getDeadPassValue(){
-        synchronized (lockDeadPassCounter) {
-            return deadPassCounter;
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while(!con.open()){                                    // aguarda ligação
+            try {
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
+        outMessage = new Message (Message.GETDEADPASSVAL);        // pede a realização do serviço
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+
+        if (inMessage.getType () != Message.DEADPASSVAL) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
+
+        return inMessage.getMsgDeadPassVal();
     }
 
     /* ************************************************* Setters ******************************************************/

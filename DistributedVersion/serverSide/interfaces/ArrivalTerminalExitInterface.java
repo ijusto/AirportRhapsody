@@ -70,6 +70,16 @@ public class ArrivalTerminalExitInterface {
                 outMessage = new Message (Message.ACK);
                 break;
 
+            case Message.RESETATE:
+                arrivalTerminalExit.resetArrivalTerminalExit();
+                outMessage = new Message (Message.ACK);
+                break;
+
+            case Message.GETDEADPASSVAL:
+                int deadPassValue = arrivalTerminalExit.getDeadPassValue();
+                outMessage = new Message (Message.DEADPASSVAL, deadPassValue);
+                break;
+
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerArrivalTerminalExit.waitConnection = false;
                 (((ArrivalTerminalExitProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);

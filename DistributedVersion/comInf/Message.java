@@ -73,8 +73,11 @@ public class Message implements Serializable
     public static final int LIMITCOUNTER = 19;
 
     /* ******* resetArrivalTerminalExit *************** */
+    public static final int RESETATE = 20;
 
     /* ******* getDeadPassValue *********************** */
+    public static final int GETDEADPASSVAL = 21;
+    public static final int DEADPASSVAL = 22;
 
     /* ****** setDepartureTerminalRef ***************** */
 
@@ -249,6 +252,8 @@ public class Message implements Serializable
 
     private boolean msgIncOrDec;
 
+    private int msgDeadPassValue = -1;
+
     /**
      *  Instanciação de uma mensagem (forma 1).
      *
@@ -268,12 +273,14 @@ public class Message implements Serializable
      */
 
 
-    public Message (int type, int id) {
+    public Message (int type, int value) {
         msgType = type;
         if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
                 || (msgType == PREPARENEXTLEG)){
-            passId = id;
+            passId = value;
+        } else if (msgType == DEADPASSVAL){
+            msgDeadPassValue = value;
         }
     }
 
@@ -346,6 +353,9 @@ public class Message implements Serializable
     public DepartureTerminalEntranceStub getMsgDepTermEntStub(){ return msgDepTermEntStub; }
 
     public boolean getIncOrDec(){ return msgIncOrDec; }
+
+    public int getMsgDeadPassVal(){ return msgDeadPassValue; }
+
 
     /**
      *  Obtenção do valor do campo tipo da mensagem.
