@@ -198,15 +198,15 @@ public class Message implements Serializable
     public static final int PBLPODONE = 56;
 
     /* ******* resetDepartureTermTransfQuay *********** */
-
+    public static final int RESETDTTQ = 57;
 
     /* *********************************************** TemporaryStorageArea ***************************************** */
 
     /* ************* probPar ************************** */
-    public static final int PARAMSTEMPSTORAREA = 63;
+    public static final int PARAMSTEMPSTORAREA = 58;
 
     /* ******* carryItToAppropriateStore ************** */
-    public static final int CARRYTOAPPSTORE_TSA = 64;
+    public static final int CARRYTOAPPSTORE_TSA = 59;
 
     /* ******* resetTemporaryStorageArea ************** */
 
@@ -214,98 +214,98 @@ public class Message implements Serializable
     /* *********************************************** GenReposInfo ************************************************* */
 
     /* ************* probPar ************************** */
-    public static final int PARAMSREPOS = 67;
+    public static final int PARAMSREPOS = 61;
 
     /* ************* printLog ************************* */
-    public static final int PRINTLOG = 68;
+    public static final int PRINTLOG = 62;
 
     /* ************* finalReport ********************** */
-    public static final int FINALREPORT = 69;
+    public static final int FINALREPORT = 63;
 
     /* ************* updateFlightNumber *************** */
-    public static final int UPDATEFN = 70;
+    public static final int UPDATEFN = 64;
 
     /* ************* initializeCargoHold ************** */
-    public static final int INITCHOLD = 71;
+    public static final int INITCHOLD = 65;
 
     /* ************* removeBagFromCargoHold *********** */
-    public static final int REMBAGCHOLD = 72;
+    public static final int REMBAGCHOLD = 66;
 
     /* ************* incBaggageCB ********************* */
-    public static final int INCBAGCB = 73;
+    public static final int INCBAGCB = 67;
 
     /* ************* pGetsABag ************************** */
-    public static final int PGETSABAG = 74;
+    public static final int PGETSABAG = 68;
 
     /* ************* saveBagInSR ************************** */
-    public static final int SAVEBAGSR = 75;
+    public static final int SAVEBAGSR = 69;
 
      /* ************* updatePorterStat ************************** */
-     public static final int UDTEPORTSTAT = 76;
+     public static final int UDTEPORTSTAT = 70;
 
      /* ************* updateBDriverStat ************************** */
-     public static final int UDTEBDSTAT = 77;
+     public static final int UDTEBDSTAT = 71;
 
      /* ************* pJoinWaitingQueue ************************** */
-     public static final int PJOINWQ = 78;
+     public static final int PJOINWQ = 72;
 
      /* ************* pLeftWaitingQueue ************************** */
-     public static final int PLEFTWQ = 79;
+     public static final int PLEFTWQ = 73;
 
      /* ************* freeBusSeat ************************** */
-     public static final int FREEBS = 80;
+     public static final int FREEBS = 74;
 
      /* ************* newPass ************************** */
-     public static final int NEWPASS = 81;
+     public static final int NEWPASS = 75;
 
      /* ************* updatePassSt ************************** */
-     public static final int UDTEPASSSTAT = 82;
+     public static final int UDTEPASSSTAT = 76;
 
      /* ************* getPassSi ************************** */
-     public static final int GETPASSSI = 83;
+     public static final int GETPASSSI = 77;
 
      /* ************* updatesPassNR ************************** */
-     public static final int UDTEPASSNR = 84;
+     public static final int UDTEPASSNR = 78;
 
      /* ************* updatesPassNA ************************** */
-     public static final int UDTEPASSNA = 85;
+     public static final int UDTEPASSNA = 79;
 
      /* ************* passengerExit ************************** */
-     public static final int PASSEXIT = 86;
+     public static final int PASSEXIT = 80;
 
      /* ************* missingBagReported ************************** */
-     public static final int MISSBAGREP = 87;
+     public static final int MISSBAGREP = 81;
 
      /* ************* numberNRTotal ************************** */
-     public static final int NUMNRTOTAL = 88;
+     public static final int NUMNRTOTAL = 82;
 
 
     /* ******************************************** GENERAL MESSAGES ************************************************ */
 
-    public static final int ACK      =  89; // TODO: Change value
+    public static final int ACK      =  83; // TODO: Change value
 
-    public static final int ENDPASSENGER      = 90;
+    public static final int ENDPASSENGER      = 94;
 
-    public static final int ENDPORTER      = 91;
+    public static final int ENDPORTER      = 95;
 
-    public static final int ENDBUSDRIVER     = 92;
+    public static final int ENDBUSDRIVER     = 96;
 
 
     /**
      *  Inicialização do ficheiro de logging (operação pedida pelo cliente)
      */
-    public static final int SETNFIC  =  93;
+    public static final int SETNFIC  =  97;
 
     /**
      *  Ficheiro de logging foi inicializado (resposta enviada pelo servidor)
      */
-    public static final int NFICDONE =  94;
+    public static final int NFICDONE =  98;
 
     /**
      *  Shutdown do servidor (operação pedida pelo cliente)
      */
 
-    public static final int SHUT   = 95;
+    public static final int SHUT   = 99;
 
     /* Campos das mensagens */
 

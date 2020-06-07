@@ -48,6 +48,24 @@ public class DepartureTermTransfQuayInterface {
                 outMessage = new Message(Message.ACK);
                 break;
 
+            // leaveTheBus
+            case Message.LEAVEBUS:
+                departureTermTransfQuay.leaveTheBus(inMessage.getPassId());
+                outMessage = new Message(Message.LBDONE);
+                break;
+
+            // parkTheBusAndLetPassOff
+            case Message.PBLPO:
+                departureTermTransfQuay.parkTheBusAndLetPassOff();
+                outMessage = new Message(Message.PBLPODONE);
+                break;
+
+            // resetDepartureTermTransfQuay
+            case Message.RESETDTTQ:
+                departureTermTransfQuay.resetDepartureTermTransfQuay();
+                outMessage = new Message(Message.ACK);
+                break;
+
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerDepartureTermTransfQuay.waitConnection = false;
                 (((DepartureTermTransfQuayProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
