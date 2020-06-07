@@ -224,26 +224,23 @@ public class ArrivalTermTransfQuayStub {
      */
 
     public void announcingBusBoarding(){
+        ClientCom con = new ClientCom (serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
 
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
-        assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
-
-        this.allowBoardBus = true;
-
-        // wake up Passengers in takeABus()
-        notifyAll();
-
-        while(!(this.getNPassOnTheBusValue() == SimulPar.BUS_CAP || this.waitingLine.isEmpty())){
+        while(!con.open()){                                    // aguarda ligação
             try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                Thread.currentThread ().sleep ((long) (10));
+            } catch (InterruptedException e) {}
         }
-        this.allowBoardBus = false;
-        this.resetNPassAllowedToEnter();
-        busDriver.setNPassOnTheBus(this.getNPassOnTheBusValue());
-
+        outMessage = new Message(Message.ANNOUCEBUSBORADING);     // o barbeiro vai dormir
+        con.writeObject (outMessage);
+        inMessage = (Message) con.readObject ();
+        if (inMessage.getType () != Message.ABBDONE) {
+            System.out.println("Thread " + Thread.currentThread ().getName () + ": Tipo inválido!");
+            System.out.println(inMessage.toString ());
+            System.exit (1);
+        }
+        con.close ();
     }
 
     /**

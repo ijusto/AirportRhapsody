@@ -65,6 +65,12 @@ public class ArrivalTermTransfQuayInterface {
                 arrivalTermTransfQuay.parkTheBus();
                 outMessage = new Message(Message.PBDONE);
                 break;
+
+            // announcingBusBoarding (BusDriver)
+            case Message.ANNOUCEBUSBORADING:
+                arrivalTermTransfQuay.announcingBusBoarding();
+                outMessage = new Message(Message.ABBDONE);
+                break;
         }
 
         return (outMessage);
