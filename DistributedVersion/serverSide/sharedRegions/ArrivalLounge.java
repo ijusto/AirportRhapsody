@@ -123,12 +123,12 @@ public class ArrivalLounge {
 
     public void probPar(int[][] destStat, int[][] nBagsPHold) throws MemException {
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
-        Map<Integer, Integer> nBagsPerPass = new HashMap<>();
+        int[] nBagsPerPass = new int[SimulPar.N_PASS_PER_FLIGHT];
         int nTotalBags = 0;
         for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
             this.reposStub.passengerExit(nPass);
             nTotalBags += nBagsPHold[nPass][this.currentFlight];
-            nBagsPerPass.put(nPass, nBagsPHold[nPass][this.currentFlight]);
+            nBagsPerPass[nPass] = nBagsPHold[nPass][this.currentFlight];
         }
         this.reposStub.initializeCargoHold(nTotalBags);
         this.pHoldBagStack = new MemStack<> (new Bag [nTotalBags]);     // stack instantiation
@@ -136,11 +136,11 @@ public class ArrivalLounge {
             for(int bag = 0; bag < nBagsPHold[nPass][this.currentFlight]; bag++){
                 this.pHoldBagStack.write(new Bag(destStat[nPass][this.currentFlight], nPass));
             }
-            MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass.get(nPass)]);        // FIFO instantiation
-            treadmill.put(nPass, bagPassFIFO);
+            //MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass[nPass]]);        // FIFO instantiation
+            //treadmill.put(nPass, bagPassFIFO);
         }
 
-        this.bagColPointStub.setTreadmill(treadmill);
+        this.bagColPointStub.setTreadmill(nBagsPerPass);
 
         resetNPassAtArrivL();
 

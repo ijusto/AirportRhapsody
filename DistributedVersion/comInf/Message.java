@@ -383,6 +383,8 @@ public class Message implements Serializable
 
     private int passNA = -1;
 
+    private int[] msgNBagsPerPass;
+
     /**
      *  Instanciação de uma mensagem (forma 1).
      *
@@ -463,6 +465,12 @@ public class Message implements Serializable
         }
     }
 
+    public Message (int type, int[] nBagsPerPass) {
+        msgType = type;
+        if(msgType ==  SETTREADMILL){
+            msgNBagsPerPass = nBagsPerPass;
+        }
+    }
     public Message (int type, boolean bool) {
         msgType = type;
         if (msgType ==  INCDECCOUNTER){
@@ -567,6 +575,7 @@ public class Message implements Serializable
 
     public int getPassNA(){ return passNA; }
 
+    public int[] getMsgNBagsPerPass(){ return msgNBagsPerPass; }
 
     /**
      *  Obtenção do valor do campo tipo da mensagem.

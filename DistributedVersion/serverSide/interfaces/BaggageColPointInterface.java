@@ -41,6 +41,7 @@ public class BaggageColPointInterface {
             case Message.RESETBCP:
             case Message.NOMOREBAGS:
             case Message.SETPHEMPTY:/* TODO: Validation */
+            case Message.SETTREADMILL:/* TODO: Validation */
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:
@@ -86,6 +87,11 @@ public class BaggageColPointInterface {
             // setPHoldEmpty
             case Message.SETPHEMPTY:
                 baggageColPoint.setPHoldEmpty(inMessage.msgPlaneHoldEmpty());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            case Message.SETTREADMILL:
+                baggageColPoint.setTreadmill(inMessage.getMsgNBagsPerPass());
                 outMessage = new Message(Message.ACK);
                 break;
 

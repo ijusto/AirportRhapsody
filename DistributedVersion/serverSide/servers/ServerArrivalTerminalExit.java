@@ -38,15 +38,12 @@ public class ServerArrivalTerminalExit {
         ArrivalTerminalExitProxy cliProxy;                                // thread agente prestador do serviço
 
         GenReposInfoStub repoInfoStub = new GenReposInfoStub(SimulPar.genReposInfoHost, SimulPar.genReposInfoPort);
-        ArrivalLoungeStub arrivLoungeStub = new ArrivalLoungeStub(SimulPar.arrivalLoungeHost, SimulPar.arrivalLoungePort);
-        ArrivalTermTransfQuayStub arrivalQuayStub = new ArrivalTermTransfQuayStub(SimulPar.arrivalTTQuayHost, SimulPar.arrivalTTQuayPort);
 
         /* estabelecimento do servico */
 
         scon = new ServerCom(portNumb);                     // criação do canal de escuta e sua associação
         scon.start ();                                       // com o endereço público
-        arrivalTerminalExit = new ArrivalTerminalExit( repoInfoStub,  arrivLoungeStub,
-                 arrivalQuayStub);                           // activação do serviço
+        arrivalTerminalExit = new ArrivalTerminalExit(repoInfoStub);                           // activação do serviço
         arrivalTerminalExitInterface = new ArrivalTerminalExitInterface(arrivalTerminalExit);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");
