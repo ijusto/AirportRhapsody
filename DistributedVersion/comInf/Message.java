@@ -382,6 +382,8 @@ public class Message implements Serializable
 
     private int[] msgNBagsPerPass;
 
+    private int passId = -1;
+
     /**
      *  Instanciação de uma mensagem (forma 1).
      *
@@ -580,10 +582,9 @@ public class Message implements Serializable
      *    @return tipo da mensagem
      */
 
-    public int getType ()
-    {
-        return (msgType);
-    }
+    public int getType(){ return msgType; }
+
+    public int getPassId(){ return passId; }
 
     /**
      *  Obtenção do valor do campo identificador do cliente.
