@@ -17,8 +17,6 @@ import clientSide.SimulPar;
 
 public class ArrivalTermTransfQuay {
 
-    private PassengerStates[] statePassengers;
-
     /*
      *   General Repository of Information Stub.
      */

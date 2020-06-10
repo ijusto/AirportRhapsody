@@ -1,11 +1,14 @@
 package serverSide.sharedRegions;
 
+import clientSide.SimulPar;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.Bag;
 import comInf.MemException;
 import comInf.MemFIFO;
 import clientSide.entities.*;
+import comInf.MemStack;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -175,11 +178,19 @@ public class BaggageColPoint {
     /**
      *   ...
      *
-     *    @param treadmill ...
+     *    @param nBagsPerPass ...
      */
 
-    public synchronized void setTreadmill(Map<Integer, MemFIFO<Bag>> treadmill) {
-        this.treadmill = treadmill;
+    public synchronized void setTreadmill(int[] nBagsPerPass) {
+        try {
+            for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
+                MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass[nPass]]);        // FIFO instantiation
+                treadmill.put(nPass, bagPassFIFO);
+            }
+
+        } catch (MemException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

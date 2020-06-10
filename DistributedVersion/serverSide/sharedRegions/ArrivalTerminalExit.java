@@ -26,18 +26,6 @@ public class ArrivalTerminalExit {
     private GenReposInfoStub reposStub;
 
     /**
-     *   Arrival Lounge Stub.
-     */
-
-    private ArrivalLoungeStub arrivLoungeStub;
-
-    /**
-     *   Arrival Terminal Transfer Quay Stub.
-     */
-
-    private ArrivalTermTransfQuayStub arrivalQuayStub;
-
-    /**
      *   Departure Terminal Entrance Stub
      */
 
@@ -60,14 +48,9 @@ public class ArrivalTerminalExit {
      *   Instantiation of the Arrival Terminal Exit.
      *
      *     @param reposStub General Repository of Information Stub.
-     *     @param arrivLoungeStub Arrival Lounge Stub.
-     *     @param arrivalQuayStub Arrival Terminal Transfer Quay Stub.
      */
 
-    public ArrivalTerminalExit(GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
-                               ArrivalTermTransfQuayStub arrivalQuayStub){
-        this.arrivLoungeStub = arrivLoungeStub;
-        this.arrivalQuayStub = arrivalQuayStub;
+    public ArrivalTerminalExit(GenReposInfoStub reposStub){
         this.reposStub = reposStub;
         this.resetDeadPassCounter();
     }
