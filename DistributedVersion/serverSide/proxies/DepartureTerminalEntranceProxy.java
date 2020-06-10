@@ -28,7 +28,7 @@ public class DepartureTerminalEntranceProxy  extends Thread {
      *    @serialField departureTerminalEntranceInterface
      */
 
-    private DepartureTerminalEntranceInterface departureTerminalEntranceInterface;
+    private final DepartureTerminalEntranceInterface departureTerminalEntranceInterface;
 
     /**
      *  Instanciação do interface
@@ -102,6 +102,4 @@ public class DepartureTerminalEntranceProxy  extends Thread {
     {
         return sconi;
     }
-}
-{
 }

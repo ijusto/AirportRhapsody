@@ -93,16 +93,16 @@ public class ArrivalTermTransfQuay {
      *   in the bus.
      */
 
-    public synchronized void takeABus(int passengerId) {
+    public synchronized void takeABus() {
         Passenger passenger = (Passenger) Thread.currentThread();
-        assert(statePassengers[passengerId] == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        statePassengers[passengerId] = PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL;
-        reposStub.updatePassSt(passengerId, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         reposStub.printLog();
 
         try {
             waitingLine.write(passenger);
-            reposStub.pJoinWaitingQueue(passengerId);
+            reposStub.pJoinWaitingQueue(passenger.getPassengerID());
         } catch (MemException e) {
             e.printStackTrace();
         }
@@ -131,7 +131,7 @@ public class ArrivalTermTransfQuay {
      *   in announcingBusBoarding, who is waiting for all the passenger to enter.
      */
 
-    public synchronized void enterTheBus(int passengerId){
+    public synchronized void enterTheBus(){
 
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);

@@ -77,14 +77,14 @@ public class ArrivalTerminalExit {
      *   Departure Terminal Entrance or, if the last, to notify all the others.
      */
 
-    public synchronized void goHome(int passengerId){
+    public synchronized void goHome(){
         Passenger passenger = (Passenger) Thread.currentThread();
-        assert(statePassengers[passengerId] == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
-                statePassengers[passengerId] == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
-                statePassengers[passengerId] == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
-        statePassengers[passengerId] = PassengerStates.EXITING_THE_ARRIVAL_TERMINAL;
+        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
+                passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
+                passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+                passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
-        reposStub.updatePassSt(passengerId, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
         reposStub.printLog();
 
         // increment the number of passengers that wants to leave the airport
@@ -108,7 +108,7 @@ public class ArrivalTerminalExit {
             }
         }
 
-        reposStub.passengerExit(passengerId);
+        reposStub.passengerExit(passenger.getPassengerID());
         reposStub.printLog();
     }
 

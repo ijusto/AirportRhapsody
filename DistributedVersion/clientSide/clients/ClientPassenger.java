@@ -26,8 +26,6 @@ public class ClientPassenger {
         int[][] nBagNR = new int[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
         int[][] nBagsNA = new int[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
 
-        String serverHostName = null;  // name of the computational system where the server is
-        int serverPortNumb = -1;  // server listening port number
 
 
         for(int land = 0; land < SimulPar.N_FLIGHTS; land++){
