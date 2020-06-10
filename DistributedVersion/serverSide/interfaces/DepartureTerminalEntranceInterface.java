@@ -59,7 +59,7 @@ public class DepartureTerminalEntranceInterface {
 
             // prepareNextLeg
             case Message.PREPARENEXTLEG:
-                departureTerminalEntrance.prepareNextLeg(inMessage.getPassId());
+                departureTerminalEntrance.prepareNextLeg();
                 outMessage = new Message(Message.ENDPASSENGER);
                 break;
 

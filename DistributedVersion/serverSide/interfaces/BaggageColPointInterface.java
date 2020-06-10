@@ -54,14 +54,16 @@ public class BaggageColPointInterface {
 
         switch (inMessage.getType ()) {
             // probPar
+            /*
             case Message.PARAMSBAGCOLPNT:
                 baggageColPoint.probPar(inMessage.getMsgReposStub());
                 outMessage = new Message(Message.ACK);
                 break;
+            */
 
             // goCollectABag (passenger)
             case Message.GOCOLLECTBAG:
-                boolean bagCollected = baggageColPoint.goCollectABag(inMessage.getPassId());
+                boolean bagCollected = baggageColPoint.goCollectABag();
                 outMessage = new Message(Message.GCBDONE, bagCollected);
                 break;
 

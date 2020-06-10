@@ -306,13 +306,13 @@ public class ArrivalLounge {
             reposStub.updateFlightNumber(this.currentFlight);
 
             Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
-            Map<Integer, Integer> nBagsPerPass = new HashMap<>();
+            int[] nBagsPerPass = new int[SimulPar.N_PASS_PER_FLIGHT];
 
             // int nSRprev = this.pHoldBagStack.getPointer();
             int nTotalBags = 0; //nSRprev;
             for (int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++) {
                 nTotalBags += nBagsNA[nPass][this.currentFlight];
-                nBagsPerPass.put(nPass, nBagsNA[nPass][this.currentFlight]);
+                nBagsPerPass[nPass] = nBagsNA[nPass][this.currentFlight];
             }
 
             reposStub.initializeCargoHold(nTotalBags);
@@ -338,12 +338,12 @@ public class ArrivalLounge {
                 }
 
                 // instantiation of the passenger's bag FIFO for the treadmill in the baggage collection point
-                MemFIFO<Bag> bagPassFIFO = new MemFIFO<>(new Bag[nBagsPerPass.get(nPass)]);
-                treadmill.put(nPass, bagPassFIFO);
+                //MemFIFO<Bag> bagPassFIFO = new MemFIFO<>(new Bag[nBagsPerPass.get(nPass)]);
+                //treadmill.put(nPass, bagPassFIFO);
             }
 
             this.bagColPointStub.setPHoldEmpty(false);
-            this.bagColPointStub.setTreadmill(treadmill);
+            this.bagColPointStub.setTreadmill(nBagsPerPass);
 
             // reset the number of passengers that arrived the airport
             this.resetNPassAtArrivL();

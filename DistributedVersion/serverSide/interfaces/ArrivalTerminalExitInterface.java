@@ -56,11 +56,13 @@ public class ArrivalTerminalExitInterface {
         switch (inMessage.getType ()) {
 
             // probPar
+            /*
             case Message.PARAMSATEXIT:
                 arrivalTerminalExit.probPar(inMessage.getMsgReposStub(), inMessage.getMsgArrLoungeStub(),
                             inMessage.getMsgArrQuayStub());
                 outMessage = new Message(Message.ACK);
                 break;
+             */
 
             // goHome (Passenger)
             case Message.GOHOME:

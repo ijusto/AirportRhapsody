@@ -70,10 +70,12 @@ public class GenReposInfoInterface {
 
         switch (inMessage.getType ()) {
             // probPar
+            /*
             case Message.PARAMSREPOS:
                 repos.probPar(inMessage.getMsgReposFile());
                 outMessage = new Message(Message.ACK);
                 break;
+             */
 
             // printLog
             case Message.PRINTLOG:
