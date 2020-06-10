@@ -19,14 +19,11 @@ public class ClientBusDriver {
         DepartureTermTransfQuayStub departureQuayStub;
 
         String fileName = "log.txt";
-        String serverHostName = null;  // name of the computational system where the server is
-        int serverPortNumb = -1;  // server listening port number
-
 
         /* instantiation of the shared regions */
-        reposStub = new GenReposInfoStub(serverHostName, serverPortNumb);
-        departureQuayStub = new DepartureTermTransfQuayStub(serverHostName, serverPortNumb);
-        arrivalQuayStub = new ArrivalTermTransfQuayStub(serverHostName, serverPortNumb);
+        reposStub = new GenReposInfoStub(SimulPar.genReposInfoHost, SimulPar.genReposInfoPort);
+        departureQuayStub = new DepartureTermTransfQuayStub(SimulPar.depTTQuayHost, SimulPar.depTTQuayPort);
+        arrivalQuayStub = new ArrivalTermTransfQuayStub(SimulPar.arrivalTTQuayHost, SimulPar.arrivalTTQuayPort);
 
         /* instantiation of the entities */
         BusDriver busDriver;

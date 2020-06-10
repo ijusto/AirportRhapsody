@@ -1,5 +1,6 @@
 package clientSide.clients;
 
+import clientSide.SimulPar;
 import clientSide.entities.*;
 import clientSide.sharedRegionsStubs.*;
 import comInf.MemException;
@@ -14,14 +15,12 @@ public class ClientPorter {
         ArrivalLoungeStub arrivLoungeStub;
 
         String fileName = "log.txt";
-        String serverHostName = null;  // name of the computational system where the server is
-        int serverPortNumb = -1;  // server listening port number
 
         /* instantiation of the shared regions */
-        reposStub = new GenReposInfoStub(serverHostName, serverPortNumb);
-        tmpStorageAreaStub = new TemporaryStorageAreaStub(serverHostName, serverPortNumb);
-        bagColPointStub = new BaggageColPointStub(serverHostName, serverPortNumb);
-        arrivLoungeStub = new ArrivalLoungeStub(serverHostName, serverPortNumb);
+        reposStub = new GenReposInfoStub(SimulPar.genReposInfoHost, SimulPar.genReposInfoPort);
+        tmpStorageAreaStub = new TemporaryStorageAreaStub(SimulPar.tmpStorageAreaHost, SimulPar.depTerminalEntrancePort);
+        bagColPointStub = new BaggageColPointStub(SimulPar.bgCollectionPointHost, SimulPar.bgCollectionPointPort);
+        arrivLoungeStub = new ArrivalLoungeStub(SimulPar.arrivalLoungeHost, SimulPar.arrivalLoungePort);
 
         /* instantiation of the entities */
         Porter porter;

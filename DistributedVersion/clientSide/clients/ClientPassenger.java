@@ -7,11 +7,6 @@ import clientSide.sharedRegionsStubs.*;
 import comInf.Bag;
 import comInf.MemException;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class ClientPassenger {
 
     public static void main(final String[] args) throws MemException {
@@ -57,15 +52,15 @@ public class ClientPassenger {
         }
 
         /* instantiation of the shared regions */
-        reposStub = new GenReposInfoStub(serverHostName, serverPortNumb);
-        bagRecOfficeStub = new BaggageReclaimOfficeStub(serverHostName, serverPortNumb);
-        tmpStorageAreaStub = new TemporaryStorageAreaStub(serverHostName, serverPortNumb);
-        departureQuayStub = new DepartureTermTransfQuayStub(serverHostName, serverPortNumb);
-        bagColPointStub = new BaggageColPointStub(serverHostName, serverPortNumb);
-        arrivalQuayStub = new ArrivalTermTransfQuayStub(serverHostName, serverPortNumb);
-        arrivLoungeStub = new ArrivalLoungeStub(serverHostName, serverPortNumb);
-        arrivalTermStub = new ArrivalTerminalExitStub(serverHostName, serverPortNumb);
-        departureTermStub = new DepartureTerminalEntranceStub(serverHostName, serverPortNumb);
+        reposStub = new GenReposInfoStub(SimulPar.genReposInfoHost, SimulPar.genReposInfoPort);
+        bagRecOfficeStub = new BaggageReclaimOfficeStub(SimulPar.bgrOfficeHost, SimulPar.bgrOfficePort);
+        tmpStorageAreaStub = new TemporaryStorageAreaStub(SimulPar.tmpStorageAreaHost, SimulPar.tmpStorageAreaPort);
+        departureQuayStub = new DepartureTermTransfQuayStub(SimulPar.depTTQuayHost, SimulPar.depTTQuayPort);
+        bagColPointStub = new BaggageColPointStub(SimulPar.bgCollectionPointHost, SimulPar.bgCollectionPointPort);
+        arrivalQuayStub = new ArrivalTermTransfQuayStub(SimulPar.arrivalTTQuayHost, SimulPar.arrivalTTQuayPort);
+        arrivLoungeStub = new ArrivalLoungeStub(SimulPar.arrivalLoungeHost, SimulPar.arrivalLoungePort);
+        arrivalTermStub = new ArrivalTerminalExitStub(SimulPar.arrivalTermExitHost, SimulPar.arrivalTermExitPort);
+        departureTermStub = new DepartureTerminalEntranceStub(SimulPar.depTerminalEntranceHost, SimulPar.depTerminalEntrancePort);
         arrivalTermStub.setDepartureTerminalRef(departureTermStub);
         departureTermStub.setArrivalTerminalRef(arrivalTermStub);
         arrivLoungeStub.setDepartureTerminalRef(departureTermStub);
