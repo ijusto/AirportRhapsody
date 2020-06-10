@@ -5,6 +5,13 @@ import comInf.MessageException;
 import serverSide.interfaces.BaggageReclaimOfficeInterface;
 import serverSide.ServerCom;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class BaggageReclaimOfficeProxy  extends Thread {
     /**
      *  Contador de threads lançados

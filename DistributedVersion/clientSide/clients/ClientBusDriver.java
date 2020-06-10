@@ -6,6 +6,13 @@ import clientSide.entities.BusDriver;
 import clientSide.sharedRegionsStubs.*;
 import comInf.MemException;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ClientBusDriver {
 
     public static void main(final String[] args) throws MemException {

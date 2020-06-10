@@ -8,6 +8,13 @@ import serverSide.servers.ServerBaggageReclaimOffice;
 import serverSide.servers.ServerDepartureTerminalEntrance;
 import serverSide.sharedRegions.DepartureTerminalEntrance;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class DepartureTerminalEntranceInterface {
 
     private DepartureTerminalEntrance departureTerminalEntrance;

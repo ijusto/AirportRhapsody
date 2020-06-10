@@ -5,6 +5,13 @@ import clientSide.entities.*;
 import clientSide.sharedRegionsStubs.*;
 import comInf.MemException;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ClientPorter {
 
     public static void main(final String[] args) throws MemException {

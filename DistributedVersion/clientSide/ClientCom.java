@@ -7,6 +7,8 @@ import java.net.*;
  *   Este tipo de dados implementa o canal de comunicação, lado do cliente, para uma comunicação baseada em passagem de
  *   mensagens sobre sockets usando o protocolo TCP.
  *   A transferência de dados é baseada em objectos, um objecto de cada vez.
+ *
+ *   @author António Rui De Oliveira E Silva Borges
  */
 
 public class ClientCom
@@ -175,8 +177,7 @@ public class ClientCom
      *    @return objecto lido
      */
 
-    public Object readObject ()
-    {
+    public Object readObject (){
         Object fromServer = null;                            // objecto
 
         try {
@@ -207,8 +208,7 @@ public class ClientCom
      *    @param toServer objecto a ser escrito
      */
 
-    public void writeObject (Object toServer)
-    {
+    public void writeObject (Object toServer){
         try {
             out.writeObject (toServer);
         } catch (InvalidClassException e) {

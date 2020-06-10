@@ -45,6 +45,10 @@ public class SimulPar {
 
     public static final String arrivalLoungeHost = "localhost";
 
+    /**
+     *
+     */
+
     public static final int arrivalLoungePort = 22001;
 
     /**
@@ -52,6 +56,10 @@ public class SimulPar {
      */
 
     public static final String arrivalTermExitHost = "localhost";
+
+    /**
+     *
+     */
 
     public static final int arrivalTermExitPort = 22002;
 
@@ -61,6 +69,10 @@ public class SimulPar {
 
     public static final String arrivalTTQuayHost = "localhost";
 
+    /**
+     *
+     */
+
     public static final int arrivalTTQuayPort = 22003;
 
     /**
@@ -68,6 +80,10 @@ public class SimulPar {
      */
 
     public static final String bgCollectionPointHost = "localhost";
+
+    /**
+     *
+     */
 
     public static final int bgCollectionPointPort = 22004;
 
@@ -77,6 +93,10 @@ public class SimulPar {
 
     public static final String bgrOfficeHost = "localhost";
 
+    /**
+     *
+     */
+
     public static final int bgrOfficePort = 22005;
 
     /**
@@ -84,6 +104,10 @@ public class SimulPar {
      */
 
     public static final String depTerminalEntranceHost = "localhost";
+
+    /**
+     *
+     */
 
     public static final int depTerminalEntrancePort = 22006;
 
@@ -93,6 +117,10 @@ public class SimulPar {
 
     public static final String depTTQuayHost = "localhost";
 
+    /**
+     *
+     */
+
     public static final int depTTQuayPort = 22007;
 
     /**
@@ -101,6 +129,10 @@ public class SimulPar {
 
     public static final String tmpStorageAreaHost = "localhost";
 
+    /**
+     *
+     */
+
     public static final int tmpStorageAreaPort = 22008;
 
     /**
@@ -108,6 +140,10 @@ public class SimulPar {
      */
 
     public static final String genReposInfoHost = "localhost";
+
+    /**
+     *
+     */
 
     public static final int genReposInfoPort = 22009;
 

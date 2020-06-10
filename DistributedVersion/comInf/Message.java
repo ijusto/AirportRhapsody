@@ -9,6 +9,9 @@ import java.util.Arrays;
  *   dos Barbeiros Sonolentos que implementa o modelo cliente-servidor de tipo 2 (replicação do servidor) com lançamento
  *   estático dos threads barbeiro.
  *   A comunicação propriamente dita baseia-se na troca de objectos de tipo Message num canal TCP.
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
  */
 
 public class Message implements Serializable

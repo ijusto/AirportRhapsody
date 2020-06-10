@@ -5,6 +5,13 @@ import comInf.MessageException;
 import serverSide.interfaces.GenReposInfoInterface;
 import serverSide.ServerCom;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class GenReposInfoProxy extends Thread {
 
     /**

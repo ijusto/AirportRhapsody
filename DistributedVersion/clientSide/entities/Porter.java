@@ -1,5 +1,4 @@
 package clientSide.entities;
-import clientSide.PorterStates;
 import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
 import clientSide.sharedRegionsStubs.BaggageColPointStub;
 import clientSide.sharedRegionsStubs.TemporaryStorageAreaStub;

@@ -9,6 +9,13 @@ import serverSide.servers.ServerArrivalLounge;
 import serverSide.servers.ServerArrivalTerminalExit;
 import serverSide.sharedRegions.ArrivalTerminalExit;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ArrivalTerminalExitInterface {
 
     private ArrivalTerminalExit arrivalTerminalExit;

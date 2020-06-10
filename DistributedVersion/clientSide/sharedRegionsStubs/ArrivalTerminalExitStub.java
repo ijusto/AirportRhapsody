@@ -4,6 +4,13 @@ import clientSide.ClientCom;
 import comInf.Message;
 import clientSide.entities.Passenger;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ArrivalTerminalExitStub {
 
     /**

@@ -5,6 +5,13 @@ import comInf.MessageException;
 import serverSide.interfaces.BaggageColPointInterface;
 import serverSide.ServerCom;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class BaggageColPointProxy extends Thread {
     /**
      *  Contador de threads lançados

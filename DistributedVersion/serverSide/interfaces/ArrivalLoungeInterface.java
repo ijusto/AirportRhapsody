@@ -8,9 +8,24 @@ import serverSide.proxies.ArrivalLoungeProxy;
 import serverSide.servers.ServerArrivalLounge;
 import serverSide.sharedRegions.ArrivalLounge;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ArrivalLoungeInterface {
 
+    /*
+     *
+     */
+
     private ArrivalLounge arrivalLounge;
+
+    /*
+     *
+     */
 
     public ArrivalLoungeInterface(ArrivalLounge arrivalLounge){
         this.arrivalLounge = arrivalLounge;
@@ -27,8 +42,12 @@ public class ArrivalLoungeInterface {
      *    @throws MessageException se a mensagem com o pedido for considerada inválida
      */
 
-    public Message processAndReply (Message inMessage) throws MessageException
-    {
+    /*
+     *
+     */
+
+    public Message processAndReply (Message inMessage) throws MessageException {
+        
         // mensagem de resposta
         Message outMessage = null;
 

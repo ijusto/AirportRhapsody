@@ -6,6 +6,13 @@ import serverSide.proxies.GenReposInfoProxy;
 import serverSide.servers.ServerGenReposInfo;
 import serverSide.sharedRegions.GenReposInfo;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class GenReposInfoInterface {
 
     private GenReposInfo repos;

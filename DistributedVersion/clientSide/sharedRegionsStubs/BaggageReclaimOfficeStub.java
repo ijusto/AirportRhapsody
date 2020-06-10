@@ -4,6 +4,13 @@ import clientSide.ClientCom;
 import clientSide.entities.Passenger;
 import comInf.Message;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class BaggageReclaimOfficeStub {
 
     /**

@@ -9,6 +9,13 @@ import comInf.Message;
 
 import java.util.Map;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class BaggageColPointStub {
 
     /**

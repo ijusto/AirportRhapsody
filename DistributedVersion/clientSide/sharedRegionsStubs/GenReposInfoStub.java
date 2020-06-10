@@ -1,8 +1,13 @@
 package clientSide.sharedRegionsStubs;
-
-import clientSide.entities.*;
 import clientSide.ClientCom;
 import comInf.Message;
+
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
 
 public class GenReposInfoStub {
 

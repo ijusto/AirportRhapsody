@@ -11,6 +11,13 @@ import serverSide.sharedRegions.ArrivalLounge;
 
 import java.net.*;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ServerArrivalLounge {
 
     /**

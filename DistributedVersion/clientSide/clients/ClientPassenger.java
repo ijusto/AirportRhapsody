@@ -7,6 +7,13 @@ import clientSide.sharedRegionsStubs.*;
 import comInf.Bag;
 import comInf.MemException;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ClientPassenger {
 
     public static void main(final String[] args) throws MemException {

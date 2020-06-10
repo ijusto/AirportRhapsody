@@ -4,11 +4,16 @@ import comInf.Bag;
 import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
-import serverSide.proxies.DepartureTermTransfQuayProxy;
 import serverSide.proxies.TemporaryStorageAreaProxy;
-import serverSide.servers.ServerDepartureTermTransfQuay;
 import serverSide.servers.ServerTemporaryStorageArea;
 import serverSide.sharedRegions.TemporaryStorageArea;
+
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
 
 public class TemporaryStorageAreaInterface {
 
