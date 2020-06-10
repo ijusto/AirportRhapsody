@@ -38,7 +38,7 @@ public class BaggageReclaimOffice {
         assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
 
-        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE.ordinal());
         reposStub.missingBagReported();
 
         reposStub.printLog();

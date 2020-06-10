@@ -51,7 +51,7 @@ public class TemporaryStorageArea {
         assert porter.getStat() == PorterStates.AT_THE_PLANES_HOLD;
         assert bag != null;
         porter.setStat(PorterStates.AT_THE_STOREROOM);
-        reposStub.updatePorterStat(PorterStates.AT_THE_STOREROOM);
+        reposStub.updatePorterStat(PorterStates.AT_THE_STOREROOM.ordinal());
 
         try {
             tmpStorageStack.write(bag);

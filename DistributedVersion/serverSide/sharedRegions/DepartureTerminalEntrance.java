@@ -75,7 +75,7 @@ public class DepartureTerminalEntrance {
         assert passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL;
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
-        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
+        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL.ordinal());
         reposStub.printLog();
 
         // increment the number of passengers that wants to leave the airport

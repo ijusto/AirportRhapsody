@@ -65,7 +65,7 @@ public class ArrivalTerminalExit {
                 passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
                 passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
-        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL.ordinal());
         reposStub.printLog();
 
         // increment the number of passengers that wants to leave the airport

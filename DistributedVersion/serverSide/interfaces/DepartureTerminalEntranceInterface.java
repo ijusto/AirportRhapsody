@@ -60,7 +60,7 @@ public class DepartureTerminalEntranceInterface {
             // prepareNextLeg
             case Message.PREPARENEXTLEG:
                 departureTerminalEntrance.prepareNextLeg(inMessage.getPassId());
-                outMessage = new Message(Message.PNLDONE);
+                outMessage = new Message(Message.ENDPASSENGER);
                 break;
 
             // resetDepartureTerminalExit

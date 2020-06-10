@@ -67,7 +67,7 @@ public class BaggageColPoint {
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         // update logger
-        reposStub.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        reposStub.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT.ordinal());
 
         /*
           Blocked Entity: Passenger
@@ -127,7 +127,7 @@ public class BaggageColPoint {
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         assert(this.treadmill.containsKey(bag.getIdOwner()));
         porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
-        reposStub.updatePorterStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
+        reposStub.updatePorterStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR.ordinal());
 
         try {
             this.treadmill.get(bag.getIdOwner()).write(bag);

@@ -28,7 +28,7 @@ public class ClientPorter {
         porter = new Porter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND, arrivLoungeStub, tmpStorageAreaStub,
                 bagColPointStub);
 
-        reposStub.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        reposStub.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND.ordinal());
 
         porter.start();
 

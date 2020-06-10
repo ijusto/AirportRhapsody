@@ -169,8 +169,8 @@ public class ArrivalLounge {
         // update logger
         this.reposStub.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
         this.reposStub.numberNRTotal(currentPassenger.getNR());
-        this.reposStub.newPass(currentPassenger.getSi());
-        this.reposStub.updatePassSt(currentPassenger.getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        this.reposStub.newPass(currentPassenger.getSi().ordinal());
+        this.reposStub.updatePassSt(currentPassenger.getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE.ordinal());
         this.reposStub.printLog();
 
         // increment passengers that arrive so the porter knows when to wake up in takeARest()
@@ -243,7 +243,7 @@ public class ArrivalLounge {
         assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
 
-        reposStub.updatePorterStat(PorterStates.AT_THE_PLANES_HOLD);
+        reposStub.updatePorterStat(PorterStates.AT_THE_PLANES_HOLD.ordinal());
 
         try {
             Bag tmpBag = pHoldBagStack.read();
@@ -267,7 +267,7 @@ public class ArrivalLounge {
         Porter porter = (Porter) Thread.currentThread();
         assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-        reposStub.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        reposStub.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND.ordinal());
 
         this.pHEmpty = true;
         // notify passenger in prepareNextLeg()

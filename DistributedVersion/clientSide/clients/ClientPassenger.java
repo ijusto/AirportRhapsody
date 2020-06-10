@@ -74,7 +74,7 @@ public class ClientPassenger {
                         nBagNR[nPass][flight], 0, nPass, arrivLoungeStub, arrivalQuayStub, departureQuayStub,
                         departureTermStub, arrivalTermStub, bagColPointStub, bagRecOfficeStub);
 
-                reposStub.updatePassSt(passengers[nPass][flight].getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE);
+                reposStub.updatePassSt(passengers[nPass][flight].getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE.ordinal());
                 reposStub.getPassSi(passengers[nPass][flight].getPassengerID(),passengers[nPass][flight].getSi().ordinal());
             }
 

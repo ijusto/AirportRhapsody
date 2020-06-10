@@ -94,7 +94,7 @@ public class BusDriver extends Thread {
     public synchronized void goToArrivalTerminal() {
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_BACKWARD);
-        reposStub.updateBDriverStat(BusDriverStates.DRIVING_BACKWARD);
+        reposStub.updateBDriverStat(BusDriverStates.DRIVING_BACKWARD.ordinal());
 
         // simulates the bus going from the departure terminal to the arrival terminal
         try {
@@ -111,7 +111,7 @@ public class BusDriver extends Thread {
     public synchronized void goToDepartureTerminal(){
         assert(this.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
         this.setStat(BusDriverStates.DRIVING_FORWARD);
-        reposStub.updateBDriverStat(BusDriverStates.DRIVING_FORWARD);
+        reposStub.updateBDriverStat(BusDriverStates.DRIVING_FORWARD.ordinal());
         reposStub.printLog();
 
         // simulates the bus going from the departure arrival to the departure terminal

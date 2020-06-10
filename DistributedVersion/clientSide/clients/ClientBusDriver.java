@@ -27,7 +27,7 @@ public class ClientBusDriver {
         busDriver = new BusDriver(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL, arrivalQuayStub,departureQuayStub,
                                     reposStub);
 
-        reposStub.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        reposStub.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL.ordinal());
 
         busDriver.start();
 

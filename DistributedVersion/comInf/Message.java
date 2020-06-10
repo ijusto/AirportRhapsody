@@ -2,6 +2,7 @@ package comInf;
 import clientSide.sharedRegionsStubs.*;
 
 import java.io.*;
+import java.util.Arrays;
 
 /**
  *   Este tipo de dados define as mensagens que são trocadas entre os clientes e o servidor numa solução do Problema
@@ -275,24 +276,13 @@ public class Message implements Serializable
 
     /* ******************************************** GENERAL MESSAGES ************************************************ */
 
-    public static final int ACK      =  83; // TODO: Change value
+    public static final int ACK =  83;
 
-    public static final int ENDPASSENGER      = 94;
+    public static final int ENDPASSENGER = 94;
 
-    public static final int ENDPORTER      = 95;
+    public static final int ENDPORTER = 95;
 
-    public static final int ENDBUSDRIVER     = 96;
-
-
-    /**
-     *  Inicialização do ficheiro de logging (operação pedida pelo cliente)
-     */
-    public static final int SETNFIC  =  97;
-
-    /**
-     *  Ficheiro de logging foi inicializado (resposta enviada pelo servidor)
-     */
-    public static final int NFICDONE =  98;
+    public static final int ENDBUSDRIVER = 96;
 
     /**
      *  Shutdown do servidor (operação pedida pelo cliente)
@@ -650,13 +640,4 @@ public class Message implements Serializable
      *    @return string contendo, em linhas separadas, a concatenação da identificação de cada campo e valor respectivo
      */
 
-    @Override
-    public String toString ()
-    {
-        return ("Tipo = " + msgType +
-                "\nId Cliente = " + custId +
-                "\nId Barbeiro = " + barbId +
-                "\nNome Fic. Logging = " + fName +
-                "\nN. de Iteracoes = " + nIter);
-    }
 }

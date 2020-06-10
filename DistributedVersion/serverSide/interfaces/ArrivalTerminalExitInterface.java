@@ -64,8 +64,8 @@ public class ArrivalTerminalExitInterface {
 
             // goHome (Passenger)
             case Message.GOHOME:
-                arrivalTerminalExit.goHome(inMessage.getPassId());
-                outMessage = new Message(Message.GODONE);
+                arrivalTerminalExit.goHome();
+                outMessage = new Message(Message.ENDPASSENGER);
                 break;
 
             // notifyFromPrepareNextLeg

@@ -95,7 +95,7 @@ public class ArrivalTermTransfQuay {
         Passenger passenger = (Passenger) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL.ordinal());
         reposStub.printLog();
 
         try {
@@ -136,7 +136,7 @@ public class ArrivalTermTransfQuay {
         assert(this.getNPassOnTheBusValue() < SimulPar.BUS_CAP);
 
         passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
-        reposStub.updatePassSt(passenger.getPassengerID(),PassengerStates.TERMINAL_TRANSFER);
+        reposStub.updatePassSt(passenger.getPassengerID(),PassengerStates.TERMINAL_TRANSFER.ordinal());
 
         try{
             this.waitingLine.read();
@@ -194,7 +194,7 @@ public class ArrivalTermTransfQuay {
         assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
-        reposStub.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        reposStub.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL.ordinal());
 
         reposStub.printLog();
         this.resetNPassOnTheBus();

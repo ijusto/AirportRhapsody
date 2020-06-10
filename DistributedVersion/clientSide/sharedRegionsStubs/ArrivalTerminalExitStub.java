@@ -84,7 +84,7 @@ public class ArrivalTerminalExitStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        if (inMessage.getType() != Message.GODONE){
+        if (inMessage.getType() != Message.ENDPASSENGER){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
