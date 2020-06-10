@@ -47,7 +47,7 @@ public class ArrivalLoungeInterface {
      */
 
     public Message processAndReply (Message inMessage) throws MessageException {
-        
+
         // mensagem de resposta
         Message outMessage = null;
 

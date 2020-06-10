@@ -56,10 +56,13 @@ public class DepartureTermTransfQuayInterface {
 
         switch (inMessage.getType ()) {
             // probPar
+            /*
             case Message.PARAMSDEPTTQUAY:
                 departureTermTransfQuay.probPar(inMessage.getMsgReposStub());
                 outMessage = new Message(Message.ACK);
                 break;
+
+             */
 
             // leaveTheBus
             case Message.LEAVEBUS:

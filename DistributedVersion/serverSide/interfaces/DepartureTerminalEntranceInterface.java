@@ -58,11 +58,14 @@ public class DepartureTerminalEntranceInterface {
 
         switch (inMessage.getType ()) {
             // probPar
+            /*
             case Message.PARAMSDEPTENT:
                 departureTerminalEntrance.probPar(inMessage.getMsgReposStub(), inMessage.getMsgArrLoungeStub(),
                         inMessage.getMsgArrQuayStub());
                 outMessage = new Message(Message.ACK);
                 break;
+
+             */
 
             // prepareNextLeg
             case Message.PREPARENEXTLEG:
