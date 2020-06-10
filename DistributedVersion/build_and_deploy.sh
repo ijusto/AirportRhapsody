@@ -1,0 +1,51 @@
+#!/bin/bash
+
+echo "Compiling Server Side"
+
+#Interfaces
+
+javac serverSide/interfaces/ArrivalLoungeInterface.java
+javac serverSide/interfaces/ArrivalTerminalExitInterface.java
+javac serverSide/interfaces/ArrivalTermTransfQuayInterface.java
+javac serverSide/interfaces/BaggageColPointInterface.java
+javac serverSide/interfaces/BaggageReclaimOfficeInterface.java
+javac serverSide/interfaces/DepartureTerminalEntranceInterface.java
+javac serverSide/interfaces/DepartureTermTransfQuayInterface.java
+javac serverSide/interfaces/GenReposInfoInterface.java
+javac serverSide/interfaces/TemporaryStorageAreaInterface.java
+
+#Proxies
+
+javac serverSide/proxies/ArrivalLoungeProxy.java
+javac serverSide/proxies/ArrivalTerminalExitProxy.java
+javac serverSide/proxies/ArrivalTermTransfQuayProxy.java
+javac serverSide/proxies/BaggageColPointProxy.java
+javac serverSide/proxies/BaggageReclaimOfficeProxy.java
+javac serverSide/proxies/DepartureTerminalEntranceProxy.java
+javac serverSide/proxies/DepartureTermTransfQuayProxy.java
+javac serverSide/proxies/GenReposInfoProxy.java
+javac serverSide/proxies/TemporaryStorageAreaProxy.java
+
+#Servers
+
+javac serverSide/Servers/ServerArrivalLounge.java
+javac serverSide/proxies/ServerArrivalTerminalExit.java
+javac serverSide/proxies/ServerArrivalTermTransfQuay.java
+javac serverSide/proxies/ServerBaggageColPoint.java
+javac serverSide/proxies/ServerBaggageReclaimOffice.java
+javac serverSide/proxies/ServerDepartureTerminalEntrance.java
+javac serverSide/proxies/ServerDepartureTermTransfQuay.java
+javac serverSide/proxies/ServerGenReposInfo.java
+javac serverSide/proxies/ServerTemporaryStorageArea.java
+
+#Shared Regions
+
+javac serverSide/Servers/ArrivalLounge.java
+javac serverSide/proxies/ArrivalTerminalExit.java
+javac serverSide/proxies/ArrivalTermTransfQuay.java
+javac serverSide/proxies/BaggageColPoint.java
+javac serverSide/proxies/BaggageReclaimOffice.java
+javac serverSide/proxies/DepartureTerminalEntrance.java
+javac serverSide/proxies/DepartureTermTransfQuay.java
+javac serverSide/proxies/GenReposInfo.java
+javac serverSide/proxies/TemporaryStorageArea.java
