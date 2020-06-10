@@ -1,6 +1,6 @@
 package serverSide.servers;
 
-import clientSide.SimulPar;
+import comInf.SimulPar;
 import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.BaggageColPointStub;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;

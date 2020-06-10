@@ -6,7 +6,7 @@ import comInf.MemException;
 import comInf.MemFIFO;
 import clientSide.entities.BusDriver;
 import clientSide.entities.Passenger;
-import clientSide.SimulPar;
+import comInf.SimulPar;
 
 /**
  *   Arrival Terminal Transfer Quay.

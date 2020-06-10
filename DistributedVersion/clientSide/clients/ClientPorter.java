@@ -1,6 +1,6 @@
 package clientSide.clients;
 
-import clientSide.SimulPar;
+import comInf.SimulPar;
 import clientSide.entities.*;
 import clientSide.sharedRegionsStubs.*;
 import comInf.MemException;

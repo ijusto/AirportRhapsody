@@ -1,13 +1,12 @@
 package serverSide.servers;
 
-import clientSide.SimulPar;
+import comInf.SimulPar;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.MemException;
 import serverSide.ServerCom;
 import serverSide.interfaces.ArrivalTermTransfQuayInterface;
 import serverSide.proxies.ArrivalTermTransfQuayProxy;
 import serverSide.sharedRegions.ArrivalTermTransfQuay;
-import serverSide.sharedRegions.GenReposInfo;
 
 import java.net.SocketTimeoutException;
 

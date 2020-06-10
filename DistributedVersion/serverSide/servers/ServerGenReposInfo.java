@@ -1,6 +1,6 @@
 package serverSide.servers;
 
-import clientSide.SimulPar;
+import comInf.SimulPar;
 import serverSide.ServerCom;
 import serverSide.interfaces.GenReposInfoInterface;
 import serverSide.proxies.GenReposInfoProxy;

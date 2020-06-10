@@ -1,12 +1,11 @@
 package serverSide.servers;
 
-import clientSide.SimulPar;
+import comInf.SimulPar;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import serverSide.ServerCom;
 import serverSide.interfaces.BaggageColPointInterface;
 import serverSide.proxies.BaggageColPointProxy;
 import serverSide.sharedRegions.BaggageColPoint;
-import serverSide.sharedRegions.GenReposInfo;
 
 import java.net.*;
 

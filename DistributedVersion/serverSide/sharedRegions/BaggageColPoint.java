@@ -1,14 +1,12 @@
 package serverSide.sharedRegions;
 
-import clientSide.SimulPar;
+import comInf.SimulPar;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.Bag;
 import comInf.MemException;
 import comInf.MemFIFO;
 import clientSide.entities.*;
-import comInf.MemStack;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**

@@ -1,6 +1,6 @@
 package serverSide.sharedRegions;
 
-import clientSide.SimulPar;
+import comInf.SimulPar;
 import clientSide.entities.*;
 import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.BaggageColPointStub;

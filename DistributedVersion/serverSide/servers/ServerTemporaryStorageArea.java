@@ -1,6 +1,6 @@
 package serverSide.servers;
 
-import clientSide.SimulPar;
+import comInf.SimulPar;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.MemException;
 import serverSide.ServerCom;

@@ -2,9 +2,7 @@ package serverSide.sharedRegions;
 
 import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
-import clientSide.SimulPar;
-import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
-import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
+import comInf.SimulPar;
 import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 

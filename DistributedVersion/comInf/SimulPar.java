@@ -1,4 +1,4 @@
-package clientSide;
+package comInf;
 
 /**
  *   Constant parameters for simulation purposes.

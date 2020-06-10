@@ -1,14 +1,10 @@
 package clientSide.clients;
 
 import clientSide.entities.*;
-import clientSide.SimulPar;
+import comInf.SimulPar;
 import clientSide.entities.BusDriver;
 import clientSide.sharedRegionsStubs.*;
-import comInf.Bag;
 import comInf.MemException;
-
-import java.io.*;
-import java.net.*;
 
 public class ClientBusDriver {
 

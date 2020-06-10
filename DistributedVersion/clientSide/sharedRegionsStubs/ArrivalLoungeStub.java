@@ -1,7 +1,7 @@
 package clientSide.sharedRegionsStubs;
 
 import clientSide.ClientCom;
-import clientSide.SimulPar;
+import comInf.SimulPar;
 import comInf.Bag;
 import comInf.Message;
 import clientSide.entities.*;

@@ -3,10 +3,7 @@ package comInf;
 import clientSide.BusDriverStates;
 import clientSide.PassengerStates;
 import clientSide.PorterStates;
-import clientSide.SimulPar;
 import clientSide.sharedRegionsStubs.*;
-import serverSide.sharedRegions.ArrivalLounge;
-import serverSide.sharedRegions.DepartureTerminalEntrance;
 
 import java.io.*;
 

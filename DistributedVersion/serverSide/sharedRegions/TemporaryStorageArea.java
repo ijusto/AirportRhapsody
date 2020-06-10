@@ -5,7 +5,7 @@ import comInf.MemStack;
 import comInf.Bag;
 import clientSide.entities.PorterStates;
 import clientSide.entities.Porter;
-import clientSide.SimulPar;
+import comInf.SimulPar;
 
 /**
  *   Temporary Storage Area.

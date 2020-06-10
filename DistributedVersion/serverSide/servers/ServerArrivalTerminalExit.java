@@ -1,15 +1,11 @@
 package serverSide.servers;
 
-import clientSide.SimulPar;
-import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
-import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
+import comInf.SimulPar;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import serverSide.ServerCom;
 import serverSide.interfaces.ArrivalTerminalExitInterface;
 import serverSide.proxies.ArrivalTerminalExitProxy;
-import serverSide.sharedRegions.ArrivalTermTransfQuay;
 import serverSide.sharedRegions.ArrivalTerminalExit;
-import serverSide.sharedRegions.GenReposInfo;
 
 import java.net.*;
 

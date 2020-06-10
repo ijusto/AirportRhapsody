@@ -1,7 +1,7 @@
 package serverSide.sharedRegions;
 
 import clientSide.entities.*;
-import clientSide.SimulPar;
+import comInf.SimulPar;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
