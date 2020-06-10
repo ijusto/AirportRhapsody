@@ -291,7 +291,27 @@ public class GenReposInfoStub {
      *    @param porterState Porter's state.
      */
 
-    public void updatePorterStat(PorterStates porterState){
+    public void updatePorterStat(int porterState){
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while(!con.open()){  // waiting for the connection to be established
+            try {
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored){}
+        }
+
+        // asks for the service to be done
+        outMessage = new Message(Message.UDTEPORTSTAT, porterState);
+        con.writeObject(outMessage);
+
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+        con.close();
     }
 
     /* ************************************************Bus Driver**************************************************** */
@@ -302,7 +322,27 @@ public class GenReposInfoStub {
      *   @param busDriverState Bus driver's state.
      */
 
-    public void updateBDriverStat(BusDriverStates busDriverState){
+    public void updateBDriverStat(int busDriverState){
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while(!con.open()){  // waiting for the connection to be established
+            try {
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored){}
+        }
+
+        // asks for the service to be done
+        outMessage = new Message(Message.UDTEBDSTAT, busDriverState);
+        con.writeObject(outMessage);
+
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+        con.close();
     }
 
     /**
@@ -400,7 +440,27 @@ public class GenReposInfoStub {
      *    @param passSi Passenger's situation.
      */
 
-    public  void newPass(Passenger.SiPass passSi){
+    public  void newPass(int passSi){
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while(!con.open()){  // waiting for the connection to be established
+            try {
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored){}
+        }
+
+        // asks for the service to be done
+        outMessage = new Message(Message.NEWPASS, passSi);
+        con.writeObject(outMessage);
+
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+        con.close();
     }
 
     /**
@@ -410,7 +470,27 @@ public class GenReposInfoStub {
      *    @param passengerState Passenger's state.
      */
 
-    public void updatePassSt(int id, PassengerStates passengerState){
+    public void updatePassSt(int id, int passengerState){
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while(!con.open()){  // waiting for the connection to be established
+            try {
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored){}
+        }
+
+        // asks for the service to be done
+        outMessage = new Message(Message.UDTEPASSSTAT, id, passengerState);
+        con.writeObject(outMessage);
+
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK){
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+        con.close();
     }
 
     /**
@@ -420,7 +500,7 @@ public class GenReposInfoStub {
      *    @param si Passenger's situation.
      */
 
-    public void getPassSi(int id, String si){
+    public void getPassSi(int id, int si){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 

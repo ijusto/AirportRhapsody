@@ -1,8 +1,4 @@
 package comInf;
-
-import clientSide.BusDriverStates;
-import clientSide.PassengerStates;
-import clientSide.PorterStates;
 import clientSide.sharedRegionsStubs.*;
 
 import java.io.*;
@@ -374,7 +370,7 @@ public class Message implements Serializable
 
     private int msgNR = -1;
 
-    private String passSi = null;
+    private int passSi = -1;
 
     private int passNR = -1;
 
@@ -383,6 +379,12 @@ public class Message implements Serializable
     private int[] msgNBagsPerPass;
 
     private int passId = -1;
+
+    private int passStat = -1;
+
+    private int porterStat = -1;
+
+    private int bdStat = -1;
 
     /**
      *  Instanciação de uma mensagem (forma 1).
@@ -413,6 +415,12 @@ public class Message implements Serializable
             msgBN = value;
         } else if(msgType == NUMNRTOTAL){
             msgNR = value;
+        } else if(msgType == UDTEBDSTAT){
+            bdStat = value;
+        } else if(msgType == NEWPASS){
+            passSi = value;
+        } else if(msgType == UDTEPORTSTAT){
+            porterStat = value;
         }
     }
 
@@ -445,14 +453,6 @@ public class Message implements Serializable
         msgType = type;
         if (msgType == PARAMSREPOS) {
             msgReposFile = filename;
-        }
-    }
-
-    public Message (int type, int id, String si) {
-        msgType = type;
-        if (msgType ==  GETPASSSI){
-            passId = id;
-            passSi = si;
         }
     }
 
@@ -508,6 +508,12 @@ public class Message implements Serializable
         } else if(msgType == UDTEPASSNA){
             passId = firstInt;
             passNA = secondInt;
+        } else if(msgType == UDTEPASSSTAT){
+            passId = firstInt;
+            passStat = secondInt;
+        } else if (msgType ==  GETPASSSI){
+            passId = firstInt;
+            passSi = secondInt;
         }
     }
 
@@ -568,7 +574,7 @@ public class Message implements Serializable
 
     public int getMsgNR(){ return msgNR; }
 
-    public String getPassSi(){ return passSi; }
+    public int getPassSi(){ return passSi; }
 
     public int getPassNR(){ return passNR; }
 
@@ -585,6 +591,12 @@ public class Message implements Serializable
     public int getType(){ return msgType; }
 
     public int getPassId(){ return passId; }
+
+    public int getPassStat(){ return passStat; }
+
+    public int getPorterStat(){ return porterStat; }
+
+    public int getBDStat(){ return bdStat; }
 
     /**
      *  Obtenção do valor do campo identificador do cliente.

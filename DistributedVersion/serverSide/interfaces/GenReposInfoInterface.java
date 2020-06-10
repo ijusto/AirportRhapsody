@@ -54,8 +54,12 @@ public class GenReposInfoInterface {
             case Message.PASSEXIT: /* TODO: Validation */
             case Message.MISSBAGREP:
             case Message.NUMNRTOTAL: /* TODO: Validation */
+            case Message.NEWPASS: /* TODO: Validation */
+            case Message.UDTEPASSSTAT: /* TODO: Validation */
+            case Message.UDTEPORTSTAT: /* TODO: Validation */
+            case Message.UDTEBDSTAT: /* TODO: Validation */
 
-            // Shutdown do servidor (operação pedida pelo cliente)
+                // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:
                 break;
             default:
@@ -173,6 +177,26 @@ public class GenReposInfoInterface {
             // numberNRTotal
             case Message.NUMNRTOTAL:
                 repos.numberNRTotal(inMessage.getMsgNR());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            case Message.NEWPASS:
+                repos.newPass(inMessage.getPassSi());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            case Message.UDTEPASSSTAT:
+                repos.updatePassSt(inMessage.getPassId(), inMessage.getPassStat());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            case Message.UDTEPORTSTAT:
+                repos.updatePorterStat(inMessage.getPorterStat());
+                outMessage = new Message(Message.ACK);
+                break;
+
+            case Message.UDTEBDSTAT:
+                repos.updateBDriverStat(inMessage.getBDStat());
                 outMessage = new Message(Message.ACK);
                 break;
 

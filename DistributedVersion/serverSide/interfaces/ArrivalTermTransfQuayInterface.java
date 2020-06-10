@@ -66,13 +66,13 @@ public class ArrivalTermTransfQuayInterface {
 
             // takeABus (Passenger)
             case Message.TAKEABUS:
-                arrivalTermTransfQuay.takeABus(inMessage.getPassId());
+                arrivalTermTransfQuay.takeABus();
                 outMessage = new Message(Message.TAKERSTDONE);
                 break;
 
             // enterTheBus (Passenger)
             case Message.ENTERBUS:
-                arrivalTermTransfQuay.enterTheBus(inMessage.getPassId());
+                arrivalTermTransfQuay.enterTheBus();
                 outMessage = new Message(Message.ACK);
                 break;
 

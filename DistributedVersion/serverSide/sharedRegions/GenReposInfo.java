@@ -1,8 +1,10 @@
 package serverSide.sharedRegions;
 
 import clientSide.entities.*;
+import comInf.Bag;
 import comInf.SimulPar;
 
+import javax.script.SimpleBindings;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -329,9 +331,9 @@ public class GenReposInfo {
      *    @param porterState Porter's state.
      */
 
-    public synchronized void updatePorterStat(PorterStates porterState){
-        if(this.porterState != porterState){
-            this.porterState = porterState;
+    public synchronized void updatePorterStat(int porterState){
+        if(this.porterState != PorterStates.values()[porterState]){
+            this.porterState = PorterStates.values()[porterState];
         }
     }
 
@@ -343,9 +345,9 @@ public class GenReposInfo {
      *   @param busDriverState Bus driver's state.
      */
 
-    public synchronized void updateBDriverStat(BusDriverStates busDriverState){
-        if(this.busDriverState != busDriverState){
-            this.busDriverState = busDriverState;
+    public synchronized void updateBDriverStat(int busDriverState){
+        if(this.busDriverState != BusDriverStates.values()[busDriverState]){
+            this.busDriverState = BusDriverStates.values()[busDriverState];
         }
     }
 
@@ -388,10 +390,10 @@ public class GenReposInfo {
      *    @param passSi Passenger's situation.
      */
 
-    public synchronized  void newPass(Passenger.SiPass passSi){
-        if(passSi == Passenger.SiPass.TRT){
+    public synchronized  void newPass(int passSi){
+        if(Passenger.SiPass.values()[passSi] == Passenger.SiPass.TRT){
             transPassTotal += 1;
-        } else if(passSi == Passenger.SiPass.FDT) {
+        } else if(Passenger.SiPass.values()[passSi] == Passenger.SiPass.FDT) {
             finalPassTotal += 1;
         }
     }
@@ -403,9 +405,9 @@ public class GenReposInfo {
      *    @param passengerState Passenger's state.
      */
 
-    public synchronized void updatePassSt(int id, PassengerStates passengerState){
-        if(passengerStates[id] != passengerState){
-            passengerStates[id] = passengerState;
+    public synchronized void updatePassSt(int id, int passengerState){
+        if(passengerStates[id] != PassengerStates.values()[passengerState]){
+            passengerStates[id] = PassengerStates.values()[passengerState];
         }
     }
 
@@ -416,8 +418,8 @@ public class GenReposInfo {
      *    @param si Passenger's situation.
      */
 
-    public synchronized void getPassSi(int id, String si){
-        passSituation[id] = si;
+    public synchronized void getPassSi(int id, int si){
+        passSituation[id] = Passenger.SiPass.values()[si].toString();
     }
 
     /**
