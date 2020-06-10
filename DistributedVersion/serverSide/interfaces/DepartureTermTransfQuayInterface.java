@@ -8,6 +8,13 @@ import serverSide.servers.ServerDepartureTermTransfQuay;
 import serverSide.servers.ServerDepartureTerminalEntrance;
 import serverSide.sharedRegions.DepartureTermTransfQuay;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class DepartureTermTransfQuayInterface {
 
     private DepartureTermTransfQuay departureTermTransfQuay;

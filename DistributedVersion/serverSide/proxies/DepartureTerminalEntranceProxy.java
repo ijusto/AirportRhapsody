@@ -5,6 +5,13 @@ import comInf.MessageException;
 import serverSide.interfaces.DepartureTerminalEntranceInterface;
 import serverSide.ServerCom;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class DepartureTerminalEntranceProxy  extends Thread {
     /**
      *  Contador de threads lançados

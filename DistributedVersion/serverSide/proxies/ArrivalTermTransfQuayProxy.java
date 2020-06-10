@@ -5,6 +5,13 @@ import comInf.MessageException;
 import serverSide.interfaces.ArrivalTermTransfQuayInterface;
 import serverSide.ServerCom;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ArrivalTermTransfQuayProxy extends Thread {
 
     /**

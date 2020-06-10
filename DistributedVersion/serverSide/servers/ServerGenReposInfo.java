@@ -8,6 +8,13 @@ import serverSide.sharedRegions.GenReposInfo;
 
 import java.net.SocketTimeoutException;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ServerGenReposInfo {
 
     /**

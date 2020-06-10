@@ -8,6 +8,13 @@ import serverSide.servers.ServerBaggageColPoint;
 import serverSide.servers.ServerBaggageReclaimOffice;
 import serverSide.sharedRegions.BaggageReclaimOffice;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class BaggageReclaimOfficeInterface {
 
     private BaggageReclaimOffice baggageReclaimOffice;

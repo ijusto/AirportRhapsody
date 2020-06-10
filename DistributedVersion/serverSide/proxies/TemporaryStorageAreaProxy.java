@@ -5,6 +5,13 @@ import comInf.MessageException;
 import serverSide.interfaces.TemporaryStorageAreaInterface;
 import serverSide.ServerCom;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class TemporaryStorageAreaProxy  extends Thread {
     /**
      *  Contador de threads lançados

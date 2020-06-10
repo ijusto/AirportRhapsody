@@ -6,6 +6,13 @@ import comInf.Bag;
 import comInf.Message;
 import clientSide.entities.*;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ArrivalLoungeStub {
 
     /**

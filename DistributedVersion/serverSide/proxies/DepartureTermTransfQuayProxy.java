@@ -5,6 +5,13 @@ import comInf.MessageException;
 import serverSide.interfaces.DepartureTermTransfQuayInterface;
 import serverSide.ServerCom;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class DepartureTermTransfQuayProxy  extends Thread {
     /**
      *  Contador de threads lançados

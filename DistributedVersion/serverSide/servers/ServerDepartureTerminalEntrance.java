@@ -11,6 +11,13 @@ import serverSide.sharedRegions.DepartureTerminalEntrance;
 
 import java.net.SocketTimeoutException;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ServerDepartureTerminalEntrance {
 
     /**

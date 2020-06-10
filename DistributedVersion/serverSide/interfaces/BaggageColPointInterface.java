@@ -10,6 +10,13 @@ import serverSide.servers.ServerArrivalTermTransfQuay;
 import serverSide.servers.ServerBaggageColPoint;
 import serverSide.sharedRegions.BaggageColPoint;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class BaggageColPointInterface {
 
     private BaggageColPoint baggageColPoint;

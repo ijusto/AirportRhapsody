@@ -9,6 +9,13 @@ import serverSide.servers.ServerArrivalTermTransfQuay;
 import serverSide.servers.ServerArrivalTerminalExit;
 import serverSide.sharedRegions.ArrivalTermTransfQuay;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ArrivalTermTransfQuayInterface {
 
     private ArrivalTermTransfQuay arrivalTermTransfQuay;

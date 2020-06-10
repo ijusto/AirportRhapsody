@@ -9,6 +9,13 @@ import serverSide.sharedRegions.ArrivalTerminalExit;
 
 import java.net.*;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ServerArrivalTerminalExit {
 
     /**

@@ -9,6 +9,13 @@ import serverSide.sharedRegions.BaggageColPoint;
 
 import java.net.*;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ServerBaggageColPoint {
 
     /**

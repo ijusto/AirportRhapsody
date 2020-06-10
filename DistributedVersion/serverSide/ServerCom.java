@@ -3,6 +3,10 @@ package serverSide;
 import java.io.*;
 import java.net.*;
 
+/**
+ *   @author António Rui De Oliveira E Silva Borges
+ */
+
 public class ServerCom {
 
     /**

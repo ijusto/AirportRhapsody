@@ -10,6 +10,13 @@ import serverSide.sharedRegions.ArrivalTermTransfQuay;
 
 import java.net.SocketTimeoutException;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ServerArrivalTermTransfQuay {
 
     /**

@@ -5,6 +5,13 @@ import comInf.MessageException;
 import serverSide.interfaces.ArrivalLoungeInterface;
 import serverSide.ServerCom;
 
+/**
+ *
+ *
+ *   @author Inês Justo
+ *   @author Miguel Lopes
+ */
+
 public class ArrivalLoungeProxy extends Thread {
 
     /**
