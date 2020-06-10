@@ -17,9 +17,7 @@ public class BaggageReclaimOffice {
      *   General Repository of Information Stub.
      */
 
-    private GenReposInfoStub reposStub;
-
-    public BaggageReclaimOffice(){}
+    private final GenReposInfoStub reposStub;
 
     /**
      *   Instantiation of the Baggage Collection Point.
@@ -27,7 +25,7 @@ public class BaggageReclaimOffice {
      *     @param reposStub general repository of information Stub
      */
 
-    public void probPar(GenReposInfoStub reposStub){
+    public BaggageReclaimOffice(GenReposInfoStub reposStub){
         this.reposStub = reposStub;
     }
 

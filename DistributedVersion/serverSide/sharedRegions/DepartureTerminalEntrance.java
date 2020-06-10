@@ -47,8 +47,6 @@ public class DepartureTerminalEntrance {
 
     private boolean phEmpty;
 
-    public DepartureTerminalEntrance(){}
-
     /**
      *   Instantiation of the Departure Terminal Entrance.
      *
@@ -57,7 +55,7 @@ public class DepartureTerminalEntrance {
      *     @param arrivalQuayStub Arrival Terminal Transfer Quay Stub.
      */
 
-    public void probPar(GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
+    public DepartureTerminalEntrance(GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
                         ArrivalTermTransfQuayStub arrivalQuayStub){
         this.arrivLoungeStub = arrivLoungeStub;
         this.arrivalQuayStub = arrivalQuayStub;

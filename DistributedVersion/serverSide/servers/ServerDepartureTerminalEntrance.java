@@ -1,8 +1,13 @@
 package serverSide.servers;
 
+import clientSide.SimulPar;
+import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
+import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import serverSide.ServerCom;
 import serverSide.interfaces.DepartureTerminalEntranceInterface;
 import serverSide.proxies.DepartureTerminalEntranceProxy;
+import serverSide.sharedRegions.ArrivalTermTransfQuay;
 import serverSide.sharedRegions.DepartureTerminalEntrance;
 
 import java.net.SocketTimeoutException;
@@ -15,7 +20,7 @@ public class ServerDepartureTerminalEntrance {
      *    @serialField portNumb
      */
 
-    private static final int portNumb = 22001;
+    private static final int portNumb = SimulPar.depTerminalEntrancePort;
     public static boolean waitConnection;                              // sinalização de actividade
 
     /**
@@ -27,13 +32,19 @@ public class ServerDepartureTerminalEntrance {
         DepartureTerminalEntrance departureTerminalEntrance;                                    // barbearia (representa o serviço a ser prestado)
         DepartureTerminalEntranceInterface departureTerminalEntranceInter;                      // interface à barbearia
         ServerCom scon, sconi;                               // canais de comunicação
-        DepartureTerminalEntranceProxy cliProxy;                                // thread agente prestador do serviço
+        DepartureTerminalEntranceProxy cliProxy;
+        GenReposInfoStub reposInfoStub;
+        ArrivalLoungeStub arriveLougeStub;
+        ArrivalTermTransfQuayStub arrivelaQuayStub;// thread agente prestador do serviço
 
         /* estabelecimento do servico */
 
         scon = new ServerCom(portNumb);                     // criação do canal de escuta e sua associação
-        scon.start ();                                       // com o endereço público
-        departureTerminalEntrance = new DepartureTerminalEntrance();                           // activação do serviço
+        scon.start ();
+        reposInfoStub = new GenReposInfoStub(SimulPar.genReposInfoHost, SimulPar.genReposInfoPort);
+        arriveLougeStub = new ArrivalLoungeStub(SimulPar.arrivalLoungeHost, SimulPar.arrivalLoungePort);
+        arrivelaQuayStub = new ArrivalTermTransfQuayStub(SimulPar.arrivalTTQuayHost, SimulPar.arrivalTTQuayPort);// com o endereço público
+        departureTerminalEntrance = new DepartureTerminalEntrance(reposInfoStub, arriveLougeStub, arrivelaQuayStub);                           // activação do serviço
         departureTerminalEntranceInter = new DepartureTerminalEntranceInterface(departureTerminalEntrance);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");

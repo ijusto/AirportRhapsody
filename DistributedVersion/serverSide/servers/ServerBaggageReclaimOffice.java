@@ -1,5 +1,7 @@
 package serverSide.servers;
 
+import clientSide.SimulPar;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import serverSide.ServerCom;
 import serverSide.interfaces.BaggageReclaimOfficeInterface;
 import serverSide.proxies.BaggageReclaimOfficeProxy;
@@ -15,7 +17,7 @@ public class ServerBaggageReclaimOffice {
      *    @serialField portNumb
      */
 
-    private static final int portNumb = 22001;
+    private static final int portNumb = SimulPar.bgrOfficePort;
     public static boolean waitConnection;                              // sinalização de actividade
 
     /**
@@ -27,13 +29,15 @@ public class ServerBaggageReclaimOffice {
         BaggageReclaimOffice baggageReclaimOffice;                                    // barbearia (representa o serviço a ser prestado)
         BaggageReclaimOfficeInterface baggageReclaimOfficeInter;                      // interface à barbearia
         ServerCom scon, sconi;                               // canais de comunicação
-        BaggageReclaimOfficeProxy cliProxy;                                // thread agente prestador do serviço
+        BaggageReclaimOfficeProxy cliProxy;
+        GenReposInfoStub reposInfoStub;                         // thread agente prestador do serviço
 
         /* estabelecimento do servico */
 
         scon = new ServerCom(portNumb);                     // criação do canal de escuta e sua associação
         scon.start ();                                       // com o endereço público
-        baggageReclaimOffice = new BaggageReclaimOffice();                           // activação do serviço
+        reposInfoStub = new GenReposInfoStub(SimulPar.genReposInfoHost, SimulPar.genReposInfoPort);
+        baggageReclaimOffice = new BaggageReclaimOffice(reposInfoStub);                           // activação do serviço
         baggageReclaimOfficeInter = new BaggageReclaimOfficeInterface(baggageReclaimOffice);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");

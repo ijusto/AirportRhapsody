@@ -34,8 +34,7 @@ public class BaggageColPoint {
      */
 
     private boolean pHoldEmpty;
-
-    public  BaggageColPoint(){}
+    
 
     /**
      *   Instantiation of the Baggage Collection Point.
@@ -43,7 +42,7 @@ public class BaggageColPoint {
      *     @param reposStub general repository of information Stub
      */
 
-    public void probPar(GenReposInfoStub reposStub){
+    public BaggageColPoint(GenReposInfoStub reposStub){
         this.reposStub = reposStub;
         this.pHoldEmpty = true;
     }

@@ -1,5 +1,6 @@
 package serverSide.servers;
 
+import clientSide.SimulPar;
 import serverSide.ServerCom;
 import serverSide.interfaces.ArrivalLoungeInterface;
 import serverSide.proxies.ArrivalLoungeProxy;
@@ -15,7 +16,7 @@ public class ServerArrivalLounge {
      *    @serialField portNumb
      */
 
-    private static final int portNumb = 22001;
+    private static final int portNumb = SimulPar.arrivalLoungePort;
     public static boolean waitConnection;                              // sinalização de actividade
 
     /**

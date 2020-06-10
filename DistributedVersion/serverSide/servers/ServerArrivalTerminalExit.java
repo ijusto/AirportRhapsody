@@ -1,9 +1,15 @@
 package serverSide.servers;
 
+import clientSide.SimulPar;
+import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
+import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import serverSide.ServerCom;
 import serverSide.interfaces.ArrivalTerminalExitInterface;
 import serverSide.proxies.ArrivalTerminalExitProxy;
+import serverSide.sharedRegions.ArrivalTermTransfQuay;
 import serverSide.sharedRegions.ArrivalTerminalExit;
+import serverSide.sharedRegions.GenReposInfo;
 
 import java.net.*;
 
@@ -15,12 +21,14 @@ public class ServerArrivalTerminalExit {
      *    @serialField portNumb
      */
 
-    private static final int portNumb = 22001;
+    private static final int portNumb = SimulPar.arrivalTermExitPort;
     public static boolean waitConnection;                              // sinalização de actividade
 
     /**
      *  Programa principal.
      */
+
+
 
     public static void main (String [] args)
     {
@@ -29,11 +37,16 @@ public class ServerArrivalTerminalExit {
         ServerCom scon, sconi;                               // canais de comunicação
         ArrivalTerminalExitProxy cliProxy;                                // thread agente prestador do serviço
 
+        GenReposInfoStub repoInfoStub = new GenReposInfoStub(SimulPar.genReposInfoHost, SimulPar.genReposInfoPort);
+        ArrivalLoungeStub arrivLoungeStub = new ArrivalLoungeStub(SimulPar.arrivalLoungeHost, SimulPar.arrivalLoungePort);
+        ArrivalTermTransfQuayStub arrivalQuayStub = new ArrivalTermTransfQuayStub(SimulPar.arrivalTTQuayHost, SimulPar.arrivalTTQuayPort);
+
         /* estabelecimento do servico */
 
         scon = new ServerCom(portNumb);                     // criação do canal de escuta e sua associação
         scon.start ();                                       // com o endereço público
-        arrivalTerminalExit = new ArrivalTerminalExit();                           // activação do serviço
+        arrivalTerminalExit = new ArrivalTerminalExit( repoInfoStub,  arrivLoungeStub,
+                 arrivalQuayStub);                           // activação do serviço
         arrivalTerminalExitInterface = new ArrivalTerminalExitInterface(arrivalTerminalExit);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");

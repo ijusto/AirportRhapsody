@@ -1,5 +1,6 @@
 package serverSide.servers;
 
+import clientSide.SimulPar;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.MemException;
 import serverSide.ServerCom;
@@ -18,7 +19,7 @@ public class ServerArrivalTermTransfQuay {
      *    @serialField portNumb
      */
 
-    private static final int portNumb = 22001;
+    private static final int portNumb = SimulPar.arrivalTTQuayPort;
     public static boolean waitConnection;                              // sinalização de actividade
 
     /**
@@ -30,14 +31,14 @@ public class ServerArrivalTermTransfQuay {
         ArrivalTermTransfQuayInterface arrivalTermTransfQuayInter;                      // interface à barbearia
         ServerCom scon, sconi;                               // canais de comunicação
         ArrivalTermTransfQuayProxy cliProxy;                                // thread agente prestador do serviço
-        GenReposInfoStub repoStub;
+        GenReposInfoStub repoInfoStub;
 
         /* estabelecimento do servico */
 
         scon = new ServerCom(portNumb);                     // criação do canal de escuta e sua associação
         scon.start ();                                                                          // com o endereço público
-        repoStub = new GenReposInfoStub("localhost", portNumb);
-        arrivalTermTransfQuay = new ArrivalTermTransfQuay(repoStub);                           // activação do serviço
+        repoInfoStub = new GenReposInfoStub(SimulPar.genReposInfoHost, SimulPar.genReposInfoPort);
+        arrivalTermTransfQuay = new ArrivalTermTransfQuay(repoInfoStub);                           // activação do serviço
         arrivalTermTransfQuayInter = new ArrivalTermTransfQuayInterface(arrivalTermTransfQuay);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");

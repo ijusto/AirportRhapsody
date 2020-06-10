@@ -56,8 +56,6 @@ public class ArrivalTerminalExit {
 
     private static final Object lockDeadPassCounter = new Object();
 
-    public ArrivalTerminalExit(){}
-
     /**
      *   Instantiation of the Arrival Terminal Exit.
      *
@@ -66,7 +64,7 @@ public class ArrivalTerminalExit {
      *     @param arrivalQuayStub Arrival Terminal Transfer Quay Stub.
      */
 
-    public void probPar(GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
+    public ArrivalTerminalExit(GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
                                ArrivalTermTransfQuayStub arrivalQuayStub){
         this.arrivLoungeStub = arrivLoungeStub;
         this.arrivalQuayStub = arrivalQuayStub;

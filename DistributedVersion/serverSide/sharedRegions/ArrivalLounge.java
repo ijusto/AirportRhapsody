@@ -101,7 +101,7 @@ public class ArrivalLounge {
      *     @param nBagsPHold number of bags per passenger and flight.
      */
 
-    public void ArrivalLounge(GenReposInfoStub reposStub, BaggageColPointStub bagColPointStub,
+    public ArrivalLounge(GenReposInfoStub reposStub, BaggageColPointStub bagColPointStub,
                         ArrivalTermTransfQuayStub arrQuayStub, int[][] destStat, int[][] nBagsPHold)
             throws MemException {
 

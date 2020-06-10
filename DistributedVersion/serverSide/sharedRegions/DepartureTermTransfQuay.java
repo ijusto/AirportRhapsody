@@ -38,15 +38,13 @@ public class DepartureTermTransfQuay {
 
     private static final Object lockNPassOnTheBus = new Object();
 
-    public DepartureTermTransfQuay(){}
-
     /**
      *   Instantiation of the Departure Terminal Transfer Quay.
      *
      *     @param reposStub general repository of information Stub.
      */
 
-    public void probPar(GenReposInfoStub reposStub){
+    public DepartureTermTransfQuay(GenReposInfoStub reposStub){
         this.reposStub = reposStub;
         this.busDoorsOpen = false;
         this.resetNPassOnTheBusValue();

@@ -1,5 +1,6 @@
 package serverSide.servers;
 
+import clientSide.SimulPar;
 import serverSide.ServerCom;
 import serverSide.interfaces.GenReposInfoInterface;
 import serverSide.proxies.GenReposInfoProxy;
@@ -15,7 +16,7 @@ public class ServerGenReposInfo {
      *    @serialField portNumb
      */
 
-    private static final int portNumb = 22001;
+    private static final int portNumb = SimulPar.genReposInfoPort;
     public static boolean waitConnection;                              // sinalização de actividade
 
     /**
@@ -33,7 +34,7 @@ public class ServerGenReposInfo {
 
         scon = new ServerCom(portNumb);                     // criação do canal de escuta e sua associação
         scon.start ();                                       // com o endereço público
-        repos = new GenReposInfo();                           // activação do serviço
+        repos = new GenReposInfo(SimulPar.filename);                           // activação do serviço
         reposInter = new GenReposInfoInterface(repos);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");

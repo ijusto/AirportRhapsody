@@ -1,9 +1,12 @@
 package serverSide.servers;
 
+import clientSide.SimulPar;
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import serverSide.ServerCom;
 import serverSide.interfaces.BaggageColPointInterface;
 import serverSide.proxies.BaggageColPointProxy;
 import serverSide.sharedRegions.BaggageColPoint;
+import serverSide.sharedRegions.GenReposInfo;
 
 import java.net.*;
 
@@ -15,7 +18,7 @@ public class ServerBaggageColPoint {
      *    @serialField portNumb
      */
 
-    private static final int portNumb = 22001;
+    private static final int portNumb = SimulPar.bgCollectionPointPort;
     public static boolean waitConnection;                              // sinalização de actividade
 
     /**
@@ -27,13 +30,15 @@ public class ServerBaggageColPoint {
         BaggageColPoint baggageColPoint;                                    // barbearia (representa o serviço a ser prestado)
         BaggageColPointInterface baggageColPointInter;                      // interface à barbearia
         ServerCom scon, sconi;                               // canais de comunicação
-        BaggageColPointProxy cliProxy;                                // thread agente prestador do serviço
+        BaggageColPointProxy cliProxy;
+        GenReposInfoStub reposInfoStub; // thread agente prestador do serviço
 
         /* estabelecimento do servico */
 
         scon = new ServerCom(portNumb);                     // criação do canal de escuta e sua associação
-        scon.start ();                                       // com o endereço público
-        baggageColPoint = new BaggageColPoint();                           // activação do serviço
+        scon.start ();
+        reposInfoStub = new GenReposInfoStub(SimulPar.genReposInfoHost, SimulPar.genReposInfoPort);// com o endereço público
+        baggageColPoint = new BaggageColPoint(reposInfoStub);                           // activação do serviço
         baggageColPointInter = new BaggageColPointInterface(baggageColPoint);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");

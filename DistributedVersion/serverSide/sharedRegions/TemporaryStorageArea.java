@@ -3,7 +3,7 @@ import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.MemException;
 import comInf.MemStack;
 import comInf.Bag;
-import clientSide.PorterStates;
+import clientSide.entities.PorterStates;
 import clientSide.entities.Porter;
 import clientSide.SimulPar;
 
@@ -28,7 +28,7 @@ public class TemporaryStorageArea {
 
     private GenReposInfoStub reposStub;
 
-    public TemporaryStorageArea(){}
+
 
     /**
      *   Instantiation of the Temporary Storage Area.
@@ -36,7 +36,7 @@ public class TemporaryStorageArea {
      *     @param reposStub general repository of information Stub
      */
 
-    public void probPar(GenReposInfoStub reposStub) throws MemException {
+    public TemporaryStorageArea(GenReposInfoStub reposStub) throws MemException {
         this.reposStub = reposStub;
         // stack of the store room instantiation
         tmpStorageStack = new MemStack<>(new Bag [SimulPar.N_PASS_PER_FLIGHT * SimulPar.N_BAGS_PER_PASS]);
