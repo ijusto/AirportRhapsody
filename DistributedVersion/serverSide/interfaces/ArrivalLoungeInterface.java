@@ -39,9 +39,10 @@ public class ArrivalLoungeInterface {
             case Message.PARAMSARRLNG:/* TODO: Validation */
             case Message.WSID:
             case Message.TAKEARST:
-            case Message.TRYTOCOL:/* TODO: Validation */
+            case Message.TRYTOCOL:
             case Message.NOBAGS2COL:
             case Message.RESETAL:/* TODO: Validation */
+                //inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsNA()
             case Message.SETDEPTERNREF:/* TODO: Validation */
 
             // Shutdown do servidor (operação pedida pelo cliente)
@@ -56,15 +57,14 @@ public class ArrivalLoungeInterface {
         switch (inMessage.getType ()) {
 
             // probPar
-//            case Message.PARAMSARRLNG:
-//                try {
-//                    arrivalLounge.probPar(inMessage.getMsgReposStub(), inMessage.getMsgBagColPointStub(),
-//                            inMessage.getMsgArrQuayStub(), inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsPHold());
-//                } catch (MemException e) {
-//                    e.printStackTrace();
-//                }
-//                outMessage = new Message(Message.ACK);
-//                break;
+            case Message.PARAMSARRLNG:
+                try {
+                    arrivalLounge.probPar(inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsPHold());
+                } catch (MemException e) {
+                    e.printStackTrace();
+                }
+                outMessage = new Message(Message.ACK);
+                break;
 
             // WhatShouldIDo (Passenger)
             case Message.WSID:
@@ -92,13 +92,13 @@ public class ArrivalLoungeInterface {
                 break;
 
             // noMoreBagsToCollect (Porter)
-            case Message.NOBAGS2COL:                                                      // receber pagamento
+            case Message.NOBAGS2COL:
                 arrivalLounge.noMoreBagsToCollect();
                 outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
 
             // resetArrivalLounge (main)
-            case Message.RESETAL:                                                      // receber pagamento
+            case Message.RESETAL:
                 try {
                     arrivalLounge.resetArrivalLounge(inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsNA());
                 } catch (MemException e) {

@@ -1,6 +1,7 @@
 package clientSide.sharedRegionsStubs;
 
 import clientSide.ClientCom;
+import clientSide.SimulPar;
 import comInf.Bag;
 import comInf.Message;
 import clientSide.entities.*;
@@ -70,12 +71,11 @@ public class ArrivalLoungeStub {
      *   <p> Head start delay, that represents the time before the passenger chooses between what to do when arriving to
      *   the airport.
      *
-     *     @param  passengerId passenger id
      *     @return <li> true, if final destination
      *             <li> false, otherwise
      */
 
-    public boolean whatShouldIDo(int passengerId){
+    public boolean whatShouldIDo(){
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -88,7 +88,7 @@ public class ArrivalLoungeStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.WSID, passengerId);
+        outMessage = new Message(Message.WSID);
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -164,7 +164,11 @@ public class ArrivalLoungeStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        if ((inMessage.getType() != Message.BAG) && (inMessage.getType() != Message.NULLBAG)){
+
+        if( (inMessage.getType() == Message.BAG &&
+                ( (inMessage.getMsgBagDestStat() != 0 || inMessage.getMsgBagDestStat() != 1)
+                    || inMessage.getMsgBagIdOwner() > SimulPar.N_PASS_PER_FLIGHT) )
+            || ( (inMessage.getType() != Message.BAG) && (inMessage.getType() != Message.NULLBAG))){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);

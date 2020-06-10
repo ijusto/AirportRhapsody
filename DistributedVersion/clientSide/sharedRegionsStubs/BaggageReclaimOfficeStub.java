@@ -61,7 +61,7 @@ public class BaggageReclaimOfficeStub {
 //        con.close();
 //    }
 
-    public void reportMissingBags(int passengerId){
+    public void reportMissingBags(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
@@ -73,7 +73,7 @@ public class BaggageReclaimOfficeStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.REPORTMISSBAG, passengerId);
+        outMessage = new Message(Message.REPORTMISSBAG);
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

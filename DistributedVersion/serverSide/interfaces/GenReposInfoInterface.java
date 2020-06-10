@@ -9,9 +9,11 @@ import serverSide.sharedRegions.GenReposInfo;
 public class GenReposInfoInterface {
 
     private GenReposInfo repos;
+    private int fr_count;
 
     public GenReposInfoInterface(GenReposInfo repos){
         this.repos = repos;
+        this.fr_count = 0;
     }
 
     /**
@@ -77,7 +79,10 @@ public class GenReposInfoInterface {
 
             // finalReport
             case Message.FINALREPORT:
-                repos.finalReport();
+                fr_count++;
+                if(fr_count == 3){
+                    repos.finalReport();
+                }
                 outMessage = new Message(Message.ACK);
                 break;
 

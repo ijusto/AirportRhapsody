@@ -62,7 +62,7 @@ public class DepartureTerminalEntranceStub {
 //        con.close();
 //    }
 
-    public void prepareNextLeg(int passengerId){
+    public void prepareNextLeg(){
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -75,7 +75,7 @@ public class DepartureTerminalEntranceStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.PREPARENEXTLEG, passengerId);
+        outMessage = new Message(Message.PREPARENEXTLEG);
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

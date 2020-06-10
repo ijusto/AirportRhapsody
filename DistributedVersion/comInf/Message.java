@@ -322,12 +322,6 @@ public class Message implements Serializable
     private int custId = -1;
 
     /**
-     *
-     */
-
-    private int passId = -1;
-
-    /**
      *  Identificação do barbeiro
      */
 
@@ -395,7 +389,7 @@ public class Message implements Serializable
      *    @param type tipo da mensagem
      */
 
-    public Message (int type)
+    public Message(int type)
     {
         msgType = type;
     }
@@ -408,14 +402,9 @@ public class Message implements Serializable
      */
 
 
-    public Message (int type, int value) {
+    public Message(int type, int value) {
         msgType = type;
-        if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
-                || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
-                || (msgType == PREPARENEXTLEG) || (msgType == PJOINWQ) || (msgType == PLEFTWQ) || (msgType == FREEBS)
-                || (msgType == PASSEXIT)){
-            passId = value;
-        } else if (msgType == DEADPASSVAL){
+        if (msgType == DEADPASSVAL){
             msgDeadPassValue = value;
         } else if(msgType == UPDATEFN){
             msgFlight = value;
@@ -423,18 +412,6 @@ public class Message implements Serializable
             msgBN = value;
         } else if(msgType == NUMNRTOTAL){
             msgNR = value;
-        }
-    }
-
-    public Message (int type, GenReposInfoStub reposStub, BaggageColPointStub bagColPointStub,
-                    ArrivalTermTransfQuayStub arrQuayStub, int[][] destStat, int[][] nBagsPHold) {
-        msgType = type;
-        if (msgType ==  PARAMSARRLNG){
-            msgReposStub = reposStub;
-            msgBagColPointStub = bagColPointStub;
-            msgArrQuayStub = arrQuayStub;
-            msgBagAndPassDest = destStat;
-            msgNBagsPHold = nBagsPHold;
         }
     }
 
@@ -480,7 +457,7 @@ public class Message implements Serializable
 
     public Message (int type, int[][] bagAndPassDest, int[][] nBagsNA) {
         msgType = type;
-        if (msgType ==  RESETAL){
+        if ((msgType ==  RESETAL) || (msgType == PARAMSARRLNG)){
             msgBagAndPassDest = bagAndPassDest;
             msgNBagsNA = nBagsNA;
         }
@@ -613,10 +590,6 @@ public class Message implements Serializable
         return (custId);
     }
 
-
-    public int getPassId() {
-        return passId;
-    }
 
     /**
      *  Obtenção do valor do campo identificador do barbeiro.

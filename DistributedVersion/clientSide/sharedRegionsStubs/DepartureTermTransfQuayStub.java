@@ -61,7 +61,7 @@ public class DepartureTermTransfQuayStub {
 //        con.close();
 //    }
 
-    public void leaveTheBus(int passengerId){
+    public void leaveTheBus(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
@@ -73,7 +73,7 @@ public class DepartureTermTransfQuayStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.LEAVEBUS, passengerId);  //pede report missing bags
+        outMessage = new Message(Message.LEAVEBUS);  //pede report missing bags
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

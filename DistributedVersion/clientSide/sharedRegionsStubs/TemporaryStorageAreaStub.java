@@ -117,7 +117,6 @@ public class TemporaryStorageAreaStub {
         con.close();
     }
 
-
     /**
      *  Shut down the server (service request).
      */
@@ -144,6 +143,4 @@ public class TemporaryStorageAreaStub {
         }
         con.close();
     }
-
-
 }

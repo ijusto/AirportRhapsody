@@ -97,13 +97,10 @@ public class ArrivalLounge {
      *
      *     @param reposStub general repository of information Stub.
      *     @param bagColPointStub baggage collection point.
-     *     @param destStat destination state of the bags.
-     *     @param nBagsPHold number of bags per passenger and flight.
      */
 
     public ArrivalLounge(GenReposInfoStub reposStub, BaggageColPointStub bagColPointStub,
-                        ArrivalTermTransfQuayStub arrQuayStub, int[][] destStat, int[][] nBagsPHold)
-            throws MemException {
+                        ArrivalTermTransfQuayStub arrQuayStub){
 
         this.reposStub = reposStub;
 
@@ -111,6 +108,20 @@ public class ArrivalLounge {
         this.reposStub.updateFlightNumber(this.currentFlight);
         this.arrQuayStub = arrQuayStub;
 
+        this.bagColPointStub = bagColPointStub;
+        this.bagColPointStub.setPHoldEmpty(false);
+
+
+    }
+
+    /**
+     *   Passing the Arrival Lounge parameters.
+     *
+     *     @param destStat destination state of the bags.
+     *     @param nBagsPHold number of bags per passenger and flight.
+     */
+
+    public void probPar(int[][] destStat, int[][] nBagsPHold) throws MemException {
         Map<Integer, MemFIFO<Bag>> treadmill = new HashMap<>();
         Map<Integer, Integer> nBagsPerPass = new HashMap<>();
         int nTotalBags = 0;
@@ -129,8 +140,6 @@ public class ArrivalLounge {
             treadmill.put(nPass, bagPassFIFO);
         }
 
-        this.bagColPointStub = bagColPointStub;
-        this.bagColPointStub.setPHoldEmpty(false);
         this.bagColPointStub.setTreadmill(treadmill);
 
         resetNPassAtArrivL();

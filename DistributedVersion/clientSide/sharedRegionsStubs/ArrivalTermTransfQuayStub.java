@@ -70,7 +70,7 @@ public class ArrivalTermTransfQuayStub {
      *   in the bus.
      */
 
-    public void takeABus(int passengerId) {
+    public void takeABus() {
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -83,7 +83,7 @@ public class ArrivalTermTransfQuayStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.TAKEABUS, passengerId);
+        outMessage = new Message(Message.TAKEABUS);
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -102,7 +102,7 @@ public class ArrivalTermTransfQuayStub {
      *   in announcingBusBoarding, who is waiting for all the passenger to enter.
      */
 
-    public void enterTheBus(int passengerId){
+    public void enterTheBus(){
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -115,7 +115,7 @@ public class ArrivalTermTransfQuayStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.ENTERBUS, passengerId);
+        outMessage = new Message(Message.ENTERBUS);
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

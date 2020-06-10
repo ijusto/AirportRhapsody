@@ -1,11 +1,11 @@
 package clientSide.sharedRegionsStubs;
 
 import clientSide.ClientCom;
+import clientSide.entities.Passenger;
+import clientSide.entities.Porter;
 import comInf.Bag;
 import comInf.MemFIFO;
 import comInf.Message;
-import entities.Passenger;
-import entities.Porter;
 
 import java.util.Map;
 
@@ -78,7 +78,7 @@ public class BaggageColPointStub {
      *
      */
 
-    public boolean goCollectABag(int passengerId){
+    public boolean goCollectABag(){
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -91,7 +91,7 @@ public class BaggageColPointStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.GOCOLLECTBAG, passengerId);
+        outMessage = new Message(Message.GOCOLLECTBAG);
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

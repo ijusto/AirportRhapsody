@@ -62,11 +62,13 @@ public class ArrivalTerminalExitInterface {
                 outMessage = new Message(Message.ACK);
                 break;
 
+            // goHome (Passenger)
             case Message.GOHOME:
                 arrivalTerminalExit.goHome(inMessage.getPassId());
                 outMessage = new Message(Message.GODONE);
                 break;
 
+            // notifyFromPrepareNextLeg
             case Message.NOTFNEXTL:
                 arrivalTerminalExit.notifyFromPrepareNextLeg();
                 outMessage = new Message(Message.ACK);

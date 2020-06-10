@@ -67,7 +67,7 @@ public class ArrivalTerminalExitStub {
      *   Departure Terminal Entrance or, if the last, to notify all the others.
      */
 
-    public void goHome(int passengerId){
+    public void goHome(){
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -80,7 +80,7 @@ public class ArrivalTerminalExitStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.GOHOME, passengerId);
+        outMessage = new Message(Message.GOHOME);
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
