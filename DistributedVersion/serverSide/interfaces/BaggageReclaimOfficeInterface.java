@@ -54,14 +54,17 @@ public class BaggageReclaimOfficeInterface {
 
         switch (inMessage.getType ()) {
             // probPar
+            /*
             case Message.PARAMSBAGRECOFF:
                 baggageReclaimOffice.probPar(inMessage.getMsgReposStub());
                 outMessage = new Message(Message.ACK);
                 break;
 
+             */
+
             // reportMissingBags
             case Message.REPORTMISSBAG:
-                baggageReclaimOffice.reportMissingBags(inMessage.getPassId());
+                baggageReclaimOffice.reportMissingBags();
                 outMessage = new Message(Message.ACK);
                 break;
 

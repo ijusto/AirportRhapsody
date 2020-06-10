@@ -53,6 +53,7 @@ public class TemporaryStorageAreaInterface {
 
         switch (inMessage.getType ()) {
             // probPar
+            /*
             case Message.PARAMSTEMPSTORAREA:
                 try {
                     temporaryStorageArea.probPar(inMessage.getMsgReposStub());
@@ -61,6 +62,8 @@ public class TemporaryStorageAreaInterface {
                 }
                 outMessage = new Message(Message.ACK);
                 break;
+
+             */
 
             // carryItToAppropriateStore (porter)
             case Message.CARRYTOAPPSTORE_TSA:
