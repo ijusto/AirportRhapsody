@@ -1,7 +1,7 @@
 package serverSide.sharedRegions;
 
 import clientSide.entities.Passenger;
-import clientSide.PassengerStates;
+import clientSide.entities.PassengerStates;
 import clientSide.SimulPar;
 import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
 import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
@@ -80,6 +80,7 @@ public class ArrivalTerminalExit {
      */
 
     public synchronized void goHome(int passengerId){
+        Passenger passenger = (Passenger) Thread.currentThread();
         assert(statePassengers[passengerId] == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
                 statePassengers[passengerId] == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
                 statePassengers[passengerId] == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);

@@ -1,6 +1,7 @@
 package serverSide.sharedRegions;
 
 import clientSide.SimulPar;
+import clientSide.entities.*;
 import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.BaggageColPointStub;
 import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
@@ -9,6 +10,8 @@ import comInf.Bag;
 import comInf.MemException;
 import comInf.MemFIFO;
 import comInf.MemStack;
+
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -88,7 +91,6 @@ public class ArrivalLounge {
 
     private static final Object lockNnPassAtArrivLCounter = new Object();
 
-    public ArrivalLounge(){}
 
     /**
      *   Instantiation of the Arrival Lounge.
@@ -99,7 +101,7 @@ public class ArrivalLounge {
      *     @param nBagsPHold number of bags per passenger and flight.
      */
 
-    public void probPar(GenReposInfoStub reposStub, BaggageColPointStub bagColPointStub,
+    public void ArrivalLounge(GenReposInfoStub reposStub, BaggageColPointStub bagColPointStub,
                         ArrivalTermTransfQuayStub arrQuayStub, int[][] destStat, int[][] nBagsPHold)
             throws MemException {
 

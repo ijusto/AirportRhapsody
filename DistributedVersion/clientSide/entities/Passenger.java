@@ -1,6 +1,6 @@
 package clientSide.entities;
 
-import clientSide.PassengerStates;
+import clientSide.entities.PassengerStates;
 import clientSide.sharedRegionsStubs.*;
 
 /**

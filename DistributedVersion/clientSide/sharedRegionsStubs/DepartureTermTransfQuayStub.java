@@ -1,6 +1,7 @@
 package clientSide.sharedRegionsStubs;
 
 import clientSide.ClientCom;
+import clientSide.entities.*;
 import comInf.Message;
 
 public class DepartureTermTransfQuayStub {
@@ -36,29 +37,29 @@ public class DepartureTermTransfQuayStub {
      *
      */
 
-    public void probPar(GenReposInfoStub reposStub){
-
-        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
-        Message inMessage, outMessage;
-
-        while(!con.open()){  // waiting for the connection to be established
-            try {
-                Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored){}
-        }
-
-        // asks for the service to be done
-        outMessage = new Message(Message.PARAMSDEPTTQUAY, reposStub);
-        con.writeObject(outMessage);
-
-        inMessage = (Message) con.readObject();
-        if (inMessage.getType() != Message.ACK){
-            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
-            System.out.println(inMessage.toString());
-            System.exit(1);
-        }
-        con.close();
-    }
+//    public void probPar(GenReposInfoStub reposStub){
+//
+//        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+//        Message inMessage, outMessage;
+//
+//        while(!con.open()){  // waiting for the connection to be established
+//            try {
+//                Thread.currentThread().sleep((long) 10);
+//            } catch (InterruptedException ignored){}
+//        }
+//
+//        // asks for the service to be done
+//        outMessage = new Message(Message.PARAMSDEPTTQUAY, reposStub);
+//        con.writeObject(outMessage);
+//
+//        inMessage = (Message) con.readObject();
+//        if (inMessage.getType() != Message.ACK){
+//            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+//            System.out.println(inMessage.toString());
+//            System.exit(1);
+//        }
+//        con.close();
+//    }
 
     public void leaveTheBus(int passengerId){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
@@ -66,7 +67,8 @@ public class DepartureTermTransfQuayStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                Passenger p = (Passenger) Thread.currentThread();
+                p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
@@ -95,7 +97,8 @@ public class DepartureTermTransfQuayStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                BusDriver b = (BusDriver) Thread.currentThread();
+                b.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 

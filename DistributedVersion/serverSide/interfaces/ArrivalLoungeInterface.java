@@ -56,15 +56,15 @@ public class ArrivalLoungeInterface {
         switch (inMessage.getType ()) {
 
             // probPar
-            case Message.PARAMSARRLNG:
-                try {
-                    arrivalLounge.probPar(inMessage.getMsgReposStub(), inMessage.getMsgBagColPointStub(),
-                            inMessage.getMsgArrQuayStub(), inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsPHold());
-                } catch (MemException e) {
-                    e.printStackTrace();
-                }
-                outMessage = new Message(Message.ACK);
-                break;
+//            case Message.PARAMSARRLNG:
+//                try {
+//                    arrivalLounge.probPar(inMessage.getMsgReposStub(), inMessage.getMsgBagColPointStub(),
+//                            inMessage.getMsgArrQuayStub(), inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsPHold());
+//                } catch (MemException e) {
+//                    e.printStackTrace();
+//                }
+//                outMessage = new Message(Message.ACK);
+//                break;
 
             // WhatShouldIDo (Passenger)
             case Message.WSID:

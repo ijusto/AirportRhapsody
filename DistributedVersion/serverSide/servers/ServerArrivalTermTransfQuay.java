@@ -1,9 +1,12 @@
 package serverSide.servers;
 
+import clientSide.sharedRegionsStubs.GenReposInfoStub;
+import comInf.MemException;
 import serverSide.ServerCom;
 import serverSide.interfaces.ArrivalTermTransfQuayInterface;
 import serverSide.proxies.ArrivalTermTransfQuayProxy;
 import serverSide.sharedRegions.ArrivalTermTransfQuay;
+import serverSide.sharedRegions.GenReposInfo;
 
 import java.net.SocketTimeoutException;
 
@@ -22,18 +25,19 @@ public class ServerArrivalTermTransfQuay {
      *  Programa principal.
      */
 
-    public static void main (String [] args)
-    {
+    public static void main (String [] args) throws MemException {
         ArrivalTermTransfQuay arrivalTermTransfQuay;                                    // barbearia (representa o serviço a ser prestado)
         ArrivalTermTransfQuayInterface arrivalTermTransfQuayInter;                      // interface à barbearia
         ServerCom scon, sconi;                               // canais de comunicação
         ArrivalTermTransfQuayProxy cliProxy;                                // thread agente prestador do serviço
+        GenReposInfoStub repoStub;
 
         /* estabelecimento do servico */
 
         scon = new ServerCom(portNumb);                     // criação do canal de escuta e sua associação
-        scon.start ();                                       // com o endereço público
-        arrivalTermTransfQuay = new ArrivalTermTransfQuay();                           // activação do serviço
+        scon.start ();                                                                          // com o endereço público
+        repoStub = new GenReposInfoStub("localhost", portNumb);
+        arrivalTermTransfQuay = new ArrivalTermTransfQuay(repoStub);                           // activação do serviço
         arrivalTermTransfQuayInter = new ArrivalTermTransfQuayInterface(arrivalTermTransfQuay);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");

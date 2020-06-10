@@ -2,6 +2,7 @@ package clientSide.sharedRegionsStubs;
 
 import clientSide.ClientCom;
 import comInf.Message;
+import clientSide.entities.Passenger;
 
 public class ArrivalTerminalExitStub {
 
@@ -36,30 +37,30 @@ public class ArrivalTerminalExitStub {
      *
      */
 
-    public void probPar(GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
-                        ArrivalTermTransfQuayStub arrivalQuayStub){
-
-        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
-        Message inMessage, outMessage;
-
-        while(!con.open()){  // waiting for the connection to be established
-            try {
-                Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored){}
-        }
-
-        // asks for the service to be done
-        outMessage = new Message(Message.PARAMSATEXIT, reposStub, arrivLoungeStub, arrivalQuayStub);
-        con.writeObject(outMessage);
-
-        inMessage = (Message) con.readObject();
-        if (inMessage.getType() != Message.ACK){
-            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
-            System.out.println(inMessage.toString());
-            System.exit(1);
-        }
-        con.close();
-    }
+//    public void probPar(GenReposInfoStub reposStub, ArrivalLoungeStub arrivLoungeStub,
+//                        ArrivalTermTransfQuayStub arrivalQuayStub){
+//
+//        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+//        Message inMessage, outMessage;
+//
+//        while(!con.open()){  // waiting for the connection to be established
+//            try {
+//                Thread.currentThread().sleep((long) 10);
+//            } catch (InterruptedException ignored){}
+//        }
+//
+//        // asks for the service to be done
+//        outMessage = new Message(Message.PARAMSATEXIT, reposStub, arrivLoungeStub, arrivalQuayStub);
+//        con.writeObject(outMessage);
+//
+//        inMessage = (Message) con.readObject();
+//        if (inMessage.getType() != Message.ACK){
+//            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+//            System.out.println(inMessage.toString());
+//            System.exit(1);
+//        }
+//        con.close();
+//    }
 
     /**
      *   Operation of the passenger of waiting for the last passenger to arrive the Arrival Terminal Exit or the
@@ -73,7 +74,8 @@ public class ArrivalTerminalExitStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                Passenger p = (Passenger) Thread.currentThread();
+                p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 

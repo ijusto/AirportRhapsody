@@ -3,6 +3,7 @@ package clientSide.sharedRegionsStubs;
 import clientSide.ClientCom;
 import comInf.Bag;
 import comInf.Message;
+import clientSide.entities.*;
 
 public class ArrivalLoungeStub {
 
@@ -36,31 +37,31 @@ public class ArrivalLoungeStub {
      *  Provide parameters of the problem (service request).
      *
      */
-
-    public void probPar(GenReposInfoStub reposStub, BaggageColPointStub bagColPointStub,
-                        ArrivalTermTransfQuayStub arrQuayStub, int[][] destStat, int[][] nBagsPHold) {
-
-        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
-        Message inMessage, outMessage;
-
-        while(!con.open()){  // waiting for the connection to be established
-            try {
-                Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored) {}
-        }
-
-        // asks for the service to be done
-        outMessage = new Message(Message.PARAMSARRLNG, reposStub, bagColPointStub, arrQuayStub, destStat, nBagsPHold);
-        con.writeObject(outMessage);
-
-        inMessage = (Message) con.readObject();
-        if (inMessage.getType() != Message.ACK) {
-            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
-            System.out.println(inMessage.toString());
-            System.exit(1);
-        }
-        con.close();
-    }
+//
+//    public void probPar(GenReposInfoStub reposStub, BaggageColPointStub bagColPointStub,
+//                        ArrivalTermTransfQuayStub arrQuayStub, int[][] destStat, int[][] nBagsPHold) {
+//
+//        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+//        Message inMessage, outMessage;
+//
+//        while(!con.open()){  // waiting for the connection to be established
+//            try {
+//                Thread.currentThread().sleep((long) 10);
+//            } catch (InterruptedException ignored) {}
+//        }
+//
+//        // asks for the service to be done
+//        outMessage = new Message(Message.PARAMSARRLNG, reposStub, bagColPointStub, arrQuayStub, destStat, nBagsPHold);
+//        con.writeObject(outMessage);
+//
+//        inMessage = (Message) con.readObject();
+//        if (inMessage.getType() != Message.ACK) {
+//            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+//            System.out.println(inMessage.toString());
+//            System.exit(1);
+//        }
+//        con.close();
+//    }
 
     /* **************************************************Passenger*************************************************** */
 
@@ -81,7 +82,8 @@ public class ArrivalLoungeStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+               Passenger p = (Passenger) Thread.currentThread();
+               p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
@@ -118,7 +120,8 @@ public class ArrivalLoungeStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                Porter pt = (Porter) Thread.currentThread();
+                pt.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
@@ -151,7 +154,8 @@ public class ArrivalLoungeStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                Porter pt = (Porter) Thread.currentThread();
+                pt.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
@@ -185,7 +189,8 @@ public class ArrivalLoungeStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                Porter pt = (Porter) Thread.currentThread();
+                pt.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
@@ -216,7 +221,8 @@ public class ArrivalLoungeStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                Passenger p = (Passenger) Thread.currentThread();
+                p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
@@ -248,7 +254,8 @@ public class ArrivalLoungeStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                Passenger p = (Passenger) Thread.currentThread();
+                p.sleep((long) 10);
             } catch(InterruptedException ignored){}
         }
 
@@ -276,7 +283,8 @@ public class ArrivalLoungeStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+               BusDriver b = (BusDriver) Thread.currentThread();
+               b.sleep((long) 10);
             } catch (InterruptedException ignored) {}
         }
 

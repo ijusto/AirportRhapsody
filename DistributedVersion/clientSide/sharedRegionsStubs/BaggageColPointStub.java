@@ -4,6 +4,8 @@ import clientSide.ClientCom;
 import comInf.Bag;
 import comInf.MemFIFO;
 import comInf.Message;
+import entities.Passenger;
+import entities.Porter;
 
 import java.util.Map;
 
@@ -40,29 +42,29 @@ public class BaggageColPointStub {
      *
      */
 
-    public void probPar(GenReposInfoStub reposStub){
-
-        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
-        Message inMessage, outMessage;
-
-        while(!con.open()){  // waiting for the connection to be established
-            try {
-                Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored){}
-        }
-
-        // asks for the service to be done
-        outMessage = new Message(Message.PARAMSBAGCOLPNT, reposStub);
-        con.writeObject(outMessage);
-
-        inMessage = (Message) con.readObject();
-        if (inMessage.getType() != Message.ACK){
-            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
-            System.out.println(inMessage.toString());
-            System.exit(1);
-        }
-        con.close();
-    }
+//    public void probPar(GenReposInfoStub reposStub){
+//
+//        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+//        Message inMessage, outMessage;
+//
+//        while(!con.open()){  // waiting for the connection to be established
+//            try {
+//                Thread.currentThread().sleep((long) 10);
+//            } catch (InterruptedException ignored){}
+//        }
+//
+//        // asks for the service to be done
+//        outMessage = new Message(Message.PARAMSBAGCOLPNT, reposStub);
+//        con.writeObject(outMessage);
+//
+//        inMessage = (Message) con.readObject();
+//        if (inMessage.getType() != Message.ACK){
+//            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+//            System.out.println(inMessage.toString());
+//            System.exit(1);
+//        }
+//        con.close();
+//    }
 
 
     /* ************************************************Passenger***************************************************** */
@@ -83,7 +85,8 @@ public class BaggageColPointStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                Passenger p = (Passenger) Thread.currentThread();
+                p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
@@ -115,7 +118,8 @@ public class BaggageColPointStub {
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+               Porter p = (Porter) Thread.currentThread();
+               p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 

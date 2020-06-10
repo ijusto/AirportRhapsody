@@ -1,12 +1,11 @@
 package serverSide.sharedRegions;
 
+import clientSide.entities.*;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.MemException;
 import comInf.MemFIFO;
 import clientSide.entities.BusDriver;
-import clientSide.BusDriverStates;
 import clientSide.entities.Passenger;
-import clientSide.PassengerStates;
 import clientSide.SimulPar;
 
 /**
@@ -71,15 +70,13 @@ public class ArrivalTermTransfQuay {
 
     private boolean endDay;
 
-    public ArrivalTermTransfQuay(){}
-
     /**
      *   Instantiation of the Arrival Terminal Transfer Quay.
      *
      *     @param reposStub general repository of  Stub
      */
 
-    public void probPar(GenReposInfoStub reposStub) throws MemException {
+    public ArrivalTermTransfQuay(GenReposInfoStub reposStub )throws MemException{
         this.reposStub = reposStub;
         this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.resetNPassAllowedToEnter();
@@ -87,7 +84,6 @@ public class ArrivalTermTransfQuay {
         this.resetNPassOnTheBus();
         this.endDay = false;
     }
-
     /* ************************************************Passenger***************************************************** */
 
     /**
@@ -98,7 +94,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void takeABus(int passengerId) {
-
+        Passenger passenger = (Passenger) Thread.currentThread();
         assert(statePassengers[passengerId] == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         statePassengers[passengerId] = PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL;
         reposStub.updatePassSt(passengerId, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);

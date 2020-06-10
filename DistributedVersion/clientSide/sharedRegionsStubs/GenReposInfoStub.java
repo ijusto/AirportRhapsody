@@ -1,8 +1,6 @@
 package clientSide.sharedRegionsStubs;
 
-import clientSide.BusDriverStates;
-import clientSide.PassengerStates;
-import clientSide.PorterStates;
+import clientSide.entities.*;
 import clientSide.ClientCom;
 import comInf.Message;
 

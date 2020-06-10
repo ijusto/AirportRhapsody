@@ -1,7 +1,7 @@
 package serverSide.sharedRegions;
 
 import clientSide.entities.Passenger;
-import clientSide.PassengerStates;
+import clientSide.entities.PassengerStates;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 
 /**

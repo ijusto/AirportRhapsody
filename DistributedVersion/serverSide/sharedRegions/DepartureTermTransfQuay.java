@@ -1,9 +1,9 @@
 package serverSide.sharedRegions;
 
 import clientSide.entities.BusDriver;
-import clientSide.BusDriverStates;
+import clientSide.entities.BusDriverStates;
 import clientSide.entities.Passenger;
-import clientSide.PassengerStates;
+import clientSide.entities.PassengerStates;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 
 /**

@@ -1,4 +1,4 @@
-package clientSide;
+package clientSide.entities;
 
 /**
  *   Enum containing the possible states of the passenger.

@@ -1,9 +1,6 @@
 package serverSide.sharedRegions;
 
-import clientSide.BusDriverStates;
-import clientSide.Passenger;
-import clientSide.PassengerStates;
-import clientSide.PorterStates;
+import clientSide.entities.*;
 import clientSide.SimulPar;
 
 import java.io.BufferedWriter;
