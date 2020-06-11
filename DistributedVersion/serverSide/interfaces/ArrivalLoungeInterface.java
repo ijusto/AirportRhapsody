@@ -1,9 +1,7 @@
 package serverSide.interfaces;
 
-import clientSide.entities.Porter;
 import comInf.*;
 import serverSide.proxies.ArrivalLoungeProxy;
-import serverSide.proxies.SharedRegionProxy;
 import serverSide.servers.ServerArrivalLounge;
 import serverSide.sharedRegions.ArrivalLounge;
 
@@ -14,7 +12,7 @@ import serverSide.sharedRegions.ArrivalLounge;
  *   @author Miguel Lopes
  */
 
-public class ArrivalLoungeInterface implements SharedRegionProxy {
+public class ArrivalLoungeInterface {
 
     /*
      *
@@ -94,7 +92,6 @@ public class ArrivalLoungeInterface implements SharedRegionProxy {
 
             // takeARest (Porter)
             case Message.TAKEARST:
-                Porter p = (Porter) Thread.currentThread();
                 if (arrivalLounge.takeARest() == 'R')
                     outMessage = new Message(Message.TAKERSTDONE);    // gerar resposta positiva
                 else

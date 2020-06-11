@@ -1,7 +1,6 @@
 package serverSide.interfaces;
 
 import comInf.*;
-import serverSide.proxies.SharedRegionProxy;
 import serverSide.proxies.TemporaryStorageAreaProxy;
 import serverSide.servers.ServerTemporaryStorageArea;
 import serverSide.sharedRegions.TemporaryStorageArea;
@@ -13,7 +12,7 @@ import serverSide.sharedRegions.TemporaryStorageArea;
  *   @author Miguel Lopes
  */
 
-public class TemporaryStorageAreaInterface implements SharedRegionProxy {
+public class TemporaryStorageAreaInterface {
 
     private TemporaryStorageArea temporaryStorageArea;
 

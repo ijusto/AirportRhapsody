@@ -1,12 +1,8 @@
 package serverSide.interfaces;
 
-import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
-import serverSide.proxies.BaggageColPointProxy;
 import serverSide.proxies.BaggageReclaimOfficeProxy;
-import serverSide.proxies.SharedRegionProxy;
-import serverSide.servers.ServerBaggageColPoint;
 import serverSide.servers.ServerBaggageReclaimOffice;
 import serverSide.sharedRegions.BaggageReclaimOffice;
 
@@ -17,7 +13,7 @@ import serverSide.sharedRegions.BaggageReclaimOffice;
  *   @author Miguel Lopes
  */
 
-public class BaggageReclaimOfficeInterface implements SharedRegionProxy {
+public class BaggageReclaimOfficeInterface{
 
     private BaggageReclaimOffice baggageReclaimOffice;
 
