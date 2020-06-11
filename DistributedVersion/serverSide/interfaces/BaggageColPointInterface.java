@@ -1,11 +1,9 @@
 package serverSide.interfaces;
 
-import comInf.Bag;
-import comInf.MemException;
-import comInf.Message;
-import comInf.MessageException;
+import comInf.*;
 import serverSide.proxies.ArrivalTermTransfQuayProxy;
 import serverSide.proxies.BaggageColPointProxy;
+import serverSide.proxies.SharedRegionProxy;
 import serverSide.servers.ServerArrivalTermTransfQuay;
 import serverSide.servers.ServerBaggageColPoint;
 import serverSide.sharedRegions.BaggageColPoint;
@@ -17,7 +15,7 @@ import serverSide.sharedRegions.BaggageColPoint;
  *   @author Miguel Lopes
  */
 
-public class BaggageColPointInterface {
+public class BaggageColPointInterface implements SharedRegionProxy {
 
     private BaggageColPoint baggageColPoint;
 
@@ -42,13 +40,13 @@ public class BaggageColPointInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSBAGCOLPNT:/* TODO: Validation */
-            case Message.GOCOLLECTBAG:/* TODO: Validation */
-            case Message.CARRYAPPSTORE:/* TODO: Validation */
-            case Message.RESETBCP:
-            case Message.NOMOREBAGS:
-            case Message.SETPHEMPTY:/* TODO: Validation */
-            case Message.SETTREADMILL:/* TODO: Validation */
+            case Message.PARAMSBAGCOLPNT:break;/* TODO: Validation */
+            case Message.GOCOLLECTBAG:break;/* TODO: Validation */
+            case Message.CARRYAPPSTORE:break;/* TODO: Validation */
+            case Message.RESETBCP:break;
+            case Message.NOMOREBAGS:break;
+            case Message.SETPHEMPTY:break;/* TODO: Validation */
+            case Message.SETTREADMILL:break;/* TODO: Validation */
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:

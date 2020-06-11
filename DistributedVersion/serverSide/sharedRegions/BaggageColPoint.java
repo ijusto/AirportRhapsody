@@ -1,10 +1,7 @@
 package serverSide.sharedRegions;
 
-import comInf.SimulPar;
+import comInf.*;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
-import comInf.Bag;
-import comInf.MemException;
-import comInf.MemFIFO;
 import clientSide.entities.*;
 
 import java.util.Map;
@@ -62,7 +59,7 @@ public class BaggageColPoint {
 
     public synchronized boolean goCollectABag(){
 
-        Passenger passenger = (Passenger) Thread.currentThread();
+        PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
@@ -123,10 +120,10 @@ public class BaggageColPoint {
      */
 
     public synchronized void carryItToAppropriateStore(Bag bag){
-        Porter porter = (Porter) Thread.currentThread();
-        assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
+        PorterInterface porter = (PorterInterface) Thread.currentThread();
+        assert(porter.getStatPorter() == PorterStates.AT_THE_PLANES_HOLD);
         assert(this.treadmill.containsKey(bag.getIdOwner()));
-        porter.setStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
+        porter.setStatPorter(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);
         reposStub.updatePorterStat(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR.ordinal());
 
         try {

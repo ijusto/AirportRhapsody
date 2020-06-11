@@ -3,6 +3,7 @@ package serverSide.sharedRegions;
 import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
+import comInf.PassengerInterface;
 
 /**
  *   Baggage Reclaim Office.
@@ -34,7 +35,7 @@ public class BaggageReclaimOffice {
      */
 
     public synchronized void reportMissingBags(){
-        Passenger passenger = (Passenger) Thread.currentThread();
+        PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
         passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
 

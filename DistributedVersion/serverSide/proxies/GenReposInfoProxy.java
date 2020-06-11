@@ -1,7 +1,10 @@
 package serverSide.proxies;
 
-import comInf.Message;
-import comInf.MessageException;
+import clientSide.entities.BusDriverStates;
+import clientSide.entities.Passenger;
+import clientSide.entities.PassengerStates;
+import clientSide.entities.PorterStates;
+import comInf.*;
 import serverSide.interfaces.GenReposInfoInterface;
 import serverSide.ServerCom;
 
@@ -12,7 +15,23 @@ import serverSide.ServerCom;
  *   @author Miguel Lopes
  */
 
-public class GenReposInfoProxy extends Thread {
+public class GenReposInfoProxy extends Thread implements PassengerInterface, PorterInterface, BusDriverInterface {
+
+    private BusDriverStates busStates;
+
+    private int nPass;
+
+    private Passenger.SiPass si;
+
+    private PassengerStates st;
+
+    private int NA;
+
+    private int NR;
+
+    private int id;
+
+    private PorterStates pSt;
 
     /**
      *  Contador de threads lançados
@@ -109,5 +128,78 @@ public class GenReposInfoProxy extends Thread {
     public ServerCom getScon ()
     {
         return sconi;
+    }
+
+
+    /********************************INTERFACE IMPLEMENTATION*********************/
+    @Override
+    public int getNPassOnTheBus() {
+        return nPass;
+    }
+
+    @Override
+    public void setStat(BusDriverStates stat) {
+        this.busStates = stat;
+    }
+
+    @Override
+    public void setNPassOnTheBus(int nPassOnTheBus) {
+        this.nPass = nPassOnTheBus;
+    }
+
+    @Override
+    public BusDriverStates getStat() {
+        return busStates;
+    }
+
+    /********************************* PASSENGER ****************************************/
+
+    @Override
+    public Passenger.SiPass getSi() {
+        return si;
+    }
+
+    @Override
+    public PassengerStates getSt() {
+        return st;
+    }
+
+    @Override
+    public int getNA() {
+        return NA;
+    }
+
+    @Override
+    public int getNR() {
+        return NR;
+    }
+
+    @Override
+    public int getPassengerID() {
+        return id;
+    }
+
+    @Override
+    public void setSt(PassengerStates st) {
+        this.st = st;
+    }
+
+    @Override
+    public void setNA(int NA) {
+        this.NA = NA;
+    }
+
+    /*********************************PORTER****************************************/
+
+
+
+    @Override
+    public void setStatPorter(PorterStates stat) {
+        this.pSt = stat;
+    }
+
+    @Override
+    public PorterStates getStatPorter() {
+        return pSt;
     }
 }

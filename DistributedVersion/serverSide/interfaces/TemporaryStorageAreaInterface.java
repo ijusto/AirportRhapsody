@@ -1,9 +1,7 @@
 package serverSide.interfaces;
 
-import comInf.Bag;
-import comInf.MemException;
-import comInf.Message;
-import comInf.MessageException;
+import comInf.*;
+import serverSide.proxies.SharedRegionProxy;
 import serverSide.proxies.TemporaryStorageAreaProxy;
 import serverSide.servers.ServerTemporaryStorageArea;
 import serverSide.sharedRegions.TemporaryStorageArea;
@@ -15,7 +13,7 @@ import serverSide.sharedRegions.TemporaryStorageArea;
  *   @author Miguel Lopes
  */
 
-public class TemporaryStorageAreaInterface {
+public class TemporaryStorageAreaInterface implements SharedRegionProxy {
 
     private TemporaryStorageArea temporaryStorageArea;
 
@@ -39,9 +37,9 @@ public class TemporaryStorageAreaInterface {
         /* validação da mensagem recebida */
 
         switch (inMessage.getType ()) {
-            case Message.PARAMSTEMPSTORAREA: /* TODO: Validation */
-            case Message.CARRYTOAPPSTORE_TSA: /* TODO: Validation */
-            case Message.RESETTSA:
+            case Message.PARAMSTEMPSTORAREA: break; /* TODO: Validation */
+            case Message.CARRYTOAPPSTORE_TSA:break; /* TODO: Validation */
+            case Message.RESETTSA:break;
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:
                 break;

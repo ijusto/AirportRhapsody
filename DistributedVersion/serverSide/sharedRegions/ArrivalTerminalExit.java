@@ -2,6 +2,7 @@ package serverSide.sharedRegions;
 
 import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
+import comInf.PassengerInterface;
 import comInf.SimulPar;
 import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
@@ -59,7 +60,7 @@ public class ArrivalTerminalExit {
      */
 
     public synchronized void goHome(){
-        Passenger passenger = (Passenger) Thread.currentThread();
+        PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
                 passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
                 passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);

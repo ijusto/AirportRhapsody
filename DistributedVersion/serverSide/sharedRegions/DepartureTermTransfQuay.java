@@ -5,6 +5,8 @@ import clientSide.entities.BusDriverStates;
 import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
+import comInf.BusDriverInterface;
+import comInf.PassengerInterface;
 
 /**
  *   Departure Terminal Transfer Quay.
@@ -58,7 +60,7 @@ public class DepartureTermTransfQuay {
      */
 
     public synchronized void leaveTheBus(){
-        Passenger passenger = (Passenger) Thread.currentThread();
+        PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         reposStub.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL.ordinal());
@@ -92,7 +94,7 @@ public class DepartureTermTransfQuay {
 
     public synchronized void parkTheBusAndLetPassOff() {
 
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        BusDriverInterface busDriver = (BusDriverInterface) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.DRIVING_FORWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         reposStub.updateBDriverStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL.ordinal());

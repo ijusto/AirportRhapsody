@@ -1,9 +1,11 @@
 package serverSide.interfaces;
 
+import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.BaggageReclaimOfficeProxy;
 import serverSide.proxies.DepartureTerminalEntranceProxy;
+import serverSide.proxies.SharedRegionProxy;
 import serverSide.servers.ServerBaggageReclaimOffice;
 import serverSide.servers.ServerDepartureTerminalEntrance;
 import serverSide.sharedRegions.DepartureTerminalEntrance;
@@ -15,7 +17,7 @@ import serverSide.sharedRegions.DepartureTerminalEntrance;
  *   @author Miguel Lopes
  */
 
-public class DepartureTerminalEntranceInterface {
+public class DepartureTerminalEntranceInterface implements SharedRegionProxy {
 
     private DepartureTerminalEntrance departureTerminalEntrance;
 
@@ -40,12 +42,12 @@ public class DepartureTerminalEntranceInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSDEPTENT:/* TODO: Validation */
-            case Message.PREPARENEXTLEG:/* TODO: Validation */
-            case Message.RESETDTE:
-            case Message.NOTFGOHOME:
-            case Message.NOMOREBAGS:
-            case Message.SETARRTERREF:/* TODO: Validation */
+            case Message.PARAMSDEPTENT:break;/* TODO: Validation */
+            case Message.PREPARENEXTLEG:break;/* TODO: Validation */
+            case Message.RESETDTE:break;
+            case Message.NOTFGOHOME:break;
+            case Message.NOMOREBAGS:break;
+            case Message.SETARRTERREF:break;/* TODO: Validation */
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:

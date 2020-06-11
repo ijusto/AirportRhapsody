@@ -6,6 +6,7 @@ import comInf.MemException;
 import comInf.MemFIFO;
 import clientSide.entities.BusDriver;
 import clientSide.entities.Passenger;
+import comInf.PassengerInterface;
 import comInf.SimulPar;
 
 /**
@@ -92,14 +93,14 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void takeABus() {
-        Passenger passenger = (Passenger) Thread.currentThread();
+        PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
         passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL.ordinal());
         reposStub.printLog();
 
         try {
-            waitingLine.write(passenger);
+            waitingLine.write((Passenger) passenger);
             reposStub.pJoinWaitingQueue(passenger.getPassengerID());
         } catch (MemException e) {
             e.printStackTrace();

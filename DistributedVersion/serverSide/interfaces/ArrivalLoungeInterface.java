@@ -1,10 +1,9 @@
 package serverSide.interfaces;
 
-import comInf.Bag;
-import comInf.MemException;
-import comInf.Message;
-import comInf.MessageException;
+import clientSide.entities.Porter;
+import comInf.*;
 import serverSide.proxies.ArrivalLoungeProxy;
+import serverSide.proxies.SharedRegionProxy;
 import serverSide.servers.ServerArrivalLounge;
 import serverSide.sharedRegions.ArrivalLounge;
 
@@ -15,7 +14,7 @@ import serverSide.sharedRegions.ArrivalLounge;
  *   @author Miguel Lopes
  */
 
-public class ArrivalLoungeInterface {
+public class ArrivalLoungeInterface implements SharedRegionProxy {
 
     /*
      *
@@ -55,14 +54,14 @@ public class ArrivalLoungeInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSARRLNG:/* TODO: Validation */
-            case Message.WSID:
-            case Message.TAKEARST:
-            case Message.TRYTOCOL:
-            case Message.NOBAGS2COL:
-            case Message.RESETAL:/* TODO: Validation */
+            case Message.PARAMSARRLNG: break;/* TODO: Validation */
+            case Message.WSID: break;
+            case Message.TAKEARST: break;
+            case Message.TRYTOCOL: break;
+            case Message.NOBAGS2COL: break;
+            case Message.RESETAL: break;/* TODO: Validation */
                 //inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsNA()
-            case Message.SETDEPTERNREF:/* TODO: Validation */
+            case Message.SETDEPTERNREF:break;/* TODO: Validation */
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:
@@ -95,6 +94,7 @@ public class ArrivalLoungeInterface {
 
             // takeARest (Porter)
             case Message.TAKEARST:
+                Porter p = (Porter) Thread.currentThread();
                 if (arrivalLounge.takeARest() == 'R')
                     outMessage = new Message(Message.TAKERSTDONE);    // gerar resposta positiva
                 else

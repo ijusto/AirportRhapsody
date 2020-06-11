@@ -1,16 +1,11 @@
 package serverSide.sharedRegions;
 
-import comInf.SimulPar;
+import comInf.*;
 import clientSide.entities.*;
 import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.BaggageColPointStub;
 import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
-import comInf.Bag;
-import comInf.MemException;
-import comInf.MemFIFO;
-import comInf.MemStack;
-
 
 
 import java.util.HashMap;
@@ -163,7 +158,7 @@ public class ArrivalLounge {
 
     public synchronized boolean whatShouldIDo(){
 
-        Passenger currentPassenger = (Passenger) Thread.currentThread();
+        PassengerInterface currentPassenger = (PassengerInterface) Thread.currentThread();
         assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
 
         // update logger
@@ -204,8 +199,8 @@ public class ArrivalLounge {
         porterSleep = true;
         notifyAll(); // notify Reset (avoid deadlock of passengers entering and notifying before the porter sleeps)
 
-        Porter porter = (Porter) Thread.currentThread();
-        assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        PorterInterface porter = (PorterInterface) Thread.currentThread();
+        assert(porter.getStatPorter() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         reposStub.printLog();
 
         if(this.endDay){
@@ -239,9 +234,9 @@ public class ArrivalLounge {
 
     public synchronized Bag tryToCollectABag(){
 
-        Porter porter = (Porter) Thread.currentThread();
-        assert(porter.getStat() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
-        porter.setStat(PorterStates.AT_THE_PLANES_HOLD);
+        PorterInterface porter = (PorterInterface) Thread.currentThread();
+        assert(porter.getStatPorter() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        porter.setStatPorter(PorterStates.AT_THE_PLANES_HOLD);
 
         reposStub.updatePorterStat(PorterStates.AT_THE_PLANES_HOLD.ordinal());
 
@@ -264,9 +259,9 @@ public class ArrivalLounge {
 
     public synchronized void noMoreBagsToCollect(){
 
-        Porter porter = (Porter) Thread.currentThread();
-        assert(porter.getStat() == PorterStates.AT_THE_PLANES_HOLD);
-        porter.setStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
+        PorterInterface porter = (PorterInterface) Thread.currentThread();
+        assert(porter.getStatPorter() == PorterStates.AT_THE_PLANES_HOLD);
+        porter.setStatPorter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         reposStub.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND.ordinal());
 
         this.pHEmpty = true;

@@ -2,6 +2,7 @@ package serverSide.sharedRegions;
 
 import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
+import comInf.PassengerInterface;
 import comInf.SimulPar;
 import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
 import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
@@ -71,7 +72,7 @@ public class DepartureTerminalEntrance {
 
     public synchronized void prepareNextLeg(){
 
-        Passenger passenger = (Passenger) Thread.currentThread();
+        PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
         assert passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL;
         passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 

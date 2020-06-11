@@ -1,10 +1,12 @@
 package serverSide.interfaces;
 
+import comInf.CommonProvider;
 import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.ArrivalLoungeProxy;
 import serverSide.proxies.ArrivalTerminalExitProxy;
+import serverSide.proxies.SharedRegionProxy;
 import serverSide.servers.ServerArrivalLounge;
 import serverSide.servers.ServerArrivalTerminalExit;
 import serverSide.sharedRegions.ArrivalTerminalExit;
@@ -16,7 +18,7 @@ import serverSide.sharedRegions.ArrivalTerminalExit;
  *   @author Miguel Lopes
  */
 
-public class ArrivalTerminalExitInterface {
+public class ArrivalTerminalExitInterface implements SharedRegionProxy {
 
     private ArrivalTerminalExit arrivalTerminalExit;
 
@@ -43,13 +45,13 @@ public class ArrivalTerminalExitInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSATEXIT:/* TODO: Validation */
-            case Message.GOHOME:/* TODO: Validation */
-            case Message.NOTFNEXTL:
-            case Message.INCDECCOUNTER:/* TODO: Validation */
-            case Message.SETDEPTERNREF:/* TODO: Validation */
-            case Message.RESETATE:
-            case Message.GETDEADPASSVAL:/* TODO: Validation */
+            case Message.PARAMSATEXIT: break;/* TODO: Validation */
+            case Message.GOHOME:break;/* TODO: Validation */
+            case Message.NOTFNEXTL:break;
+            case Message.INCDECCOUNTER:break;/* TODO: Validation */
+            case Message.SETDEPTERNREF:break;/* TODO: Validation */
+            case Message.RESETATE:break;
+            case Message.GETDEADPASSVAL:break;/* TODO: Validation */
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:

@@ -287,9 +287,7 @@ public class GenReposInfo {
      *    @param bn Number of pieces of luggage presently at the plane's hold.
      */
 
-    public synchronized void initializeCargoHold(int bn){
-        BN = bn;
-    }
+    public synchronized void initializeCargoHold(int bn){ BN = bn; }
 
     /**
      *   Update baggage stored in the cargo hold when porter retrieves the baggage.

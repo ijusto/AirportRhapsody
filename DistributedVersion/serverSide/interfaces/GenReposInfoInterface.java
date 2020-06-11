@@ -1,8 +1,10 @@
 package serverSide.interfaces;
 
+import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.GenReposInfoProxy;
+import serverSide.proxies.SharedRegionProxy;
 import serverSide.servers.ServerGenReposInfo;
 import serverSide.sharedRegions.GenReposInfo;
 
@@ -38,33 +40,32 @@ public class GenReposInfoInterface {
     {
         // mensagem de resposta
         Message outMessage = null;
-
         /* validação da mensagem recebida */
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSREPOS: /* TODO: Validation */
-            case Message.PRINTLOG:
-            case Message.FINALREPORT:
-            case Message.UPDATEFN: /* TODO: Validation */
-            case Message.INITCHOLD: /* TODO: Validation */
-            case Message.REMBAGCHOLD:
-            case Message.INCBAGCB:
-            case Message.PGETSABAG:
-            case Message.SAVEBAGSR:
-            case Message.PJOINWQ: /* TODO: Validation */
-            case Message.PLEFTWQ: /* TODO: Validation */
-            case Message.FREEBS: /* TODO: Validation */
-            case Message.GETPASSSI: /* TODO: Validation */
-            case Message.UDTEPASSNR: /* TODO: Validation */
-            case Message.UDTEPASSNA: /* TODO: Validation */
-            case Message.PASSEXIT: /* TODO: Validation */
-            case Message.MISSBAGREP:
-            case Message.NUMNRTOTAL: /* TODO: Validation */
-            case Message.NEWPASS: /* TODO: Validation */
-            case Message.UDTEPASSSTAT: /* TODO: Validation */
-            case Message.UDTEPORTSTAT: /* TODO: Validation */
-            case Message.UDTEBDSTAT: /* TODO: Validation */
+            case Message.PARAMSREPOS:break; /* TODO: Validation */
+            case Message.PRINTLOG:break;
+            case Message.FINALREPORT:break;
+            case Message.UPDATEFN: break;/* TODO: Validation */
+            case Message.INITCHOLD:break; /* TODO: Validation */
+            case Message.REMBAGCHOLD:break;
+            case Message.INCBAGCB:break;
+            case Message.PGETSABAG:break;
+            case Message.SAVEBAGSR:break;
+            case Message.PJOINWQ: break;/* TODO: Validation */
+            case Message.PLEFTWQ:break; /* TODO: Validation */
+            case Message.FREEBS: break;/* TODO: Validation */
+            case Message.GETPASSSI:break; /* TODO: Validation */
+            case Message.UDTEPASSNR: break;/* TODO: Validation */
+            case Message.UDTEPASSNA: break;/* TODO: Validation */
+            case Message.PASSEXIT: break;/* TODO: Validation */
+            case Message.MISSBAGREP:break;
+            case Message.NUMNRTOTAL: break;/* TODO: Validation */
+            case Message.NEWPASS: break;/* TODO: Validation */
+            case Message.UDTEPASSSTAT: break;/* TODO: Validation */
+            case Message.UDTEPORTSTAT: break;/* TODO: Validation */
+            case Message.UDTEBDSTAT: break;/* TODO: Validation */
 
                 // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:

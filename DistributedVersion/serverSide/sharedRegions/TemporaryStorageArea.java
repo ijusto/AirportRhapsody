@@ -1,11 +1,8 @@
 package serverSide.sharedRegions;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
-import comInf.MemException;
-import comInf.MemStack;
-import comInf.Bag;
+import comInf.*;
 import clientSide.entities.PorterStates;
 import clientSide.entities.Porter;
-import comInf.SimulPar;
 
 /**
  *   Temporary Storage Area.
@@ -47,10 +44,10 @@ public class TemporaryStorageArea {
      */
 
     public synchronized void carryItToAppropriateStore(Bag bag){
-        Porter porter = (Porter) Thread.currentThread();
-        assert porter.getStat() == PorterStates.AT_THE_PLANES_HOLD;
+        PorterInterface porter = (PorterInterface) Thread.currentThread();
+        assert porter.getStatPorter() == PorterStates.AT_THE_PLANES_HOLD;
         assert bag != null;
-        porter.setStat(PorterStates.AT_THE_STOREROOM);
+        porter.setStatPorter(PorterStates.AT_THE_STOREROOM);
         reposStub.updatePorterStat(PorterStates.AT_THE_STOREROOM.ordinal());
 
         try {

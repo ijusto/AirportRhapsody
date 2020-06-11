@@ -1,9 +1,11 @@
 package serverSide.interfaces;
 
+import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.BaggageColPointProxy;
 import serverSide.proxies.BaggageReclaimOfficeProxy;
+import serverSide.proxies.SharedRegionProxy;
 import serverSide.servers.ServerBaggageColPoint;
 import serverSide.servers.ServerBaggageReclaimOffice;
 import serverSide.sharedRegions.BaggageReclaimOffice;
@@ -15,7 +17,7 @@ import serverSide.sharedRegions.BaggageReclaimOffice;
  *   @author Miguel Lopes
  */
 
-public class BaggageReclaimOfficeInterface {
+public class BaggageReclaimOfficeInterface implements SharedRegionProxy {
 
     private BaggageReclaimOffice baggageReclaimOffice;
 
@@ -40,8 +42,8 @@ public class BaggageReclaimOfficeInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSBAGRECOFF:/* TODO: Validation */
-            case Message.REPORTMISSBAG:/* TODO: Validation */
+            case Message.PARAMSBAGRECOFF:break;/* TODO: Validation */
+            case Message.REPORTMISSBAG:break;/* TODO: Validation */
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:

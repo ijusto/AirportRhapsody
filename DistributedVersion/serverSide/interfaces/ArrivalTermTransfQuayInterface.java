@@ -1,10 +1,13 @@
 package serverSide.interfaces;
 
+import clientSide.entities.BusDriver;
+import comInf.CommonProvider;
 import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.ArrivalTermTransfQuayProxy;
 import serverSide.proxies.ArrivalTerminalExitProxy;
+import serverSide.proxies.SharedRegionProxy;
 import serverSide.servers.ServerArrivalTermTransfQuay;
 import serverSide.servers.ServerArrivalTerminalExit;
 import serverSide.sharedRegions.ArrivalTermTransfQuay;
@@ -16,7 +19,7 @@ import serverSide.sharedRegions.ArrivalTermTransfQuay;
  *   @author Miguel Lopes
  */
 
-public class ArrivalTermTransfQuayInterface {
+public class ArrivalTermTransfQuayInterface implements SharedRegionProxy {
 
     private ArrivalTermTransfQuay arrivalTermTransfQuay;
 
@@ -41,14 +44,14 @@ public class ArrivalTermTransfQuayInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSATTQUAY:/* TODO: Validation */
-            case Message.TAKEABUS:/* TODO: Validation */
-            case Message.ENTERBUS:/* TODO: Validation*/
-            case Message.WORKENDED:
-            case Message.PARKBUS:
-            case Message.ANNOUCEBUSBORADING:
-            case Message.RESETATQ:
-            case Message.SETENDDAY:
+            case Message.PARAMSATTQUAY:break;/* TODO: Validation */
+            case Message.TAKEABUS:break;/* TODO: Validation */
+            case Message.ENTERBUS:break;/* TODO: Validation*/
+            case Message.WORKENDED:break;
+            case Message.PARKBUS:break;
+            case Message.ANNOUCEBUSBORADING:break;
+            case Message.RESETATQ:break;
+            case Message.SETENDDAY:break;
 
             // Shutdown do servidor (operação pedida pelo cliente)
             case Message.SHUT:
@@ -85,6 +88,7 @@ public class ArrivalTermTransfQuayInterface {
 
             // hasDaysWorkEnded (BusDriver)
             case Message.WORKENDED:
+                BusDriver b = (BusDriver) Thread.currentThread();
                 if (arrivalTermTransfQuay.hasDaysWorkEnded() == 'R')
                     outMessage = new Message(Message.CONTDAYS);    // gerar resposta positiva
                 else
