@@ -1,12 +1,8 @@
 package serverSide.interfaces;
 
-import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
-import serverSide.proxies.BaggageReclaimOfficeProxy;
 import serverSide.proxies.DepartureTerminalEntranceProxy;
-import serverSide.proxies.SharedRegionProxy;
-import serverSide.servers.ServerBaggageReclaimOffice;
 import serverSide.servers.ServerDepartureTerminalEntrance;
 import serverSide.sharedRegions.DepartureTerminalEntrance;
 
@@ -17,7 +13,7 @@ import serverSide.sharedRegions.DepartureTerminalEntrance;
  *   @author Miguel Lopes
  */
 
-public class DepartureTerminalEntranceInterface implements SharedRegionProxy {
+public class DepartureTerminalEntranceInterface {
 
     private DepartureTerminalEntrance departureTerminalEntrance;
 

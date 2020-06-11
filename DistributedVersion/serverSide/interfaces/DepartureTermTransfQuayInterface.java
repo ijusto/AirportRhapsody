@@ -1,13 +1,9 @@
 package serverSide.interfaces;
 
-import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.DepartureTermTransfQuayProxy;
-import serverSide.proxies.DepartureTerminalEntranceProxy;
-import serverSide.proxies.SharedRegionProxy;
 import serverSide.servers.ServerDepartureTermTransfQuay;
-import serverSide.servers.ServerDepartureTerminalEntrance;
 import serverSide.sharedRegions.DepartureTermTransfQuay;
 
 /**
@@ -17,7 +13,7 @@ import serverSide.sharedRegions.DepartureTermTransfQuay;
  *   @author Miguel Lopes
  */
 
-public class DepartureTermTransfQuayInterface implements SharedRegionProxy {
+public class DepartureTermTransfQuayInterface {
 
     private DepartureTermTransfQuay departureTermTransfQuay;
 

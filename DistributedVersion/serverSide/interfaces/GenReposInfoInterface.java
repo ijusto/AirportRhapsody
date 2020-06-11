@@ -1,10 +1,8 @@
 package serverSide.interfaces;
 
-import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.GenReposInfoProxy;
-import serverSide.proxies.SharedRegionProxy;
 import serverSide.servers.ServerGenReposInfo;
 import serverSide.sharedRegions.GenReposInfo;
 

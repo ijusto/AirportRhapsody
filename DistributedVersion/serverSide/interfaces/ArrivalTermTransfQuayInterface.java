@@ -1,15 +1,11 @@
 package serverSide.interfaces;
 
 import clientSide.entities.BusDriver;
-import comInf.CommonProvider;
 import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.ArrivalTermTransfQuayProxy;
-import serverSide.proxies.ArrivalTerminalExitProxy;
-import serverSide.proxies.SharedRegionProxy;
 import serverSide.servers.ServerArrivalTermTransfQuay;
-import serverSide.servers.ServerArrivalTerminalExit;
 import serverSide.sharedRegions.ArrivalTermTransfQuay;
 
 /**
@@ -19,7 +15,7 @@ import serverSide.sharedRegions.ArrivalTermTransfQuay;
  *   @author Miguel Lopes
  */
 
-public class ArrivalTermTransfQuayInterface implements SharedRegionProxy {
+public class ArrivalTermTransfQuayInterface {
 
     private ArrivalTermTransfQuay arrivalTermTransfQuay;
 

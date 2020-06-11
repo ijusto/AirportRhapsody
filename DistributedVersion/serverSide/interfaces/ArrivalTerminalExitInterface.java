@@ -1,13 +1,8 @@
 package serverSide.interfaces;
 
-import comInf.CommonProvider;
-import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
-import serverSide.proxies.ArrivalLoungeProxy;
 import serverSide.proxies.ArrivalTerminalExitProxy;
-import serverSide.proxies.SharedRegionProxy;
-import serverSide.servers.ServerArrivalLounge;
 import serverSide.servers.ServerArrivalTerminalExit;
 import serverSide.sharedRegions.ArrivalTerminalExit;
 
@@ -18,7 +13,7 @@ import serverSide.sharedRegions.ArrivalTerminalExit;
  *   @author Miguel Lopes
  */
 
-public class ArrivalTerminalExitInterface implements SharedRegionProxy {
+public class ArrivalTerminalExitInterface {
 
     private ArrivalTerminalExit arrivalTerminalExit;
 

@@ -1,10 +1,7 @@
 package serverSide.interfaces;
 
 import comInf.*;
-import serverSide.proxies.ArrivalTermTransfQuayProxy;
 import serverSide.proxies.BaggageColPointProxy;
-import serverSide.proxies.SharedRegionProxy;
-import serverSide.servers.ServerArrivalTermTransfQuay;
 import serverSide.servers.ServerBaggageColPoint;
 import serverSide.sharedRegions.BaggageColPoint;
 
@@ -15,7 +12,7 @@ import serverSide.sharedRegions.BaggageColPoint;
  *   @author Miguel Lopes
  */
 
-public class BaggageColPointInterface implements SharedRegionProxy {
+public class BaggageColPointInterface {
 
     private BaggageColPoint baggageColPoint;
 
