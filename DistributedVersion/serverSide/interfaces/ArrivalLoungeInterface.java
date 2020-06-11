@@ -94,7 +94,6 @@ public class ArrivalLoungeInterface implements SharedRegionProxy {
 
             // takeARest (Porter)
             case Message.TAKEARST:
-                Porter p = (Porter) Thread.currentThread();
                 if (arrivalLounge.takeARest() == 'R')
                     outMessage = new Message(Message.TAKERSTDONE);    // gerar resposta positiva
                 else

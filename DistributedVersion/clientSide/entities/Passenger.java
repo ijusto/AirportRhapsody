@@ -2,6 +2,7 @@ package clientSide.entities;
 
 import clientSide.entities.PassengerStates;
 import clientSide.sharedRegionsStubs.*;
+import comInf.PassengerInterface;
 
 /**
  *   Passenger thread.
@@ -10,7 +11,7 @@ import clientSide.sharedRegionsStubs.*;
  *   @author Miguel Lopes
  */
 
-public class Passenger extends Thread {
+public class Passenger extends Thread implements PassengerInterface {
 
     /**
      *   Enum containing all the situations a passenger can be in.
@@ -187,6 +188,7 @@ public class Passenger extends Thread {
      * Get Passenger Situation
      */
 
+    @Override
     public SiPass getSi() {
         return Si;
     }
@@ -195,6 +197,7 @@ public class Passenger extends Thread {
      * Get Passenger State
      */
 
+    @Override
     public PassengerStates getSt() {
         return St;
     }
@@ -203,6 +206,7 @@ public class Passenger extends Thread {
      * Get Passenger number of pieces of luggage he has presently collected
      */
 
+    @Override
     public int getNA() {
         return NA;
     }
@@ -211,6 +215,7 @@ public class Passenger extends Thread {
      * Get Passenger number of pieces of luggage he carried at the start of the journey
      */
 
+    @Override
     public int getNR() {
         return NR;
     }
@@ -219,12 +224,14 @@ public class Passenger extends Thread {
      * Get Passenger ID
      */
 
+    @Override
     public int getPassengerID() { return id;}
 
     /**
      * Set Passenger State
      */
 
+    @Override
     public void setSt(PassengerStates st) {
         St = st;
     }
@@ -233,6 +240,7 @@ public class Passenger extends Thread {
      * Set Passenger number of pieces of luggage he has presently collected
      */
 
+    @Override
     public void setNA(int NA) {
         this.NA = NA;
     }

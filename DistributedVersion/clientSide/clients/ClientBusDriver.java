@@ -41,6 +41,11 @@ public class ClientBusDriver {
         } catch (InterruptedException e) {
             System.out.print("Main Program - One thread of BusDriver was interrupted.");
         }
-        reposStub.finalReport();
+
+        while(!reposStub.finalReport());
+
+        reposStub.shutdown();
+        arrivalQuayStub.shutdown();
+        departureQuayStub.shutdown();
     }
 }

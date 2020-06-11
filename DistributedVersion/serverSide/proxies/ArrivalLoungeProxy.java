@@ -131,8 +131,6 @@ public class ArrivalLoungeProxy extends Thread implements PassengerInterface, Po
     }
 
 
-
-
     /*********************** INTERFACE IMPLEMENTATION ****************************/
 
     @Override
@@ -192,9 +190,21 @@ public class ArrivalLoungeProxy extends Thread implements PassengerInterface, Po
         this.NA = NA;
     }
 
+    @Override
+    public void setSi(Passenger.SiPass si) {
+        this.si = si;
+    }
+
+    @Override
+    public void setNR(int NR) {
+        this.NR = NR;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
     /*********************************PORTER****************************************/
-
-
 
     @Override
     public void setStatPorter(PorterStates stat) {
@@ -205,4 +215,5 @@ public class ArrivalLoungeProxy extends Thread implements PassengerInterface, Po
     public PorterStates getStatPorter() {
         return pSt;
     }
+
 }

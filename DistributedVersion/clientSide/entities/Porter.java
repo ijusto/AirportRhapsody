@@ -3,6 +3,7 @@ import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
 import clientSide.sharedRegionsStubs.BaggageColPointStub;
 import clientSide.sharedRegionsStubs.TemporaryStorageAreaStub;
 import comInf.Bag;
+import comInf.PorterInterface;
 
 /**
  * ...
@@ -11,7 +12,7 @@ import comInf.Bag;
  * @author Miguel Lopes
  */
 
-public class Porter extends Thread {
+public class Porter extends Thread implements PorterInterface {
 
     /**
      *  State of the porter
@@ -93,6 +94,7 @@ public class Porter extends Thread {
      * Get Porter State
      */
 
+    @Override
     public PorterStates getStatPorter() {
         return this.Stat;
     }
@@ -101,6 +103,7 @@ public class Porter extends Thread {
      * Set Porter State
      */
 
+    @Override
     public void setStatPorter(PorterStates stat) {
         this.Stat = stat;
     }

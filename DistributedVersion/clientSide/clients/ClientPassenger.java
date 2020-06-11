@@ -105,7 +105,17 @@ public class ClientPassenger {
             arrivalTermStub.resetArrivalTerminalExit();
         }
 
-        reposStub.finalReport();
+        while(!reposStub.finalReport());
+
+        reposStub.shutdown();
+        bagColPointStub.shutdown();
+        bagRecOfficeStub.shutdown();
+        tmpStorageAreaStub.shutdown();
+        arrivLoungeStub.shutdown();
+        arrivalQuayStub.shutdown();
+        departureQuayStub.shutdown();
+        arrivalTermStub.shutdown();
+        departureTermStub.shutdown();
     }
 }
 

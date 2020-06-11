@@ -94,10 +94,12 @@ public class GenReposInfoInterface {
             // finalReport
             case Message.FINALREPORT:
                 fr_count++;
-                if(fr_count == 3){
+                if(fr_count >= 3){
                     repos.finalReport();
+                    outMessage = new Message(Message.SHUT);
+                } else {
+                    outMessage = new Message(Message.ACK);
                 }
-                outMessage = new Message(Message.ACK);
                 break;
 
             // updateFlightNumber

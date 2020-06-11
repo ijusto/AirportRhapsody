@@ -3,6 +3,7 @@ package comInf;
 import clientSide.entities.BusDriverStates;
 
 public interface BusDriverInterface {
+
     public BusDriverStates getStat();
 
 

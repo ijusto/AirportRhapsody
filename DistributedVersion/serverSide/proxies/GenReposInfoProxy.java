@@ -189,9 +189,22 @@ public class GenReposInfoProxy extends Thread implements PassengerInterface, Por
         this.NA = NA;
     }
 
+    @Override
+    public void setSi(Passenger.SiPass si) {
+        this.si = si;
+    }
+
+    @Override
+    public void setNR(int NR) {
+        this.NR = NR;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
     /*********************************PORTER****************************************/
-
-
 
     @Override
     public void setStatPorter(PorterStates stat) {

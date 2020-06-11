@@ -97,7 +97,7 @@ public class GenReposInfoStub {
      *   Logs the final report of the simulation.
      */
 
-    public void finalReport(){
+    public boolean finalReport(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
@@ -112,12 +112,14 @@ public class GenReposInfoStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        if (inMessage.getType() != Message.ACK){
+        if (inMessage.getType() != Message.ACK || inMessage.getType() != Message.SHUT){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
         }
         con.close();
+
+        return inMessage.getType() == Message.SHUT;
     }
 
     /* **************************************************Plane******************************************************* */

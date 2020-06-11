@@ -47,5 +47,11 @@ public interface PassengerInterface {
 
     public void setNA(int NA);
 
+    public void setSi(Passenger.SiPass si);
+
+    public void setNR(int NR);
+
+    public void setId(int id);
+
 }
 
