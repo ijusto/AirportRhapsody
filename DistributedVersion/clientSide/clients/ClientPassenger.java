@@ -16,7 +16,7 @@ import comInf.MemException;
 
 public class ClientPassenger {
 
-    public static void main(final String[] args) throws MemException {
+    public static void main(final String[] args){
 
         GenReposInfoStub reposStub;
         BaggageColPointStub bagColPointStub;
@@ -28,7 +28,6 @@ public class ClientPassenger {
         ArrivalTerminalExitStub arrivalTermStub;
         DepartureTerminalEntranceStub departureTermStub;
 
-        String fileName = "log.txt";
         int[][] bagAndPassDest = new int[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
         int[][] nBagNR = new int[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
         int[][] nBagsNA = new int[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];

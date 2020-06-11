@@ -66,7 +66,7 @@ public class DepartureTermTransfQuayInterface {
 
             // leaveTheBus
             case Message.LEAVEBUS:
-                departureTermTransfQuay.leaveTheBus(inMessage.getPassId());
+                departureTermTransfQuay.leaveTheBus();
                 outMessage = new Message(Message.LBDONE);
                 break;
 
