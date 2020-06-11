@@ -14,14 +14,12 @@ import comInf.MemException;
 
 public class ClientPorter {
 
-    public static void main(final String[] args) throws MemException {
+    public static void main(final String[] args){
 
         GenReposInfoStub reposStub;
         BaggageColPointStub bagColPointStub;
         TemporaryStorageAreaStub tmpStorageAreaStub;
         ArrivalLoungeStub arrivLoungeStub;
-
-        String fileName = "log.txt";
 
         /* instantiation of the shared regions */
         reposStub = new GenReposInfoStub(SimulPar.genReposInfoHost, SimulPar.genReposInfoPort);

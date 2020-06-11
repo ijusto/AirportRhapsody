@@ -125,7 +125,7 @@ public class ArrivalTermTransfQuayInterface implements SharedRegionProxy {
 
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerArrivalTermTransfQuay.waitConnection = false;
-                (((ArrivalTermTransfQuayProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
+                (((ArrivalTermTransfQuayProxy) (Thread.currentThread())).getScon()).setTimeout(10);
                 outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
         }
