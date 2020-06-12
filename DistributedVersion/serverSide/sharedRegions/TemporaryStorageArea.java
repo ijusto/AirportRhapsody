@@ -44,7 +44,7 @@ public class TemporaryStorageArea {
      */
 
     public synchronized void carryItToAppropriateStore(Bag bag){
-        PorterInterface porter = (PorterInterface) Thread.currentThread();
+        CommonProvider porter = (CommonProvider) Thread.currentThread();
         assert porter.getStatPorter() == PorterStates.AT_THE_PLANES_HOLD;
         assert bag != null;
         porter.setStatPorter(PorterStates.AT_THE_STOREROOM);

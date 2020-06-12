@@ -65,7 +65,8 @@ public class BaggageColPointInterface {
 
             // goCollectABag (passenger)
             case Message.GOCOLLECTBAG:
-                boolean bagCollected = baggageColPoint.goCollectABag();
+                //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                boolean bagCollected = baggageColPoint.goCollectABag(inMessage.getPassId());
                 outMessage = new Message(Message.GCBDONE, bagCollected);
                 break;
 

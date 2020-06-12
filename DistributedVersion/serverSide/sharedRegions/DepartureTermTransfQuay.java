@@ -6,6 +6,7 @@ import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import comInf.BusDriverInterface;
+import comInf.CommonProvider;
 import comInf.PassengerInterface;
 
 /**
@@ -59,11 +60,11 @@ public class DepartureTermTransfQuay {
      *   Before leaving, the passenger waits for a notification of the bus driver to let her/him leave.
      */
 
-    public synchronized void leaveTheBus(){
-        PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
+    public synchronized void leaveTheBus(int id){
+        CommonProvider passenger = (CommonProvider) Thread.currentThread();
         assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
         passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
-        reposStub.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL.ordinal());
+        reposStub.updatePassSt(id,PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL.ordinal());
 
         while(!this.canPassLeaveTheBus()) {
             try {
@@ -75,7 +76,7 @@ public class DepartureTermTransfQuay {
 
         boolean last = this.incDecCounter(false);
 
-        reposStub.freeBusSeat(passenger.getPassengerID());
+        reposStub.freeBusSeat(id);
         reposStub.printLog();
 
         // if the passenger is the last to exit the bus
@@ -94,7 +95,7 @@ public class DepartureTermTransfQuay {
 
     public synchronized void parkTheBusAndLetPassOff() {
 
-        BusDriverInterface busDriver = (BusDriverInterface) Thread.currentThread();
+        CommonProvider busDriver = (CommonProvider) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.DRIVING_FORWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL);
         reposStub.updateBDriverStat(BusDriverStates.PARKING_AT_THE_DEPARTURE_TERMINAL.ordinal());

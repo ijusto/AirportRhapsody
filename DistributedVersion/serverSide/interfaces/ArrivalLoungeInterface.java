@@ -84,7 +84,8 @@ public class ArrivalLoungeInterface {
 
             // WhatShouldIDo (Passenger)
             case Message.WSID:
-                if (arrivalLounge.whatShouldIDo())
+                //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                if (arrivalLounge.whatShouldIDo(inMessage.getPassId()))
                     outMessage = new Message(Message.FNDST);    // gerar resposta positiva
                 else
                     outMessage = new Message(Message.TRDST); // gerar resposta negativa
@@ -131,7 +132,7 @@ public class ArrivalLoungeInterface {
 
             case Message.SHUT:                                                        // shutdown do servidor
                 ServerArrivalLounge.waitConnection = false;
-                (((ArrivalLoungeProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
+                (((ArrivalLoungeProxy) (Thread.currentThread())).getScon()).setTimeout(10);
                 outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
         }

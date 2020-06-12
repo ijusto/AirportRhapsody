@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.DepartureTermTransfQuayProxy;
@@ -63,7 +64,8 @@ public class DepartureTermTransfQuayInterface {
 
             // leaveTheBus
             case Message.LEAVEBUS:
-                departureTermTransfQuay.leaveTheBus();
+                //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                departureTermTransfQuay.leaveTheBus(inMessage.getPassId());
                 outMessage = new Message(Message.LBDONE);
                 break;
 

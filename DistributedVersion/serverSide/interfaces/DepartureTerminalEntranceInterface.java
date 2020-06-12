@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.DepartureTerminalEntranceProxy;
@@ -67,7 +68,8 @@ public class DepartureTerminalEntranceInterface {
 
             // prepareNextLeg
             case Message.PREPARENEXTLEG:
-                departureTerminalEntrance.prepareNextLeg();
+               // ((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                departureTerminalEntrance.prepareNextLeg(inMessage.getPassId());
                 outMessage = new Message(Message.ENDPASSENGER);
                 break;
 

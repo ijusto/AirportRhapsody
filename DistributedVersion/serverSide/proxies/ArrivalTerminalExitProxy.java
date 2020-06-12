@@ -15,23 +15,7 @@ import serverSide.ServerCom;
  *   @author Miguel Lopes
  */
 
-public class ArrivalTerminalExitProxy extends Thread implements PassengerInterface, PorterInterface, BusDriverInterface {
-
-    private BusDriverStates busStates;
-
-    private int nPass;
-
-    private Passenger.SiPass si;
-
-    private PassengerStates st;
-
-    private int NA;
-
-    private int NR;
-
-    private int id;
-
-    private PorterStates pSt;
+public class ArrivalTerminalExitProxy extends CommonProvider{
 
     /**
      *  Contador de threads lançados
@@ -130,77 +114,4 @@ public class ArrivalTerminalExitProxy extends Thread implements PassengerInterfa
         return sconi;
     }
 
-
-
-    /********************************INTERFACE IMPLEMENTATION*********************/
-    @Override
-    public int getNPassOnTheBus() {
-        return nPass;
-    }
-
-    @Override
-    public void setStat(BusDriverStates stat) {
-        this.busStates = stat;
-    }
-
-    @Override
-    public void setNPassOnTheBus(int nPassOnTheBus) {
-        this.nPass = nPassOnTheBus;
-    }
-
-    @Override
-    public BusDriverStates getStat() {
-        return busStates;
-    }
-
-    /********************************* PASSENGER ****************************************/
-
-    @Override
-    public Passenger.SiPass getSi() {
-        return si;
-    }
-
-    @Override
-    public PassengerStates getSt() {
-        return st;
-    }
-
-    @Override
-    public int getNA() {
-        return NA;
-    }
-
-    @Override
-    public int getNR() {
-        return NR;
-    }
-
-    @Override
-    public int getPassengerID() {
-        return id;
-    }
-
-    @Override
-    public void setSt(PassengerStates st) {
-        this.st = st;
-    }
-
-    @Override
-    public void setNA(int NA) {
-        this.NA = NA;
-    }
-
-    /*********************************PORTER****************************************/
-
-
-
-    @Override
-    public void setStatPorter(PorterStates stat) {
-        this.pSt = stat;
-    }
-
-    @Override
-    public PorterStates getStatPorter() {
-        return pSt;
-    }
 }

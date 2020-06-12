@@ -2,12 +2,9 @@ package serverSide.sharedRegions;
 
 import clientSide.entities.*;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
-import comInf.MemException;
-import comInf.MemFIFO;
+import comInf.*;
 import clientSide.entities.BusDriver;
 import clientSide.entities.Passenger;
-import comInf.PassengerInterface;
-import comInf.SimulPar;
 
 /**
  *   Arrival Terminal Transfer Quay.
@@ -92,16 +89,16 @@ public class ArrivalTermTransfQuay {
      *   in the bus.
      */
 
-    public synchronized void takeABus() {
+    public synchronized void takeABus(int id) {
         PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        passenger.setSt(PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
-        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL.ordinal());
+        assert(passenger.getSt(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        passenger.setSt(id, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        reposStub.updatePassSt(id, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL.ordinal());
         reposStub.printLog();
 
         try {
             waitingLine.write((Passenger) passenger);
-            reposStub.pJoinWaitingQueue(passenger.getPassengerID());
+            reposStub.pJoinWaitingQueue(id);
         } catch (MemException e) {
             e.printStackTrace();
         }
@@ -130,18 +127,18 @@ public class ArrivalTermTransfQuay {
      *   in announcingBusBoarding, who is waiting for all the passenger to enter.
      */
 
-    public synchronized void enterTheBus(){
+    public synchronized void enterTheBus(int id){
 
-        Passenger passenger = (Passenger) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        CommonProvider passenger = (CommonProvider) Thread.currentThread();
+        assert(passenger.getSt(id) == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         assert(this.getNPassOnTheBusValue() < SimulPar.BUS_CAP);
 
-        passenger.setSt(PassengerStates.TERMINAL_TRANSFER);
-        reposStub.updatePassSt(passenger.getPassengerID(),PassengerStates.TERMINAL_TRANSFER.ordinal());
+        passenger.setSt(id, PassengerStates.TERMINAL_TRANSFER);
+        reposStub.updatePassSt(id,PassengerStates.TERMINAL_TRANSFER.ordinal());
 
         try{
             this.waitingLine.read();
-            reposStub.pLeftWaitingQueue(passenger.getPassengerID());
+            reposStub.pLeftWaitingQueue(id);
 
             boolean last = this.incDecNPassOnTheBusCounter(true);
 
@@ -168,7 +165,7 @@ public class ArrivalTermTransfQuay {
 
     public synchronized char hasDaysWorkEnded(){
 
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        CommonProvider busDriver = (CommonProvider) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         // if the last flight arrived and all passengers left the airport, end the bus driver life cycle
@@ -191,7 +188,7 @@ public class ArrivalTermTransfQuay {
 
     public synchronized void parkTheBus(){
 
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        CommonProvider busDriver = (CommonProvider) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
         busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
@@ -229,7 +226,7 @@ public class ArrivalTermTransfQuay {
 
     public synchronized void announcingBusBoarding(){
 
-        BusDriver busDriver = (BusDriver) Thread.currentThread();
+        CommonProvider busDriver = (CommonProvider) Thread.currentThread();
         assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         this.allowBoardBus = true;

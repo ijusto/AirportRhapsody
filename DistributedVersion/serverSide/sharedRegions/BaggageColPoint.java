@@ -57,14 +57,14 @@ public class BaggageColPoint {
      *
      */
 
-    public synchronized boolean goCollectABag(){
+    public synchronized boolean goCollectABag(int id){
 
-        PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        passenger.setSt(PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        CommonProvider passenger = (CommonProvider) Thread.currentThread();
+        assert(passenger.getSt(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        passenger.setSt(id, PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         // update logger
-        reposStub.updatePassSt(passenger.getPassengerID(),PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT.ordinal());
+        reposStub.updatePassSt(id,PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT.ordinal());
 
         /*
           Blocked Entity: Passenger
@@ -82,16 +82,16 @@ public class BaggageColPoint {
 
         do {
 
-            if(this.pHoldEmpty() && this.treadmill.get(passenger.getPassengerID()).isEmpty()) {
+            if(this.pHoldEmpty() && this.treadmill.get(id).isEmpty()) {
                 return false;
             }
 
-            if(!this.treadmill.get(passenger.getPassengerID()).isEmpty()){
+            if(!this.treadmill.get(id).isEmpty()){
                 try {
-                    this.treadmill.get(passenger.getPassengerID()).read();
-                    passenger.setNA(passenger.getNA() + 1);
+                    this.treadmill.get(id).read();
+                    passenger.setNA(id, passenger.getNA(id) + 1);
 
-                    reposStub.updatesPassNA(passenger.getPassengerID(), passenger.getNA());
+                    reposStub.updatesPassNA(id, passenger.getNA());
                     reposStub.pGetsABag();
 
                     return true;
@@ -120,7 +120,7 @@ public class BaggageColPoint {
      */
 
     public synchronized void carryItToAppropriateStore(Bag bag){
-        PorterInterface porter = (PorterInterface) Thread.currentThread();
+        CommonProvider porter = (CommonProvider) Thread.currentThread();
         assert(porter.getStatPorter() == PorterStates.AT_THE_PLANES_HOLD);
         assert(this.treadmill.containsKey(bag.getIdOwner()));
         porter.setStatPorter(PorterStates.AT_THE_LUGGAGE_BELT_CONVEYOR);

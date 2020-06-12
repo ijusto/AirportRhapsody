@@ -8,6 +8,7 @@ import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 
 
+import javax.sound.midi.MidiDevice;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -156,16 +157,16 @@ public class ArrivalLounge {
      *             <li> false, otherwise
      */
 
-    public synchronized boolean whatShouldIDo(){
+    public synchronized boolean whatShouldIDo(int id){
 
-        PassengerInterface currentPassenger = (PassengerInterface) Thread.currentThread();
-        assert(currentPassenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        CommonProvider currentPassenger = (CommonProvider) Thread.currentThread();
+        assert(currentPassenger.getSt(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE);
 
         // update logger
-        this.reposStub.updatesPassNR(currentPassenger.getPassengerID(), currentPassenger.getNR());
-        this.reposStub.numberNRTotal(currentPassenger.getNR());
-        this.reposStub.newPass(currentPassenger.getSi().ordinal());
-        this.reposStub.updatePassSt(currentPassenger.getPassengerID(), PassengerStates.AT_THE_DISEMBARKING_ZONE.ordinal());
+        this.reposStub.updatesPassNR(id, currentPassenger.getNR(id));
+        this.reposStub.numberNRTotal(currentPassenger.getNR(id));
+        this.reposStub.newPass(currentPassenger.getSi(id).ordinal());
+        this.reposStub.updatePassSt(id, PassengerStates.AT_THE_DISEMBARKING_ZONE.ordinal());
         this.reposStub.printLog();
 
         // increment passengers that arrive so the porter knows when to wake up in takeARest()
@@ -199,7 +200,7 @@ public class ArrivalLounge {
         porterSleep = true;
         notifyAll(); // notify Reset (avoid deadlock of passengers entering and notifying before the porter sleeps)
 
-        PorterInterface porter = (PorterInterface) Thread.currentThread();
+        CommonProvider porter = (CommonProvider) Thread.currentThread();
         assert(porter.getStatPorter() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         reposStub.printLog();
 
@@ -234,7 +235,7 @@ public class ArrivalLounge {
 
     public synchronized Bag tryToCollectABag(){
 
-        PorterInterface porter = (PorterInterface) Thread.currentThread();
+        CommonProvider porter = (CommonProvider) Thread.currentThread();
         assert(porter.getStatPorter() == PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         porter.setStatPorter(PorterStates.AT_THE_PLANES_HOLD);
 
@@ -259,7 +260,7 @@ public class ArrivalLounge {
 
     public synchronized void noMoreBagsToCollect(){
 
-        PorterInterface porter = (PorterInterface) Thread.currentThread();
+        CommonProvider porter = (CommonProvider) Thread.currentThread();
         assert(porter.getStatPorter() == PorterStates.AT_THE_PLANES_HOLD);
         porter.setStatPorter(PorterStates.WAITING_FOR_A_PLANE_TO_LAND);
         reposStub.updatePorterStat(PorterStates.WAITING_FOR_A_PLANE_TO_LAND.ordinal());

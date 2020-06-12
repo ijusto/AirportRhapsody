@@ -159,26 +159,26 @@ public class Passenger extends Thread implements PassengerInterface {
     @Override
     public void run() {
 
-        boolean isFinal = arrivalLoungeStub.whatShouldIDo();
+        boolean isFinal = arrivalLoungeStub.whatShouldIDo(this.id);
         boolean success = false;
         if (isFinal) {
             if (this.getNR() != 0) {
                 for (int i = 0; i < this.getNR(); i++) {
-                    success = baggageColPointStub.goCollectABag();
+                    success = baggageColPointStub.goCollectABag(this.id);
                     if (!success) {
                         break;
                     }
                 }
                 if (!success) {
-                    baggageReclaimOfficeStub.reportMissingBags();
+                    baggageReclaimOfficeStub.reportMissingBags(this.id);
                 }
             }
-            arrivalTerminalExitStub.goHome();
+            arrivalTerminalExitStub.goHome(this.id);
         } else {
-            arrivTransferQuayStub.takeABus();
-            arrivTransferQuayStub.enterTheBus();
-            departureTransferQuayStub.leaveTheBus();
-            departureEntranceStub.prepareNextLeg();
+            arrivTransferQuayStub.takeABus(this.id);
+            arrivTransferQuayStub.enterTheBus(this.id);
+            departureTransferQuayStub.leaveTheBus(this.id);
+            departureEntranceStub.prepareNextLeg(this.id);
         }
     }
 

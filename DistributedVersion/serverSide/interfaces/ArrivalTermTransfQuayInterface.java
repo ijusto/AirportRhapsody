@@ -1,6 +1,7 @@
 package serverSide.interfaces;
 
 import clientSide.entities.BusDriver;
+import comInf.CommonProvider;
 import comInf.MemException;
 import comInf.Message;
 import comInf.MessageException;
@@ -72,19 +73,20 @@ public class ArrivalTermTransfQuayInterface {
 
             // takeABus (Passenger)
             case Message.TAKEABUS:
-                arrivalTermTransfQuay.takeABus();
+                //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                arrivalTermTransfQuay.takeABus(inMessage.getPassId());
                 outMessage = new Message(Message.TAKERSTDONE);
                 break;
 
             // enterTheBus (Passenger)
             case Message.ENTERBUS:
-                arrivalTermTransfQuay.enterTheBus();
+                //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                arrivalTermTransfQuay.enterTheBus(inMessage.getPassId());
                 outMessage = new Message(Message.ACK);
                 break;
 
             // hasDaysWorkEnded (BusDriver)
             case Message.WORKENDED:
-                BusDriver b = (BusDriver) Thread.currentThread();
                 if (arrivalTermTransfQuay.hasDaysWorkEnded() == 'R')
                     outMessage = new Message(Message.CONTDAYS);    // gerar resposta positiva
                 else

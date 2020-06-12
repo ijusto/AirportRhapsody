@@ -2,6 +2,7 @@ package serverSide.sharedRegions;
 
 import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
+import comInf.CommonProvider;
 import comInf.PassengerInterface;
 import comInf.SimulPar;
 import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
@@ -59,14 +60,14 @@ public class ArrivalTerminalExit {
      *   Departure Terminal Entrance or, if the last, to notify all the others.
      */
 
-    public synchronized void goHome(){
-        PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
-                passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
-                passenger.getSt() == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
-                passenger.setSt(PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+    public synchronized void goHome(int id){
+        CommonProvider passenger = (CommonProvider) Thread.currentThread();
+        assert(passenger.getSt(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
+                passenger.getSt(id) == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
+                passenger.getSt(id) == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+                passenger.setSt(id, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
-        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.EXITING_THE_ARRIVAL_TERMINAL.ordinal());
+        reposStub.updatePassSt(id, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL.ordinal());
         reposStub.printLog();
 
         // increment the number of passengers that wants to leave the airport
@@ -90,7 +91,7 @@ public class ArrivalTerminalExit {
             }
         }
 
-        reposStub.passengerExit(passenger.getPassengerID());
+        reposStub.passengerExit(id);
         reposStub.printLog();
     }
 

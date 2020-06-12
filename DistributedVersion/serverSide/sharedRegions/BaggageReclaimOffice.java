@@ -3,6 +3,7 @@ package serverSide.sharedRegions;
 import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
+import comInf.CommonProvider;
 import comInf.PassengerInterface;
 
 /**
@@ -34,12 +35,12 @@ public class BaggageReclaimOffice {
      *   Operation of reporting a bag missing. (raised by the Passenger).
      */
 
-    public synchronized void reportMissingBags(){
-        PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
-        passenger.setSt(PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+    public synchronized void reportMissingBags(int id){
+        CommonProvider passenger = (CommonProvider) Thread.currentThread();
+        assert(passenger.getSt(id) == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        passenger.setSt(id, PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
 
-        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE.ordinal());
+        reposStub.updatePassSt(id, PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE.ordinal());
         reposStub.missingBagReported();
 
         reposStub.printLog();

@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.ArrivalTerminalExitProxy;
@@ -70,7 +71,8 @@ public class ArrivalTerminalExitInterface {
 
             // goHome (Passenger)
             case Message.GOHOME:
-                arrivalTerminalExit.goHome();
+                //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                arrivalTerminalExit.goHome(inMessage.getPassId());
                 outMessage = new Message(Message.ENDPASSENGER);
                 break;
 

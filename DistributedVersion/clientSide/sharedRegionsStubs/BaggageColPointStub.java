@@ -85,7 +85,7 @@ public class BaggageColPointStub {
      *
      */
 
-    public boolean goCollectABag(){
+    public boolean goCollectABag(int id){
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
@@ -98,7 +98,7 @@ public class BaggageColPointStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.GOCOLLECTBAG);
+        outMessage = new Message(Message.GOCOLLECTBAG, id);
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

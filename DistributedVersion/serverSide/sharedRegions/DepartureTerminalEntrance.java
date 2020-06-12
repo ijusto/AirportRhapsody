@@ -2,6 +2,7 @@ package serverSide.sharedRegions;
 
 import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
+import comInf.CommonProvider;
 import comInf.PassengerInterface;
 import comInf.SimulPar;
 import clientSide.sharedRegionsStubs.ArrivalLoungeStub;
@@ -70,13 +71,13 @@ public class DepartureTerminalEntrance {
      *   If there are still bags at the plane's hold, the passenger waits for the signal of the porter.
      */
 
-    public synchronized void prepareNextLeg(){
+    public synchronized void prepareNextLeg(int id){
 
-        PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
-        assert passenger.getSt() == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL;
-        passenger.setSt(PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
+        CommonProvider passenger = (CommonProvider) Thread.currentThread();
+        assert passenger.getSt(id) == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL;
+        passenger.setSt(id, PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
-        reposStub.updatePassSt(passenger.getPassengerID(), PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL.ordinal());
+        reposStub.updatePassSt(id, PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL.ordinal());
         reposStub.printLog();
 
         // increment the number of passengers that wants to leave the airport

@@ -8,50 +8,41 @@ public interface PassengerInterface {
      * Get Passenger Situation
      */
 
-    public Passenger.SiPass getSi();
+    public Passenger.SiPass getSi(int id);
 
 
     /**
      * Get Passenger State
      */
 
-    public PassengerStates getSt();
+    public PassengerStates getSt(int id);
 
     /**
      * Get Passenger number of pieces of luggage he has presently collected
      */
 
-    public int getNA();
+    public int getNA(int id);
 
     /**
      * Get Passenger number of pieces of luggage he carried at the start of the journey
      */
 
-    public int getNR();
-
-    /**
-     * Get Passenger ID
-     */
-
-    public int getPassengerID();
+    public int getNR(int id);
 
     /**
      * Set Passenger State
      */
 
-    public void setSt(PassengerStates st);
+    public void setSt(int id, PassengerStates st);
 
     /**
      * Set Passenger number of pieces of luggage he has presently collected
      */
 
-    public void setNA(int NA);
+    public void setNA(int id, int NA);
 
-    public void setSi(Passenger.SiPass si);
+    public void setSi(int id, Passenger.SiPass si);
 
-    public void setNR(int NR);
-
-    public void setId(int id);
-
+    public void setNR(int id, int NR);
 }
 

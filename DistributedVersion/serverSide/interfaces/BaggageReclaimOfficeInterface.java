@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
 import serverSide.proxies.BaggageReclaimOfficeProxy;
@@ -62,7 +63,8 @@ public class BaggageReclaimOfficeInterface{
 
             // reportMissingBags
             case Message.REPORTMISSBAG:
-                baggageReclaimOffice.reportMissingBags();
+                //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                baggageReclaimOffice.reportMissingBags(inMessage.getPassId());
                 outMessage = new Message(Message.ACK);
                 break;
 

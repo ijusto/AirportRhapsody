@@ -400,7 +400,11 @@ public class Message implements Serializable
 
     public Message(int type, int value) {
         msgType = type;
-        if (msgType == DEADPASSVAL){
+        if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
+                || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
+                || (msgType == PREPARENEXTLEG)){
+            passId = value;
+        } else if (msgType == DEADPASSVAL){
             msgDeadPassValue = value;
         } else if(msgType == UPDATEFN){
             msgFlight = value;
