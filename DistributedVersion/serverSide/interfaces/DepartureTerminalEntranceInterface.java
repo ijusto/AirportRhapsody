@@ -54,7 +54,7 @@ public class DepartureTerminalEntranceInterface {
         }
 
         /* seu processamento */
-
+        CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch (inMessage.getType ()) {
             // probPar
             /*
@@ -69,6 +69,7 @@ public class DepartureTerminalEntranceInterface {
             // prepareNextLeg
             case Message.PREPARENEXTLEG:
                // ((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
                 departureTerminalEntrance.prepareNextLeg(inMessage.getPassId());
                 outMessage = new Message(Message.ENDPASSENGER);
                 break;

@@ -1,4 +1,5 @@
 package comInf;
+import clientSide.entities.*;
 import clientSide.sharedRegionsStubs.*;
 
 import java.io.*;
@@ -379,6 +380,12 @@ public class Message implements Serializable
 
     private int bdStat = -1;
 
+    private PassengerStates stPass;
+
+    private PorterStates stPorter;
+
+    private BusDriverStates stBD;
+
     /**
      *  Instanciação de uma mensagem (forma 1).
      *
@@ -396,7 +403,25 @@ public class Message implements Serializable
      *    @param type tipo da mensagem
      *    @param value
      */
+    public Message(int type, int value, PassengerStates st) {
+        msgType = type;
+        if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
+                || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
+                || (msgType == PREPARENEXTLEG)){
+            passId = value;
+            stPass = st;
+        }
+    }
 
+    public Message(int type, PorterStates statPorter) {
+        msgType = type;
+        this.stPorter = statPorter;
+    }
+
+    public Message(int type, BusDriverStates statBD) {
+        msgType = type;
+        this.stBD = statBD;
+    }
 
     public Message(int type, int value) {
         msgType = type;
@@ -529,6 +554,8 @@ public class Message implements Serializable
         this.nIter = nIter;
     }
 
+
+
     public int getMsgBagDestStat(){
         return msgBagDestStat;
     }
@@ -589,11 +616,17 @@ public class Message implements Serializable
 
     public int getPassId(){ return passId; }
 
-    public int getPassStat(){ return passStat; }
+    public int getPassStatInt(){ return passStat; }
 
-    public int getPorterStat(){ return porterStat; }
+    public PassengerStates getPassStat(){return stPass;}
 
-    public int getBDStat(){ return bdStat; }
+    public PorterStates getPorterStat(){return stPorter;}
+
+    public BusDriverStates getBDStat(){return stBD;}
+
+    public int getPorterStatInt(){ return porterStat; }
+
+    public int getBDStatInt(){ return bdStat; }
 
     /**
      *  Obtenção do valor do campo identificador do cliente.

@@ -113,7 +113,7 @@ public class DepartureTerminalEntrance {
 
         }
 
-        reposStub.passengerExit(passenger.getPassengerID());
+        reposStub.passengerExit(id);
         reposStub.printLog();
     }
 

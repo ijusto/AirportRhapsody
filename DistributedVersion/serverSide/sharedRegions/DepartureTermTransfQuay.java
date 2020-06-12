@@ -62,8 +62,8 @@ public class DepartureTermTransfQuay {
 
     public synchronized void leaveTheBus(int id){
         CommonProvider passenger = (CommonProvider) Thread.currentThread();
-        assert(passenger.getSt() == PassengerStates.TERMINAL_TRANSFER);
-        passenger.setSt(PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
+        assert(passenger.getSt(id) == PassengerStates.TERMINAL_TRANSFER);
+        passenger.setSt(id, PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         reposStub.updatePassSt(id,PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL.ordinal());
 
         while(!this.canPassLeaveTheBus()) {

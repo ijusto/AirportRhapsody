@@ -181,7 +181,7 @@ public class ArrivalLounge {
             // wake up Porter in takeARest()
             notifyAll();
         }
-        return currentPassenger.getSi() == Passenger.SiPass.FDT;
+        return currentPassenger.getSi(id) == Passenger.SiPass.FDT;
     }
 
     /* **************************************************Porter****************************************************** */

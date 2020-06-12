@@ -91,7 +91,7 @@ public class BaggageColPoint {
                     this.treadmill.get(id).read();
                     passenger.setNA(id, passenger.getNA(id) + 1);
 
-                    reposStub.updatesPassNA(id, passenger.getNA());
+                    reposStub.updatesPassNA(id, passenger.getNA(id));
                     reposStub.pGetsABag();
 
                     return true;

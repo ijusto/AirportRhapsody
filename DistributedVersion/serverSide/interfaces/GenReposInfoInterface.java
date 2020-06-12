@@ -196,17 +196,17 @@ public class GenReposInfoInterface {
                 break;
 
             case Message.UDTEPASSSTAT:
-                repos.updatePassSt(inMessage.getPassId(), inMessage.getPassStat());
+                repos.updatePassSt(inMessage.getPassId(), inMessage.getPassStatInt());
                 outMessage = new Message(Message.ACK);
                 break;
 
             case Message.UDTEPORTSTAT:
-                repos.updatePorterStat(inMessage.getPorterStat());
+                repos.updatePorterStat(inMessage.getPorterStatInt());
                 outMessage = new Message(Message.ACK);
                 break;
 
             case Message.UDTEBDSTAT:
-                repos.updateBDriverStat(inMessage.getBDStat());
+                repos.updateBDriverStat(inMessage.getBDStatInt());
                 outMessage = new Message(Message.ACK);
                 break;
 

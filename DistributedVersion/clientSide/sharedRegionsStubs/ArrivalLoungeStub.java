@@ -86,16 +86,16 @@ public class ArrivalLoungeStub {
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
+        Passenger p = (Passenger) Thread.currentThread();
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-               Passenger p = (Passenger) Thread.currentThread();
                p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.WSID, id);
+        outMessage = new Message(Message.WSID, id, p.getSt());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -124,16 +124,16 @@ public class ArrivalLoungeStub {
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
+        Porter pt = (Porter) Thread.currentThread();
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Porter pt = (Porter) Thread.currentThread();
                 pt.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.TAKEARST);
+        outMessage = new Message(Message.TAKEARST, pt.getStatPorter());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -158,16 +158,15 @@ public class ArrivalLoungeStub {
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        Porter pt = (Porter) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Porter pt = (Porter) Thread.currentThread();
                 pt.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.TRYTOCOL);
+        outMessage = new Message(Message.TRYTOCOL, pt.getStatPorter());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -197,16 +196,15 @@ public class ArrivalLoungeStub {
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        Porter pt = (Porter) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Porter pt = (Porter) Thread.currentThread();
                 pt.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.NOBAGS2COL);
+        outMessage = new Message(Message.NOBAGS2COL, pt.getStatPorter());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -229,10 +227,10 @@ public class ArrivalLoungeStub {
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
+        Passenger p = (Passenger) Thread.currentThread();
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Passenger p = (Passenger) Thread.currentThread();
                 p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
@@ -292,11 +290,9 @@ public class ArrivalLoungeStub {
     public void shutdown(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
         while(!con.open()){  // waiting for the connection to be established
             try {
-               BusDriver b = (BusDriver) Thread.currentThread();
-               b.sleep((long) 10);
+                Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored) {}
         }
 

@@ -2,7 +2,6 @@ package clientSide.entities;
 import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.DepartureTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
-import comInf.BusDriverInterface;
 
 /**
  *   Bus driver thread.
@@ -11,7 +10,7 @@ import comInf.BusDriverInterface;
  *   @author Miguel Lopes
  */
 
-public class BusDriver extends Thread implements BusDriverInterface{
+public class BusDriver extends Thread{
 
     /**
      *   General Repository of Information Stub.
@@ -129,7 +128,7 @@ public class BusDriver extends Thread implements BusDriverInterface{
      *    @return State of the BusDriver.
      */
 
-    @Override
+
     public BusDriverStates getStat() {
         return Stat;
     }
@@ -141,7 +140,7 @@ public class BusDriver extends Thread implements BusDriverInterface{
      *    @return number os passengers on the bus.
      */
 
-    @Override
+
     public int getNPassOnTheBus() {
         return this.nPassOnTheBus;
     }
@@ -154,7 +153,7 @@ public class BusDriver extends Thread implements BusDriverInterface{
      *    @param stat Bus Driver State.
      */
 
-    @Override
+
     public void setStat(BusDriverStates stat) {
         Stat = stat;
     }
@@ -165,7 +164,7 @@ public class BusDriver extends Thread implements BusDriverInterface{
      *    @param nPassOnTheBus Number os passengers on the bus.
      */
 
-    @Override
+
     public void setNPassOnTheBus(int nPassOnTheBus) {
         this.nPassOnTheBus = nPassOnTheBus;
     }

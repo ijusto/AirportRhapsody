@@ -53,7 +53,7 @@ public class BaggageColPointInterface {
         }
 
         /* seu processamento */
-
+        CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch (inMessage.getType ()) {
             // probPar
             /*
@@ -65,6 +65,7 @@ public class BaggageColPointInterface {
 
             // goCollectABag (passenger)
             case Message.GOCOLLECTBAG:
+                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
                 //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
                 boolean bagCollected = baggageColPoint.goCollectABag(inMessage.getPassId());
                 outMessage = new Message(Message.GCBDONE, bagCollected);
@@ -72,6 +73,7 @@ public class BaggageColPointInterface {
 
             // carryItToAppropriateStore (porter)
             case Message.CARRYAPPSTORE:
+                cp.setStatPorter(inMessage.getPorterStat());
                 Bag bag = new Bag(inMessage.getMsgBagDestStat(), inMessage.getMsgBagIdOwner());
                 baggageColPoint.carryItToAppropriateStore(bag);
                 outMessage = new Message(Message.ACK);

@@ -89,16 +89,15 @@ public class BaggageColPointStub {
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        Passenger p = (Passenger) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Passenger p = (Passenger) Thread.currentThread();
                 p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.GOCOLLECTBAG, id);
+        outMessage = new Message(Message.GOCOLLECTBAG, id, p.getSt());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -122,10 +121,9 @@ public class BaggageColPointStub {
     public void carryItToAppropriateStore(Bag bag){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        Porter p = (Porter) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-               Porter p = (Porter) Thread.currentThread();
                p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
@@ -202,7 +200,7 @@ public class BaggageColPointStub {
     /**
      *   ...
      *
-     *    @param treadmill ...
+     *    @param
      */
 
     public void setTreadmill(int[] nBagsPerPass) {

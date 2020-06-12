@@ -71,16 +71,15 @@ public class BaggageReclaimOfficeStub {
     public void reportMissingBags(int id){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        Passenger p = (Passenger) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-               Passenger p = (Passenger) Thread.currentThread();
                p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.REPORTMISSBAG, id);
+        outMessage = new Message(Message.REPORTMISSBAG, id, p.getSt());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

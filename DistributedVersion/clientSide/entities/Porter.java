@@ -12,7 +12,7 @@ import comInf.PorterInterface;
  * @author Miguel Lopes
  */
 
-public class Porter extends Thread implements PorterInterface {
+public class Porter extends Thread{
 
     /**
      *  State of the porter
@@ -94,7 +94,7 @@ public class Porter extends Thread implements PorterInterface {
      * Get Porter State
      */
 
-    @Override
+
     public PorterStates getStatPorter() {
         return this.Stat;
     }
@@ -103,7 +103,7 @@ public class Porter extends Thread implements PorterInterface {
      * Set Porter State
      */
 
-    @Override
+
     public void setStatPorter(PorterStates stat) {
         this.Stat = stat;
     }

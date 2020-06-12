@@ -76,10 +76,9 @@ public class TemporaryStorageAreaStub {
     public void carryItToAppropriateStore(Bag bag){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        Porter p = (Porter) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Porter p = (Porter) Thread.currentThread();
                 p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }

@@ -47,7 +47,7 @@ public class TemporaryStorageAreaInterface {
         }
 
         /* seu processamento */
-
+        CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch (inMessage.getType ()) {
             // probPar
             /*
@@ -64,6 +64,7 @@ public class TemporaryStorageAreaInterface {
 
             // carryItToAppropriateStore (porter)
             case Message.CARRYTOAPPSTORE_TSA:
+                cp.setStatPorter(inMessage.getPorterStat());
                 Bag bag = new Bag(inMessage.getMsgBagDestStat(), inMessage.getMsgBagIdOwner());
                 temporaryStorageArea.carryItToAppropriateStore(bag);
                 outMessage = new Message(Message.ACK);

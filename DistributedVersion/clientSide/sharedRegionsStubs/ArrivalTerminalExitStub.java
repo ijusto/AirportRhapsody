@@ -234,10 +234,10 @@ public class ArrivalTerminalExitStub {
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        Passenger p = (Passenger) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
@@ -262,7 +262,6 @@ public class ArrivalTerminalExitStub {
     public void shutdown(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);

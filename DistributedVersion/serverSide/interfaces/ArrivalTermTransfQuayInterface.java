@@ -58,7 +58,7 @@ public class ArrivalTermTransfQuayInterface {
         }
 
         /* seu processamento */
-
+        CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch (inMessage.getType ()) {
 
             // probPar
@@ -74,6 +74,7 @@ public class ArrivalTermTransfQuayInterface {
             // takeABus (Passenger)
             case Message.TAKEABUS:
                 //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
                 arrivalTermTransfQuay.takeABus(inMessage.getPassId());
                 outMessage = new Message(Message.TAKERSTDONE);
                 break;
@@ -81,12 +82,14 @@ public class ArrivalTermTransfQuayInterface {
             // enterTheBus (Passenger)
             case Message.ENTERBUS:
                 //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
                 arrivalTermTransfQuay.enterTheBus(inMessage.getPassId());
                 outMessage = new Message(Message.ACK);
                 break;
 
             // hasDaysWorkEnded (BusDriver)
             case Message.WORKENDED:
+                cp.setStat(inMessage.getBDStat());
                 if (arrivalTermTransfQuay.hasDaysWorkEnded() == 'R')
                     outMessage = new Message(Message.CONTDAYS);    // gerar resposta positiva
                 else
@@ -95,12 +98,14 @@ public class ArrivalTermTransfQuayInterface {
 
             // parkTheBus (BusDriver)
             case Message.PARKBUS:
+                cp.setStat(inMessage.getBDStat());
                 arrivalTermTransfQuay.parkTheBus();
                 outMessage = new Message(Message.PBDONE);
                 break;
 
             // announcingBusBoarding (BusDriver)
             case Message.ANNOUCEBUSBORADING:
+                cp.setStat(inMessage.getBDStat());
                 arrivalTermTransfQuay.announcingBusBoarding();
                 outMessage = new Message(Message.ABBDONE);
                 break;

@@ -1,6 +1,8 @@
 package clientSide.sharedRegionsStubs;
 
 import clientSide.ClientCom;
+import clientSide.entities.BusDriver;
+import clientSide.entities.Porter;
 import comInf.Message;
 import clientSide.entities.Passenger;
 
@@ -81,16 +83,15 @@ public class ArrivalTermTransfQuayStub {
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        Passenger p = (Passenger) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Passenger p = (Passenger) Thread.currentThread();
                 p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.TAKEABUS, id);
+        outMessage = new Message(Message.TAKEABUS, id, p.getSt());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -113,16 +114,15 @@ public class ArrivalTermTransfQuayStub {
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        Passenger p = (Passenger) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Passenger p = (Passenger) Thread.currentThread();
                 p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.ENTERBUS, id);
+        outMessage = new Message(Message.ENTERBUS, id, p.getSt());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -147,15 +147,15 @@ public class ArrivalTermTransfQuayStub {
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        BusDriver b = (BusDriver) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                b.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.WORKENDED);
+        outMessage = new Message(Message.WORKENDED, b.getStat());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -179,15 +179,15 @@ public class ArrivalTermTransfQuayStub {
     public void parkTheBus(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        BusDriver b = (BusDriver) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                b.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.PARKBUS);
+        outMessage = new Message(Message.PARKBUS, b.getStat());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -208,15 +208,15 @@ public class ArrivalTermTransfQuayStub {
     public void announcingBusBoarding(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        BusDriver b = (BusDriver) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                b.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.ANNOUCEBUSBORADING);
+        outMessage = new Message(Message.ANNOUCEBUSBORADING, b.getStat());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -265,10 +265,10 @@ public class ArrivalTermTransfQuayStub {
     public void setEndDay(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        Porter p = (Porter) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Thread.currentThread().sleep((long) 10);
+                p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 

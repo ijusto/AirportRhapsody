@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import clientSide.entities.PassengerStates;
 import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
@@ -57,7 +58,7 @@ public class ArrivalTerminalExitInterface {
         }
 
         /* seu processamento */
-
+        CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch (inMessage.getType ()) {
 
             // probPar
@@ -70,8 +71,10 @@ public class ArrivalTerminalExitInterface {
              */
 
             // goHome (Passenger)
+
             case Message.GOHOME:
                 //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
                 arrivalTerminalExit.goHome(inMessage.getPassId());
                 outMessage = new Message(Message.ENDPASSENGER);
                 break;

@@ -71,10 +71,9 @@ public class DepartureTermTransfQuayStub {
     public void leaveTheBus(int id){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        Passenger p = (Passenger) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                Passenger p = (Passenger) Thread.currentThread();
                 p.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
@@ -101,16 +100,15 @@ public class DepartureTermTransfQuayStub {
     public void parkTheBusAndLetPassOff() {
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
+        BusDriver b = (BusDriver) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
-                BusDriver b = (BusDriver) Thread.currentThread();
                 b.sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.PBLPO);  //pede report missing bags
+        outMessage = new Message(Message.PBLPO, b.getStat());  //pede report missing bags
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -129,7 +127,6 @@ public class DepartureTermTransfQuayStub {
     public synchronized void resetDepartureTermTransfQuay(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-
         while(!con.open()){  // waiting for the connection to be established
             try {
                 Thread.currentThread().sleep((long) 10);

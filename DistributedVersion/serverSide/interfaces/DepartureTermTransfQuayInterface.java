@@ -51,7 +51,7 @@ public class DepartureTermTransfQuayInterface {
         }
 
         /* seu processamento */
-
+        CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch (inMessage.getType ()) {
             // probPar
             /*
@@ -64,6 +64,7 @@ public class DepartureTermTransfQuayInterface {
 
             // leaveTheBus
             case Message.LEAVEBUS:
+                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
                 //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
                 departureTermTransfQuay.leaveTheBus(inMessage.getPassId());
                 outMessage = new Message(Message.LBDONE);
@@ -71,6 +72,7 @@ public class DepartureTermTransfQuayInterface {
 
             // parkTheBusAndLetPassOff
             case Message.PBLPO:
+                cp.setStat(inMessage.getBDStat());
                 departureTermTransfQuay.parkTheBusAndLetPassOff();
                 outMessage = new Message(Message.PBLPODONE);
                 break;

@@ -11,7 +11,7 @@ import comInf.PassengerInterface;
  *   @author Miguel Lopes
  */
 
-public class Passenger extends Thread implements PassengerInterface {
+public class Passenger extends Thread{
 
     /**
      *   Enum containing all the situations a passenger can be in.
@@ -188,7 +188,7 @@ public class Passenger extends Thread implements PassengerInterface {
      * Get Passenger Situation
      */
 
-    @Override
+
     public SiPass getSi() {
         return Si;
     }
@@ -197,7 +197,7 @@ public class Passenger extends Thread implements PassengerInterface {
      * Get Passenger State
      */
 
-    @Override
+
     public PassengerStates getSt() {
         return St;
     }
@@ -206,7 +206,7 @@ public class Passenger extends Thread implements PassengerInterface {
      * Get Passenger number of pieces of luggage he has presently collected
      */
 
-    @Override
+
     public int getNA() {
         return NA;
     }
@@ -215,7 +215,7 @@ public class Passenger extends Thread implements PassengerInterface {
      * Get Passenger number of pieces of luggage he carried at the start of the journey
      */
 
-    @Override
+
     public int getNR() {
         return NR;
     }
@@ -224,14 +224,13 @@ public class Passenger extends Thread implements PassengerInterface {
      * Get Passenger ID
      */
 
-    @Override
     public int getPassengerID() { return id;}
 
     /**
      * Set Passenger State
      */
 
-    @Override
+
     public void setSt(PassengerStates st) {
         St = st;
     }
@@ -240,7 +239,7 @@ public class Passenger extends Thread implements PassengerInterface {
      * Set Passenger number of pieces of luggage he has presently collected
      */
 
-    @Override
+
     public void setNA(int NA) {
         this.NA = NA;
     }

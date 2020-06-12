@@ -50,7 +50,7 @@ public class BaggageReclaimOfficeInterface{
         }
 
         /* seu processamento */
-
+        CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch (inMessage.getType ()) {
             // probPar
             /*
@@ -64,6 +64,7 @@ public class BaggageReclaimOfficeInterface{
             // reportMissingBags
             case Message.REPORTMISSBAG:
                 //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
                 baggageReclaimOffice.reportMissingBags(inMessage.getPassId());
                 outMessage = new Message(Message.ACK);
                 break;
