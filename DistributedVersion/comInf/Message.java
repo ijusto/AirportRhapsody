@@ -395,97 +395,140 @@ public class Message implements Serializable
     public Message(int type)
     {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- END --------");
     }
 
     public Message(int type, int value) {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
         if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
                 || (msgType == PREPARENEXTLEG)){
             passId = value;
+            System.out.println("passId " + value);
         } else if (msgType == DEADPASSVAL){
             msgDeadPassValue = value;
+            System.out.println("msgDeadPassValue " + value);
         } else if(msgType == UPDATEFN){
             msgFlight = value;
+            System.out.println("msgFlight " + value);
         } else if(msgType == INITCHOLD){
             msgBN = value;
+            System.out.println("msgBN " + value);
         } else if(msgType == NUMNRTOTAL){
             msgNR = value;
+            System.out.println("msgNR " + value);
         } else if(msgType == UDTEBDSTAT){
             bdStat = value;
+            System.out.println("bdStat " + value);
         } else if(msgType == NEWPASS){
             passSi = value;
+            System.out.println("passSi " + value);
         } else if(msgType == UDTEPORTSTAT){
             porterStat = value;
-        } else if(msgType == ){
+            System.out.println("porterStat " + value);
+        } else if((msgType == TAKEARST) || (msgType == TRYTOCOL) || (msgType == NOBAGS2COL) || (msgType == NOMOREBAGS)){
             this.stPorter = value;
-        } else if(msgType == ){
+            System.out.println("stPorter " + value);
+        } else if((msgType == WORKENDED) || (msgType == PARKBUS) || (msgType == ANNOUCEBUSBORADING) || (msgType == PBLPO)){
             this.stBD = value;
+            System.out.println("stBD " + value);
         }
+        System.out.println("-------- END --------");
     }
 
     public Message (int type, ArrivalTerminalExitStub arrivalTerminalExitStub) {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
         if (msgType ==  SETARRTERREF){
             msgArrTermExitStub = arrivalTerminalExitStub;
+            System.out.println("msgArrTermExitStub " + arrivalTerminalExitStub);
         }
+        System.out.println("-------- END --------");
     }
 
     public Message (int type, GenReposInfoStub reposStub) {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
         if (msgType ==  PARAMSATTQUAY || msgType == PARAMSBAGCOLPNT || msgType == PARAMSBAGRECOFF
                 || msgType == PARAMSDEPTTQUAY || msgType == PARAMSTEMPSTORAREA){
             msgReposStub = reposStub;
+            System.out.println("msgReposStub " + reposStub);
         }
+        System.out.println("-------- END --------");
     }
 
     public Message (int type, GenReposInfoStub reposStub, ArrivalLoungeStub arrivalLoungeStub,
                     ArrivalTermTransfQuayStub arrivalTermTransfQuayStub) {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
         if (msgType ==  PARAMSATEXIT){
             msgReposStub = reposStub;
             msgArrLoungeStub = arrivalLoungeStub;
             msgArrQuayStub = arrivalTermTransfQuayStub;
+            System.out.println("msgReposStub " + reposStub);
+            System.out.println("msgArrLoungeStub " + arrivalLoungeStub);
+            System.out.println("msgArrQuayStub " + arrivalTermTransfQuayStub);
         }
+        System.out.println("-------- END --------");
     }
 
     public Message (int type, String filename) {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
         if (msgType == PARAMSREPOS) {
             msgReposFile = filename;
+            System.out.println("msgReposFile " + filename);
         }
+        System.out.println("-------- END --------");
     }
 
     public Message (int type, int[][] bagAndPassDest, int[][] nBagsNA) {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
         if ((msgType ==  RESETAL) || (msgType == PARAMSARRLNG)){
             msgBagAndPassDest = bagAndPassDest;
+            System.out.println("msgBagAndPassDest " + msgBagAndPassDest);
             msgNBagsNA = nBagsNA;
+            System.out.println("msgNBagsNA " + msgNBagsNA);
         }
+        System.out.println("-------- END --------");
     }
 
     public Message (int type, int[] nBagsPerPass) {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
         if(msgType ==  SETTREADMILL){
             msgNBagsPerPass = nBagsPerPass;
+            System.out.println("msgNBagsPerPass " + msgNBagsPerPass);
         }
+        System.out.println("-------- END --------");
     }
     public Message (int type, boolean bool) {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
         if (msgType ==  INCDECCOUNTER){
             msgIncOrDec = bool;
+            System.out.println("msgIncOrDec " + msgIncOrDec);
         } else if(msgType == GCBDONE){
             msgBagCollected = bool;
+            System.out.println("msgBagCollected " + msgBagCollected);
         } else if(msgType == SETPHEMPTY){
             msgPlaneHoldEmpty = bool;
+            System.out.println("msgPlaneHoldEmpty " + msgPlaneHoldEmpty);
         }
+        System.out.println("-------- END --------");
     }
 
     public Message (int type, DepartureTerminalEntranceStub departureTerminalEntranceStub) {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
         if (msgType ==  SETDEPTERNREF){
             msgDepTermEntStub = departureTerminalEntranceStub;
+            System.out.println("msgDepTermEntStub " + msgDepTermEntStub);
         }
+        System.out.println("-------- END --------");
     }
 
     /**
@@ -499,27 +542,41 @@ public class Message implements Serializable
     public Message (int type, int firstInt, int secondInt)
     {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
         if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
                 || (msgType == PREPARENEXTLEG)){
             passId = firstInt;
+            System.out.println("passId " + passId);
             stPass = secondInt;
+            System.out.println("stPass " + stPass);
         } else if ((msgType == BAG) || (msgType == CARRYAPPSTORE) || (msgType == CARRYTOAPPSTORE_TSA)){
             msgBagDestStat = firstInt;
+            System.out.println("msgBagDestStat " + msgBagDestStat);
             msgBagIdOwner = secondInt;
+            System.out.println("msgBagIdOwner " + msgBagIdOwner);
         } else if(msgType == UDTEPASSNR){
             passId = firstInt;
+            System.out.println("passId " + passId);
             passNR = secondInt;
+            System.out.println("passNR " + passNR);
         } else if(msgType == UDTEPASSNA){
             passId = firstInt;
+            System.out.println("passId " + passId);
             passNA = secondInt;
+            System.out.println("passNA " + passNA);
         } else if(msgType == UDTEPASSSTAT){
             passId = firstInt;
+            System.out.println("passId " + passId);
             passStat = secondInt;
+            System.out.println("passStat " + passStat);
         } else if (msgType ==  GETPASSSI){
             passId = firstInt;
+            System.out.println("passId " + passId);
             passSi = secondInt;
+            System.out.println("passSi " + passSi);
         }
+        System.out.println("-------- END --------");
     }
 
     /**
@@ -533,8 +590,12 @@ public class Message implements Serializable
     public Message (int type, String name, int nIter)
     {
         msgType = type;
+        System.out.println("-------- Message of type " + type + " --------");
         fName= name;
+        System.out.println("fName " + fName);
         this.nIter = nIter;
+        System.out.println("nIter " + nIter);
+        System.out.println("-------- END --------");
     }
 
 
