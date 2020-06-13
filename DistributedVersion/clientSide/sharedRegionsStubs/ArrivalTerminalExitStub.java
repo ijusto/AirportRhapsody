@@ -91,6 +91,7 @@ public class ArrivalTerminalExitStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ENDPASSENGER){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -119,6 +120,7 @@ public class ArrivalTerminalExitStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -150,6 +152,7 @@ public class ArrivalTerminalExitStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if ((inMessage.getType() != Message.LIMITCOUNTER) && (inMessage.getType() != Message.CONTCOUNTER)){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -180,6 +183,7 @@ public class ArrivalTerminalExitStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -212,6 +216,7 @@ public class ArrivalTerminalExitStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.DEADPASSVAL){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -246,6 +251,7 @@ public class ArrivalTerminalExitStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -273,6 +279,7 @@ public class ArrivalTerminalExitStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());

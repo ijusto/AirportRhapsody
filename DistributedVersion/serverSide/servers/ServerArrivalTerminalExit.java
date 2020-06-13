@@ -54,12 +54,14 @@ public class ServerArrivalTerminalExit {
         /* processamento de pedidos */
 
         waitConnection = true;
-        while (waitConnection)
+        while (waitConnection) {
             try {
-                sconi = scon.accept ();                          // entrada em processo de escuta
+                sconi = scon.accept();                          // entrada em processo de escuta
                 cliProxy = new ArrivalTerminalExitProxy(sconi, arrivalTerminalExitInterface);  // lançamento do agente prestador do serviço
-                cliProxy.start ();
-            } catch (SocketTimeoutException e) { }
+                cliProxy.start();
+            } catch (SocketTimeoutException e) {
+            }
+        }
         scon.end ();                                         // terminação de operações
         System.out.println("O servidor foi desactivado.");
     }

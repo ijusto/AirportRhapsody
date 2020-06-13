@@ -95,6 +95,7 @@ public class ArrivalTermTransfQuayStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.TAKEABUSDONE){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -126,6 +127,7 @@ public class ArrivalTermTransfQuayStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK) {
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -159,6 +161,7 @@ public class ArrivalTermTransfQuayStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if ((inMessage.getType() != Message.CONTDAYS) && (inMessage.getType() != Message.ENDBUSDRIVER)) {
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -191,6 +194,7 @@ public class ArrivalTermTransfQuayStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.PBDONE){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -220,6 +224,7 @@ public class ArrivalTermTransfQuayStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ABBDONE){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -247,6 +252,7 @@ public class ArrivalTermTransfQuayStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -277,6 +283,7 @@ public class ArrivalTermTransfQuayStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -304,6 +311,7 @@ public class ArrivalTermTransfQuayStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());

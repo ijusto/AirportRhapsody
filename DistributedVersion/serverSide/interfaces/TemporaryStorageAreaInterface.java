@@ -38,11 +38,8 @@ public class TemporaryStorageAreaInterface {
 
         switch (inMessage.getType ()) {
             case Message.PARAMSTEMPSTORAREA: break; /* TODO: Validation */
-            case Message.CARRYTOAPPSTORE_TSA:break; /* TODO: Validation */
-            case Message.RESETTSA:break;
-            // Shutdown do servidor (operação pedida pelo cliente)
-            case Message.SHUT:
-                break;
+            case Message.CARRYTOAPPSTORE_TSA: break; /* TODO: Validation */
+            case Message.RESETTSA: case Message.SHUT: break;
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
         }
@@ -81,6 +78,8 @@ public class TemporaryStorageAreaInterface {
                 ServerTemporaryStorageArea.waitConnection = false;
                 (((TemporaryStorageAreaProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
                 outMessage = new Message(Message.ACK);            // gerar confirmação
+                break;
+            default:
                 break;
         }
 

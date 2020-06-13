@@ -3,10 +3,12 @@ package serverSide.interfaces;
 import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
 import clientSide.entities.PorterStates;
+import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 import comInf.*;
 import serverSide.proxies.ArrivalLoungeProxy;
 import serverSide.servers.ServerArrivalLounge;
 import serverSide.sharedRegions.ArrivalLounge;
+import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 
 /**
  *
@@ -55,16 +57,26 @@ public class ArrivalLoungeInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSARRLNG: break;/* TODO: Validation */
-            case Message.WSID: break;
-            case Message.TAKEARST: break;
-            case Message.TRYTOCOL: break;
-            case Message.NOBAGS2COL: break;
-            case Message.RESETAL: break;/* TODO: Validation */
-                //inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsNA()
-            case Message.SETDEPTERNREF:break;/* TODO: Validation */
-
-            // Shutdown do servidor (operação pedida pelo cliente)
+            case Message.PARAMSARRLNG:
+                /* TODO: Validation */
+                break;
+            case Message.WSID:
+                if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
+                    throw new MessageException("Id do passageiro inválido", inMessage);
+                if(inMessage.getPassStat() > PassengerStates.values().length || inMessage.getPassStat() < 0)
+                    throw new MessageException("Estado do passageiro inválido", inMessage);
+                break;
+            case Message.TAKEARST: case Message.TRYTOCOL: case Message.NOBAGS2COL:
+                if(inMessage.getPorterStat() > PorterStates.values().length || inMessage.getPorterStat() < 0)
+                    throw new MessageException("Estado do porter inválido", inMessage);
+                break;
+            case Message.RESETAL:
+                /** TODO: Validation **/
+                break;
+            case Message.SETDEPTERNREF:
+                if(inMessage.getMsgDepTermEntStub() == null)
+                    throw new MessageException("Departure Terminal Entrance Stub null.", inMessage);
+                break;
             case Message.SHUT:
                 break;
             default:
@@ -73,7 +85,7 @@ public class ArrivalLoungeInterface {
 
         /* seu processamento */
         CommonProvider cp = (CommonProvider) Thread.currentThread();
-        switch (inMessage.getType ()) {
+        switch(inMessage.getType()) {
 
             // probPar
             case Message.PARAMSARRLNG:
@@ -140,6 +152,8 @@ public class ArrivalLoungeInterface {
                 ServerArrivalLounge.waitConnection = false;
                 (((ArrivalLoungeProxy) (Thread.currentThread())).getScon()).setTimeout(10);
                 outMessage = new Message(Message.ACK);            // gerar confirmação
+                break;
+            default:
                 break;
         }
 

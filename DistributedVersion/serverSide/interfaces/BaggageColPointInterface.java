@@ -39,16 +39,13 @@ public class BaggageColPointInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSBAGCOLPNT:break;/* TODO: Validation */
-            case Message.GOCOLLECTBAG:break;/* TODO: Validation */
+            case Message.PARAMSBAGCOLPNT: /* TODO: Validation */ break;
+            case Message.GOCOLLECTBAG: /* TODO: Validation */ break;
             case Message.CARRYAPPSTORE:break;/* TODO: Validation */
-            case Message.RESETBCP:break;
-            case Message.NOMOREBAGS:break;
             case Message.SETPHEMPTY:break;/* TODO: Validation */
             case Message.SETTREADMILL:break;/* TODO: Validation */
 
-            // Shutdown do servidor (operação pedida pelo cliente)
-            case Message.SHUT:
+            case Message.RESETBCP: case Message.NOMOREBAGS:  case Message.SHUT:
                 break;
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
@@ -107,6 +104,8 @@ public class BaggageColPointInterface {
                 ServerBaggageColPoint.waitConnection = false;
                 (((BaggageColPointProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
                 outMessage = new Message(Message.ACK);            // gerar confirmação
+                break;
+            default:
                 break;
         }
 

@@ -96,17 +96,17 @@ javac clientSide/ClientCom.java
 
 echo "Starting Server and Clients"
 #Servers
-gnome-terminal -- java serverSide/servers/ServerArrivalLounge
-gnome-terminal -- java serverSide/servers/ServerArrivalTerminalExit
-gnome-terminal -- java serverSide/servers/ServerArrivalTermTransfQuay
-gnome-terminal -- java serverSide/servers/ServerBaggageColPoint
-gnome-terminal -- java serverSide/servers/ServerBaggageReclaimOffice
-gnome-terminal -- java serverSide/servers/ServerDepartureTerminalEntrance
-gnome-terminal -- java serverSide/servers/ServerDepartureTermTransfQuay
-gnome-terminal -- java serverSide/servers/ServerGenReposInfo
-gnome-terminal -- java serverSide/servers/ServerTemporaryStorageArea
+gnome-terminal -- java serverSide/servers/ServerArrivalLounge --title="ServerArrivalLounge"
+gnome-terminal -- java serverSide/servers/ServerArrivalTerminalExit --title="ServerArrivalTerminalExit"
+gnome-terminal -- java serverSide/servers/ServerArrivalTermTransfQuay --title="ServerArrivalTermTransfQuay"
+gnome-terminal -- java serverSide/servers/ServerBaggageColPoint --title="ServerBaggageColPoint"
+gnome-terminal -- java serverSide/servers/ServerBaggageReclaimOffice --title="ServerBaggageReclaimOffice"
+gnome-terminal -- java serverSide/servers/ServerDepartureTerminalEntrance --title="ServerDepartureTerminalEntrance"
+gnome-terminal -- java serverSide/servers/ServerDepartureTermTransfQuay --title="ServerDepartureTermTransfQuay"
+gnome-terminal -- java serverSide/servers/ServerGenReposInfo --title="ServerGenReposInfo"
+gnome-terminal -- java serverSide/servers/ServerTemporaryStorageArea --title="ServerTemporaryStorageArea"
 
 #Clients
-gnome-terminal -- java clientSide/clients/ClientPassenger
-gnome-terminal -- java clientSide/clients/ClientPorter
-gnome-terminal -- java clientSide/clients/ClientBusDriver
+gnome-terminal -- java clientSide/clients/ClientPassenger --title="ClientPassenger"
+gnome-terminal -- java clientSide/clients/ClientPorter --title="ClientPorter"
+gnome-terminal -- java clientSide/clients/ClientBusDriver --title="ClientBusDriver"

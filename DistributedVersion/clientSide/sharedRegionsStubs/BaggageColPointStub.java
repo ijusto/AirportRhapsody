@@ -101,6 +101,7 @@ public class BaggageColPointStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.GCBDONE){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -133,6 +134,7 @@ public class BaggageColPointStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -160,6 +162,7 @@ public class BaggageColPointStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -187,6 +190,7 @@ public class BaggageColPointStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -218,6 +222,7 @@ public class BaggageColPointStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -245,6 +250,7 @@ public class BaggageColPointStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
@@ -273,6 +279,7 @@ public class BaggageColPointStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
+        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());

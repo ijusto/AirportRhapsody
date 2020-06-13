@@ -395,13 +395,12 @@ public class Message implements Serializable
     public Message(int type)
     {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
-        System.out.println("-------- END --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
     }
 
     public Message(int type, int value) {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
                 || (msgType == PREPARENEXTLEG)){
@@ -435,34 +434,31 @@ public class Message implements Serializable
             this.stBD = value;
             System.out.println("stBD " + value);
         }
-        System.out.println("-------- END --------");
     }
 
     public Message (int type, ArrivalTerminalExitStub arrivalTerminalExitStub) {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  SETARRTERREF){
             msgArrTermExitStub = arrivalTerminalExitStub;
             System.out.println("msgArrTermExitStub " + arrivalTerminalExitStub);
         }
-        System.out.println("-------- END --------");
     }
 
     public Message (int type, GenReposInfoStub reposStub) {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  PARAMSATTQUAY || msgType == PARAMSBAGCOLPNT || msgType == PARAMSBAGRECOFF
                 || msgType == PARAMSDEPTTQUAY || msgType == PARAMSTEMPSTORAREA){
             msgReposStub = reposStub;
             System.out.println("msgReposStub " + reposStub);
         }
-        System.out.println("-------- END --------");
     }
 
     public Message (int type, GenReposInfoStub reposStub, ArrivalLoungeStub arrivalLoungeStub,
                     ArrivalTermTransfQuayStub arrivalTermTransfQuayStub) {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  PARAMSATEXIT){
             msgReposStub = reposStub;
             msgArrLoungeStub = arrivalLoungeStub;
@@ -471,43 +467,39 @@ public class Message implements Serializable
             System.out.println("msgArrLoungeStub " + arrivalLoungeStub);
             System.out.println("msgArrQuayStub " + arrivalTermTransfQuayStub);
         }
-        System.out.println("-------- END --------");
     }
 
     public Message (int type, String filename) {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType == PARAMSREPOS) {
             msgReposFile = filename;
             System.out.println("msgReposFile " + filename);
         }
-        System.out.println("-------- END --------");
     }
 
     public Message (int type, int[][] bagAndPassDest, int[][] nBagsNA) {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType ==  RESETAL) || (msgType == PARAMSARRLNG)){
             msgBagAndPassDest = bagAndPassDest;
             System.out.println("msgBagAndPassDest " + msgBagAndPassDest);
             msgNBagsNA = nBagsNA;
             System.out.println("msgNBagsNA " + msgNBagsNA);
         }
-        System.out.println("-------- END --------");
     }
 
     public Message (int type, int[] nBagsPerPass) {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if(msgType ==  SETTREADMILL){
             msgNBagsPerPass = nBagsPerPass;
             System.out.println("msgNBagsPerPass " + msgNBagsPerPass);
         }
-        System.out.println("-------- END --------");
     }
     public Message (int type, boolean bool) {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  INCDECCOUNTER){
             msgIncOrDec = bool;
             System.out.println("msgIncOrDec " + msgIncOrDec);
@@ -518,17 +510,15 @@ public class Message implements Serializable
             msgPlaneHoldEmpty = bool;
             System.out.println("msgPlaneHoldEmpty " + msgPlaneHoldEmpty);
         }
-        System.out.println("-------- END --------");
     }
 
     public Message (int type, DepartureTerminalEntranceStub departureTerminalEntranceStub) {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  SETDEPTERNREF){
             msgDepTermEntStub = departureTerminalEntranceStub;
             System.out.println("msgDepTermEntStub " + msgDepTermEntStub);
         }
-        System.out.println("-------- END --------");
     }
 
     /**
@@ -542,7 +532,7 @@ public class Message implements Serializable
     public Message (int type, int firstInt, int secondInt)
     {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
                 || (msgType == PREPARENEXTLEG)){
@@ -576,7 +566,6 @@ public class Message implements Serializable
             passSi = secondInt;
             System.out.println("passSi " + passSi);
         }
-        System.out.println("-------- END --------");
     }
 
     /**
@@ -590,12 +579,11 @@ public class Message implements Serializable
     public Message (int type, String name, int nIter)
     {
         msgType = type;
-        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         fName= name;
         System.out.println("fName " + fName);
         this.nIter = nIter;
         System.out.println("nIter " + nIter);
-        System.out.println("-------- END --------");
     }
 
 
@@ -724,7 +712,7 @@ public class Message implements Serializable
      *    @return string contendo, em linhas separadas, a concatenação da identificação de cada campo e valor respectivo
      */
 
-    private String getMsgTypeString(int type){
+    public static String getMsgTypeString(int type){
         String str;
         switch(type){
             case 1: str = "PARAMSARRLNG"; break; case 2: str = "WSID"; break; case 3: str = "FNDST"; break;

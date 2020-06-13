@@ -104,6 +104,8 @@ public class DepartureTerminalEntranceInterface {
                 (((DepartureTerminalEntranceProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
                 outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
+            default:
+                break;
         }
 
         return (outMessage);

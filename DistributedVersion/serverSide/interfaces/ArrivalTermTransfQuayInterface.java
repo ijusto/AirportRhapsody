@@ -131,6 +131,8 @@ public class ArrivalTermTransfQuayInterface {
                 (((ArrivalTermTransfQuayProxy) (Thread.currentThread())).getScon()).setTimeout(10);
                 outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
+            default:
+                break;
         }
 
         return (outMessage);

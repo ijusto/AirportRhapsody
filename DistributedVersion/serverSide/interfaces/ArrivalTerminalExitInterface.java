@@ -44,10 +44,9 @@ public class ArrivalTerminalExitInterface {
 
             case Message.PARAMSATEXIT: break;/* TODO: Validation */
             case Message.GOHOME:break;/* TODO: Validation */
-            case Message.NOTFNEXTL:break;
+            case Message.NOTFNEXTL: case Message.RESETATE: break;
             case Message.INCDECCOUNTER:break;/* TODO: Validation */
             case Message.SETDEPTERNREF:break;/* TODO: Validation */
-            case Message.RESETATE:break;
             case Message.GETDEADPASSVAL:break;/* TODO: Validation */
 
             // Shutdown do servidor (operação pedida pelo cliente)
@@ -112,6 +111,9 @@ public class ArrivalTerminalExitInterface {
                 ServerArrivalTerminalExit.waitConnection = false;
                 (((ArrivalTerminalExitProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
                 outMessage = new Message(Message.ACK);            // gerar confirmação
+                break;
+
+            default:
                 break;
         }
 
