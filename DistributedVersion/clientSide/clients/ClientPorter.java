@@ -15,7 +15,7 @@ import comInf.MemException;
 public class ClientPorter {
 
     public static void main(final String[] args){
-
+        System.out.println("Porter Client");
         GenReposInfoStub reposStub;
         BaggageColPointStub bagColPointStub;
         TemporaryStorageAreaStub tmpStorageAreaStub;

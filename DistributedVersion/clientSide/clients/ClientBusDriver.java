@@ -16,7 +16,7 @@ import comInf.MemException;
 public class ClientBusDriver {
 
     public static void main(final String[] args){
-
+        System.out.println("BusDriver Client");
         GenReposInfoStub reposStub;
         ArrivalTermTransfQuayStub arrivalQuayStub;
         DepartureTermTransfQuayStub departureQuayStub;
