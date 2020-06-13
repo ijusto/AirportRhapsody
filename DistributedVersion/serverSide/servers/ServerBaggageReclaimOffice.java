@@ -48,6 +48,7 @@ public class ServerBaggageReclaimOffice {
         baggageReclaimOfficeInter = new BaggageReclaimOfficeInterface(baggageReclaimOffice);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");
+        System.out.println("ServerBaggageReclaimOffice");
 
         /* processamento de pedidos */
 

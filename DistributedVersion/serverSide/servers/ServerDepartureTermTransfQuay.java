@@ -47,6 +47,7 @@ public class ServerDepartureTermTransfQuay {
         departureTermTransfQuayInter = new DepartureTermTransfQuayInterface(departureTermTransfQuay);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");
+        System.out.println("ServerDepartureTermTransfQuay");
 
         /* processamento de pedidos */
 

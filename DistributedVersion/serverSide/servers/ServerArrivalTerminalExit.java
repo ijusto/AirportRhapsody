@@ -50,6 +50,7 @@ public class ServerArrivalTerminalExit {
         arrivalTerminalExitInterface = new ArrivalTerminalExitInterface(arrivalTerminalExit);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");
+        System.out.println("ServerArrivalTerminalExit");
 
         /* processamento de pedidos */
 

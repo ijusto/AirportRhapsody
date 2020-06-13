@@ -48,6 +48,7 @@ public class ServerTemporaryStorageArea  {
         temporaryStorageAreaInter = new TemporaryStorageAreaInterface(temporaryStorageArea);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");
+        System.out.println("ServerTemporaryStorageArea");
 
         /* processamento de pedidos */
 

@@ -54,6 +54,7 @@ public class ServerDepartureTerminalEntrance {
         departureTerminalEntranceInter = new DepartureTerminalEntranceInterface(departureTerminalEntrance);        // activação do interface com o serviço
         System.out.println("O serviço foi estabelecido!");
         System.out.println("O servidor esta em escuta.");
+        System.out.println("ServerDepartureTerminalEntrance");
 
         /* processamento de pedidos */
 
