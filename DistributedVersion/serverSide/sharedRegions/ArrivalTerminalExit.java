@@ -62,10 +62,10 @@ public class ArrivalTerminalExit {
 
     public synchronized void goHome(int id){
         CommonProvider passenger = (CommonProvider) Thread.currentThread();
-        assert(passenger.getSt(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
-                passenger.getSt(id) == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
-                passenger.getSt(id) == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
-                passenger.setSt(id, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
+        assert(passenger.getPassStat(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE ||
+                passenger.getPassStat(id) == PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT ||
+                passenger.getPassStat(id) == PassengerStates.AT_THE_BAGGAGE_RECLAIM_OFFICE);
+                passenger.setStatPass(id, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL);
 
         reposStub.updatePassSt(id, PassengerStates.EXITING_THE_ARRIVAL_TERMINAL.ordinal());
         reposStub.printLog();

@@ -34,7 +34,7 @@ public class CommonProvider extends Thread implements PassengerInterface, Porter
     }
 
     @Override
-    public void setStat(BusDriverStates stat) {
+    public void setBDStat(BusDriverStates stat) {
         this.busStates = stat;
     }
 
@@ -44,7 +44,7 @@ public class CommonProvider extends Thread implements PassengerInterface, Porter
     }
 
     @Override
-    public BusDriverStates getStat() {
+    public BusDriverStates getBDStat() {
         return busStates;
     }
 
@@ -56,7 +56,7 @@ public class CommonProvider extends Thread implements PassengerInterface, Porter
     }
 
     @Override
-    public PassengerStates getSt(int id) { return st[id]; }
+    public PassengerStates getPassStat(int id) { return st[id]; }
 
     @Override
     public int getNA(int id) {
@@ -69,7 +69,7 @@ public class CommonProvider extends Thread implements PassengerInterface, Porter
     }
 
     @Override
-    public void setSt(int id, PassengerStates st) {
+    public void setStatPass(int id, PassengerStates st) {
         this.st[id] = st;
     }
 

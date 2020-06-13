@@ -1,5 +1,7 @@
 package serverSide.interfaces;
 
+import clientSide.entities.BusDriverStates;
+import clientSide.entities.PassengerStates;
 import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
@@ -64,7 +66,7 @@ public class DepartureTermTransfQuayInterface {
 
             // leaveTheBus
             case Message.LEAVEBUS:
-                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
+                cp.setStatPass(inMessage.getPassId(), PassengerStates.values()[inMessage.getPassStat()]);
                 //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
                 departureTermTransfQuay.leaveTheBus(inMessage.getPassId());
                 outMessage = new Message(Message.LBDONE);
@@ -72,7 +74,7 @@ public class DepartureTermTransfQuayInterface {
 
             // parkTheBusAndLetPassOff
             case Message.PBLPO:
-                cp.setStat(inMessage.getBDStat());
+                cp.setBDStat(BusDriverStates.values()[inMessage.getBDStat()]);
                 departureTermTransfQuay.parkTheBusAndLetPassOff();
                 outMessage = new Message(Message.PBLPODONE);
                 break;

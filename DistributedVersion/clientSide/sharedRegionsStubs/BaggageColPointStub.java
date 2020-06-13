@@ -97,7 +97,7 @@ public class BaggageColPointStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.GOCOLLECTBAG, id, p.getSt());
+        outMessage = new Message(Message.GOCOLLECTBAG, id, p.getSt().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

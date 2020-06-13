@@ -60,8 +60,8 @@ public class BaggageColPoint {
     public synchronized boolean goCollectABag(int id){
 
         CommonProvider passenger = (CommonProvider) Thread.currentThread();
-        assert(passenger.getSt(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        passenger.setSt(id, PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
+        assert(passenger.getPassStat(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        passenger.setStatPass(id, PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT);
 
         // update logger
         reposStub.updatePassSt(id,PassengerStates.AT_THE_LUGGAGE_COLLECTION_POINT.ordinal());

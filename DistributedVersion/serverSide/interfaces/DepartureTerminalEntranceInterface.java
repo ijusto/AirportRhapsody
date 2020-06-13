@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import clientSide.entities.PassengerStates;
 import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
@@ -69,7 +70,7 @@ public class DepartureTerminalEntranceInterface {
             // prepareNextLeg
             case Message.PREPARENEXTLEG:
                // ((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
-                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
+                cp.setStatPass(inMessage.getPassId(), PassengerStates.values()[inMessage.getPassStat()]);
                 departureTerminalEntrance.prepareNextLeg(inMessage.getPassId());
                 outMessage = new Message(Message.ENDPASSENGER);
                 break;

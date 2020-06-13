@@ -380,11 +380,11 @@ public class Message implements Serializable
 
     private int bdStat = -1;
 
-    private PassengerStates stPass;
+    private int stPass;
 
-    private PorterStates stPorter;
+    private int stPorter;
 
-    private BusDriverStates stBD;
+    private int stBD;
 
     /**
      *  Instanciação de uma mensagem (forma 1).
@@ -395,32 +395,6 @@ public class Message implements Serializable
     public Message(int type)
     {
         msgType = type;
-    }
-
-    /**
-     *  Instanciação de uma mensagem (forma 2).
-     *
-     *    @param type tipo da mensagem
-     *    @param value
-     */
-    public Message(int type, int value, PassengerStates st) {
-        msgType = type;
-        if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
-                || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
-                || (msgType == PREPARENEXTLEG)){
-            passId = value;
-            stPass = st;
-        }
-    }
-
-    public Message(int type, PorterStates statPorter) {
-        msgType = type;
-        this.stPorter = statPorter;
-    }
-
-    public Message(int type, BusDriverStates statBD) {
-        msgType = type;
-        this.stBD = statBD;
     }
 
     public Message(int type, int value) {
@@ -443,6 +417,10 @@ public class Message implements Serializable
             passSi = value;
         } else if(msgType == UDTEPORTSTAT){
             porterStat = value;
+        } else if(msgType == ){
+            this.stPorter = value;
+        } else if(msgType == ){
+            this.stBD = value;
         }
     }
 
@@ -521,7 +499,12 @@ public class Message implements Serializable
     public Message (int type, int firstInt, int secondInt)
     {
         msgType = type;
-        if ((msgType == BAG) || (msgType == CARRYAPPSTORE) || (msgType == CARRYTOAPPSTORE_TSA)){
+        if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
+                || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
+                || (msgType == PREPARENEXTLEG)){
+            passId = firstInt;
+            stPass = secondInt;
+        } else if ((msgType == BAG) || (msgType == CARRYAPPSTORE) || (msgType == CARRYTOAPPSTORE_TSA)){
             msgBagDestStat = firstInt;
             msgBagIdOwner = secondInt;
         } else if(msgType == UDTEPASSNR){
@@ -618,11 +601,11 @@ public class Message implements Serializable
 
     public int getPassStatInt(){ return passStat; }
 
-    public PassengerStates getPassStat(){return stPass;}
+    public int getPassStat(){return stPass;}
 
-    public PorterStates getPorterStat(){return stPorter;}
+    public int getPorterStat(){return stPorter;}
 
-    public BusDriverStates getBDStat(){return stBD;}
+    public int getBDStat(){return stBD;}
 
     public int getPorterStatInt(){ return porterStat; }
 

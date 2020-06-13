@@ -79,7 +79,7 @@ public class BaggageReclaimOfficeStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.REPORTMISSBAG, id, p.getSt());
+        outMessage = new Message(Message.REPORTMISSBAG, id, p.getSt().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

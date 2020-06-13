@@ -74,8 +74,8 @@ public class DepartureTerminalEntrance {
     public synchronized void prepareNextLeg(int id){
 
         CommonProvider passenger = (CommonProvider) Thread.currentThread();
-        assert passenger.getSt(id) == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL;
-        passenger.setSt(id, PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
+        assert passenger.getPassStat(id) == PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL;
+        passenger.setStatPass(id, PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL);
 
         reposStub.updatePassSt(id, PassengerStates.ENTERING_THE_DEPARTURE_TERMINAL.ordinal());
         reposStub.printLog();

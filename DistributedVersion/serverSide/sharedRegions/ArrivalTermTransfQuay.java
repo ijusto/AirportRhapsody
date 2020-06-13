@@ -91,8 +91,8 @@ public class ArrivalTermTransfQuay {
 
     public synchronized void takeABus(int id) {
         PassengerInterface passenger = (PassengerInterface) Thread.currentThread();
-        assert(passenger.getSt(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-        passenger.setSt(id, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        assert(passenger.getPassStat(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        passenger.setStatPass(id, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         reposStub.updatePassSt(id, PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL.ordinal());
         reposStub.printLog();
 
@@ -130,10 +130,10 @@ public class ArrivalTermTransfQuay {
     public synchronized void enterTheBus(int id){
 
         CommonProvider passenger = (CommonProvider) Thread.currentThread();
-        assert(passenger.getSt(id) == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
+        assert(passenger.getPassStat(id) == PassengerStates.AT_THE_ARRIVAL_TRANSFER_TERMINAL);
         assert(this.getNPassOnTheBusValue() < SimulPar.BUS_CAP);
 
-        passenger.setSt(id, PassengerStates.TERMINAL_TRANSFER);
+        passenger.setStatPass(id, PassengerStates.TERMINAL_TRANSFER);
         reposStub.updatePassSt(id,PassengerStates.TERMINAL_TRANSFER.ordinal());
 
         try{
@@ -166,7 +166,7 @@ public class ArrivalTermTransfQuay {
     public synchronized char hasDaysWorkEnded(){
 
         CommonProvider busDriver = (CommonProvider) Thread.currentThread();
-        assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        assert(busDriver.getBDStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         // if the last flight arrived and all passengers left the airport, end the bus driver life cycle
         if(this.endDay){
@@ -189,8 +189,8 @@ public class ArrivalTermTransfQuay {
     public synchronized void parkTheBus(){
 
         CommonProvider busDriver = (CommonProvider) Thread.currentThread();
-        assert(busDriver.getStat() == BusDriverStates.DRIVING_BACKWARD);
-        busDriver.setStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        assert(busDriver.getBDStat() == BusDriverStates.DRIVING_BACKWARD);
+        busDriver.setBDStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         reposStub.updateBDriverStat(BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL.ordinal());
 
@@ -227,7 +227,7 @@ public class ArrivalTermTransfQuay {
     public synchronized void announcingBusBoarding(){
 
         CommonProvider busDriver = (CommonProvider) Thread.currentThread();
-        assert(busDriver.getStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
+        assert(busDriver.getBDStat() == BusDriverStates.PARKING_AT_THE_ARRIVAL_TERMINAL);
 
         this.allowBoardBus = true;
 

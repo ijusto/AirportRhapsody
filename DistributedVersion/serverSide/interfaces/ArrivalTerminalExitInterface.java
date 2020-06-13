@@ -73,8 +73,7 @@ public class ArrivalTerminalExitInterface {
             // goHome (Passenger)
 
             case Message.GOHOME:
-                //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
-                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
+                cp.setStatPass(inMessage.getPassId(), PassengerStates.values()[inMessage.getPassStat()]);
                 arrivalTerminalExit.goHome(inMessage.getPassId());
                 outMessage = new Message(Message.ENDPASSENGER);
                 break;

@@ -15,7 +15,7 @@ public interface PassengerInterface {
      * Get Passenger State
      */
 
-    public PassengerStates getSt(int id);
+    public PassengerStates getPassStat(int id);
 
     /**
      * Get Passenger number of pieces of luggage he has presently collected
@@ -33,7 +33,7 @@ public interface PassengerInterface {
      * Set Passenger State
      */
 
-    public void setSt(int id, PassengerStates st);
+    public void setStatPass(int id, PassengerStates st);
 
     /**
      * Set Passenger number of pieces of luggage he has presently collected

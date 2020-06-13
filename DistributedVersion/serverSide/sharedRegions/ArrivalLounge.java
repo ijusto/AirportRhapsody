@@ -160,7 +160,7 @@ public class ArrivalLounge {
     public synchronized boolean whatShouldIDo(int id){
 
         CommonProvider currentPassenger = (CommonProvider) Thread.currentThread();
-        assert(currentPassenger.getSt(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE);
+        assert(currentPassenger.getPassStat(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE);
 
         // update logger
         this.reposStub.updatesPassNR(id, currentPassenger.getNR(id));

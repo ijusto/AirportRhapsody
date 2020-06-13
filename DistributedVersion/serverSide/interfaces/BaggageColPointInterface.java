@@ -1,5 +1,7 @@
 package serverSide.interfaces;
 
+import clientSide.entities.PassengerStates;
+import clientSide.entities.PorterStates;
 import comInf.*;
 import serverSide.proxies.BaggageColPointProxy;
 import serverSide.servers.ServerBaggageColPoint;
@@ -65,15 +67,14 @@ public class BaggageColPointInterface {
 
             // goCollectABag (passenger)
             case Message.GOCOLLECTBAG:
-                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
-                //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
+                cp.setStatPass(inMessage.getPassId(), PassengerStates.values()[inMessage.getPassStat()]);
                 boolean bagCollected = baggageColPoint.goCollectABag(inMessage.getPassId());
                 outMessage = new Message(Message.GCBDONE, bagCollected);
                 break;
 
             // carryItToAppropriateStore (porter)
             case Message.CARRYAPPSTORE:
-                cp.setStatPorter(inMessage.getPorterStat());
+                cp.setStatPorter(PorterStates.values()[inMessage.getPorterStat()]);
                 Bag bag = new Bag(inMessage.getMsgBagDestStat(), inMessage.getMsgBagIdOwner());
                 baggageColPoint.carryItToAppropriateStore(bag);
                 outMessage = new Message(Message.ACK);

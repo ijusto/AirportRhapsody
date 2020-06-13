@@ -4,7 +4,7 @@ import clientSide.entities.BusDriverStates;
 
 public interface BusDriverInterface {
 
-    public BusDriverStates getStat();
+    public BusDriverStates getBDStat();
 
 
     /**
@@ -23,7 +23,7 @@ public interface BusDriverInterface {
      *    @param stat Bus Driver State.
      */
 
-    public void setStat(BusDriverStates stat);
+    public void setBDStat(BusDriverStates stat);
 
     /**
      *   Sets the Number os passengers on the bus.

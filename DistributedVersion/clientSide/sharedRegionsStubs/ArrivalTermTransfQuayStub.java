@@ -91,7 +91,7 @@ public class ArrivalTermTransfQuayStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.TAKEABUS, id, p.getSt());
+        outMessage = new Message(Message.TAKEABUS, id, p.getSt().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -122,7 +122,7 @@ public class ArrivalTermTransfQuayStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.ENTERBUS, id, p.getSt());
+        outMessage = new Message(Message.ENTERBUS, id, p.getSt().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -155,7 +155,7 @@ public class ArrivalTermTransfQuayStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.WORKENDED, b.getStat());
+        outMessage = new Message(Message.WORKENDED, b.getStat().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -187,7 +187,7 @@ public class ArrivalTermTransfQuayStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.PARKBUS, b.getStat());
+        outMessage = new Message(Message.PARKBUS, b.getStat().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -216,7 +216,7 @@ public class ArrivalTermTransfQuayStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.ANNOUCEBUSBORADING, b.getStat());
+        outMessage = new Message(Message.ANNOUCEBUSBORADING, b.getStat().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

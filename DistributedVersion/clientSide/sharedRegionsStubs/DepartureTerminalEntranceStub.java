@@ -165,7 +165,7 @@ public class DepartureTerminalEntranceStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.NOMOREBAGS,p.getStatPorter() );
+        outMessage = new Message(Message.NOMOREBAGS, p.getStatPorter().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

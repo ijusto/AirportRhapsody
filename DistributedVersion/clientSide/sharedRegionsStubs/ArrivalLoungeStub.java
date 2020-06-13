@@ -95,7 +95,7 @@ public class ArrivalLoungeStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.WSID, id, p.getSt());
+        outMessage = new Message(Message.WSID, id, p.getSt().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -133,7 +133,7 @@ public class ArrivalLoungeStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.TAKEARST, pt.getStatPorter());
+        outMessage = new Message(Message.TAKEARST, pt.getStatPorter().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -166,7 +166,7 @@ public class ArrivalLoungeStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.TRYTOCOL, pt.getStatPorter());
+        outMessage = new Message(Message.TRYTOCOL, pt.getStatPorter().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
@@ -204,7 +204,7 @@ public class ArrivalLoungeStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.NOBAGS2COL, pt.getStatPorter());
+        outMessage = new Message(Message.NOBAGS2COL, pt.getStatPorter().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

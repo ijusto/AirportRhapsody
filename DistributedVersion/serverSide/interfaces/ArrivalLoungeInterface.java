@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
 import clientSide.entities.PorterStates;
 import comInf.*;
@@ -86,8 +87,7 @@ public class ArrivalLoungeInterface {
 
             // WhatShouldIDo (Passenger)
             case Message.WSID:
-                //((CommonProvider) Thread.currentThread()).setId(inMessage.getPassId());
-                cp.setSt(inMessage.getPassId(), inMessage.getPassStat());
+                cp.setStatPass(inMessage.getPassId(), PassengerStates.values()[inMessage.getPassStat()]);
                 if (arrivalLounge.whatShouldIDo(inMessage.getPassId()))
                     outMessage = new Message(Message.FNDST);    // gerar resposta positiva
                 else
@@ -96,7 +96,7 @@ public class ArrivalLoungeInterface {
 
             // takeARest (Porter)
             case Message.TAKEARST:
-                cp.setStatPorter(inMessage.getPorterStat());
+                cp.setStatPorter(PorterStates.values()[inMessage.getPorterStat()]);
                 if (arrivalLounge.takeARest() == 'R')
                     outMessage = new Message(Message.TAKERSTDONE);    // gerar resposta positiva
                 else
@@ -106,7 +106,7 @@ public class ArrivalLoungeInterface {
             // tryToCollectABag (Porter)
             case Message.TRYTOCOL:
                 Bag msgBag = arrivalLounge.tryToCollectABag();
-                cp.setStatPorter(inMessage.getPorterStat());
+                cp.setStatPorter(PorterStates.values()[inMessage.getPorterStat()]);
                 if (msgBag != null)
                     outMessage = new Message(Message.BAG, msgBag.getIntDestStat(), msgBag.getIdOwner());    // gerar resposta positiva
                 else
@@ -115,7 +115,7 @@ public class ArrivalLoungeInterface {
 
             // noMoreBagsToCollect (Porter)
             case Message.NOBAGS2COL:
-                cp.setStatPorter(inMessage.getPorterStat());
+                cp.setStatPorter(PorterStates.values()[inMessage.getPorterStat()]);
                 arrivalLounge.noMoreBagsToCollect();
                 outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;

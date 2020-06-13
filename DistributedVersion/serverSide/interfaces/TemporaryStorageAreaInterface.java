@@ -1,5 +1,6 @@
 package serverSide.interfaces;
 
+import clientSide.entities.PorterStates;
 import comInf.*;
 import serverSide.proxies.TemporaryStorageAreaProxy;
 import serverSide.servers.ServerTemporaryStorageArea;
@@ -64,7 +65,7 @@ public class TemporaryStorageAreaInterface {
 
             // carryItToAppropriateStore (porter)
             case Message.CARRYTOAPPSTORE_TSA:
-                cp.setStatPorter(inMessage.getPorterStat());
+                cp.setStatPorter(PorterStates.values()[inMessage.getPorterStat()]);
                 Bag bag = new Bag(inMessage.getMsgBagDestStat(), inMessage.getMsgBagIdOwner());
                 temporaryStorageArea.carryItToAppropriateStore(bag);
                 outMessage = new Message(Message.ACK);
