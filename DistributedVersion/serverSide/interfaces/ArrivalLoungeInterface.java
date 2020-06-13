@@ -153,6 +153,7 @@ public class ArrivalLoungeInterface {
                 (((ArrivalLoungeProxy) (Thread.currentThread())).getScon()).setTimeout(10);
                 outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
+
             default:
                 break;
         }
