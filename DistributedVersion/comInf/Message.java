@@ -282,17 +282,17 @@ public class Message implements Serializable
 
     public static final int ACK =  83;
 
-    public static final int ENDPASSENGER = 94;
+    public static final int ENDPASSENGER = 84;
 
-    public static final int ENDPORTER = 95;
+    public static final int ENDPORTER = 85;
 
-    public static final int ENDBUSDRIVER = 96;
+    public static final int ENDBUSDRIVER = 86;
 
     /**
      *  Shutdown do servidor (operação pedida pelo cliente)
      */
 
-    public static final int SHUT   = 99;
+    public static final int SHUT   = 87;
 
     /* Campos das mensagens */
 
@@ -395,13 +395,13 @@ public class Message implements Serializable
     public Message(int type)
     {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         System.out.println("-------- END --------");
     }
 
     public Message(int type, int value) {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
                 || (msgType == PREPARENEXTLEG)){
@@ -440,7 +440,7 @@ public class Message implements Serializable
 
     public Message (int type, ArrivalTerminalExitStub arrivalTerminalExitStub) {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  SETARRTERREF){
             msgArrTermExitStub = arrivalTerminalExitStub;
             System.out.println("msgArrTermExitStub " + arrivalTerminalExitStub);
@@ -450,7 +450,7 @@ public class Message implements Serializable
 
     public Message (int type, GenReposInfoStub reposStub) {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  PARAMSATTQUAY || msgType == PARAMSBAGCOLPNT || msgType == PARAMSBAGRECOFF
                 || msgType == PARAMSDEPTTQUAY || msgType == PARAMSTEMPSTORAREA){
             msgReposStub = reposStub;
@@ -462,7 +462,7 @@ public class Message implements Serializable
     public Message (int type, GenReposInfoStub reposStub, ArrivalLoungeStub arrivalLoungeStub,
                     ArrivalTermTransfQuayStub arrivalTermTransfQuayStub) {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  PARAMSATEXIT){
             msgReposStub = reposStub;
             msgArrLoungeStub = arrivalLoungeStub;
@@ -476,7 +476,7 @@ public class Message implements Serializable
 
     public Message (int type, String filename) {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         if (msgType == PARAMSREPOS) {
             msgReposFile = filename;
             System.out.println("msgReposFile " + filename);
@@ -486,7 +486,7 @@ public class Message implements Serializable
 
     public Message (int type, int[][] bagAndPassDest, int[][] nBagsNA) {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType ==  RESETAL) || (msgType == PARAMSARRLNG)){
             msgBagAndPassDest = bagAndPassDest;
             System.out.println("msgBagAndPassDest " + msgBagAndPassDest);
@@ -498,7 +498,7 @@ public class Message implements Serializable
 
     public Message (int type, int[] nBagsPerPass) {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         if(msgType ==  SETTREADMILL){
             msgNBagsPerPass = nBagsPerPass;
             System.out.println("msgNBagsPerPass " + msgNBagsPerPass);
@@ -507,7 +507,7 @@ public class Message implements Serializable
     }
     public Message (int type, boolean bool) {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  INCDECCOUNTER){
             msgIncOrDec = bool;
             System.out.println("msgIncOrDec " + msgIncOrDec);
@@ -523,7 +523,7 @@ public class Message implements Serializable
 
     public Message (int type, DepartureTerminalEntranceStub departureTerminalEntranceStub) {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  SETDEPTERNREF){
             msgDepTermEntStub = departureTerminalEntranceStub;
             System.out.println("msgDepTermEntStub " + msgDepTermEntStub);
@@ -542,7 +542,7 @@ public class Message implements Serializable
     public Message (int type, int firstInt, int secondInt)
     {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
                 || (msgType == PREPARENEXTLEG)){
@@ -590,7 +590,7 @@ public class Message implements Serializable
     public Message (int type, String name, int nIter)
     {
         msgType = type;
-        System.out.println("-------- Message of type " + type + " --------");
+        System.out.println("-------- Message of type " + getMsgTypeString(type) + " --------");
         fName= name;
         System.out.println("fName " + fName);
         this.nIter = nIter;
@@ -724,4 +724,43 @@ public class Message implements Serializable
      *    @return string contendo, em linhas separadas, a concatenação da identificação de cada campo e valor respectivo
      */
 
+    private String getMsgTypeString(int type){
+        String str;
+        switch(type){
+            case 1: str = "PARAMSARRLNG"; break; case 2: str = "WSID"; break; case 3: str = "FNDST"; break;
+            case 4: str = "TRDST"; break; case 5: str = "TAKEARST"; break; case 6: str = "TAKERSTDONE"; break;
+            case 7: str = "TRYTOCOL"; break; case 8: str = "BAG"; break; case 9: str = "NULLBAG"; break;
+            case 10: str = "NOBAGS2COL"; break; case 11: str = "RESETAL"; break; case 12: str = "RESETALDONE"; break;
+            case 13: str = "SETDEPTERNREF"; break; case 14: str = "PARAMSATEXIT"; break; case 15: str = "GOHOME"; break;
+            case 16: str = "GODONE"; break; case 17: str = "NOTFNEXTL"; break; case 18: str = "INCDECCOUNTER"; break;
+            case 19: str = "CONTCOUNTER"; break; case 20: str = "IMITCOUNTER"; break; case 21: str = "RESETATE"; break;
+            case 22: str = "GETDEADPASSVAL"; break; case 23: str = "DEADPASSVAL"; break;
+            case 24: str = "PARAMSATTQUAY"; break; case 25: str = "TAKEABUS"; break;
+            case 26: str = "TAKEABUSDONE"; break; case 27: str = "ENTERBUS"; break; case 28: str = "WORKENDED"; break;
+            case 29: str = "CONTDAYS"; break; case 30: str = "PARKBUS"; break; case 31: str = "PBDONE"; break;
+            case 32: str = "ANNOUCEBUSBORADING"; break; case 33: str = "ABBDONE"; break;
+            case 34: str = "RESETATQ"; break; case 35: str = "SETENDDAY"; break; case 36: str = "PARAMSBAGCOLPNT"; break;
+            case 37: str = "GOCOLLECTBAG"; break; case 38: str = "GCBDONE"; break; case 39: str = "CARRYAPPSTORE"; break;
+            case 40: str = "RESETBCP"; break; case 41: str = "NOMOREBAGS"; break; case 42: str = "SETTREADMILL"; break;
+            case 43: str = "SETPHEMPTY"; break; case 44: str = "PARAMSBAGRECOFF"; break;
+            case 45: str = "REPORTMISSBAG"; break; case 46: str = "PARAMSDEPTENT"; break;
+            case 47: str = "PREPARENEXTLEG"; break; case 48: str = "PNLDONE"; break; case 49: str = "RESETDTE"; break;
+            case 50: str = "NOTFGOHOME"; break; case 51: str = "SETARRTERREF"; break;
+            case 52: str = "PARAMSDEPTTQUAY"; break; case 53: str = "LEAVEBUS"; break; case 54: str = "LBDONE"; break;
+            case 55: str = "PBLPO"; break; case 56: str = "PBLPODONE"; break; case 57: str = "RESETDTTQ"; break;
+            case 58: str = "PARAMSTEMPSTORAREA"; break; case 59: str = "CARRYTOAPPSTORE_TSA"; break;
+            case 60: str = "RESETTSA"; break; case 61: str = "PARAMSREPOS"; break; case 62: str = "PRINTLOG"; break;
+            case 63: str = "FINALREPORT"; break; case 64: str ="UPDATEFN"; break; case 65: str = "INITCHOLD"; break;
+            case 66: str = "REMBAGCHOLD"; break; case 67: str = "INCBAGCB"; break; case 68: str = "PGETSABAG"; break;
+            case 69: str = "SAVEBAGSR"; break; case 70: str = "UDTEPORTSTAT"; break; case 71: str = "UDTEBDSTAT"; break;
+            case 72: str = "PJOINWQ"; break; case 73: str = "PLEFTWQ"; break; case 74: str = "FREEBS"; break;
+            case 75: str = "NEWPASS"; break; case 76: str = "UDTEPASSSTAT"; break; case 77: str = "GETPASSSI"; break;
+            case 78: str = "UDTEPASSNR"; break; case 79: str = "UDTEPASSNA"; break; case 80: str = "PASSEXIT"; break;
+            case 81: str = "MISSBAGREP"; break; case 82: str = "NUMNRTOTAL"; break; case 83: str = "ACK"; break;
+            case 84: str = "ENDPASSENGER"; break; case 85: str = "ENDPORTER"; break;
+            case 86: str = "ENDBUSDRIVER"; break; case 87: str = "SHUT";
+            default: str = "";
+        }
+        return str;
+    }
 }
