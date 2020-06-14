@@ -49,7 +49,7 @@ public class TemporaryStorageAreaProxy extends CommonProvider{
      */
 
     public TemporaryStorageAreaProxy(ServerCom sconi, TemporaryStorageAreaInterface temporaryStorageAreaInterface) {
-        super ("Proxy_" + TemporaryStorageAreaProxy.getProxyId ());
+        super ("Proxy_TemporaryStorageAreaProxy_" + TemporaryStorageAreaProxy.getProxyId ());
 
         this.sconi = sconi;
         this.temporaryStorageAreaInterface = temporaryStorageAreaInterface;

@@ -2,6 +2,7 @@ package clientSide.entities;
 import clientSide.sharedRegionsStubs.ArrivalTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.DepartureTermTransfQuayStub;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
+import serverSide.proxies.BaggageReclaimOfficeProxy;
 
 /**
  *   Bus driver thread.
@@ -63,6 +64,7 @@ public class BusDriver extends Thread{
 
     public BusDriver(BusDriverStates Stat, ArrivalTermTransfQuayStub arrivalTerminalQuayStub,
                      DepartureTermTransfQuayStub departureTransferQuayStub, GenReposInfoStub reposStub){
+        super ("BusDriver ");
         this.Stat = Stat;
         this.arrivalTerminalQuayStub = arrivalTerminalQuayStub;
         this.departureTransferQuayStub = departureTransferQuayStub;

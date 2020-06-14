@@ -49,7 +49,7 @@ public class ArrivalLoungeProxy extends CommonProvider{
      */
 
     public ArrivalLoungeProxy(ServerCom sconi, ArrivalLoungeInterface arrivalLoungeInterface) {
-        super("Proxy_" + ArrivalLoungeProxy.getProxyId());
+        super("Proxy_ArrivalLoungeProxy_" + ArrivalLoungeProxy.getProxyId());
 
         this.sconi = sconi;
         this.arrivalLoungeInterface = arrivalLoungeInterface;

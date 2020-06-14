@@ -49,7 +49,7 @@ public class GenReposInfoProxy extends Thread{ // CommonProvider{
      */
 
     public GenReposInfoProxy(ServerCom sconi, GenReposInfoInterface reposInterface) {
-        super ("Proxy_" + GenReposInfoProxy.getProxyId ());
+        super ("Proxy_GenReposInfoProxy_" + GenReposInfoProxy.getProxyId ());
 
         this.sconi = sconi;
         this.reposInterface = reposInterface;

@@ -49,7 +49,7 @@ public class BaggageColPointProxy  extends CommonProvider{
      */
 
     public BaggageColPointProxy(ServerCom sconi, BaggageColPointInterface baggageColPointInterface) {
-        super ("Proxy_" + BaggageColPointProxy.getProxyId ());
+        super ("Proxy_BaggageColPointProxy_" + BaggageColPointProxy.getProxyId ());
 
         this.sconi = sconi;
         this.baggageColPointInterface = baggageColPointInterface;

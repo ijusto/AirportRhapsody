@@ -2,3 +2,5 @@ O serviço foi estabelecido!
 O servidor esta em escuta.
 ServerBaggageColPoint
 -------- Created Message of type ACK --------
+nBagsPerPass: [1, 0, 0, 0, 0, 0]
+-------- Created Message of type ACK --------

@@ -55,8 +55,7 @@ public class ClientCom
      *    @param portNumb número do port de escuta do servidor
      */
 
-    public ClientCom (String hostName, int portNumb)
-    {
+    public ClientCom(String hostName, int portNumb){
         serverHostName = hostName;
         serverPortNumb = portNumb;
     }
@@ -70,8 +69,8 @@ public class ClientCom
      *            <li>false, em caso contrário
      */
 
-    public boolean open ()
-    {
+    public boolean open(){
+
         boolean success = true;
         SocketAddress serverAddress = new InetSocketAddress (serverHostName, serverPortNumb);
 
@@ -141,12 +140,12 @@ public class ClientCom
      *  Fecho do socket de comunicação.
      */
 
-    public void close ()
-    {
+    public void close(){
+
         try {
             in.close();
         } catch (IOException e) {
-            System.out.println(Thread.currentThread ().getName () +
+            System.out.println(Thread.currentThread().getName () +
                 " - não foi possível fechar o canal de entrada do socket!");
             e.printStackTrace ();
             System.exit (1);
@@ -155,7 +154,7 @@ public class ClientCom
         try {
             out.close();
         } catch (IOException e) {
-            System.out.println(Thread.currentThread ().getName () +
+            System.out.println(Thread.currentThread().getName () +
                 " - não foi possível fechar o canal de saída do socket!");
             e.printStackTrace ();
             System.exit (1);
@@ -164,7 +163,7 @@ public class ClientCom
         try {
             commSocket.close();
         } catch (IOException e) {
-            System.out.println(Thread.currentThread ().getName () +
+            System.out.println(Thread.currentThread().getName () +
                 " - não foi possível fechar o socket de comunicação!");
             e.printStackTrace ();
             System.exit (1);
@@ -177,23 +176,23 @@ public class ClientCom
      *    @return objecto lido
      */
 
-    public Object readObject (){
+    public Object readObject(){
         Object fromServer = null;                            // objecto
 
         try {
-            fromServer = in.readObject ();
+            fromServer = in.readObject();
         } catch (InvalidClassException e) {
-            System.out.println(Thread.currentThread ().getName () +
+            System.out.println(Thread.currentThread().getName () +
                 " - o objecto lido não é passível de desserialização!");
             e.printStackTrace ();
             System.exit (1);
         } catch (IOException e) {
-            System.out.println(Thread.currentThread ().getName () +
+            System.out.println(Thread.currentThread().getName () +
                 " - erro na leitura de um objecto do canal de entrada do socket de comunicação!");
             e.printStackTrace ();
             System.exit (1);
         } catch (ClassNotFoundException e) {
-            System.out.println(Thread.currentThread ().getName () +
+            System.out.println(Thread.currentThread().getName () +
                 " - o objecto lido corresponde a um tipo de dados desconhecido!");
             e.printStackTrace ();
             System.exit (1);

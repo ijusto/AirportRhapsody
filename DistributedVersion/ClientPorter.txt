@@ -1,7 +1,8 @@
 Porter Client
 -------- Created Message of type UDTEPORTSTAT --------
-porterStat 0
+stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- Received Message of type ACK --------
 -------- Created Message of type TAKEARST --------
-stPorter 0
+stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- ArrivalLoungeStub Sent TAKEARST --------
+Porter - erro na leitura de um objecto do canal de entrada do socket de comunicação!

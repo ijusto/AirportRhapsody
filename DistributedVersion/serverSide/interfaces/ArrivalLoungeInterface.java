@@ -1,14 +1,10 @@
 package serverSide.interfaces;
-
-import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
 import clientSide.entities.PorterStates;
-import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 import comInf.*;
 import serverSide.proxies.ArrivalLoungeProxy;
 import serverSide.servers.ServerArrivalLounge;
 import serverSide.sharedRegions.ArrivalLounge;
-import clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub;
 
 /**
  *
@@ -91,7 +87,9 @@ public class ArrivalLoungeInterface {
         }
 
         /* seu processamento */
-        CommonProvider cp = (CommonProvider) Thread.currentThread();
+        ArrivalLoungeProxy cp = (ArrivalLoungeProxy) Thread.currentThread();
+        System.out.println("CommonProvider: " + cp.toString());
+        System.out.println("Current thread name: " + Thread.currentThread().getName());
         switch(inMessage.getType()) {
 
             // probPar
@@ -106,7 +104,10 @@ public class ArrivalLoungeInterface {
 
             // WhatShouldIDo (Passenger)
             case Message.WSID:
-                cp.setStatPass(inMessage.getPassId(), PassengerStates.values()[inMessage.getPassStat()]);
+                System.out.println("Pass id for set: " + inMessage.getPassId());
+                System.out.println("Pass state for set: " + PassengerStates.values()[inMessage.getPassStat()].name());
+                System.out.println("Pass state for set: " + PassengerStates.values()[inMessage.getPassStat()]);
+                ((ArrivalLoungeProxy) Thread.currentThread()).setStatPass(inMessage.getPassId(), PassengerStates.values()[inMessage.getPassStat()]);
                 if (arrivalLounge.whatShouldIDo(inMessage.getPassId()))
                     outMessage = new Message(Message.FNDST);    // gerar resposta positiva
                 else

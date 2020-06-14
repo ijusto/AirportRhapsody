@@ -11,15 +11,13 @@ public class CommonProvider extends Thread implements PassengerInterface, Porter
 
     private int nPass;
 
-    private Passenger.SiPass[] si;
+    private Passenger.SiPass[] si = new Passenger.SiPass[SimulPar.N_PASS_PER_FLIGHT];
 
-    private PassengerStates[] st;
+    private PassengerStates[] st = new PassengerStates[SimulPar.N_PASS_PER_FLIGHT];
 
-    private int[] NA;
+    private int[] NA = new int[SimulPar.N_PASS_PER_FLIGHT];
 
-    private int[] NR;
-
-    private int[] id;
+    private int[] NR = new int[SimulPar.N_PASS_PER_FLIGHT];
 
     private PorterStates pSt;
 

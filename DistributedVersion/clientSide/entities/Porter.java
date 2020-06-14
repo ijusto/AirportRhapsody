@@ -57,6 +57,7 @@ public class Porter extends Thread{
 
     public Porter(PorterStates Stat, ArrivalLoungeStub arrivalLoungeStub, TemporaryStorageAreaStub tempStoreStub,
                   BaggageColPointStub bColPntStub){
+        super ("Porter");
         this.Stat = Stat;
         this.arrivalLoungeStub = arrivalLoungeStub;
         this.tempStoreStub = tempStoreStub;

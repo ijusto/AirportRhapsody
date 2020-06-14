@@ -4,6 +4,8 @@ import comInf.*;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
 import clientSide.entities.*;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -177,15 +179,18 @@ public class BaggageColPoint {
      */
 
     public synchronized void setTreadmill(int[] nBagsPerPass) {
+        Map<Integer, MemFIFO<Bag>> treadmill_temp = new HashMap<>();
+        System.out.println("nBagsPerPass: " + Arrays.toString(nBagsPerPass));
         try {
             for(int nPass = 0; nPass < SimulPar.N_PASS_PER_FLIGHT; nPass++){
                 MemFIFO<Bag> bagPassFIFO =  new MemFIFO<>(new Bag [nBagsPerPass[nPass]]);        // FIFO instantiation
-                treadmill.put(nPass, bagPassFIFO);
+                treadmill_temp.put(nPass, bagPassFIFO);
             }
 
         } catch (MemException e) {
             e.printStackTrace();
         }
+        treadmill = treadmill_temp;
     }
 
     /**

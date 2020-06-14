@@ -49,7 +49,7 @@ public class DepartureTermTransfQuayProxy  extends CommonProvider{
      */
 
     public DepartureTermTransfQuayProxy(ServerCom sconi, DepartureTermTransfQuayInterface departureTermTransfQuayInterface) {
-        super ("Proxy_" + DepartureTermTransfQuayProxy.getProxyId ());
+        super ("Proxy_DepartureTermTransfQuayProxy_" + DepartureTermTransfQuayProxy.getProxyId ());
 
         this.sconi = sconi;
         this.departureTermTransfQuayInterface = departureTermTransfQuayInterface;

@@ -56,7 +56,9 @@ public class BaggageColPointInterface {
                 break;
 
             case Message.SETTREADMILL:
-                /* TODO: Validation */
+                if(inMessage.getMsgNBagsPerPass() == null){
+                    throw new MessageException("Array de malas para inicializar a treadmill null", inMessage);
+                }
                 break;
 
             case Message.RESETBCP: case Message.NOMOREBAGS: case Message.SETPHEMPTY: case Message.SHUT:

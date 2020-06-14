@@ -137,6 +137,7 @@ public class Passenger extends Thread{
                      ArrivalTermTransfQuayStub arrivalTermTransfQuayStub, DepartureTermTransfQuayStub departureTransferQuayStub,
                      DepartureTerminalEntranceStub departureEntranceStub, ArrivalTerminalExitStub arrivalTerminalExitStub,
                      BaggageColPointStub baggageColPointStub, BaggageReclaimOfficeStub baggageReclaimOfficeStub){
+        super ("Passenger_" + id);
         this.St = St;
         this.Si = Si;
         this.NR = NR;

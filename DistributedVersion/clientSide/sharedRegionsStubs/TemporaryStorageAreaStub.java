@@ -84,7 +84,7 @@ public class TemporaryStorageAreaStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.CARRYTOAPPSTORE_TSA, bag.getIntDestStat(), bag.getIdOwner());
+        outMessage = new Message(Message.CARRYTOAPPSTORE_TSA, bag.getIntDestStat(), bag.getIdOwner(), p.getStatPorter().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

@@ -49,7 +49,7 @@ public class DepartureTerminalEntranceProxy extends CommonProvider{
      */
 
     public DepartureTerminalEntranceProxy(ServerCom sconi, DepartureTerminalEntranceInterface departureTerminalEntranceInterface) {
-        super ("Proxy_" + DepartureTerminalEntranceProxy.getProxyId ());
+        super ("Proxy_DepartureTerminalEntranceProxy_" + DepartureTerminalEntranceProxy.getProxyId ());
 
         this.sconi = sconi;
         this.departureTerminalEntranceInterface = departureTerminalEntranceInterface;

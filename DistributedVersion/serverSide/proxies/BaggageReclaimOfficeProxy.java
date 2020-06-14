@@ -49,7 +49,7 @@ public class BaggageReclaimOfficeProxy extends CommonProvider{
      */
 
     public BaggageReclaimOfficeProxy(ServerCom sconi, BaggageReclaimOfficeInterface baggageReclaimOfficeInterface) {
-        super ("Proxy_" + BaggageReclaimOfficeProxy.getProxyId ());
+        super ("Proxy_BaggageReclaimOfficeProxy_" + BaggageReclaimOfficeProxy.getProxyId ());
 
         this.sconi = sconi;
         this.baggageReclaimOfficeInterface = baggageReclaimOfficeInterface;

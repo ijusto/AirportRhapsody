@@ -302,30 +302,6 @@ public class Message implements Serializable
 
     private int msgType = -1;
 
-    /**
-     *  Identificação do cliente
-     */
-
-    private int custId = -1;
-
-    /**
-     *  Identificação do barbeiro
-     */
-
-    private int barbId = -1;
-
-    /**
-     *  Nome do ficheiro de logging
-     */
-
-    private String fName = null;
-
-    /**
-     *  Número de iterações do ciclo de vida dos clientes
-     */
-
-    private int nIter = -1;
-
     private int msgBagDestStat = -1;
 
     private int msgBagIdOwner = -1;
@@ -374,17 +350,11 @@ public class Message implements Serializable
 
     private int passId = -1;
 
-    private int passStat = -1;
+    private int stPass = -1;
 
-    private int porterStat = -1;
+    private int stPorter = -1;
 
-    private int bdStat = -1;
-
-    private int stPass;
-
-    private int stPorter;
-
-    private int stBD;
+    private int stBD = -1;
 
     /**
      *  Instanciação de uma mensagem (forma 1).
@@ -392,13 +362,12 @@ public class Message implements Serializable
      *    @param type tipo da mensagem
      */
 
-    public Message(int type)
-    {
+    public Message(int type){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
     }
 
-    public Message(int type, int value) {
+    public Message(int type, int value){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType == PASSEXIT) || (msgType == PJOINWQ) || (msgType == PLEFTWQ) || (msgType == FREEBS)){
@@ -416,25 +385,21 @@ public class Message implements Serializable
         } else if(msgType == NUMNRTOTAL){
             msgNR = value;
             System.out.println("msgNR " + value);
-        } else if(msgType == UDTEBDSTAT){
-            bdStat = value;
-            System.out.println("bdStat " + value);
         } else if(msgType == NEWPASS){
             passSi = value;
             System.out.println("passSi " + value);
-        } else if(msgType == UDTEPORTSTAT){
-            porterStat = value;
-            System.out.println("porterStat " + value);
-        } else if((msgType == TAKEARST) || (msgType == TRYTOCOL) || (msgType == NOBAGS2COL) || (msgType == NOMOREBAGS_DTE)){
+        } else if((msgType == TAKEARST) || (msgType == TRYTOCOL) || (msgType == NOBAGS2COL)
+                || (msgType == NOMOREBAGS_DTE) || (msgType == UDTEPORTSTAT)){
             this.stPorter = value;
-            System.out.println("stPorter " + value);
-        } else if((msgType == WORKENDED) || (msgType == PARKBUS) || (msgType == ANNOUCEBUSBORADING) || (msgType == PBLPO)){
+            System.out.println("stPorter " + PorterStates.values()[value]);
+        } else if((msgType == WORKENDED) || (msgType == PARKBUS) || (msgType == ANNOUCEBUSBORADING)
+                || (msgType == PBLPO) || (msgType == UDTEBDSTAT)){
             this.stBD = value;
-            System.out.println("stBD " + value);
+            System.out.println("stBD " + BusDriverStates.values()[value]);
         }
     }
 
-    public Message (int type, ArrivalTerminalExitStub arrivalTerminalExitStub) {
+    public Message(int type, ArrivalTerminalExitStub arrivalTerminalExitStub){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  SETARRTERREF){
@@ -443,7 +408,7 @@ public class Message implements Serializable
         }
     }
 
-    public Message (int type, GenReposInfoStub reposStub) {
+    public Message(int type, GenReposInfoStub reposStub){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  PARAMSATTQUAY || msgType == PARAMSBAGCOLPNT || msgType == PARAMSBAGRECOFF
@@ -467,7 +432,7 @@ public class Message implements Serializable
         }
     }
 
-    public Message (int type, String filename) {
+    public Message (int type, String filename){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType == PARAMSREPOS) {
@@ -476,26 +441,27 @@ public class Message implements Serializable
         }
     }
 
-    public Message(int type, int[][] bagAndPassDest, int[][] nBagsNA) {
+    public Message(int type, int[][] bagAndPassDest, int[][] nBagsNA){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType ==  RESETAL) || (msgType == PARAMSARRLNG)){
             msgBagAndPassDest = bagAndPassDest;
-            System.out.println("msgBagAndPassDest " + msgBagAndPassDest);
+            System.out.println("msgBagAndPassDest " + Arrays.deepToString(msgBagAndPassDest));
             msgNBagsNA = nBagsNA;
-            System.out.println("msgNBagsNA " + msgNBagsNA);
+            System.out.println("msgNBagsNA " + Arrays.deepToString(msgNBagsNA));
         }
     }
 
-    public Message (int type, int[] nBagsPerPass) {
+    public Message(int type, int[] nBagsPerPass){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if(msgType ==  SETTREADMILL){
             msgNBagsPerPass = nBagsPerPass;
-            System.out.println("msgNBagsPerPass " + msgNBagsPerPass);
+            System.out.println("msgNBagsPerPass " + Arrays.toString(msgNBagsPerPass));
         }
     }
-    public Message (int type, boolean bool) {
+
+    public Message(int type, boolean bool){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  INCDECCOUNTER){
@@ -510,7 +476,7 @@ public class Message implements Serializable
         }
     }
 
-    public Message (int type, DepartureTerminalEntranceStub departureTerminalEntranceStub) {
+    public Message(int type, DepartureTerminalEntranceStub departureTerminalEntranceStub){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  SETDEPTERNREF){
@@ -519,15 +485,15 @@ public class Message implements Serializable
         }
     }
 
-    public Message (int type, int firstInt, int secondInt, int thirdInt) {
+    public Message(int type, int firstInt, int secondInt, int thirdInt){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
-        if ((msgType == CARRYAPPSTORE)) {
+        if ((msgType == CARRYAPPSTORE) || (msgType == CARRYTOAPPSTORE_TSA)) {
             msgBagDestStat = firstInt;
             System.out.println("msgBagDestStat " + msgBagDestStat);
             msgBagIdOwner = secondInt;
             System.out.println("msgBagIdOwner " + msgBagIdOwner);
-            porterStat = thirdInt;
+            stPorter = thirdInt;
         }
     }
 
@@ -539,18 +505,17 @@ public class Message implements Serializable
      *    @param secondInt
      */
 
-    public Message (int type, int firstInt, int secondInt)
-    {
+    public Message(int type, int firstInt, int secondInt){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
-                || (msgType == PREPARENEXTLEG)){
+                || (msgType == PREPARENEXTLEG) || (msgType == UDTEPASSSTAT)){
             passId = firstInt;
             System.out.println("passId " + passId);
             stPass = secondInt;
             System.out.println("stPass " + stPass);
-        } else if ((msgType == BAG) || (msgType == CARRYTOAPPSTORE_TSA)){
+        } else if (msgType == BAG){
             msgBagDestStat = firstInt;
             System.out.println("msgBagDestStat " + msgBagDestStat);
             msgBagIdOwner = secondInt;
@@ -565,11 +530,6 @@ public class Message implements Serializable
             System.out.println("passId " + passId);
             passNA = secondInt;
             System.out.println("passNA " + passNA);
-        } else if(msgType == UDTEPASSSTAT){
-            passId = firstInt;
-            System.out.println("passId " + passId);
-            passStat = secondInt;
-            System.out.println("passStat " + passStat);
         } else if (msgType ==  GETPASSSI){
             passId = firstInt;
             System.out.println("passId " + passId);
@@ -577,26 +537,6 @@ public class Message implements Serializable
             System.out.println("passSi " + passSi);
         }
     }
-
-    /**
-     *  Instanciação de uma mensagem (forma 4).
-     *
-     *    @param type tipo da mensagem
-     *    @param name nome do ficheiro de logging
-     *    @param nIter número de iterações do ciclo de vida dos clientes
-     */
-
-    public Message (int type, String name, int nIter)
-    {
-        msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
-        fName= name;
-        System.out.println("fName " + fName);
-        this.nIter = nIter;
-        System.out.println("nIter " + nIter);
-    }
-
-
 
     public int getMsgBagDestStat(){
         return msgBagDestStat;
@@ -658,62 +598,11 @@ public class Message implements Serializable
 
     public int getPassId(){ return passId; }
 
-    public int getPassStatInt(){ return passStat; }
-
     public int getPassStat(){return stPass;}
 
     public int getPorterStat(){return stPorter;}
 
     public int getBDStat(){return stBD;}
-
-    public int getPorterStatInt(){ return porterStat; }
-
-    public int getBDStatInt(){ return bdStat; }
-
-    /**
-     *  Obtenção do valor do campo identificador do cliente.
-     *
-     *    @return identificação do cliente
-     */
-
-    public int getCustId ()
-    {
-        return (custId);
-    }
-
-
-    /**
-     *  Obtenção do valor do campo identificador do barbeiro.
-     *
-     *    @return identificação do barbeiro
-     */
-
-    public int getBarbId ()
-    {
-        return (barbId);
-    }
-
-    /**
-     *  Obtenção do valor do campo nome do ficheiro de logging.
-     *
-     *    @return nome do ficheiro
-     */
-
-    public String getFName ()
-    {
-        return (fName);
-    }
-
-    /**
-     *  Obtenção do valor do campo número de iterações do ciclo de vida dos clientes.
-     *
-     *    @return número de iterações do ciclo de vida dos clientes
-     */
-
-    public int getNIter ()
-    {
-        return (nIter);
-    }
 
     /**
      *  Impressão dos campos internos.

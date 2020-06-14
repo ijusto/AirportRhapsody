@@ -10,5 +10,83 @@ msgDepTermEntStub clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub@58
 -------- ArrivalLoungeStub Sent SETDEPTERNREF --------
 -------- ArrivalLoungeStub Received ACK --------
 -------- Created Message of type PARAMSARRLNG --------
-msgBagAndPassDest [[I@7cc355be
-msgNBagsNA [[I@6e8cf4c6
+msgBagAndPassDest [[0, 0, 1, 0, 0], [1, 1, 0, 1, 0], [0, 1, 0, 1, 0], [0, 0, 0, 1, 1], [0, 1, 1, 0, 1], [0, 0, 0, 0, 0]]
+msgNBagsNA [[1, 0, 0, 0, 1], [0, 1, 2, 0, 2], [0, 0, 2, 1, 2], [0, 2, 1, 2, 2], [0, 2, 1, 2, 0], [0, 1, 2, 0, 2]]
+-------- Created Message of type UDTEPASSSTAT --------
+passId 0
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type GETPASSSI --------
+passId 0
+passSi 0
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 1
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type GETPASSSI --------
+passId 1
+passSi 1
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 2
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type GETPASSSI --------
+passId 2
+passSi 0
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 3
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type GETPASSSI --------
+passId 3
+passSi 0
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type GETPASSSI --------
+passId 4
+passSi 0
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 5
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type GETPASSSI --------
+passId 5
+passSi 0
+-------- Received Message of type ACK --------
+-------- Created Message of type WSID --------
+passId 0
+stPass 0
+-------- ArrivalLoungeStub Sent WSID --------
+-------- Created Message of type WSID --------
+passId 1
+stPass 0
+-------- ArrivalLoungeStub Sent WSID --------
+-------- Created Message of type WSID --------
+passId 2
+stPass 0
+-------- ArrivalLoungeStub Sent WSID --------
+-------- Created Message of type WSID --------
+passId 3
+stPass 0
+-------- ArrivalLoungeStub Sent WSID --------
+-------- Created Message of type WSID --------
+passId 4
+stPass 0
+-------- ArrivalLoungeStub Sent WSID --------
+-------- Created Message of type WSID --------
+passId 5
+stPass 0
+-------- ArrivalLoungeStub Sent WSID --------
+Passenger_3 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
+Passenger_4 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
+Passenger_2 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
+Passenger_1 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
+Passenger_0 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
+Passenger_5 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
