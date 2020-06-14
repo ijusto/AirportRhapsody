@@ -1,0 +1,3 @@
+O serviço foi estabelecido!
+O servidor esta em escuta.
+ServerTemporaryStorageArea

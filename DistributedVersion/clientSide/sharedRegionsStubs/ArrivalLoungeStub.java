@@ -274,11 +274,10 @@ public class ArrivalLoungeStub implements Serializable {
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
-        Passenger p = (Passenger) Thread.currentThread();
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                p.sleep((long) 10);
+                Thread.currentThread().sleep((long) 10);
             } catch(InterruptedException ignored){}
         }
 
