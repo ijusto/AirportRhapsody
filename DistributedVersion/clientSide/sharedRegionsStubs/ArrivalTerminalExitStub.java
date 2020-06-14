@@ -93,7 +93,7 @@ public class ArrivalTerminalExitStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ENDPASSENGER){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função goHome");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -123,7 +123,7 @@ public class ArrivalTerminalExitStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função notifyFromPrepareNextLeg");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -156,7 +156,7 @@ public class ArrivalTerminalExitStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if ((inMessage.getType() != Message.LIMITCOUNTER) && (inMessage.getType() != Message.CONTCOUNTER)){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função incDecCounter");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -188,7 +188,7 @@ public class ArrivalTerminalExitStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função resetArrivalTerminalExit");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -222,7 +222,7 @@ public class ArrivalTerminalExitStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.DEADPASSVAL){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função getDeadPassValue");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");

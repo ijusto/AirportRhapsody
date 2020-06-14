@@ -72,7 +72,7 @@ public class BaggageColPointStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.GCBDONE){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função goCollectABag");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -106,7 +106,7 @@ public class BaggageColPointStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função carryItToAppropriateStore");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -135,7 +135,7 @@ public class BaggageColPointStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função resetBaggageColPoint");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -164,7 +164,7 @@ public class BaggageColPointStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função noMoreBags");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -197,7 +197,7 @@ public class BaggageColPointStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função setTreadmill");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -226,7 +226,7 @@ public class BaggageColPointStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função setPHoldEmpty");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -256,7 +256,7 @@ public class BaggageColPointStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");

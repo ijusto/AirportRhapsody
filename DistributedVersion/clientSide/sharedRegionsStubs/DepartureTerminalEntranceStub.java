@@ -89,7 +89,7 @@ public class DepartureTerminalEntranceStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ENDPASSENGER){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função prepareNextLeg");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -118,7 +118,7 @@ public class DepartureTerminalEntranceStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função resetDepartureTerminalExit");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -148,7 +148,7 @@ public class DepartureTerminalEntranceStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função notifyFromGoHome");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -179,7 +179,7 @@ public class DepartureTerminalEntranceStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função noMoreBags");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -212,7 +212,7 @@ public class DepartureTerminalEntranceStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função setArrivalTerminalRef");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
@@ -242,7 +242,7 @@ public class DepartureTerminalEntranceStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
