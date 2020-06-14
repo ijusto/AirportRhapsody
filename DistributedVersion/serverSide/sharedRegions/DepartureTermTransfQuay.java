@@ -1,13 +1,9 @@
 package serverSide.sharedRegions;
 
-import clientSide.entities.BusDriver;
 import clientSide.entities.BusDriverStates;
-import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
 import clientSide.sharedRegionsStubs.GenReposInfoStub;
-import comInf.BusDriverInterface;
 import comInf.CommonProvider;
-import comInf.PassengerInterface;
 
 /**
  *   Departure Terminal Transfer Quay.
@@ -42,6 +38,13 @@ public class DepartureTermTransfQuay {
     private static final Object lockNPassOnTheBus = new Object();
 
     /**
+     *   Object used for synchronization.
+     */
+
+    private static final Object lockBusDoorsOpen = new Object();
+
+
+    /**
      *   Instantiation of the Departure Terminal Transfer Quay.
      *
      *     @param reposStub general repository of information Stub.
@@ -49,7 +52,7 @@ public class DepartureTermTransfQuay {
 
     public DepartureTermTransfQuay(GenReposInfoStub reposStub){
         this.reposStub = reposStub;
-        this.busDoorsOpen = false;
+        youCantLeaveTheBus();
         this.resetNPassOnTheBusValue();
     }
 
@@ -66,12 +69,15 @@ public class DepartureTermTransfQuay {
         passenger.setStatPass(id, PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         reposStub.updatePassSt(id,PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL.ordinal());
 
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         while(!this.canPassLeaveTheBus()) {
+            System.out.println("ESTOU PRESO");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println("POSSO SAIR? " + this.canPassLeaveTheBus());
         }
 
         boolean last = this.incDecCounter(false);
@@ -103,7 +109,9 @@ public class DepartureTermTransfQuay {
 
         this.setNPassOnTheBusValue(busDriver.getNPassOnTheBus());
 
+        System.out.println("ESTOU A PENSAR");
         this.pleaseLeaveTheBus();
+        System.out.println("DEIXEI SAIR");
         notifyAll();  // wake up Passengers in leaveTheBus()
 
         while(this.getNPassOnTheBusValue() != 0) {
@@ -115,7 +123,7 @@ public class DepartureTermTransfQuay {
         }
 
         busDriver.setNPassOnTheBus(this.getNPassOnTheBusValue());
-        this.busDoorsOpen = false;
+        youCantLeaveTheBus();
     }
 
     /**
@@ -164,7 +172,9 @@ public class DepartureTermTransfQuay {
      */
 
     public boolean canPassLeaveTheBus() {
-        return this.busDoorsOpen;
+        synchronized (lockBusDoorsOpen) {
+            return this.busDoorsOpen;
+        }
     }
 
     /**
@@ -186,7 +196,15 @@ public class DepartureTermTransfQuay {
      */
 
     public void pleaseLeaveTheBus() {
-        this.busDoorsOpen = true;
+        synchronized (lockBusDoorsOpen) {
+            this.busDoorsOpen = true;
+        }
+    }
+
+    public void youCantLeaveTheBus(){
+        synchronized (lockBusDoorsOpen) {
+            this.busDoorsOpen = false;
+        }
     }
 
     /**

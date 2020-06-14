@@ -20,12 +20,14 @@ import serverSide.sharedRegions.GenReposInfo;
 
 public class GenReposInfoInterface {
 
+    private boolean[] entities_fr = {false, false, false};
     private GenReposInfo repos;
-    private int fr_count;
+    private boolean shut = false;
+
+    private static final Object lockEntitiesFR = new Object();
 
     public GenReposInfoInterface(GenReposInfo repos){
         this.repos = repos;
-        this.fr_count = 0;
     }
 
     /**
@@ -124,6 +126,7 @@ public class GenReposInfoInterface {
 
         /* seu processamento */
 
+        System.out.println("genrepos inter message: " + Message.getMsgTypeString(inMessage.getType()));
         switch (inMessage.getType ()) {
 
             // printLog
@@ -134,10 +137,13 @@ public class GenReposInfoInterface {
 
             // finalReport
             case Message.FINALREPORT:
-                fr_count++;
-                if(fr_count >= 3){
+                //if(shut){
+                //    outMessage = new Message(Message.ACK);
+                //} else
+                if(entity_called_fr(inMessage.getEntity())) {
                     repos.finalReport();
                     outMessage = new Message(Message.SHUT);
+                    //shut = true;
                 } else {
                     outMessage = new Message(Message.ACK);
                 }
@@ -263,5 +269,12 @@ public class GenReposInfoInterface {
         }
 
         return (outMessage);
+    }
+
+    private boolean entity_called_fr(int id) {
+        synchronized (lockEntitiesFR) {
+            entities_fr[id] = true;
+        }
+        return entities_fr[0] == entities_fr[1] == entities_fr[2];
     }
 }

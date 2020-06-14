@@ -3,4 +3,387 @@ O servidor esta em escuta.
 ServerDepartureTerminalEntrance
 -------- Created Message of type ACK --------
 -------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 3
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 1
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 5
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
 -------- Created Message of type ACK --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 0
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type CONTCOUNTER --------
+-------- Created Message of type NOTFNEXTL --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PASSEXIT --------
+passId 4
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 0
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 3
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 5
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 3
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 5
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type ACK --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Created Message of type ACK --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 3
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 5
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 2
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 0
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 5
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type ACK --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type ACK --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 2
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 0
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 5
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 0
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type ACK --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 1
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 5
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type CONTCOUNTER --------
+-------- Created Message of type NOTFNEXTL --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PASSEXIT --------
+passId 5
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 4
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 0
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 5
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 3
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 1
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type IMITCOUNTER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 0
+stPass 7
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type INCDECCOUNTER --------
+msgIncOrDec true
+-------- Received Message of type CONTCOUNTER --------
+-------- Created Message of type NOTFNEXTL --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PASSEXIT --------
+passId 0
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 4
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 3
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------
+-------- Created Message of type GETDEADPASSVAL --------
+-------- Received Message of type DEADPASSVAL --------
+-------- Created Message of type PASSEXIT --------
+passId 5
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ENDPASSENGER --------

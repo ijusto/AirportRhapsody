@@ -2,14 +2,166 @@ O serviço foi estabelecido!
 O servidor esta em escuta.
 ServerBaggageColPoint
 -------- Created Message of type ACK --------
-nBagsPerPass: [2, 2, 2, 2, 0, 2]
+nBagsPerPass: [1, 0, 0, 0, 2, 0]
 -------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+nBagsPerPass: [0, 0, 2, 0, 1, 1]
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 2
+stPass 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_LUGGAGE_BELT_CONVEYOR
+-------- Received Message of type ACK --------
+-------- Created Message of type INCBAGCB --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSNA --------
+passId 4
+passNA 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PGETSABAG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type GCBDONE --------
+msgBagCollected true
+-------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_LUGGAGE_BELT_CONVEYOR
+-------- Received Message of type ACK --------
+-------- Created Message of type INCBAGCB --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSNA --------
+passId 2
+passNA 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PGETSABAG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type GCBDONE --------
+msgBagCollected true
+-------- Created Message of type UDTEPASSSTAT --------
+passId 2
+stPass 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_LUGGAGE_BELT_CONVEYOR
+-------- Received Message of type ACK --------
+-------- Created Message of type INCBAGCB --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSNA --------
+passId 2
+passNA 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PGETSABAG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type GCBDONE --------
+msgBagCollected true
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type GCBDONE --------
+msgBagCollected false
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+nBagsPerPass: [1, 1, 2, 1, 2, 0]
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 3
+stPass 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
 -------- Created Message of type UDTEPASSSTAT --------
 passId 1
 stPass 1
 -------- Received Message of type ACK --------
 -------- Created Message of type PRINTLOG --------
 -------- Received Message of type ACK --------
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_LUGGAGE_BELT_CONVEYOR
+-------- Received Message of type ACK --------
+-------- Created Message of type INCBAGCB --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSNA --------
+passId 4
+passNA 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PGETSABAG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type GCBDONE --------
+msgBagCollected true
+-------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_LUGGAGE_BELT_CONVEYOR
+-------- Received Message of type ACK --------
+-------- Created Message of type INCBAGCB --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSNA --------
+passId 4
+passNA 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PGETSABAG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type GCBDONE --------
+msgBagCollected true
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_LUGGAGE_BELT_CONVEYOR
+-------- Received Message of type ACK --------
+-------- Created Message of type INCBAGCB --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSNA --------
+passId 3
+passNA 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PGETSABAG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type GCBDONE --------
+msgBagCollected true
 -------- Created Message of type UDTEPORTSTAT --------
 stPorter AT_THE_LUGGAGE_BELT_CONVEYOR
 -------- Received Message of type ACK --------
@@ -32,6 +184,34 @@ stPass 1
 -------- Received Message of type ACK --------
 -------- Created Message of type PRINTLOG --------
 -------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type GCBDONE --------
+msgBagCollected false
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+nBagsPerPass: [1, 1, 0, 0, 0, 0]
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 3
+stPass 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type GCBDONE --------
+msgBagCollected false
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+nBagsPerPass: [0, 0, 1, 0, 0, 1]
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 2
+stPass 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
 -------- Created Message of type UDTEPORTSTAT --------
 stPorter AT_THE_LUGGAGE_BELT_CONVEYOR
 -------- Received Message of type ACK --------
@@ -41,7 +221,7 @@ stPorter AT_THE_LUGGAGE_BELT_CONVEYOR
 -------- Received Message of type ACK --------
 -------- Created Message of type ACK --------
 -------- Created Message of type UDTEPASSNA --------
-passId 1
+passId 2
 passNA 1
 -------- Received Message of type ACK --------
 -------- Created Message of type PGETSABAG --------
@@ -50,3 +230,6 @@ passNA 1
 msgBagCollected true
 -------- Created Message of type ACK --------
 -------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+O servidor foi desactivado.

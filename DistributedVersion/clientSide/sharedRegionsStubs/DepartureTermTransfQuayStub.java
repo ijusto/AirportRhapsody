@@ -110,7 +110,7 @@ public class DepartureTermTransfQuayStub {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.PBLPO, b.getStat().ordinal());  //pede report missing bags
+        outMessage = new Message(Message.PBLPO, b.getStat().ordinal(), b.getNPassOnTheBus());  //pede report missing bags
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

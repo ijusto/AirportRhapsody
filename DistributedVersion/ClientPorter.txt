@@ -13,8 +13,36 @@ stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- ArrivalLoungeStub Received BAG --------
 -------- Created Message of type CARRYTOAPPSTORE_TSA --------
 msgBagDestStat 0
-msgBagIdOwner 5
+msgBagIdOwner 4
 -------- Received Message of type ACK --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received BAG --------
+-------- Created Message of type CARRYTOAPPSTORE_TSA --------
+msgBagDestStat 0
+msgBagIdOwner 4
+-------- Received Message of type ACK --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received BAG --------
+-------- Created Message of type CARRYTOAPPSTORE_TSA --------
+msgBagDestStat 0
+msgBagIdOwner 0
+-------- Received Message of type ACK --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received NULLBAG --------
+-------- Created Message of type NOBAGS2COL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent NOBAGS2COL --------
+-------- ArrivalLoungeStub Received ACK --------
+-------- Created Message of type TAKEARST --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TAKEARST --------
+-------- ArrivalLoungeStub Received TAKERSTDONE --------
 -------- Created Message of type TRYTOCOL --------
 stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- ArrivalLoungeStub Sent TRYTOCOL --------
@@ -27,16 +55,60 @@ msgBagIdOwner 5
 stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- ArrivalLoungeStub Sent TRYTOCOL --------
 -------- ArrivalLoungeStub Received BAG --------
--------- Created Message of type CARRYTOAPPSTORE_TSA --------
-msgBagDestStat 0
-msgBagIdOwner 3
+-------- Created Message of type CARRYAPPSTORE --------
+msgBagDestStat 1
+msgBagIdOwner 4
 -------- Received Message of type ACK --------
 -------- Created Message of type TRYTOCOL --------
 stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- ArrivalLoungeStub Sent TRYTOCOL --------
 -------- ArrivalLoungeStub Received BAG --------
--------- Created Message of type CARRYTOAPPSTORE_TSA --------
-msgBagDestStat 0
+-------- Created Message of type CARRYAPPSTORE --------
+msgBagDestStat 1
+msgBagIdOwner 2
+-------- Received Message of type ACK --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received BAG --------
+-------- Created Message of type CARRYAPPSTORE --------
+msgBagDestStat 1
+msgBagIdOwner 2
+-------- Received Message of type ACK --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received NULLBAG --------
+-------- Created Message of type NOBAGS2COL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent NOBAGS2COL --------
+-------- ArrivalLoungeStub Received ACK --------
+-------- Created Message of type TAKEARST --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TAKEARST --------
+-------- ArrivalLoungeStub Received TAKERSTDONE --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received BAG --------
+-------- Created Message of type CARRYAPPSTORE --------
+msgBagDestStat 1
+msgBagIdOwner 4
+-------- Received Message of type ACK --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received BAG --------
+-------- Created Message of type CARRYAPPSTORE --------
+msgBagDestStat 1
+msgBagIdOwner 4
+-------- Received Message of type ACK --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received BAG --------
+-------- Created Message of type CARRYAPPSTORE --------
+msgBagDestStat 1
 msgBagIdOwner 3
 -------- Received Message of type ACK --------
 -------- Created Message of type TRYTOCOL --------
@@ -67,8 +139,28 @@ msgBagIdOwner 1
 stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- ArrivalLoungeStub Sent TRYTOCOL --------
 -------- ArrivalLoungeStub Received BAG --------
--------- Created Message of type CARRYAPPSTORE --------
-msgBagDestStat 1
+-------- Created Message of type CARRYTOAPPSTORE_TSA --------
+msgBagDestStat 0
+msgBagIdOwner 0
+-------- Received Message of type ACK --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received NULLBAG --------
+-------- Created Message of type NOBAGS2COL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent NOBAGS2COL --------
+-------- ArrivalLoungeStub Received ACK --------
+-------- Created Message of type TAKEARST --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TAKEARST --------
+-------- ArrivalLoungeStub Received TAKERSTDONE --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received BAG --------
+-------- Created Message of type CARRYTOAPPSTORE_TSA --------
+msgBagDestStat 0
 msgBagIdOwner 1
 -------- Received Message of type ACK --------
 -------- Created Message of type TRYTOCOL --------
@@ -82,10 +174,30 @@ msgBagIdOwner 0
 -------- Created Message of type TRYTOCOL --------
 stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received NULLBAG --------
+-------- Created Message of type NOBAGS2COL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent NOBAGS2COL --------
+-------- ArrivalLoungeStub Received ACK --------
+-------- Created Message of type TAKEARST --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TAKEARST --------
+-------- ArrivalLoungeStub Received TAKERSTDONE --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
 -------- ArrivalLoungeStub Received BAG --------
 -------- Created Message of type CARRYTOAPPSTORE_TSA --------
 msgBagDestStat 0
-msgBagIdOwner 0
+msgBagIdOwner 5
+-------- Received Message of type ACK --------
+-------- Created Message of type TRYTOCOL --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- ArrivalLoungeStub Sent TRYTOCOL --------
+-------- ArrivalLoungeStub Received BAG --------
+-------- Created Message of type CARRYAPPSTORE --------
+msgBagDestStat 1
+msgBagIdOwner 2
 -------- Received Message of type ACK --------
 -------- Created Message of type TRYTOCOL --------
 stPorter WAITING_FOR_A_PLANE_TO_LAND
@@ -103,4 +215,19 @@ Thread-0 - erro na leitura de um objecto do canal de entrada do socket de comuni
 -------- Created Message of type TAKEARST --------
 stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- ArrivalLoungeStub Sent TAKEARST --------
+<<<<<<< HEAD
+>>>>>>> master
+=======
+-------- ArrivalLoungeStub Received ENDPORTER --------
+-------- Created Message of type FINALREPORT --------
+-------- Received Message of type SHUT --------
+-------- Created Message of type SHUT --------
+-------- Received Message of type ACK --------
+-------- Created Message of type SHUT --------
+-------- Received Message of type ACK --------
+-------- Created Message of type SHUT --------
+-------- Received Message of type ACK --------
+-------- Created Message of type SHUT --------
+-------- ArrivalLoungeStub Sent SHUT --------
+-------- ArrivalLoungeStub Received ACK --------
 >>>>>>> master

@@ -25,6 +25,7 @@ stPorter AT_THE_STOREROOM
 -------- Created Message of type PRINTLOG --------
 -------- Received Message of type ACK --------
 -------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
 -------- Created Message of type UDTEPORTSTAT --------
 stPorter AT_THE_STOREROOM
 -------- Received Message of type ACK --------
@@ -32,6 +33,7 @@ stPorter AT_THE_STOREROOM
 -------- Received Message of type ACK --------
 -------- Created Message of type PRINTLOG --------
 -------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
 -------- Created Message of type ACK --------
 -------- Created Message of type UDTEPORTSTAT --------
 stPorter AT_THE_STOREROOM
@@ -57,6 +59,7 @@ stPorter AT_THE_STOREROOM
 -------- Created Message of type PRINTLOG --------
 -------- Received Message of type ACK --------
 -------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
 -------- Created Message of type UDTEPORTSTAT --------
 stPorter AT_THE_STOREROOM
 -------- Received Message of type ACK --------
@@ -65,3 +68,23 @@ stPorter AT_THE_STOREROOM
 -------- Created Message of type PRINTLOG --------
 -------- Received Message of type ACK --------
 -------- Created Message of type ACK --------
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_STOREROOM
+-------- Received Message of type ACK --------
+-------- Created Message of type SAVEBAGSR --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_STOREROOM
+-------- Received Message of type ACK --------
+-------- Created Message of type SAVEBAGSR --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
+O servidor foi desactivado.
