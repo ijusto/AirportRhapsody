@@ -1,8 +1,10 @@
 package clientSide.sharedRegionsStubs;
 
 import clientSide.ClientCom;
+import comInf.CommonProvider;
 import comInf.Message;
 import clientSide.entities.*;
+import comInf.PorterInterface;
 
 import java.io.Serializable;
 
@@ -165,7 +167,7 @@ public class DepartureTerminalEntranceStub implements Serializable {
 
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-        Porter p = (Porter) Thread.currentThread();
+        CommonProvider p = (CommonProvider) Thread.currentThread();
         while(!con.open()){  // waiting for the connection to be established
             try {
                  p.sleep((long) 10);
@@ -173,7 +175,7 @@ public class DepartureTerminalEntranceStub implements Serializable {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.NOMOREBAGS, p.getStatPorter().ordinal());
+        outMessage = new Message(Message.NOMOREBAGS_DTE, p.getStatPorter().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

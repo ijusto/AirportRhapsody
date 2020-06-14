@@ -63,6 +63,7 @@ public class DepartureTerminalEntranceInterface {
                 break;
 
             default:
+                System.out.println("Tipo inválido: " + Message.getMsgTypeString(inMessage.getType()));
                 throw new MessageException ("Tipo inválido!", inMessage);
         }
 

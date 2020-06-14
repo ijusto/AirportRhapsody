@@ -2,6 +2,36 @@ O serviço foi estabelecido!
 O servidor esta em escuta.
 ServerArrivalTermTransfQuay
 -------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 4
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PJOINWQ --------
+passId 4
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type CONTDAYS --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 3
+stPass 4
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PJOINWQ --------
+passId 3
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 2
+stPass 4
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PJOINWQ --------
+passId 2
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
 passId 5
 stPass 4
 -------- Received Message of type ACK --------
@@ -10,9 +40,6 @@ stPass 4
 -------- Created Message of type PJOINWQ --------
 passId 5
 -------- Received Message of type ACK --------
--------- Created Message of type PRINTLOG --------
--------- Received Message of type ACK --------
--------- Created Message of type CONTDAYS --------
 -------- Created Message of type UDTEPASSSTAT --------
 passId 0
 stPass 4
@@ -28,6 +55,29 @@ passId 0
 -------- Created Message of type PRINTLOG --------
 -------- Received Message of type ACK --------
 -------- Created Message of type TAKEABUSDONE --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type TAKEABUSDONE --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 3
+stPass 5
+-------- Received Message of type ACK --------
+-------- Created Message of type PLEFTWQ --------
+passId 3
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 5
+-------- Received Message of type ACK --------
+-------- Created Message of type PLEFTWQ --------
+passId 4
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
 -------- Created Message of type UDTEPASSSTAT --------
 passId 0
 stPass 5
@@ -38,12 +88,38 @@ passId 0
 -------- Created Message of type PRINTLOG --------
 -------- Received Message of type ACK --------
 -------- Created Message of type ACK --------
+-------- Created Message of type ABBDONE --------
+-------- Created Message of type UDTEBDSTAT --------
+stBD PARKING_AT_THE_ARRIVAL_TERMINAL
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PBDONE --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type CONTDAYS --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type TAKEABUSDONE --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type TAKEABUSDONE --------
 -------- Created Message of type UDTEPASSSTAT --------
 passId 5
 stPass 5
 -------- Received Message of type ACK --------
 -------- Created Message of type PLEFTWQ --------
 passId 5
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 2
+stPass 5
+-------- Received Message of type ACK --------
+-------- Created Message of type PLEFTWQ --------
+passId 2
 -------- Received Message of type ACK --------
 -------- Created Message of type PRINTLOG --------
 -------- Received Message of type ACK --------
