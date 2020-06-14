@@ -5,6 +5,7 @@ stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- Created Message of type TAKEARST --------
 stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- ArrivalLoungeStub Sent TAKEARST --------
+<<<<<<< Updated upstream
 -------- ArrivalLoungeStub Received TAKERSTDONE --------
 -------- Created Message of type TRYTOCOL --------
 stPorter WAITING_FOR_A_PLANE_TO_LAND
@@ -53,3 +54,6 @@ stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- Created Message of type NOBAGS2COL --------
 stPorter WAITING_FOR_A_PLANE_TO_LAND
 -------- ArrivalLoungeStub Sent NOBAGS2COL --------
+=======
+Thread-0 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
+>>>>>>> Stashed changes
