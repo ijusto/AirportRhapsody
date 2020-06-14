@@ -9,6 +9,7 @@ import clientSide.sharedRegionsStubs.GenReposInfoStub;
 
 
 import javax.sound.midi.MidiDevice;
+import javax.sql.rowset.spi.SyncResolver;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -161,7 +162,7 @@ public class ArrivalLounge {
 
         CommonProvider currentPassenger = (CommonProvider) Thread.currentThread();
         assert(currentPassenger.getPassStat(id) == PassengerStates.AT_THE_DISEMBARKING_ZONE);
-
+        System.out.println("___________NR: " + currentPassenger.getNR(id));
         // update logger
         this.reposStub.updatesPassNR(id, currentPassenger.getNR(id));
         this.reposStub.numberNRTotal(currentPassenger.getNR(id));

@@ -80,7 +80,7 @@ public class ArrivalTermTransfQuayInterface {
             case Message.TAKEABUS:
                 cp.setStatPass(inMessage.getPassId(), PassengerStates.values()[inMessage.getPassStat()]);
                 arrivalTermTransfQuay.takeABus(inMessage.getPassId());
-                outMessage = new Message(Message.TAKERSTDONE);
+                outMessage = new Message(Message.TAKEABUSDONE);
                 break;
 
             // enterTheBus (Passenger)

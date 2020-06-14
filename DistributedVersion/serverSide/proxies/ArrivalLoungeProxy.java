@@ -60,7 +60,7 @@ public class ArrivalLoungeProxy extends CommonProvider{
      */
 
     @Override
-    public void run () {
+    public void run() {
         Message inMessage = null,                                      // mensagem de entrada
                 outMessage = null;                      // mensagem de saída
 

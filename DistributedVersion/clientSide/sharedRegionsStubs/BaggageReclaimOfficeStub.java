@@ -85,6 +85,7 @@ public class BaggageReclaimOfficeStub {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função reportMissingBags");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -114,6 +115,7 @@ public class BaggageReclaimOfficeStub {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);

@@ -31,52 +31,211 @@ passId 4
 passId 5
 -------- Received Message of type ACK --------
 -------- Created Message of type INITCHOLD --------
-msgBN 1
+msgBN 5
 -------- Received Message of type ACK --------
 -------- Created Message of type SETTREADMILL --------
-msgNBagsPerPass [1, 0, 0, 0, 0, 0]
+msgNBagsPerPass [0, 0, 2, 1, 2, 0]
 -------- Received Message of type ACK --------
 -------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
 CommonProvider: Thread[Proxy_ArrivalLoungeProxy_2,5,main]
 Current thread name: Proxy_ArrivalLoungeProxy_2
 -------- Created Message of type PRINTLOG --------
 -------- Received Message of type ACK --------
--------- Created Message of type ACK --------
--------- Received Message of type ACK --------
-CommonProvider: Thread[Proxy_ArrivalLoungeProxy_4,5,main]
-Current thread name: Proxy_ArrivalLoungeProxy_4
-Pass id for set: 1
-Pass state for set: AT_THE_DISEMBARKING_ZONE
-Pass state for set: AT_THE_DISEMBARKING_ZONE
 CommonProvider: Thread[Proxy_ArrivalLoungeProxy_3,5,main]
 Current thread name: Proxy_ArrivalLoungeProxy_3
-Pass id for set: 0
-Pass state for set: AT_THE_DISEMBARKING_ZONE
-Pass state for set: AT_THE_DISEMBARKING_ZONE
+___________NR: 1
+-------- Created Message of type UDTEPASSNR --------
+passId 0
+passNR 1
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_4,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_4
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_6,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_6
+-------- Received Message of type ACK --------
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_5,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_5
+-------- Created Message of type NUMNRTOTAL --------
+totalNR 1
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_7,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_7
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_8,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_8
+-------- Received Message of type ACK --------
+-------- Created Message of type NEWPASS --------
+passSi 0
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 0
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type RESETDTE --------
+-------- Received Message of type ACK --------
+-------- Created Message of type TRDST --------
+___________NR: 0
+-------- Created Message of type UDTEPASSNR --------
+passId 5
+passNR 0
+-------- Received Message of type ACK --------
+-------- Created Message of type NUMNRTOTAL --------
+totalNR 0
+-------- Received Message of type ACK --------
+-------- Created Message of type NEWPASS --------
+passSi 0
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 5
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type TRDST --------
+___________NR: 2
+-------- Created Message of type UDTEPASSNR --------
+passId 4
+passNR 2
+-------- Received Message of type ACK --------
+-------- Created Message of type NUMNRTOTAL --------
+totalNR 2
+-------- Received Message of type ACK --------
+-------- Created Message of type NEWPASS --------
+passSi 1
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type FNDST --------
+___________NR: 2
+-------- Created Message of type UDTEPASSNR --------
+passId 2
+passNR 2
+-------- Received Message of type ACK --------
+-------- Created Message of type NUMNRTOTAL --------
+totalNR 2
+-------- Received Message of type ACK --------
+-------- Created Message of type NEWPASS --------
+passSi 1
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 2
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type FNDST --------
+___________NR: 2
+-------- Created Message of type UDTEPASSNR --------
+passId 3
+passNR 2
+-------- Received Message of type ACK --------
+-------- Created Message of type NUMNRTOTAL --------
+totalNR 2
+-------- Received Message of type ACK --------
+-------- Created Message of type NEWPASS --------
+passSi 1
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 3
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type FNDST --------
+___________NR: 0
 -------- Created Message of type UDTEPASSNR --------
 passId 1
 passNR 0
-CommonProvider: Thread[Proxy_ArrivalLoungeProxy_5,5,main]
-Current thread name: Proxy_ArrivalLoungeProxy_5
-Pass id for set: 2
-Pass state for set: AT_THE_DISEMBARKING_ZONE
-Pass state for set: AT_THE_DISEMBARKING_ZONE
-CommonProvider: Thread[Proxy_ArrivalLoungeProxy_6,5,main]
-Current thread name: Proxy_ArrivalLoungeProxy_6
-Pass id for set: 3
-Pass state for set: AT_THE_DISEMBARKING_ZONE
-Pass state for set: AT_THE_DISEMBARKING_ZONE
 -------- Received Message of type ACK --------
 -------- Created Message of type NUMNRTOTAL --------
-msgNR 0
-CommonProvider: Thread[Proxy_ArrivalLoungeProxy_8,5,main]
-Current thread name: Proxy_ArrivalLoungeProxy_8
-Pass id for set: 5
-Pass state for set: AT_THE_DISEMBARKING_ZONE
-Pass state for set: AT_THE_DISEMBARKING_ZONE
-CommonProvider: Thread[Proxy_ArrivalLoungeProxy_7,5,main]
-Current thread name: Proxy_ArrivalLoungeProxy_7
-Pass id for set: 4
-Pass state for set: AT_THE_DISEMBARKING_ZONE
-Pass state for set: AT_THE_DISEMBARKING_ZONE
-Proxy_ArrivalLoungeProxy_4 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
+totalNR 0
+-------- Received Message of type ACK --------
+-------- Created Message of type NEWPASS --------
+passSi 1
+-------- Received Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 1
+stPass 0
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type FNDST --------
+-------- Created Message of type TAKERSTDONE --------
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_9,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_9
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_PLANES_HOLD
+-------- Received Message of type ACK --------
+-------- Created Message of type REMBAGCHOLD --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type BAG --------
+msgBagDestStat 1
+msgBagIdOwner 4
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_10,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_10
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_PLANES_HOLD
+-------- Received Message of type ACK --------
+-------- Created Message of type REMBAGCHOLD --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type BAG --------
+msgBagDestStat 1
+msgBagIdOwner 4
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_11,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_11
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_PLANES_HOLD
+-------- Received Message of type ACK --------
+-------- Created Message of type REMBAGCHOLD --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type BAG --------
+msgBagDestStat 1
+msgBagIdOwner 3
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_12,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_12
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_PLANES_HOLD
+-------- Received Message of type ACK --------
+-------- Created Message of type REMBAGCHOLD --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type BAG --------
+msgBagDestStat 1
+msgBagIdOwner 2
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_13,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_13
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_PLANES_HOLD
+-------- Received Message of type ACK --------
+-------- Created Message of type REMBAGCHOLD --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type BAG --------
+msgBagDestStat 1
+msgBagIdOwner 2
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_14,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_14
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter AT_THE_PLANES_HOLD
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type NULLBAG --------
+CommonProvider: Thread[Proxy_ArrivalLoungeProxy_15,5,main]
+Current thread name: Proxy_ArrivalLoungeProxy_15
+-------- Created Message of type UDTEPORTSTAT --------
+stPorter WAITING_FOR_A_PLANE_TO_LAND
+-------- Received Message of type ACK --------

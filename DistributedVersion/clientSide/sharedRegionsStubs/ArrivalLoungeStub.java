@@ -64,7 +64,8 @@ public class ArrivalLoungeStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        if (inMessage.getType() != Message.ACK) {
+        if(inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função probPar");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -96,13 +97,14 @@ public class ArrivalLoungeStub implements Serializable {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.WSID, id, p.getSt().ordinal());
+        outMessage = new Message(Message.WSID, id, p.getSt().ordinal(), p.getNR(), p.getSi().ordinal());
         con.writeObject(outMessage);
         System.out.println("-------- ArrivalLoungeStub Sent " + Message.getMsgTypeString(Message.WSID) + " --------");
 
         inMessage = (Message) con.readObject();
         System.out.println("-------- ArrivalLoungeStub FNDST || TRDST, Received " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if ((inMessage.getType() != Message.FNDST) && (inMessage.getType() != Message.TRDST)){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função whatShouldIDo");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -144,6 +146,7 @@ public class ArrivalLoungeStub implements Serializable {
         System.out.println("-------- ArrivalLoungeStub Received " + Message.getMsgTypeString(inMessage.getType()) + " --------");
 
         if ((inMessage.getType() != Message.TAKERSTDONE/*CONTPORTER*/) && (inMessage.getType() != Message.ENDPORTER)) {
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função takeARest");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -179,10 +182,8 @@ public class ArrivalLoungeStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- ArrivalLoungeStub Received " + Message.getMsgTypeString(inMessage.getType()) + " --------");
 
-        if( (inMessage.getType() == Message.BAG &&
-                ( (inMessage.getMsgBagDestStat() != 0 || inMessage.getMsgBagDestStat() != 1)
-                    || inMessage.getMsgBagIdOwner() > SimulPar.N_PASS_PER_FLIGHT) )
-            || ( (inMessage.getType() != Message.BAG) && (inMessage.getType() != Message.NULLBAG))){
+        if( (inMessage.getType() != Message.BAG && (inMessage.getType() != Message.NULLBAG))){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função tryToCollectABag");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -219,6 +220,7 @@ public class ArrivalLoungeStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- ArrivalLoungeStub Received " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK) {
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função noMoreBagsToCollect");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -253,6 +255,7 @@ public class ArrivalLoungeStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- ArrivalLoungeStubv Received " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.RESETALDONE) {
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função resetArrivalLounge");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -288,6 +291,7 @@ public class ArrivalLoungeStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- ArrivalLoungeStub Received " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função setDepartureTerminalRef");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -317,6 +321,7 @@ public class ArrivalLoungeStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- ArrivalLoungeStub Received " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);

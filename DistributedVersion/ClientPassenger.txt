@@ -10,8 +10,8 @@ msgDepTermEntStub clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub@58
 -------- ArrivalLoungeStub Sent SETDEPTERNREF --------
 -------- ArrivalLoungeStub Received ACK --------
 -------- Created Message of type PARAMSARRLNG --------
-msgBagAndPassDest [[0, 0, 1, 0, 0], [1, 1, 0, 1, 0], [0, 1, 0, 1, 0], [0, 0, 0, 1, 1], [0, 1, 1, 0, 1], [0, 0, 0, 0, 0]]
-msgNBagsNA [[1, 0, 0, 0, 1], [0, 1, 2, 0, 2], [0, 0, 2, 1, 2], [0, 2, 1, 2, 2], [0, 2, 1, 2, 0], [0, 1, 2, 0, 2]]
+msgBagAndPassDest [[0, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 0], [1, 1, 0, 1, 1], [1, 0, 0, 0, 1], [0, 0, 0, 0, 0]]
+msgNBagsNA [[0, 2, 1, 0, 0], [0, 1, 2, 2, 2], [2, 2, 0, 1, 2], [1, 0, 1, 2, 2], [2, 0, 0, 1, 1], [0, 2, 2, 2, 1]]
 -------- Created Message of type UDTEPASSSTAT --------
 passId 0
 stPass 0
@@ -34,7 +34,7 @@ stPass 0
 -------- Received Message of type ACK --------
 -------- Created Message of type GETPASSSI --------
 passId 2
-passSi 0
+passSi 1
 -------- Received Message of type ACK --------
 -------- Created Message of type UDTEPASSSTAT --------
 passId 3
@@ -42,7 +42,7 @@ stPass 0
 -------- Received Message of type ACK --------
 -------- Created Message of type GETPASSSI --------
 passId 3
-passSi 0
+passSi 1
 -------- Received Message of type ACK --------
 -------- Created Message of type UDTEPASSSTAT --------
 passId 4
@@ -50,7 +50,7 @@ stPass 0
 -------- Received Message of type ACK --------
 -------- Created Message of type GETPASSSI --------
 passId 4
-passSi 0
+passSi 1
 -------- Received Message of type ACK --------
 -------- Created Message of type UDTEPASSSTAT --------
 passId 5
@@ -63,30 +63,96 @@ passSi 0
 -------- Created Message of type WSID --------
 passId 0
 stPass 0
--------- ArrivalLoungeStub Sent WSID --------
+passNR 1
+passSi 0
 -------- Created Message of type WSID --------
 passId 1
 stPass 0
+passNR 0
+passSi 1
+-------- ArrivalLoungeStub Sent WSID --------
 -------- ArrivalLoungeStub Sent WSID --------
 -------- Created Message of type WSID --------
 passId 2
 stPass 0
+passNR 2
+passSi 1
 -------- ArrivalLoungeStub Sent WSID --------
 -------- Created Message of type WSID --------
 passId 3
 stPass 0
+passNR 2
+passSi 1
 -------- ArrivalLoungeStub Sent WSID --------
 -------- Created Message of type WSID --------
 passId 4
 stPass 0
+passNR 2
+passSi 1
 -------- ArrivalLoungeStub Sent WSID --------
 -------- Created Message of type WSID --------
 passId 5
 stPass 0
+passNR 0
+passSi 0
 -------- ArrivalLoungeStub Sent WSID --------
-Passenger_3 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
-Passenger_4 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
-Passenger_2 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
-Passenger_1 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
-Passenger_0 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
-Passenger_5 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
+-------- ArrivalLoungeStub FNDST || TRDST, Received TRDST --------
+-------- ArrivalLoungeStub FNDST || TRDST, Received TRDST --------
+-------- ArrivalLoungeStub FNDST || TRDST, Received FNDST --------
+-------- Created Message of type GOCOLLECTBAG --------
+passId 4
+stPass 0
+-------- Created Message of type TAKEABUS --------
+passId 0
+stPass 0
+-------- Created Message of type TAKEABUS --------
+passId 5
+stPass 0
+-------- ArrivalLoungeStub FNDST || TRDST, Received FNDST --------
+-------- Created Message of type GOCOLLECTBAG --------
+passId 2
+stPass 0
+-------- ArrivalLoungeStub FNDST || TRDST, Received FNDST --------
+-------- Created Message of type GOCOLLECTBAG --------
+passId 3
+stPass 0
+-------- Received Message of type TAKEABUSDONE --------
+-------- Created Message of type ENTERBUS --------
+passId 0
+stPass 0
+-------- ArrivalLoungeStub FNDST || TRDST, Received FNDST --------
+-------- Created Message of type GOHOME --------
+passId 1
+stPass 0
+-------- Received Message of type TAKEABUSDONE --------
+-------- Created Message of type ENTERBUS --------
+passId 5
+stPass 0
+-------- Received Message of type ACK --------
+-------- Received Message of type ACK --------
+-------- Received Message of type GCBDONE --------
+-------- Created Message of type GOCOLLECTBAG --------
+passId 4
+stPass 0
+-------- Received Message of type GCBDONE --------
+-------- Created Message of type GOHOME --------
+passId 4
+stPass 0
+-------- Created Message of type LEAVEBUS --------
+passId 0
+stPass 0
+-------- Created Message of type LEAVEBUS --------
+passId 5
+stPass 0
+-------- Received Message of type GCBDONE --------
+-------- Created Message of type GOCOLLECTBAG --------
+passId 3
+stPass 0
+-------- Received Message of type GCBDONE --------
+-------- Created Message of type GOCOLLECTBAG --------
+passId 2
+stPass 0
+-------- Received Message of type GCBDONE --------
+-------- Created Message of type GOHOME --------
+passId 2
+stPass 0

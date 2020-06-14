@@ -99,6 +99,7 @@ public class ArrivalTermTransfQuayStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.TAKEABUSDONE){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função takeABus");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -131,6 +132,7 @@ public class ArrivalTermTransfQuayStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK) {
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função enterTheBus");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -165,6 +167,7 @@ public class ArrivalTermTransfQuayStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if ((inMessage.getType() != Message.CONTDAYS) && (inMessage.getType() != Message.ENDBUSDRIVER)) {
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função hasDaysWorkEnded");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -198,6 +201,7 @@ public class ArrivalTermTransfQuayStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.PBDONE){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função parkTheBus");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -228,6 +232,7 @@ public class ArrivalTermTransfQuayStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ABBDONE){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função announcingBusBoarding");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -256,6 +261,7 @@ public class ArrivalTermTransfQuayStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função resetArrivalTermTransfQuay");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -287,6 +293,7 @@ public class ArrivalTermTransfQuayStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função setEndDay");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -315,6 +322,7 @@ public class ArrivalTermTransfQuayStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);

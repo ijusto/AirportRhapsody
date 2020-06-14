@@ -26,7 +26,7 @@ public class ArrivalTermTransfQuay {
      *   A passenger belongs to the waitingLine in takeABus() and leaves the waitingLine in enterTheBus().
      */
 
-    private MemFIFO<Passenger> waitingLine;
+    private MemFIFO<PassengerInterface> waitingLine;
 
     /**
      *   Counter of passengers on the bus.
@@ -74,7 +74,7 @@ public class ArrivalTermTransfQuay {
 
     public ArrivalTermTransfQuay(GenReposInfoStub reposStub )throws MemException{
         this.reposStub = reposStub;
-        this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
+        this.waitingLine = new MemFIFO<>(new PassengerInterface [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.resetNPassAllowedToEnter();
         this.allowBoardBus = false;
         this.resetNPassOnTheBus();
@@ -97,7 +97,7 @@ public class ArrivalTermTransfQuay {
         reposStub.printLog();
 
         try {
-            waitingLine.write((Passenger) passenger);
+            waitingLine.write((PassengerInterface) passenger);
             reposStub.pJoinWaitingQueue(id);
         } catch (MemException e) {
             e.printStackTrace();
@@ -308,7 +308,7 @@ public class ArrivalTermTransfQuay {
      */
 
     public synchronized void resetArrivalTermTransfQuay() throws MemException {
-        this.waitingLine = new MemFIFO<>(new Passenger [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
+        this.waitingLine = new MemFIFO<>(new PassengerInterface [SimulPar.N_PASS_PER_FLIGHT]);  // FIFO instantiation
         this.resetNPassOnTheBus();
         this.resetNPassAllowedToEnter();
         this.allowBoardBus = false;

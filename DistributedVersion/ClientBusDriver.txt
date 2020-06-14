@@ -1,2 +1,23 @@
 BusDriver Client
-main - não foi possível abrir o canal de entrada do socket!
+-------- Created Message of type UDTEBDSTAT --------
+stBD PARKING_AT_THE_ARRIVAL_TERMINAL
+-------- Received Message of type ACK --------
+-------- Created Message of type WORKENDED --------
+stBD PARKING_AT_THE_ARRIVAL_TERMINAL
+-------- Received Message of type CONTDAYS --------
+-------- Created Message of type ANNOUCEBUSBORADING --------
+stBD PARKING_AT_THE_ARRIVAL_TERMINAL
+-------- Received Message of type ABBDONE --------
+-------- Created Message of type UDTEBDSTAT --------
+stBD DRIVING_FORWARD
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PBLPO --------
+stBD DRIVING_FORWARD
+-------- Received Message of type PBLPODONE --------
+-------- Created Message of type UDTEBDSTAT --------
+stBD DRIVING_BACKWARD
+-------- Received Message of type ACK --------
+-------- Created Message of type PARKBUS --------
+stBD DRIVING_BACKWARD

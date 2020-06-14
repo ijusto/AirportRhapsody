@@ -37,7 +37,7 @@ public class BaggageColPointInterface {
 
         /* validação da mensagem recebida */
 
-        switch (inMessage.getType ()) {
+        switch (inMessage.getType()) {
 
             case Message.PARAMSBAGCOLPNT: /* TODO: Validation */ break;
 
@@ -65,6 +65,7 @@ public class BaggageColPointInterface {
                 break;
 
             default:
+                System.out.println(inMessage.getType());
                 throw new MessageException ("Tipo inválido!", inMessage);
         }
 

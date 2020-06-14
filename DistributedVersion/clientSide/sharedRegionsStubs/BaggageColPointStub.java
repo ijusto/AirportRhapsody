@@ -74,6 +74,7 @@ public class BaggageColPointStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.GCBDONE){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função goCollectABag");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -107,6 +108,7 @@ public class BaggageColPointStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função carryItToAppropriateStore");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -135,6 +137,7 @@ public class BaggageColPointStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função resetBaggageColPoint");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -163,6 +166,7 @@ public class BaggageColPointStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função noMoreBags");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -195,6 +199,7 @@ public class BaggageColPointStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função setTreadmill");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -223,6 +228,7 @@ public class BaggageColPointStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função setPHoldEmpty");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -252,6 +258,7 @@ public class BaggageColPointStub implements Serializable {
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
+            System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);

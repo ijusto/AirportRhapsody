@@ -94,8 +94,10 @@ public class GenReposInfoInterface {
             case Message.UDTEPASSNR:
                 if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
                     throw new MessageException("Id do passageiro inválido", inMessage);
-                if(inMessage.getPassNR() < 0 || inMessage.getPassNR() > 2)
+                if(inMessage.getPassNR() < 0 || inMessage.getPassNR() > 2) {
+                    System.out.println("UDTEPASSNR nr: " + inMessage.getPassNR());
                     throw new MessageException("NR do passageiro inválido", inMessage);
+                }
                 break;
 
             case Message.UDTEPASSNA:
@@ -106,8 +108,10 @@ public class GenReposInfoInterface {
                 break;
 
             case Message.NUMNRTOTAL:
-                if(inMessage.getPassNR() < 0 || inMessage.getPassNR() > 2)
+                if(inMessage.getTotalNR() < 0 || inMessage.getTotalNR() > 2) {
+                    System.out.println("NUMNRTOTAL nr: " + inMessage.getTotalNR());
                     throw new MessageException("NR do passageiro inválido", inMessage);
+                }
                 break;
 
             case Message.PRINTLOG: case Message.FINALREPORT: case Message.REMBAGCHOLD: case Message.INCBAGCB:
@@ -225,7 +229,7 @@ public class GenReposInfoInterface {
 
             // numberNRTotal
             case Message.NUMNRTOTAL:
-                repos.numberNRTotal(inMessage.getMsgNR());
+                repos.numberNRTotal(inMessage.getTotalNR());
                 outMessage = new Message(Message.ACK);
                 break;
 

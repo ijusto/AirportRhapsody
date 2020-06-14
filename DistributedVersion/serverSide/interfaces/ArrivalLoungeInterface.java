@@ -1,4 +1,5 @@
 package serverSide.interfaces;
+import clientSide.entities.Passenger;
 import clientSide.entities.PassengerStates;
 import clientSide.entities.PorterStates;
 import comInf.*;
@@ -20,6 +21,7 @@ public class ArrivalLoungeInterface {
      */
 
     private ArrivalLounge arrivalLounge;
+
 
     /*
      *
@@ -61,6 +63,12 @@ public class ArrivalLoungeInterface {
             case Message.WSID:
                 if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
                     throw new MessageException("Id do passageiro inválido", inMessage);
+                if(inMessage.getPassNR() < 0 || inMessage.getPassNR() > 2)
+                    throw new MessageException("NR do passageiro inválido", inMessage);
+                if(inMessage.getPassSi() < 0 || inMessage.getPassSi() >= Passenger.SiPass.values().length) {
+                    System.out.println("Si passageiro: " + inMessage.getPassSi());
+                    throw new MessageException("Si do passageiro inválido", inMessage);
+                }
                 if(inMessage.getPassStat() > PassengerStates.values().length || inMessage.getPassStat() < 0)
                     throw new MessageException("Estado do passageiro inválido", inMessage);
                 break;
@@ -104,10 +112,9 @@ public class ArrivalLoungeInterface {
 
             // WhatShouldIDo (Passenger)
             case Message.WSID:
-                System.out.println("Pass id for set: " + inMessage.getPassId());
-                System.out.println("Pass state for set: " + PassengerStates.values()[inMessage.getPassStat()].name());
-                System.out.println("Pass state for set: " + PassengerStates.values()[inMessage.getPassStat()]);
-                ((ArrivalLoungeProxy) Thread.currentThread()).setStatPass(inMessage.getPassId(), PassengerStates.values()[inMessage.getPassStat()]);
+                ((CommonProvider) Thread.currentThread()).setStatPass(inMessage.getPassId(), PassengerStates.values()[inMessage.getPassStat()]);
+                ((CommonProvider) Thread.currentThread()).setNR(inMessage.getPassId(), inMessage.getPassNR());
+                ((CommonProvider) Thread.currentThread()).setSi(inMessage.getPassId(), Passenger.SiPass.values()[inMessage.getPassSi()]);
                 if (arrivalLounge.whatShouldIDo(inMessage.getPassId()))
                     outMessage = new Message(Message.FNDST);    // gerar resposta positiva
                 else

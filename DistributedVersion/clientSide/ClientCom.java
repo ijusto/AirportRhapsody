@@ -114,18 +114,18 @@ public class ClientCom
         if (!success) return (success);
 
         try {
-            out = new ObjectOutputStream (commSocket.getOutputStream ());
+            out = new ObjectOutputStream(commSocket.getOutputStream());
         } catch (IOException e) {
-            System.out.println(Thread.currentThread ().getName () +
+            System.out.println(Thread.currentThread().getName() +
                 " - não foi possível abrir o canal de saída do socket!");
             e.printStackTrace ();
             System.exit (1);
         }
 
         try {
-            in = new ObjectInputStream (commSocket.getInputStream ());
+            in = new ObjectInputStream(commSocket.getInputStream ());
         } catch (IOException e) {
-            System.out.println(Thread.currentThread ().getName () +
+            System.out.println(Thread.currentThread().getName() +
                 " - não foi possível abrir o canal de entrada do socket!");
             e.printStackTrace ();
             System.exit (1);

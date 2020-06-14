@@ -338,7 +338,7 @@ public class Message implements Serializable
 
     private int msgBN = -1;
 
-    private int msgNR = -1;
+    private int totalNR = -1;
 
     private int passSi = -1;
 
@@ -383,8 +383,8 @@ public class Message implements Serializable
             msgBN = value;
             System.out.println("msgBN " + value);
         } else if(msgType == NUMNRTOTAL){
-            msgNR = value;
-            System.out.println("msgNR " + value);
+            totalNR = value;
+            System.out.println("totalNR " + value);
         } else if(msgType == NEWPASS){
             passSi = value;
             System.out.println("passSi " + value);
@@ -485,6 +485,20 @@ public class Message implements Serializable
         }
     }
 
+    public Message(int type, int firstInt, int secondInt, int thirdInt, int fourthInt){
+        msgType = type;
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        if (msgType == WSID) {
+            passId = firstInt;
+            System.out.println("passId " + passId);
+            stPass = secondInt;
+            System.out.println("stPass " + stPass);
+            passNR = thirdInt;
+            System.out.println("passNR " + passNR);
+            passSi = fourthInt;
+            System.out.println("passSi " + passSi);
+        }
+    }
     public Message(int type, int firstInt, int secondInt, int thirdInt){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
@@ -508,7 +522,7 @@ public class Message implements Serializable
     public Message(int type, int firstInt, int secondInt){
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
-        if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
+        if ((msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
                 || (msgType == PREPARENEXTLEG) || (msgType == UDTEPASSSTAT)){
             passId = firstInt;
@@ -578,7 +592,7 @@ public class Message implements Serializable
 
     public int getMsgBN(){ return msgBN; }
 
-    public int getMsgNR(){ return msgNR; }
+    public int getTotalNR(){ return totalNR; }
 
     public int getPassSi(){ return passSi; }
 

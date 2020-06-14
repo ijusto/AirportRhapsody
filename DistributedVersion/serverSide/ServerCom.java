@@ -214,11 +214,11 @@ public class ServerCom {
      *    @return objecto lido
      */
 
-    public Object readObject () {
+    public Object readObject() {
         Object fromClient = null;                            // objecto
 
         try {
-            fromClient = in.readObject ();
+            fromClient = in.readObject();
         } catch (InvalidClassException e) {
             System.out.println(Thread.currentThread ().getName () +
                 " - o objecto lido não é passível de desserialização!");
@@ -227,7 +227,7 @@ public class ServerCom {
         } catch (IOException e) {
             System.out.println(Thread.currentThread ().getName () +
                 " - erro na leitura de um objecto do canal de entrada do socket de comunicação!");
-            e.printStackTrace ();
+            e.printStackTrace();
             System.exit (1);
         } catch (ClassNotFoundException e) {
             System.out.println(Thread.currentThread ().getName () +
