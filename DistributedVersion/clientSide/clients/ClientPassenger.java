@@ -65,9 +65,9 @@ public class ClientPassenger {
         arrivLoungeStub = new ArrivalLoungeStub(SimulPar.arrivalLoungeHost, SimulPar.arrivalLoungePort);
         arrivalTermStub = new ArrivalTerminalExitStub(SimulPar.arrivalTermExitHost, SimulPar.arrivalTermExitPort);
         departureTermStub = new DepartureTerminalEntranceStub(SimulPar.depTerminalEntranceHost, SimulPar.depTerminalEntrancePort);
-        //arrivalTermStub.setDepartureTerminalRef(departureTermStub);
-        //departureTermStub.setArrivalTerminalRef(arrivalTermStub);
-        //arrivLoungeStub.setDepartureTerminalRef(departureTermStub);
+        arrivalTermStub.setDepartureTerminalRef(departureTermStub);
+        departureTermStub.setArrivalTerminalRef(arrivalTermStub);
+        arrivLoungeStub.setDepartureTerminalRef(departureTermStub);
 
         /* instantiation of the entities */
         Passenger[][] passengers = new Passenger[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];

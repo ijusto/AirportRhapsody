@@ -2,6 +2,8 @@ package clientSide.sharedRegionsStubs;
 import clientSide.ClientCom;
 import comInf.Message;
 
+import java.io.Serializable;
+
 /**
  *
  *
@@ -9,7 +11,7 @@ import comInf.Message;
  *   @author Miguel Lopes
  */
 
-public class GenReposInfoStub {
+public class GenReposInfoStub implements Serializable {
 
     /**
      *  Name of the computer system where the server is located

@@ -1,0 +1,7 @@
+Passenger Client
+-------- Created Message of type SETDEPTERNREF --------
+msgDepTermEntStub clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub@58372a00
+-------- Received Message of type ACK --------
+-------- Created Message of type SETARRTERREF --------
+msgArrTermExitStub clientSide.sharedRegionsStubs.ArrivalTerminalExitStub@b4c966a
+-------- Received Message of type ACK --------

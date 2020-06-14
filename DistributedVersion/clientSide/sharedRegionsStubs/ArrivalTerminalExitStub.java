@@ -4,6 +4,8 @@ import clientSide.ClientCom;
 import comInf.Message;
 import clientSide.entities.Passenger;
 
+import java.io.Serializable;
+
 /**
  *
  *
@@ -11,7 +13,7 @@ import clientSide.entities.Passenger;
  *   @author Miguel Lopes
  */
 
-public class ArrivalTerminalExitStub {
+public class ArrivalTerminalExitStub implements Serializable {
 
     /**
      *  Name of the computer system where the server is located

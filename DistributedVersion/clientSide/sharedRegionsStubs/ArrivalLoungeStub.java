@@ -6,6 +6,8 @@ import comInf.Bag;
 import comInf.Message;
 import clientSide.entities.*;
 
+import java.io.Serializable;
+
 /**
  *
  *
@@ -13,7 +15,7 @@ import clientSide.entities.*;
  *   @author Miguel Lopes
  */
 
-public class ArrivalLoungeStub {
+public class ArrivalLoungeStub implements Serializable {
 
     /**
      *  Name of the computer system where the server is located

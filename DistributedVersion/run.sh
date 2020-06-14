@@ -12,12 +12,13 @@ sudo fuser -k 22008/tcp
 sudo fuser -k 22009/tcp
 sudo fuser -k 22010/tcp
 #Servers
-gnome-terminal -- java serverSide/servers/ServerGenReposInfo
-gnome-terminal -- java serverSide/servers/ServerBaggageColPoint
-gnome-terminal -- java serverSide/servers/ServerArrivalLounge
-gnome-terminal -- java serverSide/servers/ServerArrivalTerminalExit
-gnome-terminal -- java serverSide/servers/ServerArrivalTermTransfQuay
-gnome-terminal -- java serverSide/servers/ServerBaggageReclaimOffice
-gnome-terminal -- java serverSide/servers/ServerDepartureTerminalEntrance
-gnome-terminal -- java serverSide/servers/ServerDepartureTermTransfQuay
-gnome-terminal -- java serverSide/servers/ServerTemporaryStorageArea
+gnome-terminal -x bash -c "java serverSide/servers/ServerGenReposInfo | tee ServerGenReposInfo.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerBaggageColPoint | tee ServerBaggageColPoint.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerArrivalLounge | tee ServerArrivalLounge.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerArrivalTerminalExit | tee ServerArrivalTerminalExit.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerArrivalTermTransfQuay | tee ServerArrivalTermTransfQuay.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerBaggageReclaimOffice | tee ServerBaggageReclaimOffice.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerDepartureTerminalEntrance | tee ServerDepartureTerminalEntrance.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerDepartureTermTransfQuay | tee ServerDepartureTermTransfQuay.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerTemporaryStorageArea | tee ServerTemporaryStorageArea.txt"
+

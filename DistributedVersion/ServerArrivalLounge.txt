@@ -1,0 +1,11 @@
+-------- Created Message of type UPDATEFN --------
+msgFlight 0
+-------- Received Message of type ACK --------
+-------- Created Message of type SETPHEMPTY --------
+msgPlaneHoldEmpty false
+-------- Received Message of type ACK --------
+O serviço foi estabelecido!
+O servidor esta em escuta.
+ServerArrivalLounge
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------

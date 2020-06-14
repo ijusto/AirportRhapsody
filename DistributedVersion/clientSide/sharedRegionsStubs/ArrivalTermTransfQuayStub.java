@@ -6,6 +6,8 @@ import clientSide.entities.Porter;
 import comInf.Message;
 import clientSide.entities.Passenger;
 
+import java.io.Serializable;
+
 /**
  *
  *
@@ -13,7 +15,7 @@ import clientSide.entities.Passenger;
  *   @author Miguel Lopes
  */
 
-public class ArrivalTermTransfQuayStub {
+public class ArrivalTermTransfQuayStub implements Serializable {
 
     /**
      *  Name of the computer system where the server is located

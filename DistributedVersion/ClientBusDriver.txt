@@ -1,0 +1,23 @@
+BusDriver Client
+-------- Created Message of type UDTEBDSTAT --------
+bdStat 0
+-------- Received Message of type ACK --------
+-------- Created Message of type WORKENDED --------
+stBD 0
+-------- Received Message of type CONTDAYS --------
+-------- Created Message of type ANNOUCEBUSBORADING --------
+stBD 0
+-------- Received Message of type ABBDONE --------
+-------- Created Message of type UDTEBDSTAT --------
+bdStat 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PBLPO --------
+stBD 1
+-------- Received Message of type PBLPODONE --------
+-------- Created Message of type UDTEBDSTAT --------
+bdStat 3
+-------- Received Message of type ACK --------
+-------- Created Message of type PARKBUS --------
+stBD 3

@@ -208,9 +208,9 @@ public class ClientCom
      *    @param toServer objecto a ser escrito
      */
 
-    public void writeObject (Object toServer){
+    public void writeObject(Object toServer){
         try {
-            out.writeObject (toServer);
+            out.writeObject(toServer);
         } catch (InvalidClassException e) {
             System.out.println(Thread.currentThread ().getName () +
                 " - o objecto a ser escrito não é passível de serialização!");

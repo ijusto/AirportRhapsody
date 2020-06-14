@@ -7,6 +7,7 @@ import comInf.Bag;
 import comInf.MemFIFO;
 import comInf.Message;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Map;
  *   @author Miguel Lopes
  */
 
-public class BaggageColPointStub {
+public class BaggageColPointStub implements Serializable {
 
     /**
      *  Name of the computer system where the server is located

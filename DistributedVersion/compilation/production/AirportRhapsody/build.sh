@@ -94,7 +94,7 @@ echo "Compiling Client Side ClientCom"
 javac clientSide/ClientCom.java
 
 
-echo "Starting Server and Clients"
+#echo "Starting Server and Clients"
 #Servers
 #gnome-terminal -- java serverSide/servers/ServerArrivalLounge --title="ServerArrivalLounge"
 #gnome-terminal -- java serverSide/servers/ServerArrivalTerminalExit --title="ServerArrivalTerminalExit"
