@@ -27,9 +27,9 @@ passId 4
 passId 5
 -------- Received Message of type ACK --------
 -------- Created Message of type INITCHOLD --------
-msgBN 6
+msgBN 7
 -------- Received Message of type ACK --------
 -------- Created Message of type SETTREADMILL --------
-msgNBagsPerPass [I@311cfc80
+msgNBagsPerPass [I@26a135e5
 -------- Created Message of type PRINTLOG --------
 -------- Received Message of type ACK --------

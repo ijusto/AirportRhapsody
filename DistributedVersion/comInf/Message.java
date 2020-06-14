@@ -166,7 +166,7 @@ public class Message implements Serializable
     /* ******* prepareNextLeg ************************* */
     public static final int PREPARENEXTLEG = 47;
 
-    public static final int PNLDONE = 48;
+    //public static final int PNLDONE = 48;
 
     /* ******* resetDepartureTerminalExit ************* */
     public static final int RESETDTE = 49;
@@ -175,7 +175,7 @@ public class Message implements Serializable
     public static final int NOTFGOHOME = 50;
 
     /* ******* noMoreBags ***************************** */
-    // same as for BaggageColPoint
+    public static final int NOMOREBAGS_DTE = 48;
 
     /* ******* setArrivalTerminalRef ****************** */
     public static final int SETARRTERREF = 51;
@@ -401,9 +401,7 @@ public class Message implements Serializable
     public Message(int type, int value) {
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
-        if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
-                || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
-                || (msgType == PREPARENEXTLEG) || (msgType == PASSEXIT)){
+        if ((msgType == PASSEXIT) || (msgType == PJOINWQ) || (msgType == PLEFTWQ) || (msgType == FREEBS)){
             passId = value;
             System.out.println("passId " + value);
         } else if (msgType == DEADPASSVAL){
@@ -427,7 +425,7 @@ public class Message implements Serializable
         } else if(msgType == UDTEPORTSTAT){
             porterStat = value;
             System.out.println("porterStat " + value);
-        } else if((msgType == TAKEARST) || (msgType == TRYTOCOL) || (msgType == NOBAGS2COL) || (msgType == NOMOREBAGS)){
+        } else if((msgType == TAKEARST) || (msgType == TRYTOCOL) || (msgType == NOBAGS2COL) || (msgType == NOMOREBAGS_DTE)){
             this.stPorter = value;
             System.out.println("stPorter " + value);
         } else if((msgType == WORKENDED) || (msgType == PARKBUS) || (msgType == ANNOUCEBUSBORADING) || (msgType == PBLPO)){
@@ -521,6 +519,18 @@ public class Message implements Serializable
         }
     }
 
+    public Message (int type, int firstInt, int secondInt, int thirdInt) {
+        msgType = type;
+        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        if ((msgType == CARRYAPPSTORE)) {
+            msgBagDestStat = firstInt;
+            System.out.println("msgBagDestStat " + msgBagDestStat);
+            msgBagIdOwner = secondInt;
+            System.out.println("msgBagIdOwner " + msgBagIdOwner);
+            porterStat = thirdInt;
+        }
+    }
+
     /**
      *  Instanciação de uma mensagem (forma 3).
      *
@@ -540,7 +550,7 @@ public class Message implements Serializable
             System.out.println("passId " + passId);
             stPass = secondInt;
             System.out.println("stPass " + stPass);
-        } else if ((msgType == BAG) || (msgType == CARRYAPPSTORE) || (msgType == CARRYTOAPPSTORE_TSA)){
+        } else if ((msgType == BAG) || (msgType == CARRYTOAPPSTORE_TSA)){
             msgBagDestStat = firstInt;
             System.out.println("msgBagDestStat " + msgBagDestStat);
             msgBagIdOwner = secondInt;
@@ -732,7 +742,7 @@ public class Message implements Serializable
             case 40: str = "RESETBCP"; break; case 41: str = "NOMOREBAGS"; break; case 42: str = "SETTREADMILL"; break;
             case 43: str = "SETPHEMPTY"; break; case 44: str = "PARAMSBAGRECOFF"; break;
             case 45: str = "REPORTMISSBAG"; break; case 46: str = "PARAMSDEPTENT"; break;
-            case 47: str = "PREPARENEXTLEG"; break; case 48: str = "PNLDONE"; break; case 49: str = "RESETDTE"; break;
+            case 47: str = "PREPARENEXTLEG"; break; case 48: str = "NOMOREBAGS_DTE"; break; case 49: str = "RESETDTE"; break;
             case 50: str = "NOTFGOHOME"; break; case 51: str = "SETARRTERREF"; break;
             case 52: str = "PARAMSDEPTTQUAY"; break; case 53: str = "LEAVEBUS"; break; case 54: str = "LBDONE"; break;
             case 55: str = "PBLPO"; break; case 56: str = "PBLPODONE"; break; case 57: str = "RESETDTTQ"; break;

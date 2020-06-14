@@ -49,7 +49,7 @@ public class DepartureTerminalEntranceInterface {
                     throw new MessageException("Id do passageiro inválido", inMessage);
                 break;
 
-            case Message.NOMOREBAGS:
+            case Message.NOMOREBAGS_DTE:
                 if(inMessage.getPorterStat() > PorterStates.values().length || inMessage.getPorterStat() < 0)
                     throw new MessageException("Estado do porter inválido", inMessage);
                 break;
@@ -100,7 +100,8 @@ public class DepartureTerminalEntranceInterface {
                 break;
 
             // noMoreBags
-            case Message.NOMOREBAGS:
+            case Message.NOMOREBAGS_DTE:
+                cp.setStatPorter(PorterStates.values()[inMessage.getPorterStat()]);
                 departureTerminalEntrance.noMoreBags();
                 outMessage = new Message(Message.ACK);
                 break;

@@ -83,7 +83,7 @@ public class DepartureTerminalEntranceStub implements Serializable {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.PREPARENEXTLEG, id);
+        outMessage = new Message(Message.PREPARENEXTLEG, id, p.getSt().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

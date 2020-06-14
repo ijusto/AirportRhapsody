@@ -5,4 +5,3 @@ porterStat 0
 -------- Created Message of type TAKEARST --------
 stPorter 0
 -------- ArrivalLoungeStub Sent TAKEARST --------
-Thread-0 - erro na leitura de um objecto do canal de entrada do socket de comunicação!

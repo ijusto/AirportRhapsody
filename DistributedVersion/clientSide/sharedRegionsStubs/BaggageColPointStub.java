@@ -101,7 +101,7 @@ public class BaggageColPointStub implements Serializable {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.CARRYAPPSTORE, bag.getIntDestStat(), bag.getIdOwner());
+        outMessage = new Message(Message.CARRYAPPSTORE, bag.getIntDestStat(), bag.getIdOwner(), p.getStatPorter().ordinal());
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();

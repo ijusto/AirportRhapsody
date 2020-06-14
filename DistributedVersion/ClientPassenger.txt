@@ -12,4 +12,3 @@ msgDepTermEntStub clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub@58
 -------- Created Message of type PARAMSARRLNG --------
 msgBagAndPassDest [[I@7cc355be
 msgNBagsNA [[I@6e8cf4c6
-main - erro na leitura de um objecto do canal de entrada do socket de comunicação!
