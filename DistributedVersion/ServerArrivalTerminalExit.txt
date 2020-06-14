@@ -1,3 +1,4 @@
 O serviço foi estabelecido!
 O servidor esta em escuta.
 ServerArrivalTerminalExit
+-------- Created Message of type ACK --------

@@ -2,3 +2,5 @@ O serviço foi estabelecido!
 O servidor esta em escuta.
 ServerGenReposInfo
 -------- Created Message of type ACK --------
+Thread Proxy_1: Id do passageiro inválido!
+comInf.Message@62997fcc

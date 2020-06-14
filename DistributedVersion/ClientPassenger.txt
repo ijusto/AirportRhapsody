@@ -1,7 +1,15 @@
 Passenger Client
 -------- Created Message of type SETDEPTERNREF --------
-msgDepTermEntStub clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub@4769b07b
+msgDepTermEntStub clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub@58372a00
 -------- Received Message of type ACK --------
 -------- Created Message of type SETARRTERREF --------
-msgArrTermExitStub clientSide.sharedRegionsStubs.ArrivalTerminalExitStub@1cf4f579
+msgArrTermExitStub clientSide.sharedRegionsStubs.ArrivalTerminalExitStub@b4c966a
 -------- Received Message of type ACK --------
+-------- Created Message of type SETDEPTERNREF --------
+msgDepTermEntStub clientSide.sharedRegionsStubs.DepartureTerminalEntranceStub@58372a00
+-------- ArrivalLoungeStub Sent SETDEPTERNREF --------
+-------- ArrivalLoungeStub Received ACK --------
+-------- Created Message of type PARAMSARRLNG --------
+msgBagAndPassDest [[I@7cc355be
+msgNBagsNA [[I@6e8cf4c6
+main - erro na leitura de um objecto do canal de entrada do socket de comunicação!

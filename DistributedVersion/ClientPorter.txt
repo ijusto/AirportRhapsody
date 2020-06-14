@@ -1,7 +1,2 @@
 Porter Client
--------- Created Message of type UDTEPORTSTAT --------
-porterStat 0
--------- Received Message of type ACK --------
--------- Created Message of type TAKEARST --------
-stPorter 0
--------- ArrivalLoungeStub Sent TAKEARST --------
+main - não foi possível abrir o canal de entrada do socket!
