@@ -3,10 +3,8 @@ package serverSide.interfaces;
 import clientSide.entities.BusDriver;
 import clientSide.entities.BusDriverStates;
 import clientSide.entities.PassengerStates;
-import comInf.CommonProvider;
-import comInf.MemException;
-import comInf.Message;
-import comInf.MessageException;
+import clientSide.entities.PorterStates;
+import comInf.*;
 import serverSide.proxies.ArrivalTermTransfQuayProxy;
 import serverSide.servers.ServerArrivalTermTransfQuay;
 import serverSide.sharedRegions.ArrivalTermTransfQuay;
@@ -43,18 +41,23 @@ public class ArrivalTermTransfQuayInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSATTQUAY:break;/* TODO: Validation */
-            case Message.TAKEABUS:break;/* TODO: Validation */
-            case Message.ENTERBUS:break;/* TODO: Validation*/
-            case Message.WORKENDED:break;
-            case Message.PARKBUS:break;
-            case Message.ANNOUCEBUSBORADING:break;
-            case Message.RESETATQ:break;
-            case Message.SETENDDAY:break;
+            case Message.PARAMSATTQUAY: /* TODO: Validation */ break;
 
-            // Shutdown do servidor (operação pedida pelo cliente)
-            case Message.SHUT:
+            case Message.TAKEABUS: case Message.ENTERBUS:
+                if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
+                    throw new MessageException("Id do passageiro inválido", inMessage);
+                if(inMessage.getPassStat() > PassengerStates.values().length || inMessage.getPassStat() < 0)
+                    throw new MessageException("Estado do passageiro inválido", inMessage);
                 break;
+
+            case Message.WORKENDED: case Message.PARKBUS: case Message.ANNOUCEBUSBORADING:
+                if(inMessage.getBDStat() > BusDriverStates.values().length || inMessage.getBDStat() < 0)
+                    throw new MessageException("Estado do bus driver inválido", inMessage);
+                break;
+
+            case Message.RESETATQ: case Message.SETENDDAY: case Message.SHUT:
+                break;
+
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
         }

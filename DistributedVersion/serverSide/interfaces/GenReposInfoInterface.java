@@ -1,7 +1,12 @@
 package serverSide.interfaces;
 
+import clientSide.entities.BusDriverStates;
+import clientSide.entities.Passenger;
+import clientSide.entities.PassengerStates;
+import clientSide.entities.PorterStates;
 import comInf.Message;
 import comInf.MessageException;
+import comInf.SimulPar;
 import serverSide.proxies.GenReposInfoProxy;
 import serverSide.servers.ServerGenReposInfo;
 import serverSide.sharedRegions.GenReposInfo;
@@ -42,32 +47,73 @@ public class GenReposInfoInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSREPOS:break; /* TODO: Validation */
-            case Message.PRINTLOG:break;
-            case Message.FINALREPORT:break;
-            case Message.UPDATEFN: break;/* TODO: Validation */
-            case Message.INITCHOLD:break; /* TODO: Validation */
-            case Message.REMBAGCHOLD:break;
-            case Message.INCBAGCB:break;
-            case Message.PGETSABAG:break;
-            case Message.SAVEBAGSR:break;
-            case Message.PJOINWQ: break;/* TODO: Validation */
-            case Message.PLEFTWQ:break; /* TODO: Validation */
-            case Message.FREEBS: break;/* TODO: Validation */
-            case Message.GETPASSSI:break; /* TODO: Validation */
-            case Message.UDTEPASSNR: break;/* TODO: Validation */
-            case Message.UDTEPASSNA: break;/* TODO: Validation */
-            case Message.PASSEXIT: break;/* TODO: Validation */
-            case Message.MISSBAGREP:break;
-            case Message.NUMNRTOTAL: break;/* TODO: Validation */
-            case Message.NEWPASS: break;/* TODO: Validation */
-            case Message.UDTEPASSSTAT: break;/* TODO: Validation */
-            case Message.UDTEPORTSTAT: break;/* TODO: Validation */
-            case Message.UDTEBDSTAT: break;/* TODO: Validation */
-
-                // Shutdown do servidor (operação pedida pelo cliente)
-            case Message.SHUT:
+            case Message.UPDATEFN:
+                if(inMessage.getMsgFlight() > SimulPar.N_FLIGHTS || inMessage.getMsgFlight() < 0)
+                    throw new MessageException("Número do voo inválido", inMessage);
                 break;
+
+            case Message.INITCHOLD:
+                if(inMessage.getMsgBN() > SimulPar.N_PASS_PER_FLIGHT * 2 || inMessage.getMsgBN() < 0)
+                    throw new MessageException("Número do malas no porão inválido", inMessage);
+                break;
+
+            case Message.UDTEPORTSTAT:
+                if(inMessage.getPorterStat() > PorterStates.values().length || inMessage.getPorterStat() < 0)
+                    throw new MessageException("Estado do porter inválido", inMessage);
+                break;
+
+            case Message.UDTEBDSTAT:
+                if(inMessage.getBDStat() > BusDriverStates.values().length || inMessage.getBDStat() < 0)
+                    throw new MessageException("Estado do bus driver inválido", inMessage);
+                break;
+
+            case Message.PJOINWQ: case Message.PLEFTWQ: case Message.FREEBS: case Message.PASSEXIT:
+                if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
+                    throw new MessageException("Id do passageiro inválido", inMessage);
+                break;
+
+            case Message.NEWPASS:
+                if(inMessage.getPassSi() < 0 || inMessage.getPassSi() > Passenger.SiPass.values().length)
+                    throw new MessageException("Si do passageiro inválido", inMessage);
+                break;
+
+            case Message.UDTEPASSSTAT:
+                if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
+                    throw new MessageException("Id do passageiro inválido", inMessage);
+                if(inMessage.getPassStat() > PassengerStates.values().length || inMessage.getPassStat() < 0)
+                    throw new MessageException("Estado do passageiro inválido", inMessage);
+                break;
+
+            case Message.GETPASSSI:
+                if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
+                    throw new MessageException("Id do passageiro inválido", inMessage);
+                if(inMessage.getPassSi() < 0 || inMessage.getPassSi() > Passenger.SiPass.values().length)
+                    throw new MessageException("Si do passageiro inválido", inMessage);
+                break;
+
+            case Message.UDTEPASSNR:
+                if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
+                    throw new MessageException("Id do passageiro inválido", inMessage);
+                if(inMessage.getPassNR() < 0 || inMessage.getPassNR() > 2)
+                    throw new MessageException("NR do passageiro inválido", inMessage);
+                break;
+
+            case Message.UDTEPASSNA:
+                if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
+                    throw new MessageException("Id do passageiro inválido", inMessage);
+                if(inMessage.getPassNA() < 0 || inMessage.getPassNA() > 2)
+                    throw new MessageException("NA do passageiro inválido", inMessage);
+                break;
+
+            case Message.NUMNRTOTAL:
+                if(inMessage.getPassNR() < 0 || inMessage.getPassNR() > 2)
+                    throw new MessageException("NR do passageiro inválido", inMessage);
+                break;
+
+            case Message.PRINTLOG: case Message.FINALREPORT: case Message.REMBAGCHOLD: case Message.INCBAGCB:
+                case Message.PGETSABAG: case Message.SAVEBAGSR: case Message.MISSBAGREP: case Message.SHUT:
+                    break;
+
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
         }
@@ -75,13 +121,6 @@ public class GenReposInfoInterface {
         /* seu processamento */
 
         switch (inMessage.getType ()) {
-            // probPar
-            /*
-            case Message.PARAMSREPOS:
-                repos.probPar(inMessage.getMsgReposFile());
-                outMessage = new Message(Message.ACK);
-                break;
-             */
 
             // printLog
             case Message.PRINTLOG:

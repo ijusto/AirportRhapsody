@@ -1,9 +1,11 @@
 package serverSide.interfaces;
 
 import clientSide.entities.PassengerStates;
+import clientSide.entities.PorterStates;
 import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
+import comInf.SimulPar;
 import serverSide.proxies.DepartureTerminalEntranceProxy;
 import serverSide.servers.ServerDepartureTerminalEntrance;
 import serverSide.sharedRegions.DepartureTerminalEntrance;
@@ -41,15 +43,25 @@ public class DepartureTerminalEntranceInterface {
         switch (inMessage.getType ()) {
 
             case Message.PARAMSDEPTENT:break;/* TODO: Validation */
-            case Message.PREPARENEXTLEG:break;/* TODO: Validation */
-            case Message.RESETDTE:break;
-            case Message.NOTFGOHOME:break;
-            case Message.NOMOREBAGS:break;
-            case Message.SETARRTERREF:break;/* TODO: Validation */
 
-            // Shutdown do servidor (operação pedida pelo cliente)
-            case Message.SHUT:
+            case Message.PREPARENEXTLEG:
+                if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
+                    throw new MessageException("Id do passageiro inválido", inMessage);
                 break;
+
+            case Message.NOMOREBAGS:
+                if(inMessage.getPorterStat() > PorterStates.values().length || inMessage.getPorterStat() < 0)
+                    throw new MessageException("Estado do porter inválido", inMessage);
+                break;
+
+            case Message.SETARRTERREF:
+                if(inMessage.getMsgArrTermExitStub() == null)
+                    throw new MessageException("Arrival Terminal Exit Stub null.", inMessage);
+                break;
+
+            case Message.RESETDTE: case Message.NOTFGOHOME: case Message.SHUT:
+                break;
+
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
         }

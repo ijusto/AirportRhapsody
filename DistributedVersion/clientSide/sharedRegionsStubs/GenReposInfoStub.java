@@ -40,36 +40,6 @@ public class GenReposInfoStub implements Serializable {
     }
 
     /**
-     *  Provide parameters of the problem (service request).
-     *
-     */
-
-    public void probPar(String filename){
-
-        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
-        Message inMessage, outMessage;
-
-        while(!con.open()){  // waiting for the connection to be established
-            try {
-                Thread.currentThread().sleep((long) 10);
-            } catch (InterruptedException ignored){}
-        }
-
-        // asks for the service to be done
-        outMessage = new Message(Message.PARAMSREPOS, filename);
-        con.writeObject(outMessage);
-
-        inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
-        if (inMessage.getType() != Message.ACK){
-            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
-            System.out.println(inMessage.toString());
-            System.exit(1);
-        }
-        con.close();
-    }
-
-    /**
      *   Logs the alterations.
      */
 

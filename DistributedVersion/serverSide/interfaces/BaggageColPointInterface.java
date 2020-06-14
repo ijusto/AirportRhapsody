@@ -40,13 +40,28 @@ public class BaggageColPointInterface {
         switch (inMessage.getType ()) {
 
             case Message.PARAMSBAGCOLPNT: /* TODO: Validation */ break;
-            case Message.GOCOLLECTBAG: /* TODO: Validation */ break;
-            case Message.CARRYAPPSTORE:break;/* TODO: Validation */
-            case Message.SETPHEMPTY:break;/* TODO: Validation */
-            case Message.SETTREADMILL:break;/* TODO: Validation */
 
-            case Message.RESETBCP: case Message.NOMOREBAGS:  case Message.SHUT:
+            case Message.GOCOLLECTBAG:
+                if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
+                    throw new MessageException("Id do passageiro inválido", inMessage);
+                if(inMessage.getPassStat() > PassengerStates.values().length || inMessage.getPassStat() < 0)
+                    throw new MessageException("Estado do passageiro inválido", inMessage);
                 break;
+
+            case Message.CARRYAPPSTORE:
+                if(inMessage.getMsgBagDestStat() > Bag.DestStat.values().length || inMessage.getMsgBagDestStat() < 0)
+                    throw new MessageException("Destino da mala do passageiro inválido", inMessage);
+                if(inMessage.getMsgBagIdOwner() > SimulPar.N_PASS_PER_FLIGHT || inMessage.getMsgBagIdOwner() < 0)
+                    throw new MessageException("Id do dono da mala inválido", inMessage);
+                break;
+
+            case Message.SETTREADMILL:
+                /* TODO: Validation */
+                break;
+
+            case Message.RESETBCP: case Message.NOMOREBAGS: case Message.SETPHEMPTY: case Message.SHUT:
+                break;
+
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
         }
@@ -54,13 +69,6 @@ public class BaggageColPointInterface {
         /* seu processamento */
         CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch (inMessage.getType ()) {
-            // probPar
-            /*
-            case Message.PARAMSBAGCOLPNT:
-                baggageColPoint.probPar(inMessage.getMsgReposStub());
-                outMessage = new Message(Message.ACK);
-                break;
-            */
 
             // goCollectABag (passenger)
             case Message.GOCOLLECTBAG:
@@ -105,6 +113,7 @@ public class BaggageColPointInterface {
                 (((BaggageColPointProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
                 outMessage = new Message(Message.ACK);            // gerar confirmação
                 break;
+
             default:
                 break;
         }

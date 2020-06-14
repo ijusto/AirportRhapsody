@@ -2,9 +2,11 @@ package serverSide.interfaces;
 
 import clientSide.entities.BusDriverStates;
 import clientSide.entities.PassengerStates;
+import clientSide.entities.PorterStates;
 import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
+import comInf.SimulPar;
 import serverSide.proxies.DepartureTermTransfQuayProxy;
 import serverSide.servers.ServerDepartureTermTransfQuay;
 import serverSide.sharedRegions.DepartureTermTransfQuay;
@@ -41,13 +43,20 @@ public class DepartureTermTransfQuayInterface {
         switch (inMessage.getType ()) {
 
             case Message.PARAMSDEPTTQUAY:break;/* TODO: Validation */
-            case Message.LEAVEBUS:break;/* TODO: Validation */
-            case Message.PBLPO:break;
-            case Message.RESETDTTQ:break;
 
-            // Shutdown do servidor (operação pedida pelo cliente)
-            case Message.SHUT:
+            case Message.LEAVEBUS:
+                if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
+                    throw new MessageException("Id do passageiro inválido", inMessage);
                 break;
+
+            case Message.PBLPO:
+                if(inMessage.getBDStat() > BusDriverStates.values().length || inMessage.getBDStat() < 0)
+                    throw new MessageException("Estado do bus driver inválido", inMessage);
+                break;
+
+            case Message.RESETDTTQ: case Message.SHUT:
+                break;
+
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
         }

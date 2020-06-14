@@ -37,9 +37,16 @@ public class TemporaryStorageAreaInterface {
         /* validação da mensagem recebida */
 
         switch (inMessage.getType ()) {
-            case Message.PARAMSTEMPSTORAREA: break; /* TODO: Validation */
-            case Message.CARRYTOAPPSTORE_TSA: break; /* TODO: Validation */
+
+            case Message.CARRYTOAPPSTORE_TSA:
+                if(inMessage.getMsgBagDestStat() > Bag.DestStat.values().length || inMessage.getMsgBagDestStat() < 0)
+                    throw new MessageException("Destino da mala do passageiro inválido", inMessage);
+                if(inMessage.getMsgBagIdOwner() > SimulPar.N_PASS_PER_FLIGHT || inMessage.getMsgBagIdOwner() < 0)
+                    throw new MessageException("Id do dono da mala inválido", inMessage);
+                break;
+
             case Message.RESETTSA: case Message.SHUT: break;
+
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
         }
@@ -47,18 +54,6 @@ public class TemporaryStorageAreaInterface {
         /* seu processamento */
         CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch (inMessage.getType ()) {
-            // probPar
-            /*
-            case Message.PARAMSTEMPSTORAREA:
-                try {
-                    temporaryStorageArea.probPar(inMessage.getMsgReposStub());
-                } catch (MemException e) {
-                    e.printStackTrace();
-                }
-                outMessage = new Message(Message.ACK);
-                break;
-
-             */
 
             // carryItToAppropriateStore (porter)
             case Message.CARRYTOAPPSTORE_TSA:

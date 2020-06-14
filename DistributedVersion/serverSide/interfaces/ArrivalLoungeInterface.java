@@ -57,28 +57,30 @@ public class ArrivalLoungeInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSARRLNG:
-                /* TODO: Validation */
-                break;
             case Message.WSID:
                 if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
                     throw new MessageException("Id do passageiro inválido", inMessage);
                 if(inMessage.getPassStat() > PassengerStates.values().length || inMessage.getPassStat() < 0)
                     throw new MessageException("Estado do passageiro inválido", inMessage);
                 break;
+
             case Message.TAKEARST: case Message.TRYTOCOL: case Message.NOBAGS2COL:
                 if(inMessage.getPorterStat() > PorterStates.values().length || inMessage.getPorterStat() < 0)
                     throw new MessageException("Estado do porter inválido", inMessage);
                 break;
+
             case Message.RESETAL:
-                /** TODO: Validation **/
+                /* TODO: Validation */
                 break;
+
             case Message.SETDEPTERNREF:
                 if(inMessage.getMsgDepTermEntStub() == null)
                     throw new MessageException("Departure Terminal Entrance Stub null.", inMessage);
                 break;
+
             case Message.SHUT:
                 break;
+
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
         }
@@ -86,16 +88,6 @@ public class ArrivalLoungeInterface {
         /* seu processamento */
         CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch(inMessage.getType()) {
-
-            // probPar
-            case Message.PARAMSARRLNG:
-                try {
-                    arrivalLounge.probPar(inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsPHold());
-                } catch (MemException e) {
-                    e.printStackTrace();
-                }
-                outMessage = new Message(Message.ACK);
-                break;
 
             // WhatShouldIDo (Passenger)
             case Message.WSID:

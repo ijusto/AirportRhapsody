@@ -4,6 +4,7 @@ import clientSide.entities.PassengerStates;
 import comInf.CommonProvider;
 import comInf.Message;
 import comInf.MessageException;
+import comInf.SimulPar;
 import serverSide.proxies.BaggageReclaimOfficeProxy;
 import serverSide.servers.ServerBaggageReclaimOffice;
 import serverSide.sharedRegions.BaggageReclaimOffice;
@@ -41,11 +42,17 @@ public class BaggageReclaimOfficeInterface{
         switch (inMessage.getType ()) {
 
             case Message.PARAMSBAGRECOFF:break;/* TODO: Validation */
-            case Message.REPORTMISSBAG:break;/* TODO: Validation */
 
-            // Shutdown do servidor (operação pedida pelo cliente)
+            case Message.REPORTMISSBAG:
+                if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
+                    throw new MessageException("Id do passageiro inválido", inMessage);
+                if(inMessage.getPassStat() > PassengerStates.values().length || inMessage.getPassStat() < 0)
+                    throw new MessageException("Estado do passageiro inválido", inMessage);
+                break;
+
             case Message.SHUT:
                 break;
+
             default:
                 throw new MessageException ("Tipo inválido!", inMessage);
         }
