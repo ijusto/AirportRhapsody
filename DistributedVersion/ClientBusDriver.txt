@@ -21,3 +21,23 @@ stBD DRIVING_BACKWARD
 -------- Received Message of type ACK --------
 -------- Created Message of type PARKBUS --------
 stBD DRIVING_BACKWARD
+-------- Received Message of type PBDONE --------
+-------- Created Message of type WORKENDED --------
+stBD DRIVING_BACKWARD
+-------- Received Message of type CONTDAYS --------
+-------- Created Message of type ANNOUCEBUSBORADING --------
+stBD DRIVING_BACKWARD
+-------- Received Message of type ABBDONE --------
+-------- Created Message of type UDTEBDSTAT --------
+stBD DRIVING_FORWARD
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PBLPO --------
+stBD DRIVING_FORWARD
+-------- Received Message of type PBLPODONE --------
+-------- Created Message of type UDTEBDSTAT --------
+stBD DRIVING_BACKWARD
+-------- Received Message of type ACK --------
+-------- Created Message of type PARKBUS --------
+stBD DRIVING_BACKWARD

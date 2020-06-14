@@ -3,3 +3,4 @@ O servidor esta em escuta.
 ServerDepartureTerminalEntrance
 -------- Created Message of type ACK --------
 -------- Created Message of type ACK --------
+-------- Created Message of type ACK --------
