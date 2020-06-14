@@ -368,38 +368,38 @@ public class Message implements Serializable
 
     public Message(int type){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
     }
 
     public Message(int type, int value){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType == PASSEXIT) || (msgType == PJOINWQ) || (msgType == PLEFTWQ) || (msgType == FREEBS)){
             passId = value;
-            System.out.println("passId " + value);
+            //System.out.println("passId " + value);
         } else if (msgType == DEADPASSVAL){
             msgDeadPassValue = value;
-            System.out.println("msgDeadPassValue " + value);
+            //System.out.println("msgDeadPassValue " + value);
         } else if(msgType == UPDATEFN){
             msgFlight = value;
-            System.out.println("msgFlight " + value);
+            //System.out.println("msgFlight " + value);
         } else if(msgType == INITCHOLD){
             msgBN = value;
-            System.out.println("msgBN " + value);
+            //System.out.println("msgBN " + value);
         } else if(msgType == NUMNRTOTAL){
             totalNR = value;
-            System.out.println("totalNR " + value);
+            //System.out.println("totalNR " + value);
         } else if(msgType == NEWPASS){
             passSi = value;
-            System.out.println("passSi " + value);
+            //System.out.println("passSi " + value);
         } else if((msgType == TAKEARST) || (msgType == TRYTOCOL) || (msgType == NOBAGS2COL)
                 || (msgType == NOMOREBAGS_DTE) || (msgType == UDTEPORTSTAT)){
             this.stPorter = value;
-            System.out.println("stPorter " + PorterStates.values()[value]);
+            //System.out.println("stPorter " + PorterStates.values()[value]);
         } else if((msgType == WORKENDED) || (msgType == PARKBUS) || (msgType == ANNOUCEBUSBORADING)
                 || (msgType == UDTEBDSTAT)){
             this.stBD = value;
-            System.out.println("stBD " + BusDriverStates.values()[value]);
+            //System.out.println("stBD " + BusDriverStates.values()[value]);
         } else if(msgType == ABBDONE){
             this.nPassOnTheBus = value;
         } else if(msgType == FINALREPORT){
@@ -409,112 +409,112 @@ public class Message implements Serializable
 
     public Message(int type, ArrivalTerminalExitStub arrivalTerminalExitStub){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  SETARRTERREF){
             msgArrTermExitStub = arrivalTerminalExitStub;
-            System.out.println("msgArrTermExitStub " + arrivalTerminalExitStub);
+            //System.out.println("msgArrTermExitStub " + arrivalTerminalExitStub);
         }
     }
 
     public Message(int type, GenReposInfoStub reposStub){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  PARAMSATTQUAY || msgType == PARAMSBAGCOLPNT || msgType == PARAMSBAGRECOFF
                 || msgType == PARAMSDEPTTQUAY || msgType == PARAMSTEMPSTORAREA){
             msgReposStub = reposStub;
-            System.out.println("msgReposStub " + reposStub);
+            //System.out.println("msgReposStub " + reposStub);
         }
     }
 
     public Message (int type, GenReposInfoStub reposStub, ArrivalLoungeStub arrivalLoungeStub,
                     ArrivalTermTransfQuayStub arrivalTermTransfQuayStub) {
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  PARAMSATEXIT){
             msgReposStub = reposStub;
             msgArrLoungeStub = arrivalLoungeStub;
             msgArrQuayStub = arrivalTermTransfQuayStub;
-            System.out.println("msgReposStub " + reposStub);
-            System.out.println("msgArrLoungeStub " + arrivalLoungeStub);
-            System.out.println("msgArrQuayStub " + arrivalTermTransfQuayStub);
+            //System.out.println("msgReposStub " + reposStub);
+            //System.out.println("msgArrLoungeStub " + arrivalLoungeStub);
+            //System.out.println("msgArrQuayStub " + arrivalTermTransfQuayStub);
         }
     }
 
     public Message (int type, String filename){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType == PARAMSREPOS) {
             msgReposFile = filename;
-            System.out.println("msgReposFile " + filename);
+            //System.out.println("msgReposFile " + filename);
         }
     }
 
     public Message(int type, int[][] bagAndPassDest, int[][] nBagsNA){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType ==  RESETAL) || (msgType == PARAMSARRLNG)){
             msgBagAndPassDest = bagAndPassDest;
-            System.out.println("msgBagAndPassDest " + Arrays.deepToString(msgBagAndPassDest));
+            //System.out.println("msgBagAndPassDest " + Arrays.deepToString(msgBagAndPassDest));
             msgNBagsNA = nBagsNA;
-            System.out.println("msgNBagsNA " + Arrays.deepToString(msgNBagsNA));
+            //System.out.println("msgNBagsNA " + Arrays.deepToString(msgNBagsNA));
         }
     }
 
     public Message(int type, int[] nBagsPerPass){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if(msgType ==  SETTREADMILL){
             msgNBagsPerPass = nBagsPerPass;
-            System.out.println("msgNBagsPerPass " + Arrays.toString(msgNBagsPerPass));
+            //System.out.println("msgNBagsPerPass " + Arrays.toString(msgNBagsPerPass));
         }
     }
 
     public Message(int type, boolean bool){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  INCDECCOUNTER){
             msgIncOrDec = bool;
-            System.out.println("msgIncOrDec " + msgIncOrDec);
+            //System.out.println("msgIncOrDec " + msgIncOrDec);
         } else if(msgType == GCBDONE){
             msgBagCollected = bool;
-            System.out.println("msgBagCollected " + msgBagCollected);
+            //System.out.println("msgBagCollected " + msgBagCollected);
         } else if(msgType == SETPHEMPTY){
             msgPlaneHoldEmpty = bool;
-            System.out.println("msgPlaneHoldEmpty " + msgPlaneHoldEmpty);
+            //System.out.println("msgPlaneHoldEmpty " + msgPlaneHoldEmpty);
         }
     }
 
     public Message(int type, DepartureTerminalEntranceStub departureTerminalEntranceStub){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType ==  SETDEPTERNREF){
             msgDepTermEntStub = departureTerminalEntranceStub;
-            System.out.println("msgDepTermEntStub " + msgDepTermEntStub);
+            //System.out.println("msgDepTermEntStub " + msgDepTermEntStub);
         }
     }
 
     public Message(int type, int firstInt, int secondInt, int thirdInt, int fourthInt){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if (msgType == WSID) {
             passId = firstInt;
-            System.out.println("passId " + passId);
+            //System.out.println("passId " + passId);
             stPass = secondInt;
-            System.out.println("stPass " + stPass);
+            //System.out.println("stPass " + stPass);
             passNR = thirdInt;
-            System.out.println("passNR " + passNR);
+            //System.out.println("passNR " + passNR);
             passSi = fourthInt;
-            System.out.println("passSi " + passSi);
+            //System.out.println("passSi " + passSi);
         }
     }
     public Message(int type, int firstInt, int secondInt, int thirdInt){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType == CARRYAPPSTORE) || (msgType == CARRYTOAPPSTORE_TSA)) {
             msgBagDestStat = firstInt;
-            System.out.println("msgBagDestStat " + msgBagDestStat);
+            //System.out.println("msgBagDestStat " + msgBagDestStat);
             msgBagIdOwner = secondInt;
-            System.out.println("msgBagIdOwner " + msgBagIdOwner);
+            //System.out.println("msgBagIdOwner " + msgBagIdOwner);
             stPorter = thirdInt;
         }
     }
@@ -529,34 +529,34 @@ public class Message implements Serializable
 
     public Message(int type, int firstInt, int secondInt){
         msgType = type;
-        System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
+        //System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
                 || (msgType == PREPARENEXTLEG) || (msgType == UDTEPASSSTAT)){
             passId = firstInt;
-            System.out.println("passId " + passId);
+            //System.out.println("passId " + passId);
             stPass = secondInt;
-            System.out.println("stPass " + stPass);
+            //System.out.println("stPass " + stPass);
         } else if (msgType == BAG){
             msgBagDestStat = firstInt;
-            System.out.println("msgBagDestStat " + msgBagDestStat);
+            //System.out.println("msgBagDestStat " + msgBagDestStat);
             msgBagIdOwner = secondInt;
-            System.out.println("msgBagIdOwner " + msgBagIdOwner);
+            //System.out.println("msgBagIdOwner " + msgBagIdOwner);
         } else if(msgType == UDTEPASSNR){
             passId = firstInt;
-            System.out.println("passId " + passId);
+            //System.out.println("passId " + passId);
             passNR = secondInt;
-            System.out.println("passNR " + passNR);
+            //System.out.println("passNR " + passNR);
         } else if(msgType == UDTEPASSNA){
             passId = firstInt;
-            System.out.println("passId " + passId);
+            //System.out.println("passId " + passId);
             passNA = secondInt;
-            System.out.println("passNA " + passNA);
+            //System.out.println("passNA " + passNA);
         } else if (msgType ==  GETPASSSI){
             passId = firstInt;
-            System.out.println("passId " + passId);
+            //System.out.println("passId " + passId);
             passSi = secondInt;
-            System.out.println("passSi " + passSi);
+            //System.out.println("passSi " + passSi);
         } else if(msgType == PBLPO){
             stBD = firstInt;
             nPassOnTheBus = secondInt;

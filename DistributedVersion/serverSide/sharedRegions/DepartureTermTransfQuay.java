@@ -69,15 +69,12 @@ public class DepartureTermTransfQuay {
         passenger.setStatPass(id, PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL);
         reposStub.updatePassSt(id,PassengerStates.AT_THE_DEPARTURE_TRANSFER_TERMINAL.ordinal());
 
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         while(!this.canPassLeaveTheBus()) {
-            System.out.println("ESTOU PRESO");
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("POSSO SAIR? " + this.canPassLeaveTheBus());
         }
 
         boolean last = this.incDecCounter(false);
@@ -109,9 +106,7 @@ public class DepartureTermTransfQuay {
 
         this.setNPassOnTheBusValue(busDriver.getNPassOnTheBus());
 
-        System.out.println("ESTOU A PENSAR");
         this.pleaseLeaveTheBus();
-        System.out.println("DEIXEI SAIR");
         notifyAll();  // wake up Passengers in leaveTheBus()
 
         while(this.getNPassOnTheBusValue() != 0) {

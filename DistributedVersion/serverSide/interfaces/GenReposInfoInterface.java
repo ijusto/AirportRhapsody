@@ -97,7 +97,7 @@ public class GenReposInfoInterface {
                 if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
                     throw new MessageException("Id do passageiro inválido", inMessage);
                 if(inMessage.getPassNR() < 0 || inMessage.getPassNR() > 2) {
-                    System.out.println("UDTEPASSNR nr: " + inMessage.getPassNR());
+                    //System.out.println("UDTEPASSNR nr: " + inMessage.getPassNR());
                     throw new MessageException("NR do passageiro inválido", inMessage);
                 }
                 break;
@@ -111,7 +111,7 @@ public class GenReposInfoInterface {
 
             case Message.NUMNRTOTAL:
                 if(inMessage.getTotalNR() < 0 || inMessage.getTotalNR() > 2) {
-                    System.out.println("NUMNRTOTAL nr: " + inMessage.getTotalNR());
+                    //System.out.println("NUMNRTOTAL nr: " + inMessage.getTotalNR());
                     throw new MessageException("NR do passageiro inválido", inMessage);
                 }
                 break;
@@ -126,7 +126,7 @@ public class GenReposInfoInterface {
 
         /* seu processamento */
 
-        System.out.println("genrepos inter message: " + Message.getMsgTypeString(inMessage.getType()));
+        //System.out.println("genrepos inter message: " + Message.getMsgTypeString(inMessage.getType()));
         switch (inMessage.getType ()) {
 
             // printLog

@@ -66,7 +66,7 @@ public class ArrivalLoungeInterface {
                 if(inMessage.getPassNR() < 0 || inMessage.getPassNR() > 2)
                     throw new MessageException("NR do passageiro inválido", inMessage);
                 if(inMessage.getPassSi() < 0 || inMessage.getPassSi() >= Passenger.SiPass.values().length) {
-                    System.out.println("Si passageiro: " + inMessage.getPassSi());
+                    //System.out.println("Si passageiro: " + inMessage.getPassSi());
                     throw new MessageException("Si do passageiro inválido", inMessage);
                 }
                 if(inMessage.getPassStat() > PassengerStates.values().length || inMessage.getPassStat() < 0)
@@ -96,8 +96,8 @@ public class ArrivalLoungeInterface {
 
         /* seu processamento */
         ArrivalLoungeProxy cp = (ArrivalLoungeProxy) Thread.currentThread();
-        System.out.println("CommonProvider: " + cp.toString());
-        System.out.println("Current thread name: " + Thread.currentThread().getName());
+        //System.out.println("CommonProvider: " + cp.toString());
+        //System.out.println("Current thread name: " + Thread.currentThread().getName());
         switch(inMessage.getType()) {
 
             // probPar

@@ -88,9 +88,9 @@ public class TemporaryStorageAreaStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função carryItToAppropriateStore");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função carryItToAppropriateStore");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -117,9 +117,9 @@ public class TemporaryStorageAreaStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função resetTemporaryStorageArea");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função resetTemporaryStorageArea");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -146,9 +146,9 @@ public class TemporaryStorageAreaStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if(inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);

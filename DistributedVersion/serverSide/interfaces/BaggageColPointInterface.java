@@ -65,7 +65,7 @@ public class BaggageColPointInterface {
                 break;
 
             default:
-                System.out.println(inMessage.getType());
+                //System.out.println(inMessage.getType());
                 throw new MessageException ("Tipo inválido!", inMessage);
         }
 

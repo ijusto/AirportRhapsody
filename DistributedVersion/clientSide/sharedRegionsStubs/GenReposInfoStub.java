@@ -58,9 +58,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função printLog");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função printLog");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -87,9 +87,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK && inMessage.getType() != Message.SHUT){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função finalReport");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função finalReport");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -122,9 +122,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função updateFlightNumber");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função updateFlightNumber");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -153,9 +153,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função initializeCargoHold");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função initializeCargoHold");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -182,9 +182,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função removeBagFromCargoHold");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função removeBagFromCargoHold");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -213,9 +213,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função incBaggageCB");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função incBaggageCB");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -242,9 +242,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função pGetsABag");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função pGetsABag");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -271,9 +271,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função saveBagInSR");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função saveBagInSR");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -302,9 +302,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função updatePorterStat");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função updatePorterStat");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -335,9 +335,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função updateBDriverStat");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função updateBDriverStat");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -366,9 +366,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função pJoinWaitingQueue");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função pJoinWaitingQueue");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -397,9 +397,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função pLeftWaitingQueue");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função pLeftWaitingQueue");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -428,9 +428,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK) {
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função freeBusSeat");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função freeBusSeat");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -461,9 +461,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função newPass");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função newPass");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -493,9 +493,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função updatePassSt");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função updatePassSt");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -525,9 +525,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função getPassSi");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função getPassSi");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -557,9 +557,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função updatesPassNR");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função updatesPassNR");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -589,9 +589,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função updatesPassNA");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função updatesPassNA");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -620,9 +620,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função passengerExit");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função passengerExit");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -651,9 +651,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função missingBagReported");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função missingBagReported");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -683,9 +683,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função numberNRTotal");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função numberNRTotal");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -712,9 +712,9 @@ public class GenReposInfoStub implements Serializable {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
