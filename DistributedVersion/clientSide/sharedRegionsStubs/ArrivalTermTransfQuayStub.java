@@ -174,7 +174,7 @@ public class ArrivalTermTransfQuayStub implements Serializable {
         }
         con.close();
 
-        return (inMessage.getType() == Message.ENDBUSDRIVER) ? 'E' : 'R';
+        return (inMessage.getType() == Message.ENDBUSDRIVER) ? 'F' : 'R';
     }
 
     /**

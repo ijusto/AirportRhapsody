@@ -293,6 +293,9 @@ public class Message implements Serializable
      */
 
     public static final int SHUT   = 87;
+    private boolean entity_pass = false;
+    private boolean entity_porter = false;
+    private boolean entity_bd = false;
 
     private int nPassOnTheBus = -1;
 
@@ -403,7 +406,13 @@ public class Message implements Serializable
         } else if(msgType == ABBDONE){
             this.nPassOnTheBus = value;
         } else if(msgType == FINALREPORT){
-            entity = value;
+            if(value == 0){
+                entity_pass = true;
+            } else if(value == 1){
+                entity_porter = true;
+            } else if(value == 2){
+                entity_bd = true;
+            }
         }
     }
 
@@ -631,7 +640,11 @@ public class Message implements Serializable
 
     public int getBDStat(){return stBD;}
 
-    public int getEntity(){return entity;}
+    public boolean getEntityPass(){return entity_pass;}
+
+    public boolean getEntityPorter(){return entity_porter;}
+
+    public boolean getEntityBD(){return entity_bd;}
 
     /**
      *  Impressão dos campos internos.

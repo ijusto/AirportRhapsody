@@ -136,18 +136,16 @@ public class GenReposInfoInterface {
                 break;
 
             // finalReport
+            /*
             case Message.FINALREPORT:
-                //if(shut){
-                //    outMessage = new Message(Message.ACK);
-                //} else
-                if(entity_called_fr(inMessage.getEntity())) {
+
+                if(inMessage.getEntityPass() && inMessage.getEntityPorter() && inMessage.getEntityBD()) {
                     repos.finalReport();
                     outMessage = new Message(Message.SHUT);
-                    //shut = true;
                 } else {
                     outMessage = new Message(Message.ACK);
                 }
-                break;
+                break;*/
 
             // updateFlightNumber
             case Message.UPDATEFN:
@@ -260,6 +258,7 @@ public class GenReposInfoInterface {
                 break;
 
             case Message.SHUT:                                                        // shutdown do servidor
+                repos.finalReport();
                 ServerGenReposInfo.waitConnection = false;
                 (((GenReposInfoProxy) (Thread.currentThread ())).getScon ()).setTimeout (10);
                 outMessage = new Message(Message.ACK);            // gerar confirmação
@@ -275,6 +274,6 @@ public class GenReposInfoInterface {
         synchronized (lockEntitiesFR) {
             entities_fr[id] = true;
         }
-        return entities_fr[0] == entities_fr[1] == entities_fr[2];
+        return entities_fr[0] && entities_fr[1] && entities_fr[2];
     }
 }

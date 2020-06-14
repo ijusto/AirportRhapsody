@@ -12,13 +12,13 @@ sudo fuser -k 22008/tcp
 sudo fuser -k 22009/tcp
 sudo fuser -k 22010/tcp
 #Servers
-gnome-terminal -x bash -c "java serverSide/servers/ServerGenReposInfo &>ServerGenReposInfo.txt"
-gnome-terminal -x bash -c "java serverSide/servers/ServerBaggageColPoint &>ServerBaggageColPoint.txt"
-gnome-terminal -x bash -c "java serverSide/servers/ServerArrivalLounge &>ServerArrivalLounge.txt"
-gnome-terminal -x bash -c "java serverSide/servers/ServerArrivalTerminalExit &>ServerArrivalTerminalExit.txt"
-gnome-terminal -x bash -c "java serverSide/servers/ServerArrivalTermTransfQuay &>ServerArrivalTermTransfQuay.txt"
-gnome-terminal -x bash -c "java serverSide/servers/ServerBaggageReclaimOffice &>ServerBaggageReclaimOffice.txt"
-gnome-terminal -x bash -c "java serverSide/servers/ServerDepartureTerminalEntrance &>ServerDepartureTerminalEntrance.txt"
-gnome-terminal -x bash -c "java serverSide/servers/ServerDepartureTermTransfQuay &>ServerDepartureTermTransfQuay.txt"
-gnome-terminal -x bash -c "java serverSide/servers/ServerTemporaryStorageArea &>ServerTemporaryStorageArea.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerGenReposInfo |tee ServerGenReposInfo.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerBaggageColPoint |tee ServerBaggageColPoint.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerArrivalLounge |tee ServerArrivalLounge.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerArrivalTerminalExit |tee ServerArrivalTerminalExit.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerArrivalTermTransfQuay |tee ServerArrivalTermTransfQuay.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerBaggageReclaimOffice |tee ServerBaggageReclaimOffice.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerDepartureTerminalEntrance |tee ServerDepartureTerminalEntrance.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerDepartureTermTransfQuay |tee ServerDepartureTermTransfQuay.txt"
+gnome-terminal -x bash -c "java serverSide/servers/ServerTemporaryStorageArea |tee ServerTemporaryStorageArea.txt"
 

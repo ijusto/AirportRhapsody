@@ -106,7 +106,7 @@ public class ClientPassenger {
             arrivalTermStub.resetArrivalTerminalExit();
         }
 
-        while(!reposStub.finalReport(1));
+        //while(!reposStub.finalReport(1));
 
         reposStub.shutdown();
         bagColPointStub.shutdown();

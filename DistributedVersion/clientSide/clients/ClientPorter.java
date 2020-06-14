@@ -43,11 +43,15 @@ public class ClientPorter {
             System.out.print("Main Program - One thread of Porter was interrupted.");
         }
 
-        while(!reposStub.finalReport(2));
+        //while(!reposStub.finalReport(2));
 
+        /*
         reposStub.shutdown();
         bagColPointStub.shutdown();
         tmpStorageAreaStub.shutdown();
         arrivLoungeStub.shutdown();
+
+         */
+
     }
 }

@@ -83,9 +83,9 @@ public class DepartureTermTransfQuayStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.LBDONE){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função leaveTheBus");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função leaveTheBus");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -114,9 +114,9 @@ public class DepartureTermTransfQuayStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.PBLPODONE){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função parkTheBusAndLetPassOff");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função parkTheBusAndLetPassOff");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -142,9 +142,9 @@ public class DepartureTermTransfQuayStub {
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
-        System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
+        //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função resetDepartureTermTransfQuay");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função resetDepartureTermTransfQuay");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -174,7 +174,7 @@ public class DepartureTermTransfQuayStub {
         inMessage = (Message) con.readObject();
         //System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
         if (inMessage.getType() != Message.ACK){
-            System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
+            //System.out.println("Tipo inválido: " + inMessage.getType() + "na função shutdown");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());
             System.exit(1);
