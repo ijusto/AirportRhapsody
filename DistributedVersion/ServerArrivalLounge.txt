@@ -7,6 +7,3 @@ msgPlaneHoldEmpty false
 O serviço foi estabelecido!
 O servidor esta em escuta.
 ServerArrivalLounge
--------- Created Message of type PRINTLOG --------
--------- Received Message of type ACK --------
--------- Created Message of type ACK --------

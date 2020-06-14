@@ -64,14 +64,6 @@ public class DepartureTermTransfQuayInterface {
         /* seu processamento */
         CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch (inMessage.getType ()) {
-            // probPar
-            /*
-            case Message.PARAMSDEPTTQUAY:
-                departureTermTransfQuay.probPar(inMessage.getMsgReposStub());
-                outMessage = new Message(Message.ACK);
-                break;
-
-             */
 
             // leaveTheBus
             case Message.LEAVEBUS:

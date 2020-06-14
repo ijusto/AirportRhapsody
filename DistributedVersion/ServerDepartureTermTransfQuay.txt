@@ -1,9 +1,3 @@
 O serviço foi estabelecido!
 O servidor esta em escuta.
 ServerDepartureTermTransfQuay
--------- Created Message of type UDTEBDSTAT --------
-bdStat 2
--------- Received Message of type ACK --------
--------- Created Message of type PRINTLOG --------
--------- Received Message of type ACK --------
--------- Created Message of type PBLPODONE --------

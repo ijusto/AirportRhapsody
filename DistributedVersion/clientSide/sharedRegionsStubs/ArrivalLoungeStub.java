@@ -43,6 +43,35 @@ public class ArrivalLoungeStub implements Serializable {
         serverPortNumb = port;
     }
 
+    /**
+     *  Provide parameters of the problem (service request).
+     *
+     */
+
+    public void probPar(int[][] destStat, int[][] nBagsPHold) {
+
+        ClientCom con = new ClientCom(serverHostName, serverPortNumb);
+        Message inMessage, outMessage;
+
+        while(!con.open()){  // waiting for the connection to be established
+            try {
+                Thread.currentThread().sleep((long) 10);
+            } catch (InterruptedException ignored) {}
+        }
+
+        // asks for the service to be done
+        outMessage = new Message(Message.PARAMSARRLNG, destStat, nBagsPHold);
+        con.writeObject(outMessage);
+
+        inMessage = (Message) con.readObject();
+        if (inMessage.getType() != Message.ACK) {
+            System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+        con.close();
+    }
+
     /* **************************************************Passenger*************************************************** */
 
     /**

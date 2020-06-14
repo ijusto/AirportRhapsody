@@ -68,6 +68,7 @@ public class ClientPassenger {
         arrivalTermStub.setDepartureTerminalRef(departureTermStub);
         departureTermStub.setArrivalTerminalRef(arrivalTermStub);
         arrivLoungeStub.setDepartureTerminalRef(departureTermStub);
+        arrivLoungeStub.probPar(bagAndPassDest, nBagsNA);
 
         /* instantiation of the entities */
         Passenger[][] passengers = new Passenger[SimulPar.N_PASS_PER_FLIGHT][SimulPar.N_FLIGHTS];
