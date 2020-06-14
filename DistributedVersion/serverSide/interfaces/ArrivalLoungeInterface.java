@@ -58,7 +58,8 @@ public class ArrivalLoungeInterface {
         switch (inMessage.getType ()) {
 
             case Message.PARAMSARRLNG:
-                /* TODO: Validation */
+                if(inMessage.getMsgBagAndPassDest() == null || inMessage.getMsgNBagsNA() == null)
+                    throw new MessageException("Arrival Lounge has invalid parameters.", inMessage);
                 break;
 
             case Message.WSID:
@@ -96,7 +97,7 @@ public class ArrivalLoungeInterface {
             // probPar
             case Message.PARAMSARRLNG:
                 try {
-                    arrivalLounge.probPar(inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsPHold());
+                    arrivalLounge.probPar(inMessage.getMsgBagAndPassDest(), inMessage.getMsgNBagsNA());
                 } catch (MemException e) {
                     e.printStackTrace();
                 }

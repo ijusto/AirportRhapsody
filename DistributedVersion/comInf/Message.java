@@ -403,7 +403,7 @@ public class Message implements Serializable
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType == WSID) || (msgType == GOCOLLECTBAG) || (msgType == REPORTMISSBAG) || (msgType == GOHOME)
                 || (msgType == TAKEABUS) || (msgType == ENTERBUS) || (msgType == LEAVEBUS)
-                || (msgType == PREPARENEXTLEG)){
+                || (msgType == PREPARENEXTLEG) || (msgType == PASSEXIT)){
             passId = value;
             System.out.println("passId " + value);
         } else if (msgType == DEADPASSVAL){
@@ -478,7 +478,7 @@ public class Message implements Serializable
         }
     }
 
-    public Message (int type, int[][] bagAndPassDest, int[][] nBagsNA) {
+    public Message(int type, int[][] bagAndPassDest, int[][] nBagsNA) {
         msgType = type;
         System.out.println("-------- Created Message of type " + getMsgTypeString(type) + " --------");
         if ((msgType ==  RESETAL) || (msgType == PARAMSARRLNG)){

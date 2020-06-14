@@ -9,4 +9,27 @@ O servidor esta em escuta.
 ServerArrivalLounge
 -------- Created Message of type ACK --------
 -------- Created Message of type PASSEXIT --------
-Proxy_1 - erro na leitura de um objecto do canal de entrada do socket de comunicação!
+passId 0
+-------- Received Message of type ACK --------
+-------- Created Message of type PASSEXIT --------
+passId 1
+-------- Received Message of type ACK --------
+-------- Created Message of type PASSEXIT --------
+passId 2
+-------- Received Message of type ACK --------
+-------- Created Message of type PASSEXIT --------
+passId 3
+-------- Received Message of type ACK --------
+-------- Created Message of type PASSEXIT --------
+passId 4
+-------- Received Message of type ACK --------
+-------- Created Message of type PASSEXIT --------
+passId 5
+-------- Received Message of type ACK --------
+-------- Created Message of type INITCHOLD --------
+msgBN 6
+-------- Received Message of type ACK --------
+-------- Created Message of type SETTREADMILL --------
+msgNBagsPerPass [I@311cfc80
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
