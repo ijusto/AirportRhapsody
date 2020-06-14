@@ -237,6 +237,7 @@ public class ArrivalTermTransfQuayStub implements Serializable {
             System.out.println(inMessage.toString());
             System.exit(1);
         }
+        b.setNPassOnTheBus(inMessage.getNPassOnTheBus());
         con.close();
     }
 
@@ -279,10 +280,10 @@ public class ArrivalTermTransfQuayStub implements Serializable {
     public void setEndDay(){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-        Porter p = (Porter) Thread.currentThread();
+
         while(!con.open()){  // waiting for the connection to be established
             try {
-                p.sleep((long) 10);
+                Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 

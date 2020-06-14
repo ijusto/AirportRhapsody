@@ -72,7 +72,7 @@ public class GenReposInfoStub implements Serializable {
      *   Logs the final report of the simulation.
      */
 
-    public boolean finalReport(){
+    public boolean finalReport(int type){
         ClientCom con = new ClientCom(serverHostName, serverPortNumb);
         Message inMessage, outMessage;
 
@@ -83,12 +83,12 @@ public class GenReposInfoStub implements Serializable {
         }
 
         // asks for the service to be done
-        outMessage = new Message(Message.FINALREPORT);
+        outMessage = new Message(Message.FINALREPORT, type);
         con.writeObject(outMessage);
 
         inMessage = (Message) con.readObject();
         System.out.println("-------- Received Message of type " + Message.getMsgTypeString(inMessage.getType()) + " --------");
-        if (inMessage.getType() != Message.ACK || inMessage.getType() != Message.SHUT){
+        if (inMessage.getType() != Message.ACK && inMessage.getType() != Message.SHUT){
             System.out.println("Tipo inválido: " + inMessage.getType() + "na função finalReport");
             System.out.println("Thread " + Thread.currentThread().getName() + ": Tipo inválido!");
             System.out.println(inMessage.toString());

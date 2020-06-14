@@ -1,9 +1,7 @@
 package clientSide.sharedRegionsStubs;
 
 import clientSide.ClientCom;
-import comInf.SimulPar;
-import comInf.Bag;
-import comInf.Message;
+import comInf.*;
 import clientSide.entities.*;
 
 import java.io.Serializable;
@@ -239,11 +237,10 @@ public class ArrivalLoungeStub implements Serializable {
 
         ClientCom con = new ClientCom (serverHostName, serverPortNumb);
         Message inMessage, outMessage;
-        Passenger p = (Passenger) Thread.currentThread();
 
         while(!con.open()){  // waiting for the connection to be established
             try {
-                p.sleep((long) 10);
+                Thread.currentThread().sleep((long) 10);
             } catch (InterruptedException ignored){}
         }
 

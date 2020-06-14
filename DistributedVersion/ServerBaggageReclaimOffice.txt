@@ -1,3 +1,30 @@
 O serviço foi estabelecido!
 O servidor esta em escuta.
 ServerBaggageReclaimOffice
+-------- Created Message of type UDTEPASSSTAT --------
+passId 4
+stPass 3
+-------- Received Message of type ACK --------
+-------- Created Message of type MISSBAGREP --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 1
+stPass 3
+-------- Received Message of type ACK --------
+-------- Created Message of type MISSBAGREP --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------
+-------- Created Message of type UDTEPASSSTAT --------
+passId 3
+stPass 3
+-------- Received Message of type ACK --------
+-------- Created Message of type MISSBAGREP --------
+-------- Received Message of type ACK --------
+-------- Created Message of type PRINTLOG --------
+-------- Received Message of type ACK --------
+-------- Created Message of type ACK --------

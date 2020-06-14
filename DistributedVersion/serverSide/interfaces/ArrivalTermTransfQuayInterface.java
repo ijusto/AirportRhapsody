@@ -41,8 +41,6 @@ public class ArrivalTermTransfQuayInterface {
 
         switch (inMessage.getType ()) {
 
-            case Message.PARAMSATTQUAY: /* TODO: Validation */ break;
-
             case Message.TAKEABUS: case Message.ENTERBUS:
                 if(inMessage.getPassId() < 0 || inMessage.getPassId() > SimulPar.N_PASS_PER_FLIGHT)
                     throw new MessageException("Id do passageiro inválido", inMessage);
@@ -65,16 +63,6 @@ public class ArrivalTermTransfQuayInterface {
         /* seu processamento */
         CommonProvider cp = (CommonProvider) Thread.currentThread();
         switch (inMessage.getType ()) {
-
-            // probPar
-//            case Message.PARAMSATTQUAY:
-//                try {
-//                    arrivalTermTransfQuay.probPar(inMessage.getMsgReposStub());
-//                } catch (MemException e) {
-//                    e.printStackTrace();
-//                }
-//                outMessage = new Message(Message.ACK);
-//                break;
 
             // takeABus (Passenger)
             case Message.TAKEABUS:
@@ -110,7 +98,7 @@ public class ArrivalTermTransfQuayInterface {
             case Message.ANNOUCEBUSBORADING:
                 cp.setBDStat(BusDriverStates.values()[inMessage.getBDStat()]);
                 arrivalTermTransfQuay.announcingBusBoarding();
-                outMessage = new Message(Message.ABBDONE);
+                outMessage = new Message(Message.ABBDONE, cp.getNPassOnTheBus());
                 break;
 
             // resetArrivalTermTransfQuay

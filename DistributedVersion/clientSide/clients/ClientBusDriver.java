@@ -42,7 +42,7 @@ public class ClientBusDriver {
             System.out.print("Main Program - One thread of BusDriver was interrupted.");
         }
 
-        while(!reposStub.finalReport());
+        while(!reposStub.finalReport(0));
 
         reposStub.shutdown();
         arrivalQuayStub.shutdown();

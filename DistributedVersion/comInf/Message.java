@@ -294,6 +294,8 @@ public class Message implements Serializable
 
     public static final int SHUT   = 87;
 
+    private int nPassOnTheBus = -1;
+
     /* Campos das mensagens */
 
     /**
@@ -356,6 +358,8 @@ public class Message implements Serializable
 
     private int stBD = -1;
 
+    private  int entity = -1;
+
     /**
      *  Instanciação de uma mensagem (forma 1).
      *
@@ -393,9 +397,13 @@ public class Message implements Serializable
             this.stPorter = value;
             System.out.println("stPorter " + PorterStates.values()[value]);
         } else if((msgType == WORKENDED) || (msgType == PARKBUS) || (msgType == ANNOUCEBUSBORADING)
-                || (msgType == PBLPO) || (msgType == UDTEBDSTAT)){
+                || (msgType == UDTEBDSTAT)){
             this.stBD = value;
             System.out.println("stBD " + BusDriverStates.values()[value]);
+        } else if(msgType == ABBDONE){
+            this.nPassOnTheBus = value;
+        } else if(msgType == FINALREPORT){
+            entity = value;
         }
     }
 
@@ -549,6 +557,9 @@ public class Message implements Serializable
             System.out.println("passId " + passId);
             passSi = secondInt;
             System.out.println("passSi " + passSi);
+        } else if(msgType == PBLPO){
+            stBD = firstInt;
+            nPassOnTheBus = secondInt;
         }
     }
 
@@ -600,6 +611,8 @@ public class Message implements Serializable
 
     public int getPassNA(){ return passNA; }
 
+    public int getNPassOnTheBus(){ return nPassOnTheBus; }
+
     public int[] getMsgNBagsPerPass(){ return msgNBagsPerPass; }
 
     /**
@@ -617,6 +630,8 @@ public class Message implements Serializable
     public int getPorterStat(){return stPorter;}
 
     public int getBDStat(){return stBD;}
+
+    public int getEntity(){return entity;}
 
     /**
      *  Impressão dos campos internos.
@@ -659,7 +674,7 @@ public class Message implements Serializable
             case 78: str = "UDTEPASSNR"; break; case 79: str = "UDTEPASSNA"; break; case 80: str = "PASSEXIT"; break;
             case 81: str = "MISSBAGREP"; break; case 82: str = "NUMNRTOTAL"; break; case 83: str = "ACK"; break;
             case 84: str = "ENDPASSENGER"; break; case 85: str = "ENDPORTER"; break;
-            case 86: str = "ENDBUSDRIVER"; break; case 87: str = "SHUT";
+            case 86: str = "ENDBUSDRIVER"; break; case 87: str = "SHUT"; break;
             default: str = "";
         }
         return str;
