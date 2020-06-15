@@ -1,4 +1,0 @@
-O serviço foi estabelecido!
-O servidor esta em escuta.
-ServerBaggageColPoint
--------- Created Message of type ACK --------
